@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "geometry_files_verified": 298,
+  "geometry_identity_verified": true,
+  "common_grid_rows": 107280,
+  "common_grid_points_per_geometry": 360,
+  "equal_lift_records_recomputed": 32184,
+  "equal_lift_status_mismatches": 0,
+  "max_equal_lift_CD_abs_error": 0.0,
+  "max_equal_lift_alpha_abs_error": 0.0,
+  "npz_round_trip_exact": true,
+  "csv_coefficient_round_trip_exact": true,
+  "winning_geometry_reconciliation": true,
+  "usable_p2_points": 107280,
+  "invalid_or_unusable_points": 0,
+  "screening_eligible_points": 90814,
+  "all_108_fixed_feasible_count": 234,
+  "retained_geometry_count": 298,
+  "native_geometry_bytes": 26385052
+}

@@ -1,0 +1,265 @@
+#ocp配置
+ocp:
+  N: 20                   # 20 个区间 每个区间 3 s
+  horizon: 60.0           # 总预测时域为 60 s
+  rk4_substeps: 2         # 每个 3 s 射击区间内部使用 2 个 RK4 积分子步，即每个子步 1.5 s
+  controls: ["alpha"]     # 当前 OCP 只优化攻角 alpha，其他后续再说
+  geometry_mode: "prescribed"
+
+
+
+
+#ocp描述问题，然后casadi把问题变化为nlp，ipopt求解
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# RL 输出的 (CL_des, CD_des) 表示“即将执行的当前决策区间”希望达到的
+# 目标气动性能，而不是要求未来整个 60 s 都严格保持这一组 CL/CD。
+#
+# 目标跟踪以软代价的形式加入 OCP：
+#
+#   J_target =
+#       sum_{k < intervals}
+#       w_CL * ((CL_k - CL_des) / CL_scale)^2
+#       +
+#       w_CD * ((CD_k - CD_des) / CD_scale)^2
+#
+# 当前 CL_k、CD_k 并不是直接作为独立变量指定，而是由气动模型计算：
+#
+#   CL_k = CL(M_k, alpha_k, eta_k)
+#   CD_k = CD(M_k, alpha_k, eta_k)
+#
+# 因此攻角 alpha 仍然通过真实气动关系影响 CL、CD、升力和阻力。
+#
+
+
+aero_target_tracking:
+  enabled: true
+  intervals: 1            # 目标跟踪只作用于最前面的 1 个射击区间，即即将执行的前 3 s
+  weight_CL: 1.0          # CL 目标跟踪项权重
+  weight_CD: 1.0          # CD 目标跟踪项权重
+  CL_scale: 0.10          # CL 误差归一化尺度，看数量级
+  CD_scale: 0.03          # CD 误差归一化尺度
+  apply_to_final: true   #同理
+
+
+# =============================================================================
+# OCP 目标函数
+# =============================================================================
+#
+# 总体目标函数由多个归一化后的子目标组成。
+# 各项在 objectives.py 内部进行归一化，使不同目标项尽量处于 O(1) 的可比较数量级。
+#
+# 概念上：
+#
+#   J =
+#       w_time       * J_time
+#     + w_drag       * J_drag
+#     + w_heat       * J_heat
+#     + w_morph      * J_morph
+#     + w_terminal   * J_terminal
+#     + w_control_rate * J_delta_alpha
+#     - w_range      * J_range
+#     + J_target
+#
+objective:
+  w_time: 0.0          # 飞行时间代价；当前预测时域固定为 60 s，因此该项关闭
+  w_drag: 1.0          # 阻力耗散功积分 / 参考能量，鼓励减少不必要的机械能损失
+  w_heat: 0.5          # 积分热流 / 参考热负荷，鼓励降低整个预测时域内的热负荷
+  w_morph: 0.0         # 构型变化代价；eta 是外部给定参数而非 OCP 变量，因此当前仅统计、不参与优化
+  w_terminal: 5.0      # 预测时域末端状态误差权重
+  w_control_rate: 0.1  # 攻角变化平滑项，惩罚相邻区间 alpha 的剧烈变化
+
+  reference:
+    energy_ref: 1.0e9        # J，阻力耗散能量的归一化参考值；当前为占位值
+    heat_load_ref: 5.0e7     # J/m^2，积分热负荷的归一化参考值；当前为占位值
+
+  terminal:
+    # 预测时域末端的软目标。
+    # 如果某一项权重设为 0，则该终端目标不参与目标函数。
+    h_target: null           # m；null 表示当前不设置终端高度目标
+    V_target: null           # m/s；null 表示当前不设置终端速度目标
+    gamma_target: 0.0        # rad；希望 60 s 预测末端航迹角接近 0，即接近水平飞行
+    s_target: null           # m；null 表示当前不设置固定终端航程目标
+
+    weights:
+      h: 0.0                 # 终端高度误差权重，当前关闭
+      V: 0.0                 # 终端速度误差权重，当前关闭
+      gamma: 1.0             # 终端航迹角误差权重，当前启用
+      s: 0.0                 # 终端航程误差权重，当前关闭
+
+    scales:
+      h: 10000.0             # 终端高度误差归一化尺度，单位 m
+      V: 1000.0              # 终端速度误差归一化尺度，单位 m/s
+      gamma: 0.05            # 终端航迹角误差归一化尺度，单位 rad
+      s: 100000.0            # 终端航程误差归一化尺度，单位 m
+
+  maximize_downrange: true   # 启用预测末端航程最大化，即在目标函数中加入 -w_range * s_N / s_scale
+  w_range: 1.0               # 航程最大化项的权重
+
+
+# =============================================================================
+# OCP 约束
+# =============================================================================
+constraints:
+  enforce:
+    alpha_bounds: true       # 强制满足攻角上下界
+    q_dyn: true              # 强制满足动态压力 q_dyn 上限
+    heat_flux: true          # 强制满足气动热流上限
+    n_load: true             # 强制满足载荷因数约束
+    altitude: true           # 强制满足飞行高度上下界
+    velocity: true           # 强制满足速度上下界
+    gamma: true              # 强制满足航迹角上下界
+    eta_bounds: true         # 检查变构几何参数 eta 是否位于允许范围内
+
+    # eta 的变化率限制由变构执行机构模型 dynamics/morphing_actuator.py 保证，
+    # 而不是由 OCP 将 eta 作为决策变量进行优化。
+    eta_rate: true
+
+    # 强制限制攻角变化率，防止相邻控制区间的 alpha 发生过快变化。
+    alpha_rate: true
+
+  # 当前所有路径约束均采用硬约束形式。
+  # 暂不允许通过 slack variable 对 q、热流、载荷等约束进行软化；
+  # 如果无法满足这些约束，则 OCP 可能返回不可行。
+  soft_path_constraints: false
+
+
+# =============================================================================
+# 高密度约束审计 TRUE Dense Constraint Audit
+# =============================================================================
+#
+# V0.6 引入，具体实现在 trajectory/dense_audit.py。
+#
+# 对每一个候选计划，包括：
+#   - Final-OCP 解；
+#   - 必要情况下重新使用的 Preliminary OCP 解；
+#
+# 都使用 PLANT 模型重新进行高分辨率前向积分。
+#
+# 审计时：
+#   - alpha 在每个 OCP 区间内采用零阶保持（ZOH）；
+#   - eta(t) 使用真实变构执行机构产生的连续子步轨迹；
+#   - 每一个高密度采样点都保存并检查硬约束。
+#
+# 当前：
+#   N = 20
+#   horizon = 60 s
+#
+# 因此每个 OCP 区间长度为：
+#   60 / 20 = 3 s
+#
+# 当 dt_s = 0.1 s 时：
+#   每个 3 s 区间约包含 30 个高密度检查子步；
+#   整个 60 s 预测时域共包含 601 个状态采样点（包含初始点）。
+#
+# 如果某个候选轨迹未通过 Dense Audit，则它不会作为首选安全执行候选。
+# 系统随后进入 fallback 层级继续寻找可执行方案。
+#
+# 如果最终仍不存在通过 Dense Audit 的候选，
+# 此时必须明确记录：
+#
+#   executed_plan_dense_safe = False
+#
+# 因此 Dense Audit 失败并不等价于“系统绝对不会执行任何轨迹”。
+#
+dense_audit:
+  enabled: true             # 启用高密度约束审计
+  dt_s: 0.1                 # Dense Audit 前向积分时间步长为 0.1 s
+
+
+# =============================================================================
+# NLP 求解器配置
+# =============================================================================
+solver:
+  name: "ipopt"             # 使用 IPOPT 求解非线性规划问题
+
+  # 在构建 NLP 前，将 RK4 shooting map 展开为 SX 表达式。
+  # 数学问题保持不变，但对当前多项式气动代理模型而言，
+  # 可以显著降低函数值和导数计算开销。
+  expand: true
+
+  ipopt:
+    # 单次 IPOPT 求解允许的最大迭代次数。
+    #
+    # 2026-02 决策（docs/SOLVER_PRODUCTION_DECISION.md）：500 -> 1000。
+    # 在 26 个冻结的低马赫 final-OCP 实例上，接受率 30.8% -> 76.9%；
+    # 原本失败的 18 个实例中 12 个（66.7%）在更大预算下收敛，
+    # 且被救回的实例实际所需迭代数为 567-918，均落在 1000 以内。
+    # 代价集中在尾部：p95 墙钟时间 23.85 s，仍低于下方 max_cpu_time = 30 s，
+    # 但余量仅约 20%，在更慢的机器或超过 3-4 个并行 worker 时需要重新核验。
+    max_iter: 1000
+
+    tol: 1.0e-6             # IPOPT 正式收敛容差
+
+    # 如果无法达到严格的 1e-6 容差，但解已经达到 acceptable_tol，
+    # 并连续保持 acceptable_iter 次，则允许将其作为可接受解终止。
+    acceptable_tol: 1.0e-4
+    acceptable_iter: 10
+
+    print_level: 0          # 关闭大部分 IPOPT 迭代日志输出
+    sb: "yes"               # 隐藏 IPOPT 启动横幅信息
+
+    # 使用自适应障碍参数策略，让 IPOPT 根据求解过程自动调整 barrier parameter mu。
+    mu_strategy: "adaptive"
+
+    # 使用有限记忆准牛顿方法（L-BFGS）近似 Hessian。
+    #
+    # 原因：
+    # 当前模型包含分层大气、fmax、数值下限等分段/非光滑结构，
+    # 使用精确 Hessian 时，部分工况下 IPOPT 会在 500 次迭代后仍无法正常收敛。
+    # 因此当前采用 limited-memory Hessian 以提高数值稳定性。
+    hessian_approximation: "limited-memory"
+
+    # IPOPT 内部稀疏线性方程组使用 MUMPS 求解器。
+    linear_solver: "mumps"
+
+    # 单次 IPOPT 求解最长允许使用 30 s CPU 时间，
+    # 防止某个病态工况长期阻塞 RL 训练或滚动规划。
+    max_cpu_time: 30.0
+
+  print_time: false         # 不打印 CasADi 求解函数的时间统计
+
+  # NLP 初始猜测：
+  #
+  # "ballistic"：
+  #   使用固定攻角进行一次前向 rollout，构造一条具有物理意义的初始轨迹；
+  #
+  # "zero"：
+  #   使用零值作为初始猜测。
+  #
+  # 当前采用 ballistic，以提高非线性 OCP 的收敛稳定性。
+  initial_guess: "ballistic"
+
+  # ballistic 初始猜测使用的固定攻角：
+  # 0.05 rad ≈ 2.86 deg
+  initial_guess_alpha: 0.05
+
+  # NLP 数值缩放。
+  # 这些数值仅用于把各状态/控制量缩放到接近 O(1) 的数量级，
+  # 以改善 IPOPT 的数值条件，并不代表任何物理上下限。
+  scaling:
+    h: 1.0e4               # 高度缩放尺度，约 10 km
+    V: 1.0e3               # 速度缩放尺度，约 1000 m/s
+    gamma: 0.1             # 航迹角缩放尺度，单位 rad
+    s: 1.0e5               # 下程距离缩放尺度，约 100 km
+    alpha: 0.1             # 攻角缩放尺度，单位 rad

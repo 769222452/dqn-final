@@ -1,0 +1,53 @@
+{
+  "schema": "v5_lh1200_initial_state/1",
+  "seed": 2000,
+  "x_order": [
+    "h_m",
+    "V_mps",
+    "gamma_rad",
+    "s_m"
+  ],
+  "x_init_flown": [
+    40150.27263771527,
+    2415.6424609292885,
+    -0.014729622960607522,
+    0.0
+  ],
+  "configured_nominal_x0": [
+    40000.0,
+    2400.0,
+    -0.01,
+    0.0
+  ],
+  "jitter_half_width": {
+    "h": 1000.0,
+    "V": 50.0,
+    "gamma": 0.005
+  },
+  "jitter_offset_applied": [
+    150.27263771527214,
+    15.642460929288518,
+    -0.004729622960607522,
+    0.0
+  ],
+  "alpha0_rad": 0.05,
+  "alpha0_deg": 2.8647889756541165,
+  "k0": 0,
+  "node": "P1_k00",
+  "geometry_id": "G42",
+  "geometry_hash": "d35074a0032e37b69278fb81afbb44250363255a6f8c880e8b89208e30401f7a",
+  "mach_init": 7.598781210910417,
+  "rho_init": 0.00376679458195526,
+  "a_init": 317.8986726793609,
+  "q_dyn_init_Pa": 10990.241887064989,
+  "historical_reference": "results/v5_morph_graph_mg1/oracle/graph_fixed/P1_k00.json",
+  "historical_reference_x0": [
+    40150.27263771527,
+    2415.6424609292885,
+    -0.014729622960607522,
+    0.0
+  ],
+  "IDENTICAL_TO_HISTORICAL_REFERENCE_X0": "YES",
+  "rule": "env.reset(seed=2000), exactly as every historical PRIMARY mission run (CL2, MG1, MDP1, FCM1, ARS1): CL1Env.initial_state applies the configured rl.yaml dqn_training.initial_state_jitter to the environment.yaml initial_state. The un-jittered configured nominal x0 is reported but not flown, so that the 0-180 s window is directly comparable with the historical 180 s run.",
+  "initial_state_changed_for_lh1200": "NO"
+}

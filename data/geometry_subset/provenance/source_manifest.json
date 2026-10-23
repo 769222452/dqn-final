@@ -1,0 +1,42 @@
+{
+  "equal_lift": {
+    "source_path": "D:\\v6-mission-morph\\results\\side_figures\\mach_cl_min_cd_20261015_01\\source_snapshot\\batch_0001_equal_lift.csv",
+    "sha256": "582334536df8ccf92086d3ce23c5c48073cd5d2687da412bdf1fedcf5cc68ecd",
+    "size_bytes": 2894356
+  },
+  "domain": {
+    "source_path": "D:\\v6-mission-morph\\results\\side_figures\\mach_cl_min_cd_20261015_01\\source_snapshot\\domain.json",
+    "sha256": "567b5cc6bad6ad69fd6d76c3629989331b72b8753be297f8231aa5c555f0fa3b",
+    "size_bytes": 4813
+  },
+  "inventory": {
+    "source_path": "D:\\v6-mission-morph-core\\results\\v6_teacher_space_expansion\\merged_candidate_inventory.csv",
+    "sha256": "8e724a91c6d389e78c79e77f863f4045dc80000ec90015cced6fe568c26ac3a4",
+    "size_bytes": 387973
+  },
+  "p2_common": {
+    "source_path": "D:\\v6-mission-morph-core\\results\\v6_teacher_space_expansion\\metrics\\batch_0001_mission_all_scores.csv",
+    "sha256": "21d2095cf7e3ba0e559928129b2a4dcb33038edffdc4a85162f1503ac09ab203",
+    "size_bytes": 40987392
+  },
+  "evaluation_code": {
+    "source_path": "D:\\v6-mission-morph-core\\tools\\v6_teacher_space_expansion\\evaluation.py",
+    "sha256": "d4bf955528700f06a29b5fd530a794e43b12264934cef6793d08c811700b3aeb",
+    "size_bytes": 10081
+  },
+  "common_code": {
+    "source_path": "D:\\v6-mission-morph-core\\tools\\v6_teacher_space_expansion\\exp_common.py",
+    "sha256": "df87d3354cd6d42f27a36ca2ba94375ec5d149c1c535a477a8cfda86976af96a",
+    "size_bytes": 5633
+  },
+  "wedge_driver": {
+    "source_path": "D:\\v6-mission-morph-core\\tools\\v6_wedge_geometry_screening\\wedge_eval.m",
+    "sha256": "df29fe5038ebd66f63eb811976ced48e17d707901b0eb23ca380959c6cca14a6",
+    "size_bytes": 3413
+  },
+  "model_code": {
+    "source_path": "D:\\v6-mission-morph-core\\results\\v6_matlab_no_new_cfd\\code\\matlab\\offdesign_aero_v7.m",
+    "sha256": "67801622d37a2bcd5bd0e6c0240760fc5572aff65554d36d9c1b0e96767f52f2",
+    "size_bytes": 8902
+  }
+}

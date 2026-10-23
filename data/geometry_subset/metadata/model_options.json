@@ -1,0 +1,22 @@
+{
+  "model": "P2 strip shock-expansion",
+  "drag_component": "pressure_only",
+  "friction": "none",
+  "base_pressure_ratio": null,
+  "Sref_m2": 6.931920786884801,
+  "Lref_m": 5.0,
+  "moment_origin_m": [
+    2.5,
+    0.0,
+    -0.9481139754931033
+  ],
+  "alpha_units": "degrees",
+  "CL_screening_floor": 0.026150265744858465,
+  "volume_ratio_G42_min": 0.85,
+  "thickness_ratio_G42_min": 0.5,
+  "equal_lift_interpolation": "PCHIP CL(alpha), bracketed roots; PCHIP CD(alpha), lowest positive CD valid branch. Invalid nodes split intervals; no extrapolation.",
+  "RL_interpolation": "Not implemented in this data snapshot. Do not interpolate through invalid nodes or extrapolate outside support.",
+  "geometry_transition_model": "Not supplied or validated. Candidate IDs do not establish feasible continuous morph paths.",
+  "switching_cost_model": "Not supplied. Benchmark assumes zero switching cost.",
+  "training_status": "Database snapshot only; no RL training started."
+}

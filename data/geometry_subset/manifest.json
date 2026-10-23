@@ -1,0 +1,1921 @@
+{
+  "schema": "v6-rl-candidate-snapshot/1",
+  "status": "VERIFIED",
+  "created_utc": "2026-10-15T07:49:33.704136+00:00",
+  "geometry_count": 298,
+  "geometry_ids": [
+    "EXP_00001_c418ea316943",
+    "EXP_00004_0cba82142225",
+    "EXP_00005_7d8711626543",
+    "EXP_00007_cdcaf2c5d933",
+    "EXP_00011_21da6c654995",
+    "EXP_00044_2cd6773e95b7",
+    "EXP_00085_e54e850b80e5",
+    "EXP_00091_dc373b8b39b1",
+    "G42",
+    "S2_MD10.018_5d8416b02d",
+    "S2_MD10_466a94a8db",
+    "S2_MD10_f37d837a4c",
+    "S2_MD11.5_a5cdaa2b1b",
+    "S2_MD12_1c91236cb0",
+    "S2_MD12_dd296f618e",
+    "S2_MD12_e2a6663088",
+    "S2_MD13.25_c6fa3be941",
+    "S2_MD13.25_f56957e947",
+    "S2_MD14.3591_4fdf5fa3ac",
+    "S2_MD14.879_ff95f09613",
+    "S2_MD14.969_79cadd6f0f",
+    "S2_MD15_0370330efe",
+    "S2_MD15_1788e920a9",
+    "S2_MD15_20e7cf7822",
+    "S2_MD15_3b7ce69fc2",
+    "S2_MD15_3f9eb0b21b",
+    "S2_MD15_44a73f7219",
+    "S2_MD15_5721894433",
+    "S2_MD15_5ce8d54bb4",
+    "S2_MD15_6248d0a44c",
+    "S2_MD15_69970679cf",
+    "S2_MD15_6bf086c4bd",
+    "S2_MD15_6f4fb6891c",
+    "S2_MD15_889670a45c",
+    "S2_MD15_8d986be002",
+    "S2_MD15_9134944349",
+    "S2_MD15_9cf4a0d41c",
+    "S2_MD15_aa379760b4",
+    "S2_MD15_b2c59334e1",
+    "S2_MD15_ba5b2b240b",
+    "S2_MD15_c70bcdfe63",
+    "S2_MD15_c9499a2ed6",
+    "S2_MD15_ca6c9134d0",
+    "S2_MD15_e499b37559",
+    "S2_MD15_eb6c2fd0f4",
+    "S2_MD15_ee16542920",
+    "S2_MD15_f2a8ff3da4",
+    "S2_MD6_d56a3ecfa8",
+    "S2_MD7_10fb017f26",
+    "S2_MD8_70a715bdb4",
+    "S2_MD8_b38c94c34e",
+    "S2_MD9.75_4b3a631248",
+    "S2_MD9.898_5e403aae01",
+    "S2_MD9_33a81e0a91",
+    "V2M_MD15_001",
+    "V2M_MD15_002",
+    "V2M_MD15_003",
+    "V2M_MD15_004",
+    "V2M_MD15_005",
+    "V2M_MD15_006",
+    "V2M_MD15_007",
+    "V2M_MD15_008",
+    "V2M_MD15_009",
+    "V2M_MD15_010",
+    "V2M_MD15_011",
+    "V2M_MD15_012",
+    "V2M_MD15_013",
+    "V2M_MD15_014",
+    "V2M_MD15_015",
+    "V2M_MD15_016",
+    "V2M_MD15_017",
+    "V2M_MD15_018",
+    "V2M_MD15_019",
+    "V2M_MD15_020",
+    "V2M_MD15_021",
+    "V2M_MD15_022",
+    "V2M_MD15_023",
+    "V2M_MD15_024",
+    "V2M_MD15_025",
+    "V2M_MD15_026",
+    "V2M_MD15_027",
+    "V2M_MD4_001",
+    "V2M_MD4_004",
+    "V2M_MD4_005",
+    "V2M_MD4_006",
+    "V2M_MD4_007",
+    "V2M_MD4_008",
+    "V2M_MD4_009",
+    "V2M_MD4_010",
+    "V2M_MD4_011",
+    "V2M_MD4_013",
+    "V2M_MD4_016",
+    "V2M_MD4_017",
+    "V2M_MD4_018",
+    "V2M_MD4_019",
+    "V2M_MD4_021",
+    "V2M_MD4_023",
+    "V2M_MD4_026",
+    "V2M_MD4_029",
+    "V2M_MD4_031",
+    "V2M_MD4_034",
+    "V2M_MD4_035",
+    "V2M_MD4_036",
+    "V2M_MD4_037",
+    "V2M_MD4_040",
+    "V2M_MD4_041",
+    "V2M_MD4_042",
+    "V2M_MD4_044",
+    "V2M_MD4_045",
+    "V2M_MD5_001",
+    "V2M_MD5_002",
+    "V2M_MD5_003",
+    "V2M_MD5_004",
+    "V2M_MD5_005",
+    "V2M_MD5_006",
+    "V2M_MD5_007",
+    "V2M_MD5_008",
+    "V2M_MD5_009",
+    "V2M_MD5_010",
+    "V2M_MD5_012",
+    "V2M_MD5_013",
+    "V2M_MD5_014",
+    "V2M_MD5_015",
+    "V2M_MD5_016",
+    "V2M_MD5_017",
+    "V2M_MD5_018",
+    "V2M_MD5_019",
+    "V2M_MD5_020",
+    "V2M_MD5_021",
+    "V2M_MD5_022",
+    "V2M_MD5_023",
+    "V2M_MD5_024",
+    "V2M_MD5_026",
+    "V2M_MD5_027",
+    "V2M_MD5_028",
+    "V2M_MD5_029",
+    "V2M_MD5_030",
+    "V2M_MD5_031",
+    "V2M_MD5_032",
+    "V2M_MD5_033",
+    "V2M_MD5_034",
+    "V2M_MD5_035",
+    "V2M_MD5_036",
+    "V2M_MD5_037",
+    "V2M_MD5_038",
+    "V2M_MD5_039",
+    "V2M_MD6_001",
+    "V2M_MD6_003",
+    "V2M_MD6_006",
+    "V2M_MD6_010",
+    "V2M_MD6_012",
+    "V2M_MD6_013",
+    "V2M_MD6_019",
+    "V2M_MD6_020",
+    "V2M_MD6_021",
+    "V2M_MD6_022",
+    "V2M_MD6_025",
+    "V2M_MD6_026",
+    "V2M_MD6_027",
+    "V2M_MD6_028",
+    "V2M_MD6_029",
+    "V2M_MD6_030",
+    "V2M_MD6_032",
+    "V2M_MD6_033",
+    "V2M_MD6_034",
+    "V2M_MD6_035",
+    "V2M_MD6_036",
+    "V2M_MD6_037",
+    "V2M_MD6_038",
+    "V2M_MD6_040",
+    "V2M_MD6_042",
+    "V2M_MD6_043",
+    "V2M_MD6_044",
+    "V2M_MD7_002",
+    "V2M_MD7_003",
+    "V2M_MD7_004",
+    "V2M_MD7_005",
+    "V2M_MD7_006",
+    "V2M_MD7_007",
+    "V2M_MD7_008",
+    "V2M_MD7_009",
+    "V2M_MD7_010",
+    "V2M_MD7_012",
+    "V2M_MD7_014",
+    "V2M_MD7_015",
+    "V2M_MD7_016",
+    "V2M_MD7_018",
+    "V2M_MD7_019",
+    "V2M_MD7_020",
+    "V2M_MD7_021",
+    "V2M_MD7_022",
+    "V2M_MD7_023",
+    "V2M_MD7_024",
+    "V2M_MD7_025",
+    "V2M_MD7_027",
+    "V2M_MD7_028",
+    "V2M_MD7_029",
+    "V2M_MD7_030",
+    "V2M_MD7_031",
+    "V2M_MD7_032",
+    "V2M_MD7_034",
+    "V2M_MD7_035",
+    "V2M_MD7_036",
+    "V2M_MD7_037",
+    "V2M_MD7_038",
+    "V2M_MD7_039",
+    "V2M_MD7_040",
+    "V2M_MD7_042",
+    "V2M_MD7_043",
+    "V2M_MD7_044",
+    "V2M_MD7_045",
+    "V2M_MD7_048",
+    "V2M_MD8_004",
+    "V2M_MD8_007",
+    "V2M_MD8_009",
+    "V2M_MD8_010",
+    "V2M_MD8_011",
+    "V2M_MD8_012",
+    "V2M_MD8_014",
+    "V2M_MD8_016",
+    "V2M_MD8_018",
+    "V2M_MD8_019",
+    "V2M_MD8_022",
+    "V2M_MD8_024",
+    "V2M_MD8_025",
+    "V2M_MD8_026",
+    "V2M_MD8_027",
+    "V2M_MD8_028",
+    "V2M_MD8_029",
+    "V2M_MD8_030",
+    "V2M_MD8_038",
+    "V2M_MD8_039",
+    "V2M_MD8_042",
+    "V2M_MD8_044",
+    "V2M_MD8_045",
+    "V2M_MD8_046",
+    "V2M_MD8_048",
+    "V2M_MD8_050",
+    "V2M_MD8_052",
+    "V2M_MD8_054",
+    "V2M_MD8_055",
+    "V2M_MD8_056",
+    "V2M_MD8_060",
+    "V2M_MD8_063",
+    "V2M_MD8_064",
+    "V2M_MD8_065",
+    "V2_MD15_002",
+    "V2_MD15_003",
+    "V2_MD15_004",
+    "V2_MD15_005",
+    "V2_MD15_006",
+    "V2_MD15_007",
+    "V2_MD4_002",
+    "V2_MD4_007",
+    "V2_MD4_008",
+    "V2_MD4_009",
+    "V2_MD4_012",
+    "V2_MD4_013",
+    "V2_MD5_001",
+    "V2_MD5_002",
+    "V2_MD5_003",
+    "V2_MD5_004",
+    "V2_MD5_005",
+    "V2_MD5_006",
+    "V2_MD5_007",
+    "V2_MD5_008",
+    "V2_MD5_009",
+    "V2_MD5_011",
+    "V2_MD6_001",
+    "V2_MD6_002",
+    "V2_MD6_005",
+    "V2_MD6_006",
+    "V2_MD6_008",
+    "V2_MD6_009",
+    "V2_MD6_011",
+    "V2_MD6_013",
+    "V2_MD7_001",
+    "V2_MD7_002",
+    "V2_MD7_003",
+    "V2_MD7_004",
+    "V2_MD7_005",
+    "V2_MD7_007",
+    "V2_MD7_008",
+    "V2_MD7_009",
+    "V2_MD7_011",
+    "V2_MD7_012",
+    "V2_MD8_005",
+    "V2_MD8_007",
+    "V2_MD8_008",
+    "V2_MD8_010",
+    "V2_MD8_011",
+    "V2_MD8_012",
+    "V2_MD8_013",
+    "V2_MD8_014",
+    "V2_MD8_015",
+    "V2_MD8_017",
+    "V2_MD8_018",
+    "V2_MD8_019"
+  ],
+  "tensor_shape": [
+    298,
+    18,
+    20
+  ],
+  "tensor_axis_order": [
+    "action_index",
+    "mach_grid",
+    "alpha_deg_grid"
+  ],
+  "action_index_rule": "Sorted geometry_id, zero-based; identical across action_index.csv, candidate_inventory.csv and NPZ",
+  "data_files": {
+    "inventory": "candidate_inventory.csv",
+    "actions": "action_index.csv",
+    "npz": "aerodynamics/p2_grid.npz",
+    "p2_csv": "aerodynamics/p2_common_grid.csv",
+    "equal_lift": "aerodynamics/equal_lift.csv"
+  },
+  "model": "P2 pressure only",
+  "interpretation": "Frozen 298-geometry candidate data snapshot; ideal equal-weight 108-condition benchmark, not validated mission morphing performance",
+  "ideal_subset_gain_pct": 1.084360786022187,
+  "files": [
+    {
+      "path": "action_index.csv",
+      "size_bytes": 37991,
+      "sha256": "f803295d106fb64c2bfef9d59ce4d005a33c78109bbcc5b455480f90dda22bed"
+    },
+    {
+      "path": "aerodynamics/equal_lift.csv",
+      "size_bytes": 2787426,
+      "sha256": "e32408239cab72ed95bd22526513445a9337dd33fd4c08fddf18c80c9b884548"
+    },
+    {
+      "path": "aerodynamics/p2_common_grid.csv",
+      "size_bytes": 28848408,
+      "sha256": "d78e316afe30ad67132e2d0f4ea27ad16bd023a455d0a9f32edf2f14cae183c5"
+    },
+    {
+      "path": "aerodynamics/p2_grid.npz",
+      "size_bytes": 3968547,
+      "sha256": "3d7b27d9e2178a6fb214c6360777f8f119612668b3401914e5969540bb554586"
+    },
+    {
+      "path": "benchmarks/equal_lift_winners.csv",
+      "size_bytes": 13644,
+      "sha256": "361fe48d8e7b5dbd4351b8b9ead6d44b72c6fa89d324f64e8314b530c8c13106"
+    },
+    {
+      "path": "benchmarks/fixed_geometry_mean_cd.csv",
+      "size_bytes": 13136,
+      "sha256": "ab30a8b6b54e19394e553f6ebb76d0a06c16f7a3cbffddb5eb45691937ea6a14"
+    },
+    {
+      "path": "benchmarks/summary.json",
+      "size_bytes": 872,
+      "sha256": "fe65159971e31f5b37173490b9ae324a607c557f398635395a15da50a4445f23"
+    },
+    {
+      "path": "candidate_inventory.csv",
+      "size_bytes": 214650,
+      "sha256": "b0b7d58a44f2807a1d3f59791116fb4c8a50d3014c780bc16e7a10ef68a263d2"
+    },
+    {
+      "path": "figures/min_drag_geometry.png",
+      "size_bytes": 172670,
+      "sha256": "5d482073680e121ecad3eb455949429fa35d12459daf318f4330fe1f644a6794"
+    },
+    {
+      "path": "figures/min_drag_geometry.svg",
+      "size_bytes": 166210,
+      "sha256": "ce82b99fc08602622a49b48f532b191d09fca6e98cc1a7ce657337e6d2cbc8e7"
+    },
+    {
+      "path": "geometries/EXP_00001_c418ea316943/native_geometry.mat",
+      "size_bytes": 86955,
+      "sha256": "c182bde79fd865543495244fb6c1bf156648c86721271d50a7eca08b677c6814"
+    },
+    {
+      "path": "geometries/EXP_00004_0cba82142225/native_geometry.mat",
+      "size_bytes": 87341,
+      "sha256": "11351167882147ef77e88326c1664f69b9b4348010b7a45e0edf7d44cc0d1f2b"
+    },
+    {
+      "path": "geometries/EXP_00005_7d8711626543/native_geometry.mat",
+      "size_bytes": 86878,
+      "sha256": "4fba69c63b1b857c53057bbd91373c0e5961c0df5a34cd4f814e1991150f2c14"
+    },
+    {
+      "path": "geometries/EXP_00007_cdcaf2c5d933/native_geometry.mat",
+      "size_bytes": 87035,
+      "sha256": "9cdd30196066a88c118188d931b86770feb974ec42290c58f9c3675f46eadd27"
+    },
+    {
+      "path": "geometries/EXP_00011_21da6c654995/native_geometry.mat",
+      "size_bytes": 87010,
+      "sha256": "1dba803924b85f33d7c40a86e45de7bc06ca6540a36994baad57462dff5f89c4"
+    },
+    {
+      "path": "geometries/EXP_00044_2cd6773e95b7/native_geometry.mat",
+      "size_bytes": 88290,
+      "sha256": "8fb16eb26662245c05961b26dd0237d392c657fea3b0ab2d7a60d1e750272d09"
+    },
+    {
+      "path": "geometries/EXP_00085_e54e850b80e5/native_geometry.mat",
+      "size_bytes": 87158,
+      "sha256": "6cdd4a7c747bc095e40cbbb15982b0af37fdfdc9c58c265caa997de5c895345b"
+    },
+    {
+      "path": "geometries/EXP_00091_dc373b8b39b1/native_geometry.mat",
+      "size_bytes": 87336,
+      "sha256": "3f3bc165871eb2fb48300da80582d37e068abbe26f1c3584f779f406251db757"
+    },
+    {
+      "path": "geometries/G42/native_geometry.mat",
+      "size_bytes": 86949,
+      "sha256": "3077f1748f1beb73bb77e9aa0061bb11dfe4a971462de8bf27873c83ff382dbe"
+    },
+    {
+      "path": "geometries/S2_MD10.018_5d8416b02d/native_geometry.mat",
+      "size_bytes": 86968,
+      "sha256": "55f0fc92f072fd3583555e30dde247fd935c8f913d87d30867c571352cac91f4"
+    },
+    {
+      "path": "geometries/S2_MD10_466a94a8db/native_geometry.mat",
+      "size_bytes": 87242,
+      "sha256": "d3929de77a8eaefe3962ba8253e53c881eff6b90bab90b02f6d8fabae68f2dff"
+    },
+    {
+      "path": "geometries/S2_MD10_f37d837a4c/native_geometry.mat",
+      "size_bytes": 86583,
+      "sha256": "6def932d896bcf75cd50cb46dedad06b790cd491bd9626fcc472077e5670cd06"
+    },
+    {
+      "path": "geometries/S2_MD11.5_a5cdaa2b1b/native_geometry.mat",
+      "size_bytes": 86655,
+      "sha256": "7ef7f60a8822df2eb3811abe45591184e32ffd9d58c19c48f19a7aa9bf5c59f0"
+    },
+    {
+      "path": "geometries/S2_MD12_1c91236cb0/native_geometry.mat",
+      "size_bytes": 86871,
+      "sha256": "adb6618becf0f9196951fac04230effb3e1c5241b21a73f893886892858038f1"
+    },
+    {
+      "path": "geometries/S2_MD12_dd296f618e/native_geometry.mat",
+      "size_bytes": 86901,
+      "sha256": "5b944732498b7f80ed7ab5b9b7ef0f2ca4355b6158d2791ed41bfd8a183e350c"
+    },
+    {
+      "path": "geometries/S2_MD12_e2a6663088/native_geometry.mat",
+      "size_bytes": 86722,
+      "sha256": "7a03dbef56e5ab93635bf734502f2e7975fc9a9fb233b0f45043ca377d4842b1"
+    },
+    {
+      "path": "geometries/S2_MD13.25_c6fa3be941/native_geometry.mat",
+      "size_bytes": 86669,
+      "sha256": "9e1593997a84eaa058abc9dc18829690c961cfe2fe084aa51ed32f1e7ee9a066"
+    },
+    {
+      "path": "geometries/S2_MD13.25_f56957e947/native_geometry.mat",
+      "size_bytes": 86723,
+      "sha256": "f4c6995cfd4649a5739ba4bc5f1f5397ea6b70003e4c98b66b21c8021d6c6762"
+    },
+    {
+      "path": "geometries/S2_MD14.3591_4fdf5fa3ac/native_geometry.mat",
+      "size_bytes": 87007,
+      "sha256": "80b5924410c635f47faf42b49bfb1312f6bc13f2f7628e6cb7a0c659c6899786"
+    },
+    {
+      "path": "geometries/S2_MD14.879_ff95f09613/native_geometry.mat",
+      "size_bytes": 87184,
+      "sha256": "5e26c545e31501f6368a12c0b4c9b07399ae79b9b3f7ba6040ca5708112ab1ee"
+    },
+    {
+      "path": "geometries/S2_MD14.969_79cadd6f0f/native_geometry.mat",
+      "size_bytes": 87851,
+      "sha256": "0b62d9a8a2518ddab2f6a2708d51bcfd7100e4ceb21c2f2ac32a9246e5662911"
+    },
+    {
+      "path": "geometries/S2_MD15_0370330efe/native_geometry.mat",
+      "size_bytes": 87714,
+      "sha256": "324612afb6313b69befe69a7c808532cba8ce1ffe190b0f70e65554295731a65"
+    },
+    {
+      "path": "geometries/S2_MD15_1788e920a9/native_geometry.mat",
+      "size_bytes": 87686,
+      "sha256": "22ba13a6d571e6e359c9a7784926dcd040cf00c8c9f8c63cc4711cea0be52b78"
+    },
+    {
+      "path": "geometries/S2_MD15_20e7cf7822/native_geometry.mat",
+      "size_bytes": 87759,
+      "sha256": "0053f1a6c0c144c553b34ed0031e4427d6fde2be0a1e2a43c07822e64d5eae30"
+    },
+    {
+      "path": "geometries/S2_MD15_3b7ce69fc2/native_geometry.mat",
+      "size_bytes": 87410,
+      "sha256": "1ddf713c7c49298b820903624452610c96efdbf416fdfc8f93c5fac4e2d2eef3"
+    },
+    {
+      "path": "geometries/S2_MD15_3f9eb0b21b/native_geometry.mat",
+      "size_bytes": 87690,
+      "sha256": "0b617b61554cd61a916e03e02c61552b42440975665aca8af41b298ba5f5fd8f"
+    },
+    {
+      "path": "geometries/S2_MD15_44a73f7219/native_geometry.mat",
+      "size_bytes": 86854,
+      "sha256": "cc2f87e109f884eba9c089958f5ceb367bdc46116f650bbd9b37b7fc697f9ece"
+    },
+    {
+      "path": "geometries/S2_MD15_5721894433/native_geometry.mat",
+      "size_bytes": 87518,
+      "sha256": "68f1cd3ce052910f896c1489a4b4c763d3f946caab74d102d1710231d4020180"
+    },
+    {
+      "path": "geometries/S2_MD15_5ce8d54bb4/native_geometry.mat",
+      "size_bytes": 86986,
+      "sha256": "61802666d47d2b1e99833acb0f1c07d52004579c967041eb80ea720cfd78695b"
+    },
+    {
+      "path": "geometries/S2_MD15_6248d0a44c/native_geometry.mat",
+      "size_bytes": 87668,
+      "sha256": "15a46ce43c9ec26845bf2b0945b76a74a926c727a3f3c054ae14ee03ea60e289"
+    },
+    {
+      "path": "geometries/S2_MD15_69970679cf/native_geometry.mat",
+      "size_bytes": 87574,
+      "sha256": "ded10a6066d59806ac2b3f8a59b877e629a4de324b0da959484b5564a6d9d5f8"
+    },
+    {
+      "path": "geometries/S2_MD15_6bf086c4bd/native_geometry.mat",
+      "size_bytes": 87703,
+      "sha256": "2d3d94bd73197d93b257556446f190b225ce45cbd64abe87f698effa41303071"
+    },
+    {
+      "path": "geometries/S2_MD15_6f4fb6891c/native_geometry.mat",
+      "size_bytes": 87811,
+      "sha256": "44d9c41fa07219d0d7280a0df183012938521a77dde26300e03ca28552a5c442"
+    },
+    {
+      "path": "geometries/S2_MD15_889670a45c/native_geometry.mat",
+      "size_bytes": 87257,
+      "sha256": "04b94c21b1545868e6727f8eb82f3e072d532b7f5477fce07df592dfe6213f09"
+    },
+    {
+      "path": "geometries/S2_MD15_8d986be002/native_geometry.mat",
+      "size_bytes": 87626,
+      "sha256": "a1bb935abd040e1aac23d2a084e6326f0f7019ba632e874efa032abbf0a2a34c"
+    },
+    {
+      "path": "geometries/S2_MD15_9134944349/native_geometry.mat",
+      "size_bytes": 87360,
+      "sha256": "ccf155d34e6231072376e30e0c7fda34ddc427730421c1e2d6ad2d3bf39ea581"
+    },
+    {
+      "path": "geometries/S2_MD15_9cf4a0d41c/native_geometry.mat",
+      "size_bytes": 87263,
+      "sha256": "aef0943d5d90913df3d969e2e8fbf5f24a0221bb413bc82a7114b1361596ced5"
+    },
+    {
+      "path": "geometries/S2_MD15_aa379760b4/native_geometry.mat",
+      "size_bytes": 87206,
+      "sha256": "443df4f04ea8d4f93bb626de3240872adb986017b963bc1f4e1a1c7c3d7e7e70"
+    },
+    {
+      "path": "geometries/S2_MD15_b2c59334e1/native_geometry.mat",
+      "size_bytes": 87390,
+      "sha256": "240fb4a339ae5279663a1e29f008cb4e2f4d2927c3237020311d6fe5d6f5befc"
+    },
+    {
+      "path": "geometries/S2_MD15_ba5b2b240b/native_geometry.mat",
+      "size_bytes": 87666,
+      "sha256": "a24246df1774c89930a4beae73296ad8e72c4aa2c665891d2ec8d8c9dded8b8f"
+    },
+    {
+      "path": "geometries/S2_MD15_c70bcdfe63/native_geometry.mat",
+      "size_bytes": 88038,
+      "sha256": "827b7916183b5ecdb029da6c2a9a0d253ad095bf60b589677b7d8ba5e873ad00"
+    },
+    {
+      "path": "geometries/S2_MD15_c9499a2ed6/native_geometry.mat",
+      "size_bytes": 87647,
+      "sha256": "a566d30f2ae3c7fd432241eb758d7121ac0e658c5626bc1b9acff4c65a76f904"
+    },
+    {
+      "path": "geometries/S2_MD15_ca6c9134d0/native_geometry.mat",
+      "size_bytes": 87681,
+      "sha256": "bcd9171dc7ba330ffcd6113f92cf72e12ace6e58ddaa87cf1ae47d1634a568b5"
+    },
+    {
+      "path": "geometries/S2_MD15_e499b37559/native_geometry.mat",
+      "size_bytes": 87461,
+      "sha256": "099b195ed484abe7cb72d8909257ce401868feb4127997fa8310877e5f83b41c"
+    },
+    {
+      "path": "geometries/S2_MD15_eb6c2fd0f4/native_geometry.mat",
+      "size_bytes": 87711,
+      "sha256": "e628f603d9b643e94e80c54e0ee169c3f5efbe4eec2fb490596510abf9ca1d3e"
+    },
+    {
+      "path": "geometries/S2_MD15_ee16542920/native_geometry.mat",
+      "size_bytes": 87074,
+      "sha256": "eabd71e8a9a2f04d5d2ba1d6914925aeb499b5fbee43658e26e004ab45f12916"
+    },
+    {
+      "path": "geometries/S2_MD15_f2a8ff3da4/native_geometry.mat",
+      "size_bytes": 87001,
+      "sha256": "85bb847b70bb106cd6e1a76b13fe4f87d67375c20eb7441c6d8c8a1767ecaed8"
+    },
+    {
+      "path": "geometries/S2_MD6_d56a3ecfa8/native_geometry.mat",
+      "size_bytes": 88191,
+      "sha256": "ed1676297d96d83672f212070725fd1c2aa6c04585abc8d5c7631d2118fc2e67"
+    },
+    {
+      "path": "geometries/S2_MD7_10fb017f26/native_geometry.mat",
+      "size_bytes": 87208,
+      "sha256": "9a993bcd11a33fc046265d6312d467f7965d4d813915f49b3280eac24b6a0409"
+    },
+    {
+      "path": "geometries/S2_MD8_70a715bdb4/native_geometry.mat",
+      "size_bytes": 86759,
+      "sha256": "ac12fb544c5bfa34a86adb10a238c4b104961836e4447931caf112b0eaf18570"
+    },
+    {
+      "path": "geometries/S2_MD8_b38c94c34e/native_geometry.mat",
+      "size_bytes": 87458,
+      "sha256": "1ff62c65c2edc67496a6d73485c6b64684995b97f4b9ecd9803b5f65f42817d4"
+    },
+    {
+      "path": "geometries/S2_MD9.75_4b3a631248/native_geometry.mat",
+      "size_bytes": 86726,
+      "sha256": "01a0591d610b1627d677bcd0e508a2aec3bfa52261437160745fd2d923a588e1"
+    },
+    {
+      "path": "geometries/S2_MD9.898_5e403aae01/native_geometry.mat",
+      "size_bytes": 86905,
+      "sha256": "b99932653aa2740807995d369cbd4f5a785987169598d730f08b261f0c5b4b5b"
+    },
+    {
+      "path": "geometries/S2_MD9_33a81e0a91/native_geometry.mat",
+      "size_bytes": 87074,
+      "sha256": "33cc207517f331ca043ea70dba41591df57821ea0d87fdf8264fe0bfe5159156"
+    },
+    {
+      "path": "geometries/V2_MD15_002/native_geometry.mat",
+      "size_bytes": 87928,
+      "sha256": "4ec634128ff5b7353e106fb8244d15f243542461801348b0f401548d10c52bec"
+    },
+    {
+      "path": "geometries/V2_MD15_003/native_geometry.mat",
+      "size_bytes": 88229,
+      "sha256": "e2219f0904cbfe78456f464488158286008bbc4d48da511339294d2cd5974db4"
+    },
+    {
+      "path": "geometries/V2_MD15_004/native_geometry.mat",
+      "size_bytes": 87354,
+      "sha256": "375511c6367e9d1f00cf81fac335a5efe8abc2f126a03244e62c3443b46409af"
+    },
+    {
+      "path": "geometries/V2_MD15_005/native_geometry.mat",
+      "size_bytes": 88477,
+      "sha256": "b0b9ab228de161f5228af0bd47288d47e84a5b63827792b019b5f481754cd65a"
+    },
+    {
+      "path": "geometries/V2_MD15_006/native_geometry.mat",
+      "size_bytes": 88459,
+      "sha256": "3afc9a382a6dafbf7a3f6b9fbdc270711937a2ef10a67858972285a3943a2540"
+    },
+    {
+      "path": "geometries/V2_MD15_007/native_geometry.mat",
+      "size_bytes": 87008,
+      "sha256": "3cbd06f9ee9ad1adf92769a88168d0e44dfa458722b0ccbd7a11366ea6db80fd"
+    },
+    {
+      "path": "geometries/V2_MD4_002/native_geometry.mat",
+      "size_bytes": 89608,
+      "sha256": "b23c05863071c927c99d0fe6d0b437fbd3141efd4e737164884affd989153a01"
+    },
+    {
+      "path": "geometries/V2_MD4_007/native_geometry.mat",
+      "size_bytes": 89798,
+      "sha256": "b043ec472a570d8c7733d5104d82f6a1680e64329e700fcaa3c04143a4cd3ecc"
+    },
+    {
+      "path": "geometries/V2_MD4_008/native_geometry.mat",
+      "size_bytes": 89305,
+      "sha256": "36c4380bd7059d6e37726452005e2b4046216f389c988f58da888f43ef60280b"
+    },
+    {
+      "path": "geometries/V2_MD4_009/native_geometry.mat",
+      "size_bytes": 89385,
+      "sha256": "559852374d4edff30f57080714bb3034853d66c02a0301038af985c75a1c17cd"
+    },
+    {
+      "path": "geometries/V2_MD4_012/native_geometry.mat",
+      "size_bytes": 89430,
+      "sha256": "0c30a5cd394c5668cde391a1fefaa3b5b9c3ec00200a89f6b09482b5989127f8"
+    },
+    {
+      "path": "geometries/V2_MD4_013/native_geometry.mat",
+      "size_bytes": 89645,
+      "sha256": "a7dbc7f10843c7eb635756e740bdbf771f80b0fd62745f115dce0d1b66aa20a6"
+    },
+    {
+      "path": "geometries/V2_MD5_001/native_geometry.mat",
+      "size_bytes": 89410,
+      "sha256": "7153e7e5a1d2509f541598c7ce7080065799e3db599cd0266eea7242557bf292"
+    },
+    {
+      "path": "geometries/V2_MD5_002/native_geometry.mat",
+      "size_bytes": 89069,
+      "sha256": "0a614a52b3a0bfb7c23393beaea46e7d7fc76725ec5da67a82ec34307048de10"
+    },
+    {
+      "path": "geometries/V2_MD5_003/native_geometry.mat",
+      "size_bytes": 89391,
+      "sha256": "9dd1a1c49ed3c87e65f66f8fb3e4311b67fe775cd4bd67daa6440f8f5414c352"
+    },
+    {
+      "path": "geometries/V2_MD5_004/native_geometry.mat",
+      "size_bytes": 88967,
+      "sha256": "5ecb10b23d8fff41aefb4e3ad16bf4793f837038ab73ab2109f0c37db23aa5e3"
+    },
+    {
+      "path": "geometries/V2_MD5_005/native_geometry.mat",
+      "size_bytes": 89445,
+      "sha256": "72e5514020ef4f25bb667b4703a8c9517d6c79e0f0b4ccc04e871828e8f4def2"
+    },
+    {
+      "path": "geometries/V2_MD5_006/native_geometry.mat",
+      "size_bytes": 88909,
+      "sha256": "15727fc845ed4899f020a37d1dfe83b66dec1c824781edffa80bdb5f29352868"
+    },
+    {
+      "path": "geometries/V2_MD5_007/native_geometry.mat",
+      "size_bytes": 89285,
+      "sha256": "1069eaeaf5ca565717dbe0e74878e97a10ad408073616d4f1124ad45dec5580d"
+    },
+    {
+      "path": "geometries/V2_MD5_008/native_geometry.mat",
+      "size_bytes": 89575,
+      "sha256": "61d784ebeb5f86c4aa63728cf2b61d01e676c3149bae55d752a8e1e528b95526"
+    },
+    {
+      "path": "geometries/V2_MD5_009/native_geometry.mat",
+      "size_bytes": 89291,
+      "sha256": "b807a0772a518fba894add8c22ef0736588a27479e869abe94544790efdaf641"
+    },
+    {
+      "path": "geometries/V2_MD5_011/native_geometry.mat",
+      "size_bytes": 88916,
+      "sha256": "33ae8d97f8ea04d2e0dbe963a745c50795e34f1d13519e7d73fe915b372af9e4"
+    },
+    {
+      "path": "geometries/V2_MD6_001/native_geometry.mat",
+      "size_bytes": 89094,
+      "sha256": "cff5b5712a289b20ec80733f51ef5da66f3a39b83a9dfb274777a7781d90bfcd"
+    },
+    {
+      "path": "geometries/V2_MD6_002/native_geometry.mat",
+      "size_bytes": 89454,
+      "sha256": "25f0b9ec8f08e292aaf76df68fcd136b3008dd7e6b94bb3d1f3d14abf6c2071f"
+    },
+    {
+      "path": "geometries/V2_MD6_005/native_geometry.mat",
+      "size_bytes": 89297,
+      "sha256": "5dc2e5b2b5a364ff422b4463bba4e1e821f4c431fb91cca74988d3fb265c2876"
+    },
+    {
+      "path": "geometries/V2_MD6_006/native_geometry.mat",
+      "size_bytes": 89573,
+      "sha256": "ea473d83298947b6c9ee776af2d35b866182b3cfbed0cbfd5143f353c53c6b93"
+    },
+    {
+      "path": "geometries/V2_MD6_008/native_geometry.mat",
+      "size_bytes": 87745,
+      "sha256": "bc67c1d882120ca7bacc0fa124597b570c7215c526cef60cfb1050366e14c704"
+    },
+    {
+      "path": "geometries/V2_MD6_009/native_geometry.mat",
+      "size_bytes": 89191,
+      "sha256": "36238d1e87b35ef6d9d6c40c3d5e27a6bc2159e33386800f624248dce27be8dc"
+    },
+    {
+      "path": "geometries/V2_MD6_011/native_geometry.mat",
+      "size_bytes": 88933,
+      "sha256": "f591bede530dd37de5bcd01783adcad25b1088def0cbb46e1459da17b33ea8ce"
+    },
+    {
+      "path": "geometries/V2_MD6_013/native_geometry.mat",
+      "size_bytes": 89407,
+      "sha256": "992164177dc2c9a1ad1c023f9c5994e81238342d0c7ce76070019b7180443106"
+    },
+    {
+      "path": "geometries/V2_MD7_001/native_geometry.mat",
+      "size_bytes": 88273,
+      "sha256": "d5f61987f2d04ef5dbe49d7635c87a7cd5079fcd1941278f34627ab01a85f5b6"
+    },
+    {
+      "path": "geometries/V2_MD7_002/native_geometry.mat",
+      "size_bytes": 88916,
+      "sha256": "5b069e42adb1337a23136e56f264142ee3285164d75f378a4e7a3fa3216138fa"
+    },
+    {
+      "path": "geometries/V2_MD7_003/native_geometry.mat",
+      "size_bytes": 89111,
+      "sha256": "69956ac8e99fd91e28b3c3c7598d1786fdd4678410b9fe717f8e45e0fe52ca63"
+    },
+    {
+      "path": "geometries/V2_MD7_004/native_geometry.mat",
+      "size_bytes": 88307,
+      "sha256": "9c9ec52c66e51d68c58821089275f67bf960d8b05648ce14f9ce1facabe42f3f"
+    },
+    {
+      "path": "geometries/V2_MD7_005/native_geometry.mat",
+      "size_bytes": 89206,
+      "sha256": "1a4c95940cdeefe0d77fa8fd5c4c06c2bcfa11e5a4cce8474829d3db499263bb"
+    },
+    {
+      "path": "geometries/V2_MD7_007/native_geometry.mat",
+      "size_bytes": 88892,
+      "sha256": "408459255626b3a15b5a8e579141d30d4e289a1441a2f4e838c0f143bc8e339f"
+    },
+    {
+      "path": "geometries/V2_MD7_008/native_geometry.mat",
+      "size_bytes": 88760,
+      "sha256": "b890c972f95c86d2952803c7193a066e3364491ec9d2bfc7674bea15cc57a8b6"
+    },
+    {
+      "path": "geometries/V2_MD7_009/native_geometry.mat",
+      "size_bytes": 88918,
+      "sha256": "f8fe352982f21b764ee5f44cab27e9be60f17c2c202348ea7a778997c961a3d7"
+    },
+    {
+      "path": "geometries/V2_MD7_011/native_geometry.mat",
+      "size_bytes": 89086,
+      "sha256": "6ed1bf8df9174a478565f4b2845691136e54dab461a9f3bb892746cd2b8d8a5a"
+    },
+    {
+      "path": "geometries/V2_MD7_012/native_geometry.mat",
+      "size_bytes": 88821,
+      "sha256": "564869b11f88aa7ec310c6edf26d3283da15dbc51fdc3efdc9af2b54049fdb7a"
+    },
+    {
+      "path": "geometries/V2_MD8_005/native_geometry.mat",
+      "size_bytes": 89374,
+      "sha256": "ec187778162ba616e5f0ebe62b63ba60f4981ce287f6577669253e50214d6d6e"
+    },
+    {
+      "path": "geometries/V2_MD8_007/native_geometry.mat",
+      "size_bytes": 88277,
+      "sha256": "f92f619fd4e0047cbcfe211bc94d5253926439363afb8e39be2ad66eebaa8ef6"
+    },
+    {
+      "path": "geometries/V2_MD8_008/native_geometry.mat",
+      "size_bytes": 88995,
+      "sha256": "290686ed76e56bceee3a04a3597f2d6b92fb1127873acdc368337f42943abb8a"
+    },
+    {
+      "path": "geometries/V2_MD8_010/native_geometry.mat",
+      "size_bytes": 88301,
+      "sha256": "89e80de3535bbc0fcff36ded0a5914a06dd23c6acf682a8bcafb1e7424febc4c"
+    },
+    {
+      "path": "geometries/V2_MD8_011/native_geometry.mat",
+      "size_bytes": 89045,
+      "sha256": "4d7e05428b67154ba466587f7b08c0b76f632a043e6e6f03f55347e433fb5b4e"
+    },
+    {
+      "path": "geometries/V2_MD8_012/native_geometry.mat",
+      "size_bytes": 89126,
+      "sha256": "1b94421643c825c7cdc18271de2c6cb5f556912832ec5b23495fdde674fa4c01"
+    },
+    {
+      "path": "geometries/V2_MD8_013/native_geometry.mat",
+      "size_bytes": 88843,
+      "sha256": "4ca286911051cbfd6963178efcea68d43fe804ec87967edd0e51cc31c802296e"
+    },
+    {
+      "path": "geometries/V2_MD8_014/native_geometry.mat",
+      "size_bytes": 88129,
+      "sha256": "f65e9c85e43fc29bb878fe2f1c67d2faa2ddf9d686a79dfd16182348e24cfec0"
+    },
+    {
+      "path": "geometries/V2_MD8_015/native_geometry.mat",
+      "size_bytes": 88278,
+      "sha256": "483298f71d4c58ec10626365a13ac27e633722c364bf833f422e3370ef0ff512"
+    },
+    {
+      "path": "geometries/V2_MD8_017/native_geometry.mat",
+      "size_bytes": 87686,
+      "sha256": "2e7246b596d7dfd90674caba3fa745d910fe4e9608134db6db4a025b68705530"
+    },
+    {
+      "path": "geometries/V2_MD8_018/native_geometry.mat",
+      "size_bytes": 88083,
+      "sha256": "acff9ceafb390db6fc45032d68e9f2e03975d9fc66d6f744866f6c08f43eb516"
+    },
+    {
+      "path": "geometries/V2_MD8_019/native_geometry.mat",
+      "size_bytes": 88175,
+      "sha256": "c40aa5e6ee4fce64029d2e9e70ee0bc14a0eb808b9923c6ad66b089bb4cf1eb9"
+    },
+    {
+      "path": "geometries/V2M_MD15_001/native_geometry.mat",
+      "size_bytes": 88178,
+      "sha256": "6f9a74880658cec1a0d8af7bd6acfe40f3954ba7b79b73cad13e974558287275"
+    },
+    {
+      "path": "geometries/V2M_MD15_002/native_geometry.mat",
+      "size_bytes": 86990,
+      "sha256": "236ffef61d3910711053a0144cb7dcc0f4f430f12534a5dd6374541436a7e3a3"
+    },
+    {
+      "path": "geometries/V2M_MD15_003/native_geometry.mat",
+      "size_bytes": 87000,
+      "sha256": "7d319424950742f1a8ca58c7a4af16299518824b5dc1dd45368a6e0b1db3d9a4"
+    },
+    {
+      "path": "geometries/V2M_MD15_004/native_geometry.mat",
+      "size_bytes": 87012,
+      "sha256": "b924e2e6ed5aa6a4851440840f1bb2db7e1f77de93e275fb0a91005b8095c0c6"
+    },
+    {
+      "path": "geometries/V2M_MD15_005/native_geometry.mat",
+      "size_bytes": 87289,
+      "sha256": "5d4da68945553153947b3035b167b21297dfae758df0d7e39a1e92b440eb20af"
+    },
+    {
+      "path": "geometries/V2M_MD15_006/native_geometry.mat",
+      "size_bytes": 87147,
+      "sha256": "e2b84d65b346268327c1476ffee4247fad47db7ef3eb6ea60a570aa69ff4564f"
+    },
+    {
+      "path": "geometries/V2M_MD15_007/native_geometry.mat",
+      "size_bytes": 87260,
+      "sha256": "25986108806227e7067732103b7a76965e20353bcd011c7b7101d2f259ab189c"
+    },
+    {
+      "path": "geometries/V2M_MD15_008/native_geometry.mat",
+      "size_bytes": 88396,
+      "sha256": "11108ea730ce3181aaa559c3d91a9d66e546cb0dce75a073ae789cbd609b429d"
+    },
+    {
+      "path": "geometries/V2M_MD15_009/native_geometry.mat",
+      "size_bytes": 86989,
+      "sha256": "637194d6e6848506a6d2d8b67ffce4304c478ed3137b561212e1acb562b791f9"
+    },
+    {
+      "path": "geometries/V2M_MD15_010/native_geometry.mat",
+      "size_bytes": 87778,
+      "sha256": "be982dab58b230c97bc79f86638b1df3dc2320c88bfae721be18706d72076b4f"
+    },
+    {
+      "path": "geometries/V2M_MD15_011/native_geometry.mat",
+      "size_bytes": 87031,
+      "sha256": "9630c3f436968399993a66c908b9c2780076ade72ab75ad73b22f7e0d578f07f"
+    },
+    {
+      "path": "geometries/V2M_MD15_012/native_geometry.mat",
+      "size_bytes": 88083,
+      "sha256": "0434c48a4c745924ddc59c32b0ff93573ccf9022c8ba90cff928e726df0f99dd"
+    },
+    {
+      "path": "geometries/V2M_MD15_013/native_geometry.mat",
+      "size_bytes": 88314,
+      "sha256": "0af64ad1d2445a7d72f04117ff2e0867337b947b2e73f76e89a185c4ae957355"
+    },
+    {
+      "path": "geometries/V2M_MD15_014/native_geometry.mat",
+      "size_bytes": 88084,
+      "sha256": "d3517cf7c7c7dd1aed79ccb909c57ca462bffe7070402496b051dffe1269c610"
+    },
+    {
+      "path": "geometries/V2M_MD15_015/native_geometry.mat",
+      "size_bytes": 88049,
+      "sha256": "9581af6eb8ed56586c5d4b7b4bc4bdbda19dc176ca524f5f89599b3137bbbba6"
+    },
+    {
+      "path": "geometries/V2M_MD15_016/native_geometry.mat",
+      "size_bytes": 88321,
+      "sha256": "22087a221eb80c3fcba43d0daaf766a96b8f0335fd7d0333e6a23abd5a89e2b8"
+    },
+    {
+      "path": "geometries/V2M_MD15_017/native_geometry.mat",
+      "size_bytes": 87863,
+      "sha256": "b126f88a77611addbd3e39a757085154788dbf70b6ef8dd9342c266bf279f8d3"
+    },
+    {
+      "path": "geometries/V2M_MD15_018/native_geometry.mat",
+      "size_bytes": 87640,
+      "sha256": "7949bd511d7175632eb560130b17f36dcf5d3c1f273b1b901c3394a0c24233b0"
+    },
+    {
+      "path": "geometries/V2M_MD15_019/native_geometry.mat",
+      "size_bytes": 86818,
+      "sha256": "22fb8305197a02fcbdbc579938f95901dc9d1d805860ff636b9dffdfb11c2f72"
+    },
+    {
+      "path": "geometries/V2M_MD15_020/native_geometry.mat",
+      "size_bytes": 86870,
+      "sha256": "c6556f839b6364f1ca7541931bbba62f826bc62969c4d9ebf5ae9adcfb72df64"
+    },
+    {
+      "path": "geometries/V2M_MD15_021/native_geometry.mat",
+      "size_bytes": 88372,
+      "sha256": "70065fa2735af82509a5d4704f65020fade723e2be5047fd1fc2375205c54b06"
+    },
+    {
+      "path": "geometries/V2M_MD15_022/native_geometry.mat",
+      "size_bytes": 88114,
+      "sha256": "cdba5d5085651349a43edab969e03fc99289a355d6d438d09a04a6dbe394f647"
+    },
+    {
+      "path": "geometries/V2M_MD15_023/native_geometry.mat",
+      "size_bytes": 87515,
+      "sha256": "d5cb088b82ffb939fa9f5a7c17ccfd92b24f171c0d6be28e0ac2716f0403d2bf"
+    },
+    {
+      "path": "geometries/V2M_MD15_024/native_geometry.mat",
+      "size_bytes": 87605,
+      "sha256": "e2bf8970de3ff4e823594f30136bf317f86cfcde71d62c3570b8f1b59b953b92"
+    },
+    {
+      "path": "geometries/V2M_MD15_025/native_geometry.mat",
+      "size_bytes": 87124,
+      "sha256": "1eb3cb5483ab35b42678425b508d790846cc4ad51c85003eff704dab91803412"
+    },
+    {
+      "path": "geometries/V2M_MD15_026/native_geometry.mat",
+      "size_bytes": 87968,
+      "sha256": "2a9126b6192b1eb01f8918971f453352f8d8489b0e276207ef9d356a47ed6ebd"
+    },
+    {
+      "path": "geometries/V2M_MD15_027/native_geometry.mat",
+      "size_bytes": 88148,
+      "sha256": "b07ebf17aa501af370a5941074c2e2ecf29c8d5a15d22e8077ec5468ab563de9"
+    },
+    {
+      "path": "geometries/V2M_MD4_001/native_geometry.mat",
+      "size_bytes": 89422,
+      "sha256": "8a1652f101fdc2aef0c7ff079ca6d552903a734b3c0ab4d595029080899293f8"
+    },
+    {
+      "path": "geometries/V2M_MD4_004/native_geometry.mat",
+      "size_bytes": 89659,
+      "sha256": "af45e9278657cc0f76e0b4d43e90a9765f121c75c9085e32b244053a8c4eaa05"
+    },
+    {
+      "path": "geometries/V2M_MD4_005/native_geometry.mat",
+      "size_bytes": 89752,
+      "sha256": "1c41d50a07e46c95b5f8ea8de591020165becdb3a37675628025a42f089894ca"
+    },
+    {
+      "path": "geometries/V2M_MD4_006/native_geometry.mat",
+      "size_bytes": 89295,
+      "sha256": "f38bf95483b2dde58acb573a5621bfabcb94f6469564c141cb20de7c99595d0c"
+    },
+    {
+      "path": "geometries/V2M_MD4_007/native_geometry.mat",
+      "size_bytes": 89826,
+      "sha256": "c2d440b4f0b0954c7602a0bfbd76adf8d2f0436ca1c042f2ea0da27efa9b89bc"
+    },
+    {
+      "path": "geometries/V2M_MD4_008/native_geometry.mat",
+      "size_bytes": 89526,
+      "sha256": "ddcd384cc20f6759484420a74f0f4e9a878d9f0a25dd6aacafbf58a1286548f0"
+    },
+    {
+      "path": "geometries/V2M_MD4_009/native_geometry.mat",
+      "size_bytes": 89347,
+      "sha256": "79f44a2b2bdbf020aa23d825fedd9334c26323ce788e4ddf082dd7799508b228"
+    },
+    {
+      "path": "geometries/V2M_MD4_010/native_geometry.mat",
+      "size_bytes": 89756,
+      "sha256": "4f81c02f9c4937d91cbfeb2477521f16a51773265cd6b5dc10c9e403d2c52c3e"
+    },
+    {
+      "path": "geometries/V2M_MD4_011/native_geometry.mat",
+      "size_bytes": 89556,
+      "sha256": "57ea193a4b223cc08e925d5f28b213fd33a2e78d1121e4983893a7ccf7bfd6d7"
+    },
+    {
+      "path": "geometries/V2M_MD4_013/native_geometry.mat",
+      "size_bytes": 89792,
+      "sha256": "255bc9c75fc5050a6c5c1f5a63377b4883a90505897ebd91dcb1464fd53766b7"
+    },
+    {
+      "path": "geometries/V2M_MD4_016/native_geometry.mat",
+      "size_bytes": 89340,
+      "sha256": "34d973e0ed5e2657b9cc180654192d97b2d58a48b1febf00711c395ae0f63596"
+    },
+    {
+      "path": "geometries/V2M_MD4_017/native_geometry.mat",
+      "size_bytes": 89608,
+      "sha256": "f6a7a6050544217e92ffa75f529838ee879f5afe0964cf8f2bc2533344ea8f71"
+    },
+    {
+      "path": "geometries/V2M_MD4_018/native_geometry.mat",
+      "size_bytes": 89204,
+      "sha256": "ef8afd8770b6681ef5c241e60188a6cb4582156f83ec9689b30bcc2e0312fbce"
+    },
+    {
+      "path": "geometries/V2M_MD4_019/native_geometry.mat",
+      "size_bytes": 89244,
+      "sha256": "2fc4b1cdd3400704d261a591f02e07b244dab50aa51c41614e853b19a03ce2b1"
+    },
+    {
+      "path": "geometries/V2M_MD4_021/native_geometry.mat",
+      "size_bytes": 89642,
+      "sha256": "7b2500dcf50830c4599c0fee4a278afcd79affb93b911783242fa9706eb6c007"
+    },
+    {
+      "path": "geometries/V2M_MD4_023/native_geometry.mat",
+      "size_bytes": 89522,
+      "sha256": "cd77bcf662954f1db328ffcde42763849b1ba27bb00f7d895701f0eea813c74c"
+    },
+    {
+      "path": "geometries/V2M_MD4_026/native_geometry.mat",
+      "size_bytes": 89724,
+      "sha256": "4722a98231cc4fc737f5b3f6a039daf71ce21f15242e1a1a79192f415ef112bf"
+    },
+    {
+      "path": "geometries/V2M_MD4_029/native_geometry.mat",
+      "size_bytes": 89369,
+      "sha256": "a1f043aaee58c247a3440eb89bff45486f1174a96b48d8bdf8c269ecfc6dc87e"
+    },
+    {
+      "path": "geometries/V2M_MD4_031/native_geometry.mat",
+      "size_bytes": 89200,
+      "sha256": "5659b09b87189a1ec4519327cc4079a4268e9fb53682842a7ab33a14f6c2219f"
+    },
+    {
+      "path": "geometries/V2M_MD4_034/native_geometry.mat",
+      "size_bytes": 89480,
+      "sha256": "0b666251e9838b535beaca08e33b553f3d1a918e35c78595f1339ba83c7c30d0"
+    },
+    {
+      "path": "geometries/V2M_MD4_035/native_geometry.mat",
+      "size_bytes": 89472,
+      "sha256": "5506d4694485b29ba870317bb174fac7c25ccf34128be568db9b31516c63148e"
+    },
+    {
+      "path": "geometries/V2M_MD4_036/native_geometry.mat",
+      "size_bytes": 89319,
+      "sha256": "a8ce483cd8dff2438338c381d885aa170f7ece1c6051e5eb1af642d32a93f8b5"
+    },
+    {
+      "path": "geometries/V2M_MD4_037/native_geometry.mat",
+      "size_bytes": 89273,
+      "sha256": "3c1642b2f1c48f2644fca17cb28156a3543a9a66b7081bd1bed4e20545f33db3"
+    },
+    {
+      "path": "geometries/V2M_MD4_040/native_geometry.mat",
+      "size_bytes": 89290,
+      "sha256": "4859d92f192e5a64d1f32466a248b682dbd8c79b800a14892d5a6dc10741c349"
+    },
+    {
+      "path": "geometries/V2M_MD4_041/native_geometry.mat",
+      "size_bytes": 89399,
+      "sha256": "2d56d4eda915e95051a585c887dd28691c76bec23cab37697aa08057920cd032"
+    },
+    {
+      "path": "geometries/V2M_MD4_042/native_geometry.mat",
+      "size_bytes": 89410,
+      "sha256": "166d1a0b2ae309ad6fa7a7979e0a8e91c6f45e05be34e94fc938c0015915c9d7"
+    },
+    {
+      "path": "geometries/V2M_MD4_044/native_geometry.mat",
+      "size_bytes": 89278,
+      "sha256": "27142ec1f198d7bd9e9165aa3d60beda7a38ab034b04c5f5b5e2d9e744ce9ee5"
+    },
+    {
+      "path": "geometries/V2M_MD4_045/native_geometry.mat",
+      "size_bytes": 88969,
+      "sha256": "018ea046e22d822f7e1c5d59f734db8f420c3fa9326c9c06e5de232cee08c81d"
+    },
+    {
+      "path": "geometries/V2M_MD5_001/native_geometry.mat",
+      "size_bytes": 89298,
+      "sha256": "d85a8a3a88f37a46a549c0de6188336b5298eeec50ab02a15053f538510e8061"
+    },
+    {
+      "path": "geometries/V2M_MD5_002/native_geometry.mat",
+      "size_bytes": 89508,
+      "sha256": "a2d3ff485109eab5aa8bdfbda9fbc5ee640491016e10f4c484f64c22165124d9"
+    },
+    {
+      "path": "geometries/V2M_MD5_003/native_geometry.mat",
+      "size_bytes": 88993,
+      "sha256": "ba9842d850e0d5594b24c24882e95f3a0f3b1da3d01cdc2e7e409b715c17fd6f"
+    },
+    {
+      "path": "geometries/V2M_MD5_004/native_geometry.mat",
+      "size_bytes": 89457,
+      "sha256": "0cdab20b4bfc1e6258de4876c8e2a1fc7ce3e6d0e8ff794d15141eb56e836137"
+    },
+    {
+      "path": "geometries/V2M_MD5_005/native_geometry.mat",
+      "size_bytes": 89366,
+      "sha256": "66675434f257cb9c0b7130c64b47d1539a51038454d051aacbb35b4fcba26377"
+    },
+    {
+      "path": "geometries/V2M_MD5_006/native_geometry.mat",
+      "size_bytes": 89435,
+      "sha256": "e97f288ffb1097041d03f4ebbc9f29b8aefbdf2bc0a5b832ba2fd68c008ba5d5"
+    },
+    {
+      "path": "geometries/V2M_MD5_007/native_geometry.mat",
+      "size_bytes": 89377,
+      "sha256": "27170c79dffcb18b80c1899fba35a350aa7be25d787627d54b7b3f195609373a"
+    },
+    {
+      "path": "geometries/V2M_MD5_008/native_geometry.mat",
+      "size_bytes": 88995,
+      "sha256": "4701b0810535f082add0d0e151a5e8d864f3b4e2e95c60a99cf26bb5ecca3a22"
+    },
+    {
+      "path": "geometries/V2M_MD5_009/native_geometry.mat",
+      "size_bytes": 89366,
+      "sha256": "bcadaf5ee8f37fe5bd00d126bab7c0883dcae82bcee80e990dbea1949a9f8508"
+    },
+    {
+      "path": "geometries/V2M_MD5_010/native_geometry.mat",
+      "size_bytes": 88996,
+      "sha256": "8f30be966eed02ddcb8ac796d9a0b1e4de14a3eccc3870068d54d7f2eccacc16"
+    },
+    {
+      "path": "geometries/V2M_MD5_012/native_geometry.mat",
+      "size_bytes": 89122,
+      "sha256": "da033b2691c1ac6e7a57c5af28fdad30dbe99ca2122177b4241d0be8c74d38f3"
+    },
+    {
+      "path": "geometries/V2M_MD5_013/native_geometry.mat",
+      "size_bytes": 89158,
+      "sha256": "4b444c362775fabecf002f4d9b8b5067e8e85591342e136a977eafb4184950ea"
+    },
+    {
+      "path": "geometries/V2M_MD5_014/native_geometry.mat",
+      "size_bytes": 88942,
+      "sha256": "3c7c82e72d4859fb529475b6ade209ae62293b9b62cc4c1da69f013e94f61919"
+    },
+    {
+      "path": "geometries/V2M_MD5_015/native_geometry.mat",
+      "size_bytes": 89084,
+      "sha256": "6d709ab7cf7d502991c1885bfccb4bddf2484b41b959ab54b9d2add1a4494fbe"
+    },
+    {
+      "path": "geometries/V2M_MD5_016/native_geometry.mat",
+      "size_bytes": 89146,
+      "sha256": "a15ff1e4ee4f8b14af46b92e2e31b67dbe304bad0a5b955145be9bdbf3e72c48"
+    },
+    {
+      "path": "geometries/V2M_MD5_017/native_geometry.mat",
+      "size_bytes": 89228,
+      "sha256": "7b2888cfa36cdd360e082cc870d5ee9a79c9ae114502922882c3cd58d18ba5e1"
+    },
+    {
+      "path": "geometries/V2M_MD5_018/native_geometry.mat",
+      "size_bytes": 89465,
+      "sha256": "3ed6199f5d9281b788f7461a2ddcebfa7e9abfee6a1d5a06999189c200630990"
+    },
+    {
+      "path": "geometries/V2M_MD5_019/native_geometry.mat",
+      "size_bytes": 89326,
+      "sha256": "af11cf534637a4abdeb1b4c59d8a02a992e59cb3e181672baa5b78d334eee38d"
+    },
+    {
+      "path": "geometries/V2M_MD5_020/native_geometry.mat",
+      "size_bytes": 89250,
+      "sha256": "9593b4c6036dded33fee3489972ccb42187794fa02ee7f340ed028495b395d64"
+    },
+    {
+      "path": "geometries/V2M_MD5_021/native_geometry.mat",
+      "size_bytes": 89312,
+      "sha256": "778a83f1a9598c007379c955fc1c5f44471e22c3b1634af7a89c5da47209b6a7"
+    },
+    {
+      "path": "geometries/V2M_MD5_022/native_geometry.mat",
+      "size_bytes": 89504,
+      "sha256": "e932b445f4a2c79781f579685cd3317d966aa1124a6892a429665e56d69396bf"
+    },
+    {
+      "path": "geometries/V2M_MD5_023/native_geometry.mat",
+      "size_bytes": 89308,
+      "sha256": "e55c1920361d9cc4f1ceb86f1d8527177ee30313ca8c4c5ab9125ebc1d091fee"
+    },
+    {
+      "path": "geometries/V2M_MD5_024/native_geometry.mat",
+      "size_bytes": 89057,
+      "sha256": "a9e32a5c4b1ef41259c11aa75776bc40a21226d823d0ab149aff257fe2f6c10b"
+    },
+    {
+      "path": "geometries/V2M_MD5_026/native_geometry.mat",
+      "size_bytes": 89009,
+      "sha256": "a51692303f80d94b26d22a3a522c5d1eb5d89e123e2147b7c59379aef08ee50e"
+    },
+    {
+      "path": "geometries/V2M_MD5_027/native_geometry.mat",
+      "size_bytes": 89519,
+      "sha256": "794a5d54c89f28b6749f55f68b06b1df62ba4919cbcf97d88907598bda140ec8"
+    },
+    {
+      "path": "geometries/V2M_MD5_028/native_geometry.mat",
+      "size_bytes": 89361,
+      "sha256": "e997c298368045c217754f5eb9825a44349447a7202bd44ca12cf4aad7c7a427"
+    },
+    {
+      "path": "geometries/V2M_MD5_029/native_geometry.mat",
+      "size_bytes": 89382,
+      "sha256": "cd811419f51dcd053e5ed8a8a4ee9e15ee6aa3dd361a7d5648d8466dc1dfe859"
+    },
+    {
+      "path": "geometries/V2M_MD5_030/native_geometry.mat",
+      "size_bytes": 89457,
+      "sha256": "43f7f348af5c92499abcc486e5aa84ec0f9232773753c57458a728854c343190"
+    },
+    {
+      "path": "geometries/V2M_MD5_031/native_geometry.mat",
+      "size_bytes": 89470,
+      "sha256": "ef838bc449c15f05309ff2e6c70191dd9195358d32aa07ef3480f9c026b8c457"
+    },
+    {
+      "path": "geometries/V2M_MD5_032/native_geometry.mat",
+      "size_bytes": 89469,
+      "sha256": "a5f63df66b8be4f0fa757dc0eb885abee9e8103681311d7a3f5f9052e1571322"
+    },
+    {
+      "path": "geometries/V2M_MD5_033/native_geometry.mat",
+      "size_bytes": 89421,
+      "sha256": "ee54fd5d6d7d7f2d4f37a9b13d4923017e10d2eba86229cb0582015e26140919"
+    },
+    {
+      "path": "geometries/V2M_MD5_034/native_geometry.mat",
+      "size_bytes": 89019,
+      "sha256": "78b8134d3a7ea9ff57cd227f12e3d4b960587a665a2dd4f62e7c25411c9f5ad7"
+    },
+    {
+      "path": "geometries/V2M_MD5_035/native_geometry.mat",
+      "size_bytes": 89033,
+      "sha256": "14c8de93ff4723aa26810945b76a0189d55c770ec10427d8fc4b1d5b8f366890"
+    },
+    {
+      "path": "geometries/V2M_MD5_036/native_geometry.mat",
+      "size_bytes": 89388,
+      "sha256": "fa218afbe1f40bc225bff689be465b95bed6c600c02ba97e0389042507ff28dd"
+    },
+    {
+      "path": "geometries/V2M_MD5_037/native_geometry.mat",
+      "size_bytes": 88769,
+      "sha256": "8366ea40479b2ef66783558a32ed01382dc45e45ec3fc76964e6769eddaf6e9f"
+    },
+    {
+      "path": "geometries/V2M_MD5_038/native_geometry.mat",
+      "size_bytes": 88985,
+      "sha256": "253d5ebfe6a0dec898ec5658d55729e9bcb206859c86767b7f297261fe218716"
+    },
+    {
+      "path": "geometries/V2M_MD5_039/native_geometry.mat",
+      "size_bytes": 89127,
+      "sha256": "ec3fcaabd49e21b76bdc3f6de596c2bd7f5abd3b4832d8cbdaad46cc26706acb"
+    },
+    {
+      "path": "geometries/V2M_MD6_001/native_geometry.mat",
+      "size_bytes": 88549,
+      "sha256": "2f1547ca3b60deeb752e2f4e1156a9afce5a8e6b016758a5190f7312ed09a361"
+    },
+    {
+      "path": "geometries/V2M_MD6_003/native_geometry.mat",
+      "size_bytes": 89316,
+      "sha256": "619a1e786e945730debd734dcad4c515ce28de5086a3462911369f0dea656e70"
+    },
+    {
+      "path": "geometries/V2M_MD6_006/native_geometry.mat",
+      "size_bytes": 89687,
+      "sha256": "14e4d21010e2bec5b4af651f070d3c3d48707eb644a1b1717ecc0398342b2ada"
+    },
+    {
+      "path": "geometries/V2M_MD6_010/native_geometry.mat",
+      "size_bytes": 89344,
+      "sha256": "fa434c2741c1f6ad9e9c496c8bc30406b4c59c7dcb2406ecc8b986fd9695d1d7"
+    },
+    {
+      "path": "geometries/V2M_MD6_012/native_geometry.mat",
+      "size_bytes": 89214,
+      "sha256": "44f3e25f7620d53b27fa662d0da2ab695f72fc7fd89d101a4d360a069259c8ea"
+    },
+    {
+      "path": "geometries/V2M_MD6_013/native_geometry.mat",
+      "size_bytes": 88025,
+      "sha256": "c044031fab7d4d6904a4daf347df95d40905d72154d5a4ae3879e4f2ee2606f0"
+    },
+    {
+      "path": "geometries/V2M_MD6_019/native_geometry.mat",
+      "size_bytes": 88311,
+      "sha256": "fb178c69051ade652289fa438480b33bba5df50000e09ae6878c30d75835ce5b"
+    },
+    {
+      "path": "geometries/V2M_MD6_020/native_geometry.mat",
+      "size_bytes": 89165,
+      "sha256": "954ff54157e56209103caf9164cea9603aa6e1324c9e77f0ca5dd7944a6301bd"
+    },
+    {
+      "path": "geometries/V2M_MD6_021/native_geometry.mat",
+      "size_bytes": 88259,
+      "sha256": "fa2f9b33cd119d90e4db3951163b52a673eb8d08837b2e6a8c8a9db10b47169b"
+    },
+    {
+      "path": "geometries/V2M_MD6_022/native_geometry.mat",
+      "size_bytes": 89644,
+      "sha256": "516f10725679ebd36df2cfab4d6353d01ceb8e2806a89e181b0d3b31227dafad"
+    },
+    {
+      "path": "geometries/V2M_MD6_025/native_geometry.mat",
+      "size_bytes": 89645,
+      "sha256": "8d4a9dbbaac950cac47d23aa094189cc20efaf881e1c3142391c6f3d1d6e183e"
+    },
+    {
+      "path": "geometries/V2M_MD6_026/native_geometry.mat",
+      "size_bytes": 89097,
+      "sha256": "12eeb0aac59a04baa78f3ee7ff0827683be5291f4cd249968675ac2fe26c4375"
+    },
+    {
+      "path": "geometries/V2M_MD6_027/native_geometry.mat",
+      "size_bytes": 89314,
+      "sha256": "855b5233f22f913b0868294bb9a018617fce6de88cf99ca979060de641c6b8d1"
+    },
+    {
+      "path": "geometries/V2M_MD6_028/native_geometry.mat",
+      "size_bytes": 89285,
+      "sha256": "b6faadcaa97ec6bc67af17b1e229dc4408a8317d37b140090d87dd0c09c51022"
+    },
+    {
+      "path": "geometries/V2M_MD6_029/native_geometry.mat",
+      "size_bytes": 88123,
+      "sha256": "646473506146abb2656dfc07800b08c20ca3d255aa90f0a0f674a96a91f89a71"
+    },
+    {
+      "path": "geometries/V2M_MD6_030/native_geometry.mat",
+      "size_bytes": 89383,
+      "sha256": "76ac0a86fb4d764606eb4fecb054c5dc5481ea543a5c4ac55a16c54304af92c6"
+    },
+    {
+      "path": "geometries/V2M_MD6_032/native_geometry.mat",
+      "size_bytes": 89216,
+      "sha256": "55d2ca93b699b4c9b6b5d031e376220c4a66687546e11b272b5b4efb8c2569ef"
+    },
+    {
+      "path": "geometries/V2M_MD6_033/native_geometry.mat",
+      "size_bytes": 88040,
+      "sha256": "7262e115a326290acbf743a50daf4c2427e5ce303ec01ffa9baf6e7d0c5314d1"
+    },
+    {
+      "path": "geometries/V2M_MD6_034/native_geometry.mat",
+      "size_bytes": 89498,
+      "sha256": "382bb3b732171d30989c9c23f37af16d654ff8f706711926174729cd9b8d7e70"
+    },
+    {
+      "path": "geometries/V2M_MD6_035/native_geometry.mat",
+      "size_bytes": 89281,
+      "sha256": "9750dff0ce52a2d0f45e7f6cd3255946cf3f59387ba9be599e663312cf347bcb"
+    },
+    {
+      "path": "geometries/V2M_MD6_036/native_geometry.mat",
+      "size_bytes": 89307,
+      "sha256": "3e419bf7eeea7065c14e8aa26411a3915538198864dcd15e3c798622cdcad488"
+    },
+    {
+      "path": "geometries/V2M_MD6_037/native_geometry.mat",
+      "size_bytes": 89634,
+      "sha256": "de7719d6bf9ff4521ea35e6d8b7d346c3a929035e90fdad8c04f209d7a380a84"
+    },
+    {
+      "path": "geometries/V2M_MD6_038/native_geometry.mat",
+      "size_bytes": 89256,
+      "sha256": "6822be3ed9b597ee63571f5ddeaffd52a726c835c326e2e6543dce2bebda4b74"
+    },
+    {
+      "path": "geometries/V2M_MD6_040/native_geometry.mat",
+      "size_bytes": 89162,
+      "sha256": "1a6c6d85e1b8e7430e579fcb8ea427eba6ba107a805264a9c24c8fe31e559a66"
+    },
+    {
+      "path": "geometries/V2M_MD6_042/native_geometry.mat",
+      "size_bytes": 89329,
+      "sha256": "3f6a96d1bd8c90f9b521fb20808e3084dd12c02f11ffb1f8c2d52edcc4210af9"
+    },
+    {
+      "path": "geometries/V2M_MD6_043/native_geometry.mat",
+      "size_bytes": 89337,
+      "sha256": "44414b871addc1b752631dfe6aff0407dafb9a162cf554ea7df9a5a22cf4aba1"
+    },
+    {
+      "path": "geometries/V2M_MD6_044/native_geometry.mat",
+      "size_bytes": 89536,
+      "sha256": "56dd6cb0162a2ec8603dde9b8a3c0a27956d38c3af7b66a55e56e5f752d38562"
+    },
+    {
+      "path": "geometries/V2M_MD7_002/native_geometry.mat",
+      "size_bytes": 87815,
+      "sha256": "b936fe3d7bad8e4f63a7af560bd29076bd752b7e7ba62d9e8d95e31190615567"
+    },
+    {
+      "path": "geometries/V2M_MD7_003/native_geometry.mat",
+      "size_bytes": 88859,
+      "sha256": "2a00ef04477057e13d7d58ac850f0495d7b6ca54ee2a922027b5749d583ce182"
+    },
+    {
+      "path": "geometries/V2M_MD7_004/native_geometry.mat",
+      "size_bytes": 89162,
+      "sha256": "fdc51a61f494ce22dada7e6301fc1c2b3588278c019645dd8b4985eed5fe7ee2"
+    },
+    {
+      "path": "geometries/V2M_MD7_005/native_geometry.mat",
+      "size_bytes": 88925,
+      "sha256": "2403913cc6a39c396280954bd4eb3d9fe089940014f521fcba0064a01edc03f6"
+    },
+    {
+      "path": "geometries/V2M_MD7_006/native_geometry.mat",
+      "size_bytes": 88800,
+      "sha256": "b3e965a01848efbdcded5c28f801802e2a5288124a45fd34248dd0dee69dbf26"
+    },
+    {
+      "path": "geometries/V2M_MD7_007/native_geometry.mat",
+      "size_bytes": 88794,
+      "sha256": "1f4c633759a051d5f5970a12c29c54ef4727877e8d7b23c1ae68e3ccf8dce5f2"
+    },
+    {
+      "path": "geometries/V2M_MD7_008/native_geometry.mat",
+      "size_bytes": 88426,
+      "sha256": "f0ed212c897a235837a14dbaaf33d3d5282c3d8628287d23d59189cb8c436659"
+    },
+    {
+      "path": "geometries/V2M_MD7_009/native_geometry.mat",
+      "size_bytes": 88725,
+      "sha256": "5f2d3c3ed6a3f2c9dc666738119d16e8c5d8c6a515d0103dceecc3d436fb8b59"
+    },
+    {
+      "path": "geometries/V2M_MD7_010/native_geometry.mat",
+      "size_bytes": 88894,
+      "sha256": "2d090f0839a7d42f33ecaa171b72d51d2b9a063e14e9fac31a46a757c3235e64"
+    },
+    {
+      "path": "geometries/V2M_MD7_012/native_geometry.mat",
+      "size_bytes": 88106,
+      "sha256": "8b849dc2b831b5be9f58c22d62b17f43ea67a9e8837a475467373b5e9601cbb6"
+    },
+    {
+      "path": "geometries/V2M_MD7_014/native_geometry.mat",
+      "size_bytes": 88705,
+      "sha256": "80c9f2c21c510e7a07fdcbbd040783560b22e50aa96beb8e59948c7e202511ea"
+    },
+    {
+      "path": "geometries/V2M_MD7_015/native_geometry.mat",
+      "size_bytes": 88492,
+      "sha256": "c41b43c08f5599818d3c16416488cb8f66e533d84d9576478e5d6d2d7756d25e"
+    },
+    {
+      "path": "geometries/V2M_MD7_016/native_geometry.mat",
+      "size_bytes": 89213,
+      "sha256": "2abce9ac5a1014b3baf8badcdf51ff25f85b2fc35072e8d4d695f715cfcc918a"
+    },
+    {
+      "path": "geometries/V2M_MD7_018/native_geometry.mat",
+      "size_bytes": 88722,
+      "sha256": "62df497038061c46843b3e382f4824bcaf2e9d67d94477ca9fe091aef09b4221"
+    },
+    {
+      "path": "geometries/V2M_MD7_019/native_geometry.mat",
+      "size_bytes": 89127,
+      "sha256": "73b2b2a1f59909df8b40022c2d6c1dc219229609d3cdcdc74291aac4bb560e7c"
+    },
+    {
+      "path": "geometries/V2M_MD7_020/native_geometry.mat",
+      "size_bytes": 88848,
+      "sha256": "aafde35f5901769c0194ab7a8581c17c325d11f46affd381b4fa9d8c598fb4f5"
+    },
+    {
+      "path": "geometries/V2M_MD7_021/native_geometry.mat",
+      "size_bytes": 88871,
+      "sha256": "5675bf54a3b59367b3088836ccc6e04f9edf042cc850b13b150b12d01988c049"
+    },
+    {
+      "path": "geometries/V2M_MD7_022/native_geometry.mat",
+      "size_bytes": 89053,
+      "sha256": "3491886dc9fddd40ca771fd030c74b0d7e539a9ca50cfba068e6cfdbc4ca63a1"
+    },
+    {
+      "path": "geometries/V2M_MD7_023/native_geometry.mat",
+      "size_bytes": 88802,
+      "sha256": "b3eafd672673be16e299f94c05a06bf45d823d8e61ebe12fee9712a3c995f622"
+    },
+    {
+      "path": "geometries/V2M_MD7_024/native_geometry.mat",
+      "size_bytes": 88465,
+      "sha256": "aa6fb19a75fc5fd5cf29515d426577a05f351d1a28829d4a6895e47e04c1bb97"
+    },
+    {
+      "path": "geometries/V2M_MD7_025/native_geometry.mat",
+      "size_bytes": 88891,
+      "sha256": "d34109b3479ca8b655dde4c6e9be2b614e90991f2ba66fc233f931b853a6e2d8"
+    },
+    {
+      "path": "geometries/V2M_MD7_027/native_geometry.mat",
+      "size_bytes": 88213,
+      "sha256": "c0ad772c5bbeee26aad31b430141ebe87890d723678b3c2a5cc482a2d337c6ec"
+    },
+    {
+      "path": "geometries/V2M_MD7_028/native_geometry.mat",
+      "size_bytes": 88993,
+      "sha256": "96c55ffce362d0a33d4276d287b446e5231621d9d60be600ffa7e48f8625b824"
+    },
+    {
+      "path": "geometries/V2M_MD7_029/native_geometry.mat",
+      "size_bytes": 88575,
+      "sha256": "31770a56bc362e1d980d2d645bf73e5bf6d10bc2415d09d84fddbf3a3165f393"
+    },
+    {
+      "path": "geometries/V2M_MD7_030/native_geometry.mat",
+      "size_bytes": 88969,
+      "sha256": "30b0124b602c2eb4ae25c5ba63dc8a3d7ea493996e06cead43928f05cf2eea62"
+    },
+    {
+      "path": "geometries/V2M_MD7_031/native_geometry.mat",
+      "size_bytes": 88835,
+      "sha256": "e36f2bc2ac23deb3bac59b62e4c32de15b7fbe70cecccf7b9a69f304934d3b65"
+    },
+    {
+      "path": "geometries/V2M_MD7_032/native_geometry.mat",
+      "size_bytes": 88963,
+      "sha256": "c2f493995b1314951861b1f068d988e0b7306bb5be91dd1bbc1e1e36a2bd4f1b"
+    },
+    {
+      "path": "geometries/V2M_MD7_034/native_geometry.mat",
+      "size_bytes": 89111,
+      "sha256": "c571f4fa06a1e63496dd9c533e9b79c5c51f2a9f220591bef8c7d24d29cf676b"
+    },
+    {
+      "path": "geometries/V2M_MD7_035/native_geometry.mat",
+      "size_bytes": 88596,
+      "sha256": "e448e990229da9788fdc465183b46c64572d1ff9eddc185e80fb71b966d1b7a1"
+    },
+    {
+      "path": "geometries/V2M_MD7_036/native_geometry.mat",
+      "size_bytes": 88883,
+      "sha256": "52ad47c8eadf081a113723fdd94c5dc7b4c19fe016df6738550cc59ccdbe039d"
+    },
+    {
+      "path": "geometries/V2M_MD7_037/native_geometry.mat",
+      "size_bytes": 89012,
+      "sha256": "eac043400175f366c7b84f5cc32c160bbd0fc39ee9bce3c262bd18db5e45afcb"
+    },
+    {
+      "path": "geometries/V2M_MD7_038/native_geometry.mat",
+      "size_bytes": 88811,
+      "sha256": "264df295936214a22d6cf650c0295bd96dd67d98663f9c33ef1d35919210d88f"
+    },
+    {
+      "path": "geometries/V2M_MD7_039/native_geometry.mat",
+      "size_bytes": 88902,
+      "sha256": "1e32c53c681aa46ef2992f1d51b9a7ab6830472c4740b6b0c8c574dbf736596d"
+    },
+    {
+      "path": "geometries/V2M_MD7_040/native_geometry.mat",
+      "size_bytes": 89291,
+      "sha256": "ce689c65a3b6c0723638fc9d046987041cbb46d2f627ae9ea50f17d26e28acf2"
+    },
+    {
+      "path": "geometries/V2M_MD7_042/native_geometry.mat",
+      "size_bytes": 88873,
+      "sha256": "cac6c1976903978f8fb1015e3aff2de35f207572c05c68b2394533b765309561"
+    },
+    {
+      "path": "geometries/V2M_MD7_043/native_geometry.mat",
+      "size_bytes": 88818,
+      "sha256": "e42b2afe845dcdfaf6ea82021f3443e3a57389d268cb414e65e613ae3a63fd49"
+    },
+    {
+      "path": "geometries/V2M_MD7_044/native_geometry.mat",
+      "size_bytes": 88796,
+      "sha256": "4d95a767401656b26bf2c0236d068f11cca4f3284294193ed38b9ab3664b0d21"
+    },
+    {
+      "path": "geometries/V2M_MD7_045/native_geometry.mat",
+      "size_bytes": 88819,
+      "sha256": "8f1b86b9b08774d98316032421b4c8113c9e66af81adbf85e03f1bbc2c49aa85"
+    },
+    {
+      "path": "geometries/V2M_MD7_048/native_geometry.mat",
+      "size_bytes": 88460,
+      "sha256": "a5b3c0d18d94bea754352365025d7fbb36ab1b27bfd87c3b99d7080548b142b6"
+    },
+    {
+      "path": "geometries/V2M_MD8_004/native_geometry.mat",
+      "size_bytes": 89497,
+      "sha256": "3a67f98a0a636b90b40b07196618ce82559e5ed1919f18298f65d32ca6ddc386"
+    },
+    {
+      "path": "geometries/V2M_MD8_007/native_geometry.mat",
+      "size_bytes": 89230,
+      "sha256": "b8ad8dfd4d4c6b0d19cd2efd97ffc2baadc720505182cbb28f197cced5554366"
+    },
+    {
+      "path": "geometries/V2M_MD8_009/native_geometry.mat",
+      "size_bytes": 88090,
+      "sha256": "57b5e90bb230c9ca160a3fc095043ad81fd66ac21cc3a2c19406169066d6a9f3"
+    },
+    {
+      "path": "geometries/V2M_MD8_010/native_geometry.mat",
+      "size_bytes": 88584,
+      "sha256": "9b9c63ef4e6407afc59d15d6299d405b16effe5ae57e6cecbc3daaabfa9564b0"
+    },
+    {
+      "path": "geometries/V2M_MD8_011/native_geometry.mat",
+      "size_bytes": 88222,
+      "sha256": "4440234a34f15910f68e0d8354cb4537e3bc265869a62eca82003b65b8c90ebc"
+    },
+    {
+      "path": "geometries/V2M_MD8_012/native_geometry.mat",
+      "size_bytes": 88251,
+      "sha256": "31f6ff853326e4b1e70a195b85b99ba3c6612099ca73d7f18b188194981acb97"
+    },
+    {
+      "path": "geometries/V2M_MD8_014/native_geometry.mat",
+      "size_bytes": 87848,
+      "sha256": "15114bb1ec908ea41b3e69923255791fa13a46be7bb000c7cb9fcfc47423f372"
+    },
+    {
+      "path": "geometries/V2M_MD8_016/native_geometry.mat",
+      "size_bytes": 88201,
+      "sha256": "5b2a2517c9543d7d5c47736cae34dd961770afa5a6ecf7c519d453054238d174"
+    },
+    {
+      "path": "geometries/V2M_MD8_018/native_geometry.mat",
+      "size_bytes": 88134,
+      "sha256": "b9ccdf49d05a66b141ca33651054439ef86a9d0bccc0abfae250e94c885de0e2"
+    },
+    {
+      "path": "geometries/V2M_MD8_019/native_geometry.mat",
+      "size_bytes": 88019,
+      "sha256": "9d6bfdc27a73d52f9dad8647571a1943d30aacf592d9d10be91ced94e1be4c91"
+    },
+    {
+      "path": "geometries/V2M_MD8_022/native_geometry.mat",
+      "size_bytes": 88893,
+      "sha256": "05d1356c986e724a33f1cf62ae7fcb88b8f8261c57266184c23d1e74de2a65b1"
+    },
+    {
+      "path": "geometries/V2M_MD8_024/native_geometry.mat",
+      "size_bytes": 89066,
+      "sha256": "f6a78950c3079f2d6dd632eb81e6a8e0eefc24e4b86c2d6479dfcadf21ac8333"
+    },
+    {
+      "path": "geometries/V2M_MD8_025/native_geometry.mat",
+      "size_bytes": 89195,
+      "sha256": "27d6f571362479cbf1a44f43d39553fa11d544abda3fd4cbc1e306e15ca6b9b1"
+    },
+    {
+      "path": "geometries/V2M_MD8_026/native_geometry.mat",
+      "size_bytes": 88189,
+      "sha256": "0af6bca98fb209d749dd86f634a5abcb0cba7dcc6bbaaad55fc264d69516647f"
+    },
+    {
+      "path": "geometries/V2M_MD8_027/native_geometry.mat",
+      "size_bytes": 88236,
+      "sha256": "32f6ddcddc4496334232deb567d3c8130df883873a3c656749514a63b0a68aa1"
+    },
+    {
+      "path": "geometries/V2M_MD8_028/native_geometry.mat",
+      "size_bytes": 89181,
+      "sha256": "bda455eda3f0f8925e5276f12aaa1fe0a519837453110522a2806e01b8782938"
+    },
+    {
+      "path": "geometries/V2M_MD8_029/native_geometry.mat",
+      "size_bytes": 88034,
+      "sha256": "f135c85b4f35cd22d324ce82b76e7365f10a2e7975f3bb0a2f2158e34281d464"
+    },
+    {
+      "path": "geometries/V2M_MD8_030/native_geometry.mat",
+      "size_bytes": 88771,
+      "sha256": "6d192f4b565807ff879974cc55d0e2209882ce7e48f4d8f0c0e478e6e37cee2c"
+    },
+    {
+      "path": "geometries/V2M_MD8_038/native_geometry.mat",
+      "size_bytes": 88195,
+      "sha256": "0322cdaf3da7ef448cc123cfd26220e06ae07ea383457beaaed9b2f737170621"
+    },
+    {
+      "path": "geometries/V2M_MD8_039/native_geometry.mat",
+      "size_bytes": 89209,
+      "sha256": "3ef9a1ca74ed042f7c5a72211b2a5a21370150c5b5b1ebe6177cd02e1ae5b4e4"
+    },
+    {
+      "path": "geometries/V2M_MD8_042/native_geometry.mat",
+      "size_bytes": 88092,
+      "sha256": "9b2f4a61cb45f4aac6c9dd96b25369399aec3290f920f449370d7b2b7f10ac0a"
+    },
+    {
+      "path": "geometries/V2M_MD8_044/native_geometry.mat",
+      "size_bytes": 88141,
+      "sha256": "307ad86ed611b0ddf5f10efe15b881021a92e356589853213c913f5052f956e8"
+    },
+    {
+      "path": "geometries/V2M_MD8_045/native_geometry.mat",
+      "size_bytes": 88739,
+      "sha256": "f34d6934540bcffaf4461e46b0112b62fc48b54b98cf6d5d8f9919c2ff134f9d"
+    },
+    {
+      "path": "geometries/V2M_MD8_046/native_geometry.mat",
+      "size_bytes": 89159,
+      "sha256": "d7600152af5538418b93b96c1667f44eeda0bbe75f53d83534e40105bf84077a"
+    },
+    {
+      "path": "geometries/V2M_MD8_048/native_geometry.mat",
+      "size_bytes": 88299,
+      "sha256": "d2d12c20990b4ca8dcf08088ea2908d9dfe61620c526f2ca959c9eae622a49ea"
+    },
+    {
+      "path": "geometries/V2M_MD8_050/native_geometry.mat",
+      "size_bytes": 88739,
+      "sha256": "ff62e352d7aaf3a1e0cd88da7bcf8bb73785fae8ebd2234a4e97139375f476a3"
+    },
+    {
+      "path": "geometries/V2M_MD8_052/native_geometry.mat",
+      "size_bytes": 88059,
+      "sha256": "3f3589378bf535b24195c0e2f514444f1503e1739ec94988182d462297f05787"
+    },
+    {
+      "path": "geometries/V2M_MD8_054/native_geometry.mat",
+      "size_bytes": 88418,
+      "sha256": "7a7bb8ab567cef052f8d1d73e51c7fcb1fba78016693dfabc34061ddb88448f5"
+    },
+    {
+      "path": "geometries/V2M_MD8_055/native_geometry.mat",
+      "size_bytes": 88096,
+      "sha256": "a3d5b8ed8399fbdbf67ff110f0cc0bb0bd28d03a8e97f46790b4f808653144d7"
+    },
+    {
+      "path": "geometries/V2M_MD8_056/native_geometry.mat",
+      "size_bytes": 89361,
+      "sha256": "edcc5bdc49ccab2bad803942707bcda89c84bed4cee1317581d4aa3c3fbfbbd0"
+    },
+    {
+      "path": "geometries/V2M_MD8_060/native_geometry.mat",
+      "size_bytes": 88137,
+      "sha256": "3be626263ee914dc6939be6c9f6bda6759a51fe17133afafdabd470e975f212c"
+    },
+    {
+      "path": "geometries/V2M_MD8_063/native_geometry.mat",
+      "size_bytes": 89145,
+      "sha256": "875f3ea9936dafb5d55022b8384e905ce52edc9abc496eca6788a093491d6537"
+    },
+    {
+      "path": "geometries/V2M_MD8_064/native_geometry.mat",
+      "size_bytes": 88560,
+      "sha256": "4440118634a58dfff8cfc0149ab406446d811d3a79df1bb78d5b823e156994a0"
+    },
+    {
+      "path": "geometries/V2M_MD8_065/native_geometry.mat",
+      "size_bytes": 88173,
+      "sha256": "9fd2948ff094e65bc6dc40003cd59d0805a9a53eff66833fa6d688df2903a39d"
+    },
+    {
+      "path": "load_database.py",
+      "size_bytes": 1763,
+      "sha256": "38f626584b2388dfa1fce7ff25d51ebf17408dbdc90ec3e7040f4487252d85f3"
+    },
+    {
+      "path": "metadata/domain.json",
+      "size_bytes": 808,
+      "sha256": "573e1899c17833938555208b75ae54eaa2c338cda242043fdf6ac044ab83ac71"
+    },
+    {
+      "path": "metadata/model_options.json",
+      "size_bytes": 993,
+      "sha256": "4322d8050be21993ae716dff6a55cb877924de93cbb20e817a84ecc217805034"
+    },
+    {
+      "path": "provenance/evaluation.py",
+      "size_bytes": 10081,
+      "sha256": "d4bf955528700f06a29b5fd530a794e43b12264934cef6793d08c811700b3aeb"
+    },
+    {
+      "path": "provenance/exp_common.py",
+      "size_bytes": 5633,
+      "sha256": "df87d3354cd6d42f27a36ca2ba94375ec5d149c1c535a477a8cfda86976af96a"
+    },
+    {
+      "path": "provenance/offdesign_aero_v7.m",
+      "size_bytes": 8902,
+      "sha256": "67801622d37a2bcd5bd0e6c0240760fc5572aff65554d36d9c1b0e96767f52f2"
+    },
+    {
+      "path": "provenance/source_manifest.json",
+      "size_bytes": 1995,
+      "sha256": "9793e8f5118f45232259933323fc67f722465d4659817c5693106e412a6cd4bd"
+    },
+    {
+      "path": "provenance/wedge_eval.m",
+      "size_bytes": 3413,
+      "sha256": "df29fe5038ebd66f63eb811976ced48e17d707901b0eb23ca380959c6cca14a6"
+    },
+    {
+      "path": "README_ZH.txt",
+      "size_bytes": 3802,
+      "sha256": "2194690145f95a943b962ca0fac4ca6be89a478cc855830f12b9acca07afb243"
+    },
+    {
+      "path": "validation.json",
+      "size_bytes": 675,
+      "sha256": "de62d855044cf327d1102f32baab32eea8c6de6f970d37d24c6b2f10b96f451f"
+    }
+  ],
+  "file_count_excluding_manifest": 318,
+  "total_bytes_excluding_manifest": 62646671
+}

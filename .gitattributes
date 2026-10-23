@@ -1,0 +1,6 @@
+* text=auto eol=lf
+# Stored byte for byte: input data, configurations and the physics library are verified by SHA-256.
+data/** -text
+configs/** -text
+src/morphing_waverider/** -text
+*.npz binary

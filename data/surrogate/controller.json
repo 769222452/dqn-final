@@ -1,0 +1,167 @@
+{
+  "control_contract": "rl298-consistent/2:ec1c13606315569b",
+  "selection": {
+    "pre": {
+      "candidates": [
+        {
+          "length_scale": 0.15,
+          "validation_mse": 6.86521147971129e-06
+        },
+        {
+          "length_scale": 0.3,
+          "validation_mse": 2.385385737920548e-06
+        },
+        {
+          "length_scale": 0.6,
+          "validation_mse": 6.137896833508129e-06
+        },
+        {
+          "length_scale": 1.2,
+          "validation_mse": 6.948426561993171e-06
+        }
+      ],
+      "selected_length_scale": 0.3,
+      "train_count": 929
+    },
+    "post": {
+      "candidates": [
+        {
+          "length_scale": 0.15,
+          "validation_mse": 0.00011755533040040703
+        },
+        {
+          "length_scale": 0.3,
+          "validation_mse": 8.594041781908291e-05
+        },
+        {
+          "length_scale": 0.6,
+          "validation_mse": 6.49247701188451e-05
+        },
+        {
+          "length_scale": 1.2,
+          "validation_mse": 0.00010877123088078322
+        }
+      ],
+      "selected_length_scale": 1.2,
+      "train_count": 929
+    }
+  },
+  "post_routing": "adaptation_coverage_first",
+  "scale_up_gate_passed": false,
+  "acceptance_passed": false,
+  "base_config": {
+    "schema": "rl298-consistent-cl-mincd/2",
+    "snapshot": "results/v6_rl_subset_298_20261015",
+    "mission": "configs/mission_1200s.yaml",
+    "trajectory": "configs/trajectory.yaml",
+    "action_mode": "cl_only",
+    "cl_actions": [
+      -0.01,
+      0.0,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.08,
+      0.1,
+      0.12
+    ],
+    "cl_cd_actions": [
+      [
+        0.02,
+        0.0015
+      ],
+      [
+        0.03,
+        0.0025
+      ],
+      [
+        0.04,
+        0.0035
+      ],
+      [
+        0.05,
+        0.005
+      ],
+      [
+        0.06,
+        0.007
+      ]
+    ],
+    "transition": {
+      "duration_s": 8.0,
+      "reachability": "all_pairs_assumed",
+      "aerodynamic_blend": "linear_endpoint_coefficients_at_same_Mach_alpha",
+      "new_command_during_transition": "complete_current_pair_then_accept_at_next_decision"
+    },
+    "ocp": {
+      "jit": false,
+      "horizon_s": 60.0,
+      "fine_until_s": 9.0,
+      "fine_dt_s": 0.5,
+      "coarse_dt_s": 3.0,
+      "coarse_rk4_substeps": 2,
+      "acceptance_violation": 1e-06,
+      "audit_dt_s": 0.1,
+      "tracking_mode": "mean_3s",
+      "tracking_weight_multiplier": 1.0
+    },
+    "training": {
+      "seed": 0,
+      "steps": 24,
+      "hidden": 128,
+      "learning_rate": 0.0005,
+      "gamma": 1.0,
+      "replay_capacity": 30000,
+      "batch_size": 64,
+      "learning_starts": 128,
+      "update_every": 4,
+      "target_update_every": 100,
+      "epsilon_start": 0.5,
+      "epsilon_end": 0.05,
+      "evaluation": "explicit_full_ocp_validation_required_before_acceptance"
+    },
+    "control": {
+      "pre_transition_model": "actual",
+      "reachability": true,
+      "observation_version": "v2",
+      "switch_cost": 0.0
+    }
+  },
+  "mission_sha256": "12740383302b4e7f7576e47d1663643f55a5f1a723e912e1e6b871bad2971c32",
+  "trajectory_sha256": "fbc30a196f4bb2b996938a885125dd0f6a92e92c8ccd682d97a467ef9bc85c68",
+  "dataset_sha256": "2b2233799f9a733b887d7c64aafbda179889ea52f681f0d4fdb525ecfd01e80f",
+  "gate_config": {
+    "min_train_samples": 48,
+    "min_validation_samples": 12,
+    "min_test_samples": 24,
+    "planned_mach_mae_max": 0.01,
+    "alpha_rmse_deg_max": 0.5,
+    "alpha_abs_p95_deg_max": 1.5,
+    "test_dense_violation_rate_max": 0.0,
+    "validation_dense_violation_rate_max": 0.0,
+    "min_speedup": 5.0,
+    "full_fast_mission_required_for_scale_up": true
+  },
+  "transition_duration_s": 8.0,
+  "data_use": "V10A_929_TRAIN_HELDOUT_UNCHANGED",
+  "feature_schema": "rl298-flight-aero-fingerprint/1",
+  "surrogate_config": {
+    "kind": "residual_rbf_kernel_ridge",
+    "ridge": 0.001,
+    "length_scales": [
+      0.15,
+      0.3,
+      0.6,
+      1.2
+    ],
+    "max_neighbor_distance": 0.25,
+    "support_padding_fraction": 0.1,
+    "planned_mach_output": "delta_from_current_mach",
+    "alpha_output": "residual_on_exact_equal_lift_rate_limited_schedule"
+  },
+  "model_sha256": "1cb8d96280679a7e2a3e7d9ddc90c2e2f3159714f60fd19035cf77aca7946f00",
+  "snapshot_sha256": "a636f427a770f5f4c4a34b972a8893eb7403d4824f06cbc167b1a02c747d7003"
+}

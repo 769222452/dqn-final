@@ -1,0 +1,65 @@
+{
+  "schema": "teacher-dynamic-research-profile-v5.1",
+  "mode": "teacher_dynamic_research_v5",
+  "scope": "RESEARCH: actual shape progress -> native teacher geometry -> teacher pressure aero -> 3DOF point mass; minimal short rollouts only",
+  "explicitly_enabled": true,
+  "reference": {
+    "area_m2": 6.931920786884801,
+    "length_m": 5.0,
+    "source": "TeacherDesignSpace.reference: G42 full mirrored native lower-surface projected XY area, fixed for every z",
+    "must_equal_runtime_teacher_reference": true,
+    "not_used": {
+      "configs/vehicle.yaml aerodynamic_reference.area_m2": 12.0,
+      "results/v5_teacher/reference.json area_m2 (older xi family)": 7.602807908334378
+    }
+  },
+  "mass": {
+    "m_kg": 1500.0,
+    "status": "UNVALIDATED_RESEARCH_MASS",
+    "source": "configs/vehicle.yaml mass.m (inherited numerical assumption; no mass/CG evidence)"
+  },
+  "dynamics": {
+    "model": "dynamics.point_mass_3dof.PointMass3DOF (unchanged)",
+    "propagation_kernel": "dynamics.integrator.rk4_interval (unchanged; z evaluated at every RK4 stage time)",
+    "dt_s": 0.5,
+    "dt_source": "configs/environment.yaml dynamics.dt and dynamics.max_substep_dt",
+    "atmosphere_source": "configs/environment.yaml atmosphere",
+    "spherical_earth_source": "configs/environment.yaml dynamics.spherical_earth"
+  },
+  "shape_scheduler": {
+    "source": "configs/v5_research_profile.json",
+    "gain_key": "actuator_gain_per_s",
+    "rate_key": "xi_rate_max_per_s",
+    "expected_gain_per_s": 0.5,
+    "expected_rate_max_per_s": 0.1,
+    "law": "rho_dot=sat(K*(1-rho),-rate,+rate), rho=0 at each new command; exact piecewise solution",
+    "coordinate_semantics": "RESEARCH_SHAPE_COORDINATES; not mechanical actuator degrees of freedom",
+    "status": "RESEARCH_ASSUMPTION"
+  },
+  "teacher_aero_model_options": {
+    "mesh_stride": 1,
+    "cone_lookup_nodes": 33
+  },
+  "constraints_source": "configs/vehicle.yaml limits (thresholds unchanged)",
+  "heat_model_source": "configs/vehicle.yaml heat_flux_placeholder (inherited placeholder)",
+  "fixture": {
+    "name": "isolated_dynamic_fixture_W1_h56km",
+    "purpose": "Dynamic-chain verification at the verified stage-one working point W1; NOT the 180 s official initial state",
+    "M0": 15.0,
+    "alpha_body_deg": 4.0,
+    "h0_m": 56000.0,
+    "gamma0_source": "configs/environment.yaml initial_state.gamma",
+    "s0_m": 0.0,
+    "t0_s": 0.0,
+    "h0_selection": "Lowest whole-km altitude with M=15 inside every unchanged configs/vehicle.yaml limit (heat proxy at 55 km exceeds 2.0e6 W/m^2); chosen by the user before any teacher call"
+  },
+  "assumptions": {
+    "mass": "UNVALIDATED_RESEARCH_MASS",
+    "scale": "Teacher program coordinates treated as metres; engineering scale unverified",
+    "pressure": "Teacher local pressure approximation; no viscous, bluntness or validated base drag",
+    "base": "OPEN_BASE, Cp=0 on omitted trailing base",
+    "thermal": "Inherited placeholder heat model and limits",
+    "attitude": "3DOF point mass, direct alpha; no verified pitching moment or trim",
+    "mechanism": "No physical mechanism evidence; MECHANICAL_ACTUATOR_VALIDATED=NO"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "metric": "Arithmetic mean pressure CD over all 108 equally weighted Mach/target-CL pairs. Fixed means one geometry with independently chosen alpha at each condition. Ideal permits free instantaneous geometry selection. Not trajectory-integrated drag impulse or range.",
+  "geometry_count": 298,
+  "winner_count": 6,
+  "winner_counts": {
+    "S2_MD12_dd296f618e": 36,
+    "S2_MD8_b38c94c34e": 35,
+    "S2_MD15_1788e920a9": 18,
+    "S2_MD14.3591_4fdf5fa3ac": 15,
+    "S2_MD15_3f9eb0b21b": 2,
+    "S2_MD9.75_4b3a631248": 2
+  },
+  "max_winner_share": 0.3333333333333333,
+  "effective_winner_count": 3.789473684210527,
+  "best_fixed_id": "S2_MD12_dd296f618e",
+  "full_condition_fixed_count": 234,
+  "fixed_mean_CD": 0.0029863629397052986,
+  "ideal_mean_CD": 0.002953979991058835,
+  "ideal_gain_pct": 1.084360786022187,
+  "winner_margin_ge_0p5pct": 34
+}

@@ -1,0 +1,191 @@
+{
+  "schema": "rl298-P1-evaluation/1",
+  "status": "COMPLETE",
+  "source_sha256": {
+    "scripts\\rl298_constraint_recovery.py": "2c1c2ba446f8d02073d3155f3321d94ec13cd6857f727649520d37a1c8a02261",
+    "results\\v10a_refit_929\\model_v10a\\recovery_config.yaml": "c735d3396f31a808fc21a64823eb29f67e3ae05a054efb9e5fe8841f3b10b335",
+    "results\\v10a_refit_929\\model_v10a\\controller.npz": "1cb8d96280679a7e2a3e7d9ddc90c2e2f3159714f60fd19035cf77aca7946f00",
+    "results\\v10a_refit_929\\model_v10a\\controller.json": "c9c467e2b7e570cce554bd853b4c76504dfbd493045f9ddfdcede7936d57ec5c",
+    "results\\v10a_refit_929\\model_v10a\\labels.jsonl": "375542bf206d780e4f39077e17101cb83de24929934fa584ded33e878c8e202d",
+    "results\\v10a_refit_929\\model_v10a\\manifest.json": "026b4679dd6ff5669da915e7c9f1cad68705a2680a53e75a0cf19f17f05f0028",
+    "configs\\mission_1200s.yaml": "278f25028ef0b6cb78754cc93fe2eb26113fb24c31f4a94f0e90c574d1893b35",
+    "configs\\trajectory.yaml": "fbc30a196f4bb2b996938a885125dd0f6a92e92c8ccd682d97a467ef9bc85c68",
+    "src\\mission_v6\\rl298\\__init__.py": "a08ac0ffbba72eae996cd8fbb37c29aae1ccea2b529f5a90f02bc09cb3d52175",
+    "src\\mission_v6\\rl298\\acceptance.py": "e2fa4c546c1b0621a019778c9cee5f0257675f3e2defb56439ba2d1a59a6a068",
+    "src\\mission_v6\\rl298\\aero.py": "bcff316a10f9564c5938765f300a5504f85f0a3595c39870c10366fff49d62e2",
+    "src\\mission_v6\\rl298\\channel_data.py": "b87bc7223c0b83fb5418c5f70f1f8d78bc0d0d061ea03c3b95fe46c3db021e53",
+    "src\\mission_v6\\rl298\\channel_eval.py": "ac393e9f82e7f0dd76980eb321cd176efea84b62023aeb2d4a7e1d7b95544263",
+    "src\\mission_v6\\rl298\\contracts.py": "32309bc47af1bab889ffc766e922121d092ff3c9e4326c426299edaba36364fb",
+    "src\\mission_v6\\rl298\\controller_comparison.py": "86233bf1910cd8287c93e06820f2fef6e8deada82878d5bdc124a6000ba86d34",
+    "src\\mission_v6\\rl298\\diagnostics.py": "8bf940142a5bb43a86ebe219c565972e98111acb7db66cbd35500ce8aaccc25e",
+    "src\\mission_v6\\rl298\\distill.py": "ec82032f4e16e26059fc457bf6d868361718dfb66bac1c57ad5a2e4eae9cab7c",
+    "src\\mission_v6\\rl298\\dqn.py": "e2e3c6ab18793f1ae353bc6d7667bef43b5ee4d1e2852215e9fec61d9971676c",
+    "src\\mission_v6\\rl298\\env.py": "7b1c5b3f0c13a67d832090124c02695f197ae15c6791029e07a6209e22f9525c",
+    "src\\mission_v6\\rl298\\fast_env.py": "d116309dc53d6a0019e95d0acaa1ae92b91a3f2a065d4376b28f001d9ea9e604",
+    "src\\mission_v6\\rl298\\freeze.py": "2b798d925d83ed6bb41ca51f130c8753a215337cc9be56fae44c82d1ce2b712d",
+    "src\\mission_v6\\rl298\\lookahead.py": "e3c07cb1eb34bc4271ac6a88553084163d0e43599282868961180160cbad9ddf",
+    "src\\mission_v6\\rl298\\ocp.py": "d2037cef82da6db667f5d991ba5aad63576136982ee08cc343b03578293e1410",
+    "src\\mission_v6\\rl298\\post_corrector.py": "1f6608d4335ab16ac656cd1db6edbb7e4294722dbe036f099720e2579ffe0e6c",
+    "src\\mission_v6\\rl298\\reachability.py": "315c243c39fad3a5fbc3d6a13ea9feed12f0421775e842de3f3f224f6322b398",
+    "src\\mission_v6\\rl298\\recovery_state.py": "2669461fc4de12c2f9a02ba2edfcbf7efaf5bbb3bf7584963b9126e260335de7",
+    "src\\mission_v6\\rl298\\stability_report.py": "75c947949c60061d4e78a55a712261158c3cfdd21ad17a1b68063dc85d6b9e13",
+    "src\\mission_v6\\rl298\\transition.py": "c495e48ddca60b7c459747fe617f7ebfba610ab5d3f7726099539d211e64fcce"
+  },
+  "config": {
+    "schema": "rl298-constraint-recovery/1",
+    "base": "configs/rl298_consistent.yaml",
+    "controller": "results\\v10a_refit_929\\model_v10a\\controller.npz",
+    "freeze_manifest": "results/v6_rl298_two_channel/weight1_campaign_20261016/freeze/manifest.json",
+    "seed": 20261016,
+    "fast_safety": {
+      "constraint_aware_post_enabled": true,
+      "post_correction_method": "six_alpha_slsqp",
+      "post_correction_max_wall_s": 2.0,
+      "max_iterations": 60,
+      "ftol": 1e-10,
+      "alpha_scale_rad": 0.05,
+      "CL_scale": 0.1,
+      "weights": {
+        "network": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "smooth": 0.01,
+        "CL": 0.05
+      },
+      "internal_margin": 0.0,
+      "dense_refinement": true,
+      "lookahead_enabled": false,
+      "lookahead_horizon_s": 12.0,
+      "lookahead_candidate_policy": [
+        "equal_lift",
+        "load_recovery",
+        "rolling_corrector"
+      ],
+      "lookahead_max_wall_s": 3.0,
+      "oracle_diagnostic_budget": 0,
+      "lookahead_search_order": "risk_first",
+      "lookahead_P1_report": "results\\v6_rl298_constraint_recovery\\P1_corrector\\recovery_v7c\\AB_metrics.json",
+      "recovery_search_max_evaluations": 12,
+      "lookahead_policy_search_enabled": true,
+      "recovery_search_status_v2": true,
+      "lookahead_save_witness": true
+    },
+    "budgets": {
+      "P1_max_wall_s": 600,
+      "P2_short_durations_s": [
+        72,
+        120
+      ],
+      "P2_full_duration_s": 1200,
+      "DQN_training_steps": 0
+    },
+    "gates": {
+      "min_speedup": 5.0,
+      "maximum_dense_violations": 0,
+      "required_validation_samples": 19,
+      "required_test_samples": 30,
+      "require_P0_complete": true,
+      "require_P1_precheck_before_heldout": true,
+      "require_P1_pass_before_P2": true,
+      "full_fast_mission_required_for_scale_up": true,
+      "large_DQN_budget_enabled": false
+    },
+    "evaluation_role": "FROZEN_REGRESSION_NOT_NEW_INDEPENDENT"
+  },
+  "base": {
+    "schema": "rl298-consistent-cl-mincd/2",
+    "snapshot": "results/v6_rl_subset_298_20261015",
+    "mission": "configs/mission_1200s.yaml",
+    "trajectory": "configs/trajectory.yaml",
+    "action_mode": "cl_only",
+    "cl_actions": [
+      -0.01,
+      0.0,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.08,
+      0.1,
+      0.12
+    ],
+    "cl_cd_actions": [
+      [
+        0.02,
+        0.0015
+      ],
+      [
+        0.03,
+        0.0025
+      ],
+      [
+        0.04,
+        0.0035
+      ],
+      [
+        0.05,
+        0.005
+      ],
+      [
+        0.06,
+        0.007
+      ]
+    ],
+    "transition": {
+      "duration_s": 8.0,
+      "reachability": "all_pairs_assumed",
+      "aerodynamic_blend": "linear_endpoint_coefficients_at_same_Mach_alpha",
+      "new_command_during_transition": "complete_current_pair_then_accept_at_next_decision"
+    },
+    "ocp": {
+      "jit": false,
+      "horizon_s": 60.0,
+      "fine_until_s": 9.0,
+      "fine_dt_s": 0.5,
+      "coarse_dt_s": 3.0,
+      "coarse_rk4_substeps": 2,
+      "acceptance_violation": 1e-06,
+      "audit_dt_s": 0.1,
+      "tracking_mode": "mean_3s",
+      "tracking_weight_multiplier": 1.0
+    },
+    "training": {
+      "seed": 0,
+      "steps": 24,
+      "hidden": 128,
+      "learning_rate": 0.0005,
+      "gamma": 1.0,
+      "replay_capacity": 30000,
+      "batch_size": 64,
+      "learning_starts": 128,
+      "update_every": 4,
+      "target_update_every": 100,
+      "epsilon_start": 0.5,
+      "epsilon_end": 0.05,
+      "evaluation": "explicit_full_ocp_validation_required_before_acceptance"
+    },
+    "control": {
+      "pre_transition_model": "actual",
+      "reachability": true,
+      "observation_version": "v2",
+      "switch_cost": 0.0
+    }
+  },
+  "control_contract": "rl298-consistent/2:ec1c13606315569b",
+  "expected_validation": 19,
+  "expected_test": 30,
+  "random_seed": null,
+  "hard_constraints_unchanged": true,
+  "labels_unchanged": true,
+  "oracle_calls_added": 0,
+  "evaluation_role": "FROZEN_REGRESSION_NOT_NEW_INDEPENDENT",
+  "wall_s": 22.090926399992895,
+  "gate_status": "GATE_PASSED"
+}

@@ -1,0 +1,5 @@
+numpy==1.26.4
+scipy==1.17.1
+casadi==3.7.2
+PyYAML==6.0.3
+pytest==9.1.1
