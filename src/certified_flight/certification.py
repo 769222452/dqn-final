@@ -19,6 +19,7 @@ import numpy as np
 
 from .corrector import audit_controls, compact_audit
 from .diagnostics import interval_moments
+from .oracle_evidence import oracle_sinks
 from .serialization import append_jsonl, write_json
 from .state import STATE_FIELDS, capture_state
 from .surrogate import OracleRequired
@@ -30,13 +31,22 @@ PASS = 'VERIFIED_PASS'
 REJECT = 'VERIFIED_REJECT'
 UNKNOWN = 'UNKNOWN_NOT_CERTIFIED'
 NO_SOLUTION = 'OCP_NO_SOLUTION_FOUND'
+AUDIT_REJECTIONS = frozenset({
+    'DENSE_AUDIT_REJECTED', 'FUTURE_DENSE_AUDIT_REJECTED',
+    'FAST_EXECUTION_AUDIT_FAILURE', 'FAST_PLANT_RK_STAGE_FAILURE',
+    'TRUE_OCP_PLAN_AUDIT_REJECTED', 'PRECOMMIT_AUDIT_REJECTED',
+    'CERTIFICATE_EXECUTION_AUDIT_REJECTED',
+})
 
 
 def classification(reason):
     """Certificate status of a refusal reason."""
     if reason == 'TRUE_OCP_SOLVE_FAILED':
         return NO_SOLUTION
-    if 'AUDIT' in reason or 'RK_STAGE' in reason:
+    # A named audit exception may be an I/O or solver infrastructure error, not
+    # evidence that a trajectory violated a physical constraint. Reject only
+    # refusal codes emitted after an actual independent audit failed.
+    if reason in AUDIT_REJECTIONS:
         return REJECT
     return UNKNOWN
 
@@ -363,4 +373,10 @@ class Certifier:
         branch = deepcopy(self, {id(env.ocp.plant): env.ocp.plant, id(env.db): env.db})
         branch.folder = Path(folder)/'proofs'
         branch.folder.mkdir(parents=True, exist_ok=True)
+        branch.probes = max([branch.probes]+[int(p.stem[1:]) for p in branch.folder.glob('p*.json')])
+        event_sink, artifact_sink = oracle_sinks(folder)
+        if env.event_sink is not None:
+            branch.env.event_sink = event_sink
+        if env.artifact_sink is not None:
+            branch.env.artifact_sink = artifact_sink
         return branch

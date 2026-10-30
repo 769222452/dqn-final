@@ -46,7 +46,6 @@
       "train_count": 929
     }
   },
-  "post_routing": "adaptation_coverage_first",
   "scale_up_gate_passed": false,
   "acceptance_passed": false,
   "base_config": {
@@ -130,8 +129,8 @@
       "switch_cost": 0.0
     }
   },
-  "mission_sha256": "12740383302b4e7f7576e47d1663643f55a5f1a723e912e1e6b871bad2971c32",
-  "trajectory_sha256": "fbc30a196f4bb2b996938a885125dd0f6a92e92c8ccd682d97a467ef9bc85c68",
+  "mission_sha256": "af6b1d8ca4d283406f3a6c037d5f1d84bfc01228711ab086742bcdc5785c7ace",
+  "trajectory_sha256": "74d5cd7d0237a7d8347e03a921aeb303fefc59ee670737a41ed36ce54a32102b",
   "dataset_sha256": "2b2233799f9a733b887d7c64aafbda179889ea52f681f0d4fdb525ecfd01e80f",
   "gate_config": {
     "min_train_samples": 48,
@@ -163,5 +162,15 @@
     "alpha_output": "residual_on_exact_equal_lift_rate_limited_schedule"
   },
   "model_sha256": "1cb8d96280679a7e2a3e7d9ddc90c2e2f3159714f60fd19035cf77aca7946f00",
-  "snapshot_sha256": "a636f427a770f5f4c4a34b972a8893eb7403d4824f06cbc167b1a02c747d7003"
+  "snapshot_sha256": "5ea27611f258c0190e6e5c41ea4db90e301b84ee23d4368572ba3b793cfa7fd2",
+  "input_repackaging": {
+    "schema": "input-repackaging/1",
+    "original_bindings": {
+      "mission_sha256": "12740383302b4e7f7576e47d1663643f55a5f1a723e912e1e6b871bad2971c32",
+      "trajectory_sha256": "fbc30a196f4bb2b996938a885125dd0f6a92e92c8ccd682d97a467ef9bc85c68",
+      "snapshot_sha256": "a636f427a770f5f4c4a34b972a8893eb7403d4824f06cbc167b1a02c747d7003"
+    },
+    "archive": "archive/retired_assets_20261030.zip",
+    "note": "Unused keys/CSV exports retired; model bytes and all active numerical inputs unchanged. Not a new model qualification."
+  }
 }

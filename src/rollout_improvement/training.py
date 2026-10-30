@@ -28,11 +28,13 @@ from certified_flight import CL_ACTIONS
 from .ensemble import (HIDDEN, LABEL_DECAY, LABEL_KEEP, LABEL_SCALE, fit_ensemble, parse_hidden, prediction_check,
                        retained_labels)
 from .features import STATE_INPUTS, input_names, parse_inputs
+from .identity import digest_json, experiment_identity
 from .policy import DECISION_S, constant_stage
 from .rollouts import MISSION_S, dispatch
 
 MARGINS = (1., .5, .25, .75, 1.25, 1.5)       # LCB thresholds of model candidates, units of 1e-4 return
 OVERRIDE_SETS = (1, 2, 3, 4, 5, 6, 8, 10, 12)  # sizes of the exact override candidates (plus all)
+TRAINING_PROTOCOL = 'rollout-improvement/6-integrity'
 
 
 # ----------------------------------------------------------------------------------------------- utilities
@@ -74,6 +76,98 @@ def save_json(path, value):
 
 def load_json(path):
     return json.loads(Path(path).read_text(encoding='utf-8'))
+
+
+def training_binding(settings):
+    """Bind cached returns, labels and policies to one algorithm and physical experiment."""
+    payload = dict(protocol=TRAINING_PROTOCOL, runtime=experiment_identity(), settings=settings)
+    return dict(payload=payload, sha256=digest_json(payload))
+
+
+def validate_resume(st, binding):
+    """Never silently reinterpret an old run's labels or returns under new settings."""
+    previous = st.get('experiment_binding')
+    if st.get('training_protocol') != TRAINING_PROTOCOL or not isinstance(previous, dict):
+        raise ValueError('checkpoint has no compatible experiment fingerprint; preserve this run and use a new '
+                         'output directory. Legacy labels/returns cannot be migrated automatically.')
+    if not isinstance(previous.get('payload'), dict) or previous.get('sha256') != digest_json(previous['payload']):
+        raise ValueError('checkpoint experiment fingerprint is invalid; preserve the run and restore its original '
+                         'state.json or use a new output directory.')
+    if previous != binding or st.get('seed') != binding['payload']['settings']['seed']:
+        old_settings = previous['payload'].get('settings', {})
+        new_settings = binding['payload']['settings']
+        changed = sorted(k for k in set(old_settings) | set(new_settings)
+                         if old_settings.get(k) != new_settings.get(k))
+        if previous['payload'].get('runtime') != binding['payload']['runtime']:
+            changed.append('runtime source/input fingerprint')
+        if st.get('seed') != new_settings['seed'] and 'seed' not in changed:
+            changed.append('seed')
+        raise ValueError('resume experiment mismatch (' + ', '.join(changed or ['protocol']) + '); restore the '
+                         'original code, inputs and training settings, or use a new output directory.')
+
+
+def pair_signature(label, inputs):
+    """Exact *model-observed* feature/action identity; omitted features cannot make a pair unseen."""
+    f = label['features']
+    values = [float(f[j]) for j in (range(len(f)) if inputs is None else inputs)]
+    values = [(0. if v == 0. else v).hex() for v in values]
+    return digest_json(dict(features=values, action=int(label['action'])))
+
+
+def previous_prediction_checks(st, new, min_advantage):
+    """Separate previously fitted pairs from new pairs without changing labels or fitting order."""
+    alts = [x for x in new if x['action'] != x['base_action']]
+    members = st.get('check_members')
+    inputs = st.get('check_inputs')
+    signatures = st.get('check_pair_signatures')
+    diag = dict(alternative_pairs=len(alts), seen_pairs=0, unseen_pairs=0, unclassified_pairs=0,
+                seen=None, unseen=None, fit_identity_available=bool(members and signatures is not None))
+    if not diag['fit_identity_available']:
+        diag['unclassified_pairs'] = len(alts)
+        return None, diag
+    known = set(signatures)
+    seen, unseen = [], []
+    for x in alts:
+        (seen if pair_signature(x, inputs) in known else unseen).append(x)
+    diag.update(seen_pairs=len(seen), unseen_pairs=len(unseen),
+                seen_unique_pairs=len({pair_signature(x, inputs) for x in seen}),
+                unseen_unique_pairs=len({pair_signature(x, inputs) for x in unseen}),
+                seen=prediction_check(members, seen, min_advantage, inputs),
+                unseen=prediction_check(members, unseen, min_advantage, inputs),
+                policy_changed_since_fit=bool(st.get('check_chain_len') != len(st['chain'])))
+    for check in (diag['seen'], diag['unseen']):
+        if check is not None:
+            check['policy_changed_since_fit'] = diag['policy_changed_since_fit']
+    return diag['unseen'], diag
+
+
+def guard_descendant(path, root):
+    """Check resolved mutation targets before moving or recursively removing run evidence."""
+    path, root = Path(path).resolve(), Path(root).resolve()
+    if path == root or not path.is_relative_to(root):
+        raise ValueError(f'evidence path escapes its intended run directory: {path} (root {root})')
+    return path
+
+
+def prepare_iteration_directory(idir, keep_evidence, log):
+    """Retain interrupted proof evidence by default when retrying an unfinished iteration."""
+    guard_descendant(idir, idir.parent)
+    if not idir.exists():
+        return
+    if not keep_evidence:
+        shutil.rmtree(idir)
+        return
+    archive = idir.parent/'interrupted_attempts'
+    guard_descendant(archive, idir.parent)
+    archive.mkdir(exist_ok=True)
+    attempt = 1
+    destination = archive/f'{idir.name}_attempt_{attempt:03d}'
+    while destination.exists():
+        attempt += 1
+        destination = archive/f'{idir.name}_attempt_{attempt:03d}'
+    guard_descendant(destination, idir.parent)
+    idir.rename(destination)
+    log(f'preserved interrupted evidence: {destination}')
 
 
 def run_jobs(jobs, workers, costs=None):
@@ -140,19 +234,34 @@ def stop_reason(history, patience, sweeps=2, stall=3):
     return None
 
 
+def stop_status(history, patience, sweeps=2, stall=3):
+    """Describe the existing stop rule without claiming global or statistical convergence."""
+    reason = stop_reason(history, patience, sweeps=sweeps, stall=stall)
+    if reason is None:
+        return None
+    category = 'local_search_stationary' if 'clean sweeps' in reason else 'stalled'
+    return dict(category=category, reason=reason, convergence_proven=False)
+
+
 def prune(idir, keep):
     """Remove re-flyable proof records of a finished iteration (branches and rejected candidates)."""
-    for d in list(idir.glob('branch_t*'))+[d for d in idir.glob('candidate_*') if d.name != keep]:
-        shutil.rmtree(d, ignore_errors=True)
+    guard_descendant(idir, idir.parent)
+    targets = [d for d in list(idir.glob('branch_t*'))+list(idir.glob('candidate_*'))
+               if d.is_dir() and d.name != keep]
+    for d in targets:
+        guard_descendant(d, idir)
+    for d in targets:
+        shutil.rmtree(d)
 
 
 # ----------------------------------------------------------------------------------------------- main loop
 def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window=48., candidates=14, patience=None,
           min_advantage=1e-5, continuation='open-loop', inputs=STATE_INPUTS, overrides=False, initial_cl=.04,
-          label_decay=LABEL_DECAY, label_keep=LABEL_KEEP, use_stop_rule=True, keep_evidence=False, hidden=HIDDEN,
+          label_decay=LABEL_DECAY, label_keep=LABEL_KEEP, use_stop_rule=True, keep_evidence=True, hidden=HIDDEN,
           log=print):
     out = Path(out).resolve()
-    out.mkdir(parents=True, exist_ok=True)
+    if iterations < 0 or workers < 1:
+        raise ValueError('iterations must be nonnegative and workers must be positive')
     if stride % DECISION_S or stride <= 0 or states < 1:
         raise ValueError('stride must be a positive multiple of 12 s')
     if continuation not in ('open-loop', 'closed-loop'):
@@ -163,18 +272,36 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
     patience = patience or int(stride//DECISION_S)
     grid = margin_grid(candidates)
     inputs = parse_inputs(inputs)
+    bound_settings = dict(seed=seed, states=states, stride=stride, window=window, candidates=candidates,
+                          margins=grid, patience=patience, min_advantage=min_advantage, continuation=continuation,
+                          inputs=input_names(inputs), overrides=overrides, initial_cl=initial_cl,
+                          label_decay=label_decay, label_keep=label_keep, hidden=list(hidden))
+    binding = training_binding(bound_settings)
     path = out/'state.json'
-    st = load_json(path) if path.exists() else dict(
-        seed=seed, iteration=0, G=None, schedule=None, policy_version=0, labels_current=[], label_archive=[],
-        chain=[constant_stage(initial_cl)] if initial_cl != .04 else [], history=[], settings=[])
-    if st.get('converged'):
-        log(f"already converged at iteration {st['converged']['iteration']}: {st['converged']['reason']}")
+    if path.exists():
+        st = load_json(path)
+        validate_resume(st, binding)
+    else:
+        if out.exists() and any(out.iterdir()):
+            raise ValueError('output directory is nonempty without state.json; preserve it and use a new directory')
+        st = dict(seed=seed, iteration=0, G=None, schedule=None, policy_version=0, labels_current=[],
+                  label_archive=[], chain=[constant_stage(initial_cl)] if initial_cl != .04 else [], history=[],
+                  settings=[], training_protocol=TRAINING_PROTOCOL, experiment_binding=binding)
+    stopped = st.get('stopped')
+    if stopped and stopped['category'] != 'budget_limit' and use_stop_rule:
+        log(f"already stopped ({stopped['category']}) at iteration {stopped['iteration']}: {stopped['reason']}; "
+            'use --ignore-stop-rule to continue with an explicit iteration budget')
         return st
+    if stopped:
+        st.setdefault('stop_history', []).append(dict(st.pop('stopped'), ignored_rule=not use_stop_rule))
+    out.mkdir(parents=True, exist_ok=True)
     st['settings'].append(dict(at_iteration=st['iteration'], states=states, stride=stride, window=window,
                                candidates=candidates, margins=grid, patience=patience, min_advantage=min_advantage,
                                continuation=continuation, inputs=input_names(inputs), overrides=overrides,
                                initial_cl=initial_cl, label_decay=label_decay, label_keep=label_keep,
-                               stop_rule=use_stop_rule, workers=workers, hidden=list(hidden)))
+                               stop_rule=use_stop_rule, workers=workers, hidden=list(hidden),
+                               keep_evidence=keep_evidence, invocation_iterations=iterations))
+    save_json(path, st)
     log(f"start: iteration {st['iteration']}, seed {st['seed']}, {states} states every {stride:g} s, "
         f"continuation={continuation}, inputs={','.join(input_names(inputs))}, overrides={overrides}, "
         f"hidden={','.join(map(str, hidden))}, workers={workers}")
@@ -184,8 +311,7 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
         idir = out/f'iter_{i:03d}'
         t0 = time.perf_counter()
         rec = dict(iteration=i)
-        if idir.exists():                 # leftovers of an interrupted attempt are never mixed in
-            shutil.rmtree(idir, ignore_errors=True)
+        prepare_iteration_directory(idir, keep_evidence, log)
         times = state_times(i, states, stride)
         sweep = i//patience               # the neighbour radius (1 or 2) alternates per sweep
 
@@ -241,17 +367,19 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
             f"positive pairs {n_pos}, improvable states {frac:.0%}")
 
         # 2. out-of-sample check of the previous ensemble, then fit
-        check = prediction_check(st.get('check_members'), new, min_advantage, st.get('check_inputs'))
+        check, check_split = previous_prediction_checks(st, new, min_advantage)
         if check:
-            check['policy_changed_since_fit'] = bool(st.get('check_chain_len') != len(st['chain']))
             log(f"iter {i}: previous ensemble on {check['pairs']} unseen pairs: Spearman "
                 + (f"{check['spearman']:.2f}" if check['spearman'] is not None else '-')
                 + (f", R2 {check['r2_clipped']:.2f}" if check['r2_clipped'] is not None else ''))
+        if check_split['seen_pairs']:
+            log(f"iter {i}: excluded {check_split['seen_pairs']} previously fitted pairs from unseen diagnostics")
         tick = time.perf_counter()
         members, fit = fit_ensemble(fit_labels, st['seed']*1000+i, fit_weights, inputs, hidden)
         fit['versions'] = sorted({x['v'] for x in fit_labels})
         t_fit = time.perf_counter()-tick
         st['check_members'], st['check_chain_len'], st['check_inputs'] = members, len(st['chain']), inputs
+        st['check_pair_signatures'] = sorted({pair_signature(x, inputs) for x in fit_labels})
         label_times = sorted({float(x['t']) for x in fit_labels})
 
         # 3. candidates
@@ -271,6 +399,10 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
         tick = time.perf_counter()
         cres = run_jobs([('candidate', (str(idir/c['name']), c['chain'])) for c in specs], min(len(specs), workers))
         t_cand = time.perf_counter()-tick
+        candidate_errors = [r['error'] for r in cres if 'error' in r]
+        candidate_evidence = idir/'candidate_results.json'
+        save_json(candidate_evidence, dict(iteration=i, complete=not candidate_errors, wall_s=t_cand,
+                                           specs=specs, results=cres))
         for c, r in zip(specs, cres):
             what = f"margin {c['margin']:g}" if c['kind'] == 'model' else f"override x{c['n']}"
             if 'error' in r:
@@ -278,16 +410,25 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
             else:
                 log(f"  candidate {what}: G={r['G']:.6f} ({(r['G']-st['G'])*LABEL_SCALE:+.3f}e-4) {r['range_km']:.2f} km "
                     f"stop={r['stop']} switches={r['switches']}")
+        if candidate_errors:
+            raise RuntimeError(f'{len(candidate_errors)} candidate jobs failed; iteration {i} is incomplete and '
+                               f'was not counted toward acceptance or stopping. Evidence: {candidate_evidence}\n'
+                               + str(candidate_errors[0]))
 
         # 4. acceptance
         ok = [(r['G'], c, r) for c, r in zip(specs, cres) if 'error' not in r and r['success']]
         best = max(ok, key=lambda x: x[0]) if ok else None
         accepted = bool(best and best[0] > st['G']+1e-9)
-        rec.update(labels=len(new), invalid=n_invalid, improvable_fraction=frac, positive_pairs=n_pos, sweep=sweep,
-                   prediction_check=check, fit=fit, G_before=st['G'], accepted=accepted,
+        invalid_stops = {}
+        for row in rows:
+            if not row['valid']:
+                reason = str(row.get('stop') or row.get('outcome') or 'UNSPECIFIED')
+                invalid_stops[reason] = invalid_stops.get(reason, 0)+1
+        rec.update(labels=len(new), invalid=n_invalid, invalid_stops=invalid_stops,
+                   improvable_fraction=frac, positive_pairs=n_pos, sweep=sweep,
+                   prediction_check=check, prediction_diagnostics=check_split, fit=fit, G_before=st['G'], accepted=accepted,
                    candidates=[dict(kind=c['kind'], margin=c.get('margin'), overrides=c.get('n'),
-                                    **({k: r[k] for k in ('G', 'range_km', 'stop', 'switches')} if 'error' not in r
-                                       else dict(error=True))) for c, r in zip(specs, cres)],
+                                    **{k: v for k, v in r.items() if k != 'schedule'}) for c, r in zip(specs, cres)],
                    wall_s=dict(branch=t_branch, fit=t_fit, candidates=t_cand, total=time.perf_counter()-t0))
         if accepted:
             c = best[1]
@@ -300,15 +441,19 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
             prune(idir, best[1]['name'] if accepted else None)
         st['history'].append(rec)
         st['iteration'] = i+1
-        reason = stop_reason(st['history'], patience) if use_stop_rule else None
-        if reason:
-            st['converged'] = dict(iteration=i, reason=reason, G=st['G'])
+        status = stop_status(st['history'], patience) if use_stop_rule else None
+        if status:
+            st['stopped'] = dict(status, iteration=i, G=st['G'])
         save_json(path, st)
         log(f"iter {i} done: " + (f"accepted {best[1]['name'].removeprefix('candidate_')}" if accepted else 'kept policy')
             + f"; G={st['G']:.6f} (wall {rec['wall_s']['total']:.0f} s)")
-        if reason:
-            log(f'stopped at iteration {i}: {reason}')
+        if status:
+            log(f"stopped at iteration {i} ({status['category']}): {status['reason']}")
             break
+    if not st.get('stopped'):
+        st['stopped'] = dict(category='budget_limit', reason=f'invocation budget of {iterations} iterations reached',
+                             convergence_proven=False, iteration=st['iteration']-1, G=st['G'])
+        save_json(path, st)
     return st
 
 
@@ -333,9 +478,13 @@ def main(argv=None):
     p.add_argument('--label-decay', type=float, default=LABEL_DECAY)
     p.add_argument('--label-keep', type=int, default=LABEL_KEEP)
     p.add_argument('--ignore-stop-rule', action='store_true', help='run all iterations')
-    p.add_argument('--keep-evidence', action='store_true', help='keep proof records of branches and rejected candidates')
+    evidence = p.add_mutually_exclusive_group()
+    evidence.add_argument('--keep-evidence', dest='keep_evidence', action='store_true', default=True,
+                          help='keep proof records of branches and rejected candidates (default)')
+    evidence.add_argument('--discard-rejected-evidence', dest='keep_evidence', action='store_false',
+                          help='explicitly discard branch/rejected-candidate proofs and interrupted attempts')
     p.add_argument('--hidden', default=','.join(map(str, HIDDEN)),
-                   help='hidden layer widths of the advantage networks, e.g. 64,64,64,64')
+                   help='hidden layer widths of the advantage networks, e.g. 16,16')
     a = p.parse_args(argv)
     train(a.out, a.seed, a.iterations, a.workers, a.states, a.stride, a.window, a.candidates, a.patience,
           a.min_advantage, a.continuation, a.inputs, a.overrides, a.initial_cl, a.label_decay, a.label_keep,

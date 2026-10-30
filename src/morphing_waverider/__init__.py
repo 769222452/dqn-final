@@ -1,8 +1,7 @@
-"""morphing_waverider: V0 modular research framework.
+"""Atmosphere, units and point-mass dynamics used by certified_flight.
 
-Layers (each only depends on the layers above it, never on RL):
-    utils  -> dynamics (atmosphere, 3-DOF) -> aero -> generator -> validation
-           -> trajectory (CasADi OCP) -> envs (Gymnasium) -> rl (SB3 baselines)
+The active RK4 plant and finite geometry transition are in certified_flight.
+Retired continuous-geometry utilities are preserved in archive/.
 """
 
 __version__ = "0.0.1"

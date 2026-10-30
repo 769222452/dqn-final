@@ -2,7 +2,7 @@
 
 State   x = [h, V, gamma, s]     altitude [m], speed [m/s], flight-path angle [rad], downrange [m]
 Control u = [alpha]              angle of attack [rad]  (bank angle sigma reserved for V1+)
-Param   eta                      morphing geometry vector (see geometry.GeometrySpec)
+Param   eta                      prescribed geometry/blend input to the aerodynamic provider
 
 Equations (non-rotating spherical Earth, zero bank, zero thrust):
 
@@ -15,19 +15,9 @@ Flat-Earth option (spherical_earth: false): g = g0, drop V/r term, sdot = V cos(
 
     L = q S_ref CL,   D = q S_ref CD,   q = 0.5 rho V^2
 
-Reference-area convention (V0.6): every aerodynamic coefficient in the project is defined
-with respect to ONE constant reference area
-
-    CL = L / (q S_ref),   CD = D / (q S_ref),   S_ref = const (configs/vehicle.yaml ->
-                                                 aerodynamic_reference.area_m2)
-
-so CL/CD from the design surrogate, the synthetic truth, the generator, the validator and the
-OCP are all on the same footing regardless of eta. The geometry-dependent planform area
-
-    S_geom(eta) = max(S0 + k_b (b - b_nominal), S_min)   (PLACEHOLDER planform model)
-
-is kept as a *geometry diagnostic* (`geometry_area`) for future wetted-area / structural /
-thermal / morphing-cost models. It is NOT used to reconstruct L and D.
+Reference-area convention: L = q S_ref CL and D = q S_ref CD with constant S_ref.
+certified_flight.mission constructs VehicleParams directly from mission.yaml.
+The geometry_area diagnostic is retained; it is not used to reconstruct forces.
 
 The module depends on an AeroModel only through `coefficients(mach, alpha, eta)`; it
 never imports the generator, validator, or RL packages. Every expression is written with
@@ -40,7 +30,6 @@ from typing import Any, Protocol
 
 import numpy as np
 
-from ..geometry import GeometrySpec
 from ..utils.units import G0
 from . import backend as B
 from .atmosphere import Atmosphere
@@ -74,30 +63,11 @@ class VehicleParams:
     heat_C: float
     heat_R_n: float
 
-    @classmethod
-    def from_config(cls, vehicle_cfg: dict[str, Any], spec: GeometrySpec) -> "VehicleParams":
-        geo = vehicle_cfg["geometry"]
-        # "geometry_area" is the V0.6 name; "reference_area" is accepted for pre-V0.6 configs
-        ga = geo.get("geometry_area", geo.get("reference_area"))
-        if ga is None:
-            raise KeyError("vehicle config needs geometry.geometry_area (S0, k_b, S_min)")
-        aref = vehicle_cfg.get("aerodynamic_reference", {})
-        S_ref = float(aref["area_m2"]) if "area_m2" in aref else float(ga["S0"])
-        if not np.isfinite(S_ref) or S_ref <= 0.0:
-            raise ValueError(f"aerodynamic_reference.area_m2 must be positive, got {S_ref}")
-        hf = vehicle_cfg["heat_flux_placeholder"]
-        span_idx = spec.index("span") if "span" in spec.names else -1
-        b_nom = float(spec.nominal[span_idx]) if span_idx >= 0 else 0.0
-        return cls(
-            m=float(vehicle_cfg["mass"]["m"]), S_ref=S_ref, S0=float(ga["S0"]), k_b=float(ga["k_b"]),
-            S_min=float(ga["S_min"]), b_nominal=b_nom, span_index=span_idx,
-            heat_C=float(hf["C"]), heat_R_n=float(hf["R_n"]),
-        )
 
 
 class PointMass3DOF:
     def __init__(self, atmosphere: Atmosphere, aero: CoefficientProvider, params: VehicleParams,
-                 spec: GeometrySpec, spherical_earth: bool = True):
+                 spec: object | None, spherical_earth: bool = True):
         self.atm = atmosphere
         self.aero = aero
         self.p = params

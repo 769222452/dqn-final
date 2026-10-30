@@ -9,9 +9,9 @@ candidate_inventory.csv 记录几何参数、体积/厚度比与几何有效性�
 candidate_inventory.csv：298 个构型的几何参数、硬门槛结果、几何哈希、本地 MAT 路径。
 action_index.csv：固定的 action_index（0～297）与 geometry_id 对应关系，按 ID 字典序排列。
 geometries/<geometry_id>/native_geometry.mat：298 份原始几何文件，逐文件校验身份与 SHA256。
-aerodynamics/p2_common_grid.csv：107280 条共同网格气动记录，保留无效点与失败原因。
+归档成员 data/geometry_subset/aerodynamics/p2_common_grid.csv：107280 条共同网格气动记录，保留无效点与失败原因。
 aerodynamics/p2_grid.npz：可直接加载的数值张量，轴为 [构型, Mach, 迎角]，尺寸 [298,18,20]。
-aerodynamics/equal_lift.csv：32184 条等升力结果，含不可行状态与 298 个构型之间的排名。
+归档成员 data/geometry_subset/aerodynamics/equal_lift.csv：32184 条等升力结果，含不可行状态与 298 个构型之间的排名。
 benchmarks/：108 点理想选型、最佳固定构型比较与收益定义。
 metadata/：网格、参考面积/长度、模型设置、有效性与使用约定。
 provenance/：源数据路径/哈希和原始气动、等升力算法代码留档。
@@ -50,3 +50,9 @@ Mach 覆盖 3.5～8.25，迎角覆盖 -1～12 度，网格非等距；以 metada
 固定构型须覆盖全部 108 个工况；本数据快照中有 234 个构型满足这一覆盖条件。
 理想化指标不计构型切换成本，也不模拟真实飞行轨迹，不代表航程提升或经验证的实际变形收益。
 气动数据来自低阶 P2 压力阻力模型，不包含摩擦阻力和底阻，也不是 CFD 验证结果。
+
+六、2026-10-30 包整理
+两个 CSV 导出已无损迁入仓库 archive/retired_assets_20261030.zip。
+当前 NPZ、298 份 MAT、几何编号、元数据及验证结果字节均未改变。
+manifest.json 校验本目录现存文件；原完整清单与 CSV 同在归档内。
+validation.json 保留原导出时的核验结果，不代表 CSV 仍位于本目录。

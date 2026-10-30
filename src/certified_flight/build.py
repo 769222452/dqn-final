@@ -13,8 +13,8 @@ from .contracts import matching_contract
 from .environment import CertifiedFlightEnvironment
 from .mission import Mission
 from .ocp import TwoStageOCP
+from .oracle_evidence import oracle_sinks
 from .plant import CompiledPlant
-from .serialization import write_json
 from .surrogate import SurrogateController
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -70,16 +70,7 @@ def build_flight(folder, label, initial_offset=None):
     folder = Path(folder)
     folder.mkdir(parents=True, exist_ok=True)
 
-    def event_sink(event):
-        write_json(folder/'oracle'/f"a{event['attempt']:06d}"/'event.json', event)
-
-    def artifact_sink(event, head, plan, arrays):
-        target = folder/'oracle'/f"a{event['attempt']:06d}"/head
-        target.mkdir(parents=True, exist_ok=True)
-        np.savez_compressed(target/'solver_plan.npz', alpha=plan.alpha, times=plan.times, x=plan.x,
-                            dual_x=plan.dual.get('x', []), dual_g=plan.dual.get('g', []))
-        for dt, values in arrays.items():
-            np.savez_compressed(target/f'audit_dt{dt}.npz', **{k: values[k] for k in ('x', 'samples', 'alpha', 'times')})
+    event_sink, artifact_sink = oracle_sinks(folder)
 
     env = CertifiedFlightEnvironment(plant, controller, physical, oracle, safety, event_sink=event_sink,
                                      artifact_sink=artifact_sink, ood_physics_fallback=config['ood_physics_fallback'])

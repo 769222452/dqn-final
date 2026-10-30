@@ -43,13 +43,11 @@ Policy iteration starts from the constant policy CL = 0.04 (pi_0). In iteration 
    that two sweeps test all four neighbours of every state. The flight is then continued to the end of the mission by **open-loop replay** of the nominal
    decision sequence of pi_k. The label A(s, a) = G_rest(a) - G_rest(pi(s)) is exact because the simulator is
    deterministic; the unchanged branch is the nominal trajectory itself.
-2. **Advantage ensemble.** Five networks (4 inputs, four tanh hidden layers of 64 units, 19 outputs) are
-   fitted on bootstrap samples of the labelled states with clipped targets and out-of-bag early stopping.
+2. **Advantage ensemble.** Five networks (4 inputs, two tanh hidden layers of 16 units, 19 outputs) are
+   fitted on bootstrap samples of the labelled states with clipped targets and out-of-bag checkpoint selection.
+   All 3000 updates are run; identical network inputs stay in the same bootstrap/OOB group.
    Inputs are the flight state and time (h, V, gamma, t); labels of the last seven policy versions are used
-   with weight 0.5^age. On the label archives of training runs, networks with four hidden layers predicted the
-   advantages of the next iteration better than two-layer networks (rank correlation 0.65 against 0.53 for
-   16-16), wider two-layer networks did not, and more than four layers gave no further improvement.
-   `--hidden` sets the layer widths.
+   with weight 0.5^age. `--hidden` sets the layer widths.
 3. **Candidates.** pi_k is extended by one network stage: within +-2 classes of the current action it selects
    the action with the largest lower confidence bound (mean - standard deviation) if that bound exceeds a margin
    (six margins between 0.25e-4 and 1.5e-4) and only within +-48 s of labelled decision times.
@@ -57,13 +55,15 @@ Policy iteration starts from the constant policy CL = 0.04 (pi_0). In iteration 
    accepted only if its exact return exceeds G(pi_k); otherwise labels keep accumulating.
 
 Training stops after two consecutive sweeps over all state offsets without any positive advantage, invalid
-branch or acceptance, or after three sweeps without acceptance.
+branch or acceptance, or after three sweeps without acceptance. These are local search/stall conditions,
+not proofs of global convergence. The saved `stopped.category` distinguishes `local_search_stationary`,
+`stalled` and `budget_limit`; `convergence_proven` is false.
 
 **Baseline (ablation) settings.** The previous variant of the method continues the branches in **closed loop**
 (pi re-decides after the alternative action), uses all six features including the policy's own action feedback
 (angle of attack and previous CL target) and additionally proposes exact override candidates built from the
-positive labels. It is obtained with `--continuation closed-loop --inputs all --overrides --hidden 16,16`;
-each switch can be used separately (`--hidden 16,16` alone gives the method with two-layer networks).
+positive labels. It is obtained with `--continuation closed-loop --inputs all --overrides`; each switch can be
+used separately.
 
 ## Repository layout
 
@@ -73,10 +73,10 @@ data/                         input data, see "Data" below
   geometry_subset/            the 298 candidate geometries and their aerodynamic tables (used in flight)
   surrogate/                  surrogate of the two-stage optimal control problem
   lookahead/                  qualification report of the look-ahead recovery corrector
-  aero/                       source database of the geometry family (not read in flight)
   initial_state.json          initial state of the mission
   SHA256SUMS                  hashes of all inputs, verified before every flight
-src/morphing_waverider/       point-mass dynamics, atmosphere, morphing actuator, integrator
+archive/                      lossless source data, CSV exports and retired legacy utilities
+src/morphing_waverider/       point-mass dynamics, atmosphere and units
 src/certified_flight/         certified execution
   build.py                    build_flight(): environment and certifier from the configuration
   environment.py              flight environment (3 s steps, transitions, rewards)
@@ -97,7 +97,8 @@ tests/                        unit tests
 
 ## Data
 
-Every file in `configs/` and `data/` and the `morphing_waverider` package are listed in `data/SHA256SUMS`;
+Every file in `configs/` and `data/` (except the checksum list itself), the archive, and the
+`morphing_waverider` sources are listed in `data/SHA256SUMS`;
 each flight verifies them first and stops if any file was changed. The tables mark which files the code loads
 during a flight; the other files document where these inputs come from.
 
@@ -107,9 +108,9 @@ during a flight; the other files document where these inputs come from.
 |---|---|---|
 | `mission.yaml` | 1200 s mission, 3 s control steps, initial state, path limits, terminal gates, return definition; paths of the other configuration files | yes |
 | `environment.yaml` | atmosphere model, spherical Earth, terminal altitude, required range (cross-checked against `mission.yaml`) | yes |
-| `vehicle.yaml` | mass, path limits, heat-flux proxy, angle-of-attack rate limit. Its `synthetic_aero_dataset` section belongs to the original point-mass package and is not used | yes |
+| `vehicle.yaml` | mass, path limits, heat-flux proxy, angle-of-attack rate limit and research assumptions | yes |
 | `teacher_profile.json` | reference mass and area of the aerodynamic tables; must agree with `mission.yaml` and `vehicle.yaml` | yes (consistency check) |
-| `trajectory.yaml` | horizon (60 s), intervals and integration steps of the optimal control problem | yes |
+| `trajectory.yaml` | active OCP objective, target tracking, solver tolerances/budget and numerical scaling; the horizon/grid are in `runtime.json` | yes |
 | `runtime.json` | certification chain: surrogate, fallbacks, constraint corrector, 30 s look-ahead, the 19 CL actions, 8 s geometry transition, OCP settings | yes |
 
 **Aerodynamics of the candidate geometries (`data/geometry_subset/`)**
@@ -125,8 +126,6 @@ blended linearly at the same Mach number and angle of attack.
 |---|---|---|
 | `aerodynamics/p2_grid.npz` | the tables above as arrays [geometry, Mach, alpha], with validity masks and geometry parameters | **yes, the only aerodynamic data of the flight** |
 | `manifest.json` | geometry ids, array shape, SHA-256 of every file; its hash ties the surrogate to this snapshot | yes |
-| `aerodynamics/p2_common_grid.csv` | the same tables as CSV, including invalid points and their reasons | no |
-| `aerodynamics/equal_lift.csv` | drag of every geometry at 108 conditions (18 Mach numbers x 6 lift targets) | no |
 | `action_index.csv`, `candidate_inventory.csv` | index-to-id mapping; shape parameters, volume and thickness ratios to G42, geometry validation records | no |
 | `geometries/<id>/native_geometry.mat` | shape of each of the 298 geometries (G42 is the starting geometry of every flight) | no |
 | `benchmarks/` | best geometry per condition, mean drag of every fixed geometry over the 108 conditions | no |
@@ -145,6 +144,10 @@ blended linearly at the same Mach number and angle of attack.
 
 **Other inputs**
 
+The three `aero/` files below and the two CSV exports formerly under
+`geometry_subset/aerodynamics/` are ZIP members in `archive/retired_assets_20261030.zip`,
+under their original `data/` paths. They are retained for research and export use.
+
 | File | Content | Used in flight |
 |---|---|---|
 | `initial_state.json` | recorded initial state (h, V, gamma, s, alpha) of the mission; must agree with `mission.yaml` | yes |
@@ -152,9 +155,18 @@ blended linearly at the same Mach number and angle of attack.
 | `aero/g42_baseline.csv` | the same for the baseline geometry G42 | no |
 | `aero/geometry_inventory.csv` | design parameters and origin of the 348 geometries | no |
 
-Two recorded values describe the source database rather than the flight tables: the Mach support 3.5 to 9.25
-in `mission.yaml` (the flight tables end at Mach 8.25; flights leaving them end as a domain exit) and the paths
-of `data/aero/` there. They are part of hashed files and were kept unchanged.
+The Mach support 3.5 to 9.25 recorded in `mission.yaml` describes the source database;
+the flight tables end at Mach 8.25 and flights leaving them end as a domain exit.
+The unused source CSV paths have been removed from the mission configuration.
+
+The 2026-10-30 cleanup retires unused continuous-geometry, actuator, integrator, logging and
+configuration helpers. The active RK4 plant and eight-second transition remain in `certified_flight`.
+Only unused configuration keys were removed; active numerical values, model weights, aerodynamic
+arrays, all 298 MAT shapes and qualification evidence are retained. Original files are stored in the
+archive with per-member SHA-256 hashes; see `archive/README.txt` for restoration into a new directory.
+The snapshot and controller input hashes describe the new packaging; this is not a new model qualification.
+Source/configuration fingerprints change, so use new run/evaluation directories. Existing checkpoints
+and caches require their original working-tree snapshot; fingerprint guards are not bypassed.
 
 ## Installation
 
@@ -178,12 +190,14 @@ Train with the proposed settings (one process per worker; an iteration performs 
 python scripts/train.py --out runs/seed17 --seed 17 --workers 14
 ```
 
-The run directory contains `state.json` (policy, labels, per-iteration history) and one folder per iteration
-with the labels and the certificates of the accepted candidate. An interrupted run is resumed by repeating the
-command. Baseline:
+The run directory contains `state.json` (policy, labels, per-iteration history and experiment fingerprint)
+and one folder per iteration. Proofs of branches and all candidates are kept by default; interrupted attempts
+are retained separately. A compatible interrupted run is resumed by repeating the command. Legacy runs
+without a fingerprint, changed code/inputs, or changed learning settings require a new output directory.
+Baseline:
 
 ```bash
-python scripts/train.py --out runs/baseline_seed17 --seed 17 --continuation closed-loop --inputs all --overrides --hidden 16,16
+python scripts/train.py --out runs/baseline_seed17 --seed 17 --continuation closed-loop --inputs all --overrides
 ```
 
 Several seeds: `SEEDS="17 23 41" bash scripts/run_seeds.sh`.
@@ -193,14 +207,14 @@ Several seeds: `SEEDS="17 23 41" bash scripts/run_seeds.sh`.
 A trained policy is flown from perturbed initial states and compared with the constant policy CL = 0.025
 flown from the same states; in addition, one decision of its nominal flight is changed by one class and the
 flight is continued in closed loop (the policy re-decides) and in open loop (its nominal decisions are
-replayed). Three test sets are defined, each with 7 probe times on the 12 s decision grid:
+replayed). Four test sets are defined, each with 7 probe times on the 12 s decision grid:
 
-* **held-out-2** (default): the test set of the proposed method. 40 initial-state offsets drawn uniformly
+* **held-out-3** (default): the test set of the proposed method. 40 initial-state offsets drawn uniformly
   from |dh| <= 2000 m, |dV| <= 100 m/s from the fixed seed 20261023 (separate random streams for offsets and
   probe times), disjoint from the other sets. It was fixed before the proposed method was trained.
-* **held-out-1**: generated in the same way from other streams; it was used to test the method with two-layer
-  networks (16-16). Its results were known when the network size was changed, so it is not a clean test of the
-  proposed method.
+* **held-out-1**, **held-out-2**: generated in the same way from other streams. They were used to test earlier
+  configurations of the method (network size, configuration of the post-command surrogate) and their results
+  were known when the final configuration was chosen, so they are not clean tests of the proposed method.
 * **development**: the nominal state, 12 perturbed states on a grid and 7 probe times. These tests were used
   to diagnose the previous method and to choose the final one, so results on them are biased in its favour
   and are not a measure of generalisation.
@@ -219,12 +233,14 @@ python scripts/compare.py --out evaluation/comparison.json seed17=evaluation/see
 mean gain over the reference with a paired bootstrap 95% confidence interval, the number of wins and the worst
 case (also restricted to the states from which the reference completed the mission, since a failed reference
 flight counts with its truncated range), and the paired differences between the first policy and each other
-one. `--test-set held-out-1` or `--test-set development` selects the other test sets.
+one. `--test-set held-out-2`, `held-out-1` or `development` selects the other test sets.
 
 ## Reproducibility
 
-Flights and network fits are deterministic: all random numbers are seeded and BLAS runs single-threaded, so a
-run is reproduced bit for bit on the same platform and library versions. Different CPUs can change the last
+Random numbers are seeded and BLAS runs single-threaded. Numerical regression tests check reproducibility,
+but wall-clock limits in certification can change a refusal/fallback when machine load changes, even on the
+same platform. Consequently the complete training run is not guaranteed bit-identical under arbitrary load.
+Different CPUs can also change the last
 digits of floating-point results: after 240 s of flight the states of two machines differed by 1e-14 relative
 to the typical magnitude of each component (5 nm of range). Over a training run such differences can change a
 discrete decision, so runs on different machines need not be identical. The packages set the BLAS thread
@@ -233,3 +249,28 @@ numpy (as `scripts/` does).
 
 Every flight first verifies the configuration files, the input data and the physics package against
 `data/SHA256SUMS` and stops if any file was modified.
+
+## Integrity and diagnostic protocol
+
+Training protocol `rollout-improvement/6-integrity` binds source/input hashes, numeric software versions,
+seed and learning settings. `--iterations` remains the additional budget of this invocation;
+`--ignore-stop-rule` explicitly continues a compatible stopped run. This does not migrate old labels.
+Evaluation schema `certified-policy-evaluation/2` also binds the policy, initial conditions and continuation
+schedule. Old or mismatched cached results are refused and preserved; use a new evaluation directory.
+
+`DONE` now means a successful 1200 s mission; terminal failures retain their actual outcome.
+`switches`/`geometry_switches` count geometry transition starts, whereas `cl_action_changes` counts changes
+of the executed CL action. Only truly unseen observed-feature/action pairs enter the next-label unseen
+diagnostic; seen pairs are reported separately. Ensemble mean-minus-standard-deviation remains an
+uncertainty heuristic, not a calibrated confidence bound.
+
+Evaluations retain full flight evidence and expose requested/completed/failed/skipped/error counts.
+Missing probe pairs withhold the main probe average; partial statistics are explicitly labelled.
+The evaluation command returns exit code 2 when the requested comparison is incomplete, and `compare.py`
+refuses incomplete or incompatible summaries. Computation errors can retry into a new attempt directory.
+Evidence deletion requires explicit `--discard-evidence` for evaluation or
+`--discard-rejected-evidence` for training; preserving evidence uses more disk space.
+
+The physical task is unchanged: pressure drag only, endpoint coefficient blending, discrete alpha
+commands, point-mass dynamics and a heat proxy. These checks establish feasibility within that model,
+not a validation of vehicle trim, continuous actuator dynamics, structural morphing or thermal protection.

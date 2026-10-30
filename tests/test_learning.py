@@ -146,8 +146,9 @@ def test_default_network_shape():
     labels = [dict(x, v=0) for x in ref['labels']]
     kept, weights = ensemble.retained_labels(labels, 0)
     members, _ = ensemble.fit_ensemble(kept, ref['seed'], weights, ref['inputs'])
-    assert [np.shape(W) for W, _ in members[0]] == [(4, 64), (64, 64), (64, 64), (64, 64), (64, 19)]
-    assert ensemble.parse_hidden('64,64,64,64') == ensemble.HIDDEN == (64, 64, 64, 64)
+    assert [np.shape(W) for W, _ in members[0]] == [(4, 16), (16, 16), (16, 19)]
+    assert ensemble.parse_hidden('16,16') == ensemble.HIDDEN == (16, 16)
+    assert ensemble.parse_hidden('64,64,64,64') == (64, 64, 64, 64)
     with pytest.raises(ValueError):
         ensemble.parse_hidden('16,0')
 

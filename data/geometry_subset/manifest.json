@@ -331,16 +331,6 @@
       "sha256": "f803295d106fb64c2bfef9d59ce4d005a33c78109bbcc5b455480f90dda22bed"
     },
     {
-      "path": "aerodynamics/equal_lift.csv",
-      "size_bytes": 2787426,
-      "sha256": "e32408239cab72ed95bd22526513445a9337dd33fd4c08fddf18c80c9b884548"
-    },
-    {
-      "path": "aerodynamics/p2_common_grid.csv",
-      "size_bytes": 28848408,
-      "sha256": "d78e316afe30ad67132e2d0f4ea27ad16bd023a455d0a9f32edf2f14cae183c5"
-    },
-    {
       "path": "aerodynamics/p2_grid.npz",
       "size_bytes": 3968547,
       "sha256": "3d7b27d9e2178a6fb214c6360777f8f119612668b3401914e5969540bb554586"
@@ -1907,8 +1897,8 @@
     },
     {
       "path": "README_ZH.txt",
-      "size_bytes": 3802,
-      "sha256": "2194690145f95a943b962ca0fac4ca6be89a478cc855830f12b9acca07afb243"
+      "size_bytes": 4186,
+      "sha256": "ac0335e54ec759474c44e19224caa51c7eedd586788f4e93b8493661cf2eb8fb"
     },
     {
       "path": "validation.json",
@@ -1916,6 +1906,16 @@
       "sha256": "de62d855044cf327d1102f32baab32eea8c6de6f970d37d24c6b2f10b96f451f"
     }
   ],
-  "file_count_excluding_manifest": 318,
-  "total_bytes_excluding_manifest": 62646671
+  "file_count_excluding_manifest": 316,
+  "total_bytes_excluding_manifest": 31011221,
+  "packaging": {
+    "schema": "snapshot-repackaging/1",
+    "archive": "archive/retired_assets_20261030.zip",
+    "original_manifest_sha256": "a636f427a770f5f4c4a34b972a8893eb7403d4824f06cbc167b1a02c747d7003",
+    "archived_files": [
+      "aerodynamics/p2_common_grid.csv",
+      "aerodynamics/equal_lift.csv"
+    ],
+    "numerical_assets_unchanged": true
+  }
 }

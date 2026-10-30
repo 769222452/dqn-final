@@ -73,6 +73,27 @@ def chain_action(chain, f):
     return a
 
 
+def prepare_chain(chain):
+    """Convert model weights once for a flight, without changing arithmetic or the saved chain."""
+    ready = []
+    for stage in chain:
+        copy = dict(stage)
+        if stage.get('kind', 'model') == 'model':
+            members = []
+            for member in stage['members']:
+                params = []
+                for W, b in member:
+                    # Own immutable arrays: preparing a flight never mutates a checkpoint.
+                    W, b = np.array(W, copy=True), np.array(b, copy=True)
+                    W.setflags(write=False)
+                    b.setflags(write=False)
+                    params.append((W, b))
+                members.append(params)
+            copy['members'] = members
+        ready.append(copy)
+    return ready
+
+
 class ChainPolicy:
     """Decision rule for certified flights; decides at multiples of DECISION_S and holds the action in between.
 
@@ -82,7 +103,7 @@ class ChainPolicy:
     """
 
     def __init__(self, chain, env, override=None, schedule=None):
-        self.chain, self.env, self.override = chain, env, override
+        self.chain, self.env, self.override = prepare_chain(chain), env, override
         self.schedule = None if schedule is None else {
             int(round(float(t))): int(a) for t, a in (schedule.items() if isinstance(schedule, dict) else schedule)}
         self.action = None

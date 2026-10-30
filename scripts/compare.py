@@ -19,17 +19,29 @@ from pathlib import Path  # noqa: E402
 
 import numpy as np  # noqa: E402
 
+from certified_flight.serialization import write_json  # noqa: E402
 from rollout_improvement.evaluation import paired_bootstrap_ci  # noqa: E402
+from rollout_improvement.identity import digest_json  # noqa: E402
 
 
 def describe(x):
     x = np.asarray(x, dtype=float)
+    if not len(x):
+        return dict(n=0, mean=None, ci95=None, wins=0, worst=None, best=None, median=None)
     return dict(n=len(x), mean=float(x.mean()), ci95=paired_bootstrap_ci(x), wins=int((x > 0).sum()),
                 worst=float(x.min()), best=float(x.max()), median=float(np.median(x)))
 
 
 def compare(summaries):
     names = list(summaries)
+    if not names:
+        raise ValueError('at least one evaluated policy is required')
+    if any(s.get('complete') is False for s in summaries.values()):
+        raise ValueError('incomplete evaluation: inspect coverage and missing pairs before comparing policies')
+    identities = [summaries[n].get('comparison_identity') for n in names]
+    if any(identity is not None for identity in identities):
+        if any(identity is None for identity in identities) or len({digest_json(i) for i in identities}) != 1:
+            raise ValueError('evaluation runtime/protocol identities differ or are missing')
     sets = [summaries[n]['test_set'] for n in names]
     refs = [summaries[n]['reference_cl'] for n in names]
     if len(set(sets)) != 1 or len(set(refs)) != 1:
@@ -39,15 +51,17 @@ def compare(summaries):
     keys = sorted(states[names[0]])
     if any(sorted(states[n]) != keys for n in names):
         raise ValueError('policies were evaluated on different initial states')
-    result = dict(test_set=sets[0], reference_cl=refs[0], states=len(keys), policies={}, pairs={})
+    result = dict(test_set=sets[0], reference_cl=refs[0], states=len(keys), policies={}, pairs={},
+                  identity_verified=all(i is not None for i in identities), comparison_identity=identities[0])
     for n in names:
         s = summaries[n]
-        done = [k for k in keys if states[n][k].get('reference_stop', 'DONE') == 'DONE']
+        done = [k for k in keys if states[n][k].get('reference_completed',
+                                                  states[n][k].get('reference_stop', 'DONE') == 'DONE')]
         result['policies'][n] = dict(
             gain_over_reference_km=describe([states[n][k]['gain_km'] for k in keys]),
             gain_where_reference_completed_km=describe([states[n][k]['gain_km'] for k in done]),
             reference_completed=len(done),
-            completed=int(sum(states[n][k]['stop'] == 'DONE' for k in keys)),
+            completed=int(sum(states[n][k].get('completed', states[n][k]['stop'] == 'DONE') for k in keys)),
             nominal_range_km=s['nominal_range_km'], nominal_gain_km=s['nominal_gain_km'],
             probe_mean_A_closed=s['probe_mean_A_closed'], probe_mean_A_open=s['probe_mean_A_open'],
             probe_closed_not_worse=s['probe_closed_not_worse'], probes=len(s['probes']))
@@ -67,20 +81,33 @@ def main(argv=None):
         name, folder = item.split('=', 1)
         summaries[name] = json.loads((Path(folder)/'summary.json').read_text(encoding='utf-8'))
     result = compare(summaries)
-    Path(a.out).write_text(json.dumps(result, indent=1), encoding='utf-8')
+    write_json(a.out, result)
     for n, r in result['policies'].items():
         g = r['gain_over_reference_km']
+        if not g['n']:
+            print(f'{n:12s} no perturbed initial-state pairs; statistics unavailable')
+            continue
         print(f"{n:12s} gain over CL {result['reference_cl']:g}: mean {g['mean']:+.2f} km (95% CI {g['ci95'][0]:+.2f} to "
               f"{g['ci95'][1]:+.2f}), wins {g['wins']}/{g['n']}, worst {g['worst']:+.2f} km, completed "
-              f"{r['completed']}/{g['n']}; probes A_closed {r['probe_mean_A_closed']:+.2f}, "
-              f"A_open {r['probe_mean_A_open']:+.2f}")
+              f"{r['completed']}/{g['n']}; probes A_closed {_number(r['probe_mean_A_closed'])}, "
+              f"A_open {_number(r['probe_mean_A_open'])}")
         h = r['gain_where_reference_completed_km']
+        if not h['n']:
+            print(f"{'':12s} reference completed 0 states; conditional gain statistics unavailable")
+            continue
         print(f"{'':12s} where the reference completed ({h['n']} states): mean {h['mean']:+.2f} km (95% CI "
               f"{h['ci95'][0]:+.2f} to {h['ci95'][1]:+.2f}), wins {h['wins']}/{h['n']}, worst {h['worst']:+.2f} km")
     for pair, d in result['pairs'].items():
+        if not d['n']:
+            print(f'{pair}: no paired states; statistics unavailable')
+            continue
         print(f"{pair}: mean {d['mean']:+.2f} km (95% CI {d['ci95'][0]:+.2f} to {d['ci95'][1]:+.2f}), "
               f"first better in {d['wins']}/{d['n']}, worst {d['worst']:+.2f} km")
     return 0
+
+
+def _number(value):
+    return 'unavailable' if value is None else f'{value:+.2f}'
 
 
 if __name__ == '__main__':

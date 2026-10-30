@@ -52,11 +52,14 @@ def test_held_out_set_values():
     assert evaluation.held_out_probe_times() == (72., 300., 336., 540., 720., 960., 1164.)
     offsets, times = evaluation.test_set_points('held-out-1')
     assert offsets == [(0., 0.)]+evaluation.held_out_offsets() and times == evaluation.held_out_probe_times()
+    offsets, times = evaluation.test_set_points('held-out-3')
+    assert offsets[1:4] == [(519., 86.7), (1202., -3.7), (-629., 84.)]
+    assert times == (180., 192., 504., 564., 732., 744., 996.)
 
 
 def test_test_sets_are_disjoint():
     sets = {name: evaluation.test_set_points(name) for name in evaluation.TEST_SETS}
-    assert evaluation.TEST_SETS[0] == 'held-out-2'
+    assert evaluation.TEST_SETS[0] == 'held-out-3'
     for name, (offsets, times) in sets.items():
         perturbed = [d for d in offsets if d != (0., 0.)]
         assert len(perturbed) == len(set(perturbed)) and len(times) == len(set(times)) == 7
@@ -65,7 +68,7 @@ def test_test_sets_are_disjoint():
         for other, (o2, t2) in sets.items():
             if other != name:
                 assert not (set(perturbed) & set(o2)-{(0., 0.)}) and not set(times) & set(t2)
-    assert len(sets['held-out-2'][0]) == 41
+    assert len(sets['held-out-2'][0]) == len(sets['held-out-3'][0]) == 41
     with pytest.raises(ValueError):
         evaluation.test_set_points('held-out')
 

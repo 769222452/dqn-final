@@ -15,9 +15,6 @@ model:
   atmosphere: configs/environment.yaml
   vehicle_limits_and_heat_proxy: configs/vehicle.yaml
   teacher_dynamic_profile: configs/teacher_profile.json
-  aero_database: data/aero/aero_database.csv
-  g42_baseline: data/aero/g42_baseline.csv
-  geometry_inventory: data/aero/geometry_inventory.csv
   reference_area_m2: 6.931920786884801
   mass_kg: 1500.0
   spherical_earth: true

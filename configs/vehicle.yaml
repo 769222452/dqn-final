@@ -1,215 +1,25 @@
-# =============================================================================
-# Vehicle configuration (V0)
-#
-# STATUS: ALL NUMERICAL VALUES IN THIS FILE ARE PLACEHOLDER / TO_BE_REPLACED.
-# They are order-of-magnitude values chosen so that the pipeline runs and the
-# mathematics is well-posed. They are NOT measured, NOT from CFD, and do NOT
-# describe any real hypersonic waverider. Replace with validated data before
-# drawing any physical conclusion.
-# =============================================================================
-
+# Active vehicle parameters; SI units. Research assumptions, not validated vehicle/TPS data.
+# Reference area is mission.yaml:model.reference_area_m2. Heat proxy: C*sqrt(rho/R_n)*V^3.
+# Angles/rates are rad and rad/s; pressure Pa; heat W/m^2; load factor g.
 meta:
-  name: "generic_morphing_waverider_v0"
-  status: "PLACEHOLDER / TO_BE_REPLACED"
-  units: "SI (m, kg, s, rad, N, Pa, W/m^2)"
-
+  name: generic_morphing_waverider_v0
+  status: PLACEHOLDER / TO_BE_REPLACED
+  units: SI (m, kg, s, rad, N, Pa, W/m^2)
 mass:
-  # 质量
   m: 1500.0
-
-geometry:
-# 定义变构参数-后掠角
-  parameters:
-    - name: sweep_angle
-      symbol: "Lambda"
-      unit: rad
-      min: 1.0472    # 60 deg  PLACEHOLDER
-      max: 1.3963    # 80 deg  PLACEHOLDER
-      nominal: 1.2217  # 70 deg PLACEHOLDER
-      rate_max: 0.0175 # 1 deg/s PLACEHOLDER
- #第二个变构参数-翼展
-    - name: span
-      symbol: "b"
-      unit: m
-      min: 2.0       # PLACEHOLDER
-      max: 4.0       # PLACEHOLDER
-      nominal: 3.0   # PLACEHOLDER
-      rate_max: 0.1  # m/s PLACEHOLDER
-  geometry_area:
-    #变化后的模拟平面的面积的计算，仅用于几何诊断
-    S0: 12.0        # m^2 PLACEHOLDER
-    k_b: 2.5        # m^2 per m of span PLACEHOLDER
-    S_min: 6.0      # numerical floor [m^2]
-
-aerodynamic_reference:
-
-  area_m2: 12.0
-
-# Legacy single-model entry point (V0). V0.5 selects models per role via `aero_roles`.
-#   "analytic_placeholder" | "synthetic_truth" | "polynomial_surrogate" | "cfd_surrogate"
-aero_model: "analytic_placeholder"
-cfd_surrogate:
-  weights_path: null   
-
-#给后续的气动代理模型的留空
-
-# -----------------------------------------------------------------------------
-# V0.5 aerodynamic roles. The design/control model (generator + both OCP stages)
-# is deliberately NOT the same object as the audit model used by the generation
-# validator, so the generator cannot mark its own homework.
-#   design : F_surrogate  (fast, differentiable, fitted to the synthetic truth)
-#   audit  : F_truth      (synthetic physics-informed model, independent check)
-#   plant  : model used by the numeric integrator ("simulated world")
-# -----------------------------------------------------------------------------
-aero_roles:
-  design: "polynomial_surrogate"
-
-  # 在ocp主要要求解很多次，所以使用快速的代理模型
-
-  # 检查使用的模型，为了防止自己欺骗自己
-  audit: "synthetic_truth"
-
-  #运动学也使用真实的模型
-  plant: "synthetic_truth"
-
-
-
-
-
-
-#简单来说，我构造了一个模拟的气动模型，然后生成了气动数据库，主要是得到Fsurrogate，但是
-#实际上Fsurrogate也是通过Ftruth计算得到的
-aero_synthetic_truth:
-  # SyntheticPhysicsAeroModel -- SIMULATED_PHYSICALLY_PLAUSIBLE / NOT_REAL_VEHICLE_DATA.
-  # Physics-informed synthetic aerodynamic environment for ALGORITHM DEVELOPMENT ONLY.
-  # It is NOT CFD, NOT wind-tunnel data, and describes no real waverider.
-  #
-  #   ae  = alpha - alpha0
-  #   CN  = (kN_lin*sin(ae) + kN_quad*sin(ae)*tanh(q*sin(ae))) * fN_geom * fN_mach
-  #   CA  = CA0 + kA_sweep*dLambda + kA_span*db + CA_wave/M_eff
-  #   CL  = CN*cos(ae) - CA*sin(ae)
-  #   CD  = CN*sin(ae) + CA*cos(ae) + k_induced(db)*CL^2
-  #   Cm  = Cm0 + Cm_alpha*ae + km_sweep*dLambda + km_span*db
-  # The (CN, CA) -> (CL, CD) rotation is the standard body/wind-axis transform; the
-  # quadratic sin-term mimics the Newtonian-impact trend of hypersonic lifting bodies.
-  alpha0: 0.0              # rad   SIMULATED_PHYSICALLY_PLAUSIBLE
-  kN_lin: 1.05             # 1/rad SIMULATED (linear normal-force term)
-  kN_quad: 1.60            # 1/rad SIMULATED (Newtonian-like term)
-  quad_sharpness: 12.0     # -     smoothness of the |sin| surrogate
-  kN_sweep: -0.55          # 1/rad SIMULATED (more sweep -> slenderer -> less normal force)
-  kN_span: 0.12            # 1/m   SIMULATED (more span -> more normal force)
-  kN_mach: 1.20            # -     SIMULATED (factor 1 + kN_mach/M^2)
-  CA0: 0.0160              # -     SIMULATED baseline axial-force coefficient
-  kA_sweep: -0.0100        # 1/rad SIMULATED (more sweep -> less wave drag)
-  kA_span: 0.0035          # 1/m   SIMULATED
-  CA_wave: 0.0300          # -     SIMULATED (CA += CA_wave / M_eff)
-  CA_min: 2.0e-3           # -     positive floor on the axial-force coefficient
-  k_induced_base: 0.90     # -     SIMULATED induced/viscous drag factor
-  k_induced_span: -0.10    # 1/m   SIMULATED (more span -> less induced drag)
-  CD_min: 1.0e-3           # -     hard positive floor
-  Cm0: 0.0                 # -     SIMULATED
-  Cm_alpha: -0.15          # 1/rad SIMULATED (statically stable)
-  km_sweep: 0.030          # 1/rad SIMULATED
-  km_span: -0.010          # 1/m   SIMULATED
-  mach_min_effective: 1.5  # smooth floor on Mach
-  valid_mach: [2.0, 15.0]
-  valid_alpha: [-0.0872665, 0.261799]   # [-5, 15] deg
-
-
-
-
-synthetic_aero_dataset:
-  # Grid used by scripts/build_synthetic_aero.py to sample F_truth and fit F_surrogate.
-  # SYNTHETIC DATA ONLY -- generated from the synthetic truth model above, never CFD.
-  grid:
-    mach: {min: 2.0, max: 13.0, n: 12}
-    alpha_deg: {min: -5.0, max: 15.0, n: 11}
-    sweep_deg: {min: 60.0, max: 80.0, n: 7}
-    span_m: {min: 2.0, max: 4.0, n: 7}
-  database_path: "data/synthetic_aero_database.csv"
-  metadata_path: "data/synthetic_aero_database_metadata.json"
-  surrogate_path: "data/synthetic_aero_surrogate.json"
-  auto_build: true          # build the artifacts on first use if they are missing
-  surrogate:
-    # Polynomial basis in (1/M, alpha, Lambda, b): fast, differentiable, CasADi-traceable.
-    # total degree <= 8 with per-input caps [inv_M, alpha, Lambda, b] -> 157 monomials
-    degree: 8
-    max_degrees: [2, 6, 2, 2]
-    ridge: 1.0e-10
-    split: {train: 0.70, validation: 0.15, test: 0.15}
-    seed: 0
-
-
-
-
-
-#这部分主要是在描述构型变化的功能
-morphing_actuator:
-  # First-order morphing actuator with rate saturation (V0.5):
-  #   eta_dot = sat(K * (eta_cmd - eta), -eta_rate_max, +eta_rate_max)
-  # eta_rate_max comes from geometry.parameters[*].rate_max. PLACEHOLDER gains.
-  gain:
-    sweep_angle: 0.40       # 1/s PLACEHOLDER
-    span: 0.40              # 1/s PLACEHOLDER
-  # Minimum explicit-Euler substeps per OCP interval (V0.6). Actual count =
-  #   max(min_substeps_per_interval, ceil(dt_interval / min(1/max(K), 1 s)))
-  # With K = 0.4 1/s and dt = 3 s the stability requirement is 3, so 5 substeps of 0.6 s are
-  # executed. (pre-V0.6 key "substeps_per_interval" is still accepted with the same meaning.)
-  min_substeps_per_interval: 5
-
-
-
-
-
-#没用的东西
-aero_placeholder:
-  # AnalyticPlaceholderAeroModel coefficients.
-  # Smooth analytic functions; NOT a waverider CFD model. PLACEHOLDER.
-  #
-  #   CL = CL_alpha(M, eta) * (alpha - alpha0)
-  #   CD = CD0(M, eta) + k(M, eta) * CL^2
-  #   Cm = Cm0 + Cm_alpha * (alpha - alpha0)
-  #
-  #   CL_alpha = CLa_base * (1 + kLa_sweep*(Lambda - Lambda_nom)) * (1 + kLa_span*(b - b_nom)) * f_M
-  #   f_M      = 1 / sqrt(M^2 - 1) clipped smoothly via softplus for M near 1 (see code)
-  alpha0: 0.0             # rad PLACEHOLDER
-  CLa_base: 1.8           # 1/rad PLACEHOLDER
-  kLa_sweep: -1.5         # 1/rad PLACEHOLDER (more sweep -> less lift slope)
-  kLa_span: 0.30          # 1/m PLACEHOLDER (more span -> more lift slope)
-  mach_ref: 6.0           # reference Mach for normalization PLACEHOLDER
-  mach_min_effective: 1.5 # smooth floor on Mach for the 1/sqrt(M^2-1) term
-  CD0_base: 0.020         # PLACEHOLDER
-  kD0_sweep: -0.03        # PLACEHOLDER (more sweep -> less CD0)
-  kD0_span: 0.006         # PLACEHOLDER
-  CD0_mach_coeff: 0.010   # CD0 += coeff / M  PLACEHOLDER
-  k_induced_base: 0.9     # PLACEHOLDER
-  k_induced_span: -0.10   # PLACEHOLDER (more span -> less induced drag)
-  CD_min: 1.0e-3          # hard positive floor
-  Cm0: 0.0                # PLACEHOLDER
-  Cm_alpha: -0.15         # 1/rad PLACEHOLDER
-  valid_mach: [2.0, 15.0]
-  valid_alpha: [-0.0872665, 0.261799]  # [-5, 15] deg PLACEHOLDER
-
 heat_flux_placeholder:
-  # Stagnation-point heat flux placeholder correlation (Sutton-Graves-like form):
-  #   qdot = C * sqrt(rho / R_n) * V^3   [W/m^2]
-  # C and R_n are PLACEHOLDER; this is NOT a validated TPS model.
-  C: 1.7415e-4       # SI constant, placeholder (kg^0.5 m^-1)
-  R_n: 0.05          # nose radius [m] PLACEHOLDER
-
-
-#硬约束
+  C: 0.00017415
+  R_n: 0.05
 limits:
-  # Hard-constraint parameters. PLACEHOLDER values.
-  alpha_min: -0.0349066   # -2 deg PLACEHOLDER
-  alpha_max: 0.209440     # 12 deg PLACEHOLDER
-  alpha_rate_max: 0.0872665  # 5 deg/s PLACEHOLDER
-  q_dyn_max: 80000.0      # Pa PLACEHOLDER
-  heat_flux_max: 2.0e6    # W/m^2 PLACEHOLDER
-  n_load_max: 3.0         # g PLACEHOLDER
-  altitude_min: 15000.0   # m PLACEHOLDER
-  altitude_max: 80000.0   # m PLACEHOLDER
-  velocity_min: 800.0     # m/s PLACEHOLDER
-  velocity_max: 6000.0    # m/s PLACEHOLDER
-  gamma_min: -0.35        # rad PLACEHOLDER
-  gamma_max: 0.35         # rad PLACEHOLDER
+  alpha_min: -0.0349066
+  alpha_max: 0.20944
+  alpha_rate_max: 0.0872665
+  q_dyn_max: 80000.0
+  heat_flux_max: 2.0e6
+  n_load_max: 3.0
+  altitude_min: 15000.0
+  altitude_max: 80000.0
+  velocity_min: 800.0
+  velocity_max: 6000.0
+  gamma_min: -0.35
+  gamma_max: 0.35

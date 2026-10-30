@@ -2,8 +2,8 @@
 
 Targets are advantages A(s, a) scaled by LABEL_SCALE (units of 1e-4 return) and clipped from below at -CLIP:
 only the sign region matters for policy improvement. Each member is trained on a bootstrap sample of states
-with Adam and early-stopped on its out-of-bag states. The lower confidence bound mean - std over members is
-used for action selection.
+with Adam and selected by its lowest out-of-bag error (all STEPS updates are run).
+Mean - std over members is an uncertainty heuristic, not a calibrated confidence bound.
 """
 import numpy as np
 
@@ -13,7 +13,7 @@ N_ACTIONS = 19
 LABEL_SCALE = 1e4
 CLIP = 2.
 L2 = 1e-3
-HIDDEN = (64, 64, 64, 64)   # hidden layer widths of the proposed method
+HIDDEN = (16, 16)   # hidden layer widths of the proposed method
 MEMBERS = 5
 STEPS = 3000
 LEARNING_RATE = 3e-3
@@ -23,7 +23,7 @@ LABEL_KEEP = 7        # policy versions (current included) whose labels are used
 
 
 def parse_hidden(hidden):
-    """Hidden layer widths from '64,64,64,64' or a sequence of ints."""
+    """Hidden layer widths from '16,16' or a sequence of ints."""
     widths = tuple(int(x) for x in (hidden.split(',') if isinstance(hidden, str) else hidden))
     if not widths or min(widths) < 1:
         raise ValueError('hidden layer widths must be positive integers')
@@ -122,6 +122,25 @@ def retained_labels(archive, version, keep=LABEL_KEEP, decay=LABEL_DECAY):
     return kept, [decay**(version-x['v']) for x in kept]
 
 
+def bootstrap_indices(X, rng):
+    """Bootstrap actual network-input groups without identical-input OOB leakage.
+
+    When inputs are distinct, preserve the original random draws and row order
+    exactly. Rows differing only in discarded features are sampled together.
+    """
+    groups = {}
+    for i, row in enumerate(X):
+        groups.setdefault(tuple(row), []).append(i)
+    if len(groups) == len(X):
+        boot = rng.integers(0, len(X), len(X))
+    else:
+        rows = list(groups.values())
+        draws = rng.integers(0, len(rows), len(rows))
+        boot = np.concatenate([np.asarray(rows[k], dtype=int) for k in draws])
+    oob = np.setdiff1d(np.arange(len(X)), np.unique(boot))
+    return boot, oob
+
+
 def fit_ensemble(labels, seed, weights=None, inputs=None, hidden=HIDDEN):
     """Fit MEMBERS networks on bootstrap samples of the labelled states. Returns (members, diagnostics)."""
     X, A, M, Wt = label_matrix(labels, weights=weights)
@@ -132,13 +151,13 @@ def fit_ensemble(labels, seed, weights=None, inputs=None, hidden=HIDDEN):
     if inputs is not None:
         X = X[:, inputs]
     for k in range(MEMBERS):
-        boot = rng.integers(0, len(X), len(X))
-        oob = np.setdiff1d(np.arange(len(X)), np.unique(boot))
+        boot, oob = bootstrap_indices(X, rng)
         mem, d = fit_member(X[boot], A[boot], M[boot], X[oob], A[oob], M[oob], seed*100+k, sizes, Wt=Wt[boot], Wo=Wt[oob])
         members.append(mem)
         diags.append(d)
     var = float(np.average((A[M]-np.average(A[M], weights=Wt[M]))**2, weights=Wt[M])) if M.any() else None
-    return members, dict(members=diags, target_var_clipped=var, states=int(len(X)), labels=int(M.sum()),
+    return members, dict(members=diags, target_var_clipped=var, states=int(len(X)),
+                         input_groups=len({tuple(row) for row in X}), labels=int(M.sum()),
                          raw_labels=len(labels), weight_sum=float(Wt.sum()))
 
 
@@ -156,7 +175,7 @@ def _ranks(z):
 
 
 def prediction_check(members, new, min_advantage, inputs=None):
-    """Out-of-sample check: an ensemble fitted before these labels existed predicts the new alternative pairs.
+    """Prediction diagnostics on supplied pairs; the caller establishes their seen/unseen provenance.
 
     Reports precision/recall of positive pairs, Spearman rank correlation and R^2 on clipped targets.
     """

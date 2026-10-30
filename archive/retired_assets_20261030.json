@@ -1,0 +1,139 @@
+{
+  "schema": "cleanup-archive/1",
+  "archive": "archive/retired_assets_20261030.zip",
+  "entries": {
+    "README.md": {
+      "sha256": "43f4a3a847313ee88360ce1e98fb0a4f7e7c0b76b84cbbfb32a68100f24041cb",
+      "bytes": 18565,
+      "disposition": "before_cleanup"
+    },
+    "README_zh.md": {
+      "sha256": "9d25b1090a75bfb45ae50a242f2f29184e97c0cf71ed55dfd63142ec33b701ac",
+      "bytes": 16453,
+      "disposition": "before_cleanup"
+    },
+    "configs/environment.yaml": {
+      "sha256": "7c5a0c63680a82aa459305386924b0a4af81d581940955d603ac00142b6ae73d",
+      "bytes": 5105,
+      "disposition": "before_cleanup"
+    },
+    "configs/mission.yaml": {
+      "sha256": "12740383302b4e7f7576e47d1663643f55a5f1a723e912e1e6b871bad2971c32",
+      "bytes": 1854,
+      "disposition": "before_cleanup"
+    },
+    "configs/trajectory.yaml": {
+      "sha256": "fbc30a196f4bb2b996938a885125dd0f6a92e92c8ccd682d97a467ef9bc85c68",
+      "bytes": 10299,
+      "disposition": "before_cleanup"
+    },
+    "configs/vehicle.yaml": {
+      "sha256": "b4a980ec7e3176b0faec44b8deba841bc64b8407778c2bb7d2aae83dec274d51",
+      "bytes": 9093,
+      "disposition": "before_cleanup"
+    },
+    "data/SHA256SUMS": {
+      "sha256": "29bbfea5750cfbdd526e56f66164869944610704eb2028347d85940530bf4d57",
+      "bytes": 44212,
+      "disposition": "before_cleanup"
+    },
+    "data/aero/aero_database.csv": {
+      "sha256": "e816d2fd332c043b29f6bc489e09a83ef0147a3de22ca3b7f497c97124ed63f2",
+      "bytes": 25516281,
+      "disposition": "retired"
+    },
+    "data/aero/g42_baseline.csv": {
+      "sha256": "21b9b8501d389e759ea4beeff851fd19d7bb8016043ff1b4f584ec94aaa13ab4",
+      "bytes": 72950,
+      "disposition": "retired"
+    },
+    "data/aero/geometry_inventory.csv": {
+      "sha256": "c30233387b7da2db9ebb7ed69844ddc121858592004daaeaea3f8daa8244faea",
+      "bytes": 272575,
+      "disposition": "retired"
+    },
+    "data/geometry_subset/README_ZH.txt": {
+      "sha256": "2194690145f95a943b962ca0fac4ca6be89a478cc855830f12b9acca07afb243",
+      "bytes": 3802,
+      "disposition": "before_cleanup"
+    },
+    "data/geometry_subset/aerodynamics/equal_lift.csv": {
+      "sha256": "e32408239cab72ed95bd22526513445a9337dd33fd4c08fddf18c80c9b884548",
+      "bytes": 2787426,
+      "disposition": "retired"
+    },
+    "data/geometry_subset/aerodynamics/p2_common_grid.csv": {
+      "sha256": "d78e316afe30ad67132e2d0f4ea27ad16bd023a455d0a9f32edf2f14cae183c5",
+      "bytes": 28848408,
+      "disposition": "retired"
+    },
+    "data/geometry_subset/manifest.json": {
+      "sha256": "a636f427a770f5f4c4a34b972a8893eb7403d4824f06cbc167b1a02c747d7003",
+      "bytes": 67234,
+      "disposition": "before_cleanup"
+    },
+    "data/surrogate/controller.json": {
+      "sha256": "43f893274de86583f2ad0a955262dff47c115ad6bf2b0c86088d7c0d05d06e5d",
+      "bytes": 4468,
+      "disposition": "before_cleanup"
+    },
+    "src/morphing_waverider/__init__.py": {
+      "sha256": "ddd24e91cbf63d8cdd25a7eb6b2bda3299d1789a2472220832bbc8f460b754ae",
+      "bytes": 304,
+      "disposition": "before_cleanup"
+    },
+    "src/morphing_waverider/dynamics/__init__.py": {
+      "sha256": "efc5487689cf99224ded07644977f4f8d9f1ca26252b3b8c4e02925e7ac35c8b",
+      "bytes": 557,
+      "disposition": "before_cleanup"
+    },
+    "src/morphing_waverider/dynamics/integrator.py": {
+      "sha256": "40a784c8247d8a50f5570c1fea018961446d56a74625f48926c6691448c99d52",
+      "bytes": 11033,
+      "disposition": "retired"
+    },
+    "src/morphing_waverider/dynamics/morphing_actuator.py": {
+      "sha256": "a5aea3d474e46b6487b9dbb36c0fe6e3e4c6139bf19c6a0c738e80340075fa46",
+      "bytes": 8737,
+      "disposition": "retired"
+    },
+    "src/morphing_waverider/dynamics/point_mass_3dof.py": {
+      "sha256": "14813bf8e78a23f9982197baf8ee1f20c708bb5a48ae64cb3ed1d7f88a78ee1e",
+      "bytes": 8301,
+      "disposition": "before_cleanup"
+    },
+    "src/morphing_waverider/geometry.py": {
+      "sha256": "65efc5ba0c458ffda3ffe9eb1534a6ecd638b5dbf59474a18641a659a8e5b0dd",
+      "bytes": 3799,
+      "disposition": "retired"
+    },
+    "src/morphing_waverider/utils/__init__.py": {
+      "sha256": "8010385773454f62913b11cdfb96dccaf7d546706c1896834ea99fe7585eba34",
+      "bytes": 339,
+      "disposition": "before_cleanup"
+    },
+    "src/morphing_waverider/utils/config.py": {
+      "sha256": "f9bfd78dc15717b942e99d49932b866f25f95cc9dbfa11f2ab90948c7bcbe435",
+      "bytes": 2488,
+      "disposition": "retired"
+    },
+    "src/morphing_waverider/utils/logging.py": {
+      "sha256": "529e532de21b84213aeddb8339ff1f5e0ebbb488c16a192d221b19c745334e0f",
+      "bytes": 2706,
+      "disposition": "retired"
+    },
+    "src/morphing_waverider/utils/reproducibility.py": {
+      "sha256": "2448797cffe4cf57b9c2af0aa9a80411df51b09b5824d67a2bd9adf824810eed",
+      "bytes": 848,
+      "disposition": "retired"
+    },
+    "tests/test_legacy_helpers.py": {
+      "sha256": "ecb40422c73d19bc933ffc865e2d26d5a9de629ed77261e9ff82baa3154dfcc7",
+      "bytes": 954,
+      "disposition": "retired"
+    }
+  },
+  "purpose": "Lossless retired assets and original versions of changed files; not a trained checkpoint.",
+  "restore": "Extract into a NEW directory only. A full original working-tree snapshot is also retained locally.",
+  "archive_sha256": "104787edc517c7813ba943c6a0ea5eb20a92e5f46c49e3d640603f4ab5260a1a"
+}
