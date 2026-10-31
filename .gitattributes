@@ -7,3 +7,5 @@ src/morphing_waverider/** -text
 # Frozen experiment inputs and recorded evidence retain their original hashes.
 experiments/**/assets/** -text
 experiments/**/evidence/** -text
+cloud_results/v14_final/archive_v14_final.tgz filter=lfs diff=lfs merge=lfs -text
+cloud_results/v14_final/summaries/** -text

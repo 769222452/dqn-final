@@ -2,6 +2,12 @@
 
 [中文说明](README_zh.md)
 
+## Original cloud results
+
+This branch publishes the unchanged 2026-10-26 cloud result archive, including the seven-seed
+V16/held-out-3 experiments. Start with the [archive, results and download guide](cloud_results/v14_final/README_ZH.md).
+The 426.8 MB archive is stored using Git LFS; original result summaries are also available as regular files.
+
 ## Latest experimental implementation (2026-10-31)
 
 This branch also includes continuous tracking/recovery control, reuse of already audited execution
