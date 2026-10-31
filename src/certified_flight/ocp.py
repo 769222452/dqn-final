@@ -66,7 +66,14 @@ class TwoStageOCP:
         backoff = float(self.cfg.get('constraint_backoff', 0.))
         if not np.isfinite(backoff) or not 0 <= backoff < .5:
             raise ValueError('constraint_backoff must be finite and in [0, .5)')
-        key = (tuple(dts), backoff)
+        mode = self.cfg.get('tracking_mode', 'instantaneous')
+        boundary = bool(self.cfg.get('boundary_smoothing', False))
+        horizon_weight = float(self.cfg.get('horizon_tracking_weight', 1.))
+        curvature_weight = float(self.cfg.get('second_difference_weight', 0.))
+        if not np.isfinite(horizon_weight) or horizon_weight < 0 or not np.isfinite(curvature_weight) \
+                or curvature_weight < 0:
+            raise ValueError('horizon_tracking_weight and second_difference_weight must be finite and nonnegative')
+        key = (tuple(dts), backoff, mode, boundary, horizon_weight, curvature_weight)
         if key in self.cache:
             return self.cache[key]
         n = len(dts)
@@ -101,9 +108,16 @@ class TwoStageOCP:
         o = self.traj['objective']
         tr = self.traj['aero_target_tracking']
         terms = {k: 0 for k in ('drag', 'heat', 'target', 'control_rate')}
-        tracking_mode = self.cfg.get('tracking_mode', 'instantaneous')
-        if tracking_mode not in ('instantaneous', 'mean_3s'):
+        if curvature_weight > 0:
+            terms['control_curvature'] = 0
+        tracking_mode = mode
+        # 'pointwise_horizon' (opt-in): the commanded CL is the setpoint over the WHOLE
+        # prediction horizon, penalised pointwise at every RK stage with one stationary
+        # weight. Head and tail of the plan then share one objective, so a re-solve 3 s
+        # later has no incentive to undo the executed prefix (no replanning sawtooth).
+        if tracking_mode not in ('instantaneous', 'mean_3s', 'pointwise_horizon'):
             raise ValueError(tracking_mode)
+        horizon = float(times[-1])
         tracking_duration = min(float(times[-1]), self.m.data['decision_dt_s'])
         cl_integral = 0
         cd_integral = 0
@@ -116,6 +130,10 @@ class TwoStageOCP:
                 if times[i]+j*h < tracking_duration-1e-9:
                     cl_integral += h*(ss[8, 0]+2*ss[8, 1]+2*ss[8, 2]+ss[8, 3])/6
                     cd_integral += h*(ss[9, 0]+2*ss[9, 1]+2*ss[9, 2]+ss[9, 3])/6
+                if tr['enabled'] and tracking_mode == 'pointwise_horizon':
+                    e = ((ss[8, :4]-cl)/float(tr['CL_scale']))**2
+                    terms['target'] += (horizon_weight*weight*float(tr['weight_CL'])
+                                        * h*(e[0]+2*e[1]+2*e[2]+e[3])/6/horizon)
                 # Every RK stage, not only shooting nodes, must remain in the supported domain.
                 for axis, key2, scale in ((0, 'altitude_m', 1e4), (1, 'velocity_mps', 1e3), (2, 'gamma_rad', .1)):
                     margin = backoff*(l[key2][1]-l[key2][0])/scale
@@ -141,6 +159,15 @@ class TwoStageOCP:
             add((u[i]-(prev if i == 0 else u[i-1]))/(l['alpha_rate_radps']*rdt), -1, 1)
             if i > 0:
                 terms['control_rate'] += ((u[i]-u[i-1])/self.uscale)**2
+            elif boundary:
+                # Opt-in: the jump from the measured (last executed) alpha is costed
+                # like every other command change instead of being free.
+                terms['control_rate'] += ((u[0]-prev)/self.uscale)**2
+            if curvature_weight > 0:
+                before = prev if i == 0 else u[i-1]
+                if i >= 1:
+                    earlier = prev if i == 1 else u[i-2]
+                    terms['control_curvature'] += curvature_weight*((u[i]-2*before+earlier)/self.uscale)**2
         cl_mean = cl_integral/tracking_duration
         cd_mean = cd_integral/tracking_duration
         if tr['enabled'] and tracking_mode == 'mean_3s':
@@ -154,7 +181,8 @@ class TwoStageOCP:
                                                                 terminal['scales'][name])**2
         terms['range'] = (x[3, -1]-x0[3])/float(self.traj['solver']['scaling']['s'])
         obj = (o['w_drag']*terms['drag']+o['w_heat']*terms['heat']+o['w_terminal']*terms['terminal'] +
-               o['w_control_rate']*terms['control_rate']-o['w_range']*terms['range']+terms['target'])
+               o['w_control_rate']*(terms['control_rate']+terms.get('control_curvature', 0))
+               - o['w_range']*terms['range']+terms['target'])
         # Prediction-only diagnostics; these entries are not additional costs.
         terms['CL_first_interval_mean'] = cl_mean
         terms['CD_first_interval_mean'] = cd_mean

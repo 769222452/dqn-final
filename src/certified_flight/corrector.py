@@ -104,6 +104,8 @@ class PostCorrector:
         self.wn = np.broadcast_to(np.asarray(weights.get('network', 1.), float), (6,)).copy()
         self.ws = float(weights.get('smooth', .01))
         self.wcl = float(weights.get('CL', .05))
+        # Opt-in: include the step from the measured alpha in the smoothness cost.
+        self.boundary = bool(self.cfg.get('boundary_smoothing', False))
         vals = np.r_[self.budget, self.scale, self.clscale, self.margin, self.wn, self.ws, self.wcl]
         if not np.isfinite(vals).all() or min(self.budget, self.scale, self.clscale) <= 0 or \
            min(self.margin, self.ws, self.wcl, np.min(self.wn)) < 0:
@@ -121,7 +123,7 @@ class PostCorrector:
 
     def _shared_key(self, dt):
         limits = json.dumps(self.plant.mission.data['limits'], sort_keys=True)
-        return (float(dt), self.scale, self.clscale, self.margin, tuple(self.wn.tolist()), self.ws, self.wcl,
+        return (float(dt), self.scale, self.clscale, self.margin, tuple(self.wn.tolist()), self.ws, self.wcl, self.boundary,
                 str(self.plant.db.directory), self.plant.db.ncoef, limits, codegen.enabled())
 
     def _function(self, dt):
@@ -166,7 +168,8 @@ class PostCorrector:
         slew = (u-ca.vertcat(prev, u[:-1]))/(limits['alpha_rate_radps']*.5)
         constraints.extend([1-slew, 1+slew])
         g = ca.vertcat(*[ca.vec(v) for v in constraints])
-        objective = (ca.dot(ca.DM(self.wn), ((u-ref)/self.scale)**2)+self.ws*ca.sumsqr((u[1:]-u[:-1])/self.scale)
+        steps = ca.vertcat(prev, u) if self.boundary else u
+        objective = (ca.dot(ca.DM(self.wn), ((u-ref)/self.scale)**2)+self.ws*ca.sumsqr((steps[1:]-steps[:-1])/self.scale)
                      + self.wcl*((cl_integral/3-cl)/self.clscale)**2)
         fn = ca.Function(f'post_correction_{int(round(1/dt))}', [z, p],
                          [objective, ca.gradient(objective, z), g, ca.jacobian(g, z)])
@@ -229,7 +232,8 @@ class PostCorrector:
 
         def score(alpha, audit):
             cl = interval_moments(audit['dense'])['mean']
-            return float(np.sum(self.wn*((alpha-ref)/self.scale)**2)+self.ws*np.sum((np.diff(alpha)/self.scale)**2)
+            steps = np.r_[context['alpha_prev'], alpha] if self.boundary else np.asarray(alpha)
+            return float(np.sum(self.wn*((alpha-ref)/self.scale)**2)+self.ws*np.sum((np.diff(steps)/self.scale)**2)
                          + self.wcl*((cl-context['CL_des'])/self.clscale)**2)
 
         def consider(alpha, source):
