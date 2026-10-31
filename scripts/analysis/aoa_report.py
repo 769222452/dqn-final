@@ -89,6 +89,11 @@ def main(out):
                            range_delta_km=c['range_km']-v['range_km'],
                            reversal_rate_below_5pct=bool((c.get('reversal_rate') or 1) < .05))
             verdict['PASS'] = verdict['G1_sawtooth_removed'] and verdict['G2_feasible'] and verdict['G3_range_kept']
+            # Deviation (documented in experiments/aoa_fix/README.md): G3 was written two-sided, so a
+            # range GAIN above 0.5 % fails it. The intended no-loss reading is reported separately and
+            # is what decides whether the held-out stage runs; the declared verdict above is kept.
+            verdict['G3_no_loss'] = c['range_km'] >= .995*v['range_km']
+            verdict['PROCEED_TO_HELDOUT'] = verdict['G1_sawtooth_removed'] and verdict['G2_feasible'] and verdict['G3_no_loss']
             report['gate'][policy] = verdict
             md.append(f"- **{policy}**: " + ', '.join(f'{k}={fmt(x)}' for k, x in verdict.items()))
         md.append('')

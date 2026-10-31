@@ -1,0 +1,38 @@
+{
+ "policy": "/tmp/claude-0/-home-user/87c281b1-63f7-56ca-b436-68c23ccd16ca/scratchpad/lfs/x/v14_final/v16_b16/runs/seed101/state.json",
+ "objective": "consistent",
+ "stop": "SUCCESS",
+ "t_end_s": 1200.0,
+ "range_km": 2477.806873767427,
+ "wall_s": 1517.8138670980002,
+ "fallback_steps": 4,
+ "corrector_changed_steps": 0,
+ "lookahead_offset_steps": 6,
+ "metrics": {
+  "steps": 400,
+  "alpha_min_deg": 3.3554945603130273,
+  "alpha_max_deg": 8.559953282542473,
+  "reversal_rate": 0.14210526315789473,
+  "intra_step_ptp_median_deg": 0.002350113125526132,
+  "intra_step_ptp_p95_deg": 0.11944907886132479,
+  "boundary_jump_median_deg": 0.0005166577632560454,
+  "boundary_jump_p95_deg": 0.12843248770421098,
+  "sawtooth_opposition": 0.41025641025641024,
+  "sawtooth_opposition_steps": 39,
+  "noise_floor_deg": 0.01,
+  "mean_profile_deg": [
+   0.0079,
+   0.0016,
+   -0.0011,
+   -0.0023,
+   -0.0029,
+   -0.0032
+  ],
+  "hf_rms_deg": 0.12872456907722685,
+  "power_3s_fraction": 4.0013419018533797e-05,
+  "CL_mean_abs_error_median": 0.002647299795305376,
+  "CL_mean_abs_error_p95": 0.010471232984973697,
+  "range_km": 2477.806873767427,
+  "t_end_s": 1200.0
+ }
+}

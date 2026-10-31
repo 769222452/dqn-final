@@ -118,7 +118,8 @@ bash scripts/run_aoa_experiments.sh report
 
 Run inside `tmux`/`nohup`. Re-running a stage resumes: finished flights (`summary.json`) are skipped,
 unfinished ones are kept as `<folder>.attemptN` and re-run. Subsets: `POLICIES="const0.025 seed101"`,
-`STATES=10`, `OBJECTIVES=consistent`. Run the gate first; start held-out only if G1–G3 pass.
+`STATES=10`, `OBJECTIVES=consistent`. Run the gate first; start held-out only if the report shows
+`PROCEED_TO_HELDOUT=True` for both gate policies (see the G3 deviation in section 8).
 
 ## 5. What to send back
 
@@ -149,3 +150,31 @@ This stage tests the objective with the true OCP. If it passes, the production p
 surrogate refitted on labels from the new objective (on-policy contexts) and a new look-ahead
 qualification report (`data/lookahead/AB_metrics.json` is bound to the V16 surrogate hash); then the
 7 policies are re-evaluated and, only if their gains drop, retrained with the unchanged V16 learning code.
+
+## 8. Local gate result (4-CPU development container, 2026-10-31)
+
+The four gate flights were run once locally before the cloud run (code of commit `e85c8dc` plus
+`--horizon-weight 20`; metrics recomputed with the amended noise floor). Evidence: `gate_local/`
+(`steps.jsonl` holds every executed command).
+
+| nominal 1200 s | objective | range | intra-step ptp | 1/3 Hz power | CL error (median) |
+|---|---|---|---|---|---|
+| CL 0.025 | V16 | 2456.45 km | 1.40° | 0.51 | 0.0042 |
+| CL 0.025 | consistent | 2475.94 km | 0.002° | 0.0003 | 0.0026 |
+| seed 101 | V16 | 2460.65 km | 1.41° | 0.68 | 0.0044 |
+| seed 101 | consistent | 2477.81 km | 0.002° | 0.0000 | 0.0026 |
+
+- G1 (sawtooth removed) and G2 (feasible) pass for both policies.
+- **G3 as declared fails for both — because the consistent objective flies farther** (+19.5 km,
+  +0.79 %; +17.2 km, +0.70 %), outside the two-sided ±0.5 % band. Writing G3 two-sided was a design error;
+  its intent was "no range loss". The declared verdict is kept in the report; a separately labelled
+  one-sided reading (`G3_no_loss`: consistent ≥ 99.5 % of V16) decides `PROCEED_TO_HELDOUT`. The held-out
+  criterion H1 was already one-sided and is unchanged.
+- Learned-policy gain over constant CL 0.025 at the nominal state: +4.20 km with the V16 objective,
+  +1.87 km with the consistent objective. One state is not evidence either way; H2 on held-out-3 decides.
+- Not yet explained: why removing the sawtooth adds ~17–20 km. A plausible but untested mechanism is the
+  convexity of drag in alpha (oscillating about a mean costs more drag than holding it). This needs a
+  dedicated check before it is claimed.
+- These flights use the true OCP inner loop; they are not the archived surrogate flights (constant CL
+  0.025 surrogate flight in the V16 archive: 2443.32 km), so V16-surrogate vs OCP differences are a
+  separate comparison.

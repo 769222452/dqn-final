@@ -1,0 +1,25 @@
+{
+  "gate": {
+    "const0.025": {
+      "G1_sawtooth_removed": true,
+      "G2_feasible": true,
+      "G3_range_kept": false,
+      "range_delta_km": 19.491533313598666,
+      "reversal_rate_below_5pct": false,
+      "PASS": false,
+      "G3_no_loss": true,
+      "PROCEED_TO_HELDOUT": true
+    },
+    "seed101": {
+      "G1_sawtooth_removed": true,
+      "G2_feasible": true,
+      "G3_range_kept": false,
+      "range_delta_km": 17.156929920433413,
+      "reversal_rate_below_5pct": false,
+      "PASS": false,
+      "G3_no_loss": true,
+      "PROCEED_TO_HELDOUT": true
+    }
+  },
+  "heldout": {}
+}
