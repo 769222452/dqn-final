@@ -1,6 +1,7 @@
 """Construction of the certified flight from configs/runtime.json."""
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 
 import numpy as np
@@ -53,11 +54,20 @@ def build_flight(folder, label, initial_offset=None, config=None):
     label: stored in certifier.tag['label'].
     initial_offset: optional (dh_m, dV_mps) added to the initial altitude and speed.
     config: optional runtime configuration (default configs/runtime.json), e.g. from
-    certified_flight.objectives.objective_runtime_config.
+    certified_flight.objectives.objective_runtime_config. Without it, the environment variables
+    AOA_OBJECTIVE and AOA_SURROGATE (if set) select an objective and its refitted surrogate, so the
+    unchanged training and evaluation code (scripts/train.py, scripts/evaluate.py) can run under it.
     Returns (env, certifier).
     """
     integrity.verify(ROOT)
-    config = runtime_config(ROOT) if config is None else deepcopy(config)
+    if config is None:
+        config = runtime_config(ROOT)
+        if os.environ.get('AOA_OBJECTIVE'):
+            from .objectives import objective_runtime_config
+            config = objective_runtime_config(config, os.environ['AOA_OBJECTIVE'],
+                                              surrogate=os.environ.get('AOA_SURROGATE') or None)
+    else:
+        config = deepcopy(config)
     physical = config['physical']
     safety = deepcopy(config['safety_options'])
     mission = Mission(ROOT, physical['mission'])

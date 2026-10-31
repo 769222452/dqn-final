@@ -1,0 +1,47 @@
+{
+  "policy": "constant CL 0.025",
+  "objective": "consistent",
+  "inner": "surrogate",
+  "channels": {
+    "FAST_APPROXIMATE": 400
+  },
+  "initial_offset_h_V": [
+    -500.0,
+    -20.0
+  ],
+  "stop": "SUCCESS",
+  "completed": true,
+  "t_end_s": 1200.0,
+  "range_km": 2452.3664334034966,
+  "wall_s": 55.95012607999979,
+  "fallback_steps": 0,
+  "corrector_changed_steps": 0,
+  "lookahead_offset_steps": 16,
+  "metrics": {
+    "steps": 400,
+    "alpha_min_deg": 2.2100717873849933,
+    "alpha_max_deg": 8.493018100112684,
+    "reversal_rate": 0.7042801556420234,
+    "intra_step_ptp_median_deg": 0.08905154731949771,
+    "intra_step_ptp_p95_deg": 0.28624294289092056,
+    "boundary_jump_median_deg": 0.07282095074762829,
+    "boundary_jump_p95_deg": 0.44370596982662547,
+    "sawtooth_opposition": 0.9630681818181818,
+    "sawtooth_opposition_steps": 352,
+    "noise_floor_deg": 0.01,
+    "mean_profile_deg": [
+      -0.044,
+      0.0271,
+      0.0106,
+      0.0038,
+      0.0015,
+      0.001
+    ],
+    "hf_rms_deg": 0.08898586475630751,
+    "power_3s_fraction": 0.0019189830821057976,
+    "CL_mean_abs_error_median": 0.002968786164716247,
+    "CL_mean_abs_error_p95": 0.010715406594508778,
+    "range_km": 2452.3664334034966,
+    "t_end_s": 1200.0
+  }
+}

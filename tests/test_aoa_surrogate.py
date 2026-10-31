@@ -114,3 +114,15 @@ def test_fit_script_round_trip(v16, tmp_path):
         post = dict(x['post_context'], control_contract=model.control_contract)
         alpha, _ = refit.predict(post, 'post')
         assert np.max(np.abs(np.rad2deg(alpha-np.asarray(x['post_alpha'])))) < .05
+
+
+def test_build_flight_environment_hook(monkeypatch, tmp_path):
+    """AOA_OBJECTIVE selects an objective for unchanged training/evaluation code; it needs its own surrogate."""
+    from certified_flight import build_flight
+    monkeypatch.setenv('AOA_OBJECTIVE', 'consistent')
+    monkeypatch.delenv('AOA_SURROGATE', raising=False)
+    with pytest.raises(ValueError, match='refitted surrogate'):
+        build_flight(tmp_path/'run', 'hook')
+    monkeypatch.setenv('AOA_OBJECTIVE', 'v16')
+    env, certifier = build_flight(tmp_path/'run', 'hook')
+    assert env.cfg == runtime_config(ROOT)['physical']

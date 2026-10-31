@@ -5,11 +5,17 @@
 #   bash scripts/run_aoa_experiments.sh smoke       # 4-decision run of each objective/inner loop (~3 min)
 #   bash scripts/run_aoa_experiments.sh gate        # [true OCP] 4 nominal 1200 s flights (~1 h on 4 cores)
 #   bash scripts/run_aoa_experiments.sh surrogate   # teacher labels -> fit r0 -> qualify -> DAgger -> final
-#                                                   #   fit + qualification (~5 CPU-h)
+#                                                   #   fit + qualification (~3 CPU-h; 45 min on 4 cores)
 #   bash scripts/run_aoa_experiments.sh heldout     # [surrogate] 41 states x 8 policies x 2 objectives = 656
 #                                                   #   flights (~1-2 CPU-min each)
 #   bash scripts/run_aoa_experiments.sh fidelity    # [true OCP] 24 flights: surrogate-vs-teacher check
 #   bash scripts/run_aoa_experiments.sh report      # tables + verdicts -> $OUT/report.md, report.json
+#   bash scripts/run_aoa_experiments.sh use-local   # instead of 'surrogate': install the locally fitted models
+# Optional, only if H2 fails (learned gains do not transfer to the consistent objective):
+#   bash scripts/run_aoa_experiments.sh retrain     # unchanged V16 training (train.py, 80 iterations) of the
+#                                                   #   7 seeds under the consistent objective (~1700 CPU-h,
+#                                                   #   as V16: SEEDS, WORKERS=8 per seed)
+#   bash scripts/run_aoa_experiments.sh retrained   # [surrogate] held-out-3 flights of the retrained policies
 #
 # OUT (default runs/aoa), PYTHON (default python3), JOBS (default: CPUs - 1),
 # MAX_DECISIONS (default 400; e.g. 2 for a dry run of the flight stages).
@@ -37,13 +43,14 @@ one() {   # inner objective surrogate policy dh dv folder
   local args=(--inner "$inner" --objective "$objective" --out "$folder" --max-decisions "${MAX_DECISIONS:-400}")
   if [ "$surrogate" != "-" ]; then args+=(--surrogate "$surrogate"); fi
   if [ "$policy" = "const0.025" ]; then args+=(--cl 0.025)
+  elif [ "${policy#retrained_}" != "$policy" ]; then args+=(--chain "$OUT/retrain/${policy#retrained_}/state.json")
   else args+=(--chain "experiments/aoa_fix/policies/final_${policy}.json"); fi
   if [ "$dh" != "0.0" ] || [ "$dv" != "0.0" ]; then args+=(--offset "$dh" "$dv"); fi
   "$PYTHON" -B scripts/aoa_gate_experiment.py "${args[@]}" > "$folder.log" 2>&1 \
     && echo "done $folder" || echo "FAILED $folder (see $folder.log)"
 }
 export -f one
-export PYTHON MAX_DECISIONS
+export PYTHON MAX_DECISIONS OUT
 
 flights() {   # stage
   mkdir -p "$OUT"
@@ -54,6 +61,7 @@ flights() {   # stage
 
 fit_and_qualify() {   # model labels...
   local model=$1; shift
+  mkdir -p "$(dirname "$model")"
   if [ ! -f "$model" ]; then
     "$PYTHON" -B scripts/aoa_fit_surrogate.py --objective consistent --labels "$@" --out "$model" \
       | tee "${model%.npz}.fit.log"
@@ -79,7 +87,15 @@ case "$STAGE" in
       --out "$OUT/smoke/surrogate_v16"
     "$PYTHON" -B scripts/aoa_generate_labels.py --objective consistent --limit 2 --jobs 2 \
       --contexts experiments/aoa_fix/surrogate/contexts.jsonl --out "$OUT/smoke/labels.jsonl" ;;
-  gate|heldout|fidelity|heldout-ocp)
+  retrain)
+    [ -f "data/lookahead_consistent/AB_metrics.json" ] || { echo "run the surrogate stage first"; exit 1; }
+    mkdir -p "$OUT/retrain"
+    for s in ${SEEDS:-17 23 41 59 83 97 101}; do
+      AOA_OBJECTIVE=consistent AOA_SURROGATE=$FINAL "$PYTHON" -u scripts/train.py --out "$OUT/retrain/seed$s" \
+        --seed "$s" --workers "${WORKERS:-8}" --iterations 80 > "$OUT/retrain/seed$s.log" 2>&1 &
+    done
+    wait; sha256sum "$OUT"/retrain/seed*/state.json | tee "$OUT/retrain/state.sha256" ;;
+  gate|heldout|fidelity|heldout-ocp|retrained)
     if [ "$STAGE" = heldout ] && [ ! -f "data/lookahead_consistent/AB_metrics.json" ]; then
       echo "run the surrogate stage first (no qualified $FINAL)"; exit 1
     fi
@@ -94,8 +110,13 @@ case "$STAGE" in
     "$PYTHON" -B scripts/aoa_generate_labels.py --objective consistent --jobs "$JOBS" \
       --contexts "$LAB/dagger_contexts.jsonl" --out "$LAB/dagger_labels.jsonl" | tee -a "$LAB/labels.log"
     fit_and_qualify "$FINAL" "$LAB/labels.jsonl" "$LAB/dagger_labels.jsonl" ;;
+  use-local)   # alternative to the surrogate stage: install the surrogates fitted and qualified locally
+    for d in surrogate_consistent_r0 lookahead_consistent_r0 surrogate_consistent lookahead_consistent; do
+      if [ -e "data/$d" ]; then echo "data/$d exists, not overwritten"; else
+        cp -r "experiments/aoa_fix/surrogate_local/models/$d" "data/$d"; echo "installed data/$d"; fi
+    done ;;
   report)
     "$PYTHON" -B scripts/analysis/aoa_report.py "$OUT" ;;
   *)
-    sed -n 2,19p "$0"; exit 2 ;;
+    sed -n 2,25p "$0"; exit 2 ;;
 esac

@@ -3,8 +3,11 @@
 ## Branch `aoa-fix`: angle-of-attack sawtooth fix
 
 This branch is the original V16 source plus an opt-in, time-consistent inner-loop CL objective that removes
-the 3 s replanning sawtooth in alpha. Defaults reproduce V16 exactly. Root cause, criteria and run
-instructions: [experiments/aoa_fix/README.md](experiments/aoa_fix/README.md).
+the 3 s replanning sawtooth in alpha. It also includes the V16-style surrogate refitted to that objective:
+teacher labels, the same kernel-ridge model, P1 qualification and one DAgger round. Validation runs on the
+production surrogate pipeline (`bash scripts/run_aoa_experiments.sh ...`). Defaults reproduce V16 exactly.
+Root cause, criteria, local results and run instructions:
+[experiments/aoa_fix/README.md](experiments/aoa_fix/README.md).
 
 
 [中文说明](README_zh.md)

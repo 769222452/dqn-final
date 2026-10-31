@@ -8,6 +8,8 @@ Stages (inner loop in brackets; surrogate '-' = V16 surrogate / none):
   fidelity     [ocp]        nominal + first 5 held-out-3 states; v16/consistent; const + seed101 = 24 flights
                             (surrogate-vs-teacher check of the held-out stage)
   heldout-ocp  [ocp]        the held-out stage with the true OCP every decision (optional, ~800 CPU-h)
+  retrained    [surrogate]  held-out-3; consistent; the 7 policies retrained under the consistent objective
+                            (runs/aoa/retrain/seed*/state.json, optional retrain stage) = 287 flights
 
 Environment filters: POLICIES (space separated, e.g. "const0.025 seed101"), STATES (number of held-out
 states after the nominal state), OBJECTIVES (default "v16 consistent"), SURROGATE (refitted model,
@@ -24,9 +26,14 @@ from rollout_improvement.evaluation import INITIAL_OFFSETS, test_set_points  # n
 SEEDS = (17, 23, 41, 59, 83, 97, 101)
 STAGES = dict(gate='ocp', dagger='surrogate', heldout='surrogate', fidelity='ocp')
 STAGES['heldout-ocp'] = 'ocp'
+STAGES['retrained'] = 'surrogate'
 
 
 def policies(stage):
+    if stage == 'retrained':
+        names = [f'retrained_seed{s}' for s in SEEDS]
+        chosen = os.environ.get('POLICIES')
+        return [p for p in names if not chosen or p in chosen.split()]
     names = ['const0.025']+[f'seed{s}' for s in SEEDS] if stage in ('heldout', 'heldout-ocp') \
         else ['const0.025', 'seed101']
     chosen = os.environ.get('POLICIES')
@@ -47,7 +54,7 @@ def offsets(stage):
 
 def jobs(stage, out):
     inner = STAGES[stage]
-    objectives = ['consistent'] if stage == 'dagger' else os.environ.get('OBJECTIVES', 'v16 consistent').split()
+    objectives = ['consistent'] if stage in ('dagger', 'retrained') else os.environ.get('OBJECTIVES', 'v16 consistent').split()
     model = os.environ.get('SURROGATE_R0' if stage == 'dagger' else 'SURROGATE',
                            'data/surrogate_consistent_r0/controller.npz' if stage == 'dagger'
                            else 'data/surrogate_consistent/controller.npz')

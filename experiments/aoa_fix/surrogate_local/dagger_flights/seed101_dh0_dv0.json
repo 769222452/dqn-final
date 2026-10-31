@@ -1,0 +1,44 @@
+{
+  "policy": "experiments/aoa_fix/policies/final_seed101.json",
+  "objective": "consistent",
+  "inner": "surrogate",
+  "channels": {
+    "FAST_APPROXIMATE": 400
+  },
+  "initial_offset_h_V": null,
+  "stop": "SUCCESS",
+  "completed": true,
+  "t_end_s": 1200.0,
+  "range_km": 2466.9567383286926,
+  "wall_s": 58.64193721399988,
+  "fallback_steps": 0,
+  "corrector_changed_steps": 0,
+  "lookahead_offset_steps": 17,
+  "metrics": {
+    "steps": 400,
+    "alpha_min_deg": 3.0429644654814827,
+    "alpha_max_deg": 8.705577822086267,
+    "reversal_rate": 0.6308277830637488,
+    "intra_step_ptp_median_deg": 0.08418202419490628,
+    "intra_step_ptp_p95_deg": 0.45400619798178,
+    "boundary_jump_median_deg": 0.0702633093689653,
+    "boundary_jump_p95_deg": 1.4504489060253256,
+    "sawtooth_opposition": 0.8753541076487252,
+    "sawtooth_opposition_steps": 353,
+    "noise_floor_deg": 0.01,
+    "mean_profile_deg": [
+      -0.0289,
+      0.0273,
+      0.0086,
+      0.0002,
+      -0.003,
+      -0.0042
+    ],
+    "hf_rms_deg": 0.25922683493378773,
+    "power_3s_fraction": 0.0012328736433082606,
+    "CL_mean_abs_error_median": 0.0029715452728928914,
+    "CL_mean_abs_error_p95": 0.01480457648797976,
+    "range_km": 2466.9567383286926,
+    "t_end_s": 1200.0
+  }
+}

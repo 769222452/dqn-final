@@ -4,13 +4,17 @@
 
 Reads every <dir>/**/steps.jsonl written by aoa_gate_experiment.py --inner surrogate. Keeps all decisions
 that left the surrogate channel (physics baseline or true OCP after an OOD refusal) and a uniform random
-sample of the rest, up to --count. All go to split 'train': the development states are never test states.
+sample of the rest, up to --count. Splits are assigned by flight with the hash rule of
+aoa_label_contexts.py (70/15/15), so the length-scale selection and the qualification also see
+on-policy validation/test labels from flights never used for fitting.
 """
 import argparse
 import json
 from pathlib import Path
 
 import numpy as np
+
+from aoa_label_contexts import split_of
 
 
 def main(argv=None):
@@ -27,7 +31,7 @@ def main(argv=None):
         for line in steps.read_text(encoding='utf-8').splitlines():
             s = json.loads(line)
             rows.append(dict(id=f"dagger/{flight}#{s['step']:03d}", flight='dagger/'+flight, step=s['step'],
-                             split='train', source='dagger', t=s['t_start_s'], channel=s.get('channel'),
+                             split=split_of('dagger/'+flight), source='dagger', t=s['t_start_s'], channel=s.get('channel'),
                              pre_context=s['pre_context']))
     off = [i for i, r in enumerate(rows) if r['channel'] != 'FAST_APPROXIMATE']
     rest = [i for i, r in enumerate(rows) if r['channel'] == 'FAST_APPROXIMATE']
@@ -40,7 +44,8 @@ def main(argv=None):
         for i in chosen:
             stream.write(json.dumps(rows[i])+'\n')
     print(json.dumps(dict(flights=len({r['flight'] for r in rows}), decisions=len(rows), off_surrogate=len(off),
-                          sampled=len(chosen))))
+                          sampled=len(chosen), splits={s: sum(rows[i]['split'] == s for i in chosen)
+                                                       for s in ('train', 'validation', 'test')})))
 
 
 if __name__ == '__main__':

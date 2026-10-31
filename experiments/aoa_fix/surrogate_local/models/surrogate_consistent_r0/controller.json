@@ -1,0 +1,112 @@
+{
+  "control_contract": "rl298-consistent/2:1c42b95e1e268627",
+  "objective": "consistent",
+  "ocp": {
+    "horizon_s": 60.0,
+    "fine_until_s": 9.0,
+    "fine_dt_s": 0.5,
+    "coarse_dt_s": 3.0,
+    "coarse_rk4_substeps": 2,
+    "acceptance_violation": 1e-06,
+    "audit_dt_s": 0.1,
+    "tracking_mode": "pointwise_horizon",
+    "tracking_weight_multiplier": 1.0,
+    "boundary_smoothing": true,
+    "horizon_tracking_weight": 20.0,
+    "second_difference_weight": 0.0
+  },
+  "selection": {
+    "pre": {
+      "candidates": [
+        {
+          "length_scale": 0.15,
+          "validation_mse": 5.986681749762668e-08
+        },
+        {
+          "length_scale": 0.3,
+          "validation_mse": 9.875908294065059e-08
+        },
+        {
+          "length_scale": 0.6,
+          "validation_mse": 1.99989156163936e-07
+        },
+        {
+          "length_scale": 1.2,
+          "validation_mse": 2.9751244076916397e-07
+        }
+      ],
+      "selected_length_scale": 0.15,
+      "train_count": 1124,
+      "validation_count": 79
+    },
+    "post": {
+      "candidates": [
+        {
+          "length_scale": 0.15,
+          "validation_mse": 1.8993833783605484e-07
+        },
+        {
+          "length_scale": 0.3,
+          "validation_mse": 3.216086970328481e-07
+        },
+        {
+          "length_scale": 0.6,
+          "validation_mse": 4.98778738078348e-07
+        },
+        {
+          "length_scale": 1.2,
+          "validation_mse": 1.1470880734287834e-06
+        }
+      ],
+      "selected_length_scale": 0.15,
+      "train_count": 1124,
+      "validation_count": 79
+    }
+  },
+  "gate_config": {
+    "min_train_samples": 48,
+    "min_validation_samples": 12,
+    "min_test_samples": 24,
+    "planned_mach_mae_max": 0.01,
+    "alpha_rmse_deg_max": 0.5,
+    "alpha_abs_p95_deg_max": 1.5,
+    "test_dense_violation_rate_max": 0.0,
+    "validation_dense_violation_rate_max": 0.0,
+    "min_speedup": 5.0,
+    "full_fast_mission_required_for_scale_up": true
+  },
+  "transition_duration_s": 8.0,
+  "data_use": "AOA_FIX_TEACHER_LABELS_labels.jsonl",
+  "feature_schema": "rl298-flight-aero-fingerprint/1",
+  "surrogate_config": {
+    "kind": "residual_rbf_kernel_ridge",
+    "ridge": 0.001,
+    "length_scales": [
+      0.15,
+      0.3,
+      0.6,
+      1.2
+    ],
+    "max_neighbor_distance": 0.25,
+    "support_padding_fraction": 0.1,
+    "planned_mach_output": "delta_from_current_mach",
+    "alpha_output": "residual_on_exact_equal_lift_rate_limited_schedule"
+  },
+  "mission_sha256": "12740383302b4e7f7576e47d1663643f55a5f1a723e912e1e6b871bad2971c32",
+  "trajectory_sha256": "fbc30a196f4bb2b996938a885125dd0f6a92e92c8ccd682d97a467ef9bc85c68",
+  "snapshot_sha256": "a636f427a770f5f4c4a34b972a8893eb7403d4824f06cbc167b1a02c747d7003",
+  "dataset_sha256": "3bce02959725aa4302f3a0e748d903b7b55faaec551eace4d4554931412ec554",
+  "label_counts": {
+    "total": 1500,
+    "usable": 1495,
+    "train": 1124,
+    "validation": 79,
+    "test": 292
+  },
+  "model_sha256": "d07a1491bbd6b8db5cbced5a2b28b4dad6006651526c598b321c00cd4488c4ee",
+  "label_files": [
+    "runs/aoa/surrogate/labels.jsonl"
+  ],
+  "scale_up_gate_passed": null,
+  "acceptance_passed": null
+}

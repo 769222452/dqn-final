@@ -66,6 +66,24 @@ def sawtooth_removed(c, v):
         return False
 
 
+# Amendment 2 (declared after the local nominal surrogate flights, before any held-out flight; README
+# section 3): the opposition share is scale-free, so a residual of a few hundredths of a degree (below
+# the refitted surrogate's 0.06 deg test RMSE) still reads as "sawtooth". H3a reports the amplitude
+# reading next to the declared H3: opposition is only required when the median boundary jump exceeds
+# RESIDUAL_FLOOR_DEG. H3 as declared is kept and reported.
+RESIDUAL_FLOOR_DEG = .05
+
+
+def sawtooth_removed_amplitude(c, v):
+    try:
+        if c['boundary_jump_median_deg'] > RESIDUAL_FLOOR_DEG:
+            return sawtooth_removed(c, v)
+        return bool(c['power_3s_fraction'] <= .25*v['power_3s_fraction']
+                    and c['intra_step_ptp_median_deg'] <= .5*v['intra_step_ptp_median_deg'])
+    except (KeyError, TypeError):
+        return False
+
+
 def describe(x):
     x = np.asarray(x, float)
     if not len(x):
@@ -108,7 +126,9 @@ def main(out):
         md.append('')
     for stage in ('heldout', 'heldout-ocp'):
         md += heldout_section(rows, stage, report)
+    md += retrained_section(rows, report)
     md += reproduction_section(rows, report)
+    md += label_section(out, report)
     md += fidelity_section(rows, report)
     (out/'report.json').write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
     (out/'report.md').write_text('\n'.join(md)+'\n', encoding='utf-8')
@@ -133,11 +153,16 @@ def heldout_section(rows, stage, report):
             mean_v16 = float(np.mean([v['range_km'] for v, _ in pairs]))
             d = describe(diff)
             h1 = bool(d['n'] and d['mean'] >= -.005*mean_v16 and d['ci95'][1] >= 0)
-            removed = [sawtooth_removed(c, v) for v, c in pairs if c['completed'] and v['completed']]
+            done = [(v, c) for v, c in pairs if c['completed'] and v['completed']]
+            removed = [sawtooth_removed(c, v) for v, c in done]
+            removed_a = [sawtooth_removed_amplitude(c, v) for v, c in done]
             entry = dict(states=len(pairs), range_consistent_minus_v16_km=d, H1_range_kept=h1,
                          completed_v16=sum(v['completed'] for v, _ in pairs),
                          completed_consistent=sum(c['completed'] for _, c in pairs),
                          H3_sawtooth_removed_share=float(np.mean(removed)) if removed else None,
+                         H3a_amplitude_removed_share=float(np.mean(removed_a)) if removed_a else None,
+                         median_intra_ptp_deg=dict(v16=float(np.median([v['intra_step_ptp_median_deg'] for v, _ in pairs])),
+                                                   consistent=float(np.median([c['intra_step_ptp_median_deg'] for _, c in pairs]))),
                          median_power_3s=dict(v16=float(np.median([v['power_3s_fraction'] for v, _ in pairs])),
                                               consistent=float(np.median([c['power_3s_fraction'] for _, c in pairs]))))
             report[stage][policy] = entry
@@ -152,14 +177,16 @@ def heldout_section(rows, stage, report):
                 c = gains['consistent']
                 report[stage][policy].update(gain_over_const_v16=gains['v16'], gain_over_const_consistent=c,
                                                  H2_gain_kept=bool(c['n'] and c['ci95'][0] > 0))
-        md += ['| policy | states | done v16/cons | consistent−V16 km (mean [CI]) | H1 | gain V16 obj | gain consistent | H2 | sawtooth removed | 1/3 Hz power v16→cons |',
-               '|---|---|---|---|---|---|---|---|---|---|']
+        md += ['| policy | states | done v16/cons | consistent−V16 km (mean [CI]) | H1 | gain V16 obj | gain consistent | H2 | H3 (declared) | H3a (amplitude) | intra-ptp v16→cons deg | 1/3 Hz power v16→cons |',
+               '|---|---|---|---|---|---|---|---|---|---|---|---|']
         for policy, e in report[stage].items():
             d = e['range_consistent_minus_v16_km']
             gv, gc = e.get('gain_over_const_v16', {}), e.get('gain_over_const_consistent', {})
             g = lambda x: f"{x['mean']:+.2f} [{x['ci95'][0]:+.2f}, {x['ci95'][1]:+.2f}]" if x.get('n') else '-'
             md.append(f"| {policy} | {e['states']} | {e['completed_v16']}/{e['completed_consistent']} | {g(d)} | {e['H1_range_kept']} | "
                       f"{g(gv)} | {g(gc)} | {e.get('H2_gain_kept', '-')} | {fmt(e['H3_sawtooth_removed_share'], 2)} | "
+                      f"{fmt(e['H3a_amplitude_removed_share'], 2)} | "
+                      f"{e['median_intra_ptp_deg']['v16']:.3f}→{e['median_intra_ptp_deg']['consistent']:.3f} | "
                       f"{e['median_power_3s']['v16']:.3f}→{e['median_power_3s']['consistent']:.3f} |")
         md.append('')
         ch = {}
@@ -171,6 +198,57 @@ def heldout_section(rows, stage, report):
         md += ['Decisions per channel: '+'; '.join(f'{o}: '+', '.join(f'{n}={c}' for n, c in sorted(v.items()))
                                                    for o, v in sorted(ch.items())), '']
     return md
+
+
+def retrained_section(rows, report):
+    """H2r (optional retrain stage): retrained policy gain over constant CL 0.025, consistent objective."""
+    md, out = [], {}
+    for (stage, policy, state, objective), r in rows.items():
+        if stage == 'retrained':
+            out.setdefault(policy.removeprefix('retrained_'), {})[state] = r
+    if not out:
+        return md
+    report['retrained'] = {}
+    md += ['## Retrained policies (consistent objective, surrogate pipeline, held-out-3)', '',
+           '| seed | states | done | gain over const (consistent) | H2r | retrained − V16 arm (same seed) |',
+           '|---|---|---|---|---|---|']
+    g = lambda x: f"{x['mean']:+.2f} [{x['ci95'][0]:+.2f}, {x['ci95'][1]:+.2f}]" if x.get('n') else '-'
+    for seed, states in sorted(out.items()):
+        gain = describe([r['range_km']-rows[('heldout', 'const0.025', s, 'consistent')]['range_km']
+                         for s, r in states.items() if s != 'dh0_dv0' and ('heldout', 'const0.025', s, 'consistent') in rows])
+        vs = describe([r['range_km']-rows[('heldout', seed, s, 'v16')]['range_km']
+                       for s, r in states.items() if ('heldout', seed, s, 'v16') in rows])
+        e = dict(states=len(states), completed=sum(r['completed'] for r in states.values()), gain_over_const=gain,
+                 H2r_gain_kept=bool(gain.get('n') and gain['ci95'][0] > 0), minus_v16_arm_km=vs)
+        report['retrained'][seed] = e
+        md.append(f"| {seed} | {e['states']} | {e['completed']} | {g(gain)} | {e['H2r_gain_kept']} | {g(vs)} |")
+    return md + ['']
+
+
+def label_section(out, report):
+    """Cross-machine determinism of the teacher labels: this run vs the committed local labels."""
+    import gzip
+    md = []
+    local_dir = ROOT/'experiments/aoa_fix/surrogate_local'
+    for name in ('labels', 'dagger_labels'):
+        mine, ref = Path(out)/'surrogate'/f'{name}.jsonl', local_dir/f'{name}.jsonl.gz'
+        if not (mine.exists() and ref.exists()):
+            continue
+        a = {r['id']: r for r in map(json.loads, mine.read_text(encoding='utf-8').splitlines())}
+        b = {r['id']: r for r in map(json.loads, gzip.decompress(ref.read_bytes()).decode().splitlines())}
+        common = sorted(set(a) & set(b))
+        both = [k for k in common if a[k]['ok'] and b[k]['ok']]
+        da = [float(np.max(np.abs(np.rad2deg(np.subtract(a[k]['post_alpha'], b[k]['post_alpha']))))) for k in both]
+        dm = [abs(a[k]['pre_mach']-b[k]['pre_mach']) for k in both]
+        e = dict(common=len(common), only_here=len(set(a)-set(b)), only_local=len(set(b)-set(a)),
+                 ok_mismatch=sum(a[k]['ok'] != b[k]['ok'] for k in common),
+                 max_alpha_diff_deg=max(da) if da else None, max_mach_diff=max(dm) if dm else None,
+                 identical=sum(x == 0 for x in da))
+        report.setdefault('label_reproduction', {})[name] = e
+        md += [f"Labels `{name}` vs local: {e['common']} common ids, {e['identical']} identical, "
+               f"max |d alpha| {fmt(e['max_alpha_diff_deg'], 6)} deg, max |d Mach| {fmt(e['max_mach_diff'], 8)}, "
+               f"ok mismatches {e['ok_mismatch']}, only here/local {e['only_here']}/{e['only_local']}", '']
+    return (['## Teacher-label reproduction (this machine vs committed local labels)', ''] + md) if md else []
 
 
 def reproduction_section(rows, report):

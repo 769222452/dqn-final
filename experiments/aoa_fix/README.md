@@ -86,6 +86,14 @@ Held-out-3 (nominal + 40 states, paired by state; constant CL 0.025 and the 7 V1
 - H3 sawtooth removed (G1 thresholds) on every completed flight pair.
 Failed flights count with their truncated range. All outcomes are reported.
 
+**Amendment 1: noise floor (before any held-out result and before the V16-objective gate flights finished).** The first
+two full gate flights (consistent objective) reduced within-step alpha swings to ~0.002°. Reversal and
+jump-opposition shares computed over every non-zero change then measure solver round-off (moves of
+~1e-3°), not a sawtooth. Both are now computed only over changes above a 0.01° noise floor
+(`NOISE_DEG` in `aoa_metrics.py`); jump opposition is evaluated over steps whose jump and preceding drift
+both exceed the floor (`None` = no such step, i.e. no sawtooth). V16 baselines are unaffected by this
+(jump-opposition 99.7 % / 100 % over 398 / 399 steps). No threshold value was changed.
+
 **Addendum: surrogate pipeline.** This was declared after the local gate and before any refitted
 surrogate was fitted or flown.
 - H1–H3 are evaluated on the `heldout` stage, i.e. the production surrogate pipeline: arm (i) is the V16
@@ -100,13 +108,16 @@ surrogate was fitted or flown.
   own teacher at the nominal state (2443.32 vs 2456.45 km), so arm (ii) is judged against arm (i), not
   against the OCP gate numbers.
 
-**Amendment (before any held-out result and before the V16-objective gate flights finished).** The first
-two full gate flights (consistent objective) reduced within-step alpha swings to ~0.002°. Reversal and
-jump-opposition shares computed over every non-zero change then measure solver round-off (moves of
-~1e-3°), not a sawtooth. Both are now computed only over changes above a 0.01° noise floor
-(`NOISE_DEG` in `aoa_metrics.py`); jump opposition is evaluated over steps whose jump and preceding drift
-both exceed the floor (`None` = no such step, i.e. no sawtooth). V16 baselines are unaffected by this
-(jump-opposition 99.7 % / 100 % over 398 / 399 steps). No threshold value was changed.
+**Amendment 2: amplitude reading of H3.** This was declared after the local nominal flights of the
+refitted surrogate (section 9) and before any held-out flight.
+- The jump-opposition share is scale-free. With the refitted surrogate the within-step swing is about
+  0.02° (V16: 1.2°), which is below the surrogate's own test RMSE of 0.06°. Its sign pattern still gives
+  an opposition of 0.94–0.97, so H3 as declared fails on a residual of a few hundredths of a degree.
+- H3 as declared is kept and reported unchanged.
+- The report adds a separately labelled H3a. Opposition is required only when the median boundary jump
+  exceeds 0.05° (`RESIDUAL_FLOOR_DEG`, chosen below the surrogate test RMSE). Otherwise only the power and
+  amplitude parts of G1 apply.
+- No other threshold changed. Both readings must be stated in any write-up.
 
 ## 4. Why the true OCP for the gate, and the surrogate for everything else
 
@@ -130,8 +141,8 @@ the sawtooth. A new surrogate needs new teacher labels, i.e. OCP solves, anyway.
    objectives: surrogate-vs-teacher range and sawtooth differences of both arms.
 
 Measured costs (one core): surrogate 1200 s flight ≈ 1 min (V16 arm, 55 s locally); true-OCP flight
-25–50 min; teacher label ≈ 6 s. Held-out-3 with the true OCP every decision would be ≈ 800 CPU-h
-(`heldout-ocp` stage, optional) instead of ≈ 15 CPU-h.
+25–50 min; teacher label ≈ 4.4 s. The `surrogate` stage is ≈ 3 CPU-h and `heldout` ≈ 11 CPU-h. Held-out-3
+with the true OCP every decision would be ≈ 800 CPU-h (`heldout-ocp` stage, optional).
 
 ## 5. How to run (cloud server)
 
@@ -151,9 +162,15 @@ bash scripts/run_aoa_experiments.sh gate        # [true OCP] 4 nominal flights, 
 bash scripts/run_aoa_experiments.sh report      # check PROCEED_TO_HELDOUT=True for both policies
 bash scripts/run_aoa_experiments.sh surrogate   # labels, fit r0, qualify, 26 DAgger flights, final fit+qualify
 bash scripts/run_aoa_experiments.sh heldout     # [surrogate] 656 flights
-bash scripts/run_aoa_experiments.sh fidelity    # [true OCP] 24 flights (~10-20 h wall with 24+ cores)
+bash scripts/run_aoa_experiments.sh fidelity    # [true OCP] 24 flights, ~15 CPU-h (~1 h wall with 24 cores)
 bash scripts/run_aoa_experiments.sh report
 ```
+
+Checks in `report.md` before reading any verdict:
+- "Archive reproduction": 328/328 flights should be identical to the archive.
+- "Teacher-label reproduction": cloud labels vs `surrogate_local/`. Small solver-level differences
+  across CPUs are possible; report them.
+- Decisions per channel: the share of physics-baseline and true-OCP fallbacks in each arm.
 
 Run inside `tmux`/`nohup`. Every stage resumes: finished flights (`summary.json`) and finished labels
 are skipped; fitted/qualified models are kept (delete `data/surrogate_consistent*` and
@@ -185,9 +202,12 @@ metrics can be recomputed.
 - `scripts/aoa_gate_experiment.py`: one flight (`--inner ocp|surrogate`, objective, policy, offset).
 - `scripts/aoa_label_contexts.py` (run once; output committed), `scripts/aoa_generate_labels.py`,
   `scripts/aoa_fit_surrogate.py`, `scripts/aoa_qualify_surrogate.py`, `scripts/aoa_dagger_contexts.py`.
-- `scripts/run_aoa_experiments.sh`, `scripts/analysis/aoa_jobs.py`: stages and job lists.
+- `scripts/run_aoa_experiments.sh`, `scripts/analysis/aoa_jobs.py`: stages and job lists (also `use-local`,
+  and the optional `retrain` / `retrained` stages: unchanged V16 training under the consistent objective
+  via `AOA_OBJECTIVE=consistent AOA_SURROGATE=...`, read by `build_flight`).
 - `scripts/analysis/aoa_metrics.py`: oscillation metrics (also for archived V16 flights).
-- `scripts/analysis/aoa_report.py`: tables, verdicts, archive reproduction, fidelity.
+- `scripts/analysis/aoa_report.py`: tables, verdicts, archive reproduction, fidelity, teacher-label
+  reproduction against `surrogate_local/`.
 - `experiments/aoa_fix/surrogate/contexts.jsonl`: 1,500 recorded pre contexts (see section 9).
 - `experiments/aoa_fix/v16_heldout3_archive.json`: archived V16 held-out-3 ranges (8 policies × 41 states).
 - `experiments/aoa_fix/policies/`: the 7 trained V16 policy chains (chain field of
@@ -222,3 +242,61 @@ The four gate flights were run once locally before the cloud run (code of commit
 - These flights use the true OCP inner loop; they are not the archived surrogate flights (constant CL
   0.025 surrogate flight in the V16 archive: 2443.32 km), so V16-surrogate vs OCP differences are a
   separate comparison.
+
+## 9. Local surrogate pipeline result (4-CPU development container, 2026-10-31)
+
+The `surrogate` stage was run once locally to check that the fix survives distillation. Evidence is in
+`surrogate_local/`: labels, DAgger contexts, both models with their qualification reports, and five
+nominal flights with every executed command in `steps.jsonl.gz`. The report compares the cloud labels
+with these labels, which checks cross-machine determinism. If compute is short, `use-local` installs
+these models instead of re-running the stage.
+
+**Labels.** 1,500 contexts from 58 archived V16 flights, split by flight into 44 train, 3 validation and
+11 test flights. Five teacher failures, all pre-plan audit rejections at t ≤ 39 s. The run took 28 min
+on 4 cores (4.4 s per label).
+
+**Round 0.** Fitted on 1,124 labels. Length scales 0.15/0.15, the grid's lower edge.
+- P1 passed with zero dense failures. Test raw alpha RMSE 0.031°.
+- Closed loop at the nominal state, CL 0.025: 2476.49 km, intra-step ptp 0.09°.
+- A boundary spike remained: the first command was offset about 0.07° and returned within 0.5 s. The
+  training contexts come only from V16's sawtooth flights, so the smooth closed-loop states were
+  uncovered.
+
+**DAgger round.** 26 development-state flights with the round-0 surrogate (constant CL 0.025 and seed
+101 × 13 states). All completed, and 45 of 10,400 decisions left the surrogate channel.
+- 400 sampled contexts, split by flight: 243 train, 122 validation, 35 test.
+- 30 teacher failures, 28 of them in the dh0_dv100 fast-entry flight at t ≤ 48 s.
+- Development note: the first local final fit put all DAgger labels in `train`, which left only
+  off-policy validation. The split by flight was then introduced before the final fit below.
+
+**Final model.** 1,352 train, 187 validation and 326 test labels. Length scales 0.6/0.6. P1 passed.
+
+| Split | Raw alpha RMSE | Raw dense failures | Corrected dense failures | Other |
+|---|---|---|---|---|
+| Validation | 0.19° | 2 | 0 | — |
+| Test | 0.061° | — | 0 | p95 0.11°, Mach MAE 1.8e-4, speed-up 620× vs teacher |
+
+All `gate_config` accuracy gates pass; the V16 surrogate did not pass them.
+
+| nominal 1200 s | pipeline | range | intra-step ptp | boundary jump | 1/3 Hz power | opposition | CL error |
+|---|---|---|---|---|---|---|---|
+| CL 0.025 | V16 surrogate + V16 objective (= archive, identical to 3e-12 km) | 2443.32 km | 1.224° | 1.196° | 0.424 | 0.99 | 0.0059 |
+| CL 0.025 | round-0 surrogate, consistent | 2476.49 km | 0.091° | 0.075° | 0.0021 | 0.96 | 0.0030 |
+| CL 0.025 | **final surrogate, consistent** | **2477.36 km** | **0.019°** | 0.019° | 0.0003 | 0.97 | 0.0026 |
+| seed 101 | V16 surrogate + V16 objective (archive) | 2452.60 km | — | — | — | — | — |
+| seed 101 | round-0 surrogate, consistent | 2466.96 km | 0.084° | 0.070° | 0.0012 | 0.88 | 0.0030 |
+| seed 101 | **final surrogate, consistent** | **2480.41 km** | **0.019°** | 0.018° | 0.0000 | 0.94 | 0.0026 |
+
+Reading (one state; held-out-3 decides):
+- **Sawtooth.** Amplitude down 64× and 1/3 Hz power down three orders of magnitude. H3 as declared still
+  fails here on the residual's sign pattern; H3a passes (amendment 2).
+- **Range.** Arm (ii) − arm (i) = +34.0 km at CL 0.025. This splits into two parts:
+  - +19.5 km at teacher level: the OCP gate, 2475.94 vs 2456.45 km;
+  - a fidelity gap. The V16 surrogate flies 13.1 km short of its own teacher, while the consistent
+    surrogate is within +1.4 km of its teacher. A smooth teacher is much easier to distil.
+  The `fidelity` stage measures this split on six states. A paper must not attribute the whole +34 km to
+  the objective.
+- **Learned gain at nominal.** Seed 101 − CL 0.025 is +3.05 km with the final consistent surrogate
+  (round 0: −9.5 km; V16 arm: +9.3 km). H2 on held-out-3 decides whether the V16 policies transfer. If
+  not, the optional `retrain` stage retrains them with the unchanged V16 learning code.
+
