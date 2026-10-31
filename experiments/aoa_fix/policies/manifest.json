@@ -1,0 +1,69 @@
+{
+  "archive": "cloud_results/v14_final/archive_v14_final.tgz on branch cloud-results-v14-final-20261031",
+  "archive_sha256": "1a8d1a38e0153a9349cf77ce97248a6f828c9c176f18c1ffdb2fb50380b99130",
+  "policies": {
+    "final_seed17.json": {
+      "sha256": "38203834883c5f77541c213e6a0a1aaabebc09e51afafee4146bdf110287ad58",
+      "source_archive_member": "v14_final/v16_b16/runs/seed17/state.json",
+      "source_sha256": "e78135e04a0cf80f933ebdc7f2ec4886e8bc92ffd95fb568e445ffb26f2bf4e6",
+      "stages": 8,
+      "training_iterations": 30,
+      "nominal_G": 1.1200708476730883,
+      "extracted_field": "chain"
+    },
+    "final_seed23.json": {
+      "sha256": "f65d286b3a879ac52c0efbdd1261235e8e099cf499c630398d83bfa9edaa6d3b",
+      "source_archive_member": "v14_final/v16_b16/runs/seed23/state.json",
+      "source_sha256": "05636aeecf8528728bf7ebcd4cccd36e2d7467a62736fa2981cd3b18cb2e5cb2",
+      "stages": 8,
+      "training_iterations": 35,
+      "nominal_G": 1.121251541331597,
+      "extracted_field": "chain"
+    },
+    "final_seed41.json": {
+      "sha256": "cb93c424929a09ff1c3b4a6a2336664a8d68a71c2a82f214573b7b02daf97aa3",
+      "source_archive_member": "v14_final/v16_b16/runs/seed41/state.json",
+      "source_sha256": "016de2ca890920a1ca3a955439b985d983eaf8a283efcda9717c408d7fa1519a",
+      "stages": 10,
+      "training_iterations": 34,
+      "nominal_G": 1.1210158008638171,
+      "extracted_field": "chain"
+    },
+    "final_seed59.json": {
+      "sha256": "2d66bd30078accd5d767236e4f88ec83338c7ed0b4258ccab72f3ebf6a4e3602",
+      "source_archive_member": "v14_final/v16_b16/runs/seed59/state.json",
+      "source_sha256": "9aa97bb044bcbef06b0864d651ae8cf864ee43af3a8221594b78052846617cfe",
+      "stages": 4,
+      "training_iterations": 18,
+      "nominal_G": 1.1216935608632796,
+      "extracted_field": "chain"
+    },
+    "final_seed83.json": {
+      "sha256": "20d366fff22f0f2c989404d37768e7c9d5f4e7537e3736adaa751d5b6a183adf",
+      "source_archive_member": "v14_final/v16_b16/runs/seed83/state.json",
+      "source_sha256": "7816a465468aa5651383cfe3100ba27adaff06703c639b55ee7d9c3d8ca33474",
+      "stages": 12,
+      "training_iterations": 34,
+      "nominal_G": 1.1223894417933074,
+      "extracted_field": "chain"
+    },
+    "final_seed97.json": {
+      "sha256": "0b8ba81d543ee28a52bf2b42b93c7445b92856826ace5d4c32f589899d2c5636",
+      "source_archive_member": "v14_final/v16_b16/runs/seed97/state.json",
+      "source_sha256": "ac3a1743b343e39cb9aef3d1deab0c6da30f629153c93a8c19a5135bf71c25ea",
+      "stages": 4,
+      "training_iterations": 17,
+      "nominal_G": 1.1211857748208243,
+      "extracted_field": "chain"
+    },
+    "final_seed101.json": {
+      "sha256": "470c34a4492783a0aadd2b0bbc9d2f68df904eab47a443af1dd4ebcb15f28d7b",
+      "source_archive_member": "v14_final/v16_b16/runs/seed101/state.json",
+      "source_sha256": "3fd186776dda44d8c269181f00c627c0a0142d1ba79068b544d82af37c673f76",
+      "stages": 5,
+      "training_iterations": 22,
+      "nominal_G": 1.1219161436425267,
+      "extracted_field": "chain"
+    }
+  }
+}

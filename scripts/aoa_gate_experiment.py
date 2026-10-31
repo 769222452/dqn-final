@@ -10,8 +10,12 @@ in V16 certification. Objectives:
   consistent  tracking_mode pointwise_horizon (CL penalised pointwise over the whole
               60 s horizon) + boundary-aware rate cost (OCP and corrector)
 
-    python scripts/aoa_gate_experiment.py --objective consistent --cl 0.025 --out runs/gate/c025
-    python scripts/aoa_gate_experiment.py --objective v16 --chain <seed state.json> --out runs/gate/v16_seed101
+    python scripts/aoa_gate_experiment.py --objective consistent --cl 0.025 --out runs/aoa/c025
+    python scripts/aoa_gate_experiment.py --objective v16 --chain experiments/aoa_fix/policies/final_seed101.json \
+        --offset -738 -63.1 --out runs/aoa/v16_seed101_case
+
+The consistent objective's CL weight is frozen at 20 (calibrated on the nominal 0-120 s
+development flight to match V16's executed CL error; see experiments/aoa_fix/README.md).
 """
 import os
 for _key in ('OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'OMP_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
@@ -23,6 +27,8 @@ import json  # noqa: E402
 from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 import time  # noqa: E402
+
+import subprocess  # noqa: E402
 
 import numpy as np  # noqa: E402
 import yaml  # noqa: E402
@@ -67,7 +73,21 @@ class OCPInnerLoop:
         return out
 
 
-def build(objective, horizon_weight, curvature):
+FROZEN_HORIZON_WEIGHT = 20.
+
+
+def source_revision():
+    try:
+        rev = subprocess.run(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], capture_output=True, text=True,
+                             check=True).stdout.strip()
+        dirty = bool(subprocess.run(['git', '-C', str(ROOT), 'status', '--porcelain', '--', 'src', 'scripts',
+                                     'configs', 'data'], capture_output=True, text=True).stdout.strip())
+        return dict(commit=rev, uncommitted_changes=dirty)
+    except (OSError, subprocess.CalledProcessError):
+        return dict(commit=None, uncommitted_changes=None)
+
+
+def build(objective, horizon_weight, curvature, offset=None):
     integrity.verify(ROOT)
     config = runtime_config(ROOT)
     physical = config['physical']
@@ -91,13 +111,18 @@ def build(objective, horizon_weight, curvature):
     # Same guard as V16 (its future candidate policies use the V16 surrogate).
     env.lookahead_guard = LookaheadGuard(plant, surrogate, physical, safety, corrector)
     env.lookahead_qualification = LookaheadGuard.qualify(plant, surrogate, safety)
-    return env, inner, dict(objective=objective, ocp=ocp_cfg, safety=safety)
+    if offset is not None:
+        # Same convention as certified_flight.build_flight(initial_offset=...).
+        env.x[0] += float(offset[0])
+        env.x[1] += float(offset[1])
+    return env, inner, dict(objective=objective, ocp=ocp_cfg, safety=safety,
+                            initial_offset_h_V=None if offset is None else [float(v) for v in offset])
 
 
 def run(a):
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=False)
-    env, inner, setup = build(a.objective, a.horizon_weight, a.curvature)
+    env, inner, setup = build(a.objective, a.horizon_weight, a.curvature, a.offset)
     if a.chain:
         chain = json.loads(Path(a.chain).read_text(encoding='utf-8-sig'))['chain']
         policy_name = str(a.chain)
@@ -106,6 +131,7 @@ def run(a):
         policy_name = f'constant CL {a.cl:g}'
     policy = ChainPolicy(chain, env)
     write_json(out/'setup.json', dict(setup, policy=policy_name, max_decisions=a.max_decisions,
+                                      source=source_revision(), python=sys.version,
                                       chain=chain if a.chain else None))
     log = (out/'steps.jsonl').open('w', encoding='utf-8')
     infos, stop, started = [], 'MAX_DECISIONS', time.perf_counter()
@@ -145,7 +171,9 @@ def run(a):
             stop = env.last_outcome
             break
     log.close()
-    summary = dict(policy=policy_name, objective=a.objective, stop=stop, t_end_s=float(env.t),
+    summary = dict(policy=policy_name, objective=a.objective, initial_offset_h_V=setup['initial_offset_h_V'],
+                   stop=stop, completed=bool(stop == 'SUCCESS' and abs(float(env.t)-1200.) < 1e-6),
+                   t_end_s=float(env.t),
                    range_km=float(env.x[3]/1000), wall_s=time.perf_counter()-started,
                    fallback_steps=sum(r['action'] != r['requested_action'] for r in infos),
                    corrector_changed_steps=sum(r['corrector_source'] not in (None, 'NETWORK') for r in infos),
@@ -161,9 +189,12 @@ def main(argv=None):
     p.add_argument('--objective', choices=sorted(OBJECTIVES), required=True)
     p.add_argument('--cl', type=float, default=.025, help='constant CL policy (ignored with --chain)')
     p.add_argument('--chain', help='state.json of a trained V16 policy, flown closed loop')
-    p.add_argument('--horizon-weight', type=float, default=1., help='consistent objective: CL tracking weight')
+    p.add_argument('--horizon-weight', type=float, default=FROZEN_HORIZON_WEIGHT,
+                   help='consistent objective: CL tracking weight (frozen default 20)')
     p.add_argument('--curvature', type=float, default=0., help='consistent objective: second-difference weight')
     p.add_argument('--max-decisions', type=int, default=400)
+    p.add_argument('--offset', type=float, nargs=2, metavar=('DH_M', 'DV_MPS'),
+                   help='initial altitude/speed offset, e.g. a held-out-3 state')
     p.add_argument('--fallback-actions', type=int, default=19, help='nearest actions tried when a request is refused')
     p.add_argument('--out', required=True)
     a = p.parse_args(argv)

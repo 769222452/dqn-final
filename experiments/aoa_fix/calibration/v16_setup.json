@@ -1,0 +1,53 @@
+{
+  "objective": "v16",
+  "ocp": {
+    "horizon_s": 60.0,
+    "fine_until_s": 9.0,
+    "fine_dt_s": 0.5,
+    "coarse_dt_s": 3.0,
+    "coarse_rk4_substeps": 2,
+    "acceptance_violation": 1e-06,
+    "audit_dt_s": 0.1,
+    "tracking_mode": "mean_3s",
+    "tracking_weight_multiplier": 1.0
+  },
+  "safety": {
+    "constraint_aware_post_enabled": true,
+    "post_correction_method": "six_alpha_slsqp",
+    "post_correction_max_wall_s": 2.0,
+    "max_iterations": 60,
+    "ftol": 1e-10,
+    "alpha_scale_rad": 0.05,
+    "CL_scale": 0.1,
+    "weights": {
+      "network": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "smooth": 0.01,
+      "CL": 0.05
+    },
+    "internal_margin": 0.0,
+    "dense_refinement": true,
+    "lookahead_enabled": true,
+    "lookahead_horizon_s": 30.0,
+    "lookahead_candidate_policy": [
+      "equal_lift",
+      "load_recovery",
+      "rolling_corrector"
+    ],
+    "lookahead_max_wall_s": 30.0,
+    "lookahead_search_order": "risk_first",
+    "lookahead_qualification_report": "data/lookahead/AB_metrics.json",
+    "recovery_search_max_evaluations": 12,
+    "lookahead_policy_search_enabled": true,
+    "lookahead_save_witness": true
+  },
+  "policy": "constant CL 0.025",
+  "max_decisions": 40,
+  "chain": null
+}
