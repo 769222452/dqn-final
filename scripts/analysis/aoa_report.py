@@ -48,7 +48,10 @@ def load(out):
 
 def sawtooth_removed(c, v):
     try:
-        return bool(c['power_3s_fraction'] <= .25*v['power_3s_fraction'] and c['sawtooth_opposition'] <= .65
+        opposition = c['sawtooth_opposition']
+        # None: no step with both jump and drift above the noise floor, i.e. no sawtooth at all.
+        return bool(c['power_3s_fraction'] <= .25*v['power_3s_fraction']
+                    and (opposition is None or opposition <= .65)
                     and c['intra_step_ptp_median_deg'] <= .5*v['intra_step_ptp_median_deg'])
     except (KeyError, TypeError):
         return False

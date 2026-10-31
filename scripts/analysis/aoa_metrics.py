@@ -3,10 +3,11 @@
 The executed alpha of a flight is a sequence of 3 s steps, each holding six 0.5 s commands.
 Metrics separate the 3 s replanning sawtooth from slow trajectory-following changes:
 
-- reversal_rate: share of consecutive command changes that reverse direction;
+- reversal_rate: share of consecutive command changes larger than NOISE_DEG that reverse direction;
 - intra_step_ptp: peak-to-peak alpha within each 3 s step;
 - boundary_jump: |first command of a step - last command of the previous step|;
-- sawtooth_opposition: share of steps whose boundary jump opposes the previous step's drift;
+- sawtooth_opposition: share of steps whose boundary jump opposes the previous step's drift, over steps
+  where both the jump and the drift exceed NOISE_DEG (None if no such step: no sawtooth to measure);
 - mean_profile: average deviation of the six commands from their step mean;
 - hf_rms: RMS of alpha minus its 6 s centred moving average;
 - power_3s: share of detrended alpha variance at the 1/3 Hz replanning frequency and harmonics.
@@ -16,6 +17,10 @@ from pathlib import Path
 
 import numpy as np
 
+# Changes below this are solver/round-off level and carry no sawtooth information. Without a
+# floor, reversal and opposition shares of a ~1e-3 deg flat trajectory are noise statistics.
+NOISE_DEG = .01
+
 
 def metrics(steps, alpha0=None):
     """steps: array-like [n_steps, 6] of executed alpha in rad; alpha0: alpha before the first step."""
@@ -24,12 +29,12 @@ def metrics(steps, alpha0=None):
         raise ValueError('Expected at least three steps of six alpha commands')
     seq = a.ravel()
     d = np.diff(seq)
-    moving = d[np.abs(d) > 1e-9]
+    moving = d[np.abs(d) > NOISE_DEG]
     reversals = float(np.mean(np.sign(moving[1:]) != np.sign(moving[:-1]))) if len(moving) > 1 else 0.
     prev_last = np.r_[np.nan if alpha0 is None else np.rad2deg(alpha0), a[:-1, -1]]
     jump = a[:, 0]-prev_last
     drift = a[:, -1]-a[:, 0]
-    valid = np.isfinite(jump[1:])
+    valid = np.isfinite(jump[1:]) & (np.abs(jump[1:]) > NOISE_DEG) & (np.abs(drift[:-1]) > NOISE_DEG)
     oppose = np.sign(jump[1:]) != np.sign(drift[:-1])
     k = 12
     smooth = np.convolve(seq, np.ones(k)/k, mode='same')
@@ -47,6 +52,7 @@ def metrics(steps, alpha0=None):
                 boundary_jump_median_deg=float(np.nanmedian(np.abs(jump))),
                 boundary_jump_p95_deg=float(np.nanpercentile(np.abs(jump), 95)),
                 sawtooth_opposition=float(np.mean(oppose[valid])) if valid.any() else None,
+                sawtooth_opposition_steps=int(valid.sum()), noise_floor_deg=NOISE_DEG,
                 mean_profile_deg=np.round((a-a.mean(1, keepdims=True)).mean(0), 4).tolist(),
                 hf_rms_deg=float(hf.std()) if len(hf) else None,
                 power_3s_fraction=float(spectrum[harmonics].sum()/max(spectrum[1:].sum(), 1e-300)))

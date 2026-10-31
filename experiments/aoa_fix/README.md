@@ -86,6 +86,14 @@ Held-out-3 (nominal + 40 states, paired by state; constant CL 0.025 and the 7 V1
 - H3 sawtooth removed (G1 thresholds) on every completed flight pair.
 Failed flights count with their truncated range. All outcomes are reported.
 
+**Amendment (before any held-out result and before the V16-objective gate flights finished).** The first
+two full gate flights (consistent objective) reduced within-step alpha swings to ~0.002°. Reversal and
+jump-opposition shares computed over every non-zero change then measure solver round-off (moves of
+~1e-3°), not a sawtooth. Both are now computed only over changes above a 0.01° noise floor
+(`NOISE_DEG` in `aoa_metrics.py`); jump opposition is evaluated over steps whose jump and preceding drift
+both exceed the floor (`None` = no such step, i.e. no sawtooth). V16 baselines are unaffected by this
+(jump-opposition 99.7 % / 100 % over 398 / 399 steps). No threshold value was changed.
+
 ## 4. How to run (cloud server)
 
 Requirements: Linux, Python 3.11, `gcc` (CasADi functions are compiled once into `.cache/`), about
