@@ -8,9 +8,9 @@
 
 Test sets:
 - development: 12 perturbed initial states on a grid and 7 probe times, used while the method was developed;
-- held-out-1, held-out-2: 40 initial states each, drawn uniformly from the same offset range, and 7 probe times
-  each, drawn from the decision times not used by the earlier sets; generated from a fixed seed with separate
-  random streams. held-out-2 is the test set of the proposed method.
+- held-out-1, held-out-2, held-out-3: 40 initial states each, drawn uniformly from the same offset range, and
+  7 probe times each, drawn from the decision times not used by the earlier sets; generated from a fixed seed
+  with separate random streams. held-out-3 is the test set of the proposed method.
 """
 import argparse
 import json
@@ -61,12 +61,16 @@ def test_set_points(name):
     first_times = held_out_probe_times()
     if name == 'held-out-1':
         return [(0., 0.)]+held_out_offsets(), first_times
+    second_times = held_out_probe_times(stream=3, exclude=PROBE_TIMES+first_times)
     if name == 'held-out-2':
-        return [(0., 0.)]+held_out_offsets(stream=2), held_out_probe_times(stream=3, exclude=PROBE_TIMES+first_times)
+        return [(0., 0.)]+held_out_offsets(stream=2), second_times
+    if name == 'held-out-3':
+        return [(0., 0.)]+held_out_offsets(stream=4), \
+            held_out_probe_times(stream=5, exclude=PROBE_TIMES+first_times+second_times)
     raise ValueError(f'unknown test set {name!r}')
 
 
-TEST_SETS = ('held-out-2', 'held-out-1', 'development')
+TEST_SETS = ('held-out-3', 'held-out-2', 'held-out-1', 'development')
 
 
 def paired_bootstrap_ci(values, level=.95, resamples=10000, seed=0):
@@ -190,8 +194,8 @@ def main(argv=None):
     p.add_argument('--reference-cl', type=float, default=.025, help='constant-CL reference policy')
     p.add_argument('--workers', type=int, default=min(14, os.cpu_count() or 1))
     p.add_argument('--test-set', choices=TEST_SETS, default=TEST_SETS[0],
-                   help='held-out-2 (default): test set of the proposed method; held-out-1: earlier held-out set; '
-                        'development: tests used during development')
+                   help='held-out-3 (default): test set of the proposed method; held-out-1, held-out-2: earlier '
+                        'held-out sets; development: tests used during development')
     p.add_argument('--reference-out', help='folder caching the reference flights (shared between policies)')
     a = p.parse_args(argv)
     chain = json.loads(Path(a.state).read_text(encoding='utf-8-sig'))['chain']

@@ -1,0 +1,27 @@
+{
+  "source_directory": "D:/cloud_results/v14_final/v16_b16/repo",
+  "original_cloud_directory": "/hy-tmp/v14_final/v16_b16/repo",
+  "source_files": 388,
+  "source_manifest_sha256": "5d36ff669901a717eda424f055193d1090d3d311a63e41b9ed3e29d4d79fe526",
+  "manifest_convention": "SHA256 plus two spaces plus relative POSIX path; sorted by path bytes; LF joins; no trailing newline; excludes .git, .cache, __pycache__, .pytest_cache",
+  "source_bytes_unchanged": true,
+  "archive_original_mode": "0666 (regular non-executable files)",
+  "source_git_mode": "100644 (regular non-executable files)",
+  "result_archive_branch": "cloud-results-v14-final-20261031",
+  "result_archive_path": "cloud_results/v14_final/archive_v14_final.tgz",
+  "result_archive_sha256": "1a8d1a38e0153a9349cf77ce97248a6f828c9c176f18c1ffdb2fb50380b99130",
+  "seeds": [
+    17,
+    23,
+    41,
+    59,
+    83,
+    97,
+    101
+  ],
+  "additional_publication_files": [
+    "CLOUD_SOURCE_ZH.md",
+    "cloud_provenance/v16_b16/"
+  ],
+  "validation_for_this_upload": "Byte-for-byte Git blob verification of all 388 original files; no training or evaluation rerun."
+}

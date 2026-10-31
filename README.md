@@ -43,13 +43,10 @@ Policy iteration starts from the constant policy CL = 0.04 (pi_0). In iteration 
    that two sweeps test all four neighbours of every state. The flight is then continued to the end of the mission by **open-loop replay** of the nominal
    decision sequence of pi_k. The label A(s, a) = G_rest(a) - G_rest(pi(s)) is exact because the simulator is
    deterministic; the unchanged branch is the nominal trajectory itself.
-2. **Advantage ensemble.** Five networks (4 inputs, four tanh hidden layers of 64 units, 19 outputs) are
+2. **Advantage ensemble.** Five networks (4 inputs, two tanh hidden layers of 16 units, 19 outputs) are
    fitted on bootstrap samples of the labelled states with clipped targets and out-of-bag early stopping.
    Inputs are the flight state and time (h, V, gamma, t); labels of the last seven policy versions are used
-   with weight 0.5^age. On the label archives of training runs, networks with four hidden layers predicted the
-   advantages of the next iteration better than two-layer networks (rank correlation 0.65 against 0.53 for
-   16-16), wider two-layer networks did not, and more than four layers gave no further improvement.
-   `--hidden` sets the layer widths.
+   with weight 0.5^age. `--hidden` sets the layer widths.
 3. **Candidates.** pi_k is extended by one network stage: within +-2 classes of the current action it selects
    the action with the largest lower confidence bound (mean - standard deviation) if that bound exceeds a margin
    (six margins between 0.25e-4 and 1.5e-4) and only within +-48 s of labelled decision times.
@@ -62,8 +59,8 @@ branch or acceptance, or after three sweeps without acceptance.
 **Baseline (ablation) settings.** The previous variant of the method continues the branches in **closed loop**
 (pi re-decides after the alternative action), uses all six features including the policy's own action feedback
 (angle of attack and previous CL target) and additionally proposes exact override candidates built from the
-positive labels. It is obtained with `--continuation closed-loop --inputs all --overrides --hidden 16,16`;
-each switch can be used separately (`--hidden 16,16` alone gives the method with two-layer networks).
+positive labels. It is obtained with `--continuation closed-loop --inputs all --overrides`; each switch can be
+used separately.
 
 ## Repository layout
 
@@ -183,7 +180,7 @@ with the labels and the certificates of the accepted candidate. An interrupted r
 command. Baseline:
 
 ```bash
-python scripts/train.py --out runs/baseline_seed17 --seed 17 --continuation closed-loop --inputs all --overrides --hidden 16,16
+python scripts/train.py --out runs/baseline_seed17 --seed 17 --continuation closed-loop --inputs all --overrides
 ```
 
 Several seeds: `SEEDS="17 23 41" bash scripts/run_seeds.sh`.
@@ -193,14 +190,14 @@ Several seeds: `SEEDS="17 23 41" bash scripts/run_seeds.sh`.
 A trained policy is flown from perturbed initial states and compared with the constant policy CL = 0.025
 flown from the same states; in addition, one decision of its nominal flight is changed by one class and the
 flight is continued in closed loop (the policy re-decides) and in open loop (its nominal decisions are
-replayed). Three test sets are defined, each with 7 probe times on the 12 s decision grid:
+replayed). Four test sets are defined, each with 7 probe times on the 12 s decision grid:
 
-* **held-out-2** (default): the test set of the proposed method. 40 initial-state offsets drawn uniformly
+* **held-out-3** (default): the test set of the proposed method. 40 initial-state offsets drawn uniformly
   from |dh| <= 2000 m, |dV| <= 100 m/s from the fixed seed 20261023 (separate random streams for offsets and
   probe times), disjoint from the other sets. It was fixed before the proposed method was trained.
-* **held-out-1**: generated in the same way from other streams; it was used to test the method with two-layer
-  networks (16-16). Its results were known when the network size was changed, so it is not a clean test of the
-  proposed method.
+* **held-out-1**, **held-out-2**: generated in the same way from other streams. They were used to test earlier
+  configurations of the method (network size, configuration of the post-command surrogate) and their results
+  were known when the final configuration was chosen, so they are not clean tests of the proposed method.
 * **development**: the nominal state, 12 perturbed states on a grid and 7 probe times. These tests were used
   to diagnose the previous method and to choose the final one, so results on them are biased in its favour
   and are not a measure of generalisation.
@@ -219,7 +216,7 @@ python scripts/compare.py --out evaluation/comparison.json seed17=evaluation/see
 mean gain over the reference with a paired bootstrap 95% confidence interval, the number of wins and the worst
 case (also restricted to the states from which the reference completed the mission, since a failed reference
 flight counts with its truncated range), and the paired differences between the first policy and each other
-one. `--test-set held-out-1` or `--test-set development` selects the other test sets.
+one. `--test-set held-out-2`, `held-out-1` or `development` selects the other test sets.
 
 ## Reproducibility
 

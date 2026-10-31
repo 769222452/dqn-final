@@ -335,7 +335,7 @@ def main(argv=None):
     p.add_argument('--ignore-stop-rule', action='store_true', help='run all iterations')
     p.add_argument('--keep-evidence', action='store_true', help='keep proof records of branches and rejected candidates')
     p.add_argument('--hidden', default=','.join(map(str, HIDDEN)),
-                   help='hidden layer widths of the advantage networks, e.g. 64,64,64,64')
+                   help='hidden layer widths of the advantage networks, e.g. 16,16')
     a = p.parse_args(argv)
     train(a.out, a.seed, a.iterations, a.workers, a.states, a.stride, a.window, a.candidates, a.patience,
           a.min_advantage, a.continuation, a.inputs, a.overrides, a.initial_cl, a.label_decay, a.label_keep,

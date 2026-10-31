@@ -46,7 +46,6 @@
       "train_count": 929
     }
   },
-  "post_routing": "adaptation_coverage_first",
   "scale_up_gate_passed": false,
   "acceptance_passed": false,
   "base_config": {

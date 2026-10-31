@@ -10,8 +10,8 @@ from rollout_improvement.policy import ChainPolicy
 from rollout_improvement.rollouts import certified_fly
 
 # Constant CL 0.04 for the first 240 s of the mission.
-G_240 = 0.23269484924724818
-X_240 = [28392.05454034831, 2253.944760304253, -0.0028586617466017346, 558467.6381933958]  # h, V, gamma, s
+G_240 = 0.23273813720731978
+X_240 = [28339.074031398977, 2254.5447558374167, -0.0020314152458305616, 558571.5292975676]  # h, V, gamma, s
 
 
 def state_hash(env):

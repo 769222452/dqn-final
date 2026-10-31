@@ -20,7 +20,6 @@ from .contracts import matching_contract
 
 FEATURE_SCHEMA = 'flight-aero-fingerprint/1'
 REGRESSOR_FIELDS = ('x', 'mean', 'weights', 'length', 'lower', 'upper')
-POST_ROUTING = 'adaptation_coverage_first'
 OOD_REASONS = frozenset({'OUT_OF_DISTRIBUTION', 'UNSUPPORTED_SURROGATE_OUTPUT'})
 
 
@@ -144,18 +143,16 @@ class Regressor:
 
 
 class SurrogateController:
-    """Pre and post heads; the post head routes between an anchor and an expanded expert.
+    """One kernel-ridge regressor per head ('pre': planned Mach, 'post': six alpha commands).
 
-    The anchor expert is used inside its own coverage unless the expanded expert covers
-    the query and the adaptation samples are strictly closer than the anchor samples.
+    controller.npz also stores a second post regressor fitted on 85 of the 929 training samples
+    (post_anchor_*) and the post training inputs (post_adaptation_x); both are not used.
     """
 
     def __init__(self, db, mission, config, control_contract):
         self.db, self.m, self.cfg = db, mission, config
         self.features = Features(db, mission)
         self.heads = {}
-        self.post_anchor = None
-        self.post_adaptation_x = None
         self.control_contract = control_contract
         self.metadata = {'control_contract': control_contract}
 
@@ -165,20 +162,6 @@ class SurrogateController:
         x = self.features.vector(c)
         reg = self.heads[head]
         coverage = reg.coverage(x, self.features.physical(c), self.cfg)
-        if head == 'post':
-            expanded_coverage = coverage
-            anchor_coverage = self.post_anchor.coverage(x, self.features.physical(c), self.cfg)
-            use_anchor = anchor_coverage['supported']
-            adaptation_distance = float(np.min(np.sqrt(np.mean((self.post_adaptation_x-x)**2, axis=1))))
-            if expanded_coverage['supported'] and adaptation_distance+1e-12 < anchor_coverage['nearest_distance']:
-                use_anchor = False
-            if use_anchor:
-                reg = self.post_anchor
-                coverage = anchor_coverage
-            routing = dict(post_routing=POST_ROUTING, post_expert='anchor' if use_anchor else 'expanded',
-                           anchor_coverage=anchor_coverage, expanded_coverage=expanded_coverage,
-                           adaptation_nearest_distance=adaptation_distance)
-            coverage = dict(coverage, **routing)
         if not coverage['supported']:
             raise OracleRequired('OUT_OF_DISTRIBUTION', c, head, coverage)
         raw = self.features.baseline(c, head)+reg.predict(x)[0]
@@ -213,19 +196,11 @@ class SurrogateController:
         obj = cls(db, mission, meta['surrogate_config'], contract)
         obj.metadata = meta
         with np.load(path, allow_pickle=False) as z:
-            anchor_fields = {name for name in z.files if name.startswith('post_anchor_')}
-            if meta.get('post_routing') != POST_ROUTING or \
-               anchor_fields != {'post_anchor_'+name for name in REGRESSOR_FIELDS}:
-                raise ValueError('Post routing metadata and anchor arrays disagree')
-            if 'post_adaptation_x' not in z.files:
-                raise ValueError('Post routing and adaptation support disagree')
             for head in ('pre', 'post'):
                 obj.heads[head] = Regressor.from_arrays(z, head+'_')
-            obj.post_anchor = Regressor.from_arrays(z, 'post_anchor_')
-            a = z['post_adaptation_x'].copy()
-            if a.ndim != 2 or not len(a) or a.shape[1] != obj.heads['post'].x.shape[1] or not np.isfinite(a).all():
-                raise ValueError('Invalid adaptation training support')
-            obj.post_adaptation_x = a
+        for head, reg in obj.heads.items():
+            if reg.x.ndim != 2 or reg.x.shape[0] != len(reg.weights) or not np.isfinite(reg.x).all():
+                raise ValueError(f'Invalid {head} regressor')
         return obj
 
 

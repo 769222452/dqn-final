@@ -13,7 +13,7 @@ N_ACTIONS = 19
 LABEL_SCALE = 1e4
 CLIP = 2.
 L2 = 1e-3
-HIDDEN = (64, 64, 64, 64)   # hidden layer widths of the proposed method
+HIDDEN = (16, 16)   # hidden layer widths of the proposed method
 MEMBERS = 5
 STEPS = 3000
 LEARNING_RATE = 3e-3
@@ -23,7 +23,7 @@ LABEL_KEEP = 7        # policy versions (current included) whose labels are used
 
 
 def parse_hidden(hidden):
-    """Hidden layer widths from '64,64,64,64' or a sequence of ints."""
+    """Hidden layer widths from '16,16' or a sequence of ints."""
     widths = tuple(int(x) for x in (hidden.split(',') if isinstance(hidden, str) else hidden))
     if not widths or min(widths) < 1:
         raise ValueError('hidden layer widths must be positive integers')
