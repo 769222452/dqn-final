@@ -1,0 +1,26 @@
+{
+  "protocol": "continuous_surrogate/1",
+  "description": "Pilot refit with independently audited fresh continuous-control teacher labels. Does not qualify production deployment or generalization.",
+  "output_contract": "six future alpha nodes at .5,1,1.5,2,2.5,3 seconds; fixed actual alpha at zero; linear interpolation",
+  "reference_prediction": "hold_current_CL",
+  "teacher": {
+    "tracking_optimality_relative_allowance": 0.01,
+    "tracking_optimality_absolute_allowance": 1e-8,
+    "planning_integration_max_dt_s": 0.5,
+    "planning_normalized_margin": 0.0001,
+    "compile_nlp": true
+  },
+  "training": {
+    "label_contexts": 24,
+    "minimum_training_labels_per_head": 8,
+    "seed": 17
+  },
+  "tracking_quality": {
+    "mean_abs_error_max": 0.0025,
+    "rmse_max": 0.005,
+    "peak_abs_error_max": 0.01,
+    "meaning": "Diagnostic intervention thresholds; not physical constraints or a guarantee of attainability."
+  },
+  "flight": {"CL": 0.025, "max_decisions": 400},
+  "fallback": "continuous physical candidate and P1/H30; audited fresh continuous teacher only if these fail"
+}

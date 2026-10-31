@@ -1,0 +1,18 @@
+{
+  "protocol": "continuous-alpha-uniform-pointwise-tracking/2",
+  "reference_prediction": "hold_current_CL",
+  "tracking": "uniform_pointwise_soft_band",
+  "cl_tracking_band": 0.0001,
+  "slack_weight": 100.0,
+  "rate_change_weight_multiplier": 1.0,
+  "planning_integration_max_dt_s": 0.5,
+  "planning_normalized_margin": 0.0001,
+  "normalization_time_s": 3.0,
+  "rate_cost_reference_dt_s": 0.5,
+  "compile_nlp": true,
+  "tracking_quality": {
+    "mean_abs_error_max": 0.0025,
+    "rmse_max": 0.005,
+    "peak_abs_error_max": 0.01
+  }
+}

@@ -4,3 +4,6 @@ data/** -text
 configs/** -text
 src/morphing_waverider/** -text
 *.npz binary
+# Frozen experiment inputs and recorded evidence retain their original hashes.
+experiments/**/assets/** -text
+experiments/**/evidence/** -text

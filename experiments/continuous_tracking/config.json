@@ -1,0 +1,21 @@
+{
+  "protocol": "continuous-alpha-full-horizon-tracking/1",
+  "description": "Independent real Pre/Final OCP experiment; old surrogate and training are not used.",
+  "tracking": "rk4_pointwise_full_horizon",
+  "reference_prediction": "hold_current_CL",
+  "objective_priority": "current_tracking_then_full_horizon_economics",
+  "tracking_optimality_relative_allowance": 0.01,
+  "tracking_optimality_absolute_allowance": 0.000001,
+  "planning_integration_max_dt_s": 0.5,
+  "planning_normalized_margin": 0.0001,
+  "compile_nlp": true,
+  "normalization_time_s": 3.0,
+  "rate_cost_reference_dt_s": 0.5,
+  "warm_start_from_previous_final": true,
+  "tracking_quality": {
+    "mean_abs_error_max": 0.0025,
+    "rmse_max": 0.005,
+    "peak_abs_error_max": 0.01,
+    "semantics": "diagnostic engineering criteria, not physical limits; audited safety overrides explicitly reported"
+  }
+}

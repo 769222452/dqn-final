@@ -1,0 +1,143 @@
+{
+  "protocol": "supported-recovery-bounded-real-check/1",
+  "passed": true,
+  "training_performed": false,
+  "network_updates": 0,
+  "valid_training_labels": 0,
+  "full_mission_completed": false,
+  "runtime_binding": "14c4303054fb2b5670720295e9966fb2cc70a113121a57f019dc086b6f592f5f",
+  "checks": {
+    "off_nominal_is_a_different_actual_state": true,
+    "both_sources_are_bounded": true,
+    "reference_no_rollout_error": true,
+    "reference_identical_restored_origins": true,
+    "reference_both_four_steps": true,
+    "reference_both_reach_60s": true,
+    "reference_base_request_held_12s": true,
+    "reference_candidate_request_held_12s": true,
+    "reference_base_execution_trace_complete": true,
+    "reference_candidate_execution_trace_complete": true,
+    "reference_no_valid_training_label": true,
+    "reference_incomplete_full_horizon": true,
+    "reference_request_semantics": true,
+    "reference_fresh_certificates": true,
+    "reference_cached_returns_not_used": true,
+    "reference_base_committed_trace": true,
+    "reference_candidate_committed_trace": true,
+    "off_nominal_no_rollout_error": true,
+    "off_nominal_identical_restored_origins": true,
+    "off_nominal_both_four_steps": true,
+    "off_nominal_both_reach_60s": true,
+    "off_nominal_base_request_held_12s": true,
+    "off_nominal_candidate_request_held_12s": true,
+    "off_nominal_base_execution_trace_complete": true,
+    "off_nominal_candidate_execution_trace_complete": true,
+    "off_nominal_no_valid_training_label": true,
+    "off_nominal_incomplete_full_horizon": true,
+    "off_nominal_request_semantics": true,
+    "off_nominal_fresh_certificates": true,
+    "off_nominal_cached_returns_not_used": true,
+    "off_nominal_base_committed_trace": true,
+    "off_nominal_candidate_committed_trace": true
+  },
+  "pairs": {
+    "reference": {
+      "evidence_path": "D:\\dqn-final\\runs\\supported_recovery_check_20261031_01\\reference_pair",
+      "checks": {
+        "no_rollout_error": true,
+        "identical_restored_origins": true,
+        "both_four_steps": true,
+        "both_reach_60s": true,
+        "base_request_held_12s": true,
+        "candidate_request_held_12s": true,
+        "base_execution_trace_complete": true,
+        "candidate_execution_trace_complete": true,
+        "no_valid_training_label": true,
+        "incomplete_full_horizon": true,
+        "request_semantics": true,
+        "fresh_certificates": true,
+        "cached_returns_not_used": true,
+        "base_committed_trace": true,
+        "candidate_committed_trace": true
+      },
+      "origin_snapshot_sha256": "fe2d4556bc1716011eb92f7503b5db35ccc1ff972dbbab4a880f307e2755e39c",
+      "base_action": 11,
+      "candidate_action": 10,
+      "action_semantics": "certified_policy_request",
+      "G_base_partial": 0.012020268280049255,
+      "G_candidate_partial": 0.012020220552530492,
+      "base_actual_actions": [
+        11,
+        11,
+        11,
+        11
+      ],
+      "candidate_actual_actions": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "valid": false,
+      "error": null
+    },
+    "off_nominal": {
+      "evidence_path": "D:\\dqn-final\\runs\\supported_recovery_check_20261031_01\\off_nominal_pair",
+      "checks": {
+        "no_rollout_error": true,
+        "identical_restored_origins": true,
+        "both_four_steps": true,
+        "both_reach_60s": true,
+        "base_request_held_12s": true,
+        "candidate_request_held_12s": true,
+        "base_execution_trace_complete": true,
+        "candidate_execution_trace_complete": true,
+        "no_valid_training_label": true,
+        "incomplete_full_horizon": true,
+        "request_semantics": true,
+        "fresh_certificates": true,
+        "cached_returns_not_used": true,
+        "base_committed_trace": true,
+        "candidate_committed_trace": true
+      },
+      "origin_snapshot_sha256": "38578c4a55baa6e52bd47cf0f0c403ab91bfc5d7d1a11aff02bd15130616c626",
+      "base_action": 11,
+      "candidate_action": 10,
+      "action_semantics": "certified_policy_request",
+      "G_base_partial": 0.012039027518492673,
+      "G_candidate_partial": 0.012038673853769076,
+      "base_actual_actions": [
+        11,
+        11,
+        11,
+        11
+      ],
+      "candidate_actual_actions": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "valid": false,
+      "error": null
+    }
+  },
+  "sources": {
+    "reference": {
+      "evidence_path": "D:\\dqn-final\\runs\\supported_recovery_check_20261031_01\\reference_source",
+      "time_s": 60.0,
+      "steps": 20,
+      "stop": "MAX_DECISIONS"
+    },
+    "off_nominal": {
+      "evidence_path": "D:\\dqn-final\\runs\\supported_recovery_check_20261031_01\\off_nominal_source",
+      "time_s": 60.0,
+      "steps": 20,
+      "stop": "MAX_DECISIONS",
+      "appended_constant_CL": 0.03
+    }
+  },
+  "errors": [],
+  "evidence_path": "D:\\dqn-final\\runs\\supported_recovery_check_20261031_01",
+  "wall_s": 125.46695220000402
+}

@@ -2,6 +2,21 @@
 
 [English](README.md)
 
+## 最新实验实现（2026-10-31）
+
+本分支包含连续跟踪与恢复控制、已审计执行轨迹复用，以及仅作用于新拟合策略阶段的状态—动作证据检查。
+当前入口见[连续恢复训练说明](experiments/continuous_recovery/TRAINING_ZH.md)和
+[证据支持策略改进说明](experiments/supported_recovery/README.md)。所需冻结控制器模型和五阶段参考策略
+已放入 `experiments/*/assets/`，命令使用仓库相对路径。原 `scripts/train.py` 的行为保留。
+
+最近一次小预算试验包含4组成对查询和3条完整候选飞行。三条候选均与参考一致：航程
+2501.053414513093 km、回报1.1421055893804557、10次变构；新增阶段实际改动作0次，未采纳候选。
+这不证明泛化改善或收敛；新证据检查没有追溯改写冻结参考的旧5个阶段。
+已附[实际结果](experiments/supported_recovery/evidence/validation_result.json)及
+[有限分支验证](experiments/supported_recovery/evidence/branch_validation.json)。完整飞行日志仍保存在本地忽略的 `runs/` 中。
+
+以下章节描述保留的原训练路径。
+
 本仓库包含在固定 1200 s 滑翔任务中学习变形高超声速乘波体升力系数调度的代码与输入数据。每一个实际执行的控制步都必须先通过安全认证链。策略通过基于滚动仿真（rollout）的近似策略迭代改进：在确定性的认证仿真中分支，精确测量动作优势；用神经网络集成对其泛化；只有认证后的回报提高时才接受新策略。
 
 ## 问题

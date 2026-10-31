@@ -1,0 +1,137 @@
+{
+  "validation": {
+    "pytest_passed": 479,
+    "pytest_wall_s": 58.76,
+    "real_branch_check_passed": true,
+    "real_branch_check_wall_s": 125.46695220000402
+  },
+  "protocol": "supported-recovery-result-audit/1",
+  "phase": "COMPLETE",
+  "iteration": 1,
+  "accepted": false,
+  "wall_s": 4691.958277900005,
+  "candidates": [
+    {
+      "candidate": 0,
+      "range_km": 2501.053414513093,
+      "reward": 1.1421055893804557,
+      "completed": true,
+      "switches": 10,
+      "wall_s": 514.835156599991,
+      "support": {
+        "raw_different": 98,
+        "raw_different_without_support": 97,
+        "would_change_without_gate": 0,
+        "effective_gate_blocks": 0,
+        "actual_new_stage_changes": 0,
+        "supported_alternative_decisions": 3
+      },
+      "equals_reference": {
+        "G": true,
+        "range_km": true,
+        "final_state": true,
+        "action_counts": true,
+        "schedule": true,
+        "execution_trace": true,
+        "final_snapshot_sha256": true
+      }
+    },
+    {
+      "candidate": 1,
+      "range_km": 2501.053414513093,
+      "reward": 1.1421055893804557,
+      "completed": true,
+      "switches": 10,
+      "wall_s": 524.6603940000059,
+      "support": {
+        "raw_different": 99,
+        "raw_different_without_support": 98,
+        "would_change_without_gate": 0,
+        "effective_gate_blocks": 0,
+        "actual_new_stage_changes": 0,
+        "supported_alternative_decisions": 4
+      },
+      "equals_reference": {
+        "G": true,
+        "range_km": true,
+        "final_state": true,
+        "action_counts": true,
+        "schedule": true,
+        "execution_trace": true,
+        "final_snapshot_sha256": true
+      }
+    },
+    {
+      "candidate": 2,
+      "range_km": 2501.053414513093,
+      "reward": 1.1421055893804557,
+      "completed": true,
+      "switches": 10,
+      "wall_s": 525.0706451999868,
+      "support": {
+        "raw_different": 99,
+        "raw_different_without_support": 98,
+        "would_change_without_gate": 0,
+        "effective_gate_blocks": 0,
+        "actual_new_stage_changes": 0,
+        "supported_alternative_decisions": 4
+      },
+      "equals_reference": {
+        "G": true,
+        "range_km": true,
+        "final_state": true,
+        "action_counts": true,
+        "schedule": true,
+        "execution_trace": true,
+        "final_snapshot_sha256": true
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "t": 0.0,
+      "base_action": 10,
+      "candidate_action": 9,
+      "valid": true,
+      "delta_reward": 4.647582241723569e-06,
+      "delta_range_km": 0.011154197381343692,
+      "wall_s": 997.0457577000052,
+      "origin": "nominal"
+    },
+    {
+      "t": 576.0,
+      "base_action": 5,
+      "candidate_action": 6,
+      "valid": true,
+      "delta_reward": -0.00028515890965263857,
+      "delta_range_km": -0.684381383167114,
+      "wall_s": 528.3578562999901,
+      "origin": "nominal"
+    },
+    {
+      "t": 1152.0,
+      "base_action": 5,
+      "candidate_action": 4,
+      "valid": true,
+      "delta_reward": -5.874471883160481e-06,
+      "delta_range_km": -0.0140987325203605,
+      "wall_s": 39.197830000004615,
+      "origin": "nominal"
+    },
+    {
+      "t": 60.0,
+      "base_action": 8,
+      "candidate_action": 10,
+      "valid": true,
+      "delta_reward": -6.403254604037123e-05,
+      "delta_range_km": -0.15367811049893498,
+      "wall_s": 1051.3177345000004,
+      "origin": "active_visited_state"
+    }
+  ],
+  "source_files": 82,
+  "source_changed": [],
+  "convergence_proven": false,
+  "local_generalization_validated": false,
+  "scope": "One small-budget iteration; only newly appended stages use exact support; imported reference stages are unchanged."
+}

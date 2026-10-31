@@ -2,6 +2,25 @@
 
 [中文说明](README_zh.md)
 
+## Latest experimental implementation (2026-10-31)
+
+This branch also includes continuous tracking/recovery control, reuse of already audited execution
+trajectories, and an isolated state-and-action evidence gate for newly fitted policy stages.
+See the [recovery training guide](experiments/continuous_recovery/TRAINING_ZH.md) and the
+[supported policy-improvement guide](experiments/supported_recovery/README.md) for the current entry points.
+The required frozen controller model and five-stage reference policy are included under `experiments/*/assets/`;
+the commands in those guides use repository-relative paths. Original `scripts/train.py` behavior is retained.
+
+The latest small-budget iteration used four paired queries and three complete candidate flights.
+All candidates matched the reference: 2501.053414513093 km, return 1.1421055893804557, ten morphs,
+and zero action changes by the proposed new stage. No candidate was accepted; this is not evidence of
+improved generalisation or convergence. The new evidence gate does not retrofit the five frozen legacy stages.
+[Recorded results](experiments/supported_recovery/evidence/validation_result.json) and
+[bounded branch checks](experiments/supported_recovery/evidence/branch_validation.json) are included.
+Full flight logs remain in ignored local `runs/` directories.
+
+The sections below describe the retained original training path.
+
 This repository contains the code and input data for learning the lift-coefficient schedule of a morphing
 hypersonic waverider over a fixed 1200 s glide, where every executed control step is verified by a safety
 certification chain. The policy is improved by rollout-based approximate policy iteration: exact action
