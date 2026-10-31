@@ -16,6 +16,14 @@ in V16 certification. Objectives:
 
 The consistent objective's CL weight is frozen at 20 (calibrated on the nominal 0-120 s
 development flight to match V16's executed CL error; see experiments/aoa_fix/README.md).
+
+--inner surrogate flies the production V16 pipeline instead (certified_flight.build_flight: Certifier,
+surrogate -> physics baseline on OOD -> true OCP, corrector, look-ahead, audits) with the surrogate
+fitted to the chosen objective (--surrogate; default for v16 is the V16 surrogate):
+
+    python scripts/aoa_gate_experiment.py --inner surrogate --objective v16 --cl 0.025 --out runs/aoa/s_v16
+    python scripts/aoa_gate_experiment.py --inner surrogate --objective consistent \
+        --surrogate data/surrogate_consistent/controller.npz --cl 0.025 --out runs/aoa/s_consistent
 """
 import os
 for _key in ('OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'OMP_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
@@ -28,6 +36,7 @@ from pathlib import Path  # noqa: E402
 import sys  # noqa: E402
 import time  # noqa: E402
 
+import shutil  # noqa: E402
 import subprocess  # noqa: E402
 
 import numpy as np  # noqa: E402
@@ -37,25 +46,21 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'src'))
 sys.path.insert(0, str(ROOT/'scripts'/'analysis'))
 
-from certified_flight import CL_ACTIONS, integrity  # noqa: E402
+from certified_flight import CL_ACTIONS, build_flight, integrity  # noqa: E402
 from certified_flight.aero import AeroDatabase  # noqa: E402
 from certified_flight.build import runtime_config  # noqa: E402
 from certified_flight.corrector import PostCorrector  # noqa: E402
 from certified_flight.environment import FlightEnvironment  # noqa: E402
 from certified_flight.lookahead import LookaheadGuard  # noqa: E402
 from certified_flight.mission import Mission  # noqa: E402
+from certified_flight.objectives import (FROZEN_HORIZON_WEIGHT, OBJECTIVES, objective_ocp,  # noqa: E402
+                                         objective_runtime_config, objective_safety)
 from certified_flight.ocp import OracleController, TwoStageOCP  # noqa: E402
 from certified_flight.plant import CompiledPlant  # noqa: E402
 from certified_flight.serialization import clean, write_json  # noqa: E402
 from certified_flight.surrogate import OracleRequired, SurrogateController  # noqa: E402
 from rollout_improvement.policy import ChainPolicy, constant_stage  # noqa: E402
 from aoa_metrics import flight_metrics  # noqa: E402
-
-OBJECTIVES = dict(
-    v16=dict(),
-    consistent=dict(tracking_mode='pointwise_horizon', boundary_smoothing=True),
-)
-
 
 class OCPInnerLoop:
     """Controller interface backed by a fresh pre/post OCP pair per decision."""
@@ -71,9 +76,6 @@ class OCPInnerLoop:
         out = self.oracle.predict(context, head)
         self.last[head] = self.oracle.record['phases'][head]['solver']
         return out
-
-
-FROZEN_HORIZON_WEIGHT = 20.
 
 
 def source_revision():
@@ -99,18 +101,16 @@ def build(objective, horizon_weight, curvature, offset=None):
     surrogate = SurrogateController.load(ROOT/config['surrogate'], db, mission, physical,
                                          {'mission_sha256': mission.config_path,
                                           'trajectory_sha256': trajectory_path})
-    ocp_cfg = dict(physical['ocp'], **OBJECTIVES[objective])
-    if objective == 'consistent':
-        ocp_cfg['horizon_tracking_weight'] = horizon_weight
-        ocp_cfg['second_difference_weight'] = curvature
-        safety['boundary_smoothing'] = True
+    ocp_cfg = objective_ocp(physical['ocp'], objective, horizon_weight, curvature)
+    safety = objective_safety(safety, objective)
     ocp = TwoStageOCP(mission, db, yaml.safe_load(trajectory_path.read_text(encoding='utf-8')), ocp_cfg, plant)
     inner = OCPInnerLoop(ocp, surrogate.control_contract)
     corrector = PostCorrector(plant, safety)
     env = FlightEnvironment(plant, inner, physical, safety, post_corrector=corrector)
     # Same guard as V16 (its future candidate policies use the V16 surrogate).
     env.lookahead_guard = LookaheadGuard(plant, surrogate, physical, safety, corrector)
-    env.lookahead_qualification = LookaheadGuard.qualify(plant, surrogate, safety)
+    # The V16 qualification report covers the V16 corrector settings (no boundary_smoothing key).
+    env.lookahead_qualification = LookaheadGuard.qualify(plant, surrogate, config['safety_options'])
     if offset is not None:
         # Same convention as certified_flight.build_flight(initial_offset=...).
         env.x[0] += float(offset[0])
@@ -119,10 +119,68 @@ def build(objective, horizon_weight, curvature, offset=None):
                             initial_offset_h_V=None if offset is None else [float(v) for v in offset])
 
 
+def build_surrogate(objective, surrogate, out, offset=None):
+    """Production V16 pipeline (build_flight + Certifier) with the objective's surrogate and OCP fallback."""
+    config = objective_runtime_config(runtime_config(ROOT), objective, surrogate=surrogate)
+    env, certifier = build_flight(out/'run', 'aoa', initial_offset=offset, config=config)
+    return env, certifier, dict(objective=objective, inner='surrogate', surrogate=config['surrogate'],
+                                model_sha256=config['model_sha256'], ocp=config['physical']['ocp'],
+                                safety=config['safety_options'],
+                                initial_offset_h_V=None if offset is None else [float(v) for v in offset])
+
+
+class OCPStepper:
+    """V16 gate stepping: requested action, then the nearest actions until one passes."""
+
+    def __init__(self, env, inner, fallback_actions):
+        self.env, self.inner, self.fallback_actions = env, inner, fallback_actions
+
+    def step(self, preference):
+        info, refusals = None, []
+        for action in [int(x) for x in np.argsort(-preference)][:self.fallback_actions]:
+            try:
+                _, _, done, info = self.env.step(action)
+                return info, done, refusals
+            except (OracleRequired, ValueError) as exc:
+                refusals.append(dict(action=action, reason=getattr(exc, 'reason', repr(exc))[:200]))
+        return None, False, refusals
+
+    def solver(self):
+        return {h: dict(status=v['status'], iterations=v['iterations'], solve_s=v['solve_s'])
+                for h, v in self.inner.last.items()}
+
+
+class CertifiedStepper:
+    """Production stepping (rollout_improvement.rollouts.certified_fly): best VERIFIED_PASS action."""
+
+    def __init__(self, certifier):
+        self.certifier = certifier
+
+    def step(self, preference):
+        pool = self.certifier.pool(preference)
+        if not pool['mask'].any():
+            return None, False, [dict(action=-1, reason='NO_CERTIFIED_ACTION')]
+        a = int(np.argmax(np.where(pool['mask'], preference, -np.inf)))
+        try:
+            _, done, info = self.certifier.commit(pool, a)
+        except OracleRequired as exc:
+            return None, False, [dict(action=a, reason='EXECUTION_REFUSED:'+exc.reason)]
+        refused = [int(b) for b in np.argsort(-preference) if preference[b] > preference[a] and not pool['mask'][b]]
+        return info, done, [dict(action=b, reason='NOT_CERTIFIED') for b in refused]
+
+    def solver(self):
+        return None
+
+
 def run(a):
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=False)
-    env, inner, setup = build(a.objective, a.horizon_weight, a.curvature, a.offset)
+    if a.inner == 'ocp':
+        env, inner, setup = build(a.objective, a.horizon_weight, a.curvature, a.offset)
+        stepper = OCPStepper(env, inner, a.fallback_actions)
+    else:
+        env, certifier, setup = build_surrogate(a.objective, a.surrogate, out, a.offset)
+        stepper = CertifiedStepper(certifier)
     if a.chain:
         chain = json.loads(Path(a.chain).read_text(encoding='utf-8-sig'))['chain']
         policy_name = str(a.chain)
@@ -139,16 +197,12 @@ def run(a):
         tick = time.perf_counter()
         preference = policy.preference()
         requested = int(np.argmax(preference))
-        info, refusals = None, []
-        for action in [int(x) for x in np.argsort(-preference)][:a.fallback_actions]:
-            try:
-                _, _, done, info = env.step(action)
-                break
-            except (OracleRequired, ValueError) as exc:
-                refusals.append(dict(action=action, reason=getattr(exc, 'reason', repr(exc))[:200]))
+        info, done, refusals = stepper.step(preference)
         if info is None:
-            stop = 'NEXT_STATE_NOT_CERTIFIED'
+            last = refusals[-1]['reason'] if refusals else ''
+            stop = last if last.startswith('EXECUTION_REFUSED') else 'NEXT_STATE_NOT_CERTIFIED'
             break
+        pre = {key: v for key, v in info["pre_context"].items() if key != "control_contract"}
         row = dict(step=k, t_start_s=info['t_start_s'], t_end_s=info['t_end_s'], requested_action=requested,
                    action=info['action'], CL_cmd=info['CL_cmd'], executed_CL_mean=info['executed_CL_mean'],
                    executed_CL_target_rmse=info['executed_CL_target_rmse'], range_m=info['range_m'],
@@ -158,8 +212,7 @@ def run(a):
                    lookahead_offset_deg=info.get('lookahead', {}).get('selected_offset_deg'),
                    lookahead_status=info.get('lookahead', {}).get('status'),
                    transition_started=info['transition_started'], refusals=refusals,
-                   solver={h: dict(status=v['status'], iterations=v['iterations'], solve_s=v['solve_s'])
-                           for h, v in inner.last.items()},
+                   solver=stepper.solver(), channel=info.get('channel'), pre_context=pre,
                    wall_s=time.perf_counter()-tick)
         log.write(json.dumps(clean(row))+'\n')
         log.flush()
@@ -171,7 +224,13 @@ def run(a):
             stop = env.last_outcome
             break
     log.close()
-    summary = dict(policy=policy_name, objective=a.objective, initial_offset_h_V=setup['initial_offset_h_V'],
+    if a.inner == 'surrogate' and not a.keep_proofs:
+        shutil.rmtree(out/'run', ignore_errors=True)   # steps.jsonl keeps the executed decisions
+    channels = {}
+    for r in infos:
+        channels[r['channel']] = channels.get(r['channel'], 0)+1
+    summary = dict(policy=policy_name, objective=a.objective, inner=a.inner, channels=channels,
+                   initial_offset_h_V=setup['initial_offset_h_V'],
                    stop=stop, completed=bool(stop == 'SUCCESS' and abs(float(env.t)-1200.) < 1e-6),
                    t_end_s=float(env.t),
                    range_km=float(env.x[3]/1000), wall_s=time.perf_counter()-started,
@@ -187,6 +246,10 @@ def run(a):
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument('--objective', choices=sorted(OBJECTIVES), required=True)
+    p.add_argument('--inner', choices=('ocp', 'surrogate'), default='ocp',
+                   help='ocp: true OCP every decision (gate); surrogate: production V16 pipeline')
+    p.add_argument('--surrogate', help='controller.npz fitted to the objective (required for consistent/surrogate)')
+    p.add_argument('--keep-proofs', action='store_true', help='surrogate inner loop: keep run/ (proofs, pools)')
     p.add_argument('--cl', type=float, default=.025, help='constant CL policy (ignored with --chain)')
     p.add_argument('--chain', help='state.json of a trained V16 policy, flown closed loop')
     p.add_argument('--horizon-weight', type=float, default=FROZEN_HORIZON_WEIGHT,
@@ -200,6 +263,10 @@ def main(argv=None):
     a = p.parse_args(argv)
     if a.cl not in CL_ACTIONS:
         p.error('--cl must be one of the 19 actions')
+    if a.inner == 'surrogate' and a.objective != 'v16' and not a.surrogate:
+        p.error('--inner surrogate --objective consistent needs --surrogate (the V16 one has the v16 teacher)')
+    if a.inner == 'surrogate' and (a.horizon_weight != FROZEN_HORIZON_WEIGHT or a.curvature):
+        p.error('the surrogate inner loop uses the frozen objective it was fitted to')
     run(a)
 
 

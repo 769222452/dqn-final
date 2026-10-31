@@ -1,0 +1,18 @@
+{
+  "source_decisions": 23200,
+  "flights": 58,
+  "sampled": 1500,
+  "splits": {
+    "train": 1127,
+    "validation": 79,
+    "test": 294
+  },
+  "flights_per_split": {
+    "train": 44,
+    "validation": 3,
+    "test": 11
+  },
+  "archive_sha256": "1a8d1a38e0153a9349cf77ce97248a6f828c9c176f18c1ffdb2fb50380b99130",
+  "sampling_seed": 20261031,
+  "contexts_sha256": "6801346db66a82ffb7517f4245bff0faa02040fb3f63dd7f94e1381b928498f2"
+}

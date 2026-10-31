@@ -22,10 +22,11 @@ from .transition import Transition
 POLICIES = ('equal_lift', 'rolling_corrector', 'load_recovery')
 # Offsets are bounded candidate searches, never changes to CL actions or the generator.
 ALPHA_OFFSETS_DEG = (0., .5, 1., 2., -.5, -1.)
-# Settings of the qualification report that must equal the runtime corrector settings.
+# Settings of the qualification report that must equal the runtime corrector settings
+# (boundary_smoothing is absent from V16 reports and runtime alike, so V16 still qualifies).
 QUALIFIED_KEYS = ('constraint_aware_post_enabled', 'post_correction_method', 'post_correction_max_wall_s',
                   'max_iterations', 'ftol', 'alpha_scale_rad', 'CL_scale', 'weights', 'internal_margin',
-                  'dense_refinement')
+                  'dense_refinement', 'boundary_smoothing')
 
 
 class LoadRecoveryBaseline(PhysicalBaseline):

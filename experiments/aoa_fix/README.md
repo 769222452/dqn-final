@@ -86,6 +86,20 @@ Held-out-3 (nominal + 40 states, paired by state; constant CL 0.025 and the 7 V1
 - H3 sawtooth removed (G1 thresholds) on every completed flight pair.
 Failed flights count with their truncated range. All outcomes are reported.
 
+**Addendum: surrogate pipeline.** This was declared after the local gate and before any refitted
+surrogate was fitted or flown.
+- H1–H3 are evaluated on the `heldout` stage, i.e. the production surrogate pipeline: arm (i) is the V16
+  surrogate with the V16 objective, arm (ii) is the refitted surrogate with the consistent objective.
+- Q1: the refitted surrogate must pass the V16 P1 rule before any held-out flight is run. The rule is
+  zero independent dense-audit failures of corrected plans on validation and test labels, which come from
+  flights never used for fitting.
+- Q2: arm (i) must reproduce the archived V16 held-out-3 ranges, since it is the identical code path.
+  Any difference above 1e-6 km is reported as a reproduction failure.
+- Fidelity (`fidelity` stage, true OCP) is descriptive: the student−teacher range and sawtooth
+  differences of both arms. It is not a pass criterion. The V16 surrogate itself is 13.1 km short of its
+  own teacher at the nominal state (2443.32 vs 2456.45 km), so arm (ii) is judged against arm (i), not
+  against the OCP gate numbers.
+
 **Amendment (before any held-out result and before the V16-objective gate flights finished).** The first
 two full gate flights (consistent objective) reduced within-step alpha swings to ~0.002°. Reversal and
 jump-opposition shares computed over every non-zero change then measure solver round-off (moves of
@@ -94,37 +108,64 @@ jump-opposition shares computed over every non-zero change then measure solver r
 both exceed the floor (`None` = no such step, i.e. no sawtooth). V16 baselines are unaffected by this
 (jump-opposition 99.7 % / 100 % over 398 / 399 steps). No threshold value was changed.
 
-## 4. How to run (cloud server)
+## 4. Why the true OCP for the gate, and the surrogate for everything else
+
+V16 replaces the repeated OCP solves by a kernel-ridge surrogate. The sawtooth lives in that
+surrogate's training labels: executed alpha is the surrogate output in 400/400 steps and the surrogate
+reproduces its OCP teacher (section 1). The shipped `data/surrogate/controller.npz` was fitted to
+V16-objective labels, so it cannot express a new objective; flying the fix with it would only reproduce
+the sawtooth. A new surrogate needs new teacher labels, i.e. OCP solves, anyway. Hence:
+
+1. **Gate (true OCP, 4 flights).** Cheap causal check that the *objective* removes the sawtooth without
+   losing range, before paying for labels, refit and qualification. It separates "the objective works"
+   from "the surrogate approximates it well".
+2. **Surrogate refit (V16 design, V16 model class).** Teacher labels of the consistent objective on 1,500
+   recorded V16 contexts → fit → P1 qualification → one DAgger round on development states → final fit and
+   qualification (section 9).
+3. **Held-out-3 with the production pipeline (surrogates, 656 flights).** Arm (i): V16 surrogate + V16
+   objective, i.e. the archived V16 configuration (must reproduce the archived ranges; checked in the
+   report). Arm (ii): refitted surrogate + consistent objective. The fallback chain (physics baseline on
+   OOD, then true OCP), corrector, look-ahead and audits are unchanged and use the arm's own objective.
+4. **Fidelity (true OCP, 24 flights).** Nominal + 5 held-out states, constant CL 0.025 and seed 101, both
+   objectives: surrogate-vs-teacher range and sawtooth differences of both arms.
+
+Measured costs (one core): surrogate 1200 s flight ≈ 1 min (V16 arm, 55 s locally); true-OCP flight
+25–50 min; teacher label ≈ 6 s. Held-out-3 with the true OCP every decision would be ≈ 800 CPU-h
+(`heldout-ocp` stage, optional) instead of ≈ 15 CPU-h.
+
+## 5. How to run (cloud server)
 
 Requirements: Linux, Python 3.11, `gcc` (CasADi functions are compiled once into `.cache/`), about
-2 GB RAM per parallel flight. Each flight solves two 60 s OCPs per 3 s decision (≈10–15 s per decision
-on one core, ≈1–1.5 h per 1200 s flight). Use at most one flight per physical core: the V16 corrector
-(2 s) and look-ahead (30 s) have wall-clock budgets, so oversubscription changes results.
+2 GB RAM per parallel job. Use at most one job per physical core: the V16 corrector (2 s) and look-ahead
+(30 s) have wall-clock budgets, so oversubscription can change results.
 
 ```bash
 git clone --single-branch --branch aoa-fix https://github.com/769222452/dqn-final.git dqn-aoa
 cd dqn-aoa
 python3.11 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
-bash scripts/run_aoa_experiments.sh test        # 34 tests incl. bit-exact V16 reference; must all pass
-bash scripts/run_aoa_experiments.sh smoke       # ~2 min, both objectives
-OUT=runs/aoa_dry MAX_DECISIONS=3 STATES=1 POLICIES="const0.025 seed101" JOBS=4 \
-  bash scripts/run_aoa_experiments.sh heldout   # optional pipeline dry run (8 short flights)
-JOBS=4  bash scripts/run_aoa_experiments.sh gate      # 4 flights, ~1.5 h
-bash scripts/run_aoa_experiments.sh report
-JOBS=48 bash scripts/run_aoa_experiments.sh heldout   # 656 flights, ~800 CPU-h; set JOBS = physical cores - 2
+export JOBS=$(( $(nproc) - 2 ))
+bash scripts/run_aoa_experiments.sh test        # all tests incl. bit-exact V16 reference; must pass
+bash scripts/run_aoa_experiments.sh smoke       # ~3 min: OCP and surrogate inner loops, 2 labels
+bash scripts/run_aoa_experiments.sh gate        # [true OCP] 4 nominal flights, ~1 h
+bash scripts/run_aoa_experiments.sh report      # check PROCEED_TO_HELDOUT=True for both policies
+bash scripts/run_aoa_experiments.sh surrogate   # labels, fit r0, qualify, 26 DAgger flights, final fit+qualify
+bash scripts/run_aoa_experiments.sh heldout     # [surrogate] 656 flights
+bash scripts/run_aoa_experiments.sh fidelity    # [true OCP] 24 flights (~10-20 h wall with 24+ cores)
 bash scripts/run_aoa_experiments.sh report
 ```
 
-Run inside `tmux`/`nohup`. Re-running a stage resumes: finished flights (`summary.json`) are skipped,
-unfinished ones are kept as `<folder>.attemptN` and re-run. Subsets: `POLICIES="const0.025 seed101"`,
-`STATES=10`, `OBJECTIVES=consistent`. Run the gate first; start held-out only if the report shows
-`PROCEED_TO_HELDOUT=True` for both gate policies (see the G3 deviation in section 8).
+Run inside `tmux`/`nohup`. Every stage resumes: finished flights (`summary.json`) and finished labels
+are skipped; fitted/qualified models are kept (delete `data/surrogate_consistent*` and
+`data/lookahead_consistent*` to refit). The `surrogate` stage stops if a qualification fails
+(`P1_physical_gate_passed=false`); do not run `heldout` then — send the qualification reports back.
+Subsets: `POLICIES="const0.025 seed101"`, `STATES=10`, `OBJECTIVES=consistent`.
 
-## 5. What to send back
+## 6. What to send back
 
 ```bash
 tar czf aoa_results.tgz runs/aoa/report.md runs/aoa/report.json runs/aoa/*.jobs runs/aoa/*.progress \
+  runs/aoa/surrogate data/surrogate_consistent* data/lookahead_consistent* \
   $(find runs/aoa -name summary.json -o -name setup.json -o -name steps.jsonl) \
   $(find runs/aoa -name '*.log' -size -2M)
 ```
@@ -132,24 +173,27 @@ tar czf aoa_results.tgz runs/aoa/report.md runs/aoa/report.json runs/aoa/*.jobs 
 plus `nproc`, CPU model and `pip freeze`. `steps.jsonl` holds every executed alpha command, so all
 metrics can be recomputed.
 
-## 6. Files
+## 7. Files
 
 - `src/certified_flight/ocp.py`, `src/certified_flight/corrector.py`: opt-in objective options.
-- `scripts/aoa_gate_experiment.py`: one flight (objective, policy, initial offset).
+- `src/certified_flight/objectives.py`: the two objectives and their runtime configurations.
+- `src/certified_flight/contracts.py`: the new options enter the control-contract digest only when they
+  differ from their defaults (V16 digest unchanged), so a surrogate cannot be flown with the wrong objective.
+- `src/certified_flight/lookahead.py`: `boundary_smoothing` is a qualified corrector setting.
+- `src/certified_flight/build.py`: `build_flight(..., config=...)` for a non-default runtime configuration.
+- `src/certified_flight/distill.py`: teacher labels and the V16 kernel-ridge fit.
+- `scripts/aoa_gate_experiment.py`: one flight (`--inner ocp|surrogate`, objective, policy, offset).
+- `scripts/aoa_label_contexts.py` (run once; output committed), `scripts/aoa_generate_labels.py`,
+  `scripts/aoa_fit_surrogate.py`, `scripts/aoa_qualify_surrogate.py`, `scripts/aoa_dagger_contexts.py`.
 - `scripts/run_aoa_experiments.sh`, `scripts/analysis/aoa_jobs.py`: stages and job lists.
 - `scripts/analysis/aoa_metrics.py`: oscillation metrics (also for archived V16 flights).
-- `scripts/analysis/aoa_report.py`: tables and verdicts.
+- `scripts/analysis/aoa_report.py`: tables, verdicts, archive reproduction, fidelity.
+- `experiments/aoa_fix/surrogate/contexts.jsonl`: 1,500 recorded pre contexts (see section 9).
+- `experiments/aoa_fix/v16_heldout3_archive.json`: archived V16 held-out-3 ranges (8 policies × 41 states).
 - `experiments/aoa_fix/policies/`: the 7 trained V16 policy chains (chain field of
   `v16_b16/runs/seed*/state.json`), hashes in `manifest.json`.
-- `experiments/aoa_fix/calibration/`: the development calibration runs above.
-- `tests/test_aoa_objective.py`: defaults unchanged, head/tail weighted alike, boundary jump costed.
-
-## 7. Scope and next step
-
-This stage tests the objective with the true OCP. If it passes, the production path needs the
-surrogate refitted on labels from the new objective (on-policy contexts) and a new look-ahead
-qualification report (`data/lookahead/AB_metrics.json` is bound to the V16 surrogate hash); then the
-7 policies are re-evaluated and, only if their gains drop, retrained with the unchanged V16 learning code.
+- `experiments/aoa_fix/calibration/`, `gate_local/`, `surrogate_local/`: local development evidence.
+- `tests/test_aoa_objective.py`, `tests/test_aoa_surrogate.py`.
 
 ## 8. Local gate result (4-CPU development container, 2026-10-31)
 

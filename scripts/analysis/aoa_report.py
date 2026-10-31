@@ -15,6 +15,15 @@ Held-out-3 (41 states, paired by state):
      CI lower bound > 0
   H3 sawtooth removed on every completed held-out flight (G1 thresholds per state)
 Failed flights count with their truncated range, as in V16.
+
+Stages: gate and fidelity fly the true OCP every decision; heldout flies the production surrogate
+pipeline (V16 surrogate for v16, the refitted surrogate for consistent); heldout-ocp (optional) is the
+held-out stage with the true OCP. Also reported:
+  archive reproduction  heldout/v16 ranges vs the archived V16 held-out-3 evaluation
+                        (experiments/aoa_fix/v16_heldout3_archive.json; identical code path, so ~0 km)
+  fidelity              surrogate (heldout) minus true-OCP teacher (fidelity) on the same flights:
+                        range and sawtooth metrics, per objective
+  channels              decisions flown by the surrogate / physics baseline / true OCP fallback
 """
 import json
 from pathlib import Path
@@ -41,7 +50,7 @@ def load(out):
         # The run summary (not the metrics block) is authoritative for outcome and range.
         row.update(completed=bool(s.get('completed', s.get('stop') == 'SUCCESS' and s.get('t_end_s') == 1200.)),
                    range_km=s['range_km'], stop=s['stop'], lookahead_offset_steps=s.get('lookahead_offset_steps'),
-                   fallback_steps=s.get('fallback_steps'))
+                   fallback_steps=s.get('fallback_steps'), channels=s.get('channels', {}), inner=s.get('inner', 'ocp'))
         rows[(stage, policy, state, objective)] = row
     return rows
 
@@ -97,9 +106,22 @@ def main(out):
             report['gate'][policy] = verdict
             md.append(f"- **{policy}**: " + ', '.join(f'{k}={fmt(x)}' for k, x in verdict.items()))
         md.append('')
-    held = {k: v for k, v in rows.items() if k[0] == 'heldout'}
+    for stage in ('heldout', 'heldout-ocp'):
+        md += heldout_section(rows, stage, report)
+    md += reproduction_section(rows, report)
+    md += fidelity_section(rows, report)
+    (out/'report.json').write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
+    (out/'report.md').write_text('\n'.join(md)+'\n', encoding='utf-8')
+    print('\n'.join(md))
+
+
+def heldout_section(rows, stage, report):
+    md = []
+    held = {('heldout',)+k[1:]: v for k, v in rows.items() if k[0] == stage}
+    report[stage] = {}
     if held:
-        md += ['## Held-out-3 (paired by initial state)', '']
+        inner = 'surrogate pipeline' if stage == 'heldout' else 'true OCP'
+        md += [f'## Held-out-3 [{inner}] (paired by initial state)', '']
         states = sorted({k[2] for k in held})
         policies = sorted({k[1] for k in held})
         for policy in policies:
@@ -118,7 +140,7 @@ def main(out):
                          H3_sawtooth_removed_share=float(np.mean(removed)) if removed else None,
                          median_power_3s=dict(v16=float(np.median([v['power_3s_fraction'] for v, _ in pairs])),
                                               consistent=float(np.median([c['power_3s_fraction'] for _, c in pairs]))))
-            report['heldout'][policy] = entry
+            report[stage][policy] = entry
         for policy in [p for p in policies if p != 'const0.025']:
             gains = {}
             for objective in ('v16', 'consistent'):
@@ -126,22 +148,76 @@ def main(out):
                      for s in states if s != 'dh0_dv0' and ('heldout', policy, s, objective) in held
                      and ('heldout', 'const0.025', s, objective) in held]
                 gains[objective] = describe(g)
-            if policy in report['heldout']:
+            if policy in report[stage]:
                 c = gains['consistent']
-                report['heldout'][policy].update(gain_over_const_v16=gains['v16'], gain_over_const_consistent=c,
+                report[stage][policy].update(gain_over_const_v16=gains['v16'], gain_over_const_consistent=c,
                                                  H2_gain_kept=bool(c['n'] and c['ci95'][0] > 0))
         md += ['| policy | states | done v16/cons | consistent−V16 km (mean [CI]) | H1 | gain V16 obj | gain consistent | H2 | sawtooth removed | 1/3 Hz power v16→cons |',
                '|---|---|---|---|---|---|---|---|---|---|']
-        for policy, e in report['heldout'].items():
+        for policy, e in report[stage].items():
             d = e['range_consistent_minus_v16_km']
             gv, gc = e.get('gain_over_const_v16', {}), e.get('gain_over_const_consistent', {})
             g = lambda x: f"{x['mean']:+.2f} [{x['ci95'][0]:+.2f}, {x['ci95'][1]:+.2f}]" if x.get('n') else '-'
             md.append(f"| {policy} | {e['states']} | {e['completed_v16']}/{e['completed_consistent']} | {g(d)} | {e['H1_range_kept']} | "
                       f"{g(gv)} | {g(gc)} | {e.get('H2_gain_kept', '-')} | {fmt(e['H3_sawtooth_removed_share'], 2)} | "
                       f"{e['median_power_3s']['v16']:.3f}→{e['median_power_3s']['consistent']:.3f} |")
-    (out/'report.json').write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
-    (out/'report.md').write_text('\n'.join(md)+'\n', encoding='utf-8')
-    print('\n'.join(md))
+        md.append('')
+        ch = {}
+        for k, v in held.items():
+            for name, n in (v.get('channels') or {}).items():
+                ch.setdefault(k[3], {}).setdefault(name, 0)
+                ch[k[3]][name] += n
+        report[stage+'_channels'] = ch
+        md += ['Decisions per channel: '+'; '.join(f'{o}: '+', '.join(f'{n}={c}' for n, c in sorted(v.items()))
+                                                   for o, v in sorted(ch.items())), '']
+    return md
+
+
+def reproduction_section(rows, report):
+    archive = json.loads((ROOT/'experiments/aoa_fix/v16_heldout3_archive.json').read_text(encoding='utf-8'))['ranges']
+    diffs = []
+    for (stage, policy, state, objective), r in rows.items():
+        if stage == 'heldout' and objective == 'v16' and state in archive.get(policy, {}):
+            diffs.append(dict(policy=policy, state=state, delta_km=r['range_km']-archive[policy][state]['range_km']))
+    if not diffs:
+        return []
+    d = np.array([x['delta_km'] for x in diffs])
+    report['archive_reproduction'] = dict(flights=len(diffs), max_abs_delta_km=float(abs(d).max()),
+                                          identical_1e6_km=int((abs(d) < 1e-6).sum()),
+                                          worst=sorted(diffs, key=lambda x: -abs(x['delta_km']))[:5])
+    e = report['archive_reproduction']
+    return ['## Archive reproduction (heldout / v16 vs archived V16 held-out-3)', '',
+            f"{e['identical_1e6_km']}/{e['flights']} flights identical to 1e-6 km; max |delta| "
+            f"{e['max_abs_delta_km']:.3g} km", '']
+
+
+def fidelity_section(rows, report):
+    md, out = [], {}
+    keys = ('range_km', 'intra_step_ptp_median_deg', 'power_3s_fraction', 'CL_mean_abs_error_median')
+    for (stage, policy, state, objective), teacher in sorted(rows.items()):
+        student = rows.get(('heldout', policy, state, objective))
+        if stage != 'fidelity' or student is None:
+            continue
+        out.setdefault(objective, []).append(dict(
+            policy=policy, state=state, completed=[student['completed'], teacher['completed']],
+            **{k: [student.get(k), teacher.get(k)] for k in keys}))
+    if not out:
+        return md
+    report['fidelity'] = {}
+    md += ['## Fidelity: surrogate pipeline (heldout) vs true-OCP teacher (fidelity), same flights', '',
+           '| objective | flights | range student−teacher km (mean, worst) | intra-ptp student/teacher deg (median) | '
+           '1/3 Hz power student/teacher (median) |', '|---|---|---|---|---|']
+    for objective, items in out.items():
+        dr = [a-b for a, b in (x['range_km'] for x in items)]
+        summary = dict(flights=len(items), range_delta_km=describe(dr),
+                       intra_ptp_deg=[float(np.median([x['intra_step_ptp_median_deg'][i] for x in items])) for i in (0, 1)],
+                       power_3s=[float(np.median([x['power_3s_fraction'][i] for x in items])) for i in (0, 1)],
+                       items=items)
+        report['fidelity'][objective] = summary
+        md.append(f"| {objective} | {len(items)} | {np.mean(dr):+.2f}, {max(dr, key=abs):+.2f} | "
+                  f"{summary['intra_ptp_deg'][0]:.3f} / {summary['intra_ptp_deg'][1]:.3f} | "
+                  f"{summary['power_3s'][0]:.3f} / {summary['power_3s'][1]:.3f} |")
+    return md + ['']
 
 
 if __name__ == '__main__':

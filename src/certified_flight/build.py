@@ -45,17 +45,19 @@ def runtime_config(root=ROOT):
     return config
 
 
-def build_flight(folder, label, initial_offset=None):
+def build_flight(folder, label, initial_offset=None, config=None):
     """Build the certified flight environment and its certifier.
 
     folder: output folder (created); proofs go to folder/'proofs', the jsonl logs
     to folder, oracle events and artifacts to folder/'oracle'.
     label: stored in certifier.tag['label'].
     initial_offset: optional (dh_m, dV_mps) added to the initial altitude and speed.
+    config: optional runtime configuration (default configs/runtime.json), e.g. from
+    certified_flight.objectives.objective_runtime_config.
     Returns (env, certifier).
     """
     integrity.verify(ROOT)
-    config = runtime_config(ROOT)
+    config = runtime_config(ROOT) if config is None else deepcopy(config)
     physical = config['physical']
     safety = deepcopy(config['safety_options'])
     mission = Mission(ROOT, physical['mission'])

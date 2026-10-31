@@ -8,13 +8,23 @@ import hashlib
 import json
 
 
+# Optional OCP objective settings and their defaults. A setting enters the digest only when it differs
+# from its default, so contracts of configurations without it (V16) are unchanged.
+OPTIONAL_OBJECTIVE_KEYS = {'boundary_smoothing': False, 'horizon_tracking_weight': 1., 'second_difference_weight': 0.}
+
+
 def control_mechanics(config):
     c = config.get('control', {})
     o = config.get('ocp', {})
-    return {'pre_transition_model': c.get('pre_transition_model', 'frozen'),
-            'reachability': bool(c.get('reachability', False)),
-            'tracking_mode': o.get('tracking_mode', 'instantaneous'),
-            'tracking_weight_multiplier': float(o.get('tracking_weight_multiplier', 1.))}
+    out = {'pre_transition_model': c.get('pre_transition_model', 'frozen'),
+           'reachability': bool(c.get('reachability', False)),
+           'tracking_mode': o.get('tracking_mode', 'instantaneous'),
+           'tracking_weight_multiplier': float(o.get('tracking_weight_multiplier', 1.))}
+    for key, default in OPTIONAL_OBJECTIVE_KEYS.items():
+        value = o.get(key, default)
+        if value != default:
+            out[key] = bool(value) if isinstance(default, bool) else float(value)
+    return out
 
 
 def mechanics_digest(config):
