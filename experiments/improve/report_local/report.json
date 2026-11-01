@@ -1,0 +1,1277 @@
+{
+ "arms": {
+  "aligned@minimal_first|const0.025": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2511.933072122711,
+   "heat_load": 1607.4050123837264,
+   "ptp": 0.00853153880052071,
+   "q_cruise": 78.84827393198177,
+   "fallback": 34,
+   "gap_to_bound_km": 13.057561570809716,
+   "gap_states": 6
+  },
+  "aligned@minimal_first|seed101": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2512.009689773752,
+   "heat_load": 1597.2343429106425,
+   "ptp": 0.009589360757889853,
+   "q_cruise": 78.5383763935412,
+   "fallback": 12,
+   "gap_to_bound_km": 12.696474600085518,
+   "gap_states": 6
+  },
+  "consistent|const0.025": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2491.882804538205,
+   "heat_load": 1496.4114203713466,
+   "ptp": 0.01942996355388571,
+   "q_cruise": 70.9901383493743,
+   "fallback": 49,
+   "gap_to_bound_km": 33.535565834842906,
+   "gap_states": 6
+  },
+  "consistent|seed101": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2490.959652198706,
+   "heat_load": 1491.0840819352195,
+   "ptp": 0.019514973097404464,
+   "q_cruise": 70.94648848269603,
+   "fallback": 10,
+   "gap_to_bound_km": 34.77674076820775,
+   "gap_states": 6
+  },
+  "consistent@minimal_first|const0.025": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2496.003713042368,
+   "heat_load": 1504.962751663069,
+   "ptp": 0.01954266867582266,
+   "q_cruise": 70.8924273570812,
+   "fallback": 61,
+   "gap_to_bound_km": 29.7028781854317,
+   "gap_states": 6
+  },
+  "consistent@minimal_first|seed101": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2495.217597184676,
+   "heat_load": 1499.5153765551706,
+   "ptp": 0.01906746625116007,
+   "q_cruise": 70.9928093558136,
+   "fallback": 10,
+   "gap_to_bound_km": 30.385313484103563,
+   "gap_states": 6
+  },
+  "v16|const0.025": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2455.3803355744667,
+   "heat_load": 1369.8483868121273,
+   "ptp": 1.2250432516162202,
+   "q_cruise": 63.47984296863654,
+   "fallback": 49,
+   "gap_to_bound_km": 70.51717136783402,
+   "gap_states": 6
+  },
+  "v16|seed101": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2465.1083554263478,
+   "heat_load": 1398.6291780656775,
+   "ptp": 1.1685263449538308,
+   "q_cruise": 64.55904682006232,
+   "fallback": 18,
+   "gap_to_bound_km": 59.040542805397614,
+   "gap_states": 6
+  },
+  "v16@minimal_first|const0.025": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2456.416931583336,
+   "heat_load": 1372.4404373750779,
+   "ptp": 1.2585909806920195,
+   "q_cruise": 63.4160468360666,
+   "fallback": 49,
+   "gap_to_bound_km": 69.04209963934272,
+   "gap_states": 6
+  },
+  "v16@minimal_first|seed101": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2467.558655149101,
+   "heat_load": 1401.5008430554237,
+   "ptp": 1.1763807121662633,
+   "q_cruise": 64.42464778004128,
+   "fallback": 18,
+   "gap_to_bound_km": 57.026590708492826,
+   "gap_states": 6
+  }
+ },
+ "comparisons": [
+  {
+   "name": "AoA fix: consistent \u2212 V16 (const 0.025)",
+   "kind": "execution",
+   "a": [
+    "consistent",
+    "const0.025"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "states": 21,
+   "difference_km": {
+    "n": 21,
+    "mean": 36.50246896373873,
+    "ci95": [
+     35.33996389954676,
+     37.70400471718284
+    ],
+    "wins": 21,
+    "worst": 32.71003412769278,
+    "median": 35.72947997502206
+   },
+   "completed": [
+    21,
+    21
+   ],
+   "heat_load_delta": 126.56303355921985,
+   "gap_closure": 0.5239461129960731,
+   "gap_closure_states": 6
+  },
+  {
+   "name": "Minimal-first look-ahead: consistent@mf \u2212 consistent (const)",
+   "kind": "execution",
+   "a": [
+    "consistent@minimal_first",
+    "const0.025"
+   ],
+   "b": [
+    "consistent",
+    "const0.025"
+   ],
+   "states": 21,
+   "difference_km": {
+    "n": 21,
+    "mean": 4.120908504162647,
+    "ci95": [
+     3.2061963171242183,
+     5.006719434948805
+    ],
+    "wins": 21,
+    "worst": 0.1437573493990385,
+    "median": 3.474924781540267
+   },
+   "completed": [
+    21,
+    21
+   ],
+   "heat_load_delta": 8.551331291721919,
+   "gap_closure": 0.11275382911299574,
+   "gap_closure_states": 6
+  },
+  {
+   "name": "Heat-load alignment: aligned@mf \u2212 consistent@mf (const)",
+   "kind": "execution",
+   "a": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "b": [
+    "consistent@minimal_first",
+    "const0.025"
+   ],
+   "states": 21,
+   "difference_km": {
+    "n": 21,
+    "mean": 15.929359080343147,
+    "ci95": [
+     14.69293641098272,
+     17.12336625083049
+    ],
+    "wins": 21,
+    "worst": 9.691435681981147,
+    "median": 16.595048129420775
+   },
+   "completed": [
+    21,
+    21
+   ],
+   "heat_load_delta": 102.44226072065761,
+   "gap_closure": 0.5598808469540675,
+   "gap_closure_states": 6
+  },
+  {
+   "name": "E1 total execution layer: aligned@mf \u2212 V16 (const)",
+   "kind": "execution",
+   "a": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 21,
+   "difference_km": {
+    "n": 21,
+    "mean": 56.55273654824452,
+    "ci95": [
+     54.7761931272269,
+     58.32361829735421
+    ],
+    "wins": 21,
+    "worst": 49.970878350191924,
+    "median": 55.702772593109785
+   },
+   "completed": [
+    21,
+    21
+   ],
+   "heat_load_delta": 237.5566255715994,
+   "gap_closure": 0.814324781346263,
+   "gap_closure_states": 6,
+   "criterion_met": true
+  },
+  {
+   "name": "Minimal-first alone on V16: v16@mf \u2212 v16 (const)",
+   "kind": "execution",
+   "a": [
+    "v16@minimal_first",
+    "const0.025"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "states": 21,
+   "difference_km": {
+    "n": 21,
+    "mean": 1.036596008869938,
+    "ci95": [
+     0.08011815129158202,
+     2.0162126163793745
+    ],
+    "wins": 12,
+    "worst": -1.8489909891804928,
+    "median": 0.4756196746866408
+   },
+   "completed": [
+    21,
+    21
+   ],
+   "heat_load_delta": 2.592050562950882,
+   "gap_closure": 0.018749030454574534,
+   "gap_closure_states": 6
+  },
+  {
+   "name": "RL transfer seed17: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed17"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed17: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed17"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "System seed17: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed17"
+   ],
+   "b": [
+    "v16",
+    "seed17"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed23: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed23"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed23: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed23"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "System seed23: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed23"
+   ],
+   "b": [
+    "v16",
+    "seed23"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed41: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed41"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed41: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed41"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "System seed41: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed41"
+   ],
+   "b": [
+    "v16",
+    "seed41"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed59: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed59"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed59: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed59"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "System seed59: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed59"
+   ],
+   "b": [
+    "v16",
+    "seed59"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed83: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed83"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed83: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed83"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "System seed83: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed83"
+   ],
+   "b": [
+    "v16",
+    "seed83"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed97: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed97"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed97: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed97"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "System seed97: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed97"
+   ],
+   "b": [
+    "v16",
+    "seed97"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "RL transfer seed101: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed101"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "states": 21,
+   "difference_km": {
+    "n": 21,
+    "mean": 9.728019851881331,
+    "ci95": [
+     7.979671877415728,
+     11.632002564696476
+    ],
+    "wins": 21,
+    "worst": 3.025172016354645,
+    "median": 8.223491005666347
+   },
+   "completed": [
+    21,
+    21
+   ],
+   "heat_load_delta": 28.78079125355054,
+   "gap_closure": 0.15926849252118602,
+   "gap_closure_states": 6
+  },
+  {
+   "name": "RL transfer seed101: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed101"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "states": 21,
+   "difference_km": {
+    "n": 21,
+    "mean": 0.07661765104127144,
+    "ci95": [
+     -0.7264992482710102,
+     0.8356344022901109
+    ],
+    "wins": 13,
+    "worst": -3.372452240410894,
+    "median": 0.9284330830796534
+   },
+   "completed": [
+    21,
+    21
+   ],
+   "heat_load_delta": -10.170669473083914,
+   "gap_closure": 0.028510396647980597,
+   "gap_closure_states": 6
+  },
+  {
+   "name": "System seed101: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed101"
+   ],
+   "b": [
+    "v16",
+    "seed101"
+   ],
+   "states": 21,
+   "difference_km": {
+    "n": 21,
+    "mean": 46.90133434740446,
+    "ci95": [
+     46.230541279421146,
+     47.55473599154791
+    ],
+    "wins": 21,
+    "worst": 43.63350307019391,
+    "median": 47.29158408379499
+   },
+   "completed": [
+    21,
+    21
+   ],
+   "heat_load_delta": 198.60516484496492,
+   "gap_closure": 0.7849514512984671,
+   "gap_closure_states": 6
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed17 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed17"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E3 coordinated blocks seed17 \u2212 PI seed17 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed17"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed17"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed23 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed23"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E3 coordinated blocks seed23 \u2212 PI seed23 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed23"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed23"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed41 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed41"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E3 coordinated blocks seed41 \u2212 PI seed41 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed41"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed41"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed59 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed59"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E3 coordinated blocks seed59 \u2212 PI seed59 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed59"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed59"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed83 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed83"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E3 coordinated blocks seed83 \u2212 PI seed83 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed83"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed83"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed97 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed97"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E3 coordinated blocks seed97 \u2212 PI seed97 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed97"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed97"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed101 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed101"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "E3 coordinated blocks seed101 \u2212 PI seed101 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed101"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed101"
+   ],
+   "criterion": "ci_lower_gt_0",
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "Issue 1, exact overrides seed17 \u2212 PI seed17 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed17"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed17"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "Issue 1, exact overrides seed23 \u2212 PI seed23 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed23"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed23"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "Issue 1, exact overrides seed41 \u2212 PI seed41 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed41"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed41"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "Issue 1, exact overrides seed59 \u2212 PI seed59 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed59"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed59"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "Issue 1, exact overrides seed83 \u2212 PI seed83 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed83"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed83"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "Issue 1, exact overrides seed97 \u2212 PI seed97 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed97"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed97"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  },
+  {
+   "name": "Issue 1, exact overrides seed101 \u2212 PI seed101 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed101"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed101"
+   ],
+   "states": 0,
+   "difference_km": {
+    "n": 0
+   },
+   "completed": [
+    0,
+    0
+   ],
+   "heat_load_delta": null,
+   "gap_closure": null,
+   "gap_closure_states": 0
+  }
+ ]
+}

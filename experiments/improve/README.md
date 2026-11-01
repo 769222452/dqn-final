@@ -183,4 +183,52 @@ bash scripts/run_aoa_experiments.sh report-improve   # -> runs/aoa/improve_repor
 
 ## 4. Results
 
-Filled in as the stages finish (local development runs first, then the cloud run).
+### 4.1 Local held-out-3 run (4-CPU container, 2026-11-01)
+
+The local run covers the nominal state plus the first 20 held-out-3 states, under the production
+surrogate pipeline. The full report is `report_local/report.md`; the bounds cover only 6 of these
+states locally. Every one of the 210 flights completed 1200 s, and every executed step passed
+certification.
+
+| execution layer | CL 0.025: mean range | seed 101: mean range | heat load (CL 0.025) | intra-step ptp | cruise q | mean gap to bound |
+|---|---|---|---|---|---|---|
+| v16 (archived configuration) | 2455.38 km | 2465.11 km | 1370 MJ/m² | 1.225° | 63.5 kPa | 70.5 km |
+| v16@minimal_first | 2456.42 km | 2467.56 km | 1372 MJ/m² | 1.259° | 63.4 kPa | 69.0 km |
+| consistent (aoa-fix) | 2491.88 km | 2490.96 km | 1496 MJ/m² | 0.019° | 71.0 kPa | 33.5 km |
+| consistent@minimal_first | 2496.00 km | 2495.22 km | 1505 MJ/m² | 0.020° | 70.9 kPa | 29.7 km |
+| **aligned@minimal_first** | **2511.93 km** | **2512.01 km** | 1607 MJ/m² | **0.009°** | 78.8 kPa | **13.1 km** |
+
+Declared comparisons, paired by state (21 states, 95 % paired bootstrap CI):
+
+| comparison | mean [CI] | wins | Δ heat load | gap closure |
+|---|---|---|---|---|
+| AoA fix: consistent − v16 (CL 0.025) | +36.50 km [+35.34, +37.70] | 21/21 | +127 MJ/m² | 0.52 |
+| minimal-first guard: consistent@mf − consistent | +4.12 km [+3.21, +5.01] | 21/21 | +9 | 0.11 |
+| heat-load alignment: aligned@mf − consistent@mf | +15.93 km [+14.69, +17.12] | 21/21 | +102 | 0.56 |
+| **E1 total execution layer: aligned@mf − v16** | **+56.55 km [+54.78, +58.32]** | **21/21** | +238 | **0.81** |
+| minimal-first alone on V16: v16@mf − v16 | +1.04 km [+0.08, +2.02] | 12/21 | +3 | 0.02 |
+| RL transfer, seed 101 − constant, V16 layer | +9.73 km [+7.98, +11.63] | 21/21 | +29 | 0.16 |
+| **RL transfer, seed 101 − constant, aligned@mf** | **+0.08 km [−0.73, +0.84]** | 13/21 | −10 | 0.03 |
+| system, seed 101: aligned@mf − v16 | +46.90 km [+46.23, +47.55] | 21/21 | +199 | 0.78 |
+
+How to read this:
+- **E1 is met.** The execution-layer changes add +56.6 km (+2.3 %) on every held-out state, and close
+  81 % of the V16 gap to the physical upper bound.
+- **The changes are not independent.** Minimal-first alone does little on V16 (+1 km); its value
+  appears once the inner loop flies near the q limit. Heat alignment needs the guard fix: without it,
+  the true-OCP flight loses 14.5 km.
+- **The V16 policy's learned gain disappears on the corrected layer.** On the V16 layer, seed 101 gains
+  +9.7 km over the tuned constant; on aligned@minimal_first it gains +0.1 km, with a CI around 0. The
+  V16 "learning gain" was mostly the policy compensating for execution-layer losses: the early
+  high-CL manoeuvre offsets the guard's over-correction and the heat-biased cruise.
+- **The paper can claim** the execution-layer contribution, with a physical bound showing how close it
+  comes to optimal. It **cannot** claim that the V16 RL policy adds range on the corrected system.
+- **Whether retraining recovers a gain** is E2/E3 (§4.2). At most ≈13 km remain against the
+  (optimistic) bound, and most of that sits in the pull-out phase.
+- **Price.** Integrated heat load rises by 17 % (238 MJ/m²). Peak heat flux stays ≤ 1.78 MW/m²
+  (limit 2.0) and peak q = 80.0 kPa (limit, certified).
+
+### 4.2 Retraining on aligned@minimal_first (local: 1 seed per variant, 10 iterations)
+
+Running; filled in when it finishes. The 7-seed comparison (PI / overrides / blocks) is part of the cloud
+package (`../aoa_fix/CODEX.md`).
