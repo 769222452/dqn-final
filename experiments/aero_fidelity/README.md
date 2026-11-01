@@ -97,6 +97,21 @@ Mach range, payload volume), which the point-mass model does not contain.
 - The tangent-wedge viscous edge state is the panel's own inviscid state; a boundary-layer solver would
   differ by some percent. This affects both models alike.
 
+## 4b. Known issue: volume meshing of some geometries (read before running `cfd-mesh`)
+
+Found in a local dry run with stand-in geometries from the 298 library (the new family has not been generated
+here, since MATLAB is unavailable locally):
+- gmsh Frontal 3D (algorithm 4) crashes (segmentation fault) on these surfaces; it is not used.
+- For one stand-in (V2_MD8_018) at the medium level, gmsh re-meshing of the surface produced "overlapping
+  facets on surface 4" with both HXT and Delaunay, for every edge-size scale tried, and the result was an empty
+  mesh. Two others (V2M_MD4_044 at coarse/medium/fine, V2_MD6_008 at medium) meshed fine (97k / 328k / 1.25M tetrahedra).
+- `scripts/cfd/make_su2_cases.py` now treats an empty mesh as a failure and, if re-meshing fails, falls back to
+  using the validated STL triangulation as the surface mesh (`remesh_surface=false`, recorded in `mesh_info.json`
+  and `case.json`). **This fallback has not been tested yet.** If `cfd-mesh` fails for a family member, send the
+  error list it prints; do not change the geometry.
+- Because the surface resolution differs between the two paths, the grid-convergence check is only meaningful
+  among meshes with the same `remesh_surface` value; `collect_su2.py` lists the value per case.
+
 ## 5. How to run (cloud server)
 
 See `CODEX.md`. In short: `bash experiments/aero_fidelity/run_decision.sh all`, which stops at the first

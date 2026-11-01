@@ -189,24 +189,28 @@ EDGE_SCALES = (1., 1.5, 2., 3.)      # retried in this order when the volume mes
 
 
 def mesh(stl, out, level):
-    """Volume mesh; returns dict(cells, edge_scale, algorithm). The leading-edge size is enlarged stepwise only
-    if the mesher fails (near the wing tip the two surfaces are closer than the edge size and the remeshed
-    triangles overlap); the scale actually used is returned and stored next to the mesh."""
+    """Volume mesh; returns dict(cells, edge_scale, algorithm, remesh_surface).
+
+    First choice: gmsh re-meshes the surface to the size fields (resolution follows the level). If it fails (gmsh
+    can produce overlapping facets on thin patches near the wing tip), the validated STL triangulation is used
+    as the surface mesh and only the volume is meshed. Frontal 3D (algorithm 4) is not used: it crashes gmsh on
+    these surfaces. What was actually used is returned and stored next to the mesh."""
     errors = []
-    for scale in EDGE_SCALES:
-        for algorithm in (10, 1, 4):                              # HXT, Delaunay, Frontal
-            try:
-                info = _mesh_once(stl, out, level, scale, algorithm)
-            except Exception as exc:                              # noqa: BLE001 - gmsh raises bare Exception
-                errors.append(f'edge x{scale:g}, algorithm {algorithm}: {exc}')
-                continue
-            if info['cells'] > 0:
-                return info
-            errors.append(f'edge x{scale:g}, algorithm {algorithm}: no tetrahedra')
+    for remesh in (True, False):
+        for scale in EDGE_SCALES if remesh else (1.,):
+            for algorithm in (10, 1):                             # HXT, Delaunay
+                try:
+                    info = _mesh_once(stl, out, level, scale, algorithm, remesh)
+                except Exception as exc:                          # noqa: BLE001 - gmsh raises bare Exception
+                    errors.append(f'remesh={remesh}, edge x{scale:g}, algorithm {algorithm}: {exc}')
+                    continue
+                if info['cells'] > 0:
+                    return info
+                errors.append(f'remesh={remesh}, edge x{scale:g}, algorithm {algorithm}: no tetrahedra')
     raise RuntimeError('volume meshing failed for '+str(stl)+':\n  '+'\n  '.join(errors))
 
 
-def _mesh_once(stl, out, level, scale, algorithm):
+def _mesh_once(stl, out, level, scale, algorithm, remesh=True):
     import gmsh
     lc = dict(LEVELS[level])
     lc['edge'] = lc['edge']*scale
@@ -214,8 +218,9 @@ def _mesh_once(stl, out, level, scale, algorithm):
     gmsh.option.setNumber('General.Terminal', 0)
     gmsh.model.add('wr')
     gmsh.merge(str(stl))
-    gmsh.model.mesh.classifySurfaces(np.deg2rad(30), True, True, np.pi)
-    gmsh.model.mesh.createGeometry()
+    gmsh.model.mesh.classifySurfaces(np.deg2rad(30), True, remesh, np.pi)
+    if remesh:
+        gmsh.model.mesh.createGeometry()
     body = [s[1] for s in gmsh.model.getEntities(2)]
     sl_body = gmsh.model.geo.addSurfaceLoop(body)
     gmsh.model.geo.synchronize()
@@ -270,7 +275,7 @@ def _mesh_once(stl, out, level, scale, algorithm):
     gmsh.write(str(out))
     n = int(gmsh.model.mesh.getElementsByType(4)[0].size)
     gmsh.finalize()
-    return dict(cells=n, edge_scale=scale, algorithm=algorithm)
+    return dict(cells=n, edge_scale=scale, algorithm=algorithm, remesh_surface=remesh)
 
 
 def freestream(mission, M, q=Q_PA):
