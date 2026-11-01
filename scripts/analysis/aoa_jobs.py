@@ -8,6 +8,9 @@ Stages (inner loop in brackets; surrogate '-' = V16 surrogate / none):
   fidelity     [ocp]        nominal + first 5 held-out-3 states; v16/consistent; const + seed101 = 24 flights
                             (surrogate-vs-teacher check of the held-out stage)
   heldout-ocp  [ocp]        the held-out stage with the true OCP every decision (optional, ~800 CPU-h)
+  improve      [surrogate]  held-out-3 (nominal + 40); execution layers ARMS (default v16, v16@minimal_first, consistent,
+                            consistent@minimal_first, aligned@minimal_first) x IMPROVE_POLICIES (default
+                            const0.025 + the 7 V16 policies; trained runs as train_<name>_seed<N>)
   retrained    [surrogate]  held-out-3; consistent; the 7 policies retrained under the consistent objective
                             (runs/aoa/retrain/seed*/state.json, optional retrain stage) = 287 flights
 
@@ -29,14 +32,17 @@ SEEDS = (17, 23, 41, 59, 83, 97, 101)
 STAGES = dict(gate='ocp', dagger='surrogate', heldout='surrogate', fidelity='ocp')
 STAGES['heldout-ocp'] = 'ocp'
 STAGES['retrained'] = 'surrogate'
+STAGES['improve'] = 'surrogate'
 
 
 def policies(stage):
+    if stage == 'improve':
+        return os.environ.get('IMPROVE_POLICIES', ' '.join(['const0.025']+[f'seed{s}' for s in SEEDS])).split()
     if stage == 'retrained':
         names = [f'retrained_seed{s}' for s in SEEDS]
         chosen = os.environ.get('POLICIES')
         return [p for p in names if not chosen or p in chosen.split()]
-    names = ['const0.025']+[f'seed{s}' for s in SEEDS] if stage in ('heldout', 'heldout-ocp') \
+    names = ['const0.025']+[f'seed{s}' for s in SEEDS] if stage in ('heldout', 'heldout-ocp', 'improve') \
         else ['const0.025', 'seed101']
     chosen = os.environ.get('POLICIES')
     return [p for p in names if not chosen or p in chosen.split()]
@@ -59,7 +65,10 @@ def jobs(stage, out):
     refit = os.environ.get('REFIT_OBJECTIVE', 'consistent')
     if os.environ.get('SAFETY_VARIANT'):            # fly the dagger/retrained stages in the deployed configuration
         refit += '@'+os.environ['SAFETY_VARIANT']
-    objectives = [refit] if stage in ('dagger', 'retrained') else os.environ.get('OBJECTIVES', 'v16 consistent').split()
+    if stage == 'improve':
+        objectives = os.environ.get('ARMS', 'v16 v16@minimal_first consistent consistent@minimal_first aligned@minimal_first').split()
+    else:
+        objectives = [refit] if stage in ('dagger', 'retrained') else os.environ.get('OBJECTIVES', 'v16 consistent').split()
     for policy in policies(stage):
         for dh, dv in offsets(stage):
             for objective in objectives:

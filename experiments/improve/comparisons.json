@@ -1,0 +1,507 @@
+{
+ "declared": "2026-11-01, before any held-out-3 flight of the consistent@minimal_first, aligned@minimal_first or trained arms (only nominal development flights had been seen)",
+ "arms": {
+  "v16": "V16 surrogate, V16 objective, V16 look-ahead (archived configuration)",
+  "consistent": "aoa-fix: time-consistent CL objective + refitted surrogate",
+  "consistent@minimal_first": "consistent + look-ahead offsets smallest first",
+  "aligned@minimal_first": "consistent without the integrated heat-load penalty + refitted surrogate + minimal-first look-ahead",
+  "v16@minimal_first": "V16 + minimal-first look-ahead"
+ },
+ "comparisons": [
+  {
+   "name": "AoA fix: consistent \u2212 V16 (const 0.025)",
+   "kind": "execution",
+   "a": [
+    "consistent",
+    "const0.025"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "Minimal-first look-ahead: consistent@mf \u2212 consistent (const)",
+   "kind": "execution",
+   "a": [
+    "consistent@minimal_first",
+    "const0.025"
+   ],
+   "b": [
+    "consistent",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "Heat-load alignment: aligned@mf \u2212 consistent@mf (const)",
+   "kind": "execution",
+   "a": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "b": [
+    "consistent@minimal_first",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "E1 total execution layer: aligned@mf \u2212 V16 (const)",
+   "kind": "execution",
+   "a": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "Minimal-first alone on V16: v16@mf \u2212 v16 (const)",
+   "kind": "execution",
+   "a": [
+    "v16@minimal_first",
+    "const0.025"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "RL transfer seed17: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed17"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "RL transfer seed17: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed17"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "System seed17: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed17"
+   ],
+   "b": [
+    "v16",
+    "seed17"
+   ]
+  },
+  {
+   "name": "RL transfer seed23: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed23"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "RL transfer seed23: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed23"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "System seed23: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed23"
+   ],
+   "b": [
+    "v16",
+    "seed23"
+   ]
+  },
+  {
+   "name": "RL transfer seed41: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed41"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "RL transfer seed41: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed41"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "System seed41: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed41"
+   ],
+   "b": [
+    "v16",
+    "seed41"
+   ]
+  },
+  {
+   "name": "RL transfer seed59: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed59"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "RL transfer seed59: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed59"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "System seed59: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed59"
+   ],
+   "b": [
+    "v16",
+    "seed59"
+   ]
+  },
+  {
+   "name": "RL transfer seed83: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed83"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "RL transfer seed83: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed83"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "System seed83: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed83"
+   ],
+   "b": [
+    "v16",
+    "seed83"
+   ]
+  },
+  {
+   "name": "RL transfer seed97: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed97"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "RL transfer seed97: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed97"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "System seed97: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed97"
+   ],
+   "b": [
+    "v16",
+    "seed97"
+   ]
+  },
+  {
+   "name": "RL transfer seed101: policy \u2212 const on V16 layer (archived result)",
+   "kind": "rl",
+   "a": [
+    "v16",
+    "seed101"
+   ],
+   "b": [
+    "v16",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "RL transfer seed101: policy \u2212 const on aligned@mf",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "seed101"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ]
+  },
+  {
+   "name": "System seed101: aligned@mf \u2212 V16 (same policy)",
+   "kind": "system",
+   "a": [
+    "aligned@minimal_first",
+    "seed101"
+   ],
+   "b": [
+    "v16",
+    "seed101"
+   ]
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed17 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed17"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E3 coordinated blocks seed17 \u2212 PI seed17 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed17"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed17"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed23 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed23"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E3 coordinated blocks seed23 \u2212 PI seed23 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed23"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed23"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed41 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed41"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E3 coordinated blocks seed41 \u2212 PI seed41 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed41"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed41"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed59 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed59"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E3 coordinated blocks seed59 \u2212 PI seed59 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed59"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed59"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed83 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed83"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E3 coordinated blocks seed83 \u2212 PI seed83 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed83"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed83"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed97 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed97"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E3 coordinated blocks seed97 \u2212 PI seed97 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed97"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed97"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E2 RL gain, retrained PI seed101 \u2212 const (aligned@mf)",
+   "kind": "rl",
+   "a": [
+    "aligned@minimal_first",
+    "train_pi_seed101"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "const0.025"
+   ],
+   "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "E3 coordinated blocks seed101 \u2212 PI seed101 (aligned@mf, equal budget)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_blocks_seed101"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed101"
+   ],
+   "criterion": "ci_lower_gt_0"
+  }
+ ]
+}

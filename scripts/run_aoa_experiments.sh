@@ -18,6 +18,12 @@
 #                                                   #   7 seeds under the consistent objective (~1700 CPU-h,
 #                                                   #   as V16: SEEDS, WORKERS=8 per seed)
 #   bash scripts/run_aoa_experiments.sh retrained   # [surrogate] held-out-3 flights of the retrained policies
+# Improvement study (experiments/improve/README.md):
+#   OBJECTIVE=aligned SAFETY_VARIANT=minimal_first bash scripts/run_aoa_experiments.sh surrogate
+#   OBJECTIVE=aligned SAFETY_VARIANT=minimal_first TRAIN_NAME=pi bash scripts/run_aoa_experiments.sh train
+#   ... TRAIN_NAME=blocks TRAIN_ARGS="--overrides --blocks 2,4,8" bash scripts/run_aoa_experiments.sh train
+#   IMPROVE_POLICIES="const0.025 seed17 ... train_pi_seed17 ..." bash scripts/run_aoa_experiments.sh improve
+#   bash scripts/run_aoa_experiments.sh report-improve
 #
 # OUT (default runs/aoa), PYTHON (default python3), JOBS (default: CPUs - 1),
 # MAX_DECISIONS (default 400; e.g. 2 for a dry run of the flight stages).
@@ -50,6 +56,9 @@ one() {   # inner objective surrogate policy dh dv folder
   if [ "$surrogate" != "-" ]; then args+=(--surrogate "$surrogate"); fi
   if [ "$policy" = "const0.025" ]; then args+=(--cl 0.025)
   elif [ "${policy#retrained_}" != "$policy" ]; then args+=(--chain "$OUT/retrain/${policy#retrained_}/state.json")
+  elif [ "${policy#train_}" != "$policy" ]; then
+    local p=${policy#train_}; args+=(--chain "$OUT/train/${p%_seed*}/seed${p##*_seed}/state.json")
+  elif [ "${policy#const}" != "$policy" ]; then args+=(--cl "${policy#const}")
   else args+=(--chain "experiments/aoa_fix/policies/final_${policy}.json"); fi
   if [ "$dh" != "0.0" ] || [ "$dv" != "0.0" ]; then args+=(--offset "$dh" "$dv"); fi
   "$PYTHON" -B scripts/aoa_gate_experiment.py "${args[@]}" > "$folder.log" 2>&1 \
@@ -126,7 +135,19 @@ case "$STAGE" in
         --seed "$s" --workers "${WORKERS:-8}" --iterations 80 > "$OUT/retrain/seed$s.log" 2>&1 &
     done
     wait; sha256sum "$OUT"/retrain/seed*/state.json | tee "$OUT/retrain/state.sha256" ;;
-  gate|heldout|fidelity|heldout-ocp|retrained)
+  train)   # TRAIN_NAME, TRAIN_ARGS (e.g. "--overrides --blocks 2,4,8"), SEEDS, WORKERS, ITERATIONS
+    [ -f "data/lookahead_${OBJECTIVE}/AB_metrics.json" ] || { echo "run the surrogate stage first"; exit 1; }
+    name=${TRAIN_NAME:-pi}; mkdir -p "$OUT/train/$name"
+    for s in ${SEEDS:-17 23 41 59 83 97 101}; do
+      AOA_OBJECTIVE=$OBJECTIVE AOA_SURROGATE=$FINAL AOA_SAFETY_VARIANT=$SAFETY_VARIANT "$PYTHON" -u scripts/train.py \
+        --out "$OUT/train/$name/seed$s" --seed "$s" --workers "${WORKERS:-8}" --iterations "${ITERATIONS:-80}" \
+        ${TRAIN_ARGS:-} > "$OUT/train/$name/seed$s.log" 2>&1 &
+    done
+    wait; sha256sum "$OUT"/train/$name/seed*/state.json | tee "$OUT/train/$name/state.sha256" ;;
+  report-improve)
+    "$PYTHON" -B scripts/analysis/improve_report.py "$OUT/improve" --spec experiments/improve/comparisons.json \
+      --bounds experiments/improve/bounds --out "$OUT/improve_report" ;;
+  gate|heldout|fidelity|heldout-ocp|retrained|improve)
     if [ "$STAGE" = heldout ]; then
       for o in ${OBJECTIVES:-v16 consistent}; do [ "$o" = v16 ] && continue
         [ -f "data/lookahead_${o%%@*}/AB_metrics.json" ] || { echo "run the surrogate stage first (no qualified data/surrogate_${o%%@*})"; exit 1; }
@@ -152,5 +173,5 @@ case "$STAGE" in
   report)
     "$PYTHON" -B scripts/analysis/aoa_report.py "$OUT" ;;
   *)
-    sed -n 2,27p "$0"; exit 2 ;;
+    sed -n 2,33p "$0"; exit 2 ;;
 esac

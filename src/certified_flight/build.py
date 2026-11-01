@@ -55,7 +55,8 @@ def build_flight(folder, label, initial_offset=None, config=None):
     initial_offset: optional (dh_m, dV_mps) added to the initial altitude and speed.
     config: optional runtime configuration (default configs/runtime.json), e.g. from
     certified_flight.objectives.objective_runtime_config. Without it, the environment variables
-    AOA_OBJECTIVE and AOA_SURROGATE (if set) select an objective and its refitted surrogate, so the
+    AOA_OBJECTIVE, AOA_SURROGATE and AOA_SAFETY_VARIANT (if set) select an objective, its refitted surrogate
+    and a safety-option variant (e.g. minimal_first), so the
     unchanged training and evaluation code (scripts/train.py, scripts/evaluate.py) can run under it.
     Returns (env, certifier).
     """
@@ -65,7 +66,8 @@ def build_flight(folder, label, initial_offset=None, config=None):
         if os.environ.get('AOA_OBJECTIVE'):
             from .objectives import objective_runtime_config
             config = objective_runtime_config(config, os.environ['AOA_OBJECTIVE'],
-                                              surrogate=os.environ.get('AOA_SURROGATE') or None)
+                                              surrogate=os.environ.get('AOA_SURROGATE') or None,
+                                              safety_variant=os.environ.get('AOA_SAFETY_VARIANT') or None)
     else:
         config = deepcopy(config)
     physical = config['physical']
