@@ -73,7 +73,12 @@ class TwoStageOCP:
         if not np.isfinite(horizon_weight) or horizon_weight < 0 or not np.isfinite(curvature_weight) \
                 or curvature_weight < 0:
             raise ValueError('horizon_tracking_weight and second_difference_weight must be finite and nonnegative')
-        key = (tuple(dts), backoff, mode, boundary, horizon_weight, curvature_weight)
+        # Opt-in: weight of the integrated heat-load term (default: trajectory.yaml w_heat, i.e. V16).
+        # The heat-flux LIMIT is a hard constraint in every case; 'aligned' sets this weight to 0.
+        heat_weight = float(self.cfg.get('heat_weight', self.traj['objective']['w_heat']))
+        if not np.isfinite(heat_weight) or heat_weight < 0:
+            raise ValueError('heat_weight must be finite and nonnegative')
+        key = (tuple(dts), backoff, mode, boundary, horizon_weight, curvature_weight, heat_weight)
         if key in self.cache:
             return self.cache[key]
         n = len(dts)
@@ -180,7 +185,7 @@ class TwoStageOCP:
                 terms['terminal'] += terminal['weights'][name]*((x[j, -1]-terminal[name+'_target']) /
                                                                 terminal['scales'][name])**2
         terms['range'] = (x[3, -1]-x0[3])/float(self.traj['solver']['scaling']['s'])
-        obj = (o['w_drag']*terms['drag']+o['w_heat']*terms['heat']+o['w_terminal']*terms['terminal'] +
+        obj = (o['w_drag']*terms['drag']+heat_weight*terms['heat']+o['w_terminal']*terms['terminal'] +
                o['w_control_rate']*(terms['control_rate']+terms.get('control_curvature', 0))
                - o['w_range']*terms['range']+terms['target'])
         # Prediction-only diagnostics; these entries are not additional costs.

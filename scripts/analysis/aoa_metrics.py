@@ -82,8 +82,24 @@ def flight_metrics(infos):
     out = metrics(steps, infos[0]['post_context']['alpha_prev'])
     errors = np.array([abs(s['executed_CL_mean']-s['CL_cmd']) for s in infos])
     out.update(CL_mean_abs_error_median=float(np.median(errors)), CL_mean_abs_error_p95=float(np.percentile(errors, 95)),
-               range_km=float(infos[-1]['range_m']/1000), t_end_s=float(infos[-1]['t_end_s']))
+               range_km=float(infos[-1]['range_m']/1000), t_end_s=float(infos[-1]['t_end_s']),
+               executed_CL_mean_after_150s=float(np.mean([s['executed_CL_mean'] for s in infos
+                                                          if s.get('t_start_s', 0) >= 150] or [np.nan])))
+    out.update(thermal_and_load(infos))
     return out
+
+
+def thermal_and_load(infos, dt=.5):
+    """Integrated heat load and peaks from the logged 0.5 s slot-start plant quantities (if present)."""
+    rows = [q for s in infos for q in (s.get('quantities_start') or [])]
+    if not rows:
+        return {}
+    q = np.asarray(rows, float)
+    cruise = np.asarray([r for s in infos if s.get('t_start_s', 0) >= 150 for r in (s.get('quantities_start') or [])], float)
+    return dict(heat_load_MJ_m2=float(q[:, 1].sum()*dt/1e6), heat_flux_peak_MW_m2=float(q[:, 1].max()/1e6),
+                q_dyn_peak_kPa=float(q[:, 0].max()/1e3), load_factor_peak=float(q[:, 2].max()),
+                q_dyn_cruise_mean_kPa=float(cruise[:, 0].mean()/1e3) if len(cruise) else None,
+                )
 
 
 if __name__ == '__main__':

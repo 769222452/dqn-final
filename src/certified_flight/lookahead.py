@@ -69,6 +69,12 @@ class LookaheadGuard:
         self.search_order = options.get('lookahead_search_order', 'declared')
         if self.search_order not in ('declared', 'pressure_risk', 'risk_first'):
             raise ValueError('Unknown lookahead search order')
+        # Opt-in (experiments/improve, Phase 1): after a measured pressure risk, try positive alpha offsets
+        # smallest first ('minimal_first') instead of largest first (V16 default 'aggressive_first'). Same
+        # candidate set, same audits and witness requirement; only the least deviation that passes is kept.
+        self.offset_order = options.get('lookahead_offset_order', 'aggressive_first')
+        if self.offset_order not in ('aggressive_first', 'minimal_first'):
+            raise ValueError('Unknown lookahead offset order')
         self.max_evaluations = int(options.get('recovery_search_max_evaluations', 12))
         if self.max_evaluations <= 0:
             raise ValueError('Recovery search evaluation limit must be positive')
@@ -286,7 +292,8 @@ class LookaheadGuard:
             # current and future control still requires its own audits.
             if (self.search_order in ('pressure_risk', 'risk_first') and offset == 0. and context['x'][2] < 0.
                     and any('dynamic_pressure' in f.get('risk', []) for f in trial['forecasts'])):
-                pending = sorted((v for v in pending if v > 0.), reverse=True)+[v for v in pending if v <= 0.]
+                pending = (sorted((v for v in pending if v > 0.), reverse=self.offset_order == 'aggressive_first')
+                           + [v for v in pending if v <= 0.])
                 diag.update(pressure_risk_reordered=True, remaining_offsets_deg=pending.copy())
         for u, trial, policy in deferred:
             if time.perf_counter() >= deadline or diag['evaluations'] >= self.max_evaluations:

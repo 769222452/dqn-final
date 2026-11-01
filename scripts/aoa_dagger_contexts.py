@@ -23,10 +23,13 @@ def main(argv=None):
     p.add_argument('--out', required=True)
     p.add_argument('--count', type=int, default=400)
     p.add_argument('--seed', type=int, default=20261101)
+    p.add_argument('--objective', default=None, help='only flights of this objective (last path component)')
     a = p.parse_args(argv)
     root = Path(a.flights)
     rows = []
     for steps in sorted(root.glob('**/steps.jsonl')):
+        if a.objective and steps.parent.name != a.objective:
+            continue
         flight = steps.parent.relative_to(root).as_posix()
         for line in steps.read_text(encoding='utf-8').splitlines():
             s = json.loads(line)

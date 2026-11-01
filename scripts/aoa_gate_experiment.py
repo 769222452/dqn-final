@@ -53,8 +53,8 @@ from certified_flight.corrector import PostCorrector  # noqa: E402
 from certified_flight.environment import FlightEnvironment  # noqa: E402
 from certified_flight.lookahead import LookaheadGuard  # noqa: E402
 from certified_flight.mission import Mission  # noqa: E402
-from certified_flight.objectives import (FROZEN_HORIZON_WEIGHT, OBJECTIVES, objective_ocp,  # noqa: E402
-                                         objective_runtime_config, objective_safety)
+from certified_flight.objectives import (FROZEN_HORIZON_WEIGHT, OBJECTIVES, SAFETY_VARIANTS,  # noqa: E402
+                                         objective_ocp, objective_runtime_config, objective_safety)
 from certified_flight.ocp import OracleController, TwoStageOCP  # noqa: E402
 from certified_flight.plant import CompiledPlant  # noqa: E402
 from certified_flight.serialization import clean, write_json  # noqa: E402
@@ -89,7 +89,16 @@ def source_revision():
         return dict(commit=None, uncommitted_changes=None)
 
 
+def split_objective(name):
+    """'aligned@minimal_first' -> ('aligned', 'minimal_first'): objective plus optional safety variant."""
+    objective, _, variant = name.partition('@')
+    if objective not in OBJECTIVES or (variant and variant not in SAFETY_VARIANTS):
+        raise ValueError(f'unknown objective {name!r}')
+    return objective, variant or None
+
+
 def build(objective, horizon_weight, curvature, offset=None):
+    objective, variant = split_objective(objective)
     integrity.verify(ROOT)
     config = runtime_config(ROOT)
     physical = config['physical']
@@ -102,7 +111,7 @@ def build(objective, horizon_weight, curvature, offset=None):
                                          {'mission_sha256': mission.config_path,
                                           'trajectory_sha256': trajectory_path})
     ocp_cfg = objective_ocp(physical['ocp'], objective, horizon_weight, curvature)
-    safety = objective_safety(safety, objective)
+    safety = objective_safety(safety, objective, variant)
     ocp = TwoStageOCP(mission, db, yaml.safe_load(trajectory_path.read_text(encoding='utf-8')), ocp_cfg, plant)
     inner = OCPInnerLoop(ocp, surrogate.control_contract)
     corrector = PostCorrector(plant, safety)
@@ -121,7 +130,8 @@ def build(objective, horizon_weight, curvature, offset=None):
 
 def build_surrogate(objective, surrogate, out, offset=None):
     """Production V16 pipeline (build_flight + Certifier) with the objective's surrogate and OCP fallback."""
-    config = objective_runtime_config(runtime_config(ROOT), objective, surrogate=surrogate)
+    objective, variant = split_objective(objective)
+    config = objective_runtime_config(runtime_config(ROOT), objective, surrogate=surrogate, safety_variant=variant)
     env, certifier = build_flight(out/'run', 'aoa', initial_offset=offset, config=config)
     return env, certifier, dict(objective=objective, inner='surrogate', surrogate=config['surrogate'],
                                 model_sha256=config['model_sha256'], ocp=config['physical']['ocp'],
@@ -213,6 +223,8 @@ def run(a):
                    lookahead_status=info.get('lookahead', {}).get('status'),
                    transition_started=info['transition_started'], refusals=refusals,
                    solver=stepper.solver(), channel=info.get('channel'), pre_context=pre,
+                   # plant quantities at the start of each 0.5 s slot: q_dyn, heat flux, n, M, CL, CD, D, L
+                   quantities_start=info['plant'].get('q_start'),
                    wall_s=time.perf_counter()-tick)
         log.write(json.dumps(clean(row))+'\n')
         log.flush()
@@ -245,10 +257,11 @@ def run(a):
 
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument('--objective', choices=sorted(OBJECTIVES), required=True)
+    p.add_argument('--objective', required=True,
+                   help=f"one of {sorted(OBJECTIVES)}, optionally '@<safety variant>' ({sorted(SAFETY_VARIANTS)})")
     p.add_argument('--inner', choices=('ocp', 'surrogate'), default='ocp',
                    help='ocp: true OCP every decision (gate); surrogate: production V16 pipeline')
-    p.add_argument('--surrogate', help='controller.npz fitted to the objective (required for consistent/surrogate)')
+    p.add_argument('--surrogate', help='controller.npz fitted to the objective (required unless --objective v16)')
     p.add_argument('--keep-proofs', action='store_true', help='surrogate inner loop: keep run/ (proofs, pools)')
     p.add_argument('--cl', type=float, default=.025, help='constant CL policy (ignored with --chain)')
     p.add_argument('--chain', help='state.json of a trained V16 policy, flown closed loop')
@@ -263,8 +276,8 @@ def main(argv=None):
     a = p.parse_args(argv)
     if a.cl not in CL_ACTIONS:
         p.error('--cl must be one of the 19 actions')
-    if a.inner == 'surrogate' and a.objective != 'v16' and not a.surrogate:
-        p.error('--inner surrogate --objective consistent needs --surrogate (the V16 one has the v16 teacher)')
+    if a.inner == 'surrogate' and split_objective(a.objective)[0] != 'v16' and not a.surrogate:
+        p.error('--inner surrogate with a non-v16 objective needs --surrogate (the V16 one has the v16 teacher)')
     if a.inner == 'surrogate' and (a.horizon_weight != FROZEN_HORIZON_WEIGHT or a.curvature):
         p.error('the surrogate inner loop uses the frozen objective it was fitted to')
     run(a)

@@ -118,6 +118,28 @@ def override_sets(entries):
     return [entries[:k] for k in sorted({min(k, n) for k in OVERRIDE_SETS+(n,)}) if k > 0] if n else []
 
 
+def block_override_sets(block_labels, schedule, min_advantage, sizes=(1, 2, 3, 4, 6, 8)):
+    """Exact override candidates from positive coordinated-block labels (opt-in --blocks).
+
+    Greedy by advantage, without overlapping decisions; returns lists of override entries (one per decision
+    of every selected block, base_action = pi's nominal action there)."""
+    sched = {int(round(float(t))): int(a) for t, a in schedule}
+    chosen, used = [], set()
+    for x in sorted((x for x in block_labels if x['advantage'] > min_advantage), key=lambda x: -x['advantage']):
+        ts = {int(t) for t in x['actions']}
+        if ts & used:
+            continue
+        chosen.append(x)
+        used |= ts
+    out = []
+    for k in sorted({min(k, len(chosen)) for k in sizes if chosen}):
+        entries = [dict(t=float(t), features=list(x['features']), action=int(a), base_action=sched[int(t)],
+                        advantage=float(x['advantage']), block=int(x['block']))
+                   for x in chosen[:k] for t, a in sorted((int(t), a) for t, a in x['actions'].items())]
+        out.append((k, entries, sum(x['advantage'] for x in chosen[:k])))
+    return out
+
+
 def improvable_fraction(new, min_advantage):
     states = sorted({x['t'] for x in new})
     if not states:
@@ -150,7 +172,7 @@ def prune(idir, keep):
 def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window=48., candidates=14, patience=None,
           min_advantage=1e-5, continuation='open-loop', inputs=STATE_INPUTS, overrides=False, initial_cl=.04,
           label_decay=LABEL_DECAY, label_keep=LABEL_KEEP, use_stop_rule=True, keep_evidence=False, hidden=HIDDEN,
-          log=print):
+          log=print, blocks=()):
     out = Path(out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     if stride % DECISION_S or stride <= 0 or states < 1:
@@ -160,6 +182,9 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
     if initial_cl not in CL_ACTIONS:
         raise ValueError('initial_cl must be one of the 19 actions')
     hidden = parse_hidden(hidden)
+    blocks = tuple(sorted({int(b) for b in blocks if int(b) > 1}))
+    if blocks and continuation != 'open-loop':
+        raise ValueError('coordinated block alternatives require open-loop continuation')
     patience = patience or int(stride//DECISION_S)
     grid = margin_grid(candidates)
     inputs = parse_inputs(inputs)
@@ -174,7 +199,8 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
                                candidates=candidates, margins=grid, patience=patience, min_advantage=min_advantage,
                                continuation=continuation, inputs=input_names(inputs), overrides=overrides,
                                initial_cl=initial_cl, label_decay=label_decay, label_keep=label_keep,
-                               stop_rule=use_stop_rule, workers=workers, hidden=list(hidden)))
+                               stop_rule=use_stop_rule, workers=workers, hidden=list(hidden),
+                               **(dict(blocks=list(blocks)) if blocks else {})))
     log(f"start: iteration {st['iteration']}, seed {st['seed']}, {states} states every {stride:g} s, "
         f"continuation={continuation}, inputs={','.join(input_names(inputs))}, overrides={overrides}, "
         f"hidden={','.join(map(str, hidden))}, workers={workers}")
@@ -200,8 +226,9 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
             rec['initial'] = {k: v for k, v in init.items() if k != 'schedule'}
             log(f"iter {i}: nominal decisions of the current policy, G={init['G']:.6f} ({init['range_km']:.2f} km)")
         sched = st['schedule'] if continuation == 'open-loop' else None
-        jobs = [('branch', (str(idir/f'branch_t{int(t):04d}'), st['chain'], [t], sweep, sched)) for t in times]
-        costs = [state_cost(t) for t in times]
+        jobs = [('branch', (str(idir/f'branch_t{int(t):04d}'), st['chain'], [t], sweep, sched)
+                 + ((blocks,) if blocks else ())) for t in times]
+        costs = [state_cost(t)*(1+len(blocks)) for t in times]
         if st['G'] is None:               # closed loop: the initial return is flown alongside the branches
             res = run_jobs(jobs+[('candidate', (str(idir/'initial'), st['chain']))], workers, costs+[400.])
             init = res.pop()
@@ -215,14 +242,20 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
         errors = [r['error'] for r in res if 'error' in r]
         if errors:
             raise RuntimeError('branch job failed:\n'+errors[0])
-        rows = [r for w in res for r in w['rows']]
+        all_rows = [r for w in res for r in w['rows']]
+        rows = [r for r in all_rows if 'block' not in r]
+        block_rows = [r for r in all_rows if 'block' in r]
+        branch_steps = int(sum(w.get('steps', 0) for w in res))
         t_branch = time.perf_counter()-t0
         prefix = {float(t): x for w in res for t, x in w['prefix'].items()}
         base = {t: st['G']-g for t, (g, a0, f) in prefix.items()}
         new = [dict(features=f, action=a0, base_action=a0, t=t, advantage=0.) for t, (g, a0, f) in prefix.items()]
         new += [dict(features=r['features'], action=r['action'], base_action=r['base_action'], t=r['t'],
                      advantage=r['G_rest']-base[r['t']]) for r in rows if r['valid']]
-        save_json(idir/'labels.json', dict(rows=rows, labels=new))
+        block_labels = [dict(features=r['features'], t=r['t'], block=r['block'], delta=r['delta'],
+                             actions={str(k): v for k, v in r['actions'].items()}, advantage=r['G_rest']-base[r['t']])
+                        for r in block_rows if r['valid']]
+        save_json(idir/'labels.json', dict(rows=all_rows, labels=new, block_labels=block_labels))
         version = st['policy_version']
         for x in new:
             x['v'] = version
@@ -236,9 +269,11 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
             st['label_archive'] = list(st['labels_current'])
         frac = improvable_fraction(new, min_advantage)
         n_pos = sum(1 for x in new if x['action'] != x['base_action'] and x['advantage'] > min_advantage)
-        n_invalid = sum(not r['valid'] for r in rows)
+        n_invalid = sum(not r['valid'] for r in all_rows)
+        n_block_pos = sum(1 for x in block_labels if x['advantage'] > min_advantage)
         log(f"iter {i}: {len(new)} labels ({len(rows)} branches, {n_invalid} invalid) in {t_branch:.0f} s; "
-            f"positive pairs {n_pos}, improvable states {frac:.0%}")
+            f"positive pairs {n_pos}, improvable states {frac:.0%}"
+            + (f"; {len(block_labels)} block labels, {n_block_pos} positive" if blocks else ''))
 
         # 2. out-of-sample check of the previous ensemble, then fit
         check = prediction_check(st.get('check_members'), new, min_advantage, st.get('check_inputs'))
@@ -268,11 +303,15 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
             specs.append(dict(kind='override', name=f'candidate_override{len(es)}', n=len(es),
                               predicted_gain=sum(x['advantage'] for x in es),
                               chain=st['chain']+[dict(kind='override', entries=entries, match='t', iteration=i)]))
+        for k, entries, gain in (block_override_sets(block_labels, st['schedule'], min_advantage) if blocks else []):
+            specs.append(dict(kind='block_override', name=f'candidate_block{k}', n=k, predicted_gain=gain,
+                              chain=st['chain']+[dict(kind='override', entries=entries, match='t', iteration=i)]))
         tick = time.perf_counter()
         cres = run_jobs([('candidate', (str(idir/c['name']), c['chain'])) for c in specs], min(len(specs), workers))
         t_cand = time.perf_counter()-tick
         for c, r in zip(specs, cres):
-            what = f"margin {c['margin']:g}" if c['kind'] == 'model' else f"override x{c['n']}"
+            what = (f"margin {c['margin']:g}" if c['kind'] == 'model' else
+                    f"block override x{c['n']}" if c['kind'] == 'block_override' else f"override x{c['n']}")
             if 'error' in r:
                 log(f"  candidate {what}: ERROR\n{r['error']}")
             else:
@@ -283,7 +322,10 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
         ok = [(r['G'], c, r) for c, r in zip(specs, cres) if 'error' not in r and r['success']]
         best = max(ok, key=lambda x: x[0]) if ok else None
         accepted = bool(best and best[0] > st['G']+1e-9)
+        cand_steps = int(sum(r.get('steps', 0) for r in cres if 'error' not in r))
         rec.update(labels=len(new), invalid=n_invalid, improvable_fraction=frac, positive_pairs=n_pos, sweep=sweep,
+                   certified_steps=dict(branch=branch_steps, candidates=cand_steps),
+                   **(dict(block_labels=len(block_labels), block_positive=n_block_pos) if blocks else {}),
                    prediction_check=check, fit=fit, G_before=st['G'], accepted=accepted,
                    candidates=[dict(kind=c['kind'], margin=c.get('margin'), overrides=c.get('n'),
                                     **({k: r[k] for k in ('G', 'range_km', 'stop', 'switches')} if 'error' not in r
@@ -302,7 +344,10 @@ def train(out, seed=17, iterations=40, workers=14, states=25, stride=48., window
         st['iteration'] = i+1
         reason = stop_reason(st['history'], patience) if use_stop_rule else None
         if reason:
-            st['converged'] = dict(iteration=i, reason=reason, G=st['G'])
+            # Issue-1 diagnostic: exact positive labels of the final policy that no accepted candidate realized.
+            unrealized = [x for x in st['labels_current'] if x['action'] != x['base_action'] and x['advantage'] > min_advantage]
+            st['converged'] = dict(iteration=i, reason=reason, G=st['G'], unrealized_positive_labels=len(unrealized),
+                                   unrealized_positive_sum=float(sum(x['advantage'] for x in unrealized)))
         save_json(path, st)
         log(f"iter {i} done: " + (f"accepted {best[1]['name'].removeprefix('candidate_')}" if accepted else 'kept policy')
             + f"; G={st['G']:.6f} (wall {rec['wall_s']['total']:.0f} s)")
@@ -336,8 +381,10 @@ def main(argv=None):
     p.add_argument('--keep-evidence', action='store_true', help='keep proof records of branches and rejected candidates')
     p.add_argument('--hidden', default=','.join(map(str, HIDDEN)),
                    help='hidden layer widths of the advantage networks, e.g. 16,16')
+    p.add_argument('--blocks', default='', help="opt-in coordinated alternatives: block lengths > 1, e.g. '2,4,8'")
     a = p.parse_args(argv)
     train(a.out, a.seed, a.iterations, a.workers, a.states, a.stride, a.window, a.candidates, a.patience,
           a.min_advantage, a.continuation, a.inputs, a.overrides, a.initial_cl, a.label_decay, a.label_keep,
-          not a.ignore_stop_rule, a.keep_evidence, a.hidden, log=lambda s: print(s, flush=True))
+          not a.ignore_stop_rule, a.keep_evidence, a.hidden, log=lambda s: print(s, flush=True),
+          blocks=[int(b) for b in a.blocks.split(',') if b.strip()])
     return 0

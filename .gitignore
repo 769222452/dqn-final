@@ -4,3 +4,8 @@ __pycache__/
 .cache/
 runs/
 *.log
+
+# refitted surrogates and their qualification reports (produced by run_aoa_experiments.sh; evidence copies live in experiments/)
+data/surrogate_*/
+data/lookahead_*/
+data/lookahead_*.qualify.log

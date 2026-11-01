@@ -10,7 +10,8 @@ import json
 
 # Optional OCP objective settings and their defaults. A setting enters the digest only when it differs
 # from its default, so contracts of configurations without it (V16) are unchanged.
-OPTIONAL_OBJECTIVE_KEYS = {'boundary_smoothing': False, 'horizon_tracking_weight': 1., 'second_difference_weight': 0.}
+OPTIONAL_OBJECTIVE_KEYS = {'boundary_smoothing': False, 'horizon_tracking_weight': 1., 'second_difference_weight': 0.,
+                           'heat_weight': .5}   # .5 = configs/trajectory.yaml objective.w_heat (V16)
 
 
 def control_mechanics(config):

@@ -30,9 +30,13 @@ PYTHON=${PYTHON:-python3}
 OUT=${OUT:-runs/aoa}
 JOBS=${JOBS:-$(( $(nproc) > 1 ? $(nproc) - 1 : 1 ))}
 STAGE=${1:-}
-LAB=$OUT/surrogate
-R0=data/surrogate_consistent_r0/controller.npz
-FINAL=data/surrogate_consistent/controller.npz
+OBJECTIVE=${OBJECTIVE:-consistent}   # objective of the surrogate/retrain stages (consistent | aligned)
+if [ "$OBJECTIVE" = consistent ]; then LAB=$OUT/surrogate; else LAB=$OUT/surrogate_$OBJECTIVE; fi
+R0=data/surrogate_${OBJECTIVE}_r0/controller.npz
+FINAL=data/surrogate_${OBJECTIVE}/controller.npz
+export REFIT_OBJECTIVE=$OBJECTIVE
+export SAFETY_VARIANT=${SAFETY_VARIANT:-}       # e.g. minimal_first (look-ahead offset order), see objectives.py
+DEPLOYED=$OBJECTIVE${SAFETY_VARIANT:+@$SAFETY_VARIANT}
 
 one() {   # inner objective surrogate policy dh dv folder
   local inner=$1 objective=$2 surrogate=$3 policy=$4 dh=$5 dv=$6 folder=$7
@@ -65,12 +69,12 @@ fit_and_qualify() {   # model labels...
   local model=$1; shift
   mkdir -p "$(dirname "$model")"
   if [ ! -f "$model" ]; then
-    "$PYTHON" -B scripts/aoa_fit_surrogate.py --objective consistent --labels "$@" --out "$model" \
+    "$PYTHON" -B scripts/aoa_fit_surrogate.py --objective "$OBJECTIVE" --labels "$@" --out "$model" \
       | tee "${model%.npz}.fit.log"
   fi
   local qdir; qdir=$(dirname "$(dirname "$model")")/lookahead_$(basename "$(dirname "$model")" | sed 's/^surrogate_//')
   if [ ! -f "$qdir/AB_metrics.json" ]; then
-    "$PYTHON" -B scripts/aoa_qualify_surrogate.py --objective consistent --model "$model" --labels "$@" \
+    "$PYTHON" -B scripts/aoa_qualify_surrogate.py --objective "$OBJECTIVE" --model "$model" --labels "$@" \
       | tee "$qdir.qualify.log" || { echo "QUALIFICATION FAILED for $model (see $qdir/AB_metrics.json)"; exit 1; }
   fi
 }
@@ -115,27 +119,29 @@ case "$STAGE" in
     "$PYTHON" -B scripts/aoa_generate_labels.py --objective consistent --limit 2 --jobs 2 \
       --contexts experiments/aoa_fix/surrogate/contexts.jsonl --out "$OUT/smoke/labels.jsonl" ;;
   retrain)
-    [ -f "data/lookahead_consistent/AB_metrics.json" ] || { echo "run the surrogate stage first"; exit 1; }
+    [ -f "data/lookahead_${OBJECTIVE}/AB_metrics.json" ] || { echo "run the surrogate stage first"; exit 1; }
     mkdir -p "$OUT/retrain"
     for s in ${SEEDS:-17 23 41 59 83 97 101}; do
-      AOA_OBJECTIVE=consistent AOA_SURROGATE=$FINAL "$PYTHON" -u scripts/train.py --out "$OUT/retrain/seed$s" \
+      AOA_OBJECTIVE=$OBJECTIVE AOA_SURROGATE=$FINAL "$PYTHON" -u scripts/train.py --out "$OUT/retrain/seed$s" \
         --seed "$s" --workers "${WORKERS:-8}" --iterations 80 > "$OUT/retrain/seed$s.log" 2>&1 &
     done
     wait; sha256sum "$OUT"/retrain/seed*/state.json | tee "$OUT/retrain/state.sha256" ;;
   gate|heldout|fidelity|heldout-ocp|retrained)
     if [ "$STAGE" = heldout ]; then
-      [ -f "data/lookahead_consistent/AB_metrics.json" ] || { echo "run the surrogate stage first (no qualified $FINAL)"; exit 1; }
+      for o in ${OBJECTIVES:-v16 consistent}; do [ "$o" = v16 ] && continue
+        [ -f "data/lookahead_${o%%@*}/AB_metrics.json" ] || { echo "run the surrogate stage first (no qualified data/surrogate_${o%%@*})"; exit 1; }
+      done
       gate_check
     fi
     flights "$STAGE" ;;
   surrogate)
     mkdir -p "$LAB"
-    "$PYTHON" -B scripts/aoa_generate_labels.py --objective consistent --jobs "$JOBS" \
+    "$PYTHON" -B scripts/aoa_generate_labels.py --objective "$OBJECTIVE" --jobs "$JOBS" \
       --contexts experiments/aoa_fix/surrogate/contexts.jsonl --out "$LAB/labels.jsonl" | tee -a "$LAB/labels.log"
     fit_and_qualify "$R0" "$LAB/labels.jsonl"
     flights dagger
-    "$PYTHON" -B scripts/aoa_dagger_contexts.py "$OUT/dagger" --out "$LAB/dagger_contexts.jsonl"
-    "$PYTHON" -B scripts/aoa_generate_labels.py --objective consistent --jobs "$JOBS" \
+    "$PYTHON" -B scripts/aoa_dagger_contexts.py "$OUT/dagger" --objective "$DEPLOYED" --out "$LAB/dagger_contexts.jsonl"
+    "$PYTHON" -B scripts/aoa_generate_labels.py --objective "$OBJECTIVE" --jobs "$JOBS" \
       --contexts "$LAB/dagger_contexts.jsonl" --out "$LAB/dagger_labels.jsonl" | tee -a "$LAB/labels.log"
     fit_and_qualify "$FINAL" "$LAB/labels.jsonl" "$LAB/dagger_labels.jsonl" ;;
   use-local)   # alternative to the surrogate stage: install the surrogates fitted and qualified locally

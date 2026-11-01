@@ -61,13 +61,37 @@ def alternatives(a0, t, sweep=0):
     return [a for a in (a0-k, a0+k) if 0 <= a <= MAX_ACTION]
 
 
+def block_alternatives(t, sweep, schedule, blocks):
+    """Coordinated alternatives (opt-in): shift pi's nominal actions by delta at B consecutive decisions.
+
+    For B > 1 only: {decision time: action} for the decisions t, t+12, ..., t+12(B-1) inside the mission,
+    delta = +-k with the radius rule of alternatives(). The block is a direction in the space of decision
+    sequences: altitude and energy integrate CL, so the return is not separable over decisions, and a
+    sustained shift can improve where every single-decision move is negative (see
+    experiments/improve/README.md).
+    """
+    out = []
+    for B in blocks:
+        if B <= 1:
+            continue
+        ts = [t+DECISION_S*j for j in range(B) if t+DECISION_S*j <= MISSION_S-DECISION_S+1e-9]
+        k = 1 if (int((t+1e-9)//RADIUS_BLOCK_S)+sweep) % 2 == 0 else 2
+        for delta in (-k, k):
+            acts = {int(round(u)): schedule[int(round(u))]+delta for u in ts}
+            if all(0 <= a <= MAX_ACTION for a in acts.values()):
+                out.append((B, delta, acts))
+    return out
+
+
 def branch_job(args):
     """Fly pi to each decision time and measure the advantages of the alternatives there.
 
-    args: (folder, chain, times, sweep, schedule); schedule = pi's nominal decisions for open-loop
-    continuation or None for closed-loop continuation.
+    args: (folder, chain, times, sweep, schedule[, blocks]); schedule = pi's nominal decisions for
+    open-loop continuation or None for closed-loop continuation. blocks (opt-in, open loop only): block
+    lengths B > 1 of coordinated alternatives (block_alternatives); rows carry block=B, delta, actions.
     """
-    folder, chain, times, sweep, schedule = args
+    folder, chain, times, sweep, schedule = args[:5]
+    blocks = tuple(args[5]) if len(args) > 5 and args[5] else ()
     sched = None if schedule is None else {int(round(float(t))): int(a) for t, a in schedule}
     try:
         folder = Path(folder)
@@ -101,6 +125,22 @@ def branch_job(args):
                 steps += len(acts)+len(acts2)
                 rows.append(dict(t=t_b, action=a, base_action=a0, features=f, executed=acts[:4], G_rest=g1+g2,
                                  valid=s2 == 'DONE', stop=s2, wall_s=time.perf_counter()-tick))
+            if blocks and sched is None:
+                raise ValueError('coordinated block alternatives require open-loop continuation')
+            for B, delta, block in (block_alternatives(t_b, sweep, sched, blocks) if blocks else []):
+                tick = time.perf_counter()
+                branch = certifier.fork(folder/f't{int(t_b):04d}_B{B}_d{delta:+d}')
+                pol = ChainPolicy(chain, branch.env, override=block, schedule=sched)
+                end = max(block)+DECISION_S
+                g1, s1, acts = certified_fly(branch, pol, until=end)
+                if s1 is not None and s1 != 'DONE':
+                    rows.append(dict(t=t_b, block=B, delta=delta, actions=block, base_action=a0, features=f,
+                                     valid=False, stop=s1))
+                    continue
+                g2, s2, acts2 = (0., 'DONE', []) if s1 == 'DONE' else certified_fly(branch, pol)
+                steps += len(acts)+len(acts2)
+                rows.append(dict(t=t_b, block=B, delta=delta, actions=block, base_action=a0, features=f,
+                                 G_rest=g1+g2, valid=s2 == 'DONE', stop=s2, wall_s=time.perf_counter()-tick))
         return dict(rows=rows, prefix={str(t): list(x) for t, x in prefix.items()}, steps=steps,
                     wall_s=time.perf_counter()-started)
     except BaseException:

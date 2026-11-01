@@ -14,6 +14,8 @@ Stages (inner loop in brackets; surrogate '-' = V16 surrogate / none):
 Environment filters: POLICIES (space separated, e.g. "const0.025 seed101"), STATES (number of held-out
 states after the nominal state), OBJECTIVES (default "v16 consistent"), SURROGATE (refitted model,
 default data/surrogate_consistent/controller.npz), SURROGATE_R0 (default data/surrogate_consistent_r0/...).
+Other objectives (e.g. OBJECTIVES="v16 consistent aligned") use data/surrogate_<objective>[_r0]/controller.npz;
+REFIT_OBJECTIVE (default consistent) selects the objective of the dagger and retrained stages.
 """
 import os
 from pathlib import Path
@@ -54,14 +56,18 @@ def offsets(stage):
 
 def jobs(stage, out):
     inner = STAGES[stage]
-    objectives = ['consistent'] if stage in ('dagger', 'retrained') else os.environ.get('OBJECTIVES', 'v16 consistent').split()
-    model = os.environ.get('SURROGATE_R0' if stage == 'dagger' else 'SURROGATE',
-                           'data/surrogate_consistent_r0/controller.npz' if stage == 'dagger'
-                           else 'data/surrogate_consistent/controller.npz')
+    refit = os.environ.get('REFIT_OBJECTIVE', 'consistent')
+    if os.environ.get('SAFETY_VARIANT'):            # fly the dagger/retrained stages in the deployed configuration
+        refit += '@'+os.environ['SAFETY_VARIANT']
+    objectives = [refit] if stage in ('dagger', 'retrained') else os.environ.get('OBJECTIVES', 'v16 consistent').split()
     for policy in policies(stage):
         for dh, dv in offsets(stage):
             for objective in objectives:
-                surrogate = model if inner == 'surrogate' and objective == 'consistent' else '-'
+                base = objective.partition('@')[0]     # '@<variant>' = same surrogate, other safety option
+                default = f'data/surrogate_{base}' + ('_r0' if stage == 'dagger' else '') + '/controller.npz'
+                if base == 'consistent':
+                    default = os.environ.get('SURROGATE_R0' if stage == 'dagger' else 'SURROGATE', default)
+                surrogate = default if inner == 'surrogate' and base != 'v16' else '-'
                 folder = Path(out)/stage/policy/f'dh{dh:g}_dv{dv:g}'/objective
                 yield inner, objective, surrogate, policy, dh, dv, folder
 

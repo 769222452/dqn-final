@@ -76,13 +76,16 @@ def chain_action(chain, f):
 class ChainPolicy:
     """Decision rule for certified flights; decides at multiples of DECISION_S and holds the action in between.
 
-    override: optional (decision time, action) imposed at one decision.
+    override: optional (decision time, action) imposed at one decision, or a dict {decision time: action}
+              imposed at several decisions (coordinated block alternatives, opt-in --blocks).
     schedule: optional {decision time: action}; every other decision then replays this fixed sequence
               (open-loop continuation) instead of re-deciding from the state.
     """
 
     def __init__(self, chain, env, override=None, schedule=None):
         self.chain, self.env, self.override = chain, env, override
+        self.overrides = ({int(round(float(t))): int(a) for t, a in override.items()} if isinstance(override, dict)
+                          else None)
         self.schedule = None if schedule is None else {
             int(round(float(t))): int(a) for t, a in (schedule.items() if isinstance(schedule, dict) else schedule)}
         self.action = None
@@ -93,7 +96,9 @@ class ChainPolicy:
         t = float(self.env.t)
         if self.decision_t is None or t >= self.decision_t+DECISION_S-1e-9:
             self.decision_t = DECISION_S*np.floor((t+1e-9)/DECISION_S)
-            if self.override is not None and abs(self.decision_t-self.override[0]) < 1e-9:
+            if self.overrides is not None and int(round(self.decision_t)) in self.overrides:
+                self.action = self.overrides[int(round(self.decision_t))]
+            elif self.overrides is None and self.override is not None and abs(self.decision_t-self.override[0]) < 1e-9:
                 self.action = self.override[1]
             elif self.schedule is not None:
                 self.action = self.schedule[int(round(self.decision_t))]
