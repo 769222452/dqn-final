@@ -43,9 +43,9 @@ unset OBJECTIVE SAFETY_VARIANT
 bash scripts/run_aoa_experiments.sh improve                   # 5 execution layers x 8 policies x 41 states
 python scripts/upper_bound.py --out experiments/improve/bounds --states nominal heldout --jobs "$JOBS"
 export OBJECTIVE=aligned SAFETY_VARIANT=minimal_first WORKERS=8
-TRAIN_NAME=pi bash scripts/run_aoa_experiments.sh train       # baseline PI, 7 seeds (V16 settings)
-TRAIN_NAME=overrides TRAIN_ARGS="--overrides" bash scripts/run_aoa_experiments.sh train
-TRAIN_NAME=blocks TRAIN_ARGS="--overrides --blocks 2,4,8 --states 7 --stride 168 --patience 4" \
+TRAIN_NAME=pi TRAIN_ARGS="--initial-cl 0.025" bash scripts/run_aoa_experiments.sh train   # baseline PI (V16 settings)
+TRAIN_NAME=overrides TRAIN_ARGS="--initial-cl 0.025 --overrides" bash scripts/run_aoa_experiments.sh train
+TRAIN_NAME=blocks TRAIN_ARGS="--initial-cl 0.025 --overrides --blocks 2,4,8 --states 7 --stride 168 --patience 4" \
   bash scripts/run_aoa_experiments.sh train                   # same branch budget per iteration as PI
 unset OBJECTIVE SAFETY_VARIANT
 ARMS=aligned@minimal_first IMPROVE_POLICIES="$(for n in pi overrides blocks; do for s in 17 23 41 59 83 97 101; \

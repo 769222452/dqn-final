@@ -152,6 +152,13 @@ been seen. Arms are flown on held-out-3 (nominal + 40 states) through the produc
   new layer are reported as "transfer".
 - **E3 (coordinated search).** For each seed: `--overrides --blocks 2,4,8` − baseline PI, both under
   `aligned@minimal_first`, at equal certified-step budget. CI lower bound > 0.
+- **Training protocol.** All training variants start from constant CL 0.025 (`--initial-cl 0.025`), the
+  best constant on every layer (§1.2 and `../aoa_fix/cl_sweep_local/`). In V16, iterations 0–2 spent
+  their gain finding ≈0.025 from 0.04; starting at 0.025 measures only what the learning algorithm adds.
+  The other settings are the V16 defaults (25 states every 48 s, 14 candidates, open-loop continuation,
+  stop rule). `blocks` uses 7 states every 168 s with `--blocks 2,4,8`: 56 branches per iteration,
+  against 50 for PI, i.e. the same budget per iteration. Learning curves are compared over certified
+  steps (`history[*].certified_steps`).
 - **Safety and reporting.** No completion or safety regression in any arm. Integrated heat load, peak
   q, heat flux and n, fallback counts and the AoA metrics are reported for every arm, together with the
   gap to the per-state upper bound.
@@ -161,10 +168,14 @@ been seen. Arms are flown on held-out-3 (nominal + 40 states) through the produc
 ```bash
 OBJECTIVE=aligned SAFETY_VARIANT=minimal_first bash scripts/run_aoa_experiments.sh surrogate
 bash scripts/run_aoa_experiments.sh improve          # 5 layers x 8 policies x 41 states
-OBJECTIVE=aligned SAFETY_VARIANT=minimal_first TRAIN_NAME=pi bash scripts/run_aoa_experiments.sh train
-OBJECTIVE=aligned SAFETY_VARIANT=minimal_first TRAIN_NAME=blocks TRAIN_ARGS="--overrides --blocks 2,4,8" \
+OBJECTIVE=aligned SAFETY_VARIANT=minimal_first TRAIN_NAME=pi TRAIN_ARGS="--initial-cl 0.025" \
   bash scripts/run_aoa_experiments.sh train
-ARMS=aligned@minimal_first IMPROVE_POLICIES="$(for n in pi blocks; do for s in 17 23 41 59 83 97 101; do \
+OBJECTIVE=aligned SAFETY_VARIANT=minimal_first TRAIN_NAME=overrides TRAIN_ARGS="--initial-cl 0.025 --overrides" \
+  bash scripts/run_aoa_experiments.sh train
+OBJECTIVE=aligned SAFETY_VARIANT=minimal_first TRAIN_NAME=blocks \
+  TRAIN_ARGS="--initial-cl 0.025 --overrides --blocks 2,4,8 --states 7 --stride 168 --patience 4" \
+  bash scripts/run_aoa_experiments.sh train
+ARMS=aligned@minimal_first IMPROVE_POLICIES="$(for n in pi overrides blocks; do for s in 17 23 41 59 83 97 101; do \
   printf 'train_%s_seed%s ' $n $s; done; done)" bash scripts/run_aoa_experiments.sh improve
 python scripts/upper_bound.py --out experiments/improve/bounds --states nominal heldout --jobs 8
 bash scripts/run_aoa_experiments.sh report-improve   # -> runs/aoa/improve_report/report.md

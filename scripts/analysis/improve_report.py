@@ -103,8 +103,9 @@ def main(argv=None):
             e['criterion_met'] = bool(d['ci95'][0] > 0) if c['criterion'] == 'ci_lower_gt_0' else None
         report['comparisons'].append(e)
         g = (f"{d['mean']:+.2f} [{d['ci95'][0]:+.2f}, {d['ci95'][1]:+.2f}]" if d.get('n') else '-')
+        worst = f"{d['worst']:+.2f}" if d.get('n') else '-'
         md.append(f"| {c['name']} | {c.get('kind', '')} | {len(states)} | {g} | {d.get('wins', '-')} | "
-                  f"{d.get('worst', float('nan')):+.2f} | {e['completed'][0]}/{e['completed'][1]} | "
+                  f"{worst} | {e['completed'][0]}/{e['completed'][1]} | "
                   + (f"{e['heat_load_delta']:+.1f}" if dh else '-') + ' | '
                   + (f"{e['gap_closure']:.2f} ({len(closure)})" if closure else '-') + ' |')
     out = Path(a.out)
