@@ -14,7 +14,7 @@ Measured on the project's own data (`experiments/improve/`, this folder's analys
 | Every winning geometry has design Mach 8–15; design Mach 4–7 never wins a condition, even at flight Mach 3.5–5 | same file, `winner_counts` |
 | With skin friction added, ideal switching gain drops to 0 %: one geometry (S2_MD12) is best at every Mach | `scripts/analysis/morphing_value.py`, `data/aero_friction/` |
 | At equal volume (0.95–1.05 × G42), a design-Mach-14.4 geometry has the highest L/D from Mach 4 to 8 | this folder, analysis in the session notes |
-| Physical range bound, pressure + friction: all geometries 2168 km, G42 alone 2158 km, i.e. at most 10 km | `src/certified_flight/bound.py`, `scripts/upper_bound.py --friction` |
+| Physical range bound at the nominal state, pressure + friction: free CL, all 298 geometries **2168.5 km**; free CL, G42 only **2158.1 km** (morphing worth at most 10 km, 0.5 %); best constant CL, all geometries **2133.4 km** (CL scheduling worth 35 km, 1.6 %). Without friction the same bound is 2511 km | `src/certified_flight/bound.py`, `scripts/upper_bound.py --friction data/aero_friction/friction_table.npz [--constant-cl]`, results in `bounds_friction/` |
 
 Two causes, both in how the library was built and evaluated, not in the idea:
 

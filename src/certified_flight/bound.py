@@ -53,37 +53,89 @@ def lower_hull(x, y):
     return np.asarray(hull)
 
 
-def polar_samples(db, mach, alpha_step_deg=.05, indices=None):
-    """(CL, CD) of every geometry on a dense alpha grid at one Mach (exact PCHIP of the database)."""
+class FrictionTable:
+    """Skin-friction coefficients (scripts/build_friction_table.py) on the snapshot's Mach x alpha grid."""
+
+    def __init__(self, path, db):
+        z = np.load(path)
+        if list(z['geometry_ids']) != list(db.ids) or not np.array_equal(z['mach_grid'], db.M) \
+                or not np.array_equal(z['alpha_rad_grid'], db.A):
+            raise ValueError('Friction table does not match the aerodynamic snapshot')
+        self.path = str(path)
+        self.h = z['altitude_m_grid'].astype(float)
+        self.cl, self.cd = z['CL_friction'], z['CD_friction']          # [geom, Mach, alpha, altitude]
+        self.db = db
+
+    def at(self, mach, alphas, k, indices=None):
+        """(CL_f, CD_f) [geom, alpha] at altitude node k, linear in Mach and alpha."""
+        M, A = self.db.M, self.db.A
+        i = int(np.clip(np.searchsorted(M, mach)-1, 0, len(M)-2))
+        w = (mach-M[i])/(M[i+1]-M[i])
+        j = np.clip(np.searchsorted(A, alphas)-1, 0, len(A)-2)
+        u = (alphas-A[j])/(A[j+1]-A[j])
+        sel = slice(None) if indices is None else np.atleast_1d(indices)
+        out = []
+        for t in (self.cl, self.cd):
+            tm = (1-w)*t[sel, i, :, k]+w*t[sel, i+1, :, k]                    # [geom, alpha nodes]
+            out.append((1-u)*tm[:, j]+u*tm[:, j+1])
+        return out
+
+
+def polar_samples(db, mach, alpha_step_deg=.05, indices=None, friction=None, h_nodes=()):
+    """(CL, CD) of every geometry on a dense alpha grid at one Mach (exact PCHIP of the database).
+
+    With a FrictionTable, the friction coefficients of every altitude node in h_nodes are added and the
+    samples of all those nodes are returned together (their union, for a lower hull over the interval)."""
     alphas = np.clip(np.deg2rad(np.arange(np.rad2deg(db.A[0]), np.rad2deg(db.A[-1])+1e-9, alpha_step_deg)),
                      db.A[0], db.A[-1])
     y = PchipInterpolator(db.A, db.curves(mach, indices), axis=1, extrapolate=False)(alphas)   # [geom, alpha, 2]
-    cl, cd = y[..., 0].ravel(), y[..., 1].ravel()
+    if friction is None:
+        cl, cd = y[..., 0].ravel(), y[..., 1].ravel()
+    else:
+        cl, cd = [], []
+        for k in h_nodes:
+            clf, cdf = friction.at(mach, alphas, k, indices)
+            cl.append((y[..., 0]+clf).ravel())
+            cd.append((y[..., 1]+cdf).ravel())
+        cl, cd = np.concatenate(cl), np.concatenate(cd)
     ok = np.isfinite(cl) & np.isfinite(cd)
     return cl[ok], cd[ok]
 
 
-def envelope(db, knots=None, mach_step=.02, indices=None):
-    """Supporting lines (a_ij, b_ij) of the hull at CL_POINTS for every Mach knot i: CD >= a + b CL."""
+def _lines(cl, cd):
+    hull = lower_hull(cl, cd*(1-ENVELOPE_SAFETY))
+    out = np.zeros((len(CL_POINTS), 2))
+    for j, c in enumerate(CL_POINTS):
+        k = int(np.clip(np.searchsorted(hull[:, 0], c)-1, 0, len(hull)-2))
+        (x1, y1), (x2, y2) = hull[k], hull[k+1]
+        slope = (y2-y1)/(x2-x1)
+        out[j] = y1-slope*x1, slope
+    return out
+
+
+def envelope(db, knots=None, mach_step=.02, indices=None, friction=None):
+    """Supporting lines (a, b) of the hull at CL_POINTS: CD >= a + b CL.
+
+    Without friction: lines[i, j] for every Mach knot i. With a FrictionTable: lines[i, k, j] for every Mach
+    knot i and altitude node k, each from the union of the samples over the adjacent Mach interval and the
+    altitude nodes k-1, k, k+1, so that their bilinear interpolation lower-bounds the hull in between."""
     knots = db.M if knots is None else np.asarray(knots, float)
-    lines = np.zeros((len(knots), len(CL_POINTS), 2))
+    nh = 1 if friction is None else len(friction.h)
+    lines = np.zeros((len(knots), nh, len(CL_POINTS), 2))
     cl_range = np.zeros((len(knots), 2))
     for i in range(len(knots)):
         lo, hi = knots[max(0, i-1)], knots[min(len(knots)-1, i+1)]
-        cl, cd = [], []
-        for M in np.arange(lo, hi+1e-9, mach_step):
-            a, b = polar_samples(db, min(M, db.M[-1]), indices=indices)
-            cl.append(a)
-            cd.append(b)
-        cl, cd = np.concatenate(cl), np.concatenate(cd)
-        hull = lower_hull(cl, cd*(1-ENVELOPE_SAFETY))
-        cl_range[i] = cl.min(), cl.max()
-        for j, c in enumerate(CL_POINTS):
-            k = int(np.clip(np.searchsorted(hull[:, 0], c)-1, 0, len(hull)-2))
-            (x1, y1), (x2, y2) = hull[k], hull[k+1]
-            slope = (y2-y1)/(x2-x1)
-            lines[i, j] = y1-slope*x1, slope
-    return knots, lines, cl_range
+        for k in range(nh):
+            nodes = [m for m in (k-1, k, k+1) if 0 <= m < nh]
+            cl, cd = [], []
+            for M in np.arange(lo, hi+1e-9, mach_step):
+                a, b = polar_samples(db, min(M, db.M[-1]), indices=indices, friction=friction, h_nodes=nodes)
+                cl.append(a)
+                cd.append(b)
+            cl, cd = np.concatenate(cl), np.concatenate(cd)
+            lines[i, k] = _lines(cl, cd)
+            cl_range[i] = (cl.min(), cl.max()) if k == 0 else (min(cl_range[i, 0], cl.min()), max(cl_range[i, 1], cl.max()))
+    return knots, (lines[:, 0] if friction is None else lines), cl_range
 
 
 class EnvelopeAero:
@@ -111,12 +163,23 @@ def _limits_constraints(model, x, q, lim, db, add):
     add(db.M[-1]-q['mach'], 0, ca.inf)
 
 
-def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None):
-    """Upper bound on s(1200)-s(0). warm: optional dict(t, x[n,4], CL[n]) to initialise."""
+def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None, friction=None, constant_cl=False):
+    """Upper bound on s(1200)-s(0). warm: optional dict(t, x[n+1,4], t_ctrl, CL) to initialise.
+
+    friction: optional FrictionTable (CD includes skin friction, interpolated in Mach and altitude).
+    constant_cl: one CL for the whole flight (the best constant-CL policy under the same relaxation)."""
     started = time.perf_counter()
-    knots, lines, cl_range = envelope(db, indices=indices)
-    A = [ca.interpolant(f'a{j}', 'linear', [knots], lines[:, j, 0]) for j in range(len(CL_POINTS))]
-    Bf = [ca.interpolant(f'b{j}', 'linear', [knots], lines[:, j, 1]) for j in range(len(CL_POINTS))]
+    knots, lines, cl_range = envelope(db, indices=indices, friction=friction)
+    if friction is None:
+        A = [ca.interpolant(f'a{j}', 'linear', [knots], lines[:, j, 0]) for j in range(len(CL_POINTS))]
+        Bf = [ca.interpolant(f'b{j}', 'linear', [knots], lines[:, j, 1]) for j in range(len(CL_POINTS))]
+        coef = lambda f, M, h: f(M)
+    else:
+        A = [ca.interpolant(f'a{j}', 'linear', [knots, friction.h], lines[:, :, j, 0].ravel(order='F'))
+             for j in range(len(CL_POINTS))]
+        Bf = [ca.interpolant(f'b{j}', 'linear', [knots, friction.h], lines[:, :, j, 1].ravel(order='F'))
+              for j in range(len(CL_POINTS))]
+        coef = lambda f, M, h: f(ca.vertcat(M, h))
     model = mission.model(EnvelopeAero())
     lim = mission.data['limits']
     dts = _grid() if dts is None else np.asarray(dts)
@@ -155,8 +218,10 @@ def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None
                 _limits_constraints(model, xsg, dict(q_dyn=qq[0], heat_flux=qq[1], n_load=qq[2], mach=qq[3]),
                                     lim, db, add)
                 for j in range(len(CL_POINTS)):
-                    add((CD[k]-(A[j](qq[3])+Bf[j](qq[3])*CL[k]))*100, 0, ca.inf)
+                    add((CD[k]-(coef(A[j], qq[3], xsg[0])+coef(Bf[j], qq[3], xsg[0])*CL[k]))*100, 0, ca.inf)
         add(X[:, k+1]-state/sx, 0, 0)
+        if constant_cl and k > 0:
+            add(CL[k]-CL[0], 0, 0)
     _, qe = F(xs(n), CL[n-1], CD[n-1])
     _limits_constraints(model, xs(n), dict(q_dyn=qe[0], heat_flux=qe[1], n_load=qe[2], mach=qe[3]), lim, db, add)
     obj = -(X[3, n]-X[3, 0])
@@ -177,7 +242,11 @@ def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None
     else:
         xw = np.tile(x0, (n+1, 1))
         clw = np.full(n, .027)
-    v0 = np.r_[(xw/sx).ravel(), clw, np.full(n, .0018)]
+    if friction is not None:
+        clw = np.maximum(clw, .04)          # with friction the best CL is near 0.035-0.06 (experiments/aero_fidelity)
+    if constant_cl:
+        clw = np.full(n, float(np.mean(clw)))
+    v0 = np.r_[(xw/sx).ravel(), clw, np.full(n, .0018 if friction is None else .005)]
     r = solver(x0=v0, lbx=lbx, ubx=ubx, lbg=lbg, ubg=ubg)
     sol = np.asarray(r['x']).ravel()
     Xs = sol[:4*(n+1)].reshape(n+1, 4)*sx
@@ -185,19 +254,25 @@ def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None
                range_km=float((Xs[-1, 3]-Xs[0, 3])/1000), t=t.tolist(), x=Xs.tolist(),
                CL=sol[4*(n+1):4*(n+1)+n].tolist(), CD=sol[4*(n+1)+n:].tolist(), wall_s=time.perf_counter()-started,
                envelope=dict(safety=ENVELOPE_SAFETY, cl_points=CL_POINTS.tolist(), cl_range=[cl_lo, cl_hi],
-                             geometries='all' if indices is None else [db.ids[i] for i in indices]))
-    out['verification'] = verify_relaxed(mission, db, x0, out, knots, lines)
+                             geometries='all' if indices is None else [db.ids[i] for i in indices],
+                             friction=None if friction is None else friction.path, constant_cl=bool(constant_cl)))
+    out['verification'] = verify_relaxed(mission, db, x0, out, knots, lines,
+                                         h_grid=None if friction is None else friction.h)
     return out
 
 
-def hull_cd(knots, lines, mach, cl):
+def hull_cd(knots, lines, mach, cl, h=None, h_grid=None):
     i = np.clip(np.searchsorted(knots, mach)-1, 0, len(knots)-2)
     w = (mach-knots[i])/(knots[i+1]-knots[i])
     l = (1-w)*lines[i]+w*lines[i+1]
+    if h_grid is not None:                       # lines [Mach, altitude, J, 2]: linear in altitude too
+        k = int(np.clip(np.searchsorted(h_grid, h)-1, 0, len(h_grid)-2))
+        u = (h-h_grid[k])/(h_grid[k+1]-h_grid[k])
+        l = (1-u)*l[k]+u*l[k+1]
     return float(np.max(l[:, 0]+l[:, 1]*cl))
 
 
-def verify_relaxed(mission, db, x0, sol, knots, lines, dt=.1):
+def verify_relaxed(mission, db, x0, sol, knots, lines, dt=.1, h_grid=None):
     """Re-integrate the relaxed controls on a fine grid with CD = envelope(M, CL) (numeric RK4)."""
     model = mission.model(EnvelopeAero())
     lim = mission.data['limits']
@@ -210,7 +285,7 @@ def verify_relaxed(mission, db, x0, sol, knots, lines, dt=.1):
         for _ in range(steps):
             def fx(y):
                 M = y[1]/float(model.atm.speed_of_sound(y[0]))
-                cd = hull_cd(knots, lines, M, cl[k])
+                cd = hull_cd(knots, lines, M, cl[k], y[0], h_grid)
                 r, q = model.rhs_with_quantities(y, [cl[k]], [cd])
                 return np.asarray(r, float), q
             k1, q1 = fx(x)

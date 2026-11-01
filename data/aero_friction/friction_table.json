@@ -1,0 +1,13 @@
+{
+ "schema": "aero-friction-table/1",
+ "mode": "transition",
+ "wall_temperature_K": 1000.0,
+ "Re_transition": 5000000.0,
+ "reference_area_m2": 6.931920786884801,
+ "edge_state": "tangent wedge / Prandtl-Meyer per panel (P1 of offdesign_aero_v7.m)",
+ "correlations": "Eckert reference temperature; laminar 0.664/sqrt(Re*), turbulent 0.0592/Re*^0.2, cell-averaged",
+ "snapshot_manifest_sha256": "a636f427a770f5f4c4a34b972a8893eb7403d4824f06cbc167b1a02c747d7003",
+ "friction_module_sha256": "8772fee13e26ab1ff371e72089dc71a38880db174bc1045054fb9e49fd7f905d",
+ "table_sha256": "0b7e22fb576ef9cac8781fc78eca81b3674387428fb384e004aa269206ece15c",
+ "geometries": 298
+}
