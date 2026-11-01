@@ -331,3 +331,31 @@ Reading (one state; held-out-3 decides):
   (round 0: −9.5 km; V16 arm: +9.3 km). H2 on held-out-3 decides whether the V16 policies transfer. If
   not, the optional `retrain` stage retrains them with the unchanged V16 learning code.
 
+## 10. Constant-CL sweep (local, 2026-11-01; `cl_sweep_local/`)
+
+All 19 constant CL actions were flown from the nominal state through both production surrogate
+pipelines. Arm (i) is V16; arm (ii) is the consistent objective with the local final surrogate.
+
+| CL | 0.00 | 0.01 | 0.015 | 0.02 | **0.025** | 0.03 | 0.035 | 0.04 | 0.05 | 0.06 | 0.08 | 0.10 | 0.12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| V16 km | 2426.3 | 2405.3 | 2394.0 | 2411.5 | **2443.3** | 2424.2 | 2399.4 | 2374.9 | 2324.0 | 2269.1 | 2155.1 | 2042.4 | 1904.3* |
+| consistent km | 2302.1 | 2437.7 | 2418.4 | 2409.3 | **2477.4** | 2457.5 | 2434.7 | 2410.6 | 2360.6 | 2297.7 | 2126.8 | 2027.7 | 1899.0* |
+| consistent ptp | 1.94° | 0.75° | 0.76° | 0.23° | 0.019° | 0.020° | 0.029° | 0.043° | 0.067° | 0.064° | 0.10° | 0.00° | 0.00° |
+
+`*` = stopped before 1200 s, with no certifiable next action.
+
+**CL 0.025 is the best constant in both arms**, so the V16 reference is the tuned constant, not a weak
+baseline.
+
+**Where the sawtooth fix has been shown (CL 0.025–0.06):** within-step swings of ≤ 0.07° and 1/3 Hz power
+≤ 0.001. This covers the range the trained policies use: seed 101 uses CL 0.02–0.055, and CL 0.025 in
+83/100 decisions.
+
+**Where it has not:**
+- **Low CL (≤ 0.015).** The commanded CL is not trackable (executed CL error 0.025–0.039), and alpha
+  varies by 0.75–1.9° within steps. This is not the 3 s sawtooth (1/3 Hz power 0.01–0.03) and also occurs
+  with the V16 objective.
+- **CL 0.02.** The swing is 0.23°.
+- **High CL (≥ 0.07).** These leave the surrogate's coverage: 100–342 of 400 decisions fall back to the
+  physics baseline or the true OCP.
+

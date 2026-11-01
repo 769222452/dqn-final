@@ -1,0 +1,44 @@
+{
+  "policy": "constant CL 0.04",
+  "objective": "v16",
+  "inner": "surrogate",
+  "channels": {
+    "FAST_APPROXIMATE": 400
+  },
+  "initial_offset_h_V": null,
+  "stop": "SUCCESS",
+  "completed": true,
+  "t_end_s": 1200.0,
+  "range_km": 2374.8844969822217,
+  "wall_s": 59.81159550000007,
+  "fallback_steps": 0,
+  "corrector_changed_steps": 0,
+  "lookahead_offset_steps": 8,
+  "metrics": {
+    "steps": 400,
+    "alpha_min_deg": 4.667923220598384,
+    "alpha_max_deg": 8.94663304551247,
+    "reversal_rate": 0.3436293436293436,
+    "intra_step_ptp_median_deg": 0.7888533386797523,
+    "intra_step_ptp_p95_deg": 1.2548936431543556,
+    "boundary_jump_median_deg": 0.7792332016195544,
+    "boundary_jump_p95_deg": 1.253006405712867,
+    "sawtooth_opposition": 0.9974874371859297,
+    "sawtooth_opposition_steps": 398,
+    "noise_floor_deg": 0.01,
+    "mean_profile_deg": [
+      -0.2574,
+      -0.2302,
+      -0.155,
+      -0.0149,
+      0.1924,
+      0.465
+    ],
+    "hf_rms_deg": 0.28885617072462266,
+    "power_3s_fraction": 0.35637506636997196,
+    "CL_mean_abs_error_median": 0.0034550713493070005,
+    "CL_mean_abs_error_p95": 0.009160139983523571,
+    "range_km": 2374.8844969822217,
+    "t_end_s": 1200.0
+  }
+}
