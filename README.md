@@ -9,6 +9,15 @@ production surrogate pipeline (`bash scripts/run_aoa_experiments.sh ...`). Defau
 Root cause, criteria, local results and run instructions:
 [experiments/aoa_fix/README.md](experiments/aoa_fix/README.md).
 
+The follow-up study [experiments/improve/README.md](experiments/improve/README.md) adds three things:
+- a physical upper bound on range;
+- a mission-aligned inner loop (no heat-load penalty) with a minimal-first look-ahead guard;
+- opt-in coordinated (block) search for the policy iteration.
+
+It also attributes every gain to its source. Locally, on 21 held-out-3 states, the execution layer adds
++56.6 km over V16 and closes 81 % of the gap to the bound. On that layer, the V16 policies add no range
+over constant CL 0.025.
+
 
 [中文说明](README_zh.md)
 
