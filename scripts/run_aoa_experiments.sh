@@ -11,6 +11,8 @@
 #   bash scripts/run_aoa_experiments.sh fidelity    # [true OCP] 24 flights: surrogate-vs-teacher check
 #   bash scripts/run_aoa_experiments.sh report      # tables + verdicts -> $OUT/report.md, report.json
 #   bash scripts/run_aoa_experiments.sh use-local   # instead of 'surrogate': install the locally fitted models
+#   bash scripts/run_aoa_experiments.sh all         # test, gate, report, gate check, surrogate (USE_LOCAL=1:
+#                                                   #   use-local), heldout, fidelity, report - in this order
 # Optional, only if H2 fails (learned gains do not transfer to the consistent objective):
 #   bash scripts/run_aoa_experiments.sh retrain     # unchanged V16 training (train.py, 80 iterations) of the
 #                                                   #   7 seeds under the consistent objective (~1700 CPU-h,
@@ -73,7 +75,32 @@ fit_and_qualify() {   # model labels...
   fi
 }
 
+gate_check() {   # held-out runs only if the report's gate decision says so (README section 3 and 8)
+  "$PYTHON" -B scripts/analysis/aoa_report.py "$OUT" > /dev/null
+  "$PYTHON" -B - "$OUT/report.json" <<'PY'
+import json, sys
+gate = json.load(open(sys.argv[1])).get('gate', {})
+missing = [p for p in ('const0.025', 'seed101') if p not in gate]
+if missing:
+    sys.exit(f'gate check: no gate verdict for {missing}; run the gate stage first')
+for p, v in gate.items():
+    print(f"gate {p}: G1={v['G1_sawtooth_removed']} G2={v['G2_feasible']} G3 declared (two-sided)="
+          f"{v['G3_range_kept']} G3_no_loss={v['G3_no_loss']} range delta={v['range_delta_km']:+.3f} km "
+          f"-> PROCEED_TO_HELDOUT={v['PROCEED_TO_HELDOUT']}")
+if not all(v['PROCEED_TO_HELDOUT'] for v in gate.values()):
+    sys.exit('gate check: PROCEED_TO_HELDOUT is false; held-out stage not run')
+PY
+}
+
 case "$STAGE" in
+  all)
+    bash "$0" test
+    bash "$0" gate
+    gate_check
+    if [ "${USE_LOCAL:-0}" = 1 ]; then bash "$0" use-local; else bash "$0" surrogate; fi
+    bash "$0" heldout
+    bash "$0" fidelity
+    bash "$0" report ;;
   test)
     "$PYTHON" -B -m pytest -p no:cacheprovider -q ;;
   smoke)
@@ -96,8 +123,9 @@ case "$STAGE" in
     done
     wait; sha256sum "$OUT"/retrain/seed*/state.json | tee "$OUT/retrain/state.sha256" ;;
   gate|heldout|fidelity|heldout-ocp|retrained)
-    if [ "$STAGE" = heldout ] && [ ! -f "data/lookahead_consistent/AB_metrics.json" ]; then
-      echo "run the surrogate stage first (no qualified $FINAL)"; exit 1
+    if [ "$STAGE" = heldout ]; then
+      [ -f "data/lookahead_consistent/AB_metrics.json" ] || { echo "run the surrogate stage first (no qualified $FINAL)"; exit 1; }
+      gate_check
     fi
     flights "$STAGE" ;;
   surrogate)
@@ -118,5 +146,5 @@ case "$STAGE" in
   report)
     "$PYTHON" -B scripts/analysis/aoa_report.py "$OUT" ;;
   *)
-    sed -n 2,25p "$0"; exit 2 ;;
+    sed -n 2,27p "$0"; exit 2 ;;
 esac

@@ -146,6 +146,8 @@ with the true OCP every decision would be ≈ 800 CPU-h (`heldout-ocp` stage, op
 
 ## 5. How to run (cloud server)
 
+For an automated agent (Codex): follow `CODEX.md`, which uses the single `all` stage.
+
 Requirements: Linux, Python 3.11, `gcc` (CasADi functions are compiled once into `.cache/`), about
 2 GB RAM per parallel job. Use at most one job per physical core: the V16 corrector (2 s) and look-ahead
 (30 s) have wall-clock budgets, so oversubscription can change results.
@@ -242,6 +244,35 @@ The four gate flights were run once locally before the cloud run (code of commit
 - These flights use the true OCP inner loop; they are not the archived surrogate flights (constant CL
   0.025 surrogate flight in the V16 archive: 2443.32 km), so V16-surrogate vs OCP differences are a
   separate comparison.
+
+## 8b. Cloud replication of the gate (cloud server, 2026-11-01)
+
+The cloud run reported revision `8ae24f3`, which is not in this repository. Its report has no
+`G3_no_loss` key, so it was an older revision with the agent's own report. It stopped before the
+held-out stage on the declared, two-sided G3. All four flights completed 1200 s.
+
+| nominal 1200 s | objective | cloud range | local range (§8) | cloud − local | wall cloud / local |
+|---|---|---|---|---|---|
+| CL 0.025 | consistent | 2475.939872 km | 2475.939907 km | −3.6e-5 km | 3561 / 1524 s |
+| CL 0.025 | V16 | 2455.930105 km | 2456.448374 km | **−0.518 km** | 7008 / 3010 s |
+| seed 101 | consistent | 2477.806884 km | 2477.806874 km | +1.0e-5 km | 3562 / 1518 s |
+| seed 101 | V16 | 2460.650245 km | 2460.649944 km | +3.0e-4 km | 6819 / 2982 s |
+
+- **G1 and G2 pass for both policies on the cloud too.**
+- **Declared G3 fails for both, because of range gains:** +20.01 km (+0.81 %) and +17.16 km (+0.70 %).
+  The one-sided `G3_no_loss` reading documented in §8 before the cloud run passes, so
+  `PROCEED_TO_HELDOUT=True`.
+  - Decision by the study owner, 2026-11-01: proceed to the surrogate, held-out and fidelity stages.
+    Both readings are reported.
+- **Not bit-identical across machines.** Three flights agree to ≤ 3e-4 km. The V16-objective CL 0.025
+  flight differs by 0.52 km.
+  - The cloud flights took 2.3× longer, and the corrector and look-ahead have wall-clock budgets. A
+    budget-dependent discrete decision is therefore the likely cause.
+  - This is not yet verified. The first diverging decision will be located from the cloud
+    `steps.jsonl`.
+  - The gate conclusion is unaffected: Δrange +20.01 km on the cloud vs +19.49 km locally.
+- The runner now enforces the gate decision (`gate_check` in `scripts/run_aoa_experiments.sh`; `all`
+  stage). Agent instructions: `CODEX.md`.
 
 ## 9. Local surrogate pipeline result (4-CPU development container, 2026-10-31)
 
