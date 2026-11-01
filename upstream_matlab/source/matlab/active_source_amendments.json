@@ -1,0 +1,31 @@
+{
+  "schema": "v5_active_source_amendments/1",
+  "audit_source_manifest": "results/v5_geometry_audit/source_manifest.json",
+  "audit_source_manifest_sha256": "8f116f01988aa2a13cd7c49b3b03acc283a27150a0a35c50b05f9fdb0bc74edd",
+  "amendments": [
+    {
+      "path": "teacher_matlab\\active\\comptue_conicalfield.m",
+      "audited_sha256": "116c1a4887a76c677d3220a2c59fea6aae8f1a92ca9d736adc2aba13aebcbdd8",
+      "amended_sha256": "acf6930d25e310cf138fac1d043e66378ab200d49c78de85dfdb9321724a3d17",
+      "phase": "V5_CSR1_CONE_SOLVER_PATH_SUPPORT",
+      "physics_changed": false,
+      "geometry_generation_affected": false,
+      "reason": "fzero TolX 2e-13 -> eps in the weak-cone shooting root solve (general numerical repair of the TolX-limited wall residual on small cone angles); Phase-6 InitialStep and typed failures kept",
+      "evidence": "results/v5_cone_solver_path_support_csr1/promotion_patch_summary.txt",
+      "evidence_sha256": "af65f0c61c85e3da6522f21359d755d4f961de1a5fc3fde5d53e3f49f8a83306",
+      "history": [
+        {
+          "path": "teacher_matlab\\active\\comptue_conicalfield.m",
+          "audited_sha256": "116c1a4887a76c677d3220a2c59fea6aae8f1a92ca9d736adc2aba13aebcbdd8",
+          "amended_sha256": "c687a9f283dc7ec4dedc1645c2766840d2f30ad6622cbb7c49ae224c407b2c3f",
+          "phase": "V5_PHASE6_CONE_SOLVER_ROBUSTNESS",
+          "physics_changed": false,
+          "geometry_generation_affected": false,
+          "reason": "ode45 InitialStep sized to the post-shock sonic-margin layer + typed cone failure identifiers",
+          "evidence": "results/v5_cone_solver_robustness/candidate_patch_summary.txt",
+          "evidence_sha256": "ea3571152d894b017007c998e9427ef797de1d68321d162a0abd49637b619944"
+        }
+      ]
+    }
+  ]
+}

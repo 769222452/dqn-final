@@ -2,6 +2,8 @@
 
 [中文说明](README_zh.md)
 
+[MATLAB geometry generation and aerodynamic database sources](upstream_matlab/README.md) — archived upstream code, reference inputs, and SHA-256 provenance.
+
 This repository contains the code and input data for learning the lift-coefficient schedule of a morphing
 hypersonic waverider over a fixed 1200 s glide, where every executed control step is verified by a safety
 certification chain. The policy is improved by rollout-based approximate policy iteration: exact action

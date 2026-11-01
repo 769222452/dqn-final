@@ -1,0 +1,29 @@
+{
+  "version": "native-triangle-audit-1",
+  "frozen_utc": "2026-10-01T02:41:09.841486+00:00",
+  "length_tolerance": "max(128*float64_eps*L, 1e-9*L), L=maximum coordinate extent",
+  "area_tolerance": "1e-14 * L**2 (triangle area)",
+  "thickness_negative_tolerance": "same length tolerance; no centimetre-scale tolerance",
+  "native_triangulation": "Each native quad (a,b,c,d) split (a,b,c),(a,c,d); no smoothing or regridding. Opposite diagonal is a sensitivity check.",
+  "allowed_degeneracy": "Only zero-area faces on row 0 when all row-0 vertices coincide with the common leading-edge tip; source explicitly collapses outermost row. All raw degeneracies still counted.",
+  "allowed_contact": "Only the actual shared upper/lower leading-edge polyline; self pairs may touch at their shared native vertices/edge only. No tail or interior penetration exclusion.",
+  "section_method": "Intersect native triangles with x plane; compare piecewise-linear yz curves on common y domain using union of actual breakpoints. No extrapolation. t=lower_program_z-upper_program_z.",
+  "VALID": "Finite real complete native surfaces; no unapproved degeneracy or intersection/self-intersection; single-valued graph with nonnegative common-domain thickness; connected leading edge and symmetry conditions. Documented open base is allowed.",
+  "INVALID": "Confirmed nonallowed surface intersection or self-intersection, nonfinite/complex generated coordinates, or unapproved degenerate interior faces. Thickness alone never establishes INVALID.",
+  "AMBIGUOUS": "Negative thickness without actual intersection, unresolved graph/connection/normal diagnostics, or insufficient surface semantics.",
+  "GENERATION_FAILED": "No complete native geometry returned, MATLAB error, or supervisor hard timeout.",
+  "boundary_semantics": "Native half-skin, shared leading edge; y=0 is mirror seam, not upper/lower closure; no base cap is supplied => OPEN_BASE.",
+  "normal_diagnostic": "Adjacent nondegenerate normals with negative dot product; positive XY oriented triangle areas plus simple projected boundary certify a piecewise-linear single-valued graph.",
+  "discontinuity_diagnostic": "Native edge length greater than 20 times the median positive edge length, diagnostic only (mesh is intentionally nonuniform).",
+  "hard_timeout_s": 120,
+  "max_consecutive_timeouts": 3,
+  "workers": 0,
+  "pilot_design_indices": [
+    1,
+    2,
+    3
+  ],
+  "scan_order": "stable ascending pareto_front[:,0], then original row",
+  "figure_selection": "All INVALID; at least three VALID if available; at least one AMBIGUOUS if available.",
+  "limits": "Floating-point narrow phase, not exact arithmetic. Conclusions apply to frozen native discretization, not unobserved continuous surfaces or fabrication."
+}
