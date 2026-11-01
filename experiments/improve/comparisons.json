@@ -502,6 +502,90 @@
     "train_pi_seed101"
    ],
    "criterion": "ci_lower_gt_0"
+  },
+  {
+   "name": "Issue 1, exact overrides seed17 \u2212 PI seed17 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed17"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed17"
+   ]
+  },
+  {
+   "name": "Issue 1, exact overrides seed23 \u2212 PI seed23 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed23"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed23"
+   ]
+  },
+  {
+   "name": "Issue 1, exact overrides seed41 \u2212 PI seed41 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed41"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed41"
+   ]
+  },
+  {
+   "name": "Issue 1, exact overrides seed59 \u2212 PI seed59 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed59"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed59"
+   ]
+  },
+  {
+   "name": "Issue 1, exact overrides seed83 \u2212 PI seed83 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed83"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed83"
+   ]
+  },
+  {
+   "name": "Issue 1, exact overrides seed97 \u2212 PI seed97 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed97"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed97"
+   ]
+  },
+  {
+   "name": "Issue 1, exact overrides seed101 \u2212 PI seed101 (aligned@mf)",
+   "kind": "algorithm",
+   "a": [
+    "aligned@minimal_first",
+    "train_overrides_seed101"
+   ],
+   "b": [
+    "aligned@minimal_first",
+    "train_pi_seed101"
+   ]
   }
  ]
 }
