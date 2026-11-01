@@ -1,0 +1,161 @@
+
+#物理参数配置与环境参数配置
+atmosphere:
+  #描述大气环境，分层的模型
+  model: "isa_like_piecewise"
+  rho0: 1.225            # kg/m^3 海平面空气密度
+  p0: 101325.0           # Pa 海平面大气压
+  T0: 288.15             # K 海平面温度
+  R_gas: 287.05287       # J/(kg K) 空气比气体常数
+  gamma_gas: 1.4         #空气比热比
+  g0: 9.80665            # m/s^2 重力加速度
+  R_earth: 6371000.0     # m 地球半径
+  h_min_valid: 0.0
+  h_max_valid: 100000.0
+  rho_floor: 1.0e-9      # 空气密度最低值
+
+dynamics:
+  # 3-DOF 
+  spherical_earth: true
+  integrator: "rk4"
+  dt: 0.5                 # 积分步长
+  max_substep_dt: 0.5     # 最大子步长
+
+initial_state:
+
+  h: 40000.0        # m
+  V: 2400.0         # m/s
+  gamma: -0.01      # rad
+  s: 0.0            # m
+
+# 正式任务定义：360 km 是完整 180 s 结束时的最低成功要求，不是提前终止点。
+mission:
+  required_downrange_m: 360000.0
+  duration_s: 180.0
+  terminate_on_required_downrange: false
+
+
+#生成器处代价函数的参数，主要就是为了暂时描述那个构型生成器
+generator:
+  kind: "dummy"
+  dummy:
+    noise_std: 0.01          
+    w_CL: 1.0
+    w_CD: 1.0
+    CL_scale: 0.10
+    CD_scale: 0.03
+    lambda_eta: 0.05        
+    infeasible_error_threshold: 0.25   
+    low_conf_threshold: 0.4
+    confidence_scale: 0.2
+  real:
+    checkpoint_path: null    
+
+validation:
+  policy: "fallback"         # 误差或者置信度不满足要求时，fallback
+  out_of_bounds_policy: "project"   # 超出物理范围的处理
+  eps_g: 0.30                
+  w_CL: 1.0
+  w_CD: 1.0
+  CL_scale: 0.10
+  CD_scale: 0.03
+  min_confidence: 0.3
+
+pipeline:
+
+  post_generation_replan: true   #进行final-ocp
+  planned_point: "first_interval_midpoint" #取中间
+
+pipeline_demo:
+  target_aero:
+    CL_des: 0.085   #默认升力系数
+    CD_des: 0.031   #默认阻力系数
+  relative_target: [1.10, 1.05] #乘个系数
+  rollout_horizon: 60.0   #demo跑60s
+
+stress_test:
+#压力测试，随机生成初始状态进行测试
+  n_states: 300  #300个独立工况
+  h: [22000.0, 60000.0]        # m，取值高度
+  V: [1200.0, 4500.0]          # m/s 取值速度
+  gamma: [-0.15, 0.10]         # rad 取值轨迹角度
+  alpha: [0.0, 0.15]           # rad  随机当前攻角
+  target_relative: [[0.7, 1.3], [0.8, 1.2]]   #随机 RL 气动目标
+  benchmark_cycles: 8  #统计8轮时间
+
+
+
+#RL环境配置
+gym_env:
+  
+  max_episode_steps: 60    #最多60步
+  decision_dt: 3.0          # 3s一次决策 
+  # 保留旧 reward / observation shaping 曲面；这不是正式 mission-success threshold。
+  reward_reference_downrange_m: 400000.0
+  terminal_altitude: 20000.0  # 最小高度 m 
+  action_mode: "relative"
+  discrete_targets_relative:
+
+  # 简单设置了6个按钮
+    - [1.00, 1.00]  
+    - [1.15, 1.05]   
+    - [1.30, 1.15]
+    - [0.85, 0.90]   
+    - [0.70, 0.80]
+    - [1.10, 0.95]   
+  # 可选的离散动作表（网格）。configs/rl.yaml -> action_decoder.grid 选择使用哪一个；
+  # "legacy" 表示上面的 discrete_targets_relative（默认，行为不变）。
+  discrete_target_grids:
+    # V1 动作空间审计（docs/ACTION_SPACE_V1_BASELINE_AUDIT.md）得出的近中性网格：
+    # 索引 0 = 中性/保持当前；1 = 学到的 a1/a3 混合等效点；2 = Mach 5.5-6.0 等效点；
+    # 3 = legacy a3 方向的 1/5 幅度（缩小而非删除）；4 = 切换态等效点；5 = 非切换态等效点。
+    near_neutral_v1:
+      - [1.00, 1.00]
+      - [1.03, 0.99]
+      - [1.05, 1.00]
+      - [0.97, 0.98]
+      - [1.00, 0.97]
+      - [1.07, 1.02]
+  discrete_targets_absolute:
+  #测试使用的
+    - [0.06, 0.022]
+    - [0.08, 0.028]
+    - [0.10, 0.036]
+    - [0.12, 0.045]
+
+#SAC
+  continuous_target_bounds:
+  #SAC方法的连续动作边界
+    relative:
+      f_L: [0.6, 1.4]
+      f_D: [0.7, 1.3]
+    absolute:
+    #绝对边界
+      CL: [0.04, 0.15]
+      CD: [0.015, 0.06]
+  observation:
+    #进行一个尺度的缩放，然后丢进神经网络里面
+    scales:
+      mach: 10.0
+      h: 50000.0
+      V: 3000.0
+      gamma: 0.2
+      alpha: 0.2
+      s: 500000.0
+  reward:
+  #强化学习参数
+    w_progress: 0.1        # 前进奖励 关注怎么飞快 
+    w_terminal: 10.0       # 终止奖励 关注距离终点
+    w_drag: 0.5            # 阻力惩罚 
+    w_morph: 0.5           # 变构惩罚  不希望频繁变构 
+    w_quality: 0.2         # 约束的裕度惩罚 
+    penalty_generation_rejected: -1.0  #无效构型的惩罚
+    penalty_ocp_infeasible: -2.0  #OCP不可行的惩罚
+    penalty_numerical_failure: -5.0  #数值失败的惩罚
+    penalty_constraint_violation: -5.0  #执行段违反硬约束的惩罚（并终止 episode）
+    w_last_resort_fallback: 0.0   # 保留位
+    w_dense_unsafe: 0.0           # 保留位
+    # terminal_mode: legacy        -> r_terminal = w_terminal * clip(s_final / reward_reference_downrange_m, 0, 1)
+    #                success_bonus -> legacy term + success_bonus * 1[mission_success at 180 s]
+    terminal_mode: legacy
+    success_bonus: 0.0

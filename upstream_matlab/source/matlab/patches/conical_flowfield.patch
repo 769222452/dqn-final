@@ -1,0 +1,79 @@
+--- teacher_original/conical_flowfield.m
++++ teacher_active/conical_flowfield.m
+@@ -1,63 +1,14 @@
+-function [angle1_shock,velocity1_x,velocity1_y,mf_cone,pf_cone]=conical_flowfield(m0,delta0,gamma)
+-%% �������
+-%����������
+-%��ʼ����׶��
+-%Զ��ѹ��
+-%Զ���¶�
+-%%%ע�⣺
+-%1��Զ��ѹ�����¶�ȡ1����ʵ��ֵ��Ӱ�������ٻ�ѹ���������ٻ��¶Ⱥ�������������
+-%2��Զ��ѹ�����¶�ȡ1����ʵ��ֵӰ��x��y�����ٶȵļ����������Ƕȶ�Ӧ���ٶ�Ϊ�ȱȷŴ��Ҹ��ǶȷŴ������ȣ����Զ��ѹ�����¶�ȡ1����ʵ��ֵ��Ӱ������׷�ٽ��
+-%3������1��2������֤�������ͬ�ļ����е�"ѹ���¶�ȡֵӰ����֤.xls"��
+-mach_preshock = m0;
+-angle0_halfcone = delta0;
+-pressure_inlet =1;
+-temperature_inlet =1;
+-specific_heat_ratio=gamma;
+-gas_constant = 287;
+-%% ���T-M����
+-[index,angle1_shock,angle_span,velocitynormal,velocityradiul]=comptue_conicalfield(mach_preshock,angle0_halfcone, specific_heat_ratio);%��������������mach_preshock����ʼ����׶��angle0_halfcone
+-%���������angle1_shock����������ϵ�������angle_span�Ͷ�Ӧ������ϵĴ�ֱ����뾶��������ٶ�velocitynormal����뾶�����ٶ�velocityradiul
+-
+-%������ϵ�µ������ٻ��ٶȷ���ת��Ϊ�����ٵĶ�ά�ٶȷ������ο������129ҳ��ʽ16.73-16.76
+-mach = sqrt(velocitynormal.*velocitynormal+velocityradiul.*velocityradiul);%�������ٵ�������ٶ�velocitynormal����뾶�����ٶ�velocityradiul�����Ӧ�������ٶ�ά������
+-velocity_x = velocityradiul.*cos(angle_span)- velocitynormal.*sin(angle_span);%�������ٵ�������ٶ�velocitynormal����뾶�����ٶ�velocityradiul�����Ӧ�������ٶ�άVx
+-velocity_y = velocityradiul.*sin(angle_span)+ velocitynormal.*cos(angle_span);%�������ٵ�������ٶ�velocitynormal����뾶�����ٶ�velocityradiul�����Ӧ�������ٶ�άVy
+-angle_flowturning = atan(velocity_y./velocity_x);%�����ά�ٶȼ�ļнǼ�������
+-
+-
+-
+-%�������T-M���̵Ĺ�����ͨ���������ٽ��ٶ������ٻ������������ٶȵ������»�ԭ�������ٵ���
+-mach1 = sqrt(2*mach.*mach./(specific_heat_ratio+1-(specific_heat_ratio-1).*mach.*mach));%��������嶯��ѧ�ϲ� EQ3.189�����������������������������Ĺ�ϵʽ
+-%ͨ��б������ϵʽ�в�ǰ��������ļ����ϵʽ������Ҫ��velocitynormal��velocityradiul��velocity_x��velocity_y���ٶ�ֵת��Ϊ���������ٵ�������Ĳ������
+-temp = mach_preshock*sind(angle1_shock);%sind�ǡ��Ƕ��ơ������Ǻ���
+-mach_aftshock = sqrt(((specific_heat_ratio+1)^2*temp^2*mach_preshock^2-4*(temp^2-1)*(specific_heat_ratio*temp^2+1))/...
+-    (2*specific_heat_ratio*temp^2-(specific_heat_ratio-1))/((specific_heat_ratio-1)*temp^2+2));%б����ǰ����������ϵʽ �ο�PPT
+-pressure_aftshock  = pressure_inlet*(2*specific_heat_ratio*temp^2-(specific_heat_ratio-1))/(specific_heat_ratio+1);%��������嶯��ѧ�²� EQ16.66����page286 EQ(7.49)б����ǰ��ѹ����ϵʽ
+-temperature_aftshock = temperature_inlet*(2*specific_heat_ratio*temp^2-(specific_heat_ratio-1))*((specific_heat_ratio-1)*temp^2+2)/((specific_heat_ratio+1)^2*temp^2);%page286 EQ(7.51)��б������ʽ б����ǰ���¶ȹ�ϵʽ
+-totalpressure_aftshock = (1+(specific_heat_ratio-1)*mach_aftshock^2/2.)^(specific_heat_ratio/(specific_heat_ratio-1))*pressure_aftshock ;%�ܾ�ѹ��ϵʽ
+-totaltemperature_aftshock = (1+(specific_heat_ratio-1)*mach_aftshock^2/2.)*temperature_aftshock;%�ܾ��¹�ϵʽ
+-% "pressure_aftshock ��temperature_aftshock" see book of M.J.����� "gas dynamics " rudin  page272 EQ(7.49)��(7.51)����Ϊб������ʽ
+-% "totalpressure_aftshock ��totaltemperature_aftshock" see book of M.J.����� "gas dynamics " rudin  page107 EQ��3.76������3.69��
+-%������ϵ���������velocitynormal��velocityradiul��velocity_x��velocity_y�������ٵ��ٶ�����ͨ��Vmax'����ٽ�����ת��Ϊ�����ٵ���
+-velocity1_radiul= sqrt(2*specific_heat_ratio*gas_constant *totaltemperature_aftshock/(specific_heat_ratio+1)).*velocityradiul;
+-velocity1_normal = sqrt(2*specific_heat_ratio*gas_constant *totaltemperature_aftshock/(specific_heat_ratio+1)).*velocitynormal;
+-velocity1_x = sqrt(2*specific_heat_ratio*gas_constant *totaltemperature_aftshock/(specific_heat_ratio+1)).*velocity_x;
+-velocity1_y = sqrt(2*specific_heat_ratio*gas_constant *totaltemperature_aftshock/(specific_heat_ratio+1)).*velocity_y;
+-% "velocity1_radiul��velocity1_normal" is dimensional according the limited velocity��Vmax'��
+-% specified see book of M.J.����� "gas dynamics "   page 124-125,EQ��3.187��
+-
+-totalpressure_inlet = (1+(specific_heat_ratio-1)*mach_preshock^2/2.)^(specific_heat_ratio/(specific_heat_ratio-1))*pressure_inlet;%������ѹ����ο�M.J.����� "gas dynamics " page124��EQ3.182 
+-pressure1 = zeros(index+1,1);%����׶������������ѹ������ѹ����ѹ�ָ�ϵ�����¶ȵȲ����ľ����С
+-totalpressure1 = zeros(index+1,1);
+-totalpressure1_recovery = zeros(index+1,1);
+-temperature1 = zeros(index+1,1);
+-%����׶�������������ĸ�������Ĵ�С
+-for i=1:index+1
+-    pressure1(i) = totalpressure_aftshock./(1+(specific_heat_ratio-1).*mach1(i)^2./2.)^(specific_heat_ratio./(specific_heat_ratio-1))/pressure_inlet;%�ܾ��¹�ϵʽsee book of M.J.����� "gas dynamics " rudin  page107 EQ��3.76��
+-    totalpressure1(i) = (1+(specific_heat_ratio-1).*mach1(i)^2./2.)^(specific_heat_ratio./(specific_heat_ratio-1)).*pressure1(i);%"totalpressure_aftshocksee book of M.J.����� "gas dynamics " rudin  page107 EQ��3.76��
+-    totalpressure1_recovery(i) = totalpressure1(i)./totalpressure_inlet;%��ѹ�ָ�ϵ��
+-    temperature1(i) = totaltemperature_aftshock./(1+(specific_heat_ratio-1).*mach1(i)^2/2.)/temperature_inlet;%�ܾ��¹�ϵʽsee book of M.J.����� "gas dynamics " rudin  page107 EQ��3.69��
++function [beta,velocity_x,velocity_y,mf_cone,pf_cone]=conical_flowfield(M,theta,gamma_gas)
++% V5 radians end-to-end. Teacher Taylor-Maccoll pressure approach, bounded.
++[~,beta,angles,vt,vr]=comptue_conicalfield(M,theta,gamma_gas);
++v2=vr.^2+vt.^2;
++if any(v2>=1)||any(v2<0);error('V5:NumericalDomain','Invalid cone energy');end
++mf_cone=sqrt(2*v2./((gamma_gas-1)*(1-v2)));
++Mn=M*sin(beta);pr_shock=1+2*gamma_gas/(gamma_gas+1)*(Mn^2-1);
++p0ratio=pr_shock*(1+(gamma_gas-1)/2*mf_cone(1)^2)^(gamma_gas/(gamma_gas-1));
++pf_cone=p0ratio./(1+(gamma_gas-1)/2*mf_cone.^2).^(gamma_gas/(gamma_gas-1));
++velocity_x=vr.*cos(angles)-vt.*sin(angles);velocity_y=vr.*sin(angles)+vt.*cos(angles);
++if ~isreal(pf_cone)||any(~isfinite(pf_cone))||any(pf_cone<=0)
++    error('V5:NumericalDomain','Invalid cone pressure');
+ end
+-deltaf_cone=angle_span;%����������׶���������������
+-mf_cone=mach1;%����������׶����������������
+-pf_cone=pressure1;%����������׶����������ѹ��
++end

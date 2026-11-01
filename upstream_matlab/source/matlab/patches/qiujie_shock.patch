@@ -1,0 +1,11 @@
+--- teacher_original/qiujie_shock.m
++++ teacher_active/qiujie_shock.m
+@@ -1,6 +1,6 @@
+ function [x1,y1,p1,r1,v1,a1,v1_x,v1_y] = qiujie_shock(x_shock,r_shock,h_center_body,p0,a0,v0,r0,shock_angle)
+-global g
+-global xishu
++g=1.4;
++xishu=1;
+ g=1.4;xishu=1;
+ m0 = v0./sqrt(g*p0./r0);
+ for i=1
