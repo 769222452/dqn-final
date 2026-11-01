@@ -1,0 +1,58 @@
+{
+ "schema": "aoa-fix-P1-evaluation/1",
+ "status": "COMPLETE",
+ "source_sha256": {
+  "data/surrogate_aligned/controller.npz": "990b2f2fc6d32a753494e15d4949eea3c1bc6433675272c268f9b03f58cd7c40",
+  "data/surrogate_aligned/controller.json": "b45531c0fcff47f006c988af95c965af48fbf345293ac4234c30156abe0ec0a0",
+  "runs/aoa/surrogate_aligned/labels.jsonl": "c6000a4fe01a7f0bfc6c026c2e3f547a8083cf1e0aee955921c92afbcae05b18",
+  "runs/aoa/surrogate_aligned/dagger_labels.jsonl": "9c3fcede4bf1e06896692d9a3bffeecd8a7c7ab16a1d2d708e5a1de62d2d005f",
+  "scripts/aoa_qualify_surrogate.py": "c1e4b2bf5fbbd8e7e209a634c36830ef6abcc6685ff81cda0aac1fc79982d9ca",
+  "src/certified_flight/distill.py": "a0f64554bf3d68275e4f025b0c0c5c4ce174fa0577da2b5c72304b98017815bb",
+  "src/certified_flight/corrector.py": "efcc58310497b9eb45d9ff6816a50738a3adb7e9018b12ad0d33f4d79d3a1bfe",
+  "src/certified_flight/ocp.py": "f7ac054d77c1d7828249deccd246d13f26ea0dc33ae1887909a37ff23c1a114e"
+ },
+ "config": {
+  "objective": "aligned",
+  "fast_safety": {
+   "constraint_aware_post_enabled": true,
+   "post_correction_method": "six_alpha_slsqp",
+   "post_correction_max_wall_s": 2.0,
+   "max_iterations": 60,
+   "ftol": 1e-10,
+   "alpha_scale_rad": 0.05,
+   "CL_scale": 0.1,
+   "weights": {
+    "network": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "smooth": 0.01,
+    "CL": 0.05
+   },
+   "internal_margin": 0.0,
+   "dense_refinement": true,
+   "boundary_smoothing": true
+  }
+ },
+ "control_contract": "rl298-consistent/2:ac8fa9f64586d329",
+ "gates": {
+  "maximum_dense_violations": 0,
+  "min_train_samples": 48,
+  "min_validation_samples": 12,
+  "min_test_samples": 24,
+  "planned_mach_mae_max": 0.01,
+  "alpha_rmse_deg_max": 0.5,
+  "alpha_abs_p95_deg_max": 1.5,
+  "test_dense_violation_rate_max": 0.0,
+  "validation_dense_violation_rate_max": 0.0,
+  "min_speedup": 5.0,
+  "full_fast_mission_required_for_scale_up": true
+ },
+ "expected_validation": 130,
+ "expected_test": 336,
+ "gate_status": "PASSED"
+}
