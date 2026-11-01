@@ -6,6 +6,8 @@
 |---|---|---|---|---|---|---|---|---|---|
 | aligned@minimal_first | const0.025 | 21 | 21 | 2511.93 | 1607.4 | 0.009 | 78.8 | 34 | 13.06 (6) |
 | aligned@minimal_first | seed101 | 21 | 21 | 2512.01 | 1597.2 | 0.010 | 78.5 | 12 | 12.70 (6) |
+| aligned@minimal_first | train_blocks_seed17 | 21 | 21 | 2513.66 | 1609.7 | 0.018 | 79.2 | 17 | 11.19 (6) |
+| aligned@minimal_first | train_pi_seed17 | 21 | 21 | 2514.04 | 1607.1 | 0.008 | 78.8 | 24 | 10.45 (6) |
 | consistent | const0.025 | 21 | 21 | 2491.88 | 1496.4 | 0.019 | 71.0 | 49 | 33.54 (6) |
 | consistent | seed101 | 21 | 21 | 2490.96 | 1491.1 | 0.020 | 70.9 | 10 | 34.78 (6) |
 | consistent@minimal_first | const0.025 | 21 | 21 | 2496.00 | 1505.0 | 0.020 | 70.9 | 61 | 29.70 (6) |
@@ -45,8 +47,8 @@
 | RL transfer seed101: policy − const on V16 layer (archived result) | rl | 21 | +9.73 [+7.98, +11.63] | 21 | +3.03 | 21/21 | +28.8 | 0.16 (6) |
 | RL transfer seed101: policy − const on aligned@mf | rl | 21 | +0.08 [-0.73, +0.84] | 13 | -3.37 | 21/21 | -10.2 | 0.03 (6) |
 | System seed101: aligned@mf − V16 (same policy) | system | 21 | +46.90 [+46.23, +47.55] | 21 | +43.63 | 21/21 | +198.6 | 0.78 (6) |
-| E2 RL gain, retrained PI seed17 − const (aligned@mf) | rl | 0 | - | - | - | 0/0 | - | - |
-| E3 coordinated blocks seed17 − PI seed17 (aligned@mf, equal budget) | algorithm | 0 | - | - | - | 0/0 | - | - |
+| E2 RL gain, retrained PI seed17 − const (aligned@mf) | rl | 21 | +2.10 [+1.68, +2.46] | 20 | -0.49 | 21/21 | -0.3 | 0.20 (6) |
+| E3 coordinated blocks seed17 − PI seed17 (aligned@mf, equal budget) | algorithm | 21 | -0.38 [-0.79, +0.05] | 5 | -2.21 | 21/21 | +2.6 | -0.07 (6) |
 | E2 RL gain, retrained PI seed23 − const (aligned@mf) | rl | 0 | - | - | - | 0/0 | - | - |
 | E3 coordinated blocks seed23 − PI seed23 (aligned@mf, equal budget) | algorithm | 0 | - | - | - | 0/0 | - | - |
 | E2 RL gain, retrained PI seed41 − const (aligned@mf) | rl | 0 | - | - | - | 0/0 | - | - |

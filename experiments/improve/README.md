@@ -230,5 +230,51 @@ How to read this:
 
 ### 4.2 Retraining on aligned@minimal_first (local: 1 seed per variant, 10 iterations)
 
-Running; filled in when it finishes. The 7-seed comparison (PI / overrides / blocks) is part of the cloud
-package (`../aoa_fix/CODEX.md`).
+Both variants start from constant CL 0.025 and use the V16 training settings otherwise (§2). PI is the
+unchanged V16 algorithm. "Blocks" adds exact overrides and coordinated blocks of 2/4/8 decisions, with 7
+states every 168 s, i.e. 14 + 42 branch flights per iteration against PI's 50.
+Evidence: `train_local/`, `flights_trained/`; the report is `report_local/report.md`.
+
+| seed 17 | certified steps | stages accepted | nominal gain (training) | held-out gain over constant (21 states) |
+|---|---|---|---|---|
+| PI | 174,700 | 3 of 10 iterations | +1.70 km | **+2.10 km [+1.68, +2.46]**, 20/21 states |
+| blocks + overrides | 163,324 | 8 of 10 iterations | +2.67 km | +1.73 km [+1.40, +2.06], 21/21 states |
+
+Paired comparison at equal budget (E3): blocks − PI = **−0.38 km [−0.79, +0.05]**, blocks better on
+5 of 21 states. Both runs completed all 21 flights, and the safety-related quantities are unchanged
+(peak heat flux ≤ 1.78 MW/m², no failed or refused steps).
+
+Reading:
+- **E2 holds for the PI baseline (one seed).** The unchanged V16 algorithm, retrained on the corrected
+  layer, learns a real but small gain: +2.1 km over the tuned constant, i.e. 0.08 % of range and ≈16 %
+  of the remaining 13 km gap to the bound. The V16 policy's "+9.7 km" was therefore mostly layer
+  compensation (§4.1); the genuinely learnable part on the corrected layer is about a fifth of that.
+- **E3 is not met.** The coordinated-block variant found larger gains at the nominal state it trained on
+  (+2.67 vs +1.70 km), but they do not carry over to the held-out states. The reason is structural:
+  accepted stages are time-keyed overrides, i.e. a learned nominal schedule, which does not adapt to
+  perturbed starts. PI's model stages condition on the state and generalise better. So the
+  nominal-state number the training loop optimises was misleading for the blocks variant.
+- **Issue 1 (premature stop):** no variant stopped early in these 10 iterations; PI stopped
+  improving after iteration 3 and blocks kept finding exact improvements until the end. With state-
+  independent overrides these are overfit to one trajectory, so more exact labels at one state do
+  not help the held-out policy.
+- **Open questions, not claims:** a single seed per variant gives no seed variance, and a 21-state
+  held-out subset is not the 41-state set. The 7-seed cloud comparison (§3) decides E2/E3 properly.
+- **Likely next step if E3 stays negative:** make overrides state-gated (`tol`, already supported by
+  `policy._override`) or train blocks as model stages with state inputs, so that coordinated
+  improvements generalise. This was not tested.
+
+### 4.3 Total attribution (nominal-start flights are the common ground; held-out means over 21 states)
+
+| source | effect | evidence |
+|---|---|---|
+| AoA sawtooth fix (consistent objective + refitted surrogate) | **+36.5 km** [+35.3, +37.7] | §4.1 |
+| minimal-first look-ahead guard | +4.1 km [+3.2, +5.0] | §4.1 |
+| heat-load alignment (needs the guard fix) | +15.9 km [+14.7, +17.1] | §4.1 |
+| **execution layer in total** | **+56.5 km** [+54.8, +58.3] | §4.1 |
+| RL policy on the corrected layer (PI, 1 seed) | +2.1 km [+1.7, +2.5] | §4.2 |
+| coordinated blocks over PI (1 seed) | −0.4 km [−0.8, +0.05] | §4.2 |
+| gap left to the physical upper bound | ≈11 km (aligned, PI) | bounds |
+
+So of the ≈ 59 km gained over V16 + constant CL, about 96 % comes from the execution layer and about
+4 % from learning. The paper should say so plainly.

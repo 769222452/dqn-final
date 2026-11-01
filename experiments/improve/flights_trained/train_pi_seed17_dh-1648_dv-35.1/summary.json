@@ -1,0 +1,53 @@
+{
+  "policy": "runs/aoa/train/pi/seed17/state.json",
+  "objective": "aligned@minimal_first",
+  "inner": "surrogate",
+  "channels": {
+    "FAST_APPROXIMATE": 400
+  },
+  "initial_offset_h_V": [
+    -1648.0,
+    -35.1
+  ],
+  "stop": "SUCCESS",
+  "completed": true,
+  "t_end_s": 1200.0,
+  "range_km": 2457.5299280219488,
+  "wall_s": 73.11204902299869,
+  "fallback_steps": 0,
+  "corrector_changed_steps": 1,
+  "lookahead_offset_steps": 51,
+  "metrics": {
+    "steps": 400,
+    "alpha_min_deg": 3.133205257898762,
+    "alpha_max_deg": 7.377656628485967,
+    "reversal_rate": 0.36989247311827955,
+    "intra_step_ptp_median_deg": 0.0071412847717740036,
+    "intra_step_ptp_p95_deg": 0.2358184414920652,
+    "boundary_jump_median_deg": 0.008257564222611258,
+    "boundary_jump_p95_deg": 0.5001210312920638,
+    "sawtooth_opposition": 0.8367346938775511,
+    "sawtooth_opposition_steps": 98,
+    "noise_floor_deg": 0.01,
+    "mean_profile_deg": [
+      0.0212,
+      0.0014,
+      -0.0044,
+      -0.0061,
+      -0.0063,
+      -0.0058
+    ],
+    "hf_rms_deg": 0.09895990139467521,
+    "power_3s_fraction": 0.0005082582622309449,
+    "CL_mean_abs_error_median": 0.0007491116128449764,
+    "CL_mean_abs_error_p95": 0.007447990920148467,
+    "range_km": 2457.5299280219488,
+    "t_end_s": 1200.0,
+    "executed_CL_mean_after_150s": 0.025007457430303484,
+    "heat_load_MJ_m2": 1539.2352638715488,
+    "heat_flux_peak_MW_m2": 1.6860612878735701,
+    "q_dyn_peak_kPa": 79.97752798283263,
+    "load_factor_peak": 1.779555858111402,
+    "q_dyn_cruise_mean_kPa": 78.70328071261167
+  }
+}

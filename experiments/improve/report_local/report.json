@@ -22,6 +22,28 @@
    "gap_to_bound_km": 12.696474600085518,
    "gap_states": 6
   },
+  "aligned@minimal_first|train_blocks_seed17": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2513.66054058225,
+   "heat_load": 1609.7209903977914,
+   "ptp": 0.018096678843496417,
+   "q_cruise": 79.17992454002842,
+   "fallback": 17,
+   "gap_to_bound_km": 11.191542391281777,
+   "gap_states": 6
+  },
+  "aligned@minimal_first|train_pi_seed17": {
+   "states": 21,
+   "completed": 21,
+   "range_km": 2514.0360977748,
+   "heat_load": 1607.0912671348096,
+   "ptp": 0.008427216568509976,
+   "q_cruise": 78.84681601904266,
+   "fallback": 24,
+   "gap_to_bound_km": 10.454456689420871,
+   "gap_states": 6
+  },
   "consistent|const0.025": {
    "states": 21,
    "completed": 21,
@@ -788,17 +810,26 @@
     "const0.025"
    ],
    "criterion": "ci_lower_gt_0",
-   "states": 0,
+   "states": 21,
    "difference_km": {
-    "n": 0
+    "n": 21,
+    "mean": 2.1030256520889017,
+    "ci95": [
+     1.6843963922728347,
+     2.4641696891451144
+    ],
+    "wins": 20,
+    "worst": -0.4874952518898681,
+    "median": 2.134663860911587
    },
    "completed": [
-    0,
-    0
+    21,
+    21
    ],
-   "heat_load_delta": null,
-   "gap_closure": null,
-   "gap_closure_states": 0
+   "heat_load_delta": -0.3137452489166186,
+   "gap_closure": 0.19908410466465623,
+   "gap_closure_states": 6,
+   "criterion_met": true
   },
   {
    "name": "E3 coordinated blocks seed17 \u2212 PI seed17 (aligned@mf, equal budget)",
@@ -812,17 +843,26 @@
     "train_pi_seed17"
    ],
    "criterion": "ci_lower_gt_0",
-   "states": 0,
+   "states": 21,
    "difference_km": {
-    "n": 0
+    "n": 21,
+    "mean": -0.3755571925493141,
+    "ci95": [
+     -0.7908576696044324,
+     0.054369683502678894
+    ],
+    "wins": 5,
+    "worst": -2.2097066319920486,
+    "median": -0.3690761653710979
    },
    "completed": [
-    0,
-    0
+    21,
+    21
    ],
-   "heat_load_delta": null,
-   "gap_closure": null,
-   "gap_closure_states": 0
+   "heat_load_delta": 2.6297232629814666,
+   "gap_closure": -0.06723990005663459,
+   "gap_closure_states": 6,
+   "criterion_met": false
   },
   {
    "name": "E2 RL gain, retrained PI seed23 \u2212 const (aligned@mf)",
