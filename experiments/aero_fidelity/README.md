@@ -224,6 +224,27 @@ that it is not met, would be a post-hoc change. The honest handling is:
   force giving the base term as a check of the diagnosis above. Its criteria are those of section 3 applied to the skin-only
   forces, and its result is reported as exploratory, following a primary test whose measurement was flawed.
 
+## 3f. CFD stage version 5 (skin-only forces): declared before it is run
+
+Purpose: test the diagnosis of section 3e and, if it holds, measure the design-Mach question on forces that do not contain the
+base-cap artefact. Same three geometries (`results_family_v4/select.json`), same 27 medium cases and 2 grid-check cases, same
+meshes (the base relabelling does not change the volume mesh: FAM_MD6 coarse gives 93 085 tetrahedra in both versions),
+same free stream and solver settings. Only the markers change (`make_su2_cases.py --base-marker`): the planar base cap is its
+own Euler-wall marker `base`; `MARKER_MONITORING = ( body )`, so CL and CD are the skin forces. Run with
+`BASE_MARKER=1 OUT=runs/aero_fidelity_v5`.
+
+**Declared checks of the diagnosis (all computed per case from the version-4 and version-5 histories):**
+- D1: base term = (version-4 total CD) minus (version-5 skin CD); the diagnosis predicts it is negative and nearly independent of
+  alpha at fixed (geometry, Mach), standard deviation over alpha below 0.0003, and close to the Euler-minus-wedge offsets of
+  section 3e (differences below 0.0005).
+- D2: skin-only Euler pressure CD is positive in all 29 cases.
+- D3: grid check, skin-only: CL and pressure CD change by less than 15 % between medium and fine, with the same sign.
+If D2 fails, the diagnosis is wrong and the Euler drag cannot be used for this question at all; this is then reported as such.
+
+**Decision criteria:** exactly those of section 3, applied to the skin-only Euler forces plus friction (and the wedge model as
+before). The result is reported as EXPLORATORY: it follows a primary test (section 3e) whose measurement was found to be
+flawed, and the criteria were not changed after seeing the skin-only forces. The version-4 outcome stays on record as the primary result.
+
 ## 4. Known limits
 
 - Euler is inviscid: no viscous interaction, no boundary-layer displacement at the leading edge, no

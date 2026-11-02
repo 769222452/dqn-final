@@ -10,6 +10,10 @@ morphing. This script builds, for each case:
 - mesh.su2: tetrahedral volume mesh (gmsh) of a box around the body; markers 'body' and 'farfield';
 - case.cfg: SU2 Euler setup (free stream at the altitude where q = Q_PA for that Mach).
 
+With --base-marker the planar base cap is its own marker 'base' (still an Euler wall) and only 'body' (the skins) is
+monitored, so CL and CD are the skin forces; without it the cap belongs to 'body' (versions 1 to 4 of the family
+experiment).
+
     python scripts/cfd/make_su2_cases.py --out runs/cfd --level coarse          # 24 cases
     python scripts/cfd/make_su2_cases.py --out runs/cfd --level medium --geometries S2_MD12_dd296f618e
 
@@ -188,7 +192,7 @@ def write_stl(path, V, T):
 EDGE_SCALES = (1., 1.5, 2., 3.)      # retried in this order when the volume mesher fails or returns no elements
 
 
-def mesh(stl, out, level):
+def mesh(stl, out, level, base_x=None):
     """Volume mesh; returns dict(cells, edge_scale, algorithm, remesh_surface).
 
     First choice: gmsh re-meshes the surface to the size fields (resolution follows the level). If it fails (gmsh
@@ -200,7 +204,7 @@ def mesh(stl, out, level):
         for scale in EDGE_SCALES if remesh else (1.,):
             for algorithm in (10, 1):                             # HXT, Delaunay
                 try:
-                    info = _mesh_once(stl, out, level, scale, algorithm, remesh)
+                    info = _mesh_once(stl, out, level, scale, algorithm, remesh, base_x)
                 except Exception as exc:                          # noqa: BLE001 - gmsh raises bare Exception
                     errors.append(f'remesh={remesh}, edge x{scale:g}, algorithm {algorithm}: {exc}')
                     continue
@@ -210,7 +214,7 @@ def mesh(stl, out, level):
     raise RuntimeError('volume meshing failed for '+str(stl)+':\n  '+'\n  '.join(errors))
 
 
-def _mesh_once(stl, out, level, scale, algorithm, remesh=True):
+def _mesh_once(stl, out, level, scale, algorithm, remesh=True, base_x=None):
     import gmsh
     lc = dict(LEVELS[level])
     lc['edge'] = lc['edge']*scale
@@ -222,6 +226,14 @@ def _mesh_once(stl, out, level, scale, algorithm, remesh=True):
     if remesh:
         gmsh.model.mesh.createGeometry()
     body = [s[1] for s in gmsh.model.getEntities(2)]
+    base = []
+    if base_x is not None:                                    # planar patches lying in the base plane x = base_x
+        for tag in body:
+            x0, _, _, x1, _, _ = gmsh.model.getBoundingBox(2, tag)
+            if abs(x0-base_x) < 1e-6 and abs(x1-base_x) < 1e-6:
+                base.append(tag)
+        if not base or len(base) == len(body):
+            raise RuntimeError(f'base patch detection failed: {len(base)} of {len(body)} surfaces in the plane x = {base_x}')
     sl_body = gmsh.model.geo.addSurfaceLoop(body)
     gmsh.model.geo.synchronize()
     # farfield box (hypersonic: short upstream, longer downstream)
@@ -243,7 +255,9 @@ def _mesh_once(stl, out, level, scale, algorithm, remesh=True):
     sl_far = gmsh.model.geo.addSurfaceLoop(surf)
     vol = gmsh.model.geo.addVolume([sl_far, sl_body])
     gmsh.model.geo.synchronize()
-    gmsh.model.addPhysicalGroup(2, body, name='body')
+    gmsh.model.addPhysicalGroup(2, [t for t in body if t not in base], name='body')
+    if base:
+        gmsh.model.addPhysicalGroup(2, base, name='base')
     gmsh.model.addPhysicalGroup(2, surf, name='farfield')
     gmsh.model.addPhysicalGroup(3, [vol], name='fluid')
     # size field: fine on the body, finest along sharp edges (leading edge), growing outward
@@ -275,7 +289,8 @@ def _mesh_once(stl, out, level, scale, algorithm, remesh=True):
     gmsh.write(str(out))
     n = int(gmsh.model.mesh.getElementsByType(4)[0].size)
     gmsh.finalize()
-    return dict(cells=n, edge_scale=scale, algorithm=algorithm, remesh_surface=remesh)
+    return dict(cells=n, edge_scale=scale, algorithm=algorithm, remesh_surface=remesh, base_surfaces=len(base),
+                skin_surfaces=len(body)-len(base))
 
 
 def freestream(mission, M, q=Q_PA):
@@ -304,9 +319,9 @@ REF_ORIGIN_MOMENT_Z= 0.9481139754931033
 REF_LENGTH= 5.0
 REF_AREA= {sref}
 REF_DIMENSIONALIZATION= DIMENSIONAL
-MARKER_EULER= ( body )
+MARKER_EULER= ( {euler} )
 MARKER_FAR= ( farfield )
-MARKER_PLOTTING= ( body )
+MARKER_PLOTTING= ( {euler} )
 MARKER_MONITORING= ( body )
 NUM_METHOD_GRAD= WEIGHTED_LEAST_SQUARES
 CFL_NUMBER= 0.5
@@ -345,6 +360,8 @@ def main(argv=None):
     ap.add_argument('--alphas', nargs='*', type=float, default=list(ALPHAS_DEG))
     ap.add_argument('--iters', type=int, default=6000)
     ap.add_argument('--no-mesh', action='store_true', help='write surfaces and configs only')
+    ap.add_argument('--base-marker', action='store_true',
+                    help="the base cap is its own marker 'base' and is not monitored: CL, CD are the skin forces")
     ap.add_argument('--geometry-dir', default=str(SNAPSHOT/'geometries'),
                     help='folder with <geometry_id>/native_geometry.mat (default: the 298-geometry snapshot)')
     ap.add_argument('--select', default=str(ROOT/'experiments/aero_fidelity/select_snapshot_equal_volume.json'),
@@ -368,7 +385,7 @@ def main(argv=None):
         elif (gdir/'mesh.su2').exists() and (gdir/'mesh_info.json').exists():
             minfo = json.loads((gdir/'mesh_info.json').read_text())
         else:
-            minfo = mesh(gdir/'surface.stl', gdir/'mesh.su2', a.level)
+            minfo = mesh(gdir/'surface.stl', gdir/'mesh.su2', a.level, base_x=float(V[:, 0].max()) if a.base_marker else None)
             (gdir/'mesh_info.json').write_text(json.dumps(minfo))
         for M in a.machs:
             fs = freestream(mission, M)
@@ -376,9 +393,10 @@ def main(argv=None):
                 cdir = gdir/f'M{M:g}_a{al:g}'
                 cdir.mkdir(parents=True, exist_ok=True)
                 (cdir/'case.cfg').write_text(CFG.format(mach=M, alpha=al, p=fs['p_Pa'], T=fs['T_K'], sref=SREF,
-                                                         iters=a.iters, mesh='../mesh.su2'))
+                                                         iters=a.iters, mesh='../mesh.su2',
+                                                         euler='body, base' if a.base_marker else 'body'))
                 meta = dict(geometry=g, geometry_mat=str(gdir_root/g/'native_geometry.mat'), level=a.level, mach=M,
-                            alpha_deg=al, freestream=fs, surface=closed, mesh=minfo)
+                            alpha_deg=al, freestream=fs, surface=closed, mesh=minfo, base_marker=bool(a.base_marker))
                 (cdir/'case.json').write_text(json.dumps(meta, indent=1))
                 cases.append(str(cdir.relative_to(out)))
         print(json.dumps(dict(geometry=g, level=a.level, triangles=int(len(T)), mesh=minfo, **closed)), flush=True)

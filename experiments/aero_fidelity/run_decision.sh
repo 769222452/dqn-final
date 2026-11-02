@@ -9,7 +9,7 @@
 #   collect     equal-lift comparison and the declared decision -> $OUT/results/decision.json
 #   all         preflight, family, check, cfd-mesh, cfd-run, collect
 #
-# Environment: OUT (default runs/aero_fidelity), PYTHON (python3), MATLAB (matlab), SLICES (4), NP (7),
+# Environment: BASE_MARKER (0; 1 = skin-only forces, version 5), OUT (default runs/aero_fidelity), PYTHON (python3), MATLAB (matlab), SLICES (4), NP (7),
 # JOBS (2), GRID_CASE (default: member FAM_MD6 at Mach 6, alpha 4).  A 14-core machine: NP=7 JOBS=2.
 # Every stage stops at the first problem and prints it; nothing is substituted silently.
 set -euo pipefail
@@ -71,6 +71,8 @@ check() {
 cfd_mesh() {
   [ -f "$SEL/select.json" ] || die "run check first"
   local common=(--geometry-dir "$SEL" --select "$SEL/select.json" --out "$CFD")
+  # BASE_MARKER=1 (CFD stage version 5, README section 3f): the base cap is its own marker and is not monitored
+  [ "${BASE_MARKER:-0}" = 1 ] && common+=(--base-marker)
   "$PYTHON" scripts/cfd/make_su2_cases.py "${common[@]}" --level medium --machs 4 6 8 --alphas 2 4 6
   # grid check: one case on the two neighbouring levels
   local g=${GRID_GEOMETRY:-FAM_MD6}

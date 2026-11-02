@@ -235,3 +235,26 @@ def test_per_mach_selection_is_closest_volume_within_the_unchanged_tolerance():
     rows[3]['volume_m3'] = 1.031                                              # 3.1 %: not admissible, not relaxed
     assert fam.select_per_mach(rows, t)[1] is None
     assert fam.select_per_mach([r for r in rows if r['Ma_design'] != 8.], t)[0][0]['reason'] == 'a design Mach has no valid member'
+
+
+# ---------------------------------------------------------------------------------- CFD stage version 5 (base marker)
+def test_base_marker_changes_only_the_markers_in_the_case_configuration(tmp_path):
+    for flag, euler in ((False, 'body'), (True, 'body, base')):
+        out = tmp_path/('with' if flag else 'without')
+        cfd.main(['--geometry-dir', str(SNAP/'geometries'), '--geometries', 'G42', '--out', str(out), '--level', 'coarse',
+                  '--machs', '6', '--alphas', '4', '--no-mesh']+(['--base-marker'] if flag else []))
+        cfg = (out/'G42'/'coarse'/'M6_a4'/'case.cfg').read_text()
+        assert f'MARKER_EULER= ( {euler} )' in cfg and 'MARKER_MONITORING= ( body )' in cfg
+        assert ('"base_marker": true' in (out/'G42'/'coarse'/'M6_a4'/'case.json').read_text()) == flag
+    assert (tmp_path/'with'/'G42'/'coarse'/'M6_a4'/'case.cfg').read_text().replace('body, base', 'body') == \
+        (tmp_path/'without'/'G42'/'coarse'/'M6_a4'/'case.cfg').read_text()
+
+
+def test_base_marker_mesh_has_a_separate_base_patch(tmp_path):
+    pytest.importorskip('gmsh')
+    cfd.main(['--geometry-dir', str(SNAP/'geometries'), '--geometries', 'G42', '--out', str(tmp_path), '--level', 'coarse',
+              '--machs', '6', '--alphas', '4', '--base-marker'])
+    mesh = (tmp_path/'G42'/'coarse'/'mesh.su2').read_text()
+    assert 'MARKER_TAG= base' in mesh and 'MARKER_TAG= body' in mesh and 'NMARK= 3' in mesh
+    info = __import__('json').loads((tmp_path/'G42'/'coarse'/'mesh_info.json').read_text())
+    assert info['base_surfaces'] >= 1 and info['skin_surfaces'] >= 1

@@ -55,3 +55,22 @@ grid-check cases. Report timings.
 Report the outcome of the declared criterion exactly as `decision.json` states it, together with the wedge
 model's ranking and the grid-convergence numbers. Do not interpret beyond that; the analysis is done
 afterwards.
+
+## CFD stage version 5 (skin-only forces; README section 3f)
+
+Run only after the family selection of version 4 exists (`results_family_v4/` documents it; copy its `family_selected/`
+folder with the three `.mat` files and `select.json` from your version-4 run). No MATLAB is needed.
+
+```bash
+git fetch origin aoa-fix && git checkout aoa-fix && git pull          # report git rev-parse HEAD
+export NP=7 JOBS=2 BASE_MARKER=1 OUT=runs/aero_fidelity_v5
+mkdir -p $OUT && cp -r runs/aero_fidelity/family_selected $OUT/       # the version-4 selection, unchanged
+bash experiments/aero_fidelity/run_decision.sh cfd-mesh
+nohup bash experiments/aero_fidelity/run_decision.sh cfd-run > $OUT/cfd_run.log 2>&1 &
+bash experiments/aero_fidelity/run_decision.sh collect
+```
+
+Check after cfd-mesh that each `mesh.su2` has three markers (body, base, farfield) and that `mesh_info.json` lists
+`base_surfaces: 1`; if a mesh differs from the version-4 cell count (FAM_MD6 coarse: 93 085), report it. Do not change any
+setting. Send back `case.json`, `case.cfg`, `history.csv`, `su2.log` of every case, `decision.json/txt`, timings, and the
+convergence status, to a new branch `aero-family-v5-results-20261102`.
