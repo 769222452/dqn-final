@@ -285,6 +285,38 @@ an off-design penalty that 3D flow would show) is NOT supported for this class a
   optimisation can be done with the wedge model and a few Euler checks.
 - Nothing here addresses trim, stability, heating, low-speed or take-off performance, or Mach numbers outside 4-8.
 
+## 3h. Optimal-family test: declared before any member exists
+
+Question: when each shape is free to be the best equal-volume shape for a given flight Mach, does the best shape change with the
+flight Mach (and is its design Mach close to the flight Mach)? This is the premise in its strongest fair form; the members of
+sections 3d-3g were not optimised for L/D.
+
+Design space (generator inputs; everything else fixed to G42: c1 = c2 = 1.0331, d1 = 0.11607, design AOA = -4 deg):
+design Mach Md in {4, 5, 6, 7, 8, 9, 10}, shock offset delta in {1, ..., 6} deg, ratio r in {0.35, 0.5} (a1 = a2 = a, b1 = b2 = r a,
+mean = asin(1/Md) + delta), a_x as the volume knob.
+- Stage A, map (`family_jobs.py --version 5`, 420 calls): a_x in {0.95, 0.975, 1.0, 1.025, 1.05}; audited without selection
+  (check mode `map`).
+- Stage B (`--version 6 --map <stage-A family_audit.json>`): for every shape whose adjacent VALID map members bracket G42's
+  volume, three members at the linearly interpolated a_x and +-0.0025; audited the same way.
+- Candidates: stage-B members that are audit-VALID and within +-3 % of G42's volume, the closest one per shape.
+
+Aerodynamics: tangent-wedge + friction, validated against Euler for this class in section 3g; flight Mach F in {4, 6, 8} at
+q = 50 kPa; alpha 2...8 deg; quadratic CD(CL); L/D at CL 0.03, 0.04, 0.05 (`optimum/evaluate_optimum.py`).
+
+Declared rule (also in the script's docstring):
+- eligible: all three CL targets inside the fitted range at all three F; LD(m, F) = mean over the targets;
+- w(F) = best eligible candidate at F, Md*(F) its design Mach;
+- P1: Md*(4) < Md*(8);
+- P2: per target c, the best single shape s*_c (highest mean over F) and the ideal switching gain
+  G_c = mean_F [ max_m LD(m, F, c) / LD(s*_c, F, c) ] - 1; P2 holds if G_c >= 3 % for at least two targets;
+- the premise holds in the optimal-family sense iff P1 and P2;
+- Euler confirmation: {w(4), w(6), w(8), s*_0.04} with the version-5 CFD setup (`--base-marker`, alpha 2, 4, 6, 8, medium mesh,
+  no grid check); the wedge result is confirmed if Euler + friction gives the same winner at every F among this set.
+
+Expected outcomes, stated in advance: if P1 and P2 hold, the design-point library of `library/` is built on this space; if not,
+design-Mach matching is not a source of L/D gain for this class at Mach 4-8 even after optimisation, and the case for morphing
+must rest on other effects (trim, heating, Mach range outside 4-8, volume).
+
 ## 4. Known limits
 
 - Euler is inviscid: no viscous interaction, no boundary-layer displacement at the leading edge, no

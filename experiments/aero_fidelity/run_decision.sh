@@ -51,7 +51,7 @@ preflight() {
 
 family() {
   mkdir -p "$FAM"
-  "$PYTHON" experiments/aero_fidelity/family/family_jobs.py --out "$FAM" --slices "$SLICES" --version "${FAMILY_VERSION:-4}"
+  "$PYTHON" experiments/aero_fidelity/family/family_jobs.py --out "$FAM" --slices "$SLICES" --version "${FAMILY_VERSION:-4}" ${FAMILY_ARGS:-}
   local pids=() k
   for k in $(seq 0 $((SLICES-1))); do
     "$MATLAB" -batch "addpath('$PWD/experiments/aero_fidelity/family'); make_family('$PWD/$FAM/jobs_$k.json', '$ACTIVE', '$PWD/$FAM')" \
@@ -73,7 +73,9 @@ cfd_mesh() {
   local common=(--geometry-dir "$SEL" --select "$SEL/select.json" --out "$CFD")
   # BASE_MARKER=1 (CFD stage version 5, README section 3f): the base cap is its own marker and is not monitored
   [ "${BASE_MARKER:-0}" = 1 ] && common+=(--base-marker)
-  "$PYTHON" scripts/cfd/make_su2_cases.py "${common[@]}" --level medium --machs 4 6 8 --alphas 2 4 6
+  # ALPHAS (default "2 4 6"); GRID_CHECK=0 skips the coarse/fine grid check (optimal-family Euler confirmation)
+  "$PYTHON" scripts/cfd/make_su2_cases.py "${common[@]}" --level medium --machs 4 6 8 --alphas ${ALPHAS:-2 4 6}
+  [ "${GRID_CHECK:-1}" = 1 ] || return 0
   # grid check: one case on the two neighbouring levels
   local g=${GRID_GEOMETRY:-FAM_MD6}
   "$PYTHON" scripts/cfd/make_su2_cases.py "${common[@]}" --level coarse --geometries "$g" --machs 6 --alphas 4

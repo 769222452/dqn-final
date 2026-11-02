@@ -141,7 +141,10 @@ def main(argv=None):
     target = targets.pop()
     modes = {j.get('selection') for j in jobs}
     assert len(modes) == 1, 'jobs of one family must share one selection mode'
-    if modes.pop() == 'per_mach_closest_volume':
+    mode = modes.pop()
+    if mode == 'map':                      # optimal-family test (README section 3h): audit and volumes only, no selection
+        options, best = [], None
+    elif mode == 'per_mach_closest_volume':
         options, best = select_per_mach(rows, target)
     else:
         options, best = select(rows, target=target)
@@ -152,7 +155,9 @@ def main(argv=None):
         reasons[r['reason'] or 'VALID'] = reasons.get(r['reason'] or 'VALID', 0)+1
     summary = dict(jobs=len(rows), generated=sum(r['status'] == 'GENERATED' for r in rows), valid=sum(r['valid'] for r in rows),
                    outcomes=reasons, options=options, rule=__doc__.split('Selection rule')[1].strip())
-    if best is None:
+    if mode == 'map':
+        summary['status'] = 'MAP_ONLY'
+    elif best is None:
         summary['status'] = 'NO_ADMISSIBLE_FAMILY'
     else:
         summary.update(status='SELECTED', selected=best, members={})
@@ -170,7 +175,7 @@ def main(argv=None):
     (out/'family_audit.json').write_text(json.dumps(dict(summary, rows=rows), indent=1, default=float))
     print(json.dumps({k: v for k, v in summary.items() if k not in ('rule', 'options', 'members')}, indent=1, default=float))
     print('candidates:', [(o['design_key'], o['admissible'], round(o.get('max_volume_deviation', float('nan')), 3)) for o in options][:60])
-    return 0 if best else 3
+    return 0 if (best or mode == 'map') else 3
 
 
 if __name__ == '__main__':

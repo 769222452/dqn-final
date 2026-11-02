@@ -30,6 +30,12 @@ valid a_x window reaches G42's volume, which the version-3 audit gives as MD4: +
 on a fine grid around the volume match (29 generator calls).
 
     python experiments/aero_fidelity/family/family_jobs.py --out runs/aero_fidelity/family --version 4
+
+Versions 5 and 6 (optimal-family test, README section 3h): version 5 is a map of design Mach x shock offset x shock-angle
+ratio x a_x (420 calls); version 6 takes the audited map (--map <family_audit.json of version 5>) and, for every shape
+(design Mach, offset, ratio) whose valid a_x neighbours bracket G42's volume, generates three members at the interpolated a_x
+and +-0.0025 around it. Both are audited without selection (check mode 'map'); the selection is the declared L/D rule of
+experiments/aero_fidelity/optimum/evaluate_optimum.py.
 """
 import argparse
 import json
@@ -50,6 +56,9 @@ V3 = dict(deltas=(2., 4., 6.), ratio=0.5, ax=tuple(round(0.90+0.01*i, 2) for i i
 V4 = {4.: dict(delta=4., ax=tuple(round(1.02+.005*i, 4) for i in range(9))),
       6.: dict(delta=2., ax=tuple(round(1.00+.005*i, 4) for i in range(9))),
       8.: dict(delta=2., ax=tuple(round(.975+.0025*i, 4) for i in range(11)))}
+# Optimal-family map (version 5)
+OPT_A = dict(machs=(4., 5., 6., 7., 8., 9., 10.), deltas=(1., 2., 3., 4., 5., 6.), ratios=(.35, .5),
+             ax=(.95, .975, 1., 1.025, 1.05))
 # Enclosed volume of G42 (data/geometry_subset/geometries/G42, scripts/cfd/make_su2_cases.closed_surface): equal payload volume.
 TARGET_VOLUME_M3 = 1.018813633812261
 
@@ -63,7 +72,48 @@ def _job(job_id, M, delta, beta4, ax, **extra):
                 inputs10=[M, *beta4, FIXED['c1'], FIXED['c2'], FIXED['d1'], FIXED['AOA'], ax], **extra)
 
 
-def jobs(version=2):
+def _pair(job_id, M, d, r, ax, **extra):
+    a = 2*(mach_angle_deg(M)+d)/(1+r)
+    return _job(job_id, M, d, (a, a, r*a, r*a), ax, design='pair', ratio=r, design_key=f'MD{M:g}_d{d:+g}_r{r:g}',
+                target_volume_m3=TARGET_VOLUME_M3, selection='map', **extra)
+
+
+def opt_stage_a():
+    return [_pair(f'OPTA_MD{M:g}_d{d:+g}_r{r:g}_ax{ax:.3f}', M, d, r, ax)
+            for M in OPT_A['machs'] for d in OPT_A['deltas'] for r in OPT_A['ratios'] for ax in OPT_A['ax']]
+
+
+def opt_stage_b(map_rows, target=None, step=.0025):
+    """Interpolated a_x per shape whose adjacent valid map members bracket the target volume (pure function)."""
+    target = TARGET_VOLUME_M3 if target is None else target
+    groups = {}
+    for r in map_rows:
+        groups.setdefault((r['Ma_design'], r['delta_deg'], r['ratio']), []).append(r)
+    out = []
+    for (M, d, ratio), rows in sorted(groups.items()):
+        by_ax = {round(r['a_x'], 6): r for r in rows}
+        grid = sorted(by_ax)
+        for a0, a1 in zip(grid[:-1], grid[1:]):
+            r0, r1 = by_ax[a0], by_ax[a1]
+            if not (r0['valid'] and r1['valid']):
+                continue
+            v0, v1 = r0['volume_m3'], r1['volume_m3']
+            if (v0-target)*(v1-target) > 0 or v0 == v1:
+                continue
+            ax = a0+(target-v0)*(a1-a0)/(v1-v0)
+            for k in (-1, 0, 1):
+                x = round(ax+k*step, 5)
+                out.append(_pair(f'OPTB_MD{M:g}_d{d:+g}_r{ratio:g}_ax{x:.5f}', M, d, ratio, x, bracket=[a0, a1]))
+    return out
+
+
+def jobs(version=2, map_rows=None):
+    if version == 5:
+        return opt_stage_a()
+    if version == 6:
+        if map_rows is None:
+            raise ValueError('version 6 needs the audited version-5 map (--map)')
+        return opt_stage_b(map_rows)
     out = []
     for M in DESIGN_MACHS:
         mu = mach_angle_deg(M)
@@ -107,11 +157,12 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--out', required=True)
     ap.add_argument('--slices', type=int, default=4, help='parallel MATLAB processes')
-    ap.add_argument('--version', type=int, default=4, choices=(1, 2, 3, 4))
+    ap.add_argument('--version', type=int, default=4, choices=(1, 2, 3, 4, 5, 6))
+    ap.add_argument('--map', help='version 6: family_audit.json of the audited version-5 map')
     a = ap.parse_args(argv)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
-    js = jobs(a.version)
+    js = jobs(a.version, json.loads(Path(a.map).read_text())['rows'] if a.map else None)
     (out/'jobs.json').write_text(json.dumps(js, indent=1))
     for k in range(a.slices):
         (out/f'jobs_{k}.json').write_text(json.dumps(js[k::a.slices]))

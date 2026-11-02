@@ -75,3 +75,35 @@ Check after cfd-mesh that each `mesh.su2` has three markers (body, base, farfiel
 plane x = x_max by construction, and all of them form the single marker `base`; FAM_MD4 medium has 2); if a mesh differs from the version-4 cell count (FAM_MD6 coarse: 93 085), report it. Do not change any
 setting. Send back `case.json`, `case.cfg`, `history.csv`, `su2.log` of every case, `decision.json/txt`, timings, and the
 convergence status, to a new branch `aero-family-v5-results-20261102`.
+
+## Optimal-family test (README section 3h)
+
+MATLAB runs on the user's computer as before (two short batches); everything else on the server. Do not change any value.
+
+```bash
+git fetch origin aoa-fix && git checkout aoa-fix && git pull                     # report git rev-parse HEAD
+export NP=7 JOBS=2 SLICES=4
+# stage A: map, 420 generator calls, then audit (mode map: status MAP_ONLY is the expected result)
+OUT=runs/aero_opt_a FAMILY_VERSION=5 bash experiments/aero_fidelity/run_decision.sh family
+OUT=runs/aero_opt_a bash experiments/aero_fidelity/run_decision.sh check
+# stage B: interpolated a_x from the audited map, then audit
+OUT=runs/aero_opt_b FAMILY_VERSION=6 FAMILY_ARGS="--map $PWD/runs/aero_opt_a/family_selected/family_audit.json" \
+    bash experiments/aero_fidelity/run_decision.sh family
+OUT=runs/aero_opt_b bash experiments/aero_fidelity/run_decision.sh check
+# declared evaluation (tangent wedge + friction)
+python experiments/aero_fidelity/optimum/evaluate_optimum.py runs/aero_opt_b/family \
+    --audit runs/aero_opt_b/family_selected/family_audit.json --out runs/aero_opt/results
+# Euler confirmation of the winners (only if optimum_decision.json has status EVALUATED)
+mkdir -p runs/aero_opt/cfd_root && cp -r runs/aero_opt/results/confirm runs/aero_opt/cfd_root/family_selected
+OUT=runs/aero_opt/cfd_root BASE_MARKER=1 ALPHAS="2 4 6 8" GRID_CHECK=0 bash experiments/aero_fidelity/run_decision.sh cfd-mesh
+nohup env OUT=runs/aero_opt/cfd_root bash experiments/aero_fidelity/run_decision.sh cfd-run > runs/aero_opt/cfd_run.log 2>&1 &
+# after cfd-run has finished (do NOT run the 'collect' stage here):
+python experiments/aero_fidelity/optimum/evaluate_optimum.py runs/aero_opt_b/family \
+    --audit runs/aero_opt_b/family_selected/family_audit.json --out runs/aero_opt/results --confirm-cfd runs/aero_opt/cfd_root/cfd
+```
+
+If the MATLAB batches run on another machine, run the `family` stage there exactly as for versions 1-4 (job lists from
+`family_jobs.py --version 5`, then `--version 6 --map ...` with the stage-A audit copied over). Send back to a new branch
+`aero-opt-results-20261103`: both `family_audit.json`, all `status.json` and `matlab_*.log`, the stage-B `.mat` files of VALID
+members, `runs/aero_opt/results/` (optimum_decision.json, optimum_table.json, euler_confirmation.json, confirm/), every
+case.json/case.cfg/history.csv/su2.log of the confirmation run, timings and convergence status.

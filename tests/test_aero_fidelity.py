@@ -271,3 +271,43 @@ def test_library_stage_a_job_list_follows_the_recipe():
         assert a1 == a2 and b1 == b2 and b1/a1 == pytest.approx(.5)
         assert (a1+b1)/2 == pytest.approx(fj.mach_angle_deg(j['Ma_design'])+j['delta_deg'])
         assert j['inputs10'][0] == j['Ma_design'] and j['inputs10'][-1] == j['a_x']
+
+
+# ---------------------------------------------------------------------------------- optimal-family test (section 3h)
+def test_optimal_family_map_and_interpolation_stage():
+    a = fj.jobs(5)
+    assert len(a) == 7*6*2*5 and len({j['job_id'] for j in a}) == len(a) and {j['selection'] for j in a} == {'map'}
+    rows = [dict(Ma_design=6., delta_deg=2., ratio=.5, a_x=ax, valid=ok, volume_m3=v)
+            for ax, ok, v in ((.95, False, None), (.975, True, .8), (1.0, True, .9), (1.025, True, 1.1), (1.05, True, 1.3))]
+    rows += [dict(Ma_design=8., delta_deg=1., ratio=.35, a_x=ax, valid=True, volume_m3=v) for ax, v in ((1.0, 1.5), (1.025, 1.6))]
+    b = fj.jobs(6, rows)
+    assert len(b) == 3                                      # only the bracketing pair of the first shape; the second never reaches
+    ax = 1.0+(fj.TARGET_VOLUME_M3-.9)*.025/.2
+    assert [j['a_x'] for j in b] == [round(ax-.0025, 5), round(ax, 5), round(ax+.0025, 5)]
+    assert all(j['Ma_design'] == 6. and j['bracket'] == [1.0, 1.025] for j in b)
+    with pytest.raises(ValueError):
+        fj.jobs(6)
+
+
+def test_optimal_family_declared_rule():
+    sys.path.insert(0, str(ROOT/'experiments'/'aero_fidelity'/'optimum'))
+    import evaluate_optimum as E
+    T = E.CL_TARGETS
+
+    def flat(v):
+        return {c: v for c in T}
+    # design-point behaviour: each member best at its own Mach by 10 %
+    ld = {'m4': {4.: flat(8.8), 6.: flat(7.), 8.: flat(6.)}, 'm6': {4.: flat(8.), 6.: flat(7.7), 8.: flat(6.)},
+          'm8': {4.: flat(8.), 6.: flat(7.), 8.: flat(6.6)}}
+    md = {'m4': 4., 'm6': 6., 'm8': 8.}
+    r = E.criteria(ld, md)
+    assert r['P1'] and r['P2'] and r['premise_holds'] and r['winners'] == {'4.0': 'm4', '6.0': 'm6', '8.0': 'm8'}
+    # one member dominates everywhere: no switching gain, premise fails
+    ld['m8'] = {4.: flat(9.), 6.: flat(8.), 8.: flat(7.)}
+    r = E.criteria(ld, md)
+    assert not r['P1'] and not r['P2'] and not r['premise_holds'] and set(r['switching_gain'].values()) == {0.}
+    # a member without all targets is not eligible
+    ld['m8'][8.] = {.03: 7., .04: 7.}
+    assert 'm8' not in E.criteria(ld, md)['winners'].values()
+    rows = [dict(valid=True, volume_m3=v, Ma_design=4., delta_deg=4., ratio=.5, job_id=str(v)) for v in (.98, 1.01, 1.04)]
+    assert [c['job_id'] for c in E.candidates(rows, 1.0)] == ['1.01']
