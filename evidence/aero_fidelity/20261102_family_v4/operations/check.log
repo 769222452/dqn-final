@@ -1,0 +1,31 @@
+{
+ "jobs": 29,
+ "generated": 29,
+ "valid": 29,
+ "outcomes": {
+  "VALID": 29
+ },
+ "status": "SELECTED",
+ "selected": {
+  "design_key": "per_mach",
+  "target_volume_m3": 1.018813633812261,
+  "max_volume_deviation": 0.008925663727964439,
+  "admissible": true,
+  "chosen": {
+   "4.0": "FAM4_MD4_pair_d+4_r0.5_ax1.0400",
+   "6.0": "FAM4_MD6_pair_d+2_r0.5_ax1.0250",
+   "8.0": "FAM4_MD8_pair_d+2_r0.5_ax0.9850"
+  },
+  "deviation_per_mach": {
+   "4.0": -0.006023182169068386,
+   "6.0": 0.008925663727964439,
+   "8.0": -0.00024170476995577506
+  },
+  "shock_offset_deg_per_mach": {
+   "4.0": 4.0,
+   "6.0": 2.0,
+   "8.0": 2.0
+  }
+ }
+}
+candidates: [('per_mach', True, 0.009)]
