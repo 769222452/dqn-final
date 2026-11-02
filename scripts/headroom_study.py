@@ -88,7 +88,8 @@ def run(job):
         planner = H.Planner(mission, surface, support)
         controller = H.mpc_controller(planner, back=base*(1-b), lam=lam*1e-3)
         flown = H.fly(truth, x0, controller, period=period)
-        res.update(plans=getattr(controller, 'plans', 0), plan_failures=getattr(controller, 'failures', 0))
+        res.update(plans=getattr(controller, 'plans', 0), plan_failures=getattr(controller, 'failures', 0),
+                   plan_retries=getattr(controller, 'retries', 0), max_slack=getattr(controller, 'slack_used', 0.))
     log = flown.pop('log')
     res.update(flown, wall_s=time.perf_counter()-started, min_q_ratio_note='margins are normalised: >= 0 feasible',
                log_t_h_V_s_c=log[::4].tolist())

@@ -113,6 +113,8 @@ class Planner:
     """
     SPLIT = ((15, .10), (22, .30), (23, .60))
     IPOPT = dict(warm_start_init_point='yes', warm_start_bound_push=1e-8, warm_start_mult_bound_push=1e-8, mu_init=1e-5)
+    SLACK_STEPS = 3
+    SLACK_PENALTY = 1e3          # per unit of normalised limit violation; the range term is in units of 100 km
     BASE_BACKOFF = .998          # discretisation allowance: the nominal open-loop plan must stay feasible in the 0.5 s truth
 
     def __init__(self, mission, surface, mach_support, kind='param', profile=None, split=None, smooth=1e-4, ipopt=None):
@@ -123,6 +125,7 @@ class Planner:
         n = self.n = len(self.fractions)
         P = ca.MX.sym('P', 10)                  # x0(4), T, back, k0, lam, k_L, k_D
         X, C = ca.MX.sym('X', 4, n+1), ca.MX.sym('C', n)
+        S = ca.MX.sym('S', self.SLACK_STEPS)      # elastic q / n / heat limits on the first steps (measured state may already be over)
         if kind == 'profile':
             s_grid, k_grid = profile
             kfun = ca.interpolant('field', 'linear', [np.asarray(s_grid)], np.asarray(k_grid))
@@ -140,8 +143,11 @@ class Planner:
         def evaluate(state, c):
             return self.F(state, c, ca.vertcat(density(state[3]), P[8], P[9]))
 
-        def limits(state, qty):
-            add(ca.vertcat(*stage_margins(mission, mach_support, state, qty, P[5])), 0, ca.inf)
+        def limits(state, qty, slack=0):
+            m = stage_margins(mission, mach_support, state, qty, P[5])
+            for j in (6, 7, 8):
+                m[j] = m[j]+slack
+            add(ca.vertcat(*m), 0, ca.inf)
 
         for k in range(n):
             dt = self.fractions[k]*P[4]
@@ -154,18 +160,19 @@ class Planner:
             x4 = s0+dt*k3
             k4, q4 = evaluate(x4, C[k])
             for st, qq in ((s0, q1), (x2, q2), (x3, q3), (x4, q4)):
-                limits(st, qq)
+                limits(st, qq, S[k] if k < self.SLACK_STEPS else 0)
             add(X[:, k+1]-(s0+dt*(k1+2*k2+2*k3+k4)/6)/SX, 0, 0)
         _, qe = evaluate(X[:, n]*SX, C[n-1])
         limits(X[:, n]*SX, qe)
-        obj = -X[3, n]*SX[3]/1e5+smooth*ca.sumsqr((C[1:]-C[:-1])/.01)
+        obj = -X[3, n]*SX[3]/1e5+smooth*ca.sumsqr((C[1:]-C[:-1])/.01)+self.SLACK_PENALTY*ca.sum1(S)
         options = dict(max_iter=400, tol=1e-7, print_level=0, mu_strategy='adaptive')
         options.update(self.IPOPT if ipopt is None else ipopt)
-        opts = dict(print_time=False, ipopt=options)
-        self.solver = ca.nlpsol('plan', 'ipopt', dict(x=ca.vertcat(ca.vec(X), C), f=obj, g=ca.vertcat(*g), p=P), opts)
+        self._problem = dict(x=ca.vertcat(ca.vec(X), C, S), f=obj, g=ca.vertcat(*g), p=P)
+        self.solver = ca.nlpsol('plan', 'ipopt', self._problem, dict(print_time=False, ipopt=options))
+        self._retry_solver = None
         self.lbg, self.ubg = np.concatenate(lb), np.concatenate(ub)
-        self.lbx = np.r_[np.full(4*(n+1), -np.inf), np.full(n, CL_BOUNDS[0])]
-        self.ubx = np.r_[np.full(4*(n+1), np.inf), np.full(n, CL_BOUNDS[1])]
+        self.lbx = np.r_[np.full(4*(n+1), -np.inf), np.full(n, CL_BOUNDS[0]), np.zeros(self.SLACK_STEPS)]
+        self.ubx = np.r_[np.full(4*(n+1), np.inf), np.full(n, CL_BOUNDS[1]), np.full(self.SLACK_STEPS, np.inf)]
         self.last = None
         self.mach_support = mach_support
 
@@ -200,18 +207,29 @@ class Planner:
     def plan(self, x0, T, t_abs=0., back=1., k0=1., lam=0., k_lift=1., k_drag=1.):
         started = time.perf_counter()
         xs, cc = self._guess(x0, T, t_abs)
-        v0 = np.r_[(xs/SX).ravel(), cc]
+        v0 = np.r_[(xs/SX).ravel(), cc, np.zeros(self.SLACK_STEPS)]
         p = np.r_[np.asarray(x0, float), T, back, k0, lam, k_lift, k_drag]
-        r = self.solver(x0=v0, p=p, lbx=self.lbx, ubx=self.ubx, lbg=self.lbg, ubg=self.ubg)
-        stats = self.solver.stats()
+        good = ('Solve_Succeeded', 'Solved_To_Acceptable_Level')
+        solver = self.solver
+        r = solver(x0=v0, p=p, lbx=self.lbx, ubx=self.ubx, lbg=self.lbg, ubg=self.ubg)
+        stats = solver.stats()
+        retried = False
+        if stats['return_status'] not in good:           # second chance: default IPOPT (no warm start), more iterations
+            if self._retry_solver is None:
+                self._retry_solver = ca.nlpsol('plan_retry', 'ipopt', self._problem, dict(
+                    print_time=False, ipopt=dict(max_iter=1500, tol=1e-7, print_level=0, mu_strategy='adaptive')))
+            solver, retried = self._retry_solver, True
+            r = solver(x0=v0, p=p, lbx=self.lbx, ubx=self.ubx, lbg=self.lbg, ubg=self.ubg)
+            stats = solver.stats()
         sol = np.asarray(r['x']).ravel()
         n = self.n
         x_plan = sol[:4*(n+1)].reshape(n+1, 4)*SX
-        c_plan = sol[4*(n+1):]
-        ok = stats['return_status'] in ('Solve_Succeeded', 'Solved_To_Acceptable_Level')
+        c_plan = sol[4*(n+1):5*n+4]
+        slack = sol[5*n+4:]
+        ok = stats['return_status'] in good
         out = dict(ok=ok, status=stats['return_status'], iterations=int(stats['iter_count']), t=t_abs+self.times(T),
                    x=x_plan, c=c_plan, range_km=float((x_plan[-1, 3]-x_plan[0, 3])/1000),
-                   wall_s=time.perf_counter()-started)
+                   wall_s=time.perf_counter()-started, retried=retried, slack=float(slack.max()) if len(slack) else 0.)
         if ok:
             self.last = (out['t'], x_plan, c_plan)
         return out
@@ -334,6 +352,8 @@ def mpc_controller(planner, back=1., lam=0.):
                             k_drag=k_drag)
         controller.plans = getattr(controller, 'plans', 0)+1
         controller.failures = getattr(controller, 'failures', 0)+(0 if plan['ok'] else 1)
+        controller.retries = getattr(controller, 'retries', 0)+int(plan['retried'])
+        controller.slack_used = max(getattr(controller, 'slack_used', 0.), plan['slack'])
         if not plan['ok'] and getattr(controller, 'last', None) is not None:
             return controller.last
         controller.last = schedule_from_plan(plan)
