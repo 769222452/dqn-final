@@ -43,7 +43,7 @@ detachment and spillage at the inviscid level.
 - leading-edge and planform inputs fixed to those of G42 (c1 = c2 = 1.0331, d1 = 0.11607, design AOA −4°);
 - conical shock: a1 = a2 = b1 = b2 = asin(1/M_d) + δ, with one common δ ∈ {−3,…,+4}° for all members;
 - exit-deflection coefficient a_x ∈ {0.970, 0.985, 1.000, 1.015, 1.030}, used to match the volume.
-  Version 1: 120 generator calls; version 2 (§3b): 180.
+  Version 1: 120 generator calls; version 2 (§3b): 180; version 3 (§3c): 189.
 
 **Selection rule, version 1** (`family/check_family.py`; see §3b for the amendment): a member is valid if its surface is watertight with
 positive volume. A δ is admissible if all three design Machs have a valid member and the chosen members'
@@ -117,6 +117,37 @@ Mach range, payload volume), which the point-mass model does not contain.
 - Not known in advance: whether version 2 has any admissible member. The largest shock angles (up to 31.7° for
   MD4 with r = 0.5) are far above the 20° upper bound used for the project's validated members and are
   expected to fail at generation; that is a boundary of the design space, not an error.
+
+## 3c. Result of family version 2 and protocol amendment 2
+
+**Version 2 was run** (180 generator calls, evidence branch `aero-family-v2-results-20261102`, copy of the summary in
+`results_family_v2/`): 110 generated, 70 failed at generation (`V5:GeometryDomain`, invalid shock or isentropic
+streamline), and the frozen native-mesh audit classified 37 VALID, 73 INVALID. Outcome under the declared rule:
+**NO_ADMISSIBLE_FAMILY**. Nothing was relaxed. (An authorised MATLAB-side fix for heterogeneous job records, the
+`iscell` branch in `make_family.m`, was needed to start the run; it does not touch the generator or any input.)
+
+What the data show:
+- All 37 VALID members have r = 0.5 except 3 with r = 0.65 (MD8, d = -2). No member with r = 0.8 or with the G42
+  shock-angle pattern was VALID.
+- Only `pair_d+2_r0.5`, `pair_d+4_r0.5`, `pair_d+6_r0.5` have a VALID member at all three design Machs; their best
+  volume deviations were 59.5 %, 27.4 % and 15.6 %.
+- The cause is the volume knob, not the family: over a_x = 0.97...1.03 the enclosed volume changes by about 35 %
+  (e.g. MD6, `pair_d+6_r0.5`: 1.395 to 1.882 m3), so three a_x values cannot land inside +-3 %.
+
+**Amendment 2** (declared after seeing the version-2 audit, before any CFD result; no CFD has been run on any member):
+- Shock parametrisations: exactly the three keys above (those with a VALID member at every design Mach in version 2;
+  `tests/test_aero_fidelity.py` re-derives them from `results_family_v2/family_audit.json`).
+- Volume knob: a_x = 0.90, 0.91, ..., 1.10 (21 values), 189 generator calls (`family_jobs.py --version 3`).
+- Target volume V*: the enclosed volume of G42, 1.018814 m3 (equal payload volume), replacing the median of the
+  a_x-closest-to-1 members. The median rule would put V* at a value the three design Machs cannot reach together
+  for these keys; the G42 volume is also the physically meaningful reference.
+- Unchanged: validity = frozen audit VALID plus a constructible watertight surface; the tolerance +-3 %; the
+  candidate with the smallest maximum deviation wins; no relaxation; `NO_ADMISSIBLE_FAMILY` remains a valid outcome;
+  all decision criteria of section 3.
+- Not known in advance: whether a_x outside 0.97...1.03 stays VALID. Generation failures or INVALID audits at the ends
+  of the range are possible, in which case the outcome is again `NO_ADMISSIBLE_FAMILY` and is reported as such.
+- Limitation to carry into any write-up: the family is a one-sided design (r = 0.5, lower-surface shock angle half
+  the upper one), because that is where this generator produces audit-VALID members. Conclusions apply to that class.
 
 ## 4. Known limits
 

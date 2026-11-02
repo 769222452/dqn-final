@@ -9,7 +9,11 @@ assert(strcmp(which('build_geometry_core'), fullfile(active_dir, 'build_geometry
 set(0, 'DefaultFigureVisible', 'off');
 jobs = jsondecode(fileread(job_file));
 for k = 1:numel(jobs)
-    job = jobs(k);
+    if iscell(jobs)
+        job = jobs{k};
+    else
+        job = jobs(k);
+    end
     d = fullfile(out_dir, job.job_id);
     sfile = fullfile(d, 'status.json');
     if isfile(sfile)

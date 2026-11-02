@@ -24,14 +24,14 @@ otherwise. Keep the machine otherwise idle.
 4. Run the stages one at a time and read the output of each before the next:
    ```bash
    export NP=7 JOBS=2 SLICES=4
-   bash experiments/aero_fidelity/run_decision.sh family      # version 2: 180 generator calls, resumable
+   bash experiments/aero_fidelity/run_decision.sh family      # version 3: 189 generator calls, resumable
    bash experiments/aero_fidelity/run_decision.sh check       # selection rule; may legitimately end in NO_ADMISSIBLE_FAMILY
    bash experiments/aero_fidelity/run_decision.sh cfd-mesh
    nohup bash experiments/aero_fidelity/run_decision.sh cfd-run > runs/aero_fidelity/cfd_run.log 2>&1 &
    bash experiments/aero_fidelity/run_decision.sh collect
    ```
-5. Version 1 of the family already ran (results in `results_family_v1/`): all 105 generated members fail the frozen
-   audit. Version 2 (protocol amendment 1, README §3b) is the one to run now. `NO_ADMISSIBLE_FAMILY` is a result, not a failure to work around: send `family_audit.json` back and stop.
+5. Versions 1 and 2 of the family already ran (`results_family_v1/`, `results_family_v2/`): no admissible member.
+   Version 3 (protocol amendment 2, README §3c) is the one to run now. `NO_ADMISSIBLE_FAMILY` is a result, not a failure to work around: send `family_audit.json` back and stop.
    Do not widen the scan, change δ values or relax the ±3 % volume tolerance.
 6. Convergence: a case is usable if its `history.csv` ends with the density residual below 1e-5 or the
    lift and drag Cauchy criteria met. If cases do not converge, report their ids and residuals. You may
@@ -46,7 +46,7 @@ otherwise. Keep the machine otherwise idle.
 
 ## What to expect
 
-Generator calls take about 2 to 10 seconds each; 180 of them over four processes take roughly 5 to 10 minutes. The check audits
+Generator calls take about 2 to 10 seconds each; 189 of them over four processes take roughly 5 to 10 minutes. The check audits
 each valid candidate with the project's frozen native-mesh audit (about 12 s each) and takes some minutes.
 SU2 on the medium mesh (about 330 thousand cells) takes about one to two hours per case with seven ranks; the
 fine mesh (about 1.25 million cells) several times that. The full set is 27 medium cases plus the two

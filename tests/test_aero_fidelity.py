@@ -163,3 +163,42 @@ def test_selection_rule_is_common_key_volume_matched_and_not_relaxed():
     assert best is None and options[0]['reason'] == 'a design Mach has no valid member'
     two = dict(ok, k0={4.: [(1.0, 1.0)], 6.: [(1.0, 1.0)], 8.: [(1.0, 1.0)]})
     assert fam.select(_members(two))[1]['design_key'] == 'k0'      # smaller deviation wins
+
+
+# ---------------------------------------------------------------------------------- family version 3 (amendment 2)
+def test_version_3_keys_are_exactly_those_valid_at_every_design_mach_in_the_version_2_audit():
+    import json
+    audit = json.loads((ROOT/'experiments/aero_fidelity/results_family_v2/family_audit.json').read_text())
+    full = [k for k in {r['design_key'] for r in audit['rows']}
+            if all(any(r['valid'] and r['design_key'] == k and r['Ma_design'] == M for r in audit['rows']) for M in (4., 6., 8.))]
+    v3 = fj.jobs(3)
+    assert sorted(full) == sorted({j['design_key'] for j in v3})
+    assert len(v3) == 3*3*21 and len({j['job_id'] for j in v3}) == len(v3)
+    assert {j['a_x'] for j in v3} == {round(.9+.01*i, 2) for i in range(21)}
+    assert {j['target_volume_m3'] for j in v3} == {fj.TARGET_VOLUME_M3}
+    for j in v3:
+        a1, a2, b1, b2 = j['shock_angles_deg']
+        assert a1 == a2 and b1 == b2 and b1/a1 == pytest.approx(.5)
+        assert (a1+b1)/2 == pytest.approx(fj.mach_angle_deg(j['Ma_design'])+j['delta_deg'])
+        assert j['inputs10'][-1] == j['a_x'] and j['inputs10'][8] == -4.
+
+
+def test_target_volume_is_the_enclosed_volume_of_g42():
+    V, T = cfd.closed_surface(SNAP/'geometries'/'G42'/'native_geometry.mat')
+    vol = float(np.sum(np.einsum('ij,ij->i', V[T[:, 0]], np.cross(V[T[:, 1]], V[T[:, 2]])))/6)
+    assert vol == pytest.approx(fj.TARGET_VOLUME_M3, rel=1e-9)
+
+
+def test_selection_with_target_volume_and_unchanged_tolerance():
+    t = 1.0
+    ok = {'k': {4.: [(.97, .9), (1.0, 1.02), (1.03, 1.2)], 6.: [(1.0, .985)], 8.: [(.99, 1.029), (1.0, 1.06)]}}
+    options, best = fam.select(_members(ok), target=t)
+    assert best['design_key'] == 'k' and best['max_volume_deviation'] == pytest.approx(.029)
+    assert best['chosen'] == {'4.0': 'k_4.0_1.0', '6.0': 'k_6.0_1.0', '8.0': 'k_8.0_0.99'}
+    assert best['valid_volume_range_per_mach']['4.0'] == [.9, 1.2]
+    far = {'k': {4.: [(1.0, 1.04)], 6.: [(1.0, 1.0)], 8.: [(1.0, 1.0)]}}          # 4 % off the target: not admissible
+    assert fam.select(_members(far), target=t)[1] is None
+    # with the median rule the same data would have been judged against 1.0 as well; the target only changes V*
+    skew = {'k': {4.: [(1.0, 1.5)], 6.: [(1.0, 1.5)], 8.: [(1.0, 1.0)]}}
+    assert fam.select(_members(skew))[1] is None
+    assert fam.select(_members(skew), target=1.5)[1] is None

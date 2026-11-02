@@ -16,6 +16,8 @@ Selection rule (declared before any CFD result; protocol amendment 1 only enlarg
    per design Mach the valid member with the volume closest to V* is taken;
 3. the candidate is admissible only if every chosen volume is within +-3 % of V*; among admissible
    candidates the smallest maximum deviation wins (ties: the key that sorts first).
+Protocol amendment 2 (version-3 jobs carry `target_volume_m3`, the enclosed volume of G42): V* is that target
+instead of the median in step 2; steps 1 and 3, the tolerance and the frozen audit are unchanged.
 If no candidate is admissible the script stops with status NO_ADMISSIBLE_FAMILY; the rule is not relaxed.
 """
 import argparse
@@ -75,8 +77,11 @@ def audit_one(args):
     return r
 
 
-def select(rows, machs=(4., 6., 8.), tol=TOL):
-    """The declared selection rule; rows need Ma_design, design_key, a_x, valid, volume_m3 (pure function)."""
+def select(rows, machs=(4., 6., 8.), tol=TOL, target=None):
+    """The declared selection rule; rows need Ma_design, design_key, a_x, valid, volume_m3 (pure function).
+
+    target=None: V* is the median volume of the a_x-closest-to-1 members (versions 1 and 2).
+    target=V:    V* = V (version 3, the enclosed volume of G42)."""
     keys = sorted({r['design_key'] for r in rows})
     options = []
     for key in keys:
@@ -85,12 +90,17 @@ def select(rows, machs=(4., 6., 8.), tol=TOL):
             options.append(dict(design_key=key, admissible=False, reason='a design Mach has no valid member',
                                 valid_per_mach={str(M): len(v) for M, v in per.items()}))
             continue
-        ref = [min(v, key=lambda r: abs(r['a_x']-1.))['volume_m3'] for v in per.values()]
-        target = float(np.median(ref))
-        chosen = {M: min(v, key=lambda r: abs(r['volume_m3']-target)) for M, v in per.items()}
-        dev = max(abs(c['volume_m3']/target-1) for c in chosen.values())
-        options.append(dict(design_key=key, target_volume_m3=target, max_volume_deviation=float(dev), admissible=bool(dev <= tol),
-                            chosen={str(M): c['job_id'] for M, c in chosen.items()}))
+        if target is None:
+            ref = [min(v, key=lambda r: abs(r['a_x']-1.))['volume_m3'] for v in per.values()]
+            tv = float(np.median(ref))
+        else:
+            tv = float(target)
+        chosen = {M: min(v, key=lambda r: abs(r['volume_m3']-tv)) for M, v in per.items()}
+        dev = max(abs(c['volume_m3']/tv-1) for c in chosen.values())
+        options.append(dict(design_key=key, target_volume_m3=tv, max_volume_deviation=float(dev), admissible=bool(dev <= tol),
+                            chosen={str(M): c['job_id'] for M, c in chosen.items()},
+                            valid_volume_range_per_mach={str(M): [min(r['volume_m3'] for r in v), max(r['volume_m3'] for r in v)]
+                                                         for M, v in per.items()}))
     adm = [o for o in options if o['admissible']]
     best = min(adm, key=lambda o: (o['max_volume_deviation'], o['design_key'])) if adm else None
     return options, best
@@ -108,7 +118,9 @@ def main(argv=None):
         j.setdefault('design_key', 'd%+g' % j['delta_deg'])
     with get_context('spawn').Pool(a.jobs) as pool:
         rows = pool.map(audit_one, [(j, str(fam)) for j in jobs], chunksize=1)
-    options, best = select(rows)
+    targets = {j.get('target_volume_m3') for j in jobs}
+    assert len(targets) == 1, 'jobs of one family must share one target volume (or none)'
+    options, best = select(rows, target=targets.pop())
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     reasons = {}

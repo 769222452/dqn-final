@@ -14,7 +14,13 @@ scaled to the same mean angle. Everything else is as in version 1: leading-edge 
 (c1 = c2 = 1.0331, d1 = 0.11607, design AOA = -4 deg), a_x in {0.97, 1.00, 1.03} to match the volume, design
 Mach in {4, 6, 8}. Members are accepted only if the frozen audit classifies them VALID.
 
-    python experiments/aero_fidelity/family/family_jobs.py --out runs/aero_fidelity/family --version 2
+Version 3 (protocol amendment 2, declared before any CFD result): the volume knob is refined. In version 2 only
+`pair_d+2_r0.5`, `pair_d+4_r0.5` and `pair_d+6_r0.5` had a VALID member at every design Mach, and none was
+volume-matched because a_x was scanned in three steps (0.97, 1.00, 1.03) while the enclosed volume changes by
+about 35 % over that range. Version 3 re-generates exactly those three shock parametrisations with
+a_x = 0.90, 0.91, ..., 1.10 (21 values) and matches the volume to the enclosed volume of G42 (TARGET_VOLUME_M3).
+
+    python experiments/aero_fidelity/family/family_jobs.py --out runs/aero_fidelity/family --version 3
 """
 import argparse
 import json
@@ -28,6 +34,11 @@ G42_PATTERN = (5.633749605922896, 7.796675937828777, 3.698465133623518, 3.011610
 
 V1 = dict(deltas=(-3., -2., -1., 0., 1., 2., 3., 4.), ax=(0.97, 0.985, 1.0, 1.015, 1.03))
 V2 = dict(deltas=(-2., 0., 2., 4., 6.), ratios=(0.5, 0.65, 0.8), ax=(0.97, 1.0, 1.03))
+# Version 3: the design keys with a VALID member at all three design Machs in the version-2 audit
+# (results_family_v2/family_audit.json; checked by tests/test_aero_fidelity.py), and the refined a_x scan.
+V3 = dict(deltas=(2., 4., 6.), ratio=0.5, ax=tuple(round(0.90+0.01*i, 2) for i in range(21)))
+# Enclosed volume of G42 (data/geometry_subset/geometries/G42, scripts/cfd/make_su2_cases.closed_surface): equal payload volume.
+TARGET_VOLUME_M3 = 1.018813633812261
 
 
 def mach_angle_deg(M):
@@ -43,6 +54,14 @@ def jobs(version=2):
     out = []
     for M in DESIGN_MACHS:
         mu = mach_angle_deg(M)
+        if version == 3:
+            r = V3['ratio']
+            for d in V3['deltas']:
+                a = 2*(mu+d)/(1+r)
+                for ax in V3['ax']:
+                    out.append(_job(f'FAM3_MD{M:g}_pair_d{d:+g}_r{r:g}_ax{ax:.2f}', M, d, (a, a, r*a, r*a), ax,
+                                    design='pair', ratio=r, design_key='pair_d%+g_r%g' % (d, r), target_volume_m3=TARGET_VOLUME_M3))
+            continue
         if version == 1:
             for d in V1['deltas']:
                 b = mu+d
@@ -67,7 +86,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--out', required=True)
     ap.add_argument('--slices', type=int, default=4, help='parallel MATLAB processes')
-    ap.add_argument('--version', type=int, default=2, choices=(1, 2))
+    ap.add_argument('--version', type=int, default=3, choices=(1, 2, 3))
     a = ap.parse_args(argv)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)

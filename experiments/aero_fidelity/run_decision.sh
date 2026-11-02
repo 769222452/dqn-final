@@ -2,7 +2,7 @@
 # Design-point decision experiment (experiments/aero_fidelity/README.md). Stages, in order:
 #
 #   preflight   check MATLAB (+ Optimization, Symbolic Math toolboxes), SU2_CFD, mpirun, gmsh, Python packages
-#   family      generator calls (FAMILY_VERSION=2: 180) with the unmodified upstream_matlab core (SLICES parallel processes)
+#   family      generator calls (FAMILY_VERSION=3: 189) with the unmodified upstream_matlab core (SLICES parallel processes)
 #   check       watertight/volume audit and the declared selection rule -> $OUT/family_selected/select.json
 #   cfd-mesh    surfaces, gmsh meshes and SU2 inputs: medium for all cases, coarse+fine for the grid check
 #   cfd-run     SU2 Euler cases, JOBS cases in parallel with NP MPI ranks each (resumable)
@@ -38,7 +38,7 @@ preflight() {
     echo "$v" | grep -q "Symbolic Math Toolbox" || { echo "FAIL MATLAB without Symbolic Math Toolbox"; bad=1; }
   else
     echo "FAIL matlab not found (set MATLAB=...). The family stage can instead be run on another machine: "
-    echo "     python3 experiments/aero_fidelity/family/family_jobs.py --out $FAM --version 2, then in MATLAB"
+    echo "     python3 experiments/aero_fidelity/family/family_jobs.py --out $FAM --version 3, then in MATLAB"
     echo "     make_family('$FAM/jobs.json', '<repo>/upstream_matlab/source/matlab/active', '$FAM'); copy $FAM back here."
     bad=1
   fi
@@ -51,7 +51,7 @@ preflight() {
 
 family() {
   mkdir -p "$FAM"
-  "$PYTHON" experiments/aero_fidelity/family/family_jobs.py --out "$FAM" --slices "$SLICES" --version "${FAMILY_VERSION:-2}"
+  "$PYTHON" experiments/aero_fidelity/family/family_jobs.py --out "$FAM" --slices "$SLICES" --version "${FAMILY_VERSION:-3}"
   local pids=() k
   for k in $(seq 0 $((SLICES-1))); do
     "$MATLAB" -batch "addpath('$PWD/experiments/aero_fidelity/family'); make_family('$PWD/$FAM/jobs_$k.json', '$ACTIVE', '$PWD/$FAM')" \
