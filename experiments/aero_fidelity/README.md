@@ -245,6 +245,46 @@ If D2 fails, the diagnosis is wrong and the Euler drag cannot be used for this q
 before). The result is reported as EXPLORATORY: it follows a primary test (section 3e) whose measurement was found to be
 flawed, and the criteria were not changed after seeing the skin-only forces. The version-4 outcome stays on record as the primary result.
 
+## 3g. Result of CFD stage version 5 (skin-only forces; exploratory)
+
+Run at `dc39a7f` (evidence branch `aero-family-v5-results-20261102`, copies in `results_cfd_v5/`): same meshes as version 4 cell for
+cell (FAM_MD4 medium has its base cap in two patches, both in the single `base` marker), 29/29 cases converged, cfd-run 2751 s.
+
+**The diagnosis of section 3e is confirmed.**
+- D2: all 29 skin-only pressure drags are positive (version 4: 12 negative).
+- D3: grid check medium vs fine, CL changes 2.6 %, pressure CD 1.8 %, same sign (version 4: CD changed sign).
+- D1: the base term (version-4 total minus version-5 skin CD) is negative at M6 and M8 for all members and at M4 for MD8, nearly
+  constant in alpha (standard deviation 0.00004-0.00037; two cases slightly above the declared 0.0003) and within 0.0005 of the
+  section-3e offsets except MD8 at M4 (0.00064). At M4 the base term of MD4 and MD6 is positive. The Euler base pressure of the
+  closed tail was the error.
+
+**Decision criteria of section 3 on the skin-only forces: premise NOT met, 0 of 3 CL targets.** Equal-lift L/D (Euler + friction):
+
+| flight Mach | CL | MD4 | MD6 | MD8 |
+|---|---|---|---|---|
+| 4 | 0.03 / 0.04 / 0.05 | 4.66 / 5.49 / 6.01 | 5.85 / 6.78 / 7.28 | **7.60 / 8.44 / 8.68** |
+| 6 | 0.03 / 0.04 / 0.05 | 4.69 / 5.28 / 5.54 | 5.75 / 6.37 / 6.56 | **7.27 / 7.70 / 7.61** |
+| 8 | 0.03 / 0.04 / 0.05 | 4.61 / 5.01 / 5.11 | 5.53 / 5.91 / 5.93 | **6.89 / 7.00 / -** |
+
+The member designed for Mach 8 is best at every flight Mach, including Mach 4 where its design shock angle (12.2 deg) is below the Mach
+angle (14.5 deg); the member designed for Mach 4 is worst everywhere. The frozen script's "0 % switching gain over MD6" excludes MD8
+because it lacks CL = 0.05 at M8; with MD8 included the conclusion is the same (one member wins every compared condition).
+
+**The tangent-wedge model gives the same ranking.** At alpha >= 4 deg it agrees with Euler to 4 % (median) in CL and 6 % in pressure CD,
+and the equal-lift L/D of both models differ by about 5 %. So the hypothesis of section 1, cause 2 (the local-inclination model hides
+an off-design penalty that 3D flow would show) is NOT supported for this class at Mach 4-8: Euler shows no such penalty either.
+
+**What this does and does not establish.**
+- In this class (r = 0.5, G42 planform, equal volume), at the inviscid + laminar/turbulent friction level, design-Mach matching does
+  not pay: the weaker-shock, high-design-Mach shape is better at all Mach 4-8.
+- Confound: MD4 has a larger shock offset (+4 deg vs +2 deg). Between MD6 and MD8 (same offset) the ranking is the same, MD8 better
+  by 20-30 % at Mach 4.
+- These members were not optimised for L/D at their design Mach; they are the weakest-shock members that reach G42's volume. A
+  stronger test of the premise is a family in which each member maximises L/D at its own design Mach under the same volume
+  constraint. Because the wedge model is now validated against Euler for this class (same ranking, about 5 % in L/D), that
+  optimisation can be done with the wedge model and a few Euler checks.
+- Nothing here addresses trim, stability, heating, low-speed or take-off performance, or Mach numbers outside 4-8.
+
 ## 4. Known limits
 
 - Euler is inviscid: no viscous interaction, no boundary-layer displacement at the leading edge, no
