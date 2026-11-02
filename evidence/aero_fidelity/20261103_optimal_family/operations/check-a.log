@@ -1,0 +1,11 @@
+{
+ "jobs": 420,
+ "generated": 302,
+ "valid": 302,
+ "outcomes": {
+  "GENERATION_FAILED": 118,
+  "VALID": 302
+ },
+ "status": "MAP_ONLY"
+}
+candidates: []

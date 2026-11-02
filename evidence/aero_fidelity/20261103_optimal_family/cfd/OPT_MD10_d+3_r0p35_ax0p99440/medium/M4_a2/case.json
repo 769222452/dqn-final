@@ -1,0 +1,27 @@
+{
+ "geometry": "OPT_MD10_d+3_r0p35_ax0p99440",
+ "geometry_mat": "runs/aero_opt/cfd_root/family_selected/OPT_MD10_d+3_r0p35_ax0p99440/native_geometry.mat",
+ "level": "medium",
+ "mach": 4.0,
+ "alpha_deg": 2.0,
+ "freestream": {
+  "altitude_m": 21297.94678856749,
+  "T_K": 217.94794678856752,
+  "rho_kgm3": 0.07135711882106346,
+  "p_Pa": 4464.285714285725
+ },
+ "surface": {
+  "edges": 28809,
+  "open_edges": 0,
+  "nonmanifold_edges": 0
+ },
+ "mesh": {
+  "cells": 264832,
+  "edge_scale": 1.5,
+  "algorithm": 10,
+  "remesh_surface": true,
+  "base_surfaces": 1,
+  "skin_surfaces": 4
+ },
+ "base_marker": true
+}

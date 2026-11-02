@@ -1,0 +1,144 @@
+MATLAB_VERSION=9.14.0.2206163 (R2023a)
+[警告: 为文件或文件夹指定的位置 perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LC_ALL = "C.UTF-8",
+	LC_CTYPE = "C.UTF-8",
+	LANG = "C.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+D:\matlab\toolbox\matlab\addons_common\matlab 无效。] 
+[> 位置：restoredefaultpath (第 57 行)
+位置: make_family (第 6 行)] 
+[警告: Unable to prove '-(1256620916642903*cos(v)*((19669076939853955*u)/18014398509481984 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD4_d+4_r0.5_ax1.04404 GENERATED 14.0s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((10938358576598365*u)/9007199254740992 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD4_d+6_r0.5_ax0.97975 GENERATED 6.0s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((30764442557505455*u)/36028797018963968 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD5_d+3_r0.5_ax1.02165 GENERATED 5.9s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((32926037229159205*u)/36028797018963968 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD5_d+4_r0.5_ax0.99355 GENERATED 5.6s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((13294322467788645*u)/18014398509481984 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD6_d+3_r0.5_ax0.98798 GENERATED 6.0s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((11965843803795445*u)/18014398509481984 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD6_d+5_r0.35_ax1.03782 GENERATED 5.6s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((25592778916066615*u)/36028797018963968 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD6_d+6_r0.35_ax1.00998 GENERATED 6.1s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((43017909019463145*u)/72057594037927936 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD7_d+2_r0.5_ax0.99708 GENERATED 6.2s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((39984789374964045*u)/72057594037927936 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD7_d+4_r0.35_ax1.02924 GENERATED 6.4s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((21644455491014655*u)/36028797018963968 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD7_d+5_r0.35_ax1.00213 GENERATED 6.1s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((34398835501584095*u)/72057594037927936 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD8_d+1_r0.5_ax1.01890 GENERATED 6.0s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((38634086636879835*u)/72057594037927936 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD8_d+2_r0.5_ax0.98543 GENERATED 5.9s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((8322287983365875*u)/18014398509481984 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD8_d+3_r0.35_ax1.03784 GENERATED 5.8s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((39877668489668555*u)/72057594037927936 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD8_d+5_r0.35_ax0.97713 GENERATED 6.0s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((1938225462897235*u)/4503599627370496 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD9_d+1_r0.5_ax1.00749 GENERATED 5.7s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((4404903995155365*u)/9007199254740992 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD9_d+2_r0.5_ax0.97800 GENERATED 5.8s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((16971191351194965*u)/36028797018963968 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD9_d+4_r0.35_ax0.98227 GENERATED 5.9s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((14154799285588495*u)/36028797018963968 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD10_d+1_r0.5_ax0.99705 GENERATED 5.7s
+[警告: Unable to prove '-(1256620916642903*cos(v)*((25275325282291085*u)/72057594037927936 + 10331/10000))/18014398509481984 == 0'.] 
+[> 位置：symengine
+位置: sym/isAlways (第 41 行)
+位置: create_shock_functions (第 79 行)
+位置: build_geometry_core (第 64 行)
+位置: make_family (第 28 行)] 
+FAMILY OPTB_MD10_d+2_r0.35_ax1.03205 GENERATED 6.0s

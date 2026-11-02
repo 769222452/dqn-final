@@ -1,0 +1,12 @@
+{
+  "source_repository": "https://github.com/769222452/dqn-final",
+  "source_branch": "aoa-fix",
+  "commit": "f248c4f7da03a48335cbe1dfca4e2b6e0e58c7da",
+  "acquired_date": "2026-11-02",
+  "local_source": "D:/aero-opt-f248c4f",
+  "cloud_source": "/hy-tmp/dqn-aero-opt-f248c4f",
+  "bundle_sha256": "c73d5745833ce1e5cc54f4f0f57ad5dd98830c120a2e217e0cecb0a42500d209",
+  "source_unchanged": true,
+  "tests": "21 passed in 53.81s",
+  "upstream_hashes": "203 files PASS"
+}

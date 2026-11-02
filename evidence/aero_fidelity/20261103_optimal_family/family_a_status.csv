@@ -1,0 +1,421 @@
+job_id,status,elapsed_s,error_identifier,error_message
+OPTA_MD10_d+1_r0.35_ax0.950,GENERATION_FAILED,1.3540543,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+1_r0.35_ax0.975,GENERATED,5.7594962,,
+OPTA_MD10_d+1_r0.35_ax1.000,GENERATED,5.9896655,,
+OPTA_MD10_d+1_r0.35_ax1.025,GENERATED,5.8930214,,
+OPTA_MD10_d+1_r0.35_ax1.050,GENERATED,5.7121424,,
+OPTA_MD10_d+1_r0.5_ax0.950,GENERATION_FAILED,1.3584806,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+1_r0.5_ax0.975,GENERATED,6.1187321,,
+OPTA_MD10_d+1_r0.5_ax1.000,GENERATED,6.4115663,,
+OPTA_MD10_d+1_r0.5_ax1.025,GENERATED,5.8203862,,
+OPTA_MD10_d+1_r0.5_ax1.050,GENERATED,5.5980631,,
+OPTA_MD10_d+2_r0.35_ax0.950,GENERATION_FAILED,1.3070796,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+2_r0.35_ax0.975,GENERATED,6.0424086,,
+OPTA_MD10_d+2_r0.35_ax1.000,GENERATED,5.810977,,
+OPTA_MD10_d+2_r0.35_ax1.025,GENERATED,5.6951608,,
+OPTA_MD10_d+2_r0.35_ax1.050,GENERATED,5.6906383,,
+OPTA_MD10_d+2_r0.5_ax0.950,GENERATION_FAILED,1.2822722,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+2_r0.5_ax0.975,GENERATED,6.0171424,,
+OPTA_MD10_d+2_r0.5_ax1.000,GENERATED,5.9253183,,
+OPTA_MD10_d+2_r0.5_ax1.025,GENERATED,5.9226398,,
+OPTA_MD10_d+2_r0.5_ax1.050,GENERATED,5.6842034,,
+OPTA_MD10_d+3_r0.35_ax0.950,GENERATION_FAILED,1.2372639,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+3_r0.35_ax0.975,GENERATED,5.8354422,,
+OPTA_MD10_d+3_r0.35_ax1.000,GENERATED,5.8763262,,
+OPTA_MD10_d+3_r0.35_ax1.025,GENERATED,6.1763663,,
+OPTA_MD10_d+3_r0.35_ax1.050,GENERATED,5.6313068,,
+OPTA_MD10_d+3_r0.5_ax0.950,GENERATION_FAILED,1.1768815,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+3_r0.5_ax0.975,GENERATION_FAILED,1.3256186,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+3_r0.5_ax1.000,GENERATED,6.1476582,,
+OPTA_MD10_d+3_r0.5_ax1.025,GENERATED,5.795666,,
+OPTA_MD10_d+3_r0.5_ax1.050,GENERATED,5.7376506,,
+OPTA_MD10_d+4_r0.35_ax0.950,GENERATION_FAILED,1.2065837,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+4_r0.35_ax0.975,GENERATED,6.0276316,,
+OPTA_MD10_d+4_r0.35_ax1.000,GENERATED,5.9842491,,
+OPTA_MD10_d+4_r0.35_ax1.025,GENERATED,5.9506384,,
+OPTA_MD10_d+4_r0.35_ax1.050,GENERATED,5.8179981,,
+OPTA_MD10_d+4_r0.5_ax0.950,GENERATION_FAILED,1.2983098,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+4_r0.5_ax0.975,GENERATION_FAILED,1.322771,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+4_r0.5_ax1.000,GENERATED,5.8704278,,
+OPTA_MD10_d+4_r0.5_ax1.025,GENERATED,6.0963306,,
+OPTA_MD10_d+4_r0.5_ax1.050,GENERATED,5.4438149,,
+OPTA_MD10_d+5_r0.35_ax0.950,GENERATION_FAILED,1.3718907,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+5_r0.35_ax0.975,GENERATION_FAILED,1.1014797,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+5_r0.35_ax1.000,GENERATED,5.9461745,,
+OPTA_MD10_d+5_r0.35_ax1.025,GENERATED,5.0921129,,
+OPTA_MD10_d+5_r0.35_ax1.050,GENERATED,5.8210087,,
+OPTA_MD10_d+5_r0.5_ax0.950,GENERATION_FAILED,1.0635274,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+5_r0.5_ax0.975,GENERATION_FAILED,1.2513858,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+5_r0.5_ax1.000,GENERATED,5.0427743,,
+OPTA_MD10_d+5_r0.5_ax1.025,GENERATED,6.0965022,,
+OPTA_MD10_d+5_r0.5_ax1.050,GENERATED,5.0244705,,
+OPTA_MD10_d+6_r0.35_ax0.950,GENERATION_FAILED,1.3546555,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+6_r0.35_ax0.975,GENERATION_FAILED,1.1053133,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+6_r0.35_ax1.000,GENERATED,6.1225705,,
+OPTA_MD10_d+6_r0.35_ax1.025,GENERATED,5.0730434,,
+OPTA_MD10_d+6_r0.35_ax1.050,GENERATED,5.9987293,,
+OPTA_MD10_d+6_r0.5_ax0.950,GENERATION_FAILED,1.0399269,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+6_r0.5_ax0.975,GENERATION_FAILED,1.2936125,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD10_d+6_r0.5_ax1.000,GENERATED,4.7365826,,
+OPTA_MD10_d+6_r0.5_ax1.025,GENERATED,5.9774302,,
+OPTA_MD10_d+6_r0.5_ax1.050,GENERATED,4.4816809,,
+OPTA_MD4_d+1_r0.35_ax0.950,GENERATION_FAILED,7.8070682,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+1_r0.35_ax0.975,GENERATION_FAILED,8.1096966,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+1_r0.35_ax1.000,GENERATION_FAILED,7.8689308,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+1_r0.35_ax1.025,GENERATION_FAILED,7.7415186,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+1_r0.35_ax1.050,GENERATION_FAILED,1.0022737,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+1_r0.5_ax0.950,GENERATION_FAILED,2.6451345,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+1_r0.5_ax0.975,GENERATION_FAILED,2.6835692,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+1_r0.5_ax1.000,GENERATION_FAILED,2.8080736,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+1_r0.5_ax1.025,GENERATION_FAILED,3.4191875,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+1_r0.5_ax1.050,GENERATION_FAILED,2.6087314,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+2_r0.35_ax0.950,GENERATION_FAILED,1.9782268,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+2_r0.35_ax0.975,GENERATION_FAILED,2.0285556,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+2_r0.35_ax1.000,GENERATION_FAILED,1.3830784,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+2_r0.35_ax1.025,GENERATION_FAILED,1.2174165,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+2_r0.35_ax1.050,GENERATION_FAILED,1.0940824,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+2_r0.5_ax0.950,GENERATED,7.1928997,,
+OPTA_MD4_d+2_r0.5_ax0.975,GENERATED,7.3637144,,
+OPTA_MD4_d+2_r0.5_ax1.000,GENERATED,7.3141443,,
+OPTA_MD4_d+2_r0.5_ax1.025,GENERATED,7.297602,,
+OPTA_MD4_d+2_r0.5_ax1.050,GENERATED,5.4502292,,
+OPTA_MD4_d+3_r0.35_ax0.950,GENERATION_FAILED,1.1583954,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+3_r0.35_ax0.975,GENERATION_FAILED,1.155819,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+3_r0.35_ax1.000,GENERATION_FAILED,1.1553841,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+3_r0.35_ax1.025,GENERATION_FAILED,1.1820595,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+3_r0.35_ax1.050,GENERATION_FAILED,0.9406548,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+3_r0.5_ax0.950,GENERATED,5.5904514,,
+OPTA_MD4_d+3_r0.5_ax0.975,GENERATED,5.6542804,,
+OPTA_MD4_d+3_r0.5_ax1.000,GENERATED,5.5817286,,
+OPTA_MD4_d+3_r0.5_ax1.025,GENERATED,5.5087319,,
+OPTA_MD4_d+3_r0.5_ax1.050,GENERATED,5.9009957,,
+OPTA_MD4_d+4_r0.35_ax0.950,GENERATION_FAILED,1.208537,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+4_r0.35_ax0.975,GENERATION_FAILED,1.1774473,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+4_r0.35_ax1.000,GENERATION_FAILED,1.2398464,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+4_r0.35_ax1.025,GENERATION_FAILED,1.1319441,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+4_r0.35_ax1.050,GENERATION_FAILED,0.9369575,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+4_r0.5_ax0.950,GENERATED,5.6916713,,
+OPTA_MD4_d+4_r0.5_ax0.975,GENERATED,5.5147103,,
+OPTA_MD4_d+4_r0.5_ax1.000,GENERATED,5.4061068,,
+OPTA_MD4_d+4_r0.5_ax1.025,GENERATED,5.4216002,,
+OPTA_MD4_d+4_r0.5_ax1.050,GENERATED,5.3597236,,
+OPTA_MD4_d+5_r0.35_ax0.950,GENERATION_FAILED,1.5019093,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+5_r0.35_ax0.975,GENERATION_FAILED,1.5311674,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+5_r0.35_ax1.000,GENERATION_FAILED,1.319257,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+5_r0.35_ax1.025,GENERATION_FAILED,1.4791373,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+5_r0.35_ax1.050,GENERATION_FAILED,1.1017683,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+5_r0.5_ax0.950,GENERATED,5.6034086,,
+OPTA_MD4_d+5_r0.5_ax0.975,GENERATED,5.4657114,,
+OPTA_MD4_d+5_r0.5_ax1.000,GENERATED,5.5262984,,
+OPTA_MD4_d+5_r0.5_ax1.025,GENERATED,5.5192885,,
+OPTA_MD4_d+5_r0.5_ax1.050,GENERATED,5.2830998,,
+OPTA_MD4_d+6_r0.35_ax0.950,GENERATION_FAILED,2.0154615,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+6_r0.35_ax0.975,GENERATION_FAILED,2.3028111,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+6_r0.35_ax1.000,GENERATION_FAILED,1.8544219,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+6_r0.35_ax1.025,GENERATION_FAILED,1.964866,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+6_r0.35_ax1.050,GENERATION_FAILED,1.6403941,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD4_d+6_r0.5_ax0.950,GENERATED,5.5033496,,
+OPTA_MD4_d+6_r0.5_ax0.975,GENERATED,5.5904699,,
+OPTA_MD4_d+6_r0.5_ax1.000,GENERATED,5.5444993,,
+OPTA_MD4_d+6_r0.5_ax1.025,GENERATED,5.564684,,
+OPTA_MD4_d+6_r0.5_ax1.050,GENERATED,5.3508458,,
+OPTA_MD5_d+1_r0.35_ax0.950,GENERATION_FAILED,1.1920927,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+1_r0.35_ax0.975,GENERATION_FAILED,1.1057146,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+1_r0.35_ax1.000,GENERATION_FAILED,1.1112952,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+1_r0.35_ax1.025,GENERATION_FAILED,1.162948,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+1_r0.35_ax1.050,GENERATION_FAILED,0.912021,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+1_r0.5_ax0.950,GENERATED,5.9755335,,
+OPTA_MD5_d+1_r0.5_ax0.975,GENERATED,5.5864331,,
+OPTA_MD5_d+1_r0.5_ax1.000,GENERATED,5.6794844,,
+OPTA_MD5_d+1_r0.5_ax1.025,GENERATED,5.533294,,
+OPTA_MD5_d+1_r0.5_ax1.050,GENERATED,5.6630538,,
+OPTA_MD5_d+2_r0.35_ax0.950,GENERATION_FAILED,1.5365524,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+2_r0.35_ax0.975,GENERATION_FAILED,1.5833662,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+2_r0.35_ax1.000,GENERATION_FAILED,1.4232294,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+2_r0.35_ax1.025,GENERATION_FAILED,1.4399065,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+2_r0.35_ax1.050,GENERATION_FAILED,1.1915264,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+2_r0.5_ax0.950,GENERATED,5.729306,,
+OPTA_MD5_d+2_r0.5_ax0.975,GENERATED,5.4013933,,
+OPTA_MD5_d+2_r0.5_ax1.000,GENERATED,5.7647374,,
+OPTA_MD5_d+2_r0.5_ax1.025,GENERATED,5.8424803,,
+OPTA_MD5_d+2_r0.5_ax1.050,GENERATED,5.7779763,,
+OPTA_MD5_d+3_r0.35_ax0.950,GENERATION_FAILED,1.8666953,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+3_r0.35_ax0.975,GENERATION_FAILED,2.0029818,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+3_r0.35_ax1.000,GENERATION_FAILED,1.9406617,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+3_r0.35_ax1.025,GENERATION_FAILED,2.1737836,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+3_r0.35_ax1.050,GENERATION_FAILED,1.5872857,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD5_d+3_r0.5_ax0.950,GENERATED,6.6585155,,
+OPTA_MD5_d+3_r0.5_ax0.975,GENERATED,6.0547246,,
+OPTA_MD5_d+3_r0.5_ax1.000,GENERATED,5.7071694,,
+OPTA_MD5_d+3_r0.5_ax1.025,GENERATED,5.904296,,
+OPTA_MD5_d+3_r0.5_ax1.050,GENERATED,5.552474,,
+OPTA_MD5_d+4_r0.35_ax0.950,GENERATED,5.3549821,,
+OPTA_MD5_d+4_r0.35_ax0.975,GENERATED,6.1191314,,
+OPTA_MD5_d+4_r0.35_ax1.000,GENERATED,5.5995078,,
+OPTA_MD5_d+4_r0.35_ax1.025,GENERATED,5.6838692,,
+OPTA_MD5_d+4_r0.35_ax1.050,GENERATED,5.8391932,,
+OPTA_MD5_d+4_r0.5_ax0.950,GENERATION_FAILED,1.2762092,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD5_d+4_r0.5_ax0.975,GENERATED,6.177975,,
+OPTA_MD5_d+4_r0.5_ax1.000,GENERATED,5.6599952,,
+OPTA_MD5_d+4_r0.5_ax1.025,GENERATED,5.9927143,,
+OPTA_MD5_d+4_r0.5_ax1.050,GENERATED,5.6654164,,
+OPTA_MD5_d+5_r0.35_ax0.950,GENERATED,5.9913211,,
+OPTA_MD5_d+5_r0.35_ax0.975,GENERATED,5.7768571,,
+OPTA_MD5_d+5_r0.35_ax1.000,GENERATED,5.6224561,,
+OPTA_MD5_d+5_r0.35_ax1.025,GENERATED,5.6878548,,
+OPTA_MD5_d+5_r0.35_ax1.050,GENERATED,5.7350929,,
+OPTA_MD5_d+5_r0.5_ax0.950,GENERATION_FAILED,1.2733612,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD5_d+5_r0.5_ax0.975,GENERATED,5.6810316,,
+OPTA_MD5_d+5_r0.5_ax1.000,GENERATED,5.8235286,,
+OPTA_MD5_d+5_r0.5_ax1.025,GENERATED,5.8113032,,
+OPTA_MD5_d+5_r0.5_ax1.050,GENERATED,5.8956573,,
+OPTA_MD5_d+6_r0.35_ax0.950,GENERATED,5.6170201,,
+OPTA_MD5_d+6_r0.35_ax0.975,GENERATED,5.9430383,,
+OPTA_MD5_d+6_r0.35_ax1.000,GENERATED,5.5967921,,
+OPTA_MD5_d+6_r0.35_ax1.025,GENERATED,5.9403133,,
+OPTA_MD5_d+6_r0.35_ax1.050,GENERATED,5.5078729,,
+OPTA_MD5_d+6_r0.5_ax0.950,GENERATION_FAILED,1.2118231,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD5_d+6_r0.5_ax0.975,GENERATED,5.8180084,,
+OPTA_MD5_d+6_r0.5_ax1.000,GENERATED,5.6783443,,
+OPTA_MD5_d+6_r0.5_ax1.025,GENERATED,5.6151766,,
+OPTA_MD5_d+6_r0.5_ax1.050,GENERATED,5.6833575,,
+OPTA_MD6_d+1_r0.35_ax0.950,GENERATION_FAILED,1.955016,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD6_d+1_r0.35_ax0.975,GENERATION_FAILED,1.8355317,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD6_d+1_r0.35_ax1.000,GENERATION_FAILED,1.9234602,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD6_d+1_r0.35_ax1.025,GENERATION_FAILED,1.897921,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD6_d+1_r0.35_ax1.050,GENERATION_FAILED,1.6694066,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain]
+OPTA_MD6_d+1_r0.5_ax0.950,GENERATED,6.2307973,,
+OPTA_MD6_d+1_r0.5_ax0.975,GENERATED,5.8533567,,
+OPTA_MD6_d+1_r0.5_ax1.000,GENERATED,5.8148261,,
+OPTA_MD6_d+1_r0.5_ax1.025,GENERATED,6.0242214,,
+OPTA_MD6_d+1_r0.5_ax1.050,GENERATED,6.3867778,,
+OPTA_MD6_d+2_r0.35_ax0.950,GENERATED,5.676298,,
+OPTA_MD6_d+2_r0.35_ax0.975,GENERATED,6.9121968,,
+OPTA_MD6_d+2_r0.35_ax1.000,GENERATED,5.6163874,,
+OPTA_MD6_d+2_r0.35_ax1.025,GENERATED,6.3990817,,
+OPTA_MD6_d+2_r0.35_ax1.050,GENERATED,5.7715189,,
+OPTA_MD6_d+2_r0.5_ax0.950,GENERATED,7.5097436,,
+OPTA_MD6_d+2_r0.5_ax0.975,GENERATED,6.5011865,,
+OPTA_MD6_d+2_r0.5_ax1.000,GENERATED,5.5607224,,
+OPTA_MD6_d+2_r0.5_ax1.025,GENERATED,6.7753905,,
+OPTA_MD6_d+2_r0.5_ax1.050,GENERATED,7.2496647,,
+OPTA_MD6_d+3_r0.35_ax0.950,GENERATED,6.9210967,,
+OPTA_MD6_d+3_r0.35_ax0.975,GENERATED,6.0329367,,
+OPTA_MD6_d+3_r0.35_ax1.000,GENERATED,5.8425338,,
+OPTA_MD6_d+3_r0.35_ax1.025,GENERATED,6.1309307,,
+OPTA_MD6_d+3_r0.35_ax1.050,GENERATED,5.7858751,,
+OPTA_MD6_d+3_r0.5_ax0.950,GENERATION_FAILED,1.2936773,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD6_d+3_r0.5_ax0.975,GENERATED,5.6214771,,
+OPTA_MD6_d+3_r0.5_ax1.000,GENERATED,5.7905704,,
+OPTA_MD6_d+3_r0.5_ax1.025,GENERATED,5.7436243,,
+OPTA_MD6_d+3_r0.5_ax1.050,GENERATED,5.3258942,,
+OPTA_MD6_d+4_r0.35_ax0.950,GENERATED,6.0360753,,
+OPTA_MD6_d+4_r0.35_ax0.975,GENERATED,6.918093,,
+OPTA_MD6_d+4_r0.35_ax1.000,GENERATED,6.0122235,,
+OPTA_MD6_d+4_r0.35_ax1.025,GENERATED,5.8445743,,
+OPTA_MD6_d+4_r0.35_ax1.050,GENERATED,5.5977246,,
+OPTA_MD6_d+4_r0.5_ax0.950,GENERATION_FAILED,1.4794644,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD6_d+4_r0.5_ax0.975,GENERATED,5.8268733,,
+OPTA_MD6_d+4_r0.5_ax1.000,GENERATED,5.8404228,,
+OPTA_MD6_d+4_r0.5_ax1.025,GENERATED,5.9743486,,
+OPTA_MD6_d+4_r0.5_ax1.050,GENERATED,5.9125884,,
+OPTA_MD6_d+5_r0.35_ax0.950,GENERATED,5.7805056,,
+OPTA_MD6_d+5_r0.35_ax0.975,GENERATED,7.1071459,,
+OPTA_MD6_d+5_r0.35_ax1.000,GENERATED,5.9206714,,
+OPTA_MD6_d+5_r0.35_ax1.025,GENERATED,5.8755413,,
+OPTA_MD6_d+5_r0.35_ax1.050,GENERATED,5.6727471,,
+OPTA_MD6_d+5_r0.5_ax0.950,GENERATION_FAILED,1.3912598,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD6_d+5_r0.5_ax0.975,GENERATED,5.8788528,,
+OPTA_MD6_d+5_r0.5_ax1.000,GENERATED,6.1907353,,
+OPTA_MD6_d+5_r0.5_ax1.025,GENERATED,5.8636958,,
+OPTA_MD6_d+5_r0.5_ax1.050,GENERATED,5.8572984,,
+OPTA_MD6_d+6_r0.35_ax0.950,GENERATION_FAILED,1.1688476,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD6_d+6_r0.35_ax0.975,GENERATED,6.1642108,,
+OPTA_MD6_d+6_r0.35_ax1.000,GENERATED,5.6862766,,
+OPTA_MD6_d+6_r0.35_ax1.025,GENERATED,5.971715,,
+OPTA_MD6_d+6_r0.35_ax1.050,GENERATED,5.8976735,,
+OPTA_MD6_d+6_r0.5_ax0.950,GENERATION_FAILED,1.2431624,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD6_d+6_r0.5_ax0.975,GENERATED,6.1313198,,
+OPTA_MD6_d+6_r0.5_ax1.000,GENERATED,6.0991815,,
+OPTA_MD6_d+6_r0.5_ax1.025,GENERATED,5.9444931,,
+OPTA_MD6_d+6_r0.5_ax1.050,GENERATED,5.7628625,,
+OPTA_MD7_d+1_r0.35_ax0.950,GENERATED,5.9639835,,
+OPTA_MD7_d+1_r0.35_ax0.975,GENERATED,6.1615344,,
+OPTA_MD7_d+1_r0.35_ax1.000,GENERATED,5.7767548,,
+OPTA_MD7_d+1_r0.35_ax1.025,GENERATED,6.1203641,,
+OPTA_MD7_d+1_r0.35_ax1.050,GENERATED,5.5837408,,
+OPTA_MD7_d+1_r0.5_ax0.950,GENERATION_FAILED,1.3360515,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD7_d+1_r0.5_ax0.975,GENERATED,6.0560639,,
+OPTA_MD7_d+1_r0.5_ax1.000,GENERATED,5.9035987,,
+OPTA_MD7_d+1_r0.5_ax1.025,GENERATED,6.2302869,,
+OPTA_MD7_d+1_r0.5_ax1.050,GENERATED,5.7126621,,
+OPTA_MD7_d+2_r0.35_ax0.950,GENERATED,6.1389403,,
+OPTA_MD7_d+2_r0.35_ax0.975,GENERATED,7.7911675,,
+OPTA_MD7_d+2_r0.35_ax1.000,GENERATED,5.9817301,,
+OPTA_MD7_d+2_r0.35_ax1.025,GENERATED,6.119993,,
+OPTA_MD7_d+2_r0.35_ax1.050,GENERATED,5.5059001,,
+OPTA_MD7_d+2_r0.5_ax0.950,GENERATION_FAILED,1.3206995,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD7_d+2_r0.5_ax0.975,GENERATED,6.1491865,,
+OPTA_MD7_d+2_r0.5_ax1.000,GENERATED,5.811622,,
+OPTA_MD7_d+2_r0.5_ax1.025,GENERATED,6.2549094,,
+OPTA_MD7_d+2_r0.5_ax1.050,GENERATED,5.6209312,,
+OPTA_MD7_d+3_r0.35_ax0.950,GENERATED,5.887213,,
+OPTA_MD7_d+3_r0.35_ax0.975,GENERATED,5.9262289,,
+OPTA_MD7_d+3_r0.35_ax1.000,GENERATED,5.8412583,,
+OPTA_MD7_d+3_r0.35_ax1.025,GENERATED,6.0206606,,
+OPTA_MD7_d+3_r0.35_ax1.050,GENERATED,5.8075995,,
+OPTA_MD7_d+3_r0.5_ax0.950,GENERATION_FAILED,1.287413,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD7_d+3_r0.5_ax0.975,GENERATED,5.7739238,,
+OPTA_MD7_d+3_r0.5_ax1.000,GENERATED,6.0197281,,
+OPTA_MD7_d+3_r0.5_ax1.025,GENERATED,5.917784,,
+OPTA_MD7_d+3_r0.5_ax1.050,GENERATED,5.6185214,,
+OPTA_MD7_d+4_r0.35_ax0.950,GENERATION_FAILED,1.2043098,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD7_d+4_r0.35_ax0.975,GENERATED,6.1395791,,
+OPTA_MD7_d+4_r0.35_ax1.000,GENERATED,6.1185229,,
+OPTA_MD7_d+4_r0.35_ax1.025,GENERATED,5.7465151,,
+OPTA_MD7_d+4_r0.35_ax1.050,GENERATED,5.8078437,,
+OPTA_MD7_d+4_r0.5_ax0.950,GENERATION_FAILED,1.2877136,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD7_d+4_r0.5_ax0.975,GENERATED,5.9821272,,
+OPTA_MD7_d+4_r0.5_ax1.000,GENERATED,5.8454697,,
+OPTA_MD7_d+4_r0.5_ax1.025,GENERATED,5.9367799,,
+OPTA_MD7_d+4_r0.5_ax1.050,GENERATED,5.7819767,,
+OPTA_MD7_d+5_r0.35_ax0.950,GENERATION_FAILED,1.2981169,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD7_d+5_r0.35_ax0.975,GENERATED,5.7793798,,
+OPTA_MD7_d+5_r0.35_ax1.000,GENERATED,5.8867581,,
+OPTA_MD7_d+5_r0.35_ax1.025,GENERATED,6.0410154,,
+OPTA_MD7_d+5_r0.35_ax1.050,GENERATED,5.6181141,,
+OPTA_MD7_d+5_r0.5_ax0.950,GENERATION_FAILED,1.2799156,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD7_d+5_r0.5_ax0.975,GENERATED,5.9449427,,
+OPTA_MD7_d+5_r0.5_ax1.000,GENERATED,5.8695564,,
+OPTA_MD7_d+5_r0.5_ax1.025,GENERATED,5.8165499,,
+OPTA_MD7_d+5_r0.5_ax1.050,GENERATED,5.7710994,,
+OPTA_MD7_d+6_r0.35_ax0.950,GENERATION_FAILED,1.2921564,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD7_d+6_r0.35_ax0.975,GENERATED,5.8128923,,
+OPTA_MD7_d+6_r0.35_ax1.000,GENERATED,5.8692142,,
+OPTA_MD7_d+6_r0.35_ax1.025,GENERATED,5.9249085,,
+OPTA_MD7_d+6_r0.35_ax1.050,GENERATED,5.5594682,,
+OPTA_MD7_d+6_r0.5_ax0.950,GENERATION_FAILED,1.2871767,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD7_d+6_r0.5_ax0.975,GENERATED,5.9168087,,
+OPTA_MD7_d+6_r0.5_ax1.000,GENERATED,5.9332585,,
+OPTA_MD7_d+6_r0.5_ax1.025,GENERATED,5.9769486,,
+OPTA_MD7_d+6_r0.5_ax1.050,GENERATED,6.0692038,,
+OPTA_MD8_d+1_r0.35_ax0.950,GENERATED,5.8289379,,
+OPTA_MD8_d+1_r0.35_ax0.975,GENERATED,6.1569281,,
+OPTA_MD8_d+1_r0.35_ax1.000,GENERATED,5.9287845,,
+OPTA_MD8_d+1_r0.35_ax1.025,GENERATED,6.0520193,,
+OPTA_MD8_d+1_r0.35_ax1.050,GENERATED,5.7347821,,
+OPTA_MD8_d+1_r0.5_ax0.950,GENERATION_FAILED,1.3027787,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+1_r0.5_ax0.975,GENERATED,6.054462,,
+OPTA_MD8_d+1_r0.5_ax1.000,GENERATED,5.7936279,,
+OPTA_MD8_d+1_r0.5_ax1.025,GENERATED,6.0136585,,
+OPTA_MD8_d+1_r0.5_ax1.050,GENERATED,5.6952673,,
+OPTA_MD8_d+2_r0.35_ax0.950,GENERATION_FAILED,1.3634849,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+2_r0.35_ax0.975,GENERATED,5.9174212,,
+OPTA_MD8_d+2_r0.35_ax1.000,GENERATED,5.9551908,,
+OPTA_MD8_d+2_r0.35_ax1.025,GENERATED,6.162822,,
+OPTA_MD8_d+2_r0.35_ax1.050,GENERATED,5.7605078,,
+OPTA_MD8_d+2_r0.5_ax0.950,GENERATION_FAILED,1.3145999,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+2_r0.5_ax0.975,GENERATED,5.8234318,,
+OPTA_MD8_d+2_r0.5_ax1.000,GENERATED,6.0585442,,
+OPTA_MD8_d+2_r0.5_ax1.025,GENERATED,5.8701781,,
+OPTA_MD8_d+2_r0.5_ax1.050,GENERATED,5.9446573,,
+OPTA_MD8_d+3_r0.35_ax0.950,GENERATION_FAILED,1.2034599,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+3_r0.35_ax0.975,GENERATED,6.0317691,,
+OPTA_MD8_d+3_r0.35_ax1.000,GENERATED,6.0354804,,
+OPTA_MD8_d+3_r0.35_ax1.025,GENERATED,6.0597249,,
+OPTA_MD8_d+3_r0.35_ax1.050,GENERATED,5.7903092,,
+OPTA_MD8_d+3_r0.5_ax0.950,GENERATION_FAILED,1.3104519,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+3_r0.5_ax0.975,GENERATED,6.0477227,,
+OPTA_MD8_d+3_r0.5_ax1.000,GENERATED,6.1457347,,
+OPTA_MD8_d+3_r0.5_ax1.025,GENERATED,6.1967135,,
+OPTA_MD8_d+3_r0.5_ax1.050,GENERATED,5.6347047,,
+OPTA_MD8_d+4_r0.35_ax0.950,GENERATION_FAILED,1.3145219,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+4_r0.35_ax0.975,GENERATED,6.0864543,,
+OPTA_MD8_d+4_r0.35_ax1.000,GENERATED,5.7754584,,
+OPTA_MD8_d+4_r0.35_ax1.025,GENERATED,5.8514898,,
+OPTA_MD8_d+4_r0.35_ax1.050,GENERATED,5.6116512,,
+OPTA_MD8_d+4_r0.5_ax0.950,GENERATION_FAILED,1.277998,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+4_r0.5_ax0.975,GENERATED,6.0148912,,
+OPTA_MD8_d+4_r0.5_ax1.000,GENERATED,5.9787121,,
+OPTA_MD8_d+4_r0.5_ax1.025,GENERATED,5.9724056,,
+OPTA_MD8_d+4_r0.5_ax1.050,GENERATED,5.7624982,,
+OPTA_MD8_d+5_r0.35_ax0.950,GENERATION_FAILED,1.2995676,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+5_r0.35_ax0.975,GENERATED,5.9673424,,
+OPTA_MD8_d+5_r0.35_ax1.000,GENERATED,6.0901584,,
+OPTA_MD8_d+5_r0.35_ax1.025,GENERATED,5.8093697,,
+OPTA_MD8_d+5_r0.35_ax1.050,GENERATED,5.4052781,,
+OPTA_MD8_d+5_r0.5_ax0.950,GENERATION_FAILED,1.2848512,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+5_r0.5_ax0.975,GENERATION_FAILED,1.293607,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+5_r0.5_ax1.000,GENERATED,5.9379131,,
+OPTA_MD8_d+5_r0.5_ax1.025,GENERATED,6.0252144,,
+OPTA_MD8_d+5_r0.5_ax1.050,GENERATED,5.7361508,,
+OPTA_MD8_d+6_r0.35_ax0.950,GENERATION_FAILED,1.2709921,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+6_r0.35_ax0.975,GENERATED,6.2192861,,
+OPTA_MD8_d+6_r0.35_ax1.000,GENERATED,6.1311849,,
+OPTA_MD8_d+6_r0.35_ax1.025,GENERATED,5.9491745,,
+OPTA_MD8_d+6_r0.35_ax1.050,GENERATED,5.726032,,
+OPTA_MD8_d+6_r0.5_ax0.950,GENERATION_FAILED,1.3076278,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+6_r0.5_ax0.975,GENERATION_FAILED,1.2594423,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD8_d+6_r0.5_ax1.000,GENERATED,7.318865,,
+OPTA_MD8_d+6_r0.5_ax1.025,GENERATED,5.9095638,,
+OPTA_MD8_d+6_r0.5_ax1.050,GENERATED,5.9285212,,
+OPTA_MD9_d+1_r0.35_ax0.950,GENERATION_FAILED,1.3220879,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+1_r0.35_ax0.975,GENERATED,7.5903784,,
+OPTA_MD9_d+1_r0.35_ax1.000,GENERATED,6.069433,,
+OPTA_MD9_d+1_r0.35_ax1.025,GENERATED,6.1468764,,
+OPTA_MD9_d+1_r0.35_ax1.050,GENERATED,6.0176065,,
+OPTA_MD9_d+1_r0.5_ax0.950,GENERATION_FAILED,1.3492127,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+1_r0.5_ax0.975,GENERATED,6.1543214,,
+OPTA_MD9_d+1_r0.5_ax1.000,GENERATED,5.9341545,,
+OPTA_MD9_d+1_r0.5_ax1.025,GENERATED,6.115641,,
+OPTA_MD9_d+1_r0.5_ax1.050,GENERATED,5.5964779,,
+OPTA_MD9_d+2_r0.35_ax0.950,GENERATION_FAILED,1.380891,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+2_r0.35_ax0.975,GENERATED,6.1253258,,
+OPTA_MD9_d+2_r0.35_ax1.000,GENERATED,5.9511408,,
+OPTA_MD9_d+2_r0.35_ax1.025,GENERATED,6.0268599,,
+OPTA_MD9_d+2_r0.35_ax1.050,GENERATED,6.1029629,,
+OPTA_MD9_d+2_r0.5_ax0.950,GENERATION_FAILED,1.3329071,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+2_r0.5_ax0.975,GENERATED,6.0069423,,
+OPTA_MD9_d+2_r0.5_ax1.000,GENERATED,8.0186668,,
+OPTA_MD9_d+2_r0.5_ax1.025,GENERATED,5.9730262,,
+OPTA_MD9_d+2_r0.5_ax1.050,GENERATED,5.6808213,,
+OPTA_MD9_d+3_r0.35_ax0.950,GENERATION_FAILED,1.3497546,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+3_r0.35_ax0.975,GENERATED,6.0392848,,
+OPTA_MD9_d+3_r0.35_ax1.000,GENERATED,5.9273197,,
+OPTA_MD9_d+3_r0.35_ax1.025,GENERATED,6.1565352,,
+OPTA_MD9_d+3_r0.35_ax1.050,GENERATED,5.4724012,,
+OPTA_MD9_d+3_r0.5_ax0.950,GENERATION_FAILED,1.3885026,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+3_r0.5_ax0.975,GENERATED,5.8891655,,
+OPTA_MD9_d+3_r0.5_ax1.000,GENERATED,5.9583157,,
+OPTA_MD9_d+3_r0.5_ax1.025,GENERATED,6.1094296,,
+OPTA_MD9_d+3_r0.5_ax1.050,GENERATED,5.734524,,
+OPTA_MD9_d+4_r0.35_ax0.950,GENERATION_FAILED,1.2567235,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+4_r0.35_ax0.975,GENERATED,6.0284723,,
+OPTA_MD9_d+4_r0.35_ax1.000,GENERATED,5.9804917,,
+OPTA_MD9_d+4_r0.35_ax1.025,GENERATED,6.2063293,,
+OPTA_MD9_d+4_r0.35_ax1.050,GENERATED,5.6274314,,
+OPTA_MD9_d+4_r0.5_ax0.950,GENERATION_FAILED,1.3461684,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+4_r0.5_ax0.975,GENERATION_FAILED,1.444435,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+4_r0.5_ax1.000,GENERATED,5.9869798,,
+OPTA_MD9_d+4_r0.5_ax1.025,GENERATED,5.9999933,,
+OPTA_MD9_d+4_r0.5_ax1.050,GENERATED,5.496578,,
+OPTA_MD9_d+5_r0.35_ax0.950,GENERATION_FAILED,1.3370371,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+5_r0.35_ax0.975,GENERATED,6.0639301,,
+OPTA_MD9_d+5_r0.35_ax1.000,GENERATED,6.1841538,,
+OPTA_MD9_d+5_r0.35_ax1.025,GENERATED,5.9970482,,
+OPTA_MD9_d+5_r0.35_ax1.050,GENERATED,5.7646689,,
+OPTA_MD9_d+5_r0.5_ax0.950,GENERATION_FAILED,1.4024063,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+5_r0.5_ax0.975,GENERATION_FAILED,1.3267428,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+5_r0.5_ax1.000,GENERATED,5.9028012,,
+OPTA_MD9_d+5_r0.5_ax1.025,GENERATED,5.8300315,,
+OPTA_MD9_d+5_r0.5_ax1.050,GENERATED,6.2103508,,
+OPTA_MD9_d+6_r0.35_ax0.950,GENERATION_FAILED,1.3000683,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+6_r0.35_ax0.975,GENERATED,6.0642514,,
+OPTA_MD9_d+6_r0.35_ax1.000,GENERATED,6.1011203,,
+OPTA_MD9_d+6_r0.35_ax1.025,GENERATED,6.1714763,,
+OPTA_MD9_d+6_r0.35_ax1.050,GENERATED,5.7347407,,
+OPTA_MD9_d+6_r0.5_ax0.950,GENERATION_FAILED,1.2838379,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+6_r0.5_ax0.975,GENERATION_FAILED,1.2830692,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]
+OPTA_MD9_d+6_r0.5_ax1.000,GENERATED,5.9228427,,
+OPTA_MD9_d+6_r0.5_ax1.025,GENERATED,6.3460737,,
+OPTA_MD9_d+6_r0.5_ax1.050,GENERATED,5.7061845,,

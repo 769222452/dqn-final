@@ -1,0 +1,16 @@
+f248c4f7da03a48335cbe1dfca4e2b6e0e58c7da
+PASS: 203 files, 1608945 bytes; all SHA-256 hashes match.
+/hy-tmp/aero_su2/bin/SU2_CFD
+/hy-tmp/aero_su2/bin/mpirun
+gmsh 4.15.2
+.....................                                                    [100%]
+21 passed in 53.81s
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [4922, 4923, 4921] #4
+  2nd: [4922, 4923, 5671] #4
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [4043, 4044, 4045] #4
+  2nd: [4043, 4044, 3897] #4
+Found two overlapping facets.
+  1st: [449, 450, 451] #4
+  2nd: [449, 450, 451] #5

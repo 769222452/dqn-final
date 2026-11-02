@@ -1,0 +1,33 @@
+{
+  "stage": "confirm",
+  "commit": "f248c4f7da03a48335cbe1dfca4e2b6e0e58c7da",
+  "status": "COMPLETED",
+  "started_at": "2026-11-02T14:09:39.226215+00:00",
+  "command": [
+    "/hy-tmp/dqn-aero/.venv/bin/python",
+    "-B",
+    "experiments/aero_fidelity/optimum/evaluate_optimum.py",
+    "runs/aero_opt_b/family",
+    "--audit",
+    "runs/aero_opt_b/family_selected/family_audit.json",
+    "--out",
+    "runs/aero_opt/results",
+    "--confirm-cfd",
+    "runs/aero_opt/cfd_root/cfd"
+  ],
+  "OUT": "runs/aero_opt/results",
+  "NP": 7,
+  "JOBS": 2,
+  "SLICES": 4,
+  "BASE_MARKER": 1,
+  "ALPHAS": [
+    2,
+    4,
+    6,
+    8
+  ],
+  "GRID_CHECK": 0,
+  "exit_code": 0,
+  "wall_s": 6.307630434632301,
+  "finished_at": "2026-11-02T14:09:45.553384+00:00"
+}

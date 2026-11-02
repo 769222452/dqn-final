@@ -1,0 +1,18 @@
+Found two overlapping facets.
+  1st: [738, 737, 739] #2
+  2nd: [738, 737, 739] #3
+{"geometry": "OPT_MD10_d+3_r0p35_ax0p99440", "level": "medium", "triangles": 19206, "mesh": {"cells": 264832, "edge_scale": 1.5, "algorithm": 10, "remesh_surface": true, "base_surfaces": 1, "skin_surfaces": 4}, "edges": 28809, "open_edges": 0, "nonmanifold_edges": 0}
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [14438, 14432, 14431] #4
+  2nd: [14438, 14432, 15631] #4
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [11678, 11679, 11677] #4
+  2nd: [11678, 11679, 11929] #4
+PLC Error:  A segment and a facet intersect at point (3.7769,0.817416,-1.1536).
+  Segment: [2114,1376] #-1 (0)
+  Facet:   [1318,1459,1461] #2
+Found two overlapping facets.
+  1st: [771, 772, 773] #4
+  2nd: [771, 772, 773] #5
+{"geometry": "OPT_MD9_d+2_r0p5_ax0p97550", "level": "medium", "triangles": 19206, "mesh": {"cells": 195468, "edge_scale": 1.0, "algorithm": 10, "remesh_surface": false, "base_surfaces": 1, "skin_surfaces": 2}, "edges": 28809, "open_edges": 0, "nonmanifold_edges": 0}
+24 cases -> runs/aero_opt/cfd_root/cfd/cases_medium.txt

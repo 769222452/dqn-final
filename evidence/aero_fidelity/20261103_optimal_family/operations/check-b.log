@@ -1,0 +1,10 @@
+{
+ "jobs": 78,
+ "generated": 78,
+ "valid": 78,
+ "outcomes": {
+  "VALID": 78
+ },
+ "status": "MAP_ONLY"
+}
+candidates: []
