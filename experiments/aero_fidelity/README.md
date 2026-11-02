@@ -43,9 +43,9 @@ detachment and spillage at the inviscid level.
 - leading-edge and planform inputs fixed to those of G42 (c1 = c2 = 1.0331, d1 = 0.11607, design AOA −4°);
 - conical shock: a1 = a2 = b1 = b2 = asin(1/M_d) + δ, with one common δ ∈ {−3,…,+4}° for all members;
 - exit-deflection coefficient a_x ∈ {0.970, 0.985, 1.000, 1.015, 1.030}, used to match the volume.
-  120 generator calls in total.
+  Version 1: 120 generator calls; version 2 (§3b): 180.
 
-**Selection rule** (`family/check_family.py`, fixed now): a member is valid if its surface is watertight with
+**Selection rule, version 1** (`family/check_family.py`; see §3b for the amendment): a member is valid if its surface is watertight with
 positive volume. A δ is admissible if all three design Machs have a valid member and the chosen members'
 volumes (per M_d the one closest to the median volume V* of the a_x = 1 members) are within ±3 % of V*. The
 admissible δ with the smallest maximum deviation wins. If none is admissible the experiment stops with
@@ -86,6 +86,38 @@ experiments), and a re-run of the flight pipeline.
 at the inviscid level, and the case for morphing has to rest on other mechanisms (trim, heating, a wider
 Mach range, payload volume), which the point-mass model does not contain.
 
+## 3b. Result of family version 1 and protocol amendment 1
+
+**Version 1 was run first** (120 generator calls, `results_family_v1/`, evidence branch
+`aero-family-results-20261102`, commit `2acaaa5`):
+- 105 generated, 15 failed with the generator's own `V5:GeometryDomain` error (δ = −3° for MD6 and MD8, and
+  δ = +2…+4° at a_x = 0.970 for MD6 and MD8).
+- The check stopped on a base-outline error. Cause found afterwards: **every one of the 105 members has
+  intersecting upper and lower skins at the tail.** The project's own frozen native-mesh audit, ported in
+  `family/native_audit.py` (verified: G42 → VALID; FAM_MD6_d+0_ax1.000 → INVALID, 196 triangle-pair
+  intersections, tail minimum thickness −0.035 m), classifies **0 of 105 as VALID**, 105 as INVALID.
+- Why: the generator builds the upper skin as a straight free-stream line from the leading edge
+  (`build_geometry_core.m`, lines 474–476), while the lower skin follows the streamlines behind the shock and
+  drifts sideways. The drift at the base is 0.09–0.125 m for the library's valid members and 0.02–0.39 m,
+  growing with δ, for version 1. With four equal shock angles the lower edge crosses the upper edge.
+  The generator is not at fault; version 1 chose a parametrisation outside its valid region.
+- Outcome under the declared rule: **NO_ADMISSIBLE_FAMILY**. Nothing was relaxed.
+
+**Amendment 1** (declared before any CFD result exists; no CFD has been run on any family member):
+- Design variable: the shock is described by the mean angle offset δ and the ratio r = b/a of the lower to the
+  upper shock angle pair, a1 = a2 = a, b1 = b2 = r·a with mean(a, r·a) = asin(1/M_d) + δ, r ∈ {0.50, 0.65,
+  0.80}, δ ∈ {−2, 0, 2, 4, 6}°; plus the angle pattern of the validated reference geometry G42 scaled to the
+  same mean angle. a_x ∈ {0.97, 1.00, 1.03}. 180 generator calls (`family_jobs.py --version 2`).
+- Validity: the frozen native-mesh audit must classify the member VALID (this replaces "watertight and positive
+  volume", which is implied but weaker), and a watertight closed surface must be constructible.
+- Selection rule: unchanged in form. A candidate is a design key shared by the three design Machs (now
+  `pair_d·_r·` or `g42_d·` instead of δ alone); volumes within ±3 % of V*; smallest maximum deviation wins;
+  no relaxation; `NO_ADMISSIBLE_FAMILY` is a valid outcome.
+- The decision criteria in §3 are unchanged.
+- Not known in advance: whether version 2 has any admissible member. The largest shock angles (up to 31.7° for
+  MD4 with r = 0.5) are far above the 20° upper bound used for the project's validated members and are
+  expected to fail at generation; that is a boundary of the design space, not an error.
+
 ## 4. Known limits
 
 - Euler is inviscid: no viscous interaction, no boundary-layer displacement at the leading edge, no
@@ -119,7 +151,8 @@ failed stage and prints what it needs (MATLAB with the Optimization and Symbolic
 
 ## 6. Files
 
-- `family/family_jobs.py`, `family/make_family.m`, `family/check_family.py`: the family and its selection.
+- `family/family_jobs.py`, `family/make_family.m`, `family/check_family.py`, `family/native_audit.py`: the family, its
+  selection and the ported frozen audit. `results_family_v1/`: the first run and its outcome.
 - `run_decision.sh`, `CODEX.md`: stages and agent instructions.
 - `../../scripts/cfd/make_su2_cases.py`, `collect_su2.py`: surfaces, meshes, SU2 inputs; comparison and decision.
 - `../../src/certified_flight/friction.py`, `../../scripts/build_friction_table.py`, `../../data/aero_friction/`:

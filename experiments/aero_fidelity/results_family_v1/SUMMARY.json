@@ -1,0 +1,27 @@
+{
+ "family": "F1: a1=a2=b1=b2=asin(1/M_d)+delta, delta -3..+4, a_x 0.970..1.030, design Mach 4/6/8, 120 jobs",
+ "generation": {
+  "generated": 105,
+  "failed": 15,
+  "failure_text": {
+   "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]": 5,
+   "Stream surface 3: Invalid shock streamline [V5:GeometryDomain]": 5,
+   "Stream surface 1: Invalid shock streamline [V5:GeometryDomain]": 5
+  }
+ },
+ "frozen_audit": {
+  "valid": 0,
+  "invalid": 105,
+  "ambiguous": 0,
+  "reasons": {
+   "Actual non-leading-edge upper/lower triangle intersection": 101,
+   "Actual non-leading-edge upper/lower triangle intersection; Single-valued XY graph not certified; Some required sections unresolved": 4
+  },
+  "tail_min_thickness_m": [
+   -0.3257660142443992,
+   -0.0009178928262700836
+  ]
+ },
+ "outcome": "NO_ADMISSIBLE_FAMILY (no member passes the project frozen native-mesh audit)",
+ "audit_port": "experiments/aero_fidelity/family/native_audit.py; verified on G42 (VALID) and FAM_MD6_d+0_ax1.000 (INVALID, 196 triangle-pair intersections, tail min thickness -0.0345 m)"
+}

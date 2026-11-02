@@ -115,3 +115,51 @@ def test_switching_gain_is_zero_when_one_member_dominates():
     assert collect.switching_gain(rows, 'euler')['gain_pct'] == pytest.approx(0., abs=1e-9)
     rows = _rows({('FAM_MD4', 4.): 9., ('FAM_MD8', 4.): 8., ('FAM_MD4', 8.): 8., ('FAM_MD8', 8.): 9.})
     assert collect.switching_gain(rows, 'euler')['gain_pct'] == pytest.approx(100*(9/8.5-1), rel=1e-9)
+
+
+# ---------------------------------------------------------------------------------- family jobs and selection rule
+sys.path.insert(0, str(ROOT/'experiments'/'aero_fidelity'/'family'))
+import check_family as fam  # noqa: E402
+import family_jobs as fj  # noqa: E402
+
+
+def test_family_version_1_is_reproducible_and_version_2_angles_follow_the_declared_formula():
+    v1 = fj.jobs(1)
+    assert len(v1) == 120 and all(len(set(j['shock_angles_deg'])) == 1 for j in v1)
+    v2 = fj.jobs(2)
+    assert len(v2) == 180
+    for j in v2:
+        a1, a2, b1, b2 = j['shock_angles_deg']
+        mean = fj.mach_angle_deg(j['Ma_design'])+j['delta_deg']
+        if j['design'] == 'pair':
+            assert a1 == a2 and b1 == b2 and b1/a1 == pytest.approx(j['ratio'])
+            assert (a1+b1)/2 == pytest.approx(mean)
+        else:
+            assert np.mean([a1, a2, b1, b2]) == pytest.approx(mean)
+            assert a1/a2 == pytest.approx(fj.G42_PATTERN[0]/fj.G42_PATTERN[1])
+        assert j['inputs10'][0] == j['Ma_design'] and j['inputs10'][-1] == j['a_x'] and j['inputs10'][8] == -4.
+    assert len({j['job_id'] for j in v2}) == 180
+
+
+def _members(volumes):
+    """volumes[key][mach] = list of (a_x, volume); all valid."""
+    rows = []
+    for key, per in volumes.items():
+        for M, lst in per.items():
+            for ax, v in lst:
+                rows.append(dict(job_id=f'{key}_{M}_{ax}', design_key=key, Ma_design=M, a_x=ax, valid=True, volume_m3=v))
+    return rows
+
+
+def test_selection_rule_is_common_key_volume_matched_and_not_relaxed():
+    ok = {'k1': {4.: [(.97, 1.0), (1.0, 1.01)], 6.: [(1.0, .99)], 8.: [(1.0, 1.03), (1.03, 1.005)]}}
+    options, best = fam.select(_members(ok))
+    assert best['design_key'] == 'k1' and best['max_volume_deviation'] <= .03
+    assert best['chosen']['8.0'].endswith('1.03')                  # closest to the median target, not to a_x = 1
+    bad = {'k1': {4.: [(1.0, 1.0)], 6.: [(1.0, 1.0)], 8.: [(1.0, 1.05)]}}  # 5 % apart: not admissible, not relaxed
+    assert fam.select(_members(bad))[1] is None
+    missing = {'k1': {4.: [(1.0, 1.0)], 6.: [(1.0, 1.0)], 8.: []}}
+    options, best = fam.select(_members(missing))
+    assert best is None and options[0]['reason'] == 'a design Mach has no valid member'
+    two = dict(ok, k0={4.: [(1.0, 1.0)], 6.: [(1.0, 1.0)], 8.: [(1.0, 1.0)]})
+    assert fam.select(_members(two))[1]['design_key'] == 'k0'      # smaller deviation wins
