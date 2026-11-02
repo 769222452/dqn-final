@@ -83,7 +83,7 @@ MATLAB runs on the user's computer as before (two short batches); everything els
 ```bash
 git fetch origin aoa-fix && git checkout aoa-fix && git pull                     # report git rev-parse HEAD
 export NP=7 JOBS=2 SLICES=4
-# stage A: map, 420 generator calls, then audit (mode map: status MAP_ONLY is the expected result)
+# stage A: map, 1260 generator calls (d1 is a design variable; about 25 minutes), then audit (mode map: status MAP_ONLY is the expected result)
 OUT=runs/aero_opt_a FAMILY_VERSION=5 bash experiments/aero_fidelity/run_decision.sh family
 OUT=runs/aero_opt_a bash experiments/aero_fidelity/run_decision.sh check
 # stage B: interpolated a_x from the audited map, then audit

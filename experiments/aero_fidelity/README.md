@@ -293,8 +293,11 @@ sections 3d-3g were not optimised for L/D.
 
 Design space (generator inputs; everything else fixed to G42: c1 = c2 = 1.0331, d1 = 0.11607, design AOA = -4 deg):
 design Mach Md in {4, 5, 6, 7, 8, 9, 10}, shock offset delta in {1, ..., 6} deg, ratio r in {0.35, 0.5} (a1 = a2 = a, b1 = b2 = r a,
-mean = asin(1/Md) + delta), a_x as the volume knob.
-- Stage A, map (`family_jobs.py --version 5`, 420 calls): a_x in {0.95, 0.975, 1.0, 1.025, 1.05}; audited without selection
+mean = asin(1/Md) + delta), leading-edge control point d1 in {0.04, 0.08, 0.11607}, a_x as the volume knob.
+(Amendment before any member of this test existed: d1 was first fixed to G42's 0.11607. G42 is a Mach-15 design
+(`geometry_inventory.csv`: REG_G42_MD15) and the library's own d1 values are mostly 0.02-0.06, so fixing it would have
+handed every low-Mach member a planform meant for Mach 15. c1 = c2 stay at 1.0331.)
+- Stage A, map (`family_jobs.py --version 5`, 1260 calls, about 25 minutes of MATLAB): a_x in {0.95, 0.975, 1.0, 1.025, 1.05}; audited without selection
   (check mode `map`).
 - Stage B (`--version 6 --map <stage-A family_audit.json>`): for every shape whose adjacent VALID map members bracket G42's
   volume, three members at the linearly interpolated a_x and +-0.0025; audited the same way.

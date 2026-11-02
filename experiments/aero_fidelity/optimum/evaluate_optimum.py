@@ -4,7 +4,7 @@
         --out experiments/aero_fidelity/optimum/results
 
 Candidates: audited members of the version-6 batch (family_jobs.py) that are VALID and within +-3 % of G42's volume; per shape
-(design Mach, shock offset, ratio) the member closest to the volume. Aerodynamics: tangent-wedge pressure + friction
+(design Mach, shock offset, ratio, d1) the member closest to the volume. Aerodynamics: tangent-wedge pressure + friction
 (src/certified_flight/friction.py; validated against Euler for this class in section 3g), flight Mach F in {4, 6, 8} at q = 50 kPa,
 alpha 2..8 deg; quadratic CD(CL) through the alphas; L/D at CL 0.03, 0.04, 0.05.
 
@@ -44,7 +44,7 @@ def candidates(rows, target):
     ok = [r for r in rows if r['valid'] and abs(r['volume_m3']/target-1) <= TOL]
     best = {}
     for r in ok:
-        k = (r['Ma_design'], r['delta_deg'], r['ratio'])
+        k = (r['Ma_design'], r['delta_deg'], r['ratio'], r['d1'])
         if k not in best or abs(r['volume_m3']/target-1) < abs(best[k]['volume_m3']/target-1):
             best[k] = r
     return [best[k] for k in sorted(best)]
@@ -141,7 +141,7 @@ def main(argv=None):
         for Fm, v in res.items():
             for c, x in v.items():
                 table.append(dict(job_id=r['job_id'], Ma_design=r['Ma_design'], delta_deg=r['delta_deg'], ratio=r['ratio'],
-                                  a_x=r['a_x'], volume_m3=r['volume_m3'], flight_mach=Fm, CL=c, LD=x))
+                                  d1=r['d1'], a_x=r['a_x'], volume_m3=r['volume_m3'], flight_mach=Fm, CL=c, LD=x))
     result = dict(rule=__doc__.split('Declared rule')[1].strip(), candidates=len(cand), **criteria(ld, md))
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)

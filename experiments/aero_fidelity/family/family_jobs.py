@@ -32,7 +32,7 @@ on a fine grid around the volume match (29 generator calls).
     python experiments/aero_fidelity/family/family_jobs.py --out runs/aero_fidelity/family --version 4
 
 Versions 5 and 6 (optimal-family test, README section 3h): version 5 is a map of design Mach x shock offset x shock-angle
-ratio x a_x (420 calls); version 6 takes the audited map (--map <family_audit.json of version 5>) and, for every shape
+ratio x d1 x a_x (1260 calls); version 6 takes the audited map (--map <family_audit.json of version 5>) and, for every shape
 (design Mach, offset, ratio) whose valid a_x neighbours bracket G42's volume, generates three members at the interpolated a_x
 and +-0.0025 around it. Both are audited without selection (check mode 'map'); the selection is the declared L/D rule of
 experiments/aero_fidelity/optimum/evaluate_optimum.py.
@@ -57,7 +57,9 @@ V4 = {4.: dict(delta=4., ax=tuple(round(1.02+.005*i, 4) for i in range(9))),
       6.: dict(delta=2., ax=tuple(round(1.00+.005*i, 4) for i in range(9))),
       8.: dict(delta=2., ax=tuple(round(.975+.0025*i, 4) for i in range(11)))}
 # Optimal-family map (version 5)
-OPT_A = dict(machs=(4., 5., 6., 7., 8., 9., 10.), deltas=(1., 2., 3., 4., 5., 6.), ratios=(.35, .5),
+# d1 (the leading-edge curve control point, build_geometry_core.m line 71) is a design variable too: G42, whose value the
+# earlier families inherited, is a Mach-15 design (geometry_inventory.csv: REG_G42_MD15), and the library's own d1 values are mostly 0.02-0.06.
+OPT_A = dict(machs=(4., 5., 6., 7., 8., 9., 10.), deltas=(1., 2., 3., 4., 5., 6.), ratios=(.35, .5), d1s=(0.04, 0.08, FIXED['d1']),
              ax=(.95, .975, 1., 1.025, 1.05))
 # Enclosed volume of G42 (data/geometry_subset/geometries/G42, scripts/cfd/make_su2_cases.closed_surface): equal payload volume.
 TARGET_VOLUME_M3 = 1.018813633812261
@@ -72,15 +74,18 @@ def _job(job_id, M, delta, beta4, ax, **extra):
                 inputs10=[M, *beta4, FIXED['c1'], FIXED['c2'], FIXED['d1'], FIXED['AOA'], ax], **extra)
 
 
-def _pair(job_id, M, d, r, ax, **extra):
+def _pair(job_id, M, d, r, ax, d1=None, **extra):
+    d1 = FIXED['d1'] if d1 is None else d1
     a = 2*(mach_angle_deg(M)+d)/(1+r)
-    return _job(job_id, M, d, (a, a, r*a, r*a), ax, design='pair', ratio=r, design_key=f'MD{M:g}_d{d:+g}_r{r:g}',
-                target_volume_m3=TARGET_VOLUME_M3, selection='map', **extra)
+    job = _job(job_id, M, d, (a, a, r*a, r*a), ax, design='pair', ratio=r, design_key=f'MD{M:g}_d{d:+g}_r{r:g}_p{d1:.4f}',
+               target_volume_m3=TARGET_VOLUME_M3, selection='map', d1=d1, **extra)
+    job['inputs10'][7] = d1
+    return job
 
 
 def opt_stage_a():
-    return [_pair(f'OPTA_MD{M:g}_d{d:+g}_r{r:g}_ax{ax:.3f}', M, d, r, ax)
-            for M in OPT_A['machs'] for d in OPT_A['deltas'] for r in OPT_A['ratios'] for ax in OPT_A['ax']]
+    return [_pair(f'OPTA_MD{M:g}_d{d:+g}_r{r:g}_p{p:.4f}_ax{ax:.3f}', M, d, r, ax, d1=p)
+            for M in OPT_A['machs'] for d in OPT_A['deltas'] for r in OPT_A['ratios'] for p in OPT_A['d1s'] for ax in OPT_A['ax']]
 
 
 def opt_stage_b(map_rows, target=None, step=.0025):
@@ -88,9 +93,9 @@ def opt_stage_b(map_rows, target=None, step=.0025):
     target = TARGET_VOLUME_M3 if target is None else target
     groups = {}
     for r in map_rows:
-        groups.setdefault((r['Ma_design'], r['delta_deg'], r['ratio']), []).append(r)
+        groups.setdefault((r['Ma_design'], r['delta_deg'], r['ratio'], r['d1']), []).append(r)
     out = []
-    for (M, d, ratio), rows in sorted(groups.items()):
+    for (M, d, ratio, d1), rows in sorted(groups.items()):
         by_ax = {round(r['a_x'], 6): r for r in rows}
         grid = sorted(by_ax)
         for a0, a1 in zip(grid[:-1], grid[1:]):
@@ -103,7 +108,7 @@ def opt_stage_b(map_rows, target=None, step=.0025):
             ax = a0+(target-v0)*(a1-a0)/(v1-v0)
             for k in (-1, 0, 1):
                 x = round(ax+k*step, 5)
-                out.append(_pair(f'OPTB_MD{M:g}_d{d:+g}_r{ratio:g}_ax{x:.5f}', M, d, ratio, x, bracket=[a0, a1]))
+                out.append(_pair(f'OPTB_MD{M:g}_d{d:+g}_r{ratio:g}_p{d1:.4f}_ax{x:.5f}', M, d, ratio, x, d1=d1, bracket=[a0, a1]))
     return out
 
 

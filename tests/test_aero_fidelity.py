@@ -276,15 +276,16 @@ def test_library_stage_a_job_list_follows_the_recipe():
 # ---------------------------------------------------------------------------------- optimal-family test (section 3h)
 def test_optimal_family_map_and_interpolation_stage():
     a = fj.jobs(5)
-    assert len(a) == 7*6*2*5 and len({j['job_id'] for j in a}) == len(a) and {j['selection'] for j in a} == {'map'}
-    rows = [dict(Ma_design=6., delta_deg=2., ratio=.5, a_x=ax, valid=ok, volume_m3=v)
+    assert len(a) == 7*6*2*3*5 and len({j['job_id'] for j in a}) == len(a) and {j['selection'] for j in a} == {'map'}
+    rows = [dict(Ma_design=6., delta_deg=2., ratio=.5, d1=.04, a_x=ax, valid=ok, volume_m3=v)
             for ax, ok, v in ((.95, False, None), (.975, True, .8), (1.0, True, .9), (1.025, True, 1.1), (1.05, True, 1.3))]
-    rows += [dict(Ma_design=8., delta_deg=1., ratio=.35, a_x=ax, valid=True, volume_m3=v) for ax, v in ((1.0, 1.5), (1.025, 1.6))]
+    rows += [dict(Ma_design=8., delta_deg=1., ratio=.35, d1=.08, a_x=ax, valid=True, volume_m3=v) for ax, v in ((1.0, 1.5), (1.025, 1.6))]
     b = fj.jobs(6, rows)
     assert len(b) == 3                                      # only the bracketing pair of the first shape; the second never reaches
     ax = 1.0+(fj.TARGET_VOLUME_M3-.9)*.025/.2
     assert [j['a_x'] for j in b] == [round(ax-.0025, 5), round(ax, 5), round(ax+.0025, 5)]
-    assert all(j['Ma_design'] == 6. and j['bracket'] == [1.0, 1.025] for j in b)
+    assert all(j['Ma_design'] == 6. and j['bracket'] == [1.0, 1.025] and j['d1'] == .04 and j['inputs10'][7] == .04 for j in b)
+    assert {j['d1'] for j in a} == {.04, .08, fj.FIXED['d1']} and all(j['inputs10'][7] == j['d1'] for j in a)
     with pytest.raises(ValueError):
         fj.jobs(6)
 
@@ -309,5 +310,5 @@ def test_optimal_family_declared_rule():
     # a member without all targets is not eligible
     ld['m8'][8.] = {.03: 7., .04: 7.}
     assert 'm8' not in E.criteria(ld, md)['winners'].values()
-    rows = [dict(valid=True, volume_m3=v, Ma_design=4., delta_deg=4., ratio=.5, job_id=str(v)) for v in (.98, 1.01, 1.04)]
+    rows = [dict(valid=True, volume_m3=v, Ma_design=4., delta_deg=4., ratio=.5, d1=.04, job_id=str(v)) for v in (.98, 1.01, 1.04)]
     assert [c['job_id'] for c in E.candidates(rows, 1.0)] == ['1.01']
