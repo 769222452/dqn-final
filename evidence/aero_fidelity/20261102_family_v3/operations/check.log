@@ -1,0 +1,12 @@
+{
+ "jobs": 189,
+ "generated": 106,
+ "valid": 106,
+ "outcomes": {
+  "VALID": 106,
+  "GENERATION_FAILED": 83
+ },
+ "status": "NO_ADMISSIBLE_FAMILY"
+}
+candidates: [('pair_d+2_r0.5', False, 0.385), ('pair_d+4_r0.5', False, 0.326), ('pair_d+6_r0.5', False, 0.667)]
+STOP: family selection failed (see runs/aero_fidelity_v3/family_selected/family_audit.json)
