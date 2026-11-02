@@ -1,0 +1,54 @@
+{
+  "commit": "4d211b1b9cc282bdf7716c6e03ff5c5156c9d4a7",
+  "stage": "family_completed",
+  "started_at": "2026-11-02T09:23:24.065718+08:00",
+  "workers": [
+    3908,
+    18876,
+    5292,
+    18260
+  ],
+  "commands": [
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-git-meta-4d211b1\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-git-meta-4d211b1\\runs\\aero_fidelity\\family\\jobs_0.json', 'D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-git-meta-4d211b1\\runs\\aero_fidelity\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-git-meta-4d211b1\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-git-meta-4d211b1\\runs\\aero_fidelity\\family\\jobs_1.json', 'D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-git-meta-4d211b1\\runs\\aero_fidelity\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-git-meta-4d211b1\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-git-meta-4d211b1\\runs\\aero_fidelity\\family\\jobs_2.json', 'D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-git-meta-4d211b1\\runs\\aero_fidelity\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-git-meta-4d211b1\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-git-meta-4d211b1\\runs\\aero_fidelity\\family\\jobs_3.json', 'D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-git-meta-4d211b1\\runs\\aero_fidelity\\family')"
+    ]
+  ],
+  "updated_at": "2026-11-02T09:27:11.222513+08:00",
+  "counts": {
+    "GENERATED": 105,
+    "GENERATION_FAILED": 15
+  },
+  "wall_s": 225.26599999999996,
+  "worker_exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "execution_location": "local licensed MATLAB; cloud has no MATLAB",
+  "matlab": "9.14.0.2206163 R2023a",
+  "slices": 4,
+  "NP": 7,
+  "JOBS": 2
+}

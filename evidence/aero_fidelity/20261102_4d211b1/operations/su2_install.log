@@ -1,0 +1,245 @@
+warning  libmamba 'repo.anaconda.com', a commercial channel hosted by Anaconda.com, is used.
+    
+warning  libmamba Please make sure you understand Anaconda Terms of Services.
+    
+warning  libmamba See: https://legal.anaconda.com/policies/en/
+⚠ Shard Index for https://mirrors.bfsu.edu.cn/anaconda/cloud/pytorch/linux-64 not available, falling back to flat repodata
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/cloud/pytorch/linux-64             ✔ Starting
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/cloud/pytorch/linux-64       ✔ Done (0.0 sec)
+⚠ Shard Index for https://mirrors.bfsu.edu.cn/anaconda/cloud/pytorch/noarch not available, falling back to flat repodata
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/cloud/pytorch/noarch               ✔ Starting
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/cloud/pytorch/noarch         ✔ Done (0.0 sec)
+⚠ Shard Index for https://mirrors.bfsu.edu.cn/anaconda/pkgs/r/linux-64 not available, falling back to flat repodata
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/pkgs/r/linux-64                    ✔ Starting
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/pkgs/r/linux-64              ✔ Done (0.2 sec)
+⚠ Shard Index for https://mirrors.bfsu.edu.cn/anaconda/pkgs/r/noarch not available, falling back to flat repodata
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/pkgs/r/noarch                      ✔ Starting
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/pkgs/r/noarch                ✔ Done (0.2 sec)
+⚠ Shard Index for https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/linux-64 not available, falling back to flat repodata
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/linux-64                 ✔ Starting
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/linux-64           ✔ Done (1.3 sec)
+⚠ Shard Index for https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/noarch not available, falling back to flat repodata
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/noarch                   ✔ Starting
+Using Flat Repodata for https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/noarch             ✔ Done (0.1 sec)
+⚠ Shard Index for pkgs/main/linux-64 not available, falling back to flat repodata
+Using Flat Repodata for pkgs/main/linux-64                                                      ✔ Starting
+Using Flat Repodata for pkgs/main/linux-64                                                ✔ Done (1.3 sec)
+⚠ Shard Index for pkgs/main/noarch not available, falling back to flat repodata
+Using Flat Repodata for pkgs/main/noarch                                                        ✔ Starting
+Using Flat Repodata for pkgs/main/noarch                                                  ✔ Done (0.1 sec)
+⚠ Shard Index for pkgs/r/linux-64 not available, falling back to flat repodata
+Using Flat Repodata for pkgs/r/linux-64                                                         ✔ Starting
+Using Flat Repodata for pkgs/r/linux-64                                                   ✔ Done (0.1 sec)
+⚠ Shard Index for pkgs/r/noarch not available, falling back to flat repodata
+Using Flat Repodata for pkgs/r/noarch                                                           ✔ Starting
+Using Flat Repodata for pkgs/r/noarch                                                     ✔ Done (0.2 sec)
+Fetch Shard Index for conda-forge/linux-64                                                      ⧖ Starting
+Fetch Shard Index for conda-forge/linux-64                                                ✔ Done (7.4 sec)
+Fetch Shard Index for conda-forge/noarch                                                        ⧖ Starting
+Fetch Shard Index for conda-forge/noarch                                                  ✔ Done (4.9 sec)
+Fetching and Parsing Packages' Shards                                                           ⧖ Starting
+Fetching and Parsing Packages' Shards                                                    ✔ Done (45.2 sec)
+Parsing Packages' Records                                                                ✔ Done (62.9 sec)
+
+Resolving Environment                                                                           ⧖ Starting
+Resolving Environment                                                                     ✔ Done (1.3 sec)
+
+Transaction
+
+  Prefix: /hy-tmp/aero_su2
+
+  Updating specs:
+
+   - su2
+   - openmpi
+
+
+  Package                Version  Build                  Channel          Size
+────────────────────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────────────────────
+
+  + _openmp_mutex            4.5  20_gnu                 conda-forge      29kB
+  + bzip2                  1.0.8  hda65f42_10            conda-forge     258kB
+  + ca-certificates   2026.10.23  hbd8a1cb_0             conda-forge     130kB
+  + lapack                3.11.0  10_netlib              conda-forge      12kB
+  + ld_impl_linux-64      2.46.1  default_hbd61a6d_103   conda-forge     742kB
+  + libblas               3.11.0  11_h4a7cf45_openblas   conda-forge      18kB
+  + libcap                  2.78  h084b8d7_1             conda-forge     124kB
+  + libevent              2.1.12  h5348a74_2             conda-forge     431kB
+  + libexpat               2.9.0  hd2095e1_0             conda-forge      79kB
+  + libfabric              2.7.0  ha770c72_0             conda-forge      14kB
+  + libfabric1             2.7.0  hf0f7150_0             conda-forge     768kB
+  + libffi                 3.7.0  h81df57d_1             conda-forge      68kB
+  + libgcc                16.2.0  ha9f2e26_7             conda-forge       1MB
+  + libgfortran           16.2.0  h69a702a_7             conda-forge      29kB
+  + libgfortran5          16.2.0  h6b99dfc_7             conda-forge       3MB
+  + libgomp               16.2.0  he0feb66_7             conda-forge     641kB
+  + libhwloc              2.13.0  default_he001693_1000  conda-forge       2MB
+  + libiconv                1.18  h0cb94f2_3             conda-forge     789kB
+  + liblapack             3.11.0  11_h47877c9_openblas   conda-forge      18kB
+  + liblzma                5.8.3  hb03c661_1             conda-forge     113kB
+  + libnl                 3.11.0  hb03c661_1             conda-forge     735kB
+  + libnsl                 2.0.1  hb9d3cd8_1             conda-forge      34kB
+  + libopenblas           0.3.34  pthreads_hf13c14d_2    conda-forge       7MB
+  + libpmix                5.0.8  h31fc519_4             conda-forge     731kB
+  + libpython            3.11.18  ha57cdbe_0_cpython     conda-forge       8MB
+  + libsqlite             3.54.1  h0737f62_101           conda-forge     980kB
+  + libstdcxx             16.2.0  h934c35e_7             conda-forge       7MB
+  + libsystemd0            262.1  h26e0ef7_0             conda-forge     575kB
+  + libudev1               262.1  h26e0ef7_0             conda-forge     185kB
+  + libuuid               2.42.4  hcfc3c73_0             conda-forge      34kB
+  + libxcrypt             4.4.38  h280c20c_0             conda-forge     102kB
+  + libxml2               2.15.4  ha7a5771_1             conda-forge      47kB
+  + libxml2-16            2.15.4  hbdfff7e_1             conda-forge     566kB
+  + libzlib                1.3.2  h25fd6f3_3             conda-forge      64kB
+  + mpi                    1.0.1  openmpi                conda-forge       7kB
+  + mpi4py                 4.1.2  py311hba6ca95_101      conda-forge     915kB
+  + ncurses                  6.6  hdb14827_1             conda-forge     911kB
+  + openmpi               5.0.11  hee33aa4_0             conda-forge       4MB
+  + openssl                3.6.5  h781a0a9_0             conda-forge       3MB
+  + python               3.11.18  h5f976f7_0_cpython     conda-forge      23MB
+  + python_abi              3.11  9_cp311                conda-forge       7kB
+  + rdma-core               65.0  h7b4f2e6_0             conda-forge       1MB
+  + readline                 8.3  hd6e31c0_1             conda-forge     349kB
+  + su2                    8.5.0  py311h97eaa5e_0        conda-forge      55MB
+  + tk                    8.6.13  noxft_h1df4ec4_4       conda-forge       4MB
+  + tzdata                 2026e  h5d301ff_0             conda-forge     119kB
+  + ucc                    1.8.0  h539fd1b_2             conda-forge      13MB
+  + ucx                   1.22.0  h6cc3e34_1             conda-forge       9MB
+  + zstd                   1.5.7  hb78ec9c_7             conda-forge     601kB
+
+  Summary:
+
+  Install: 49 packages
+
+  Total download: 151MB
+
+────────────────────────────────────────────────────────────────────────────────
+
+
+warning  libmamba Security Warning: This transaction includes executing package scripts (pre/post-link/unlink) if present. These scripts can contain arbitrary code. Please ensure you trust the package sources.
+
+Transaction starting
+Linking python_abi-3.11-9_cp311
+Linking mpi-1.0.1-openmpi
+Linking ca-certificates-2026.10.23-hbd8a1cb_0
+Linking tzdata-2026e-h5d301ff_0
+Linking libzlib-1.3.2-h25fd6f3_3
+Linking libgomp-16.2.0-he0feb66_7
+Linking zstd-1.5.7-hb78ec9c_7
+Linking _openmp_mutex-4.5-20_gnu
+Linking ld_impl_linux-64-2.46.1-default_hbd61a6d_103
+Linking libgcc-16.2.0-ha9f2e26_7
+Linking libiconv-1.18-h0cb94f2_3
+Linking libnsl-2.0.1-hb9d3cd8_1
+Linking libffi-3.7.0-h81df57d_1
+Linking libsqlite-3.54.1-h0737f62_101
+Linking liblzma-5.8.3-hb03c661_1
+Linking tk-8.6.13-noxft_h1df4ec4_4
+Linking ncurses-6.6-hdb14827_1
+Linking libexpat-2.9.0-hd2095e1_0
+Linking bzip2-1.0.8-hda65f42_10
+Linking openssl-3.6.5-h781a0a9_0
+Linking libcap-2.78-h084b8d7_1
+Linking libpython-3.11.18-ha57cdbe_0_cpython
+Linking libxcrypt-4.4.38-h280c20c_0
+Linking libuuid-2.42.4-hcfc3c73_0
+Linking libnl-3.11.0-hb03c661_1
+Linking libgfortran5-16.2.0-h6b99dfc_7
+Linking libstdcxx-16.2.0-h934c35e_7
+Linking libxml2-16-2.15.4-hbdfff7e_1
+Linking readline-8.3-hd6e31c0_1
+Linking libevent-2.1.12-h5348a74_2
+Linking libudev1-262.1-h26e0ef7_0
+Linking libsystemd0-262.1-h26e0ef7_0
+Linking libgfortran-16.2.0-h69a702a_7
+Linking libxml2-2.15.4-ha7a5771_1
+Linking python-3.11.18-h5f976f7_0_cpython
+Linking rdma-core-65.0-h7b4f2e6_0
+Linking libopenblas-0.3.34-pthreads_hf13c14d_2
+Linking libhwloc-2.13.0-default_he001693_1000
+Linking ucx-1.22.0-h6cc3e34_1
+warning  libmamba Executing post-link script for package 'ucx'.
+
+To enable CUDA support, UCX requires the CUDA Runtime library (libcudart).
+The library can be installed with the appropriate command below:
+
+* For CUDA 12, run:    conda install cuda-cudart cuda-version=12
+* For CUDA 13, run:    conda install cuda-cudart cuda-version=13
+
+If any of the packages you requested use CUDA then CUDA should already
+have been installed for you.
+
+
+Linking libfabric1-2.7.0-hf0f7150_0
+Linking libblas-3.11.0-11_h4a7cf45_openblas
+Linking libpmix-5.0.8-h31fc519_4
+Linking ucc-1.8.0-h539fd1b_2
+warning  libmamba Executing post-link script for package 'ucc'.
+setting libfabric environment variables for conda-build
+FI_PROVIDER=tcp
+
+To enable CUDA support, UCX requires the CUDA Runtime library (libcudart).
+The library can be installed with the appropriate command below:
+
+* For CUDA 12, run:    conda install cuda-cudart cuda-version=12
+* For CUDA 13, run:    conda install cuda-cudart cuda-version=13
+
+If any of the packages you requested use CUDA then CUDA should already
+have been installed for you.
+
+
+To enable CUDA support, please follow UCX's instruction above.
+
+To additionally enable NCCL support, run:    conda install nccl
+
+
+Linking libfabric-2.7.0-ha770c72_0
+Linking liblapack-3.11.0-11_h47877c9_openblas
+Linking openmpi-5.0.11-hee33aa4_0
+warning  libmamba Executing post-link script for package 'openmpi'.
+setting libfabric environment variables for conda-build
+FI_PROVIDER=tcp
+setting openmpi environment variables for conda-build
+
+To enable CUDA support, UCX requires the CUDA Runtime library (libcudart).
+The library can be installed with the appropriate command below:
+
+* For CUDA 12, run:    conda install cuda-cudart cuda-version=12
+* For CUDA 13, run:    conda install cuda-cudart cuda-version=13
+
+If any of the packages you requested use CUDA then CUDA should already
+have been installed for you.
+
+
+To enable CUDA support, please follow UCX's instruction above.
+
+To additionally enable NCCL support, run:    conda install nccl
+
+
+On Linux, Open MPI is built with CUDA awareness but it is disabled by default.
+To enable it, please set the environment variable
+OMPI_MCA_opal_cuda_support=true
+before launching your MPI processes.
+Equivalently, you can set the MCA parameter in the command line:
+mpiexec --mca opal_cuda_support 1 ...
+Note that you might also need to set UCX_MEMTYPE_CACHE=n for CUDA awareness via
+UCX. Please consult UCX documentation for further details.
+
+
+Linking lapack-3.11.0-10_netlib
+Linking mpi4py-4.1.2-py311hba6ca95_101
+Linking su2-8.5.0-py311h97eaa5e_0
+
+Transaction finished
+
+
+To activate this environment, use:
+
+    micromamba activate /hy-tmp/aero_su2
+
+Or to execute a single command in this environment, use:
+
+    micromamba run -p /hy-tmp/aero_su2 mycommand
+
