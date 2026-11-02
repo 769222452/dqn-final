@@ -40,3 +40,4 @@ for k = 1:numel(jobs)
     fid = fopen(sfile, 'w'); fprintf(fid, '%s', jsonencode(r)); fclose(fid);
     fprintf('FAMILY %s %s %.1fs\n', job.job_id, r.status, r.elapsed_s);
 end
+end
