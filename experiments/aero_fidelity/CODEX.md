@@ -71,6 +71,7 @@ bash experiments/aero_fidelity/run_decision.sh collect
 ```
 
 Check after cfd-mesh that each `mesh.su2` has three markers (body, base, farfield) and that `mesh_info.json` lists
-`base_surfaces: 1`; if a mesh differs from the version-4 cell count (FAM_MD6 coarse: 93 085), report it. Do not change any
+`base_surfaces` >= 1 (gmsh may split the planar base cap into more than one patch; every patch counted there lies in the
+plane x = x_max by construction, and all of them form the single marker `base`; FAM_MD4 medium has 2); if a mesh differs from the version-4 cell count (FAM_MD6 coarse: 93 085), report it. Do not change any
 setting. Send back `case.json`, `case.cfg`, `history.csv`, `su2.log` of every case, `decision.json/txt`, timings, and the
 convergence status, to a new branch `aero-family-v5-results-20261102`.
