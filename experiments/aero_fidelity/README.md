@@ -184,6 +184,46 @@ never from aerodynamic results):
   design AOA. This is a volume-constrained design-point family, not a one-variable sweep.
 - Not known in advance: whether a_x between the audited points stays VALID and reaches +-3 % at MD8.
 
+## 3e. Result of family version 4: the declared test is NOT met, and its data are compromised
+
+**Family selected** (version 4, 29/29 generated and audit-VALID): MD4 `pair_d+4_r0.5` a_x = 1.040 (volume -0.60 % from G42),
+MD6 `pair_d+2_r0.5` a_x = 1.025 (+0.89 %), MD8 `pair_d+2_r0.5` a_x = 0.985 (-0.02 %). All within +-3 %.
+**CFD:** 27 medium cases plus 2 grid-check cases (coarse, fine) = 29 cases, all met the frozen convergence rule
+(cfd-mesh 656 s, cfd-run 3077 s on 10 cores). Copies of the summary, decision and audit are in `results_family_v4/`.
+
+**Formal outcome of the declared criterion (section 3): premise NOT met, 0 of 3 CL targets.** The ideal switching gain is
+0 % for both Euler and the wedge model (MD6 best throughout in the filtered set).
+
+**This outcome cannot be read as a refutation of the premise, because the primary measurement fails basic checks:**
+1. 12 of 29 Euler cases have a NEGATIVE pressure drag (down to CDp = -0.0040). Steady inviscid supersonic flow without
+   thrust cannot have negative drag, so the Euler CD contains an error of the size of the physical drag (0.002-0.008).
+2. The equal-lift L/D values are therefore meaningless in places (+58, -80 at CL = 0.03, M8): they divide by a total CD
+   near zero or negative. Two total-CD entries after the quadratic fit are non-positive.
+3. Grid check (FAM_MD6, M6, alpha 4): CL 0.0354 / 0.0369 / 0.0381 (coarse / medium / fine), pressure CD -0.0038 /
+   +0.00007 / -0.0005. CL changes 3 %; CD changes sign.
+4. FAM_MD8 at M8 lacks the CL = 0.05 target (alpha range too small for it), so the filtered switching-gain statistic does not
+   cover all three members.
+
+**What the data say about the source of the error** (computed from the archived tables, not part of the declared test):
+- Euler minus wedge pressure drag is nearly independent of alpha for every (member, Mach) pair: standard deviation over
+  alpha = 0.0001 to 0.0003, while the offset itself is +0.0023 ... -0.0048.
+- The alpha-dependence of the drag agrees: increase of CDp from alpha 2 to 6 is Euler / wedge = 0.00902 / 0.00824 (MD4, M4),
+  0.00571 / 0.00603 (MD6, M6), 0.00320 / 0.00349 (MD8, M8), i.e. within 1-12 %. CL agrees within 0.001-0.007.
+- The offset scales like (open-base area / S_ref) times a pressure coefficient that grows with Mach (it divides to -0.04 at
+  M6 and -0.07 at M8 using the base-cap area of each member). A pressure on the closed base cap above the free-stream value
+  would produce exactly this; it is not physical for an aft-facing face and must come from how the open tail is closed and
+  meshed (the base cap is part of the monitored `body` marker).
+- This is a diagnosis from the integrated coefficients; the per-surface force split was not written, so it is NOT yet verified.
+
+**Consequence for the protocol.** The decision criterion was declared in terms of total Euler CD. Changing it now, after seeing
+that it is not met, would be a post-hoc change. The honest handling is:
+- the primary test stands as reported: not met, with its data-quality defect documented here;
+- a follow-up experiment (version 5 of the CFD stage, NOT a new geometry family) is declared before it is run: the same three
+  geometries and 27 + 2 cases, with the base cap as its own marker excluded from force monitoring so that CL and CD
+  are the skin forces only (the usual forebody convention; the base is not predicted by an Euler model), the old total minus the new skin
+  force giving the base term as a check of the diagnosis above. Its criteria are those of section 3 applied to the skin-only
+  forces, and its result is reported as exploratory, following a primary test whose measurement was flawed.
+
 ## 4. Known limits
 
 - Euler is inviscid: no viscous interaction, no boundary-layer displacement at the leading edge, no

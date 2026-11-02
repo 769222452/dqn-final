@@ -1,0 +1,114 @@
+{
+  "commit": "01589db3371acc0f542b4c9b1877db0b6221566d",
+  "source_branch": "aoa-fix",
+  "protocol_version": 4,
+  "amendment": 3,
+  "NP": 7,
+  "JOBS": 2,
+  "SLICES": 4,
+  "cpu_quota_cores": 10,
+  "family_counts": {
+    "GENERATED": 29
+  },
+  "family_wall_s": 80.34399999999732,
+  "failure_categories": {},
+  "check_wall_s": 215.0998636931181,
+  "check_exit_code": 0,
+  "selection_status": "SELECTED",
+  "audit_outcomes": {
+    "VALID": 29
+  },
+  "generated": 29,
+  "valid": 29,
+  "selected": {
+    "design_key": "per_mach",
+    "target_volume_m3": 1.018813633812261,
+    "max_volume_deviation": 0.008925663727964439,
+    "admissible": true,
+    "chosen": {
+      "4.0": "FAM4_MD4_pair_d+4_r0.5_ax1.0400",
+      "6.0": "FAM4_MD6_pair_d+2_r0.5_ax1.0250",
+      "8.0": "FAM4_MD8_pair_d+2_r0.5_ax0.9850"
+    },
+    "deviation_per_mach": {
+      "4.0": -0.006023182169068386,
+      "6.0": 0.008925663727964439,
+      "8.0": -0.00024170476995577506
+    },
+    "shock_offset_deg_per_mach": {
+      "4.0": 4.0,
+      "6.0": 2.0,
+      "8.0": 2.0
+    }
+  },
+  "target_volume_m3": 1.018813633812261,
+  "tests": "16 passed",
+  "upstream_verified_files": 203,
+  "source_modified": false,
+  "stages": {
+    "cfd-mesh": {
+      "stage": "cfd-mesh",
+      "status": "COMPLETED",
+      "commit": "01589db3371acc0f542b4c9b1877db0b6221566d",
+      "NP": 7,
+      "JOBS": 2,
+      "SLICES": 4,
+      "started_at": "2026-11-02T06:20:10.831508+00:00",
+      "command": [
+        "bash",
+        "experiments/aero_fidelity/run_decision.sh",
+        "cfd-mesh"
+      ],
+      "exit_code": 0,
+      "wall_s": 655.9232612997293,
+      "finished_at": "2026-11-02T06:31:06.755080+00:00"
+    },
+    "cfd-run": {
+      "stage": "cfd-run",
+      "status": "COMPLETED",
+      "commit": "01589db3371acc0f542b4c9b1877db0b6221566d",
+      "NP": 7,
+      "JOBS": 2,
+      "SLICES": 4,
+      "started_at": "2026-11-02T06:31:45.546847+00:00",
+      "command": [
+        "bash",
+        "experiments/aero_fidelity/run_decision.sh",
+        "cfd-run"
+      ],
+      "exit_code": 0,
+      "wall_s": 3076.834026351571,
+      "finished_at": "2026-11-02T07:23:02.381199+00:00",
+      "failed_cases": []
+    },
+    "collect": {
+      "stage": "collect",
+      "status": "COMPLETED",
+      "commit": "01589db3371acc0f542b4c9b1877db0b6221566d",
+      "NP": 7,
+      "JOBS": 2,
+      "SLICES": 4,
+      "started_at": "2026-11-02T07:30:06.050047+00:00",
+      "command": [
+        "bash",
+        "experiments/aero_fidelity/run_decision.sh",
+        "collect"
+      ],
+      "exit_code": 0,
+      "wall_s": 7.110188290476799,
+      "finished_at": "2026-11-02T07:30:13.160499+00:00"
+    }
+  },
+  "cfd_executed": true,
+  "cfd_case_count": 29,
+  "cfd_done_count": 29,
+  "decision_exists": true,
+  "convergence": {
+    "converged": 29,
+    "not_converged": [],
+    "cases_with_nonphysical_point_warning": 9,
+    "cases_with_nonphysical_reconstruction_warning": 28,
+    "warning_interpretation": "Literal SU2 warnings preserved; their impact is not established by Cauchy convergence. No new pass/fail criterion is imposed."
+  },
+  "packaged_at": "2026-11-02T07:32:34.893897+00:00"
+}
