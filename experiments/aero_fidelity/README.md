@@ -43,7 +43,7 @@ detachment and spillage at the inviscid level.
 - leading-edge and planform inputs fixed to those of G42 (c1 = c2 = 1.0331, d1 = 0.11607, design AOA −4°);
 - conical shock: a1 = a2 = b1 = b2 = asin(1/M_d) + δ, with one common δ ∈ {−3,…,+4}° for all members;
 - exit-deflection coefficient a_x ∈ {0.970, 0.985, 1.000, 1.015, 1.030}, used to match the volume.
-  Version 1: 120 generator calls; version 2 (§3b): 180; version 3 (§3c): 189.
+  Version 1: 120 generator calls; version 2 (§3b): 180; version 3 (§3c): 189; version 4 (§3d): 29.
 
 **Selection rule, version 1** (`family/check_family.py`; see §3b for the amendment): a member is valid if its surface is watertight with
 positive volume. A δ is admissible if all three design Machs have a valid member and the chosen members'
@@ -148,6 +148,41 @@ What the data show:
   of the range are possible, in which case the outcome is again `NO_ADMISSIBLE_FAMILY` and is reported as such.
 - Limitation to carry into any write-up: the family is a one-sided design (r = 0.5, lower-surface shock angle half
   the upper one), because that is where this generator produces audit-VALID members. Conclusions apply to that class.
+
+## 3d. Result of family version 3 and protocol amendment 3
+
+**Version 3 was run** (189 generator calls, evidence branch `aero-family-v3-results-20261102`, copy in
+`results_family_v3/`): 106 generated, all 106 audit-VALID, 83 failed at generation (74 invalid isentropic streamline,
+9 characteristic iteration cap). Outcome under the declared rule: **NO_ADMISSIBLE_FAMILY**, best volume deviations
+38.5 % (`pair_d+2`), 32.6 % (`pair_d+4`), 66.7 % (`pair_d+6`). Nothing was relaxed.
+
+Why: at one shock offset delta, a_x moves the volume only inside the window where the generator works, and the
+windows of the three design Machs do not intersect. Valid volume ranges [m3] (G42 = 1.019):
+
+| delta | MD4 | MD6 | MD8 | gap between MD8 minimum and MD4 maximum |
+|---|---|---|---|---|
+| +2 | 0.10-0.63 | 0.57-1.21 | 0.91-1.34 | 0.28 |
+| +4 | 0.39-1.18 | 1.05-1.59 | 1.35-1.71 | 0.17 |
+| +6 | 0.77-1.60 | 1.40-1.94 | 1.70-2.04 | 0.10 |
+
+so "one common delta for all three members" cannot reach a common volume near G42, which is a property of the
+requirement, not of the volume knob. The common delta was never part of the scientific question (design Mach is).
+
+**Amendment 3** (declared after the version-3 audit, before any CFD result; chosen from volumes and validity only,
+never from aerodynamic results):
+- Each design Mach gets its own shock offset: the weakest delta of the audited set {+2, +4, +6} whose valid a_x window
+  reaches G42's volume. From the version-3 audit: MD4 +4 deg, MD6 +2 deg, MD8 +2 deg. Shock angle pairs (upper/lower,
+  deg): MD4 24.6/12.3, MD6 15.5/7.7, MD8 12.2/6.1 (r = 0.5 as before).
+- a_x scanned finely around the match (`family_jobs.py --version 4`, 29 generator calls): MD4 1.020-1.060 (step 0.005),
+  MD6 1.000-1.040 (0.005), MD8 0.975-1.000 (0.0025). The closest version-3 members are MD4 -0.6 %, MD6 -1.9 %,
+  MD8 +3.4 % from G42's volume; MD8 needs the finer a_x.
+- Selection (`check_family.select_per_mach`): per design Mach, the VALID member closest to V* = 1.018814 m3; the family
+  is admissible only if all three are within +-3 %. Validity (frozen audit), tolerance and all decision criteria of
+  section 3 are unchanged.
+- Confound to state in any write-up: the three members differ in design Mach, in shock offset (+4, +2, +2 deg, i.e.
+  0.28, 0.21, 0.28 of the Mach angle) and slightly in a_x. They are equal in volume, planform inputs, length and
+  design AOA. This is a volume-constrained design-point family, not a one-variable sweep.
+- Not known in advance: whether a_x between the audited points stays VALID and reaches +-3 % at MD8.
 
 ## 4. Known limits
 

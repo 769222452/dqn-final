@@ -202,3 +202,36 @@ def test_selection_with_target_volume_and_unchanged_tolerance():
     skew = {'k': {4.: [(1.0, 1.5)], 6.: [(1.0, 1.5)], 8.: [(1.0, 1.0)]}}
     assert fam.select(_members(skew))[1] is None
     assert fam.select(_members(skew), target=1.5)[1] is None
+
+
+# ---------------------------------------------------------------------------------- family version 4 (amendment 3)
+def test_version_3_audit_shows_no_common_delta_can_reach_a_common_volume():
+    import json
+    a = json.loads((ROOT/'experiments/aero_fidelity/results_family_v3/family_audit.json').read_text())
+    assert a['status'] == 'NO_ADMISSIBLE_FAMILY' and all(not o['admissible'] for o in a['options'])
+    for o in a['options']:
+        r = o['valid_volume_range_per_mach']
+        assert max(v[0] for v in r.values()) > min(v[1] for v in r.values())      # the three ranges have no common point
+
+
+def test_version_4_jobs_follow_the_declared_per_mach_offsets():
+    v4 = fj.jobs(4)
+    assert len(v4) == 9+9+11 and len({j['job_id'] for j in v4}) == len(v4)
+    for j in v4:
+        a1, a2, b1, b2 = j['shock_angles_deg']
+        assert j['delta_deg'] == {4.: 4., 6.: 2., 8.: 2.}[j['Ma_design']]
+        assert a1 == a2 and b1 == b2 and b1/a1 == pytest.approx(.5)
+        assert (a1+b1)/2 == pytest.approx(fj.mach_angle_deg(j['Ma_design'])+j['delta_deg'])
+        assert j['selection'] == 'per_mach_closest_volume' and j['target_volume_m3'] == fj.TARGET_VOLUME_M3
+
+
+def test_per_mach_selection_is_closest_volume_within_the_unchanged_tolerance():
+    t = 1.0
+    rows = [dict(job_id=f'{M}_{ax}', Ma_design=M, a_x=ax, valid=True, volume_m3=v, delta_deg=2.)
+            for M, ax, v in ((4., 1., .99), (4., 1.1, 1.2), (6., 1., 1.02), (8., 1., 1.029), (8., 1.1, 1.2))]
+    options, best = fam.select_per_mach(rows, t)
+    assert best is not None and best['chosen'] == {'4.0': '4.0_1.0', '6.0': '6.0_1.0', '8.0': '8.0_1.0'}
+    assert best['max_volume_deviation'] == pytest.approx(.029)
+    rows[3]['volume_m3'] = 1.031                                              # 3.1 %: not admissible, not relaxed
+    assert fam.select_per_mach(rows, t)[1] is None
+    assert fam.select_per_mach([r for r in rows if r['Ma_design'] != 8.], t)[0][0]['reason'] == 'a design Mach has no valid member'

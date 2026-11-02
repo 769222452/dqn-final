@@ -21,6 +21,15 @@ about 35 % over that range. Version 3 re-generates exactly those three shock par
 a_x = 0.90, 0.91, ..., 1.10 (21 values) and matches the volume to the enclosed volume of G42 (TARGET_VOLUME_M3).
 
     python experiments/aero_fidelity/family/family_jobs.py --out runs/aero_fidelity/family --version 3
+
+Version 4 (protocol amendment 3, declared before any CFD result): version 3 produced 106 audit-VALID members but no
+common shock offset delta whose volume ranges at the three design Machs intersect (the valid volume ranges at
+delta = +2, +4, +6 miss each other by 28 %, 17 % and 10 % of G42's volume). The requirement that all three members
+share one delta is dropped: each design Mach gets the weakest shock offset in {+2, +4, +6} (the audited set) whose
+valid a_x window reaches G42's volume, which the version-3 audit gives as MD4: +4, MD6: +2, MD8: +2, with a_x scanned
+on a fine grid around the volume match (29 generator calls).
+
+    python experiments/aero_fidelity/family/family_jobs.py --out runs/aero_fidelity/family --version 4
 """
 import argparse
 import json
@@ -37,6 +46,10 @@ V2 = dict(deltas=(-2., 0., 2., 4., 6.), ratios=(0.5, 0.65, 0.8), ax=(0.97, 1.0, 
 # Version 3: the design keys with a VALID member at all three design Machs in the version-2 audit
 # (results_family_v2/family_audit.json; checked by tests/test_aero_fidelity.py), and the refined a_x scan.
 V3 = dict(deltas=(2., 4., 6.), ratio=0.5, ax=tuple(round(0.90+0.01*i, 2) for i in range(21)))
+# Version 4: shock offset per design Mach and fine a_x scan around the volume match (derived from volumes only).
+V4 = {4.: dict(delta=4., ax=tuple(round(1.02+.005*i, 4) for i in range(9))),
+      6.: dict(delta=2., ax=tuple(round(1.00+.005*i, 4) for i in range(9))),
+      8.: dict(delta=2., ax=tuple(round(.975+.0025*i, 4) for i in range(11)))}
 # Enclosed volume of G42 (data/geometry_subset/geometries/G42, scripts/cfd/make_su2_cases.closed_surface): equal payload volume.
 TARGET_VOLUME_M3 = 1.018813633812261
 
@@ -54,6 +67,14 @@ def jobs(version=2):
     out = []
     for M in DESIGN_MACHS:
         mu = mach_angle_deg(M)
+        if version == 4:
+            d, r = V4[M]['delta'], 0.5
+            a = 2*(mu+d)/(1+r)
+            for ax in V4[M]['ax']:
+                out.append(_job(f'FAM4_MD{M:g}_pair_d{d:+g}_r{r:g}_ax{ax:.4f}', M, d, (a, a, r*a, r*a), ax,
+                                design='pair', ratio=r, design_key='pair_d%+g_r%g' % (d, r), target_volume_m3=TARGET_VOLUME_M3,
+                                selection='per_mach_closest_volume'))
+            continue
         if version == 3:
             r = V3['ratio']
             for d in V3['deltas']:
@@ -86,7 +107,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--out', required=True)
     ap.add_argument('--slices', type=int, default=4, help='parallel MATLAB processes')
-    ap.add_argument('--version', type=int, default=3, choices=(1, 2, 3))
+    ap.add_argument('--version', type=int, default=4, choices=(1, 2, 3, 4))
     a = ap.parse_args(argv)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)

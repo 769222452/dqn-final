@@ -18,6 +18,9 @@ Selection rule (declared before any CFD result; protocol amendment 1 only enlarg
    candidates the smallest maximum deviation wins (ties: the key that sorts first).
 Protocol amendment 2 (version-3 jobs carry `target_volume_m3`, the enclosed volume of G42): V* is that target
 instead of the median in step 2; steps 1 and 3, the tolerance and the frozen audit are unchanged.
+Protocol amendment 3 (version-4 jobs carry selection = per_mach_closest_volume): the common design key of step 1 is
+dropped; for each design Mach the valid member whose volume is closest to the target is taken, and the family is
+admissible only if every chosen member is within the same +-3 % of the target. Validity and tolerance are unchanged.
 If no candidate is admissible the script stops with status NO_ADMISSIBLE_FAMILY; the rule is not relaxed.
 """
 import argparse
@@ -106,6 +109,21 @@ def select(rows, machs=(4., 6., 8.), tol=TOL, target=None):
     return options, best
 
 
+def select_per_mach(rows, target, machs=(4., 6., 8.), tol=TOL):
+    """Amendment 3: per design Mach the valid member closest to the target volume; admissible if all within tol."""
+    per = {M: [r for r in rows if r['Ma_design'] == M and r['valid']] for M in machs}
+    if not all(per.values()):
+        return [dict(design_key='per_mach', admissible=False, reason='a design Mach has no valid member',
+                     valid_per_mach={str(M): len(v) for M, v in per.items()})], None
+    chosen = {M: min(v, key=lambda r: (abs(r['volume_m3']/target-1), r['job_id'])) for M, v in per.items()}
+    dev = max(abs(c['volume_m3']/target-1) for c in chosen.values())
+    option = dict(design_key='per_mach', target_volume_m3=float(target), max_volume_deviation=float(dev),
+                  admissible=bool(dev <= tol), chosen={str(M): c['job_id'] for M, c in chosen.items()},
+                  deviation_per_mach={str(M): float(c['volume_m3']/target-1) for M, c in chosen.items()},
+                  shock_offset_deg_per_mach={str(M): c['delta_deg'] for M, c in chosen.items()})
+    return [option], (option if option['admissible'] else None)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('family')
@@ -120,7 +138,13 @@ def main(argv=None):
         rows = pool.map(audit_one, [(j, str(fam)) for j in jobs], chunksize=1)
     targets = {j.get('target_volume_m3') for j in jobs}
     assert len(targets) == 1, 'jobs of one family must share one target volume (or none)'
-    options, best = select(rows, target=targets.pop())
+    target = targets.pop()
+    modes = {j.get('selection') for j in jobs}
+    assert len(modes) == 1, 'jobs of one family must share one selection mode'
+    if modes.pop() == 'per_mach_closest_volume':
+        options, best = select_per_mach(rows, target)
+    else:
+        options, best = select(rows, target=target)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     reasons = {}
