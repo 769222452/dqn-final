@@ -258,3 +258,16 @@ def test_base_marker_mesh_has_a_separate_base_patch(tmp_path):
     assert 'MARKER_TAG= base' in mesh and 'MARKER_TAG= body' in mesh and 'NMARK= 3' in mesh
     info = __import__('json').loads((tmp_path/'G42'/'coarse'/'mesh_info.json').read_text())
     assert info['base_surfaces'] >= 1 and info['skin_surfaces'] >= 1
+
+
+def test_library_stage_a_job_list_follows_the_recipe():
+    sys.path.insert(0, str(ROOT/'experiments'/'aero_fidelity'/'library'))
+    import library_jobs as lj
+    js = lj.jobs()
+    assert len(js) == 9*6*5 and len({j['job_id'] for j in js}) == len(js)
+    assert sorted({j['Ma_design'] for j in js}) == [4.+.5*i for i in range(9)]
+    for j in js:
+        a1, a2, b1, b2 = j['shock_angles_deg']
+        assert a1 == a2 and b1 == b2 and b1/a1 == pytest.approx(.5)
+        assert (a1+b1)/2 == pytest.approx(fj.mach_angle_deg(j['Ma_design'])+j['delta_deg'])
+        assert j['inputs10'][0] == j['Ma_design'] and j['inputs10'][-1] == j['a_x']
