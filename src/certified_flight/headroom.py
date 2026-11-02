@@ -274,12 +274,13 @@ class LoadEstimator:
         self.den = np.array([prior, prior])
 
     def add(self, x0, x1, c, k_rho_measured):
+        """One step of data; every term is evaluated at the mid-point state (the finite differences are centred)."""
         t = self.t
-        _, q = t.eval(x0, c, 1., 1., k_rho_measured)                  # nominal CL, CD at the measured density
+        xm = .5*(x0+x1)
+        _, q = t.eval(xm, c, 1., 1., k_rho_measured)                  # nominal CL, CD at the measured density
         q_dyn, cl, cd = q[0], q[4], q[5]
-        h, v, g = x0[0], x0[1], x0[2]
-        grav = t.model.atm.gravity(h, spherical=True)
-        grav = float(grav)
+        h, v, g = xm[0], xm[1], xm[2]
+        grav = float(t.model.atm.gravity(h, spherical=True))
         r_e = t.model.atm.cfg.R_earth+h
         dt = t.dt
         l_hat = t.m*v*(x1[2]-x0[2])+t.m*(grav-v*v/r_e)*np.cos(g)*dt
