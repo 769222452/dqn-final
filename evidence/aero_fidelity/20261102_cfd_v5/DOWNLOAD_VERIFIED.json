@@ -1,0 +1,1181 @@
+{
+  "verified_at": "2026-11-02T17:14:08.562599+08:00",
+  "zip_sha256": "03a698fdcec49cf082191d8ae56a2c9872cc05f673df9e18943dde87993bb2c1",
+  "zip_bytes": 1456093,
+  "verified_files": 202,
+  "source": {
+    "zip": "/hy-tmp/aero_operations_v5_20261102/aero_family_v5_dc39a7f_results.zip",
+    "sha256": "03a698fdcec49cf082191d8ae56a2c9872cc05f673df9e18943dde87993bb2c1",
+    "bytes": 1456093,
+    "manifest_files": 202,
+    "summary": {
+      "commit": "dc39a7f9e7c3d78f8bc66c660866907759362c24",
+      "source_branch": "aoa-fix",
+      "cfd_stage_version": 5,
+      "classification": "exploratory",
+      "NP": 7,
+      "JOBS": 2,
+      "BASE_MARKER": 1,
+      "cpu_quota_cores": 10,
+      "family_reused_from": "/hy-tmp/dqn-aero-v4-01589db/runs/aero_fidelity_v4/family_selected",
+      "family_rerun": false,
+      "family_copy_verified": {
+        "source": "/hy-tmp/dqn-aero-v4-01589db/runs/aero_fidelity_v4/family_selected",
+        "destination": "runs/aero_fidelity_v5/family_selected",
+        "sha256": {
+          "FAM_MD4/native_geometry.mat": "e5354c33bd1d0254cf405476208d212a42acd901ff28d06103b8cd18dde512f9",
+          "FAM_MD6/native_geometry.mat": "d0c1cd5038ea271bd8a4f2b4d06721f4c6d75825527519bd0455c5e9311667dd",
+          "FAM_MD8/native_geometry.mat": "77a5bdce37ef2331472b74841541d3a3dd3ae753bb9762a441b72d0349a730fa",
+          "family_audit.json": "86f0d3dd53766525c8ebceed5847c8b3343c5ec016218cc1a9206a4588a6c3b1",
+          "select.json": "d8cc78c78eef78e01297649a82b2ca3fa340e587139be55b4b697d30eb38317d"
+        },
+        "all_identical": true,
+        "mat_count": 3,
+        "copied_at": "2026-11-02T08:00:02.290025+00:00"
+      },
+      "tests": "19 passed",
+      "upstream_verified_files": 203,
+      "source_modified": false,
+      "stages": {
+        "cfd-mesh": {
+          "stage": "cfd-mesh",
+          "status": "COMPLETED",
+          "commit": "dc39a7f9e7c3d78f8bc66c660866907759362c24",
+          "NP": 7,
+          "JOBS": 2,
+          "BASE_MARKER": 1,
+          "started_at": "2026-11-02T08:00:24.936152+00:00",
+          "command": [
+            "bash",
+            "experiments/aero_fidelity/run_decision.sh",
+            "cfd-mesh"
+          ],
+          "exit_code": 0,
+          "wall_s": 662.512533634901,
+          "finished_at": "2026-11-02T08:11:27.449047+00:00"
+        },
+        "cfd-run": {
+          "stage": "cfd-run",
+          "status": "COMPLETED",
+          "commit": "dc39a7f9e7c3d78f8bc66c660866907759362c24",
+          "NP": 7,
+          "JOBS": 2,
+          "BASE_MARKER": 1,
+          "started_at": "2026-11-02T08:13:11.433029+00:00",
+          "command": [
+            "bash",
+            "experiments/aero_fidelity/run_decision.sh",
+            "cfd-run"
+          ],
+          "exit_code": 0,
+          "wall_s": 2750.911030367017,
+          "finished_at": "2026-11-02T08:59:02.344369+00:00",
+          "failed_cases": []
+        },
+        "collect": {
+          "stage": "collect",
+          "status": "COMPLETED",
+          "commit": "dc39a7f9e7c3d78f8bc66c660866907759362c24",
+          "NP": 7,
+          "JOBS": 2,
+          "BASE_MARKER": 1,
+          "started_at": "2026-11-02T09:12:50.152336+00:00",
+          "command": [
+            "bash",
+            "experiments/aero_fidelity/run_decision.sh",
+            "collect"
+          ],
+          "exit_code": 0,
+          "wall_s": 6.779040083289146,
+          "finished_at": "2026-11-02T09:12:56.931688+00:00"
+        }
+      },
+      "mesh_verification": {
+        "mesh_count": 5,
+        "case_count": 29,
+        "markers_valid": true,
+        "all_base_surfaces_are_one": false,
+        "accepted_deviation": {
+          "accepted_by_user": true,
+          "date": "2026-11-02",
+          "path": "FAM_MD4/medium/mesh.su2",
+          "expected_base_surfaces": 1,
+          "actual_base_surfaces": 2,
+          "answer": "接受原始输出，继续 CFD（推荐）",
+          "scope": "Continue the frozen CFD experiment without modifying source, settings or generated mesh. Both elementary surfaces form one connected planar base and share one physical base marker.",
+          "evidence": "base_review.json"
+        },
+        "tetrahedra_all_identical": true,
+        "interiors_all_identical": true,
+        "meshes": [
+          {
+            "path": "FAM_MD4/medium/mesh.su2",
+            "v5": {
+              "markers": [
+                "body",
+                "base",
+                "farfield"
+              ],
+              "nmark": 3,
+              "elements": 347599,
+              "tetrahedra": 347599,
+              "element_types": {
+                "10": 347599
+              },
+              "interior_sha256": "e34ce114fa3753222c1e317ef4ca7dff1c7af9a6e62619f3134caf1608205aec",
+              "mesh_sha256": "b4bcb6d241c00ab28df1c4057ced54496d67e1bbb25db592a957f0bd7ea590bf"
+            },
+            "v4": {
+              "markers": [
+                "body",
+                "farfield"
+              ],
+              "nmark": 2,
+              "elements": 347599,
+              "tetrahedra": 347599,
+              "element_types": {
+                "10": 347599
+              },
+              "interior_sha256": "e34ce114fa3753222c1e317ef4ca7dff1c7af9a6e62619f3134caf1608205aec",
+              "mesh_sha256": "9fa6e54973c6cacbe720664d374ec33d69296a9fa1c64e1d919ad296585a5c5a"
+            },
+            "mesh_info": {
+              "cells": 347599,
+              "edge_scale": 1.0,
+              "algorithm": 10,
+              "remesh_surface": true,
+              "base_surfaces": 2,
+              "skin_surfaces": 4
+            },
+            "base_surfaces_is_one": false,
+            "accepted_exception": true,
+            "markers_valid": true,
+            "tetrahedra_identical": true,
+            "interior_identical": true
+          },
+          {
+            "path": "FAM_MD6/coarse/mesh.su2",
+            "v5": {
+              "markers": [
+                "body",
+                "base",
+                "farfield"
+              ],
+              "nmark": 3,
+              "elements": 93085,
+              "tetrahedra": 93085,
+              "element_types": {
+                "10": 93085
+              },
+              "interior_sha256": "246aad75b95cb21423075f5f57b9abf1816a66a4eea5250c7224f84f2b19267d",
+              "mesh_sha256": "ccde2bfc898c718112127878f6184f1e70e6f9f9a1fb42a48e071fc5aacde88a"
+            },
+            "v4": {
+              "markers": [
+                "body",
+                "farfield"
+              ],
+              "nmark": 2,
+              "elements": 93085,
+              "tetrahedra": 93085,
+              "element_types": {
+                "10": 93085
+              },
+              "interior_sha256": "246aad75b95cb21423075f5f57b9abf1816a66a4eea5250c7224f84f2b19267d",
+              "mesh_sha256": "f38c4d313e1b55499281ba02cc66740d624796ce9d7da03fbeb2a3bbcbcce1d1"
+            },
+            "mesh_info": {
+              "cells": 93085,
+              "edge_scale": 1.0,
+              "algorithm": 10,
+              "remesh_surface": true,
+              "base_surfaces": 1,
+              "skin_surfaces": 4
+            },
+            "base_surfaces_is_one": true,
+            "accepted_exception": false,
+            "markers_valid": true,
+            "tetrahedra_identical": true,
+            "interior_identical": true
+          },
+          {
+            "path": "FAM_MD6/fine/mesh.su2",
+            "v5": {
+              "markers": [
+                "body",
+                "base",
+                "farfield"
+              ],
+              "nmark": 3,
+              "elements": 1012692,
+              "tetrahedra": 1012692,
+              "element_types": {
+                "10": 1012692
+              },
+              "interior_sha256": "dac7fd8318b80e9ea19d5b5252a4e71f59153f10be04b77581063b138309f02a",
+              "mesh_sha256": "4b3840410c659fa2af3bfce91dc0f4f676d25ba75751b63f293a5eda1ce44668"
+            },
+            "v4": {
+              "markers": [
+                "body",
+                "farfield"
+              ],
+              "nmark": 2,
+              "elements": 1012692,
+              "tetrahedra": 1012692,
+              "element_types": {
+                "10": 1012692
+              },
+              "interior_sha256": "dac7fd8318b80e9ea19d5b5252a4e71f59153f10be04b77581063b138309f02a",
+              "mesh_sha256": "6f014e6af71348a66f1bb4af7e4b8427540d6c35e90ffbc0e526f3ba1c7574a2"
+            },
+            "mesh_info": {
+              "cells": 1012692,
+              "edge_scale": 3.0,
+              "algorithm": 10,
+              "remesh_surface": true,
+              "base_surfaces": 1,
+              "skin_surfaces": 4
+            },
+            "base_surfaces_is_one": true,
+            "accepted_exception": false,
+            "markers_valid": true,
+            "tetrahedra_identical": true,
+            "interior_identical": true
+          },
+          {
+            "path": "FAM_MD6/medium/mesh.su2",
+            "v5": {
+              "markers": [
+                "body",
+                "base",
+                "farfield"
+              ],
+              "nmark": 3,
+              "elements": 284213,
+              "tetrahedra": 284213,
+              "element_types": {
+                "10": 284213
+              },
+              "interior_sha256": "6a246ffbc4f5c32da500f44f60829f522c44735134ab276bef6d2f033cb3b444",
+              "mesh_sha256": "5be44bf92a3197da73f2219420a091d040199610a68055f8d6c3b97c249a21ab"
+            },
+            "v4": {
+              "markers": [
+                "body",
+                "farfield"
+              ],
+              "nmark": 2,
+              "elements": 284213,
+              "tetrahedra": 284213,
+              "element_types": {
+                "10": 284213
+              },
+              "interior_sha256": "6a246ffbc4f5c32da500f44f60829f522c44735134ab276bef6d2f033cb3b444",
+              "mesh_sha256": "60190dc7825796185d4c923a0b64827da34237d96eb0ec7edc891132fce7051d"
+            },
+            "mesh_info": {
+              "cells": 284213,
+              "edge_scale": 1.5,
+              "algorithm": 10,
+              "remesh_surface": true,
+              "base_surfaces": 1,
+              "skin_surfaces": 4
+            },
+            "base_surfaces_is_one": true,
+            "accepted_exception": false,
+            "markers_valid": true,
+            "tetrahedra_identical": true,
+            "interior_identical": true
+          },
+          {
+            "path": "FAM_MD8/medium/mesh.su2",
+            "v5": {
+              "markers": [
+                "body",
+                "base",
+                "farfield"
+              ],
+              "nmark": 3,
+              "elements": 257932,
+              "tetrahedra": 257932,
+              "element_types": {
+                "10": 257932
+              },
+              "interior_sha256": "0da5fddadbe0d9a8bd87836ec2d14a8f11cdbddd51824fb2757eb964b6628dad",
+              "mesh_sha256": "c0109fbaacc91b93a3595ee704714809e3a61ab5328aac3ce47cb25ac3ad84e9"
+            },
+            "v4": {
+              "markers": [
+                "body",
+                "farfield"
+              ],
+              "nmark": 2,
+              "elements": 257932,
+              "tetrahedra": 257932,
+              "element_types": {
+                "10": 257932
+              },
+              "interior_sha256": "0da5fddadbe0d9a8bd87836ec2d14a8f11cdbddd51824fb2757eb964b6628dad",
+              "mesh_sha256": "4fc289a0ed2e0bc895a3bf211e2985fc6afbd91bd428878741df55db28c53254"
+            },
+            "mesh_info": {
+              "cells": 257932,
+              "edge_scale": 2.0,
+              "algorithm": 10,
+              "remesh_surface": true,
+              "base_surfaces": 1,
+              "skin_surfaces": 4
+            },
+            "base_surfaces_is_one": true,
+            "accepted_exception": false,
+            "markers_valid": true,
+            "tetrahedra_identical": true,
+            "interior_identical": true
+          }
+        ],
+        "case_settings": [
+          {
+            "case_id": "FAM_MD4/medium/M4_a2",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD4/medium/M4_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD4/medium/M4_a6",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD4/medium/M6_a2",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD4/medium/M6_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD4/medium/M6_a6",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD4/medium/M8_a2",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD4/medium/M8_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD4/medium/M8_a6",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/medium/M4_a2",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/medium/M4_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/medium/M4_a6",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/medium/M6_a2",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/medium/M6_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/medium/M6_a6",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/medium/M8_a2",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/medium/M8_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/medium/M8_a6",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/coarse/M6_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD6/fine/M6_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD8/medium/M4_a2",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD8/medium/M4_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD8/medium/M4_a6",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD8/medium/M6_a2",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD8/medium/M6_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD8/medium/M6_a6",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD8/medium/M8_a2",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD8/medium/M8_a4",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          },
+          {
+            "case_id": "FAM_MD8/medium/M8_a6",
+            "cfg_identical_except_two_marker_lines": true,
+            "physical_inputs_identical": true
+          }
+        ]
+      },
+      "cfd_case_count": 29,
+      "cfd_done_count": 29,
+      "convergence": {
+        "converged": 29,
+        "not_converged": [],
+        "cases_with_nonphysical_point_warning": 9,
+        "cases_with_nonphysical_reconstruction_warning": 26
+      },
+      "decision": {
+        "per_condition": {
+          "0.03": {
+            "met": false,
+            "at_flight_mach": {
+              "4.0": {
+                "best": "FAM_MD8",
+                "expected": "FAM_MD4",
+                "best_is_expected": false,
+                "lead_over_worst": 0.6340949889379475,
+                "LD": {
+                  "FAM_MD4": 4.650020517203619,
+                  "FAM_MD6": 5.849114311761248,
+                  "FAM_MD8": 7.598575225621077
+                }
+              },
+              "8.0": {
+                "best": "FAM_MD8",
+                "expected": "FAM_MD8",
+                "best_is_expected": true,
+                "lead_over_worst": 0.4951213672764647,
+                "LD": {
+                  "FAM_MD4": 4.599223255413209,
+                  "FAM_MD6": 5.532842198631211,
+                  "FAM_MD8": 6.87639696204311
+                }
+              }
+            }
+          },
+          "0.04": {
+            "met": false,
+            "at_flight_mach": {
+              "4.0": {
+                "best": "FAM_MD8",
+                "expected": "FAM_MD4",
+                "best_is_expected": false,
+                "lead_over_worst": 0.5354760007794448,
+                "LD": {
+                  "FAM_MD4": 5.487759297299135,
+                  "FAM_MD6": 6.777822257702824,
+                  "FAM_MD8": 8.426322699057092
+                }
+              },
+              "8.0": {
+                "best": "FAM_MD8",
+                "expected": "FAM_MD8",
+                "best_is_expected": true,
+                "lead_over_worst": 0.3968389963116543,
+                "LD": {
+                  "FAM_MD4": 4.996354187101682,
+                  "FAM_MD6": 5.903454887333679,
+                  "FAM_MD8": 6.979102367928645
+                }
+              }
+            }
+          },
+          "0.05": {
+            "met": false,
+            "at_flight_mach": {
+              "4.0": {
+                "best": "FAM_MD8",
+                "expected": "FAM_MD4",
+                "best_is_expected": false,
+                "lead_over_worst": 0.44332828866713236,
+                "LD": {
+                  "FAM_MD4": 6.006269415015046,
+                  "FAM_MD6": 7.270034607492944,
+                  "FAM_MD8": 8.669018556047405
+                }
+              },
+              "8.0": null
+            }
+          }
+        },
+        "premise_holds": false,
+        "targets_met": 0
+      },
+      "diagnostics": {
+        "protocol": "README 3f; exploratory, not a replacement of the primary v4 result",
+        "D1": {
+          "groups": [
+            {
+              "geometry": "FAM_MD4",
+              "mach": 4.0,
+              "alpha_count": 3,
+              "base_mean": 0.0018329838886666666,
+              "base_std_population": 0.0001524108963896494,
+              "all_base_terms_negative": false,
+              "std_below_0_0003": true,
+              "mean_offset_difference": -0.00044090675720345664,
+              "abs_mean_offset_difference_below_0_0005": true,
+              "max_abs_pointwise_offset_difference": 0.0010299199360032166,
+              "all_pointwise_differences_below_0_0005": false
+            },
+            {
+              "geometry": "FAM_MD4",
+              "mach": 6.0,
+              "alpha_count": 3,
+              "base_mean": -0.0025223492355,
+              "base_std_population": 0.0002513808855077042,
+              "all_base_terms_negative": true,
+              "std_below_0_0003": true,
+              "mean_offset_difference": -0.0004613375993409239,
+              "abs_mean_offset_difference_below_0_0005": true,
+              "max_abs_pointwise_offset_difference": 0.0009701688779772798,
+              "all_pointwise_differences_below_0_0005": false
+            },
+            {
+              "geometry": "FAM_MD4",
+              "mach": 8.0,
+              "alpha_count": 3,
+              "base_mean": -0.004219710059066666,
+              "base_std_population": 0.00031415741081650887,
+              "all_base_terms_negative": true,
+              "std_below_0_0003": false,
+              "mean_offset_difference": -0.00047661663568387204,
+              "abs_mean_offset_difference_below_0_0005": true,
+              "max_abs_pointwise_offset_difference": 0.0009747631018743588,
+              "all_pointwise_differences_below_0_0005": false
+            },
+            {
+              "geometry": "FAM_MD6",
+              "mach": 4.0,
+              "alpha_count": 3,
+              "base_mean": 0.0005073640199999997,
+              "base_std_population": 0.0001293494587886377,
+              "all_base_terms_negative": false,
+              "std_below_0_0003": true,
+              "mean_offset_difference": 0.0003230832145911064,
+              "abs_mean_offset_difference_below_0_0005": true,
+              "max_abs_pointwise_offset_difference": 0.00042162933863800454,
+              "all_pointwise_differences_below_0_0005": true
+            },
+            {
+              "geometry": "FAM_MD6",
+              "mach": 6.0,
+              "alpha_count": 3,
+              "base_mean": -0.00354821281201,
+              "base_std_population": 0.0002493370619114448,
+              "all_base_terms_negative": true,
+              "std_below_0_0003": true,
+              "mean_offset_difference": -7.020579445099614e-05,
+              "abs_mean_offset_difference_below_0_0005": true,
+              "max_abs_pointwise_offset_difference": 0.00021016145503557036,
+              "all_pointwise_differences_below_0_0005": true
+            },
+            {
+              "geometry": "FAM_MD6",
+              "mach": 8.0,
+              "alpha_count": 3,
+              "base_mean": -0.005026898625000001,
+              "base_std_population": 0.0003723073813983755,
+              "all_base_terms_negative": true,
+              "std_below_0_0003": false,
+              "mean_offset_difference": -0.00020011591722450336,
+              "abs_mean_offset_difference_below_0_0005": true,
+              "max_abs_pointwise_offset_difference": 0.0003980653655320677,
+              "all_pointwise_differences_below_0_0005": true
+            },
+            {
+              "geometry": "FAM_MD8",
+              "mach": 4.0,
+              "alpha_count": 3,
+              "base_mean": -0.0018261642978666666,
+              "base_std_population": 4.1912187865180214e-05,
+              "all_base_terms_negative": true,
+              "std_below_0_0003": true,
+              "mean_offset_difference": 0.000638371573342123,
+              "abs_mean_offset_difference_below_0_0005": false,
+              "max_abs_pointwise_offset_difference": 0.0009988373611828456,
+              "all_pointwise_differences_below_0_0005": false
+            },
+            {
+              "geometry": "FAM_MD8",
+              "mach": 6.0,
+              "alpha_count": 3,
+              "base_mean": -0.004160721187033333,
+              "base_std_population": 0.00010649476015076559,
+              "all_base_terms_negative": true,
+              "std_below_0_0003": true,
+              "mean_offset_difference": 0.00016806623022508146,
+              "abs_mean_offset_difference_below_0_0005": true,
+              "max_abs_pointwise_offset_difference": 0.00022283346743755,
+              "all_pointwise_differences_below_0_0005": true
+            },
+            {
+              "geometry": "FAM_MD8",
+              "mach": 8.0,
+              "alpha_count": 3,
+              "base_mean": -0.004750236605433333,
+              "base_std_population": 0.00013862680199249895,
+              "all_base_terms_negative": true,
+              "std_below_0_0003": true,
+              "mean_offset_difference": -6.825683211116387e-06,
+              "abs_mean_offset_difference_below_0_0005": true,
+              "max_abs_pointwise_offset_difference": 3.695036670199343e-05,
+              "all_pointwise_differences_below_0_0005": true
+            }
+          ],
+          "per_case": [
+            {
+              "geometry": "FAM_MD4",
+              "level": "medium",
+              "mach": 4.0,
+              "alpha_deg": 2.0,
+              "v4_total_CD": 0.005363988857,
+              "v5_skin_CD": 0.003340949996,
+              "v4_euler_minus_wedge": 0.0019036905483072884,
+              "base_term": 0.0020230388609999996,
+              "base_minus_prior_offset": 0.00011934831269271116
+            },
+            {
+              "geometry": "FAM_MD4",
+              "level": "medium",
+              "mach": 4.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": 0.008421239071,
+              "v5_skin_CD": 0.006595231816,
+              "v4_euler_minus_wedge": 0.002238155903299864,
+              "base_term": 0.0018260072549999996,
+              "base_minus_prior_offset": -0.0004121486482998645
+            },
+            {
+              "geometry": "FAM_MD4",
+              "level": "medium",
+              "mach": 4.0,
+              "alpha_deg": 6.0,
+              "v4_total_CD": 0.01438209734,
+              "v5_skin_CD": 0.01273219179,
+              "v4_euler_minus_wedge": 0.002679825486003217,
+              "base_term": 0.0016499055500000005,
+              "base_minus_prior_offset": -0.0010299199360032166
+            },
+            {
+              "geometry": "FAM_MD4",
+              "level": "medium",
+              "mach": 6.0,
+              "alpha_deg": 2.0,
+              "v4_total_CD": 0.0003194349585,
+              "v5_skin_CD": 0.002537306247,
+              "v4_euler_minus_wedge": -0.002207615789727152,
+              "base_term": -0.0022178712884999997,
+              "base_minus_prior_offset": -1.025549877284749e-05
+            },
+            {
+              "geometry": "FAM_MD4",
+              "level": "medium",
+              "mach": 6.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": 0.002547948048,
+              "v5_skin_CD": 0.005063607313,
+              "v4_euler_minus_wedge": -0.002112070843727356,
+              "base_term": -0.002515659265,
+              "base_minus_prior_offset": -0.00040358842127264424
+            },
+            {
+              "geometry": "FAM_MD4",
+              "level": "medium",
+              "mach": 6.0,
+              "alpha_deg": 6.0,
+              "v4_total_CD": 0.007086129232,
+              "v5_skin_CD": 0.009919646385,
+              "v4_euler_minus_wedge": -0.0018633482750227198,
+              "base_term": -0.0028335171529999996,
+              "base_minus_prior_offset": -0.0009701688779772798
+            },
+            {
+              "geometry": "FAM_MD4",
+              "level": "medium",
+              "mach": 8.0,
+              "alpha_deg": 2.0,
+              "v4_total_CD": -0.001682561758,
+              "v5_skin_CD": 0.002145390977,
+              "v4_euler_minus_wedge": -0.003776983029250765,
+              "base_term": -0.003827952735,
+              "base_minus_prior_offset": -5.0969705749235195e-05
+            },
+            {
+              "geometry": "FAM_MD4",
+              "level": "medium",
+              "mach": 8.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": 0.0001388459188,
+              "v5_skin_CD": 0.004372949193,
+              "v4_euler_minus_wedge": -0.0038299861747719778,
+              "base_term": -0.0042341032742,
+              "base_minus_prior_offset": -0.0004041170994280221
+            },
+            {
+              "geometry": "FAM_MD4",
+              "level": "medium",
+              "mach": 8.0,
+              "alpha_deg": 6.0,
+              "v4_total_CD": 0.004093404983,
+              "v5_skin_CD": 0.008690479151,
+              "v4_euler_minus_wedge": -0.003622311066125641,
+              "base_term": -0.004597074168,
+              "base_minus_prior_offset": -0.0009747631018743588
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "coarse",
+              "mach": 6.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": -0.003771778583,
+              "v5_skin_CD": 0.003624810003,
+              "v4_euler_minus_wedge": -0.007332553352782094,
+              "base_term": -0.007396588586,
+              "base_minus_prior_offset": -6.40352332179064e-05
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "fine",
+              "mach": 6.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": -0.0004932206681,
+              "v5_skin_CD": 0.003709471671,
+              "v4_euler_minus_wedge": -0.004053995437882093,
+              "base_term": -0.0042026923391,
+              "base_minus_prior_offset": -0.00014869690121790697
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "medium",
+              "mach": 4.0,
+              "alpha_deg": 2.0,
+              "v4_total_CD": 0.002784771265,
+              "v5_skin_CD": 0.002109546412,
+              "v4_euler_minus_wedge": 0.0003487763584002217,
+              "base_term": 0.0006752248529999999,
+              "base_minus_prior_offset": 0.00032644849459977825
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "medium",
+              "mach": 4.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": 0.005115695797,
+              "v5_skin_CD": 0.004629302053,
+              "v4_euler_minus_wedge": 0.0002652219334644632,
+              "base_term": 0.0004863937439999995,
+              "base_minus_prior_offset": 0.0002211718105355363
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "medium",
+              "mach": 4.0,
+              "alpha_deg": 6.0,
+              "v4_total_CD": 0.01026873222,
+              "v5_skin_CD": 0.009908258757,
+              "v4_euler_minus_wedge": -6.115587563800505e-05,
+              "base_term": 0.0003604734629999995,
+              "base_minus_prior_offset": 0.00042162933863800454
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "medium",
+              "mach": 6.0,
+              "alpha_deg": 2.0,
+              "v4_total_CD": -0.001595499322,
+              "v5_skin_CD": 0.001637718553,
+              "v4_euler_minus_wedge": -0.003314949609900489,
+              "base_term": -0.003233217875,
+              "base_minus_prior_offset": 8.17317349004888e-05
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "medium",
+              "mach": 6.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": 7.450045997e-05,
+              "v5_skin_CD": 0.003642962433,
+              "v4_euler_minus_wedge": -0.0034862743098120932,
+              "base_term": -0.00356846197303,
+              "base_minus_prior_offset": -8.218766321790687e-05
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "medium",
+              "mach": 6.0,
+              "alpha_deg": 6.0,
+              "v4_total_CD": 0.004112802725,
+              "v5_skin_CD": 0.007955761313,
+              "v4_euler_minus_wedge": -0.0036327971329644295,
+              "base_term": -0.003842958588,
+              "base_minus_prior_offset": -0.00021016145503557036
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "medium",
+              "mach": 8.0,
+              "alpha_deg": 2.0,
+              "v4_total_CD": -0.003182092792,
+              "v5_skin_CD": 0.001400226189,
+              "v4_euler_minus_wedge": -0.004562872078556711,
+              "base_term": -0.004582318981,
+              "base_minus_prior_offset": -1.944690244328872e-05
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "medium",
+              "mach": 8.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": -0.001857584056,
+              "v5_skin_CD": 0.003147307677,
+              "v4_euler_minus_wedge": -0.0048220562493018464,
+              "base_term": -0.005004891733,
+              "base_minus_prior_offset": -0.0001828354836981537
+            },
+            {
+              "geometry": "FAM_MD6",
+              "level": "medium",
+              "mach": 8.0,
+              "alpha_deg": 6.0,
+              "v4_total_CD": 0.001475550326,
+              "v5_skin_CD": 0.006969035487,
+              "v4_euler_minus_wedge": -0.005095419795467933,
+              "base_term": -0.005493485161000001,
+              "base_minus_prior_offset": -0.0003980653655320677
+            },
+            {
+              "geometry": "FAM_MD8",
+              "level": "medium",
+              "mach": 4.0,
+              "alpha_deg": 2.0,
+              "v4_total_CD": -0.001022913651,
+              "v5_skin_CD": 0.0007470138494,
+              "v4_euler_minus_wedge": -0.002211189574269189,
+              "base_term": -0.0017699275004000002,
+              "base_minus_prior_offset": 0.00044126207386918897
+            },
+            {
+              "geometry": "FAM_MD8",
+              "level": "medium",
+              "mach": 4.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": 0.0002297439048,
+              "v5_skin_CD": 0.002067808889,
+              "v4_euler_minus_wedge": -0.002313080269174334,
+              "base_term": -0.0018380649841999999,
+              "base_minus_prior_offset": 0.00047501528497433435
+            },
+            {
+              "geometry": "FAM_MD8",
+              "level": "medium",
+              "mach": 4.0,
+              "alpha_deg": 6.0,
+              "v4_total_CD": 0.003988350528,
+              "v5_skin_CD": 0.005858850937,
+              "v4_euler_minus_wedge": -0.002869337770182845,
+              "base_term": -0.0018705004089999994,
+              "base_minus_prior_offset": 0.0009988373611828456
+            },
+            {
+              "geometry": "FAM_MD8",
+              "level": "medium",
+              "mach": 6.0,
+              "alpha_deg": 2.0,
+              "v4_total_CD": -0.003398337814,
+              "v5_skin_CD": 0.0006373632442,
+              "v4_euler_minus_wedge": -0.004209932235949197,
+              "base_term": -0.0040357010582,
+              "base_minus_prior_offset": 0.00017423117774919682
+            },
+            {
+              "geometry": "FAM_MD8",
+              "level": "medium",
+              "mach": 6.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": -0.002451725998,
+              "v5_skin_CD": 0.001698778529,
+              "v4_euler_minus_wedge": -0.004257638572488498,
+              "base_term": -0.004150504527,
+              "base_minus_prior_offset": 0.00010713404548849757
+            },
+            {
+              "geometry": "FAM_MD8",
+              "level": "medium",
+              "mach": 6.0,
+              "alpha_deg": 6.0,
+              "v4_total_CD": 0.0004701772201,
+              "v5_skin_CD": 0.004766135196,
+              "v4_euler_minus_wedge": -0.00451879144333755,
+              "base_term": -0.0042959579759,
+              "base_minus_prior_offset": 0.00022283346743755
+            },
+            {
+              "geometry": "FAM_MD8",
+              "level": "medium",
+              "mach": 8.0,
+              "alpha_deg": 2.0,
+              "v4_total_CD": -0.003991814683,
+              "v5_skin_CD": 0.0005998697073,
+              "v4_euler_minus_wedge": -0.0046228787792500295,
+              "base_term": -0.0045916843903,
+              "base_minus_prior_offset": 3.1194388950029316e-05
+            },
+            {
+              "geometry": "FAM_MD8",
+              "level": "medium",
+              "mach": 8.0,
+              "alpha_deg": 4.0,
+              "v4_total_CD": -0.003234388905,
+              "v5_skin_CD": 0.001495263998,
+              "v4_euler_minus_wedge": -0.004692702536298007,
+              "base_term": -0.004729652903,
+              "base_minus_prior_offset": -3.695036670199343e-05
+            },
+            {
+              "geometry": "FAM_MD8",
+              "level": "medium",
+              "mach": 8.0,
+              "alpha_deg": 6.0,
+              "v4_total_CD": -0.000792385048,
+              "v5_skin_CD": 0.004136987475,
+              "v4_euler_minus_wedge": -0.0049146514511186155,
+              "base_term": -0.0049293725230000005,
+              "base_minus_prior_offset": -1.472107188138505e-05
+            }
+          ],
+          "standard_deviation": "population SD over three alpha cases per medium geometry/Mach",
+          "note": "Both pointwise and group-mean offset differences reported; the original protocol threshold is 0.0005."
+        },
+        "D2": {
+          "pass_": true,
+          "case_count": 29,
+          "nonpositive_cases": []
+        },
+        "D3": {
+          "rel_change_CL": 0.025585088784250948,
+          "rel_change_CD": 0.017929571620658995,
+          "same_sign": true,
+          "pass_": true,
+          "denominator": "abs(fine), following frozen collect_su2.grid_convergence"
+        },
+        "grid_values": [
+          {
+            "level": "coarse",
+            "CL": 0.03560687477,
+            "CD_pressure": 0.003624810003
+          },
+          {
+            "level": "fine",
+            "CL": 0.03860297763,
+            "CD_pressure": 0.003709471671
+          },
+          {
+            "level": "medium",
+            "CL": 0.03761531702,
+            "CD_pressure": 0.003642962433
+          }
+        ],
+        "original_decision": {
+          "per_condition": {
+            "0.03": {
+              "met": false,
+              "at_flight_mach": {
+                "4.0": {
+                  "best": "FAM_MD8",
+                  "expected": "FAM_MD4",
+                  "best_is_expected": false,
+                  "lead_over_worst": 0.6340949889379475,
+                  "LD": {
+                    "FAM_MD4": 4.650020517203619,
+                    "FAM_MD6": 5.849114311761248,
+                    "FAM_MD8": 7.598575225621077
+                  }
+                },
+                "8.0": {
+                  "best": "FAM_MD8",
+                  "expected": "FAM_MD8",
+                  "best_is_expected": true,
+                  "lead_over_worst": 0.4951213672764647,
+                  "LD": {
+                    "FAM_MD4": 4.599223255413209,
+                    "FAM_MD6": 5.532842198631211,
+                    "FAM_MD8": 6.87639696204311
+                  }
+                }
+              }
+            },
+            "0.04": {
+              "met": false,
+              "at_flight_mach": {
+                "4.0": {
+                  "best": "FAM_MD8",
+                  "expected": "FAM_MD4",
+                  "best_is_expected": false,
+                  "lead_over_worst": 0.5354760007794448,
+                  "LD": {
+                    "FAM_MD4": 5.487759297299135,
+                    "FAM_MD6": 6.777822257702824,
+                    "FAM_MD8": 8.426322699057092
+                  }
+                },
+                "8.0": {
+                  "best": "FAM_MD8",
+                  "expected": "FAM_MD8",
+                  "best_is_expected": true,
+                  "lead_over_worst": 0.3968389963116543,
+                  "LD": {
+                    "FAM_MD4": 4.996354187101682,
+                    "FAM_MD6": 5.903454887333679,
+                    "FAM_MD8": 6.979102367928645
+                  }
+                }
+              }
+            },
+            "0.05": {
+              "met": false,
+              "at_flight_mach": {
+                "4.0": {
+                  "best": "FAM_MD8",
+                  "expected": "FAM_MD4",
+                  "best_is_expected": false,
+                  "lead_over_worst": 0.44332828866713236,
+                  "LD": {
+                    "FAM_MD4": 6.006269415015046,
+                    "FAM_MD6": 7.270034607492944,
+                    "FAM_MD8": 8.669018556047405
+                  }
+                },
+                "8.0": null
+              }
+            }
+          },
+          "premise_holds": false,
+          "targets_met": 0
+        },
+        "original_grid_convergence": [
+          {
+            "geometry": "FAM_MD6",
+            "mach": 6.0,
+            "alpha_deg": 4.0,
+            "levels": [
+              "medium",
+              "fine"
+            ],
+            "rel_change_CL": 0.025585088784250948,
+            "rel_change_CD": 0.017929571620658995
+          }
+        ],
+        "comparison_pair_count": 29,
+        "all_cases_converged": true,
+        "switching_gain_coverage": {
+          "euler": {
+            "FAM_MD4": {
+              "eligible_for_original_switching_gain": true,
+              "missing_conditions": []
+            },
+            "FAM_MD6": {
+              "eligible_for_original_switching_gain": true,
+              "missing_conditions": []
+            },
+            "FAM_MD8": {
+              "eligible_for_original_switching_gain": false,
+              "missing_conditions": [
+                {
+                  "mach": 8.0,
+                  "CL_target": 0.05
+                }
+              ]
+            }
+          },
+          "wedge": {
+            "FAM_MD4": {
+              "eligible_for_original_switching_gain": true,
+              "missing_conditions": []
+            },
+            "FAM_MD6": {
+              "eligible_for_original_switching_gain": true,
+              "missing_conditions": []
+            },
+            "FAM_MD8": {
+              "eligible_for_original_switching_gain": false,
+              "missing_conditions": [
+                {
+                  "mach": 8.0,
+                  "CL_target": 0.05
+                }
+              ]
+            }
+          }
+        }
+      },
+      "packaged_at": "2026-11-02T09:13:53.021081+00:00"
+    }
+  }
+}

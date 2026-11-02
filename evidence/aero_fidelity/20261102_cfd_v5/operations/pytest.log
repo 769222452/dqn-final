@@ -1,0 +1,11 @@
+...................                                                      [100%]
+19 passed in 54.73s
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [4922, 4923, 4921] #4
+  2nd: [4922, 4923, 5671] #4
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [4043, 4044, 4045] #4
+  2nd: [4043, 4044, 3897] #4
+Found two overlapping facets.
+  1st: [449, 450, 451] #4
+  2nd: [449, 450, 451] #5

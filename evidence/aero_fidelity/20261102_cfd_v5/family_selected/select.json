@@ -1,0 +1,9 @@
+{
+ "cfd_geometries": [
+  "FAM_MD4",
+  "FAM_MD6",
+  "FAM_MD8"
+ ],
+ "source": "check_family.py",
+ "design_key": "per_mach"
+}
