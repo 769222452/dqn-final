@@ -1,0 +1,181 @@
+job_id,status,elapsed_s,error_identifier,error_message,frozen_audit,valid,reason,audit_reason,volume_m3
+FAM2_MD4_pair_d-2_r0.5_ax0.97,GENERATION_FAILED,4.8718867,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d-2_r0.5_ax1.00,GENERATION_FAILED,6.7858998,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d-2_r0.5_ax1.03,GENERATION_FAILED,6.3932121,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d-2_r0.65_ax0.97,GENERATION_FAILED,6.9989507,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d-2_r0.65_ax1.00,GENERATION_FAILED,1.0311949,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d-2_r0.65_ax1.03,GENERATION_FAILED,6.5389547,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d-2_r0.8_ax0.97,GENERATED,8.5133345,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d-2_r0.8_ax1.00,GENERATED,8.6436056,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d-2_r0.8_ax1.03,GENERATED,5.298397,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_g42_d-2_ax0.97,GENERATION_FAILED,1.4641536,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d-2_ax1.00,GENERATION_FAILED,1.4517758,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d-2_ax1.03,GENERATION_FAILED,1.9585027,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d+0_r0.5_ax0.97,GENERATION_FAILED,0.9656256,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d+0_r0.5_ax1.00,GENERATION_FAILED,1.7953464,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d+0_r0.5_ax1.03,GENERATION_FAILED,1.9153343,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d+0_r0.65_ax0.97,GENERATED,9.510448,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+0_r0.65_ax1.00,GENERATED,4.3930773,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+0_r0.65_ax1.03,GENERATED,5.7442816,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+0_r0.8_ax0.97,GENERATED,6.1251827,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+0_r0.8_ax1.00,GENERATED,8.2774514,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+0_r0.8_ax1.03,GENERATED,4.4526811,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_g42_d+0_ax0.97,GENERATION_FAILED,1.3821631,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d+0_ax1.00,GENERATION_FAILED,1.387463,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d+0_ax1.03,GENERATION_FAILED,1.5201995,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d+2_r0.5_ax0.97,GENERATED,4.2638953,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.1819281253650309
+FAM2_MD4_pair_d+2_r0.5_ax1.00,GENERATED,5.5587643,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.25013836987979315
+FAM2_MD4_pair_d+2_r0.5_ax1.03,GENERATED,5.6747832,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.35291772588369213
+FAM2_MD4_pair_d+2_r0.65_ax0.97,GENERATED,5.5860487,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+2_r0.65_ax1.00,GENERATED,4.3037822,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+2_r0.65_ax1.03,GENERATED,6.1571885,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+2_r0.8_ax0.97,GENERATED,5.7241038,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+2_r0.8_ax1.00,GENERATED,6.0539469,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+2_r0.8_ax1.03,GENERATED,4.3739772,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_g42_d+2_ax0.97,GENERATION_FAILED,1.5103013,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d+2_ax1.00,GENERATION_FAILED,1.3413522,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d+2_ax1.03,GENERATION_FAILED,1.4914033,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d+4_r0.5_ax0.97,GENERATED,4.3178753,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.5507678305975324
+FAM2_MD4_pair_d+4_r0.5_ax1.00,GENERATED,5.7491659,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.7311706161157777
+FAM2_MD4_pair_d+4_r0.5_ax1.03,GENERATED,5.5938926,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.9446895832037354
+FAM2_MD4_pair_d+4_r0.65_ax0.97,GENERATED,5.8676511,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+4_r0.65_ax1.00,GENERATED,4.3988643,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+4_r0.65_ax1.03,GENERATED,5.7511125,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+4_r0.8_ax0.97,GENERATED,5.9137136,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+4_r0.8_ax1.00,GENERATED,5.6697617,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+4_r0.8_ax1.03,GENERATED,4.411638,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_g42_d+4_ax0.97,GENERATION_FAILED,1.4028812,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d+4_ax1.00,GENERATION_FAILED,1.2687832,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d+4_ax1.03,GENERATION_FAILED,1.3313677,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d+6_r0.5_ax0.97,GENERATED,4.3390717,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.9132061617105417
+FAM2_MD4_pair_d+6_r0.5_ax1.00,GENERATED,5.7647772,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.1769849521835507
+FAM2_MD4_pair_d+6_r0.5_ax1.03,GENERATED,5.9322923,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.4311054727920045
+FAM2_MD4_pair_d+6_r0.65_ax0.97,GENERATED,5.7281406,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+6_r0.65_ax1.00,GENERATED,4.4850114,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+6_r0.65_ax1.03,GENERATED,5.6802364,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+6_r0.8_ax0.97,GENERATION_FAILED,1.2031055,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_pair_d+6_r0.8_ax1.00,GENERATED,5.7685931,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_pair_d+6_r0.8_ax1.03,GENERATED,5.0074214,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD4_g42_d+6_ax0.97,GENERATION_FAILED,1.3412183,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d+6_ax1.00,GENERATION_FAILED,1.2915035,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD4_g42_d+6_ax1.03,GENERATION_FAILED,1.2616025,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d-2_r0.5_ax0.97,GENERATION_FAILED,1.2912714,V5:GeometryFailure,Stream surface 6: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d-2_r0.5_ax1.00,GENERATION_FAILED,1.6333091,V5:GeometryFailure,Stream surface 6: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d-2_r0.5_ax1.03,GENERATION_FAILED,1.7072039,V5:GeometryFailure,Stream surface 6: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d-2_r0.65_ax0.97,GENERATED,5.8471497,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d-2_r0.65_ax1.00,GENERATED,4.2403862,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d-2_r0.65_ax1.03,GENERATED,5.6123482,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d-2_r0.8_ax0.97,GENERATED,5.8254695,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d-2_r0.8_ax1.00,GENERATED,5.6198403,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d-2_r0.8_ax1.03,GENERATED,4.3216715,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_g42_d-2_ax0.97,GENERATION_FAILED,1.2863701,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d-2_ax1.00,GENERATION_FAILED,1.2869155,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d-2_ax1.03,GENERATION_FAILED,1.2240705,V5:GeometryFailure,Stream surface 1: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d+0_r0.5_ax0.97,GENERATED,4.2529208,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.2927611209870013
+FAM2_MD6_pair_d+0_r0.5_ax1.00,GENERATED,5.8726547,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.39362495270186876
+FAM2_MD6_pair_d+0_r0.5_ax1.03,GENERATED,5.6604928,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.5230258386163277
+FAM2_MD6_pair_d+0_r0.65_ax0.97,GENERATED,5.5429917,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+0_r0.65_ax1.00,GENERATED,4.3265796,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+0_r0.65_ax1.03,GENERATED,5.7358568,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+0_r0.8_ax0.97,GENERATED,5.3235252,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+0_r0.8_ax1.00,GENERATED,5.8473565,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+0_r0.8_ax1.03,GENERATED,4.5161611,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_g42_d+0_ax0.97,GENERATION_FAILED,1.4608374,V5:GeometryFailure,Stream surface 2: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d+0_ax1.00,GENERATION_FAILED,1.6135916,V5:GeometryFailure,Stream surface 2: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d+0_ax1.03,GENERATION_FAILED,1.5058898,V5:GeometryFailure,Stream surface 2: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d+2_r0.5_ax0.97,GENERATED,4.5401777,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.6788653688223167
+FAM2_MD6_pair_d+2_r0.5_ax1.00,GENERATED,5.8219436,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.8717597384145135
+FAM2_MD6_pair_d+2_r0.5_ax1.03,GENERATED,6.0348301,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.054849912731129
+FAM2_MD6_pair_d+2_r0.65_ax0.97,GENERATED,5.791152,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+2_r0.65_ax1.00,GENERATED,4.4691588,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+2_r0.65_ax1.03,GENERATED,5.8585115,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+2_r0.8_ax0.97,GENERATED,6.094848,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+2_r0.8_ax1.00,GENERATED,5.8876625,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+2_r0.8_ax1.03,GENERATED,4.632301,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_g42_d+2_ax0.97,GENERATION_FAILED,1.567052,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d+2_ax1.00,GENERATION_FAILED,1.5528926,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d+2_ax1.03,GENERATION_FAILED,1.6296498,V5:GeometryFailure,Stream surface 3: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d+4_r0.5_ax0.97,GENERATED,4.6275749,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.0453725673812124
+FAM2_MD6_pair_d+4_r0.5_ax1.00,GENERATED,5.6802965,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.3005935704062657
+FAM2_MD6_pair_d+4_r0.5_ax1.03,GENERATED,5.7826838,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.491733236811669
+FAM2_MD6_pair_d+4_r0.65_ax0.97,GENERATION_FAILED,1.1889745,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d+4_r0.65_ax1.00,GENERATED,4.4003951,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+4_r0.65_ax1.03,GENERATED,5.9172777,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+4_r0.8_ax0.97,GENERATION_FAILED,1.3483379,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d+4_r0.8_ax1.00,GENERATED,5.8001363,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+4_r0.8_ax1.03,GENERATED,4.4853539,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_g42_d+4_ax0.97,GENERATION_FAILED,1.7214514,V5:GeometryFailure,Stream surface 4: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d+4_ax1.00,GENERATION_FAILED,1.7053624,V5:GeometryFailure,Stream surface 4: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d+4_ax1.03,GENERATION_FAILED,1.8742665,V5:GeometryFailure,Stream surface 4: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d+6_r0.5_ax0.97,GENERATED,4.4681803,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.3945797409960248
+FAM2_MD6_pair_d+6_r0.5_ax1.00,GENERATED,5.7641883,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.6963543775474623
+FAM2_MD6_pair_d+6_r0.5_ax1.03,GENERATED,5.9719612,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.882009348696137
+FAM2_MD6_pair_d+6_r0.65_ax0.97,GENERATION_FAILED,1.3573032,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d+6_r0.65_ax1.00,GENERATED,4.3992274,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+6_r0.65_ax1.03,GENERATED,5.8093139,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+6_r0.8_ax0.97,GENERATION_FAILED,1.2459122,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_pair_d+6_r0.8_ax1.00,GENERATED,6.1487556,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_pair_d+6_r0.8_ax1.03,GENERATED,4.4332103,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD6_g42_d+6_ax0.97,GENERATION_FAILED,1.7968919,V5:GeometryFailure,Stream surface 5: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d+6_ax1.00,GENERATION_FAILED,1.8049323,V5:GeometryFailure,Stream surface 5: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD6_g42_d+6_ax1.03,GENERATION_FAILED,1.7566551,V5:GeometryFailure,Stream surface 5: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d-2_r0.5_ax0.97,GENERATED,4.4430759,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.12351932217886774
+FAM2_MD8_pair_d-2_r0.5_ax1.00,GENERATED,5.591748,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.1695677632104832
+FAM2_MD8_pair_d-2_r0.5_ax1.03,GENERATED,5.9254628,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.2358434810896116
+FAM2_MD8_pair_d-2_r0.65_ax0.97,GENERATED,5.8771941,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.29377949464461156
+FAM2_MD8_pair_d-2_r0.65_ax1.00,GENERATED,4.6135867,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.3902429169350121
+FAM2_MD8_pair_d-2_r0.65_ax1.03,GENERATED,5.9266082,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.5044695418010354
+FAM2_MD8_pair_d-2_r0.8_ax0.97,GENERATED,5.9125425,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d-2_r0.8_ax1.00,GENERATED,5.6465201,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d-2_r0.8_ax1.03,GENERATED,5.001203,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_g42_d-2_ax0.97,GENERATION_FAILED,1.9837062,V5:GeometryFailure,Stream surface 7: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d-2_ax1.00,GENERATION_FAILED,1.8849779,V5:GeometryFailure,Stream surface 7: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d-2_ax1.03,GENERATION_FAILED,1.8922529,V5:GeometryFailure,Stream surface 7: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+0_r0.5_ax0.97,GENERATED,4.4143604,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.5345078499311424
+FAM2_MD8_pair_d+0_r0.5_ax1.00,GENERATED,5.6910248,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.684946512647119
+FAM2_MD8_pair_d+0_r0.5_ax1.03,GENERATED,5.5569457,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.8263406562383326
+FAM2_MD8_pair_d+0_r0.65_ax0.97,GENERATED,5.7339234,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+0_r0.65_ax1.00,GENERATED,4.4771599,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+0_r0.65_ax1.03,GENERATED,5.5325662,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+0_r0.8_ax0.97,GENERATED,6.0078184,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+0_r0.8_ax1.00,GENERATED,5.6488476,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+0_r0.8_ax1.03,GENERATED,4.6512719,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_g42_d+0_ax0.97,GENERATION_FAILED,1.9845834,V5:GeometryFailure,Stream surface 7: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d+0_ax1.00,GENERATION_FAILED,1.9676311,V5:GeometryFailure,Stream surface 7: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d+0_ax1.03,GENERATION_FAILED,1.9562317,V5:GeometryFailure,Stream surface 7: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+2_r0.5_ax0.97,GENERATED,4.8498177,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,0.9094520360563162
+FAM2_MD8_pair_d+2_r0.5_ax1.00,GENERATED,5.8626317,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.120552555600109
+FAM2_MD8_pair_d+2_r0.5_ax1.03,GENERATED,5.6669726,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.2674415728758686
+FAM2_MD8_pair_d+2_r0.65_ax0.97,GENERATION_FAILED,1.2420505,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+2_r0.65_ax1.00,GENERATED,4.4098687,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+2_r0.65_ax1.03,GENERATED,5.5158363,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+2_r0.8_ax0.97,GENERATION_FAILED,1.2534818,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+2_r0.8_ax1.00,GENERATED,5.7325246,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+2_r0.8_ax1.03,GENERATED,4.4388825,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_g42_d+2_ax0.97,GENERATION_FAILED,2.0265405,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d+2_ax1.00,GENERATION_FAILED,2.2371986,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d+2_ax1.03,GENERATION_FAILED,1.9905225,V5:GeometryFailure,Stream surface 8: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+4_r0.5_ax0.97,GENERATION_FAILED,1.0170278,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+4_r0.5_ax1.00,GENERATED,6.1463403,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.5119594179361775
+FAM2_MD8_pair_d+4_r0.5_ax1.03,GENERATED,5.815309,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.6517753523607837
+FAM2_MD8_pair_d+4_r0.65_ax0.97,GENERATION_FAILED,1.2428968,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+4_r0.65_ax1.00,GENERATED,4.4483842,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+4_r0.65_ax1.03,GENERATED,5.9252476,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+4_r0.8_ax0.97,GENERATION_FAILED,1.1559878,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+4_r0.8_ax1.00,GENERATED,5.8255736,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+4_r0.8_ax1.03,GENERATED,4.4234557,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_g42_d+4_ax0.97,GENERATION_FAILED,1.946507,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d+4_ax1.00,GENERATION_FAILED,2.0079145,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d+4_ax1.03,GENERATION_FAILED,2.0768505,V5:GeometryFailure,Stream surface 9: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+6_r0.5_ax0.97,GENERATION_FAILED,1.0397503,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+6_r0.5_ax1.00,GENERATED,5.8037298,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,1.8754105580708238
+FAM2_MD8_pair_d+6_r0.5_ax1.03,GENERATED,5.3632651,,,VALID,True,,All frozen native-mesh checks passed; OPEN_BASE declared,2.0063696218925613
+FAM2_MD8_pair_d+6_r0.65_ax0.97,GENERATION_FAILED,1.1999001,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+6_r0.65_ax1.00,GENERATED,4.9213274,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+6_r0.65_ax1.03,GENERATED,5.0456373,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+6_r0.8_ax0.97,GENERATION_FAILED,1.1778391,V5:GeometryFailure,Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_pair_d+6_r0.8_ax1.00,GENERATED,4.6436151,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_pair_d+6_r0.8_ax1.03,GENERATED,5.0580152,,,INVALID,False,FROZEN_AUDIT_INVALID,Actual non-leading-edge upper/lower triangle intersection,
+FAM2_MD8_g42_d+6_ax0.97,GENERATION_FAILED,1.5302457,V5:GeometryFailure,Stream surface 3: Invalid isentropic streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d+6_ax1.00,GENERATION_FAILED,1.8476584,V5:GeometryFailure,Stream surface 10: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
+FAM2_MD8_g42_d+6_ax1.03,GENERATION_FAILED,2.2247047,V5:GeometryFailure,Stream surface 10: Invalid shock streamline [V5:GeometryDomain],,False,GENERATION_FAILED,,
