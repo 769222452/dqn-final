@@ -1,0 +1,66 @@
+{
+ "rule": "(fixed before any member of the batch exists):\n  eligible   a candidate with all three CL targets inside its fitted range at all three flight Machs\n  LD(m, F)   mean over the three CL targets\n  w(F)       argmax_m LD(m, F); its design Mach is Md*(F)\n  P1         Md*(4) < Md*(8)\n  P2         per CL target c: s*_c = argmax_m mean_F LD(m, F, c); G_c = mean_F [max_m LD(m, F, c) / LD(s*_c, F, c)] - 1;\n             P2 holds if G_c >= 0.03 for at least two of the three targets\n  premise    holds in the optimal-family sense iff P1 and P2\n  Euler set  {w(4), w(6), w(8), s*_0.04}: written to --out/confirm for an Euler check (make_su2_cases.py --base-marker, alpha\n             2, 4, 6, 8); the wedge result counts as confirmed if Euler gives the same winner w(F) among this set at every F.",
+ "candidates": 26,
+ "status": "EVALUATED",
+ "eligible": 26,
+ "winners": {
+  "4.0": "OPTB_MD9_d+2_r0.5_ax0.97550",
+  "6.0": "OPTB_MD9_d+2_r0.5_ax0.97550",
+  "8.0": "OPTB_MD10_d+3_r0.35_ax0.99440"
+ },
+ "winner_design_mach": {
+  "4.0": 9.0,
+  "6.0": 9.0,
+  "8.0": 10.0
+ },
+ "P1": true,
+ "switching_gain": {
+  "0.03": 0.0,
+  "0.04": 0.00044358758409557275,
+  "0.05": 0.0027865784104486035
+ },
+ "best_single": {
+  "0.03": "OPTB_MD9_d+2_r0.5_ax0.97550",
+  "0.04": "OPTB_MD9_d+2_r0.5_ax0.97550",
+  "0.05": "OPTB_MD10_d+3_r0.35_ax0.99440"
+ },
+ "P2": false,
+ "premise_holds": false,
+ "best_LD_by_design_mach": {
+  "4.0": {
+   "4.0": 6.931717216866146,
+   "5.0": 7.341454533211389,
+   "6.0": 7.614884530631713,
+   "7.0": 7.768496550057577,
+   "8.0": 7.946203667376534,
+   "9.0": 8.027239997751337,
+   "10.0": 7.939945772607438
+  },
+  "6.0": {
+   "4.0": 6.453980056425485,
+   "5.0": 6.877119154729011,
+   "6.0": 7.147912104763562,
+   "7.0": 7.263545198729498,
+   "8.0": 7.469644795509889,
+   "9.0": 7.538266382709344,
+   "10.0": 7.512291536275822
+  },
+  "8.0": {
+   "4.0": 6.025312675610006,
+   "5.0": 6.429174798226682,
+   "6.0": 6.6865260011218055,
+   "7.0": 6.7858635038943325,
+   "8.0": 6.985587821352034,
+   "9.0": 7.046531987766767,
+   "10.0": 7.0524790886387265
+  }
+ },
+ "euler_confirmation_set": [
+  "OPTB_MD10_d+3_r0.35_ax0.99440",
+  "OPTB_MD9_d+2_r0.5_ax0.97550"
+ ],
+ "euler_confirmation_ids": [
+  "OPT_MD10_d+3_r0p35_ax0p99440",
+  "OPT_MD9_d+2_r0p5_ax0p97550"
+ ]
+}

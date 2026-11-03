@@ -320,6 +320,39 @@ Expected outcomes, stated in advance: if P1 and P2 hold, the design-point librar
 design-Mach matching is not a source of L/D gain for this class at Mach 4-8 even after optimisation, and the case for morphing
 must rest on other effects (trim, heating, Mach range outside 4-8, volume).
 
+## 3i. Result of the optimal-family test, version with d1 FIXED (run at `f248c4f`)
+
+**Which version ran.** Codex executed the commit before the d1 amendment of section 3h (stage A: 420 calls, d1 = 0.11607 = G42's
+value, inputs10 of the archived jobs confirm it). The d1-varied test (1260 calls, commit `2e3c8e6` and later) has NOT been run yet;
+the concern that motivated it (G42 is a Mach-15 design) is therefore untested. Evidence branch `aero-opt-results-20261103`, copies
+in `results_optimum_d1fixed/`.
+
+**Generation and audit.** Stage A: 302 of 420 generated (118 domain failures), all 302 audit-VALID. Stage B: 78 of 78 generated
+and VALID. 26 candidates within +-3 % of G42's volume (per design Mach 4..10: 3, 2, 4, 5, 5, 4, 3; r = 0.5: 14, r = 0.35: 12).
+
+**Declared rule (wedge + friction), frozen script output:** P1 true (winner design Mach 9, 9, 10 at flight Mach 4, 6, 8), P2 false
+(ideal switching gain 0 %, 0.04 %, 0.28 % at CL 0.03, 0.04, 0.05; threshold 3 %), **premise not met**.
+Best L/D (mean over CL targets) by design Mach, flight Mach 4: 6.93 (Md 4), 7.34, 7.61, 7.77, 7.95, 8.03 (Md 9), 7.94 (Md 10);
+flight Mach 8: 6.03 (Md 4), 6.43, 6.69, 6.79, 6.99, 7.05 (Md 9), 7.05 (Md 10). The best design Mach is about 9 at every flight
+Mach, 14-17 % above the design-Mach-4 shape even at flight Mach 4. P1 passing reflects a 1 % wedge difference between two
+near-tied shapes, not a design-point effect.
+
+**Euler confirmation (declared check): NOT confirmed** (`confirmed = false`), and the evidence is incomplete.
+- 24 cases, 21 converged. The three unconverged cases are MD9 at Mach 6, alpha 4, 6, 8 (log10 density residual -3.9, -4.3, -3.9; the
+  threshold is -5), so the MD9 ranking at flight Mach 6 is not valid Euler evidence.
+- Only two members were in the confirmation set; medium mesh only, no grid check.
+- Euler + friction mean L/D, MD10 shape (d +3, r 0.35) / MD9 shape (d +2, r 0.5): flight Mach 4: 8.17 / 8.07, Mach 6: 7.44 / 7.13
+  (MD9 unconverged), Mach 8: 6.83 / 6.36. Euler picks the MD10 shape at all three flight Machs; the wedge model picks MD9 at Mach 4
+  and 6 by 1.1 % and 0.4 %. The mismatch is a swap between near-tied shapes; both models agree that no switching occurs between the two
+  shapes in Euler, and gain at most 0.28 % in the wedge model. It is nevertheless reported as not confirmed, as declared.
+
+**What this supports and what it does not.**
+- Supported, for this class with d1 fixed to 0.11607: the best equal-volume shape is a high-design-Mach one (about 9-10) at every
+  flight Mach 4-8, the switching gain is below 0.3 % in the wedge model, and Euler gives no switching either for the two shapes checked.
+- Not established: that the result holds when d1 (and c1, c2) vary; that the 26 candidates contain the optimum of the design space
+  (the winner at flight Mach 8 has r = 0.35, the lower edge of the scanned r); full Euler validation (one unconverged group,
+  two members, one mesh level).
+
 ## 4. Known limits
 
 - Euler is inviscid: no viscous interaction, no boundary-layer displacement at the leading edge, no
