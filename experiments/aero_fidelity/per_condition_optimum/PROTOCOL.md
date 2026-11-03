@@ -31,9 +31,20 @@ averaged over the points that share a CL, and reported per CL. It is an upper bo
    (confirms the input format), and record G42's `Vol_eff` (the D2 target). If they differ, stop and report.
 1. Decide how friction enters the objective (inside MATLAB, or by calling the validated Python module). The route is the owner's and the
    advisor's decision; the model must be the one named in D1.
-2. For each flight condition the four shock angles must exceed the local Mach angle; the search box is set relative to the Mach angle
-   (earlier family runs: the audit-VALID members had a lower/upper shock-angle ratio near 0.35-0.5), not copied from the Mach-15 box 3-8.
-   The values are fixed before the first run and written next to the results.
+2. **Correction (the first version of this item was wrong).** It said that all four shock angles must exceed the local Mach angle and
+   that the search box should be scaled that way. A pilot that sampled all four angles at 1.05-2.10 times the Mach angle found almost no
+   valid shape. In every audit-VALID shape of the family experiments (versions 2-5, `experiments/aero_fidelity/results_*`) the
+   structure is: upper pair a1 = a2 = a, lower pair b1 = b2 = r a with r between 0.35 and 0.5, and the mean (a + b)/2 equals the Mach
+   angle plus 1 to 6 degrees. The lower pair is therefore BELOW the Mach angle (b / Mach angle = 0.81-0.85 for design Mach 4, 6, 8).
+   The search box is built around this structure, its values fixed before the first run and written next to the results.
+2b. Feasibility first. The volume is very sensitive to a_x (about 35 % over the usable window 0.95-1.06) and the generator fails or
+   self-intersects outside the valid region, so (i) the initial population is seeded with audit-VALID shapes taken from the archived
+   audit files (`family_audit.json` rows carry `inputs10` and volumes), not drawn at random; (ii) the volume constraint is met by
+   solving for a_x (monotone, one-dimensional) for given shape parameters, not left to chance; (iii) every candidate passes the frozen
+   native-mesh audit (`family/native_audit.py`) before it counts. `waveRiderEval` has no intersection check; a candidate with the right
+   volume and a negative minimum thickness is invalid.
+2c. D2 target value: `Vol_eff` of G42 = 0.8166 m3 (allowed 0.7921-0.8411 m3), from the owner's G42 check; the enclosed volume of G42
+   is 1.0188 m3 and is reported alongside.
 3. Every returned shape goes through the frozen native-mesh audit (`experiments/aero_fidelity/family/native_audit.py`); only VALID
    shapes count.
 
