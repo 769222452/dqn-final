@@ -1,0 +1,122 @@
+{
+  "commit": "e33111d30934e3ff1f2f069510127f02c443b4a9",
+  "base_commit": "4baf51c6ad962dc646ced8ab4c105b50db131dc0",
+  "started_at": "2026-11-02T10:42:53.859416+08:00",
+  "stage": "FAMILY_COMPLETED",
+  "commands": [
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-v2-4baf51c\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family\\jobs_resume_0.json', 'D:\\aero-v2-4baf51c\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-v2-4baf51c\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family\\jobs_resume_1.json', 'D:\\aero-v2-4baf51c\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-v2-4baf51c\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family\\jobs_resume_2.json', 'D:\\aero-v2-4baf51c\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-v2-4baf51c\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family\\jobs_resume_3.json', 'D:\\aero-v2-4baf51c\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family')"
+    ]
+  ],
+  "previous_records": 45,
+  "pending": 135,
+  "workers": [
+    22048,
+    21476,
+    19388,
+    27348
+  ],
+  "updated_at": "2026-11-02T10:45:44.477189+08:00",
+  "counts": {
+    "GENERATION_FAILED": 70,
+    "GENERATED": 110
+  },
+  "resume_wall_s": 170.42199999999957,
+  "worker_exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "initial_attempt_wall_s": 220.533239,
+  "wall_s": 390.95523899999955,
+  "NP": 7,
+  "JOBS": 2,
+  "SLICES": 4,
+  "execution_location": "local licensed MATLAB R2023a",
+  "initial_attempt": {
+    "commit": "4baf51c6ad962dc646ced8ab4c105b50db131dc0",
+    "started_at": "2026-11-02T10:38:00.193084+08:00",
+    "stage": "FAILED",
+    "workers": [
+      15116,
+      26560,
+      7936,
+      21732
+    ],
+    "commands": [
+      [
+        "D:\\matlab\\bin\\matlab.exe",
+        "-wait",
+        "-batch",
+        "addpath('D:\\aero-v2-4baf51c\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family\\jobs_0.json', 'D:\\aero-v2-4baf51c\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family')"
+      ],
+      [
+        "D:\\matlab\\bin\\matlab.exe",
+        "-wait",
+        "-batch",
+        "addpath('D:\\aero-v2-4baf51c\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family\\jobs_1.json', 'D:\\aero-v2-4baf51c\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family')"
+      ],
+      [
+        "D:\\matlab\\bin\\matlab.exe",
+        "-wait",
+        "-batch",
+        "addpath('D:\\aero-v2-4baf51c\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family\\jobs_2.json', 'D:\\aero-v2-4baf51c\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family')"
+      ],
+      [
+        "D:\\matlab\\bin\\matlab.exe",
+        "-wait",
+        "-batch",
+        "addpath('D:\\aero-v2-4baf51c\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family\\jobs_3.json', 'D:\\aero-v2-4baf51c\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family')"
+      ]
+    ],
+    "job_command": [
+      "D:\\v6-mission-morph-clean\\.venv\\Scripts\\python.exe",
+      "experiments/aero_fidelity/family/family_jobs.py",
+      "--out",
+      "D:\\aero-v2-4baf51c\\runs\\aero_fidelity_v2\\family",
+      "--slices",
+      "4",
+      "--version",
+      "2"
+    ],
+    "updated_at": "2026-11-02T10:41:40.726323+08:00",
+    "counts": {
+      "GENERATION_FAILED": 6,
+      "GENERATED": 39
+    },
+    "wall_s": 210.45299999999952,
+    "worker_exit_codes": [
+      null,
+      1,
+      1,
+      1
+    ],
+    "error": "AssertionError: MATLAB process failure: [0, 1, 1, 1]; no automatic retry"
+  },
+  "initial_records_preserved": 45,
+  "remaining_executed_once": 135,
+  "original_started_at": "2026-11-02T10:38:00.193084+08:00",
+  "end_to_end_wall_s": 464.285088
+}

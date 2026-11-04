@@ -1,0 +1,11 @@
+cgroup v1 CPU quota / period / memory limit:
+1000000
+100000
+16642998272
+mpirun (Open MPI) 5.0.11
+
+Report bugs to https://www.open-mpi.org/community/help/
+
+/hy-tmp/aero_su2/conda-meta/su2-8.5.0-py311h97eaa5e_0.json
+e33111d30934e3ff1f2f069510127f02c443b4a9
+?? .venv/
