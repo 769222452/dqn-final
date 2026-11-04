@@ -1,0 +1,61 @@
+{
+  "archive": "archive_v14_final.tgz",
+  "bytes": 426801390,
+  "sha256": "1a8d1a38e0153a9349cf77ce97248a6f828c9c176f18c1ffdb2fb50380b99130",
+  "downloaded_from_cloud": "2026-10-26",
+  "publication_branch": "cloud-results-v14-final-20261031",
+  "storage": "git-lfs",
+  "source_archive_unchanged": true,
+  "browseable_files": {
+    "summaries/heldout2/PREREGISTRATION.md": {
+      "bytes": 5835,
+      "sha256": "8fab51ed71f8af23e558c7630512007587aecdb5d2afa041e6a9f2fbd1371910",
+      "archive_member": "v14_final/PREREGISTRATION.md"
+    },
+    "summaries/heldout2/RESULTS.md": {
+      "bytes": 3112,
+      "sha256": "c29a4f482420099a24d77474fdba625c5699216963a3ac26c7930ad918f6ecd6",
+      "archive_member": "v14_final/RESULTS.md"
+    },
+    "summaries/heldout2/comparison.json": {
+      "bytes": 7488,
+      "sha256": "d85fa1843aaade24b80cd3b74c9b9759787497e1540f23963c754f896bcf6d81",
+      "archive_member": "v14_final/comparison.json"
+    },
+    "summaries/v16_b16/PREREGISTRATION.md": {
+      "bytes": 7806,
+      "sha256": "a00567572bcbc1b351889ed9e179657f4df0eef889abde95f8e4fe4ebcc8e92f",
+      "archive_member": "v14_final/v16_b16/PREREGISTRATION.md"
+    },
+    "summaries/v16_b16/RESULTS.md": {
+      "bytes": 6070,
+      "sha256": "d5f21de771d2750e53caab7cc32d1abb9584e13ddf23aef9dd804d1826fe83aa",
+      "archive_member": "v14_final/v16_b16/RESULTS.md"
+    },
+    "summaries/v16_b16/verdict.json": {
+      "bytes": 597,
+      "sha256": "06b287c440923ad7aa649a1eac0a3a26280545a5bcfd26e0589604f0bd2aa5ce",
+      "archive_member": "v14_final/v16_b16/verdict.json"
+    },
+    "summaries/v16_b16/comparison.json": {
+      "bytes": 15133,
+      "sha256": "56bbf6051b77b0279630f04a95154e8148f657ce0644743b2e72336524ea2194",
+      "archive_member": "v14_final/v16_b16/comparison.json"
+    },
+    "summaries/v16_b16/heldout3_set.json": {
+      "bytes": 1517,
+      "sha256": "e63b7acc53f3c36f11649ad9df9009abe643958163c576af9ed736c36997dbe7",
+      "archive_member": "v14_final/v16_b16/heldout3_set.json"
+    },
+    "summaries/v16_b16/NOTES.md": {
+      "bytes": 730,
+      "sha256": "d8630386c8f3e31bfea593de81a383211a61211d36011258a5c9b165f98fe032",
+      "archive_member": "v14_final/v16_b16/NOTES.md"
+    }
+  },
+  "archive_root": "v14_final",
+  "archive_regular_files": 39404,
+  "archive_regular_file_bytes": 1918121039,
+  "nested_tar_archives": 1,
+  "browseable_files_verified_against_archive": true
+}
