@@ -1,0 +1,5 @@
+FAIL matlab not found (set MATLAB=...). The family stage can instead be run on another machine: 
+     python3 experiments/aero_fidelity/family/family_jobs.py --out runs/aero_fidelity/family, then in MATLAB
+     make_family('runs/aero_fidelity/family/jobs.json', '<repo>/upstream_matlab/source/matlab/active', 'runs/aero_fidelity/family'); copy runs/aero_fidelity/family back here.
+cores: 1  planned: NP=7 x JOBS=2
+STOP: preflight failed

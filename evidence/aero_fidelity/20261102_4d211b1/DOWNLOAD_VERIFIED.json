@@ -1,0 +1,39 @@
+{
+  "zip_sha256": "1a7c0295ab3c94e69d97d539aecfc9ffa49f93e5c602558a374ba8bb94694519",
+  "files_verified": 259,
+  "cloud_delivery": {
+    "zip": "/hy-tmp/aero_operations_4d211b1/aero_family_4d211b1_check_failed.zip",
+    "sha256": "1a7c0295ab3c94e69d97d539aecfc9ffa49f93e5c602558a374ba8bb94694519",
+    "bytes": 9374235,
+    "summary": {
+      "commit": "4d211b1b9cc282bdf7716c6e03ff5c5156c9d4a7",
+      "branch": "aoa-fix",
+      "pytest": "8 passed in 2.33s",
+      "family_counts": {
+        "GENERATED": 105,
+        "GENERATION_FAILED": 15
+      },
+      "family_wall_s": 225.26599999999996,
+      "family_execution": "Local licensed MATLAB R2023a; CODEX.md section 3 other-machine fallback",
+      "worker_exit_codes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "failure_counts": {
+        "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]": 5,
+        "Stream surface 3: Invalid shock streamline [V5:GeometryDomain]": 5,
+        "Stream surface 1: Invalid shock streamline [V5:GeometryDomain]": 5
+      },
+      "check_status": "ABORTED_WITH_EXCEPTION",
+      "check_exit_code": 1,
+      "check_error": "ear clipping failed (non-simple base polygon)",
+      "family_audit_created": false,
+      "select_created": false,
+      "selection_verdict": null,
+      "cfd_executed": false,
+      "criteria_or_generator_modified": false
+    }
+  }
+}

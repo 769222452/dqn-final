@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/hy-tmp/dqn-aero/experiments/aero_fidelity/family/check_family.py", line 105, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/hy-tmp/dqn-aero/experiments/aero_fidelity/family/check_family.py", line 58, in main
+    r.update(audit(d/'native_geometry.mat'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/hy-tmp/dqn-aero/experiments/aero_fidelity/family/check_family.py", line 37, in audit
+    V, T = cfd.closed_surface(mat)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/hy-tmp/dqn-aero/scripts/cfd/make_su2_cases.py", line 136, in closed_surface
+    for t in _base_triangles(loop[:, 1:]):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/hy-tmp/dqn-aero/scripts/cfd/make_su2_cases.py", line 101, in _base_triangles
+    return _ear_clip(poly)
+           ^^^^^^^^^^^^^^^
+  File "/hy-tmp/dqn-aero/scripts/cfd/make_su2_cases.py", line 74, in _ear_clip
+    raise RuntimeError('ear clipping failed (non-simple base polygon)')
+RuntimeError: ear clipping failed (non-simple base polygon)
+STOP: family selection failed (see runs/aero_fidelity/family_selected/family_audit.json)

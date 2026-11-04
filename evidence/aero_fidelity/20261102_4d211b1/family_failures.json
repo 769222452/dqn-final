@@ -1,0 +1,302 @@
+[
+  {
+    "job_id": "FAM_MD6_d+3_ax0.970",
+    "inputs10": [
+      6,
+      12.594068226860461,
+      12.594068226860461,
+      12.594068226860461,
+      12.594068226860461,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.97
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2323232
+  },
+  {
+    "job_id": "FAM_MD6_d+4_ax0.970",
+    "inputs10": [
+      6,
+      13.594068226860461,
+      13.594068226860461,
+      13.594068226860461,
+      13.594068226860461,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.97
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2366029
+  },
+  {
+    "job_id": "FAM_MD6_d-3_ax0.970",
+    "inputs10": [
+      6,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.97
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 3: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.3932486
+  },
+  {
+    "job_id": "FAM_MD6_d-3_ax0.985",
+    "inputs10": [
+      6,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.985
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 3: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.3136092
+  },
+  {
+    "job_id": "FAM_MD6_d-3_ax1.000",
+    "inputs10": [
+      6,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 3: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.3504702
+  },
+  {
+    "job_id": "FAM_MD6_d-3_ax1.015",
+    "inputs10": [
+      6,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.015
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 3: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.3514875
+  },
+  {
+    "job_id": "FAM_MD6_d-3_ax1.030",
+    "inputs10": [
+      6,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      6.594068226860461,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.03
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 3: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1739982
+  },
+  {
+    "job_id": "FAM_MD8_d+2_ax0.970",
+    "inputs10": [
+      8,
+      9.18075578145828,
+      9.18075578145828,
+      9.18075578145828,
+      9.18075578145828,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.97
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1692582
+  },
+  {
+    "job_id": "FAM_MD8_d+3_ax0.970",
+    "inputs10": [
+      8,
+      10.18075578145828,
+      10.18075578145828,
+      10.18075578145828,
+      10.18075578145828,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.97
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2180518
+  },
+  {
+    "job_id": "FAM_MD8_d+4_ax0.970",
+    "inputs10": [
+      8,
+      11.18075578145828,
+      11.18075578145828,
+      11.18075578145828,
+      11.18075578145828,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.97
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2713945
+  },
+  {
+    "job_id": "FAM_MD8_d-3_ax0.970",
+    "inputs10": [
+      8,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.97
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1614118
+  },
+  {
+    "job_id": "FAM_MD8_d-3_ax0.985",
+    "inputs10": [
+      8,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.985
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1336429
+  },
+  {
+    "job_id": "FAM_MD8_d-3_ax1.000",
+    "inputs10": [
+      8,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2958507
+  },
+  {
+    "job_id": "FAM_MD8_d-3_ax1.015",
+    "inputs10": [
+      8,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.015
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.3659122
+  },
+  {
+    "job_id": "FAM_MD8_d-3_ax1.030",
+    "inputs10": [
+      8,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      4.180755781458282,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.03
+    ],
+    "core_path": "D:\\aero-git-meta-4d211b1\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid shock streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9325019
+  }
+]
