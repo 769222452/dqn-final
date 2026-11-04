@@ -1,0 +1,71 @@
+{
+  "commit": "f248c4f7da03a48335cbe1dfca4e2b6e0e58c7da",
+  "stage_name": "a",
+  "family_version": 5,
+  "started_at": "2026-11-02T19:13:55.239383+08:00",
+  "status": "COMPLETED",
+  "workers": [
+    392,
+    10660,
+    11432,
+    28608
+  ],
+  "commands": [
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "fprintf('MATLAB_VERSION=%s\\n',version); assert(license('test','Optimization_Toolbox'),'Optimization Toolbox unavailable'); assert(license('test','Symbolic_Toolbox'),'Symbolic Math Toolbox unavailable'); addpath('D:\\aero-opt-f248c4f\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family\\jobs_0.json', 'D:\\aero-opt-f248c4f\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "fprintf('MATLAB_VERSION=%s\\n',version); assert(license('test','Optimization_Toolbox'),'Optimization Toolbox unavailable'); assert(license('test','Symbolic_Toolbox'),'Symbolic Math Toolbox unavailable'); addpath('D:\\aero-opt-f248c4f\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family\\jobs_1.json', 'D:\\aero-opt-f248c4f\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "fprintf('MATLAB_VERSION=%s\\n',version); assert(license('test','Optimization_Toolbox'),'Optimization Toolbox unavailable'); assert(license('test','Symbolic_Toolbox'),'Symbolic Math Toolbox unavailable'); addpath('D:\\aero-opt-f248c4f\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family\\jobs_2.json', 'D:\\aero-opt-f248c4f\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "fprintf('MATLAB_VERSION=%s\\n',version); assert(license('test','Optimization_Toolbox'),'Optimization Toolbox unavailable'); assert(license('test','Symbolic_Toolbox'),'Symbolic Math Toolbox unavailable'); addpath('D:\\aero-opt-f248c4f\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family\\jobs_3.json', 'D:\\aero-opt-f248c4f\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family')"
+    ]
+  ],
+  "job_command": [
+    "D:\\v6-mission-morph-clean\\.venv\\Scripts\\python.exe",
+    "experiments/aero_fidelity/family/family_jobs.py",
+    "--out",
+    "D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family",
+    "--slices",
+    "4",
+    "--version",
+    "5"
+  ],
+  "job_count": 420,
+  "updated_at": "2026-11-02T19:22:48.139220+08:00",
+  "counts": {
+    "GENERATION_FAILED": 118,
+    "GENERATED": 302
+  },
+  "wall_s": 532.6100000000006,
+  "worker_exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "failure_categories": {
+    "V5:GeometryFailure | Stream surface 1: Invalid shock streamline [V5:GeometryDomain]": 25,
+    "V5:GeometryFailure | Stream surface 8: Invalid shock streamline [V5:GeometryDomain]": 10,
+    "V5:GeometryFailure | Stream surface 3: Invalid shock streamline [V5:GeometryDomain]": 10,
+    "V5:GeometryFailure | Stream surface 9: Invalid shock streamline [V5:GeometryDomain]": 10,
+    "V5:GeometryFailure | Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]": 63
+  },
+  "execution_location": "local licensed MATLAB R2023a",
+  "SLICES": 4
+}

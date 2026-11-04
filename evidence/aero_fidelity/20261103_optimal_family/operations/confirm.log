@@ -1,0 +1,19 @@
+{
+ "euler": {
+  "4.0": "OPTB_MD10_d+3_r0.35_ax0.99440",
+  "6.0": "OPTB_MD10_d+3_r0.35_ax0.99440",
+  "8.0": "OPTB_MD10_d+3_r0.35_ax0.99440"
+ },
+ "wedge": {
+  "4.0": "OPTB_MD9_d+2_r0.5_ax0.97550",
+  "6.0": "OPTB_MD9_d+2_r0.5_ax0.97550",
+  "8.0": "OPTB_MD10_d+3_r0.35_ax0.99440"
+ },
+ "wedge_winners_declared": {
+  "4.0": "OPTB_MD9_d+2_r0.5_ax0.97550",
+  "6.0": "OPTB_MD9_d+2_r0.5_ax0.97550",
+  "8.0": "OPTB_MD10_d+3_r0.35_ax0.99440"
+ },
+ "confirmed": false,
+ "cases": 24
+}

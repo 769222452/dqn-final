@@ -1,0 +1,67 @@
+{
+  "commit": "f248c4f7da03a48335cbe1dfca4e2b6e0e58c7da",
+  "stage_name": "b",
+  "family_version": 6,
+  "started_at": "2026-11-02T20:03:21.379129+08:00",
+  "input_map_sha256": "9a9847e1aefb01d5c93b83ed749c72666e3eb1bd2f0d49fdb2debc674290a1ba",
+  "status": "COMPLETED",
+  "workers": [
+    10540,
+    22712,
+    28416,
+    25724
+  ],
+  "commands": [
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "fprintf('MATLAB_VERSION=%s\\n',version); assert(license('test','Optimization_Toolbox'),'Optimization Toolbox unavailable'); assert(license('test','Symbolic_Toolbox'),'Symbolic Math Toolbox unavailable'); addpath('D:\\aero-opt-f248c4f\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-opt-f248c4f\\runs\\aero_opt_b\\family\\jobs_0.json', 'D:\\aero-opt-f248c4f\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-opt-f248c4f\\runs\\aero_opt_b\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "fprintf('MATLAB_VERSION=%s\\n',version); assert(license('test','Optimization_Toolbox'),'Optimization Toolbox unavailable'); assert(license('test','Symbolic_Toolbox'),'Symbolic Math Toolbox unavailable'); addpath('D:\\aero-opt-f248c4f\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-opt-f248c4f\\runs\\aero_opt_b\\family\\jobs_1.json', 'D:\\aero-opt-f248c4f\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-opt-f248c4f\\runs\\aero_opt_b\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "fprintf('MATLAB_VERSION=%s\\n',version); assert(license('test','Optimization_Toolbox'),'Optimization Toolbox unavailable'); assert(license('test','Symbolic_Toolbox'),'Symbolic Math Toolbox unavailable'); addpath('D:\\aero-opt-f248c4f\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-opt-f248c4f\\runs\\aero_opt_b\\family\\jobs_2.json', 'D:\\aero-opt-f248c4f\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-opt-f248c4f\\runs\\aero_opt_b\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "fprintf('MATLAB_VERSION=%s\\n',version); assert(license('test','Optimization_Toolbox'),'Optimization Toolbox unavailable'); assert(license('test','Symbolic_Toolbox'),'Symbolic Math Toolbox unavailable'); addpath('D:\\aero-opt-f248c4f\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-opt-f248c4f\\runs\\aero_opt_b\\family\\jobs_3.json', 'D:\\aero-opt-f248c4f\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-opt-f248c4f\\runs\\aero_opt_b\\family')"
+    ]
+  ],
+  "job_command": [
+    "D:\\v6-mission-morph-clean\\.venv\\Scripts\\python.exe",
+    "experiments/aero_fidelity/family/family_jobs.py",
+    "--out",
+    "D:\\aero-opt-f248c4f\\runs\\aero_opt_b\\family",
+    "--slices",
+    "4",
+    "--version",
+    "6",
+    "--map",
+    "D:\\aero-opt-f248c4f\\runs\\aero_opt_a\\family_selected\\family_audit.json"
+  ],
+  "job_count": 78,
+  "updated_at": "2026-11-02T20:06:02.107914+08:00",
+  "counts": {
+    "GENERATED": 78
+  },
+  "wall_s": 160.43800000000192,
+  "worker_exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "failure_categories": {},
+  "execution_location": "local licensed MATLAB R2023a",
+  "SLICES": 4
+}
