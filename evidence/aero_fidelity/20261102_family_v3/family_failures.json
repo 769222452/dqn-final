@@ -1,0 +1,1662 @@
+[
+  {
+    "job_id": "FAM3_MD4_pair_d+2_r0.5_ax1.10",
+    "inputs10": [
+      4,
+      21.970016247906567,
+      21.970016247906567,
+      10.985008123953284,
+      10.985008123953284,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.1
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0572422
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+4_r0.5_ax0.90",
+    "inputs10": [
+      4,
+      24.636682914573232,
+      24.636682914573232,
+      12.318341457286616,
+      12.318341457286616,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.9
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2134526
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+4_r0.5_ax0.91",
+    "inputs10": [
+      4,
+      24.636682914573232,
+      24.636682914573232,
+      12.318341457286616,
+      12.318341457286616,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.91
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2872087
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+4_r0.5_ax0.92",
+    "inputs10": [
+      4,
+      24.636682914573232,
+      24.636682914573232,
+      12.318341457286616,
+      12.318341457286616,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.92
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1828153
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+4_r0.5_ax1.08",
+    "inputs10": [
+      4,
+      24.636682914573232,
+      24.636682914573232,
+      12.318341457286616,
+      12.318341457286616,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.08
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0244872
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+4_r0.5_ax1.09",
+    "inputs10": [
+      4,
+      24.636682914573232,
+      24.636682914573232,
+      12.318341457286616,
+      12.318341457286616,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.09
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9675018
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+4_r0.5_ax1.10",
+    "inputs10": [
+      4,
+      24.636682914573232,
+      24.636682914573232,
+      12.318341457286616,
+      12.318341457286616,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.1
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0810481
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+6_r0.5_ax0.90",
+    "inputs10": [
+      4,
+      27.3033495812399,
+      27.3033495812399,
+      13.65167479061995,
+      13.65167479061995,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.9
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1929258
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+6_r0.5_ax0.91",
+    "inputs10": [
+      4,
+      27.3033495812399,
+      27.3033495812399,
+      13.65167479061995,
+      13.65167479061995,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.91
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2660074
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+6_r0.5_ax0.92",
+    "inputs10": [
+      4,
+      27.3033495812399,
+      27.3033495812399,
+      13.65167479061995,
+      13.65167479061995,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.92
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2229615
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+6_r0.5_ax0.93",
+    "inputs10": [
+      4,
+      27.3033495812399,
+      27.3033495812399,
+      13.65167479061995,
+      13.65167479061995,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.93
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1483232
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+6_r0.5_ax0.94",
+    "inputs10": [
+      4,
+      27.3033495812399,
+      27.3033495812399,
+      13.65167479061995,
+      13.65167479061995,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.94
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9554641
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+6_r0.5_ax1.07",
+    "inputs10": [
+      4,
+      27.3033495812399,
+      27.3033495812399,
+      13.65167479061995,
+      13.65167479061995,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.07
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9352735
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+6_r0.5_ax1.08",
+    "inputs10": [
+      4,
+      27.3033495812399,
+      27.3033495812399,
+      13.65167479061995,
+      13.65167479061995,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.08
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0310858
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+6_r0.5_ax1.09",
+    "inputs10": [
+      4,
+      27.3033495812399,
+      27.3033495812399,
+      13.65167479061995,
+      13.65167479061995,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.09
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0171696
+  },
+  {
+    "job_id": "FAM3_MD4_pair_d+6_r0.5_ax1.10",
+    "inputs10": [
+      4,
+      27.3033495812399,
+      27.3033495812399,
+      13.65167479061995,
+      13.65167479061995,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.1
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9702794
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+2_r0.5_ax0.90",
+    "inputs10": [
+      6,
+      15.458757635813948,
+      15.458757635813948,
+      7.729378817906974,
+      7.729378817906974,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.9
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2272439
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+2_r0.5_ax0.91",
+    "inputs10": [
+      6,
+      15.458757635813948,
+      15.458757635813948,
+      7.729378817906974,
+      7.729378817906974,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.91
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.3023325
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+2_r0.5_ax0.92",
+    "inputs10": [
+      6,
+      15.458757635813948,
+      15.458757635813948,
+      7.729378817906974,
+      7.729378817906974,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.92
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.3523638
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+2_r0.5_ax0.93",
+    "inputs10": [
+      6,
+      15.458757635813948,
+      15.458757635813948,
+      7.729378817906974,
+      7.729378817906974,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.93
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.3782282
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+2_r0.5_ax0.94",
+    "inputs10": [
+      6,
+      15.458757635813948,
+      15.458757635813948,
+      7.729378817906974,
+      7.729378817906974,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.94
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0663795
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+2_r0.5_ax1.08",
+    "inputs10": [
+      6,
+      15.458757635813948,
+      15.458757635813948,
+      7.729378817906974,
+      7.729378817906974,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.08
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2265002
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+2_r0.5_ax1.09",
+    "inputs10": [
+      6,
+      15.458757635813948,
+      15.458757635813948,
+      7.729378817906974,
+      7.729378817906974,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.09
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.150055
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+2_r0.5_ax1.10",
+    "inputs10": [
+      6,
+      15.458757635813948,
+      15.458757635813948,
+      7.729378817906974,
+      7.729378817906974,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.1
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.169476
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax0.90",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.9
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2621013
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax0.91",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.91
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2308238
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax0.92",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.92
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2953426
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax0.93",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.93
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2020835
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax0.94",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.94
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9812579
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax0.95",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.95
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9833198
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax0.96",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.96
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.015231
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax1.07",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.07
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.982285
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax1.08",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.08
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9402413
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax1.09",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.09
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0506943
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+4_r0.5_ax1.10",
+    "inputs10": [
+      6,
+      18.125424302480614,
+      18.125424302480614,
+      9.062712151240307,
+      9.062712151240307,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.1
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0211083
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax0.90",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.9
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]",
+    "elapsed_s": 1.183356
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax0.91",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.91
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1165567
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax0.92",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.92
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1713837
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax0.93",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.93
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2069492
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax0.94",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.94
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9227057
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax0.95",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.95
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9802001
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax0.96",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.96
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9946453
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax1.06",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.06
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9750495
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax1.07",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.07
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.949915
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax1.08",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.08
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9704386
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax1.09",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.09
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.4755204
+  },
+  {
+    "job_id": "FAM3_MD6_pair_d+6_r0.5_ax1.10",
+    "inputs10": [
+      6,
+      20.79209096914728,
+      20.79209096914728,
+      10.39604548457364,
+      10.39604548457364,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.1
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9571288
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax0.90",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.9
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]",
+    "elapsed_s": 1.1900229
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax0.91",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.91
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.2763349
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax0.92",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.92
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.3871225
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax0.93",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.93
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.4939373
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax0.94",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.94
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1184388
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax0.95",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.95
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1384722
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax0.96",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.96
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9524805
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax1.07",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.07
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.350204
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax1.08",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.08
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1161513
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax1.09",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.09
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9445716
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+2_r0.5_ax1.10",
+    "inputs10": [
+      8,
+      12.241007708611042,
+      12.241007708611042,
+      6.120503854305521,
+      6.120503854305521,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.1
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9625621
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax0.90",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.9
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]",
+    "elapsed_s": 1.2934463
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax0.91",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.91
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]",
+    "elapsed_s": 1.4386342
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax0.92",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.92
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]",
+    "elapsed_s": 1.2618885
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax0.93",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.93
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.276163
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax0.94",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.94
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0189532
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax0.95",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.95
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.028673
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax0.96",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.96
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0206058
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax0.97",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.97
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1009889
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax1.07",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.07
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.086669
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax1.08",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.08
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1533853
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax1.09",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.09
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1068667
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+4_r0.5_ax1.10",
+    "inputs10": [
+      8,
+      14.907674375277708,
+      14.907674375277708,
+      7.453837187638854,
+      7.453837187638854,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.1
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.1259054
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax0.90",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.9
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]",
+    "elapsed_s": 1.2313162
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax0.91",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.91
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]",
+    "elapsed_s": 1.377434
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax0.92",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.92
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]",
+    "elapsed_s": 1.3297099
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax0.93",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.93
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]",
+    "elapsed_s": 1.3274589
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax0.94",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.94
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0424642
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax0.95",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.95
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0596947
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax0.96",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.96
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0453534
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax0.97",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      0.97
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0737109
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax1.06",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.06
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.798344
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax1.07",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.07
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 1.0715624
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax1.08",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.08
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9787573
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax1.09",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.09
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9322328
+  },
+  {
+    "job_id": "FAM3_MD8_pair_d+6_r0.5_ax1.10",
+    "inputs10": [
+      8,
+      17.574341041944376,
+      17.574341041944376,
+      8.787170520972188,
+      8.787170520972188,
+      1.0331,
+      1.0331,
+      0.11606537709080691,
+      -4,
+      1.1
+    ],
+    "core_path": "D:\\aero-v3-78378fa\\upstream_matlab\\source\\matlab\\active\\build_geometry_core.m",
+    "status": "GENERATION_FAILED",
+    "error_identifier": "V5:GeometryFailure",
+    "error_message": "Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]",
+    "elapsed_s": 0.9267385
+  }
+]

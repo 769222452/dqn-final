@@ -1,0 +1,52 @@
+{
+  "verified_at": "2026-11-02T11:35:33.153464+08:00",
+  "zip_sha256": "8f43684157ce861c3bb52c238759f1b9a47d73aeabeec9f62756de12bf1bb3fe",
+  "zip_bytes": 9493908,
+  "verified_files": 323,
+  "source": {
+    "zip": "/hy-tmp/aero_operations_v3_20261102/aero_family_v3_78378fa_results.zip",
+    "sha256": "8f43684157ce861c3bb52c238759f1b9a47d73aeabeec9f62756de12bf1bb3fe",
+    "bytes": 9493908,
+    "manifest_files": 323,
+    "summary": {
+      "commit": "78378fab661eff81b0840417a1f7616acf451454",
+      "source_branch": "aoa-fix",
+      "protocol_version": 3,
+      "amendment": 2,
+      "NP": 7,
+      "JOBS": 2,
+      "SLICES": 4,
+      "family_counts": {
+        "GENERATED": 106,
+        "GENERATION_FAILED": 83
+      },
+      "family_wall_s": 210.70300000000043,
+      "family_started_at": "2026-11-02T11:17:44.327626+08:00",
+      "family_finished_at": "2026-11-02T11:21:15.142075+08:00",
+      "failure_categories": {
+        "V5:GeometryFailure | Stream surface 1: Invalid isentropic streamline [V5:GeometryDomain]": 74,
+        "V5:GeometryFailure | Stream surface 1: Characteristic iteration cap [V5:GeometryNonconverged]": 9
+      },
+      "check_started_at": "2026-11-02T03:21:58.783385+00:00",
+      "check_finished_at": "2026-11-02T03:34:52.660074+00:00",
+      "check_wall_s": 773.8766588717699,
+      "check_exit_code": 1,
+      "selection_status": "NO_ADMISSIBLE_FAMILY",
+      "audit_outcomes": {
+        "VALID": 106,
+        "GENERATION_FAILED": 83
+      },
+      "generated": 106,
+      "valid": 106,
+      "selected": null,
+      "target_volume_m3": 1.018813633812261,
+      "tests": "13 passed",
+      "upstream_verified_files": 203,
+      "preflight": "Cloud lacks MATLAB only; explicitly authorized local MATLAB R2023a with required toolboxes used",
+      "cfd_executed": false,
+      "source_modified": false,
+      "transfer_verified_files": 307,
+      "input_records_verified": 189
+    }
+  }
+}
