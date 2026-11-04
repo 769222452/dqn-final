@@ -1,0 +1,62 @@
+{
+  "commit": "01589db3371acc0f542b4c9b1877db0b6221566d",
+  "started_at": "2026-11-02T14:12:35.317129+08:00",
+  "stage": "family_completed",
+  "workers": [
+    1876,
+    20088,
+    6316,
+    4548
+  ],
+  "commands": [
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-v4-01589db\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v4-01589db\\runs\\aero_fidelity_v4\\family\\jobs_0.json', 'D:\\aero-v4-01589db\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v4-01589db\\runs\\aero_fidelity_v4\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-v4-01589db\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v4-01589db\\runs\\aero_fidelity_v4\\family\\jobs_1.json', 'D:\\aero-v4-01589db\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v4-01589db\\runs\\aero_fidelity_v4\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-v4-01589db\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v4-01589db\\runs\\aero_fidelity_v4\\family\\jobs_2.json', 'D:\\aero-v4-01589db\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v4-01589db\\runs\\aero_fidelity_v4\\family')"
+    ],
+    [
+      "D:\\matlab\\bin\\matlab.exe",
+      "-wait",
+      "-batch",
+      "addpath('D:\\aero-v4-01589db\\experiments\\aero_fidelity\\family'); make_family('D:\\aero-v4-01589db\\runs\\aero_fidelity_v4\\family\\jobs_3.json', 'D:\\aero-v4-01589db\\upstream_matlab\\source\\matlab\\active', 'D:\\aero-v4-01589db\\runs\\aero_fidelity_v4\\family')"
+    ]
+  ],
+  "job_command": [
+    "D:\\v6-mission-morph-clean\\.venv\\Scripts\\python.exe",
+    "experiments/aero_fidelity/family/family_jobs.py",
+    "--out",
+    "D:\\aero-v4-01589db\\runs\\aero_fidelity_v4\\family",
+    "--slices",
+    "4",
+    "--version",
+    "4"
+  ],
+  "updated_at": "2026-11-02T14:13:55.852424+08:00",
+  "counts": {
+    "GENERATED": 29
+  },
+  "wall_s": 80.34399999999732,
+  "worker_exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "execution_location": "local licensed MATLAB R2023a",
+  "NP": 7,
+  "JOBS": 2,
+  "SLICES": 4
+}

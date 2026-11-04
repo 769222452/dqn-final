@@ -1,0 +1,17 @@
+{
+  "stage": "cfd-mesh",
+  "status": "COMPLETED",
+  "commit": "01589db3371acc0f542b4c9b1877db0b6221566d",
+  "NP": 7,
+  "JOBS": 2,
+  "SLICES": 4,
+  "started_at": "2026-11-02T06:20:10.831508+00:00",
+  "command": [
+    "bash",
+    "experiments/aero_fidelity/run_decision.sh",
+    "cfd-mesh"
+  ],
+  "exit_code": 0,
+  "wall_s": 655.9232612997293,
+  "finished_at": "2026-11-02T06:31:06.755080+00:00"
+}

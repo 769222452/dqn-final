@@ -1,0 +1,26 @@
+{"geometry": "FAM_MD4", "level": "medium", "triangles": 19206, "mesh": {"cells": 347599, "edge_scale": 1.0, "algorithm": 10, "remesh_surface": true}, "edges": 28809, "open_edges": 0, "nonmanifold_edges": 0}
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [9216, 11723, 11720] #3
+  2nd: [9216, 11723, 11684] #3
+{"geometry": "FAM_MD6", "level": "medium", "triangles": 19206, "mesh": {"cells": 284213, "edge_scale": 1.5, "algorithm": 10, "remesh_surface": true}, "edges": 28809, "open_edges": 0, "nonmanifold_edges": 0}
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [14224, 14225, 14226] #4
+  2nd: [14224, 14225, 14209] #4
+PLC Error:  A segment and a facet intersect at point (3.39924,-0.844827,-1.22404).
+  Segment: [1769,1805] #-1 (0)
+  Facet:   [5463,1770,99] #2
+{"geometry": "FAM_MD8", "level": "medium", "triangles": 19206, "mesh": {"cells": 257932, "edge_scale": 2.0, "algorithm": 10, "remesh_surface": true}, "edges": 28809, "open_edges": 0, "nonmanifold_edges": 0}
+27 cases -> runs/aero_fidelity_v4/cfd/cases_medium.txt
+{"geometry": "FAM_MD6", "level": "coarse", "triangles": 19206, "mesh": {"cells": 93085, "edge_scale": 1.0, "algorithm": 10, "remesh_surface": true}, "edges": 28809, "open_edges": 0, "nonmanifold_edges": 0}
+1 cases -> runs/aero_fidelity_v4/cfd/cases_coarse.txt
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [4383, 4384, 4382] #2
+  2nd: [4383, 4384, 4387] #2
+Found two exactly self-intersecting facets (dihedral angle  0.00000E+00).
+  1st: [31763, 31815, 31816] #4
+  2nd: [31763, 31815, 31762] #4
+Found two overlapping facets.
+  1st: [786, 785, 784] #2
+  2nd: [786, 785, 784] #3
+{"geometry": "FAM_MD6", "level": "fine", "triangles": 19206, "mesh": {"cells": 1012692, "edge_scale": 3.0, "algorithm": 10, "remesh_surface": true}, "edges": 28809, "open_edges": 0, "nonmanifold_edges": 0}
+1 cases -> runs/aero_fidelity_v4/cfd/cases_fine.txt

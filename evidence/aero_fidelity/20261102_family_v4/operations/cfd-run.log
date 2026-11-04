@@ -1,0 +1,32 @@
+level medium: 27 cases, 2 in parallel x 7 ranks
+done FAM_MD4/medium/M4_a4
+done FAM_MD4/medium/M4_a2
+done FAM_MD4/medium/M4_a6
+done FAM_MD4/medium/M6_a2
+done FAM_MD4/medium/M6_a4
+done FAM_MD4/medium/M6_a6
+done FAM_MD4/medium/M8_a2
+done FAM_MD4/medium/M8_a4
+done FAM_MD6/medium/M4_a2
+done FAM_MD4/medium/M8_a6
+done FAM_MD6/medium/M4_a4
+done FAM_MD6/medium/M4_a6
+done FAM_MD6/medium/M6_a2
+done FAM_MD6/medium/M6_a4
+done FAM_MD6/medium/M6_a6
+done FAM_MD6/medium/M8_a2
+done FAM_MD6/medium/M8_a4
+done FAM_MD6/medium/M8_a6
+done FAM_MD8/medium/M4_a2
+done FAM_MD8/medium/M4_a4
+done FAM_MD8/medium/M4_a6
+done FAM_MD8/medium/M6_a2
+done FAM_MD8/medium/M6_a4
+done FAM_MD8/medium/M6_a6
+done FAM_MD8/medium/M8_a2
+done FAM_MD8/medium/M8_a4
+done FAM_MD8/medium/M8_a6
+level coarse: 1 cases, 2 in parallel x 7 ranks
+done FAM_MD6/coarse/M6_a4
+level fine: 1 cases, 2 in parallel x 7 ranks
+done FAM_MD6/fine/M6_a4
