@@ -1,0 +1,7 @@
+{
+  "commit": "dc39a7f9e7c3d78f8bc66c660866907759362c24",
+  "source_branch": "aoa-fix",
+  "acquisition": "Cloud Git fetch, exact commit worktree; incremental Git bundle to local",
+  "source_tree": "cf4e671406462be6b1fc6dbb2246888a4f4934e4",
+  "bundle_sha256": "08cb4e8843e040596d5aaa9eb49731d336bea34a514054eea67ef5a1148f03c9"
+}

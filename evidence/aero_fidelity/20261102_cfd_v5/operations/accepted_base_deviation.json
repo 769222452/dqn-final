@@ -1,0 +1,10 @@
+{
+  "accepted_by_user": true,
+  "date": "2026-11-02",
+  "path": "FAM_MD4/medium/mesh.su2",
+  "expected_base_surfaces": 1,
+  "actual_base_surfaces": 2,
+  "answer": "接受原始输出，继续 CFD（推荐）",
+  "scope": "Continue the frozen CFD experiment without modifying source, settings or generated mesh. Both elementary surfaces form one connected planar base and share one physical base marker.",
+  "evidence": "base_review.json"
+}

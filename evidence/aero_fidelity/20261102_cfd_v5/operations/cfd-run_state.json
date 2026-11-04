@@ -1,0 +1,18 @@
+{
+  "stage": "cfd-run",
+  "status": "COMPLETED",
+  "commit": "dc39a7f9e7c3d78f8bc66c660866907759362c24",
+  "NP": 7,
+  "JOBS": 2,
+  "BASE_MARKER": 1,
+  "started_at": "2026-11-02T08:13:11.433029+00:00",
+  "command": [
+    "bash",
+    "experiments/aero_fidelity/run_decision.sh",
+    "cfd-run"
+  ],
+  "exit_code": 0,
+  "wall_s": 2750.911030367017,
+  "finished_at": "2026-11-02T08:59:02.344369+00:00",
+  "failed_cases": []
+}

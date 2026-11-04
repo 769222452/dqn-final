@@ -1,0 +1,392 @@
+{
+  "mesh_count": 5,
+  "case_count": 29,
+  "markers_valid": true,
+  "all_base_surfaces_are_one": false,
+  "accepted_deviation": {
+    "accepted_by_user": true,
+    "date": "2026-11-02",
+    "path": "FAM_MD4/medium/mesh.su2",
+    "expected_base_surfaces": 1,
+    "actual_base_surfaces": 2,
+    "answer": "\u63a5\u53d7\u539f\u59cb\u8f93\u51fa\uff0c\u7ee7\u7eed CFD\uff08\u63a8\u8350\uff09",
+    "scope": "Continue the frozen CFD experiment without modifying source, settings or generated mesh. Both elementary surfaces form one connected planar base and share one physical base marker.",
+    "evidence": "base_review.json"
+  },
+  "tetrahedra_all_identical": true,
+  "interiors_all_identical": true,
+  "meshes": [
+    {
+      "path": "FAM_MD4/medium/mesh.su2",
+      "v5": {
+        "markers": [
+          "body",
+          "base",
+          "farfield"
+        ],
+        "nmark": 3,
+        "elements": 347599,
+        "tetrahedra": 347599,
+        "element_types": {
+          "10": 347599
+        },
+        "interior_sha256": "e34ce114fa3753222c1e317ef4ca7dff1c7af9a6e62619f3134caf1608205aec",
+        "mesh_sha256": "b4bcb6d241c00ab28df1c4057ced54496d67e1bbb25db592a957f0bd7ea590bf"
+      },
+      "v4": {
+        "markers": [
+          "body",
+          "farfield"
+        ],
+        "nmark": 2,
+        "elements": 347599,
+        "tetrahedra": 347599,
+        "element_types": {
+          "10": 347599
+        },
+        "interior_sha256": "e34ce114fa3753222c1e317ef4ca7dff1c7af9a6e62619f3134caf1608205aec",
+        "mesh_sha256": "9fa6e54973c6cacbe720664d374ec33d69296a9fa1c64e1d919ad296585a5c5a"
+      },
+      "mesh_info": {
+        "cells": 347599,
+        "edge_scale": 1.0,
+        "algorithm": 10,
+        "remesh_surface": true,
+        "base_surfaces": 2,
+        "skin_surfaces": 4
+      },
+      "base_surfaces_is_one": false,
+      "accepted_exception": true,
+      "markers_valid": true,
+      "tetrahedra_identical": true,
+      "interior_identical": true
+    },
+    {
+      "path": "FAM_MD6/coarse/mesh.su2",
+      "v5": {
+        "markers": [
+          "body",
+          "base",
+          "farfield"
+        ],
+        "nmark": 3,
+        "elements": 93085,
+        "tetrahedra": 93085,
+        "element_types": {
+          "10": 93085
+        },
+        "interior_sha256": "246aad75b95cb21423075f5f57b9abf1816a66a4eea5250c7224f84f2b19267d",
+        "mesh_sha256": "ccde2bfc898c718112127878f6184f1e70e6f9f9a1fb42a48e071fc5aacde88a"
+      },
+      "v4": {
+        "markers": [
+          "body",
+          "farfield"
+        ],
+        "nmark": 2,
+        "elements": 93085,
+        "tetrahedra": 93085,
+        "element_types": {
+          "10": 93085
+        },
+        "interior_sha256": "246aad75b95cb21423075f5f57b9abf1816a66a4eea5250c7224f84f2b19267d",
+        "mesh_sha256": "f38c4d313e1b55499281ba02cc66740d624796ce9d7da03fbeb2a3bbcbcce1d1"
+      },
+      "mesh_info": {
+        "cells": 93085,
+        "edge_scale": 1.0,
+        "algorithm": 10,
+        "remesh_surface": true,
+        "base_surfaces": 1,
+        "skin_surfaces": 4
+      },
+      "base_surfaces_is_one": true,
+      "accepted_exception": false,
+      "markers_valid": true,
+      "tetrahedra_identical": true,
+      "interior_identical": true
+    },
+    {
+      "path": "FAM_MD6/fine/mesh.su2",
+      "v5": {
+        "markers": [
+          "body",
+          "base",
+          "farfield"
+        ],
+        "nmark": 3,
+        "elements": 1012692,
+        "tetrahedra": 1012692,
+        "element_types": {
+          "10": 1012692
+        },
+        "interior_sha256": "dac7fd8318b80e9ea19d5b5252a4e71f59153f10be04b77581063b138309f02a",
+        "mesh_sha256": "4b3840410c659fa2af3bfce91dc0f4f676d25ba75751b63f293a5eda1ce44668"
+      },
+      "v4": {
+        "markers": [
+          "body",
+          "farfield"
+        ],
+        "nmark": 2,
+        "elements": 1012692,
+        "tetrahedra": 1012692,
+        "element_types": {
+          "10": 1012692
+        },
+        "interior_sha256": "dac7fd8318b80e9ea19d5b5252a4e71f59153f10be04b77581063b138309f02a",
+        "mesh_sha256": "6f014e6af71348a66f1bb4af7e4b8427540d6c35e90ffbc0e526f3ba1c7574a2"
+      },
+      "mesh_info": {
+        "cells": 1012692,
+        "edge_scale": 3.0,
+        "algorithm": 10,
+        "remesh_surface": true,
+        "base_surfaces": 1,
+        "skin_surfaces": 4
+      },
+      "base_surfaces_is_one": true,
+      "accepted_exception": false,
+      "markers_valid": true,
+      "tetrahedra_identical": true,
+      "interior_identical": true
+    },
+    {
+      "path": "FAM_MD6/medium/mesh.su2",
+      "v5": {
+        "markers": [
+          "body",
+          "base",
+          "farfield"
+        ],
+        "nmark": 3,
+        "elements": 284213,
+        "tetrahedra": 284213,
+        "element_types": {
+          "10": 284213
+        },
+        "interior_sha256": "6a246ffbc4f5c32da500f44f60829f522c44735134ab276bef6d2f033cb3b444",
+        "mesh_sha256": "5be44bf92a3197da73f2219420a091d040199610a68055f8d6c3b97c249a21ab"
+      },
+      "v4": {
+        "markers": [
+          "body",
+          "farfield"
+        ],
+        "nmark": 2,
+        "elements": 284213,
+        "tetrahedra": 284213,
+        "element_types": {
+          "10": 284213
+        },
+        "interior_sha256": "6a246ffbc4f5c32da500f44f60829f522c44735134ab276bef6d2f033cb3b444",
+        "mesh_sha256": "60190dc7825796185d4c923a0b64827da34237d96eb0ec7edc891132fce7051d"
+      },
+      "mesh_info": {
+        "cells": 284213,
+        "edge_scale": 1.5,
+        "algorithm": 10,
+        "remesh_surface": true,
+        "base_surfaces": 1,
+        "skin_surfaces": 4
+      },
+      "base_surfaces_is_one": true,
+      "accepted_exception": false,
+      "markers_valid": true,
+      "tetrahedra_identical": true,
+      "interior_identical": true
+    },
+    {
+      "path": "FAM_MD8/medium/mesh.su2",
+      "v5": {
+        "markers": [
+          "body",
+          "base",
+          "farfield"
+        ],
+        "nmark": 3,
+        "elements": 257932,
+        "tetrahedra": 257932,
+        "element_types": {
+          "10": 257932
+        },
+        "interior_sha256": "0da5fddadbe0d9a8bd87836ec2d14a8f11cdbddd51824fb2757eb964b6628dad",
+        "mesh_sha256": "c0109fbaacc91b93a3595ee704714809e3a61ab5328aac3ce47cb25ac3ad84e9"
+      },
+      "v4": {
+        "markers": [
+          "body",
+          "farfield"
+        ],
+        "nmark": 2,
+        "elements": 257932,
+        "tetrahedra": 257932,
+        "element_types": {
+          "10": 257932
+        },
+        "interior_sha256": "0da5fddadbe0d9a8bd87836ec2d14a8f11cdbddd51824fb2757eb964b6628dad",
+        "mesh_sha256": "4fc289a0ed2e0bc895a3bf211e2985fc6afbd91bd428878741df55db28c53254"
+      },
+      "mesh_info": {
+        "cells": 257932,
+        "edge_scale": 2.0,
+        "algorithm": 10,
+        "remesh_surface": true,
+        "base_surfaces": 1,
+        "skin_surfaces": 4
+      },
+      "base_surfaces_is_one": true,
+      "accepted_exception": false,
+      "markers_valid": true,
+      "tetrahedra_identical": true,
+      "interior_identical": true
+    }
+  ],
+  "case_settings": [
+    {
+      "case_id": "FAM_MD4/medium/M4_a2",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD4/medium/M4_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD4/medium/M4_a6",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD4/medium/M6_a2",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD4/medium/M6_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD4/medium/M6_a6",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD4/medium/M8_a2",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD4/medium/M8_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD4/medium/M8_a6",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/medium/M4_a2",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/medium/M4_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/medium/M4_a6",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/medium/M6_a2",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/medium/M6_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/medium/M6_a6",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/medium/M8_a2",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/medium/M8_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/medium/M8_a6",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/coarse/M6_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD6/fine/M6_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD8/medium/M4_a2",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD8/medium/M4_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD8/medium/M4_a6",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD8/medium/M6_a2",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD8/medium/M6_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD8/medium/M6_a6",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD8/medium/M8_a2",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD8/medium/M8_a4",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    },
+    {
+      "case_id": "FAM_MD8/medium/M8_a6",
+      "cfg_identical_except_two_marker_lines": true,
+      "physical_inputs_identical": true
+    }
+  ]
+}

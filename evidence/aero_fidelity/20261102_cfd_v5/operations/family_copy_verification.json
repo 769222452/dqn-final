@@ -1,0 +1,14 @@
+{
+  "source": "/hy-tmp/dqn-aero-v4-01589db/runs/aero_fidelity_v4/family_selected",
+  "destination": "runs/aero_fidelity_v5/family_selected",
+  "sha256": {
+    "FAM_MD4/native_geometry.mat": "e5354c33bd1d0254cf405476208d212a42acd901ff28d06103b8cd18dde512f9",
+    "FAM_MD6/native_geometry.mat": "d0c1cd5038ea271bd8a4f2b4d06721f4c6d75825527519bd0455c5e9311667dd",
+    "FAM_MD8/native_geometry.mat": "77a5bdce37ef2331472b74841541d3a3dd3ae753bb9762a441b72d0349a730fa",
+    "family_audit.json": "86f0d3dd53766525c8ebceed5847c8b3343c5ec016218cc1a9206a4588a6c3b1",
+    "select.json": "d8cc78c78eef78e01297649a82b2ca3fa340e587139be55b4b697d30eb38317d"
+  },
+  "all_identical": true,
+  "mat_count": 3,
+  "copied_at": "2026-11-02T08:00:02.290025+00:00"
+}

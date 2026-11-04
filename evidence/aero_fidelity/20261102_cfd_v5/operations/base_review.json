@@ -1,0 +1,23 @@
+{
+  "mesh_info": {
+    "cells": 347599,
+    "edge_scale": 1.0,
+    "algorithm": 10,
+    "remesh_surface": true,
+    "base_surfaces": 2,
+    "skin_surfaces": 4
+  },
+  "markers": {
+    "body": 54817,
+    "base": 4487,
+    "farfield": 3970
+  },
+  "base_x_min": 4.999999999999999,
+  "base_x_max": 5.000000000000001,
+  "base_area": 0.6236558143651497,
+  "base_connected_components": 1,
+  "base_normal_x_positive": 4487,
+  "base_normal_x_negative": 0,
+  "volume_mesh_identical": true,
+  "observation": "Two elementary base surfaces are grouped in one physical base marker; recorded without changing any geometry or setting."
+}
