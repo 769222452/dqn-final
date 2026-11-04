@@ -1,6 +1,20 @@
 # Certified rollout policy iteration for a morphing waverider
 
-## Branch `aoa-fix`: angle-of-attack sawtooth fix
+## Repository map (reorganised 2026-11-04)
+
+| branch | what it holds |
+|---|---|
+| `project-latest` (this branch) | the current project: certified flight control, rollout policy iteration, the angle-of-attack fix, the execution-layer and improvement studies, the aerodynamic-fidelity experiments, the headroom study, tests, configs and the data needed to run them |
+| `aero-database` | code that generates the geometries and the aerodynamic database: the MATLAB generator and database sources (`upstream_matlab/`, verified by SHA-256), `waveRiderEval`, the complete original MATLAB directory, the SU2 and friction tools |
+| `evidence-archive` | every audit, check and experiment result (cloud V14/V16 results, controlled families v1 to v5, optimal-family test, network-architecture study), one commit per source |
+| `misc-archive` | files that belong to none of the above (invalid pilot runs and similar) |
+| `main` | the original project of 2026-10-23, unchanged |
+| `audit-cleanup-20261030`, `supported-recovery-latest-20261031` | an independent line of work (integrity fixes, continuous recovery, state-supported policy experiments), not merged here |
+
+`upstream_matlab/` is not in this branch. The MATLAB stages of `experiments/aero_fidelity` (family generation, frozen audit) need it: copy it from
+`aero-database` to the repository root first.
+
+## Angle-of-attack sawtooth fix (formerly the `aoa-fix` branch)
 
 This branch is the original V16 source plus an opt-in, time-consistent inner-loop CL objective that removes
 the 3 s replanning sawtooth in alpha. It also includes the V16-style surrogate refitted to that objective:

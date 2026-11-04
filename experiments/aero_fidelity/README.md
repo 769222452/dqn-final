@@ -381,6 +381,9 @@ here, since MATLAB is unavailable locally):
 
 ## 5. How to run (cloud server)
 
+The MATLAB sources (`upstream_matlab/`) are on the `aero-database` branch, not here; copy that folder to the repository root before the `family` and `check`
+stages (the frozen audit imports `upstream_matlab/source/tools/geometry_audit/mesh_checks.py`).
+
 See `CODEX.md`. In short: `bash experiments/aero_fidelity/run_decision.sh all`, which stops at the first
 failed stage and prints what it needs (MATLAB with the Optimization and Symbolic Math toolboxes, SU2, MPI).
 

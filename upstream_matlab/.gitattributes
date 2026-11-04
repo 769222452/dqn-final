@@ -1,2 +1,0 @@
-# Preserve archived source and input bytes, including historical line endings.
-source/** -text
