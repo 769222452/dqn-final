@@ -1,0 +1,200 @@
+--- teacher_original/offdesign_aero_v4.m
++++ teacher_active/offdesign_aero_v4.m
+@@ -1,138 +1,67 @@
+-function [L_D, Force_x, Force_y, Force_z] = offdesign_aero_v4(wav_x, wav_y, wav_z, wav_up_x, wav_up_y, wav_up_z, Ma, AOA)
+-% offdesign_aero_v2 - Improved pressure model (2018) streamline-tracing approach.
+-% Traces streamlines along each spanwise station using Eq.(1): Vi = ni x Vinf x ni.
+-% Each panel's effective inclination is computed relative to the LOCAL flow
+-% direction (turned by upstream panels), not the freestream.
+-% Pressure model: oblique shock (compression) + PM (expansion) + Newtonian
+-% for panels where local Mach cannot sustain attached shock.
+-
+-    %% rot_x(180): program frame -> real physics frame
+-    wav_z = -wav_z;
+-    wav_y = -wav_y;
+-    wav_up_z = -wav_up_z;
+-    wav_up_y = -wav_up_y;
+-
+-    [M, nn] = size(wav_x);
+-
+-   %% Build 3D point arrays in [nn, 3, M] format
+-    x_y_z_wav = zeros(nn, 3, M);
+-    x_y_z_up  = zeros(nn, 3, M);
+-    for i = 1:M
+-        x_y_z_wav(:, 1, i) = wav_x(i, :)';
+-        x_y_z_wav(:, 2, i) = wav_y(i, :)';
+-        x_y_z_wav(:, 3, i) = wav_z(i, :)';
+-        x_y_z_up(:, 1, i)  = wav_up_x(i, :)';
+-        x_y_z_up(:, 2, i)  = wav_up_y(i, :)';
+-        x_y_z_up(:, 3, i)  = wav_up_z(i, :)';
++function out=offdesign_aero_v4(wav_x,wav_y,wav_z,wav_up_x,wav_up_y,wav_up_z,M,alpha,reference,options)
++% V5 repaired selected v4 path. INPUT ANGLES RADIANS, pressure coefficients.
++% Body x downstream,z up: native program -> body diag(1,-1,-1).
++% Full mirrored surfaces; trailing base explicit Cp=0 approximation.
++% Native QUAD area-vector integration preserved, not plotting resampling.
++if ~isreal([M,alpha])||any(~isfinite([M,alpha]))||M<=1||abs(alpha)>=pi/2
++    error('V5:InputInvalid','Invalid fixed-surface flight condition');
++end
++if reference.area_m2<=0||reference.length_m<=0;error('V5:InputInvalid','Invalid reference');end
++g=1.4;ed=[cos(alpha),0,sin(alpha)];el=[-sin(alpha),0,cos(alpha)];
++N=[];A=[];R=[];labels={};
++for k=1:2
++    if k==1;X=wav_x;Y=-wav_y;Z=-wav_z;sgn=-1;lab='lower';
++    else;X=wav_up_x;Y=-wav_up_y;Z=-wav_up_z;sgn=1;lab='upper';end
++    if any(~isfinite([X(:);Y(:);Z(:)]))||~isreal([X(:);Y(:);Z(:)])
++        error('V5:InputInvalid','Invalid fixed surfaces');
+     end
+-
+-    %% Rotate to off-design freestream-aligned frame (V_inf -> [1,0,0])
+-    Vector_V = [cosd(AOA), 0, sind(AOA)]';
+-    rat = rotate_matrix(Vector_V, [1, 0, 0]');
+-
+-    x_y_z_wav_perm = permute(x_y_z_wav, [2, 1, 3]);
+-    x_y_z_wav_r = permute(pagemtimes(rat, x_y_z_wav_perm), [2, 1, 3]);
+-    x_y_z_up_perm = permute(x_y_z_up, [2, 1, 3]);
+-    x_y_z_up_r = permute(pagemtimes(rat, x_y_z_up_perm), [2, 1, 3]);
+-
+-    %% Panel integration
+-    [Fx_l, Fy_l, Fz_l] = panel_integration(x_y_z_wav_r, Ma, M, nn, false);
+-    [Fx_u, Fy_u, Fz_u] = panel_integration(x_y_z_up_r, Ma, M, nn, true);
+-
+-    %% Combine forces (same sign convention as generatewaverider)
+-    Force_x = Fx_u + Fx_l;
+-    Force_y = Fy_u + Fy_l;
+-    Force_z = Fz_l + Fz_u;
+-
+-    L_D = Force_z / Force_x;
+-end
+-
+-function [Fx, Fy, Fz] = panel_integration(xingxian, Ma, M, nn, is_upper)
+-% Panel integration with local inclination pressure model.
+-% xingxian: [nn, 3, M] array. is_upper: true for upper surface.
+-% The cross product gives opposite normals for upper vs lower.
+-%
+-% For nx/ny: flip upper surface to ensure consistent force direction.
+-% - Force_x and Force_y use direct summation (Fx_u + Fx_l, Fy_u + Fy_l)
+-% - So nx and ny must be flipped for upper surface so forces add correctly.
+-%
+-% For nz: do NOT flip. Force_z uses subtraction (Fz_l - Fz_u),
+-% so the '-' already handles the sign difference.
+-    gamma = 1.4;
+-    fzero_opts = optimset('Display', 'off', 'TolX', 1e-12);
+-
+-    Fx = 0; Fy = 0; Fz = 0;
+-
+-    for i = 1:M-1
+-        for j = 1:nn-1
+-            P1 = [xingxian(j,   1, i),   xingxian(j,   2, i),   xingxian(j,   3, i)  ];
+-            P2 = [xingxian(j,   1, i+1), xingxian(j,   2, i+1), xingxian(j,   3, i+1)];
+-            P3 = [xingxian(j+1, 1, i+1), xingxian(j+1, 2, i+1), xingxian(j+1, 3, i+1)];
+-            P4 = [xingxian(j+1, 1, i),   xingxian(j+1, 2, i),   xingxian(j+1, 3, i)  ];
+-
+-            C = cross(P3 - P1, P2 - P4);
+-            C_mod = norm(C);
+-
+-            if C_mod < 1e-14
+-                continue;
++    if isfield(options,'mesh_stride')&&options.mesh_stride>1
++        r=unique([1:options.mesh_stride:size(X,1),size(X,1)]);c=unique([1:options.mesh_stride:size(X,2),size(X,2)]);
++        X=X(r,c);Y=Y(r,c);Z=Z(r,c);
++    end
++    for i=1:size(X,1)-1
++        for j=1:size(X,2)-1
++            p1=[X(i,j),Y(i,j),Z(i,j)];p2=[X(i+1,j),Y(i+1,j),Z(i+1,j)];
++            p3=[X(i+1,j+1),Y(i+1,j+1),Z(i+1,j+1)];p4=[X(i,j+1),Y(i,j+1),Z(i,j+1)];
++            v=sgn*cross(p3-p1,p2-p4);mag=norm(v);
++            if mag<=1e-14;error('V5:GeometryDomain','Degenerate integration quad');end
++            n=v/mag;centre=(p1+p2+p3+p4)/4;
++            for mirror=[1,-1]
++                N(end+1,:)=n.*[1,mirror,1];A(end+1,1)=mag/2;R(end+1,:)=centre.*[1,mirror,1];labels{end+1}=lab;
+             end
+-
+-            Aw = C_mod / 2;
+-            if is_upper
+-                nx = -C(1) / C_mod;
+-                ny = -C(2) / C_mod;
+-                nz = -C(3) / C_mod;
+-            else
+-                nx = C(1) / C_mod;
+-                ny = C(2) / C_mod;
+-                nz = C(3) / C_mod;
+-            end
+-            %% Pressure model: theta uses consistent nx for both surfaces
+-            theta = asin(nx);
+-            p_ratio = local_pressure_ratio(Ma, theta, gamma, fzero_opts);
+-
+-            %% Force projection
+-            Fx = Fx + p_ratio * Aw * nx;
+-            Fy = Fy + p_ratio * Aw * ny;
+-            Fz = Fz + p_ratio * Aw * nz;
+         end
+     end
+ end
+-
+-function p_ratio = local_pressure_ratio(Ma, theta, gamma, fzero_opts)
+-% Liu Wen (2019) unified formula:
+-%   K = Ma * theta >= 0 -> oblique shock (theta-beta-M)
+-%   K = Ma * theta < 0  -> PM hypersonic similarity
+-
+-    if abs(theta) < 1e-10
+-        p_ratio = 1.0;
+-        return;
++incidence=-N*ed';
++if any(abs(incidence)>1+1e-12);error('V5:NumericalDomain','Unit normal incidence outside [-1,1]');end
++% No Mach-angle floor on WALL inclination. Zero incidence = freestream.
++theta=asin(incidence);pr=ones(size(theta));branch=zeros(size(theta));
++comp=theta>1e-9;expansion=theta< -1e-9;
++% Bounded lookup of the exact same local tangent-cone component; pchip.
++% Numerical lookup is explicit, validation compares 33 vs65 nodes separately.
++lookup_n=33;if isfield(options,'cone_lookup_nodes');lookup_n=options.cone_lookup_nodes;end
++if any(comp)
++    knots=linspace(0,max(theta(comp)),lookup_n);values=ones(size(knots));
++    for k=2:lookup_n
++        [~,~,~,~,pc]=conical_flowfield(M,knots(k),g);values(k)=pc(end);
+     end
+-
+-    K = Ma * theta;
+-
+-    if K >= 0
+-        beta_guess = asin(1/Ma) + 0.05;
+-        if beta_guess <= theta
+-            beta_guess = theta + 0.1;
+-        end
+-        try
+-            % beta = fzero(@(b) shock_residual(b, theta, Ma, gamma), ...
+-            %              beta_guess, fzero_opts);
+-            % p_ratio = 1 + 2*gamma/(gamma+1) * (Ma^2 * sin(beta)^2 - 1);
+-            [beta,~,~,~,pf_cone] = conical_flowfield(Ma,theta,gamma);
+-            p_ratio = pf_cone(end);
+-        catch
+-            % Correct modified Newtonian from forcecst.m (catch for detached shock)
+-            p02_over_p0 = (((gamma+1)^2*Ma^2/(4*gamma*Ma^2-2*(gamma-1)))^(gamma/(gamma-1))) * (1-gamma+2*gamma*Ma^2)/(gamma+1);
+-            p_ratio = 1 + (p02_over_p0 - 1) * sin(theta)^2;
+-        end
+-    else
+-        p_ratio = (1 + (gamma-1)/2 * K)^(2*gamma/(gamma-1));
+-    end
++    pr(comp)=interp1(knots,values,theta(comp),'pchip');branch(comp)=1;
+ end
+-
+-function res = shock_residual(beta, theta, M, gamma)
+-    res = tan(theta) - 2/tan(beta) * (M^2 * sin(beta)^2 - 1) / ...
+-          (M^2 * (gamma + cos(2*beta)) + 2);
++K=M*theta(expansion);base=1+(g-1)/2*K;
++if any(base<=0);error('V5:OutOfDomain','Hypersonic expansion similarity outside positive-base domain');end
++pr(expansion)=base.^(2*g/(g-1));branch(expansion)=2;
++if ~isreal(pr)||any(~isfinite(pr))||any(pr<=0);error('V5:NumericalDomain','Invalid pressure ratio');end
++Cp=2*(pr-1)/(g*M^2);dF=-(Cp.*A).*N/reference.area_m2;CF=sum(dF,1);
++origin=[0,0,0];if isfield(reference,'moment_origin_m');origin=reshape(reference.moment_origin_m,1,3);end
++CM=sum(cross(R-origin,dF,2),1)/reference.length_m;
++out=struct('status','PASS','CL_pressure',dot(CF,el),'CD_pressure',dot(CF,ed),'CY_pressure',CF(2), ...
++    'pressure_moment_body',CM,'Cm_pressure',CM(2),'coefficient_force_body',CF, ...
++    'pressure_ratio_min',min(pr),'pressure_ratio_max',max(pr),'Cp_min',min(Cp),'Cp_max',max(Cp), ...
++    'branch_counts',struct('tangent_cone_compression',sum(branch==1),'hypersonic_expansion_similarity',sum(branch==2),'freestream',sum(branch==0),'modified_newtonian_fallback',0), ...
++    'reference',reference,'model_version','teacher-offdesign-v4-repaired-v5.1','gamma_gas',g, ...
++    'panel_count_full_body',numel(A),'cone_lookup_nodes',lookup_n,'base_assumption','Cp=0 on omitted trailing base', ...
++    'missing_physics',{{'viscous_drag','bluntness','base_pressure','heating','validated_trim'}}, ...
++    'moment_scope','pressure moment about declared origin only; NOT validated trim', ...
++    'coordinate_convention','x downstream,z up; e_drag=[cos(alpha),0,sin(alpha)]; e_lift=[-sin(alpha),0,cos(alpha)]', ...
++    'coefficient_convention','CF=-sum(Cp*A*n_out)/Sref; Cp=2*(p/pinf-1)/(gamma*M^2)');
+ end

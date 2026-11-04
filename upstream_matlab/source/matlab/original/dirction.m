@@ -1,0 +1,19 @@
+function [y3,z3,theta0]=dirction(x1,y1,z1,u1,v1,w1,x2,y2,z2,u2,v2,w2,x3,det_x)
+    theta1=included_angle([v1,w1]);
+    theta2=included_angle([v2,w2]);
+    theta0=theta1+(theta2-theta1)*det_x/(x2-x1);
+    x0=x1+det_x;
+    y0=y1+(y2-y1)*det_x/(x2-x1);
+    z0=z1+(z2-z1)*det_x/(x2-x1);
+    u0=u1+(u2-u1)*det_x/(x2-x1);
+    v0=v1+(v2-v1)*det_x/(x2-x1);
+    w0=w1+(w2-w1)*det_x/(x2-x1);
+    x_j=x3-x0;
+    x_i=x2-x1;
+    y_i=y2-y1;
+    z_i=z2-z1;
+    y_j=x_j*(v0*(x_i^2+z_i^2)-u0*x_i*y_i-w0*y_i*z_i)/(u0*(y_i^2+z_i^2)-v0*x_i*y_i-w0*x_i*z_i);
+    z_j=-(x_i*x_j+y_i*y_j)/z_i;
+    y3=y0+y_j;
+    z3=z0+z_j;
+end

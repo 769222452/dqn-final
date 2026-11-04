@@ -1,0 +1,216 @@
+--- teacher_original/generatewaverider.m
++++ teacher_active/build_geometry_core.m
+@@ -1,4 +1,4 @@
+-function [wav_x,wav_y,wav_z,L_D,L_W,H_L,Vol,Vol_eff,Time_LTOCs]=generatewaverider(Ma, angle_shock_a1, angle_shock_a2, angle_shock_b1, angle_shock_b2, c1, c2, d1, AOA, a_xishu_1)
++function [wav_x,wav_y,wav_z,wav_up_x,wav_up_y,wav_up_z,diagnostics]=build_geometry_core(Ma, angle_shock_a1, angle_shock_a2, angle_shock_b1, angle_shock_b2, c1, c2, d1, AOA, a_xishu_1)
+     % 通过旋转激波来处理，贝塞尔曲面
+     % 乘波体分为两个部分，前者保证激波，后者保证体积+重构各流面内的网格(指定流面出口参数)
+     % % 关闭符号计算的警告
+@@ -125,13 +125,14 @@
+             %                       'Algorithm', 'levenberg-marquardt', ...
+             %                       'FunctionTolerance', 1e-8, ...
+             %                       'StepTolerance', 1e-8);            
+-            solution = fsolve(@(x) equations(x, target_y, target_x, y_v_func, x_v_func), ...
++            [solution,residual,flag] = fsolve(@(x) equations(x, target_y, target_x, y_v_func, x_v_func), ...
+                               [u_init, v_init], options);            
+             u_s = solution(1);
+             v_s = solution(2);            
+             % 确保结果在合理范围内
+-            u_s = max(0, min(u_s, 1.1));
+-            v_s = max(0, min(v_s, pi/2));            
++            if flag<=0 || norm(residual,inf)>1e-7 || u_s<0 || u_s>1.1 || v_s<0 || v_s>pi/2
++                error('V5:GeometryNonconverged','Leading edge root invalid');
++            end            
+             % 存储结果
+             u_fct(i) = u_s;
+             v_fct(i) = v_s;            
+@@ -143,17 +144,7 @@
+             y_fct(i) = y_v_r_func(u_s, v_s);
+             z_fct(i) = z_v_r_func(u_s, v_s);            
+         catch ME
+-            % 错误处理 - 使用网格最优解作为回退
+-            fprintf('Error processing point %d: %s\n', i, ME.message);
+-            x_fct_1(i)=x_design*[t(i)^2,t(i),1]*N*P_X';
+-            y_fct_1(i)=x_design*[t(i)^2,t(i),1]*N*P_Y';
+-            u_fct(i) = u_init;
+-            v_fct(i) = v_init;
+-            z_fct_1(i) = z_v_func(u_init, v_init);
+-            deta_x(i) = ((x_design + 0.1 - x_fct_1(i)) / (N_l - 1)) * cosd(AOA);
+-            x_fct(i) = x_v_r_func(u_init, v_init);
+-            y_fct(i) = y_v_r_func(u_init, v_init);
+-            z_fct(i) = z_v_r_func(u_init, v_init);
++            rethrow(ME);
+         end
+     end    
+     % 辅助函数：定义方程组
+@@ -196,7 +187,7 @@
+     wav_x_new=zeros(M,nn); wav_y_new=zeros(M,nn); wav_z_new=zeros(M,nn);
+     leading_edge_points = struct();
+     leading_edge_points.X_LE = zeros(M,1); leading_edge_points.Y_LE = zeros(M,1); leading_edge_points.Z_LE = zeros(M,1);
+-    parfor i=1:M
++    for i=1:M
+     % for i=1:M
+ 
+         try
+@@ -292,31 +283,18 @@
+                     x_v_r_func(uv(1), uv(2)) - target_x;
+                     y_v_r_func(uv(1), uv(2)) - target_y;
+                 ];
+-                % 添加try-catch保护
+-                try
+-                    [solution, ~, exitflag] = fsolve(eq_func, [u_init, v_init], options);
+-                    
+-                    if exitflag > 0
+-                        u_s = solution(1);
+-                        v_s = solution(2);
+-                    else
+-                        u_s = u_init;
+-                        v_s = v_init;
+-                    end
+-                catch
+-                    u_s = u_init;
+-                    v_s = v_init;
+-                end         
+-                % 确保结果在合理范围内
+-                u_s = max(0, min(u_s, 2));
+-                v_s = max(0, min(v_s, pi/2));
++                [solution,residual,exitflag] = fsolve(eq_func,[u_init,v_init],options);
++                u_s=solution(1); v_s=solution(2);
++                if exitflag<=0 || norm(residual,inf)>1e-7 || u_s<0 || u_s>2 || v_s<0 || v_s>pi/2
++                    error('V5:GeometryNonconverged','Interior shock root invalid');
++                end
+                 local_U_index(1,j) = u_s; local_V_index(1,j) = v_s;
+                 % 计算z坐标
+                 u_val = local_U_index(1,j); v_val = local_V_index(1,j);
+                 try
+                     local_x_y_z_shock(j,3) = z_v_r_func(u_val, v_val);
+-                catch
+-                    local_x_y_z_shock(j,3) = z_v_r_func(u_init, v_init); % 回退计算
++                catch ME
++                    rethrow(ME);
+                 end
+                 Fx_val = Fx_func(u_val, v_val); Fy_val = Fy_func(u_val, v_val); Fz_val = Fz_func(u_val, v_val);
+                 F_norm = norm([Fx_val, Fy_val, Fz_val]); ratio = min(abs(Fx_val)/F_norm, 1);
+@@ -389,8 +367,7 @@
+                 end
+                 x_distance=local_x_l(j,1); 
+                if isnan(x_distance)==1 || x_distance<local_x_inter(j-1,1)
+-                   fprintf('Shock Error in stream surface %d\n', i);
+-                   break;
++                   error('V5:GeometryDomain','Invalid shock streamline');
+                end  
+             end
+             local_index=j;
+@@ -471,8 +448,7 @@
+                 local_beta_index_2(j+2,local_index-j+1:local_index)=local_beta_index_2(j+2,local_index-j);
+                x_distance=local_x_l_2(j+2,1);
+                if isnan(x_distance)==1 || x_distance<local_x_l_2(j+1,1)
+-                   disp('Isentropy error in stream surface %d\n', i);
+-                   break;
++                   error('V5:GeometryDomain','Invalid isentropic streamline');
+                end  
+             end
+             local_x_y_z_xingxian(:,1)=[local_x_inter(:,1); local_x_inter_2(3:end,1)];
+@@ -541,94 +517,14 @@
+             x_y_z_wav(:,:,i) = [wav_x(i,:)', wav_y(i,:)', wav_z(i,:)'];
+             x_y_z_up(:,:,i) = [wav_up_x(i,:)', wav_up_y(i,:)', wav_up_z(i,:)'];
+         catch ME
+-            % fprintf('Error in stream surface %d: %s\n', i, ME.message);
+-            wav_x(i,:)=NaN; wav_y(i,:)=NaN; wav_z(i,:)=NaN;
+-            p_wav(i,:)=NaN; vx_wav(i,:)=NaN; vy_wav(i,:)=NaN; vz_wav(i,:)=NaN;
+-            wav_up_x(i,:)=NaN; wav_up_y(i,:)=NaN; wav_up_z(i,:)=NaN; p_wav_up(i,:)=NaN;
+-            x_y_z_wav(:,:,i) = [wav_x(i,:)', wav_y(i,:)', wav_z(i,:)'];
+-            x_y_z_up(:,:,i) = [wav_up_x(i,:)', wav_up_y(i,:)', wav_up_z(i,:)'];
++            error('V5:GeometryFailure','Stream surface %d: %s [%s]',i,ME.message,ME.identifier);
+         end
+     end    
+-    if any(isnan(wav_x(:))) || any(isinf(wav_x(:))) || ~isreal(wav_x)
+-        wav_x_new = NaN(M,nn); wav_y_new =wav_x_new; wav_z_new = wav_x_new;
+-        L_D =NaN; L_W=NaN; Xcp=NaN; Vol_eff=NaN; Vol=NaN;
+-    else
+-        % leading_edge_points.X_LE = wav_x(:,1); leading_edge_points.Y_LE = wav_y(:,1); leading_edge_points.Z_LE = -wav_z(:,1);
+-        % delta_h_sym = det_H_sym-(wav_z(end,end)-wav_z(end,1));
+-        % [wav_up_x, wav_up_y, wav_up_z] = Generate_Upper_Surface_Bezier(leading_edge_points, bezier_params, up_cst_options, delta_h_sym);
+-        % wav_up_z = -wav_up_z;
+-        % figure(1)
+-        % mesh(wav_x,wav_y,-wav_z,'edgecolor','g','facecolor','none') %
+-        % axis equal
+-        % hold on
+-        % mesh(wav_up_x, wav_up_y, -wav_up_z,'edgecolor','b','facecolor','none')
+-        % hold on
+-        [Vol_eff] = vol_eff_sim(wav_x,wav_y,wav_z,wav_up_x,wav_up_y,wav_up_z);
+-        L=max(wav_x(:)); W=2*max(wav_y(:));
+-        H_L=wav_z(end,end)-wav_up_z(end,end);
+-        L_W = L/W;
+-        Y=linspace(0,1,nn)*W/2; X=zeros(1,M);
+-        wav_y_new = repmat(Y, M, 1);          
+-        x_y_z_wav_perm = permute(x_y_z_wav, [2, 1, 3]);  % 维度转换: [3, N, M]
+-        x_y_z_wav_r = permute(pagemtimes(rat, x_y_z_wav_perm), [2, 1, 3]);
+-        x_y_z_up_perm = permute(x_y_z_up, [2, 1, 3]);  % 维度转换: [3, N, M]
+-        x_y_z_up_r = permute(pagemtimes(rat, x_y_z_up_perm), [2, 1, 3]);
+-        X = interp1(wav_y(:,1), wav_x(:,1), Y);  % 一次性计算所有插值
+-        X(isnan(X)) = 0;  % 批量处理NaN值
+-        t = linspace(0, 1, nn)';
+-        wav_x_new = (1 - t) .* X + t .* wav_x(1, :);  % 向量化线性插值
+-        F = scatteredInterpolant(wav_x(:), wav_y(:), wav_z(:), 'natural');
+-        wav_z_new = F(wav_x_new(:), wav_y_new(:));  % 将所有点作为向量处理
+-        wav_z_new = reshape(wav_z_new, size(wav_x_new));  % 恢复原始矩阵形状
+-        % 处理最后一行边界
+-        z_end = interp1(wav_y(:,end), wav_z(:,end), wav_y_new(end,:));
+-        nan_mask_end = isnan(z_end);
+-        z_end(nan_mask_end) = wav_z(nn - find(nan_mask_end) + 1, end);
+-        wav_z_new(end,:) = z_end;
+-        % 处理第一列边界
+-        z_first = interp1(wav_x(end,:), wav_z(end,:), wav_x_new(:,1)');
+-        nan_mask_first = isnan(z_first);
+-        z_first(nan_mask_first) = wav_z(find(nan_mask_first), end);
+-        wav_z_new(:,1) = z_first';
+-        % for j=1:nn
+-        %     X(j)=interp1(wav_y(:,1),wav_x(:,1),Y(j));
+-        %     if isnan(X(j))==1
+-        %         X(j)=0;
+-        %     end
+-        %     wav_x_new(:,j)=linspace(X(j),wav_x(1,j),nn);
+-        % end
+-        % F=scatteredInterpolant(wav_x(:), wav_y(:), wav_z(:), 'natural');
+-        % for i=1:M
+-        %     for j=1:nn
+-        %         wav_z_new(i,j) = F(wav_x_new(i,j),wav_y_new(i,j));
+-        %     end
+-        % end
+-        % for j=1:nn
+-        %     wav_z_new(end,j)=interp1(wav_y(:,end),wav_z(:,end),wav_y_new(end,j));
+-        %     if isnan(wav_z_new(end,j))==1
+-        %         wav_z_new(end,j)=wav_z(nn-j+1,end);
+-        %     end
+-        %     wav_z_new(j,1)=interp1(wav_x(end,:),wav_z(end,:),wav_x_new(j,1));
+-        %     if isnan(wav_z_new(j,1))==1
+-        %         wav_z_new(j,1)=wav_z(j,end);
+-        %     end
+-        % end
+-        % mesh(wav_x_new,wav_y_new,wav_z_new,'edgecolor','k','facecolor','none') %
+-        % axis equal
+-        % hold on
+-        [Force_x_lower,Force_y_lower,Force_z_lower,Sw_lower,Sb_lower,Sp_lower,My_lower]=force_lower(x_y_z_wav_r,p_wav,M);
+-        [Force_x_upper,Force_y_upper,Force_z_upper,Sw_upper,Sb_upper,Sp_upper,My_upper]=force_upper(x_y_z_up_r,p_wav_up,M);
+-        Force_x = Force_x_upper+Force_x_lower;
+-        Force_y = Force_y_upper+Force_y_lower;
+-        Force_z = Force_z_upper-Force_z_lower;
+-        My = My_lower-My_upper;
+-        L_D=Force_z/Force_x;
+-        Sw = Sw_upper+Sw_lower;
+-        Sp = 2*Sp_lower;
+-        Sb = abs(Sb_upper)+abs(Sb_lower);
+-        Vol=2*volume(x_y_z_up,x_y_z_wav);
+-        eta = Vol^(2/3)/Sp;
+-        Xcp=My*Force_z/(Force_z^2+Force_x^2)/x_design;        
+-    end 
+-    Time_LTOCs = toc;
+-end+    fields={wav_x,wav_y,wav_z,wav_up_x,wav_up_y,wav_up_z};
++    for k=1:numel(fields)
++        if ~isreal(fields{k}) || any(~isfinite(fields{k}(:)))
++            error('V5:GeometryDomain','Nonfinite or complex native surface');
++        end
++    end
++    diagnostics=struct('native_M',M,'native_N',nn,'streamwise_solver_intervals',N_l,'geometry_elapsed_s',toc,'mesh_version','native50x50-stream40-v5','parallel_workers',0,'upper_surface','native generator upper','regridded_for_plot',false);
++end

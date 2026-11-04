@@ -1,0 +1,13 @@
+{
+  "source_path": "D:/mat/.code/waveRiderEval.m",
+  "filename": "waveRiderEval.m",
+  "bytes": 38980,
+  "sha256": "affbd2dacbaff5584a7d29a48c72dd1be1d0239f2ed71470a88616071d632b02",
+  "git_blob": "c862135a6ef37a9630982b53c45f99412c196ab5",
+  "identical_archived_copy": "D:/v6-mission-morph/results/v5_geometry_audit/source_evidence/waveRiderEval.m.txt",
+  "upload_date": "2026-11-03",
+  "base_branch": "aoa-fix",
+  "base_commit": "6cbdf4f01d136dd0097a33feeceb8834467bdb99",
+  "byte_preserving": true,
+  "numerical_execution_performed": false
+}

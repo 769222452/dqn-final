@@ -1,0 +1,145 @@
+{
+  "schema": "wedge-screening-config/1",
+  "frozen_utc": "2026-10-13T12:28:31Z",
+  "aero_backend": {
+    "name": "TANGENT_WEDGE_SHOCK_EXPANSION",
+    "implementation": "results/v6_matlab_no_new_cfd/code/matlab/offdesign_aero_v7.m (existing, unmodified)",
+    "options": {
+      "mode": "P2",
+      "friction": "none",
+      "base_pressure_ratio": "NaN (no base term)"
+    },
+    "model_version": "TANGENT_WEDGE_SHOCK_EXPANSION | offdesign_aero_v7-1.0 mode=P2 friction=none base=none (pressure only)",
+    "coefficients": "pressure-only CL and CD_pressure on Sref; NOT total drag (no friction, no base drag)",
+    "invalid_states": "no attached weak shock / subsonic / Prandtl-Meyer vacuum / strip fold-back -> model_valid=false, no silent fallback",
+    "Sref_m2": 6.931920786884801,
+    "Lref_m": 5.0,
+    "reference_source": "configs/mission_1200s.yaml model.reference_area_m2; v7 database builder reference"
+  },
+  "flight_grid": {
+    "M_flight": [
+      5.0,
+      5.5,
+      6.0,
+      6.5,
+      7.0,
+      7.5,
+      8.0
+    ],
+    "alpha_deg": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "n_conditions": 49,
+    "note": "primary-mission screening only; the full support domain M[3.5,9.25] alpha[-2,12] is NOT covered by this run"
+  },
+  "ranking": {
+    "metric": "L_over_D = CL / CD_pressure at fixed alpha",
+    "top_n": 5,
+    "gates": {
+      "geometry_validity": "audit classification == VALID (frozen native-mesh audit)",
+      "aero": "model_valid and finite CL, CD_pressure>0",
+      "lift_floor_CL_min": 0.026150265744858465,
+      "lift_floor_source": "results/fixed_geometry_baselines/comparison.json operating_condition_envelope.CL_actual.p5 (all feasible fixed baselines, 0.5 s samples)",
+      "volume_thickness_screen": "EXPLORATORY: volume_full >= 0.85*G42 and grid_thickness_max >= 0.5*G42 (src/mission_v6 stage2 common.py scenario definition; research assumption, not an engineering requirement)"
+    },
+    "low_lift_note": "candidates below the floor are kept in all_candidate_scores.csv with flag LOW_LIFT; they are never ranked"
+  },
+  "controls": {
+    "baseline": "G42 (if it already is in Top5 it is not duplicated)",
+    "diversity": "valid gate-passing candidate maximizing min normalized distance to the Top5 over [Ma_design, volume ratio, thickness ratio, a1,a2,b1,b2,d1,a_x]"
+  },
+  "nearby": {
+    "dM": 0.25,
+    "dalpha_deg": 1.0,
+    "diagonals": false
+  },
+  "cross_mach": {
+    "M_grid": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0
+    ],
+    "alpha_deg_grid": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "geometry_set": "G_selected_unique"
+  },
+  "equal_lift": {
+    "alpha_dense_deg": [
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0,
+      4.5,
+      5.0,
+      5.5,
+      6.0,
+      6.5,
+      7.0,
+      7.5,
+      8.0,
+      8.5,
+      9.0,
+      9.5,
+      10.0,
+      10.5,
+      11.0,
+      11.5,
+      12.0
+    ],
+    "M_grid": [
+      5.0,
+      5.5,
+      6.0,
+      6.5,
+      7.0,
+      7.5,
+      8.0
+    ],
+    "CL_targets": [
+      0.026150265744858465,
+      0.0398,
+      0.05350025264833205
+    ],
+    "targets_source": "mission envelope CL_actual p5 / mid / p95 (comparison.json)",
+    "interpolation": "PCHIP in alpha inside the bracket only, no extrapolation"
+  },
+  "geometry_generation": {
+    "new_geometries_generated": 0,
+    "reason": "existing audited pool already spans many design Mach families; new teacher generation deferred (budget 0 in this run)",
+    "budget_note": "no parallel MATLAB, no use of CFD processes"
+  },
+  "budget": {
+    "matlab_processes_at_once": 1,
+    "cfd": false,
+    "dqn": false,
+    "ocp": false,
+    "synthetic_data": false
+  },
+  "cad": {
+    "unit_policy": "program length unit = 1 m (audit: 'm under existing V5 1 metre/program-unit assumption; physical scale unconfirmed'); STEP written in mm (x1000)"
+  }
+}

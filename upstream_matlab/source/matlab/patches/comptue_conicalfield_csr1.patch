@@ -1,0 +1,11 @@
+--- a/teacher_matlab/active/comptue_conicalfield.m
++++ b/teacher_matlab/active/comptue_conicalfield.m
+@@ -21,7 +21,7 @@
+     if valid_count>=4;error('V5:NoAttachedSolution','No weak attached cone solution in bounded shock scan');
+     else;error('V5:RootBracketFailure','Cone shock scan failed');end
+ end
+-opts=optimset('Display','off','TolX',2e-13,'MaxIter',70,'MaxFunEvals',100);
++opts=optimset('Display','off','TolX',eps,'MaxIter',70,'MaxFunEvals',100);
+ [beta,residual,flag,fz]=fzero(@wall_residual,[lo hi],opts);
+ if flag<=0||abs(residual)>2e-7;error('V5:RootConvergenceFailure','Cone wall residual did not converge');end
+ [wall,angles,y,ok]=wall_solution(beta);

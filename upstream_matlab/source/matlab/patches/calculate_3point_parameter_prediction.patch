@@ -1,0 +1,19 @@
+--- teacher_original/calculate_3point_parameter_prediction.m
++++ teacher_active/calculate_3point_parameter_prediction.m
+@@ -1,5 +1,5 @@
+ function [ x4,y4,p4,r4,v4,a4 ] = calculate_3point_parameter_prediction( x1,y1,p1,r1,v1,a1,x2,y2,p2,r2,v2,a2,x3,y3 )
+-global g
++g=1.4; % Explicit fixed ideal-gas geometry assumption
+ difference_B4=1;f12=atan((y2-y1)/(x2-x1));
+ D1=sqrt(g*p1/r1);M1=v1/D1;B1=a1-asin(1/M1);
+ D2=sqrt(g*p2/r2);M2=v2/D2;B2=a2-asin(1/M2);
+@@ -12,8 +12,7 @@
+     difference_B4=abs(B41-B4);
+     B4=B41;
+     if n_step>=30
+-        x4=NAN; y4=NAN;
+-        break
++        error('V5:GeometryNonconverged','Characteristic iteration cap');
+     end
+ end
+ p4=p2+(y4-y2)*(p1-p2)/(y1-y2);

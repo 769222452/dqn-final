@@ -1,0 +1,35 @@
+{
+ "rule": "one geometry per design-Mach family, volume ratio to G42 in [0.95, 1.05], best P2+friction L/D at min(8, max(4, design Mach)); chosen so the CFD comparison is between equal-volume vehicles",
+ "cfd_geometries": [
+  "V2M_MD4_044",
+  "V2_MD6_008",
+  "V2_MD8_018",
+  "S2_MD14.3591_4fdf5fa3ac"
+ ],
+ "families": {
+  "MD4": {
+   "geometry": "V2M_MD4_044",
+   "candidates": 5,
+   "volume_ratio": 0.9701414567452868,
+   "design_mach": 4.0
+  },
+  "MD6": {
+   "geometry": "V2_MD6_008",
+   "candidates": 2,
+   "volume_ratio": 0.9770678433362818,
+   "design_mach": 6.0
+  },
+  "MD8": {
+   "geometry": "V2_MD8_018",
+   "candidates": 4,
+   "volume_ratio": 1.000376688401639,
+   "design_mach": 8.0
+  },
+  "MD14-15": {
+   "geometry": "S2_MD14.3591_4fdf5fa3ac",
+   "candidates": 26,
+   "volume_ratio": 0.9678035492315564,
+   "design_mach": 14.359125
+  }
+ }
+}

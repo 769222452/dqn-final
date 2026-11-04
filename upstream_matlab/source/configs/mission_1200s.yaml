@@ -1,0 +1,54 @@
+name: MISSION_DRIVEN_MORPHING_V6
+schema: mission_v6/1
+duration_s: 1200.0
+decision_dt_s: 3.0
+plant_dt_s: 0.5
+initial_state:
+  source: results/v5_long_horizon_mach_diagnostic_1200s/initial_state.json
+  seed: 2000
+  x_h_V_gamma_s: [40150.27263771527, 2415.6424609292885, -0.014729622960607522, 0.0]
+  nominal_unperturbed_x: [40000.0, 2400.0, -0.01, 0.0]
+  alpha_rad: 0.05
+  geometry_rule: chosen_before_flight_fixed
+  morphing_comparison_rule: common_start_G42_separate_experiment
+model:
+  atmosphere: configs/environment.yaml
+  vehicle_limits_and_heat_proxy: configs/vehicle.yaml
+  teacher_dynamic_profile: configs/v5_teacher_dynamic_research_profile.json
+  aero_v2: results/v5_multimach_aero_database_v2/aero_database.csv
+  g42_v2: results/v5_multimach_aero_database_v2/g42_baseline.csv
+  geometry_v2: results/v5_multimach_geometry_db_v2/valid_geometry_inventory.csv
+  reference_area_m2: 6.931920786884801
+  mass_kg: 1500.0
+  spherical_earth: true
+  aero_interpolation: pchip_mach_then_pchip_alpha
+  support_mach: [3.5, 9.25]
+  support_alpha_deg: [-2.0, 12.0]
+limits:
+  altitude_m: [20000.0, 80000.0]
+  velocity_mps: [800.0, 6000.0]
+  gamma_rad: [-0.35, 0.35]
+  alpha_rad: [-0.0349066, 0.209440]
+  alpha_rate_radps: 0.0872665
+  dynamic_pressure_pa_max: 80000.0
+  heat_proxy_wm2_max: 2000000.0
+  load_factor_g_max: 3.0
+terminal:
+  altitude_m_min: 20000.0
+  velocity_mps_min: 800.0
+  required_downrange_m_min: 360000.0
+objective:
+  primary: max_horizontal_range_at_fixed_1200s
+  unsuccessful_trajectories: not_ranked
+reward_interface:
+  schema: v6_mission_progress/1
+  downrange_scale_m: 2400000.0
+  progress_weight: 1.0
+  success_bonus: 0.10
+  failure_penalty: -0.25
+  # No terminal success reward for a failure or external interruption.
+  gamma: 1.0
+  finite_horizon_bootstrap_on_success: false
+  finite_horizon_bootstrap_on_failure: false
+  bootstrap_on_external_interrupt: true
+research_assumptions: [mass, heat_proxy, all_vehicle_limits, volume_screen, thickness_screen, actuator_path_rate]

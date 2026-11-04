@@ -1,0 +1,130 @@
+--- teacher_original/comptue_conicalfield.m
++++ teacher_active/comptue_conicalfield.m
+@@ -1,71 +1,58 @@
+-function [index,angle1_shock,angle_span,velocitynormal,velocityradiul]=comptue_conicalfield(mach_preshock,angle0_halfcone, specific_heat_ratio)
+-%��֪Բ׶�İ�׶�ǡ�����������������Ӧ�ļ�����
+-format long 
+-esp1 = 1.0; %���Ʊ���
+-
+-angle0_halfcone = angle0_halfcone.*pi/180;%��ʼ����׶�ǽ��нǶȺͻ���ת��
+-angle1_shock =angle0_halfcone+(asin(1./mach_preshock));%�����������ʱ�����ǵĳ�ֵ��(asin(1./mach_preshock)Ϊ���������սǣ��ο���������嶯��ѧ�²�128- EQ16.64
+-
+-while abs(esp1)>1e-5 %������ʼ������angle1_shock��ͨ����ֵ�������T-M���̵õ��µļ�������ļ�����angle1_shock�����߼�����С��0.00001���ɵõ���ӦԲ׶��ǵļ�����,�����ֵ�ɵ����ܹ��õ�����׼�Ľ�����
+-machnormal_preshock = mach_preshock*sin(angle1_shock);
+-beta = atan(tan(angle1_shock)*2./(specific_heat_ratio+1)*(1/machnormal_preshock^2+(specific_heat_ratio-1)/2.));
+-%�ο���������嶯��ѧ�²�129- EQ16.67
+-temp=sqrt((specific_heat_ratio+1)*mach_preshock^2./(2+(specific_heat_ratio-1)*mach_preshock^2));
+-%�ο���������嶯��ѧ�²�129- EQ3.189
+-mach_aftshock = temp*(sin(angle1_shock)/sin(beta))*(2./((specific_heat_ratio+1)*machnormal_preshock^2)+(specific_heat_ratio-1)/(specific_heat_ratio+1));
+-%�ο���������嶯��ѧ�²�129- EQ16.68
+-velocity0_radiul = mach_aftshock*cos(beta);%�����ٶ��ļ�����ʱ��õĵ�һ��U����ٶ�
+-%�ο���������嶯��ѧ�²�129- EQ16.70
+-velocity0_normal = -mach_aftshock*sin(beta);%�����ٶ��ļ�����ʱ��õĵ�һ��V����ٶ�
+-y0 = [velocity0_radiul velocity0_normal];
+-%�ο���������嶯��ѧ�²�129- EQ16.71
+-
+-anglespan_halfcone = [angle1_shock:-0.001:angle0_halfcone];%ȷ���������׶��֮����ֵ�����㷨�Ĳ���Ϊ0.001�����Ӱ�׶�ǵ������Ƿֳ���0.001Ϊ������N�������
+-[angle,y] = ode45(@weifen,anglespan_halfcone,y0);%���ݸ�����ÿһ���ٶ�������Ǽ���ʼ��UV����ٶ������������εļ����Ǻ�UV����ٶȣ�4�������������΢�ַ����������ֵ���
+-velocity_radiul = y(:,1);%ÿһ���ٶ�������Ƕ�Ӧ��U����ٶ�
+-velocity_normal = y(:,2);%ÿһ���ٶ�������Ƕ�Ӧ��V����ٶ�
+-
+-for j = 2:numel(velocity_radiul)%��ʼ���ϵ��������е㣬�ҵ���һ���ٶ�������Ƕ�Ӧ��V����ٶ�Ϊ0�ĵ㣬��Ӧ������Ǽ�Ϊ��ʱ��Բ׶��ǣ�����Բ׶���
+-    %�����������Բ׶��Ǵ��ڲ�ֵ����Ҫ���������ܵó���Ӧ���������Բ׶��ǵļ�����
+-    if velocity_normal(end)>0%�жϳ�V���ٶ�Ϊ0��λ��
+-        if velocity_normal(j)>0&&velocity_normal(j-1)<0
+-            index=j;
+-            break
+-        end
+-        else
+-        index=numel(velocity_radiul);
++function [index,beta,angles,vt,vr]=comptue_conicalfield(M,theta,gamma_gas)
++% V5 bounded Taylor-Maccoll weak attached cone. ALL angles radians.
++% Velocity normalized by sqrt(2*h0); explicit gamma in every RHS.
++if ~isscalar(M)||~isscalar(theta)||~isscalar(gamma_gas)||~isreal([M,theta,gamma_gas])||any(~isfinite([M,theta,gamma_gas]))||M<=1||theta<=0||theta>=pi/2||gamma_gas<=1
++    error('V5:InputInvalid','Cone needs M>1, 0<theta<pi/2 and gamma>1');
++end
++started=tic;mu=asin(1/M);grid=linspace(mu+1e-7,pi/2-1e-4,48);
++% At exactly beta=Mach angle the shock vanishes and cone angle tends to 0.
++% Use this analytic endpoint; imposing a finite beta excess wrongly excludes
++% small WALL inclinations. This is not a floor on wall half-angle.
++last_b=mu;last_f=-theta;lo=NaN;hi=NaN;valid_count=0;
++for k=1:numel(grid)
++    [wall,~,~,ok]=wall_solution(grid(k));
++    if ok
++        valid_count=valid_count+1;f=wall-theta;
++        if isfinite(last_f)&&last_f<0&&f>=0;lo=last_b;hi=grid(k);break;end
++        last_b=grid(k);last_f=f;
+     end
+ end
+-        velocitynormal_chazhi1 = velocity_normal(1:index);%��velocity_normal����0���ٶ�ֵ������ velocitynormal_chazhi1
+-        anglehalfcone_chazhi1 = angle(1:index);%��velocity_normal����0ʱ��Ӧ��angle������ֵ����anglehalfcone_chazhi1
+-
+-        angle_velocity0 = interp1(velocitynormal_chazhi1,anglehalfcone_chazhi1,0,'spline'); %cubic��������ֵ����V����ٶ�Ϊ0ʱ��׼ȷ�����ֵ��
+-        %�伴Ϊ��ʱ��Բ׶��� angle_velocity0 
+-        esp1 = (angle0_halfcone-angle_velocity0)/10.;%���������V����ٶ�Ϊ0ʱ��Բ׶���angle_velocity0 �������������Բ׶���angle0_halfcon�Ĳ�ֵ����10��Ϊ���㾫�ȵı��ֵ
+-        angle1_shock = angle1_shock+esp1;%ͨ����һ�μ��������Բ׶��ǵĲ�ֵesp1�������ٶ��ļ����� angle1_shock
+-end 
+-        velocityradiul_chazhi1 = velocity_radiul(1:index);%��������������V���ٶ�Ϊ0ʱ��Ӧ��U����ٶ�ֵvelocity_radiul(1:index)��ֵ��velocityradiul_chazhi1
+-        velocityradiul0 = interp1(velocitynormal_chazhi1,velocityradiul_chazhi1,0,'spline');%��ֵ��׼ȷ�ҳ�V����ٶ�Ϊ0ʱ��U����ٶ�
+- %---------------------------output--------------------------------------%      
+-        angle1_shock = angle1_shock*180./pi;%���������ļ�����
+-        angle_span = [anglehalfcone_chazhi1
+-                      angle_velocity0];%,������ȣ��ӱ��浽�����ǵķֳ���N��
+-        velocitynormal =[velocitynormal_chazhi1
+-                         0];%��Ӧ������ϵ�V����ٶ�
+-        velocityradiul=[velocityradiul_chazhi1
+-                        velocityradiul0];%��Ӧ������ϵ�U����ٶ�
+-                                                         
+-%------------------------subfuction of EQ T-M----------------------------%
+-function dy=weifen(angle_halfcone,y) 
+-global specific_heat_ratio
+-dy = zeros(2,1);%����dy�Ĵ�СΪ����һ��
+-
+-dy(1) = y(2);%U����ٶ�������ǵ�΢��ֵ���ڴ���ĳ�ʼV����ٶ�
+-%see book of M.J.����� "gas dynamics "  page 128,EQ��16.60��
+-
+-temp  = (specific_heat_ratio+1)/2.-(specific_heat_ratio-1)/2.*(y(1)^2+y(2)^2);
+-% sound speed is un_dimensional according the critical sound speed(a*)
+-%see book of M.J.����� "gas dynamics "   page 128,EQ��16.62����128,EQ��16.63��
+-
+-dy(2) = -y(1)+(temp*(y(1)+y(2)/tan(angle_halfcone)))/(y(2)^2-temp);%�����V����ٶ�������ǵ�΢��ֵ
+-%see book of M.J.����� "gas dynamics "   page 128,EQ��16.61��
++if ~isfinite(lo)
++    if valid_count>=4;error('V5:NoAttachedSolution','No weak attached cone solution in bounded shock scan');
++    else;error('V5:NumericalNonconvergence','Cone shock scan failed');end
++end
++opts=optimset('Display','off','TolX',2e-13,'MaxIter',70,'MaxFunEvals',100);
++[beta,residual,flag]=fzero(@wall_residual,[lo hi],opts);
++if flag<=0||abs(residual)>2e-7;error('V5:NumericalNonconvergence','Cone wall residual did not converge');end
++[wall,angles,y,ok]=wall_solution(beta);
++if ~ok||abs(wall-theta)>2e-7;error('V5:NumericalNonconvergence','Cone final integration invalid');end
++vr=y(:,1);vt=y(:,2);index=numel(angles)-1;
++    function f=wall_residual(b)
++        if b==mu;f=-theta;return;end
++        [a,~,~,good]=wall_solution(b);
++        if ~good;error('V5:NumericalNonconvergence','Cone bracket integration failed');end
++        f=a-theta;
++    end
++    function [wall,t,y,ok]=wall_solution(b)
++        if toc(started)>8;error('V5:NumericalTimeout','Cone component exceeded 8 s');end
++        Mn=M*sin(b);rr=(gamma_gas+1)*Mn^2/(2+(gamma_gas-1)*Mn^2);
++        vinf=sqrt((gamma_gas-1)*M^2/(2+(gamma_gas-1)*M^2));y0=[vinf*cos(b);-vinf*sin(b)/rr];
++        optsode=odeset('RelTol',2e-10,'AbsTol',1e-12,'MaxStep',.01,'Events',@wall_event,'OutputFcn',@time_guard);
++        [t,y,te,ye,ie]=ode45(@(a,u)rhs(a,u,gamma_gas),[b,1e-7],y0,optsode);
++        ok=~isempty(te)&&ie(end)==1&&isreal(y)&&all(isfinite(y(:)));
++        if ok;wall=te(end);t(end)=wall;y(end,:)=ye(end,:);else;wall=NaN;end
++    end
++    function [value,isterminal,direction]=wall_event(~,y)
++        a2=(gamma_gas-1)/2*(1-sum(y.^2));value=[y(2);a2-y(2)^2-1e-10];isterminal=[1;1];direction=[1;-1];
++    end
++    function stop=time_guard(~,~,~)
++        stop=0;if toc(started)>8;error('V5:NumericalTimeout','Cone component exceeded 8 s');end
++    end
++end
++function dy=rhs(a,y,gamma_gas)
++a2=(gamma_gas-1)/2*(1-sum(y.^2));den=y(2)^2-a2;
++if ~isreal(y)||any(~isfinite(y))||a2<=0||abs(den)<1e-15
++    error('V5:NumericalDomain','Taylor-Maccoll sonic or energy singularity');
++end
++dy=[y(2);(a2*(2*y(1)+y(2)/tan(a))-y(2)^2*y(1))/den];
++end
