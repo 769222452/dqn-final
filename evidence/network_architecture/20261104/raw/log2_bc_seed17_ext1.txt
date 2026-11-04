@@ -1,0 +1,16 @@
+bc_seed17 block 2 train states None labels None new-state tests 50 / 50
+bc_seed17 block 3 train states None labels None new-state tests 50 / 50
+bc_seed17 block 4 train states None labels None new-state tests 50 / 50
+bc_seed17 block 5 train states None labels None new-state tests 50 / 50
+bc_seed17 block 6 train states None labels None new-state tests 50 / 50
+bc_seed17 block 7 train states None labels None new-state tests 44 / 50
+bc_seed17 block 8 train states None labels None new-state tests 44 / 50
+bc_seed17 block 9 train states None labels None new-state tests 38 / 50
+bc_seed17 block 10 train states None labels None new-state tests 0 / 50
+bc_seed17 block 11 train states None labels None new-state tests 0 / 50
+bc_seed17 block 12 train states None labels None new-state tests 0 / 50
+bc_seed17 block 13 train states None labels None new-state tests 0 / 50
+bc_seed17 block 14 train states None labels None new-state tests 0 / 50
+bc_seed17 block 15 train states None labels None new-state tests 0 / 50
+bc_seed17 block 16 train states None labels None new-state tests 0 / 50
+bc_seed17 block 17 train states 238 labels 914 new-state tests 0 / 50

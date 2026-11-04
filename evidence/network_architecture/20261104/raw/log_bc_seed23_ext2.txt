@@ -1,0 +1,7 @@
+bc_seed23 block 2 train states 50 labels 150 new-state tests 50 / 50
+bc_seed23 block 3 train states 75 labels 225 new-state tests 50 / 50
+bc_seed23 block 4 train states 100 labels 300 new-state tests 48 / 50
+bc_seed23 block 5 train states 124 labels 374 new-state tests 48 / 50
+bc_seed23 block 6 train states 148 labels 447 new-state tests 50 / 50
+bc_seed23 block 7 train states 173 labels 522 new-state tests 50 / 50
+bc_seed23 block 8 train states 198 labels 597 new-state tests 46 / 50

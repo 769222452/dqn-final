@@ -1,0 +1,16 @@
+bc_seed17 block 2 train states 50 labels 150 new-state tests 50 / 50
+bc_seed17 block 3 train states 75 labels 225 new-state tests 50 / 50
+bc_seed17 block 4 train states 100 labels 300 new-state tests 50 / 50
+bc_seed17 block 5 train states 125 labels 375 new-state tests 50 / 50
+bc_seed17 block 6 train states 150 labels 450 new-state tests 50 / 50
+bc_seed17 block 7 train states 175 labels 525 new-state tests 44 / 50
+bc_seed17 block 8 train states 197 labels 596 new-state tests 44 / 50
+bc_seed17 block 9 train states 219 labels 668 new-state tests 38 / 50
+bc_seed17 block 10 train states 238 labels 737 new-state tests 0 / 50
+bc_seed17 block 11 train states 238 labels 787 new-state tests 0 / 50
+bc_seed17 block 12 train states 238 labels 832 new-state tests 0 / 50
+bc_seed17 block 13 train states 238 labels 876 new-state tests 0 / 50
+bc_seed17 block 14 train states 238 labels 914 new-state tests 0 / 50
+bc_seed17 block 15 train states 238 labels 914 new-state tests 0 / 50
+bc_seed17 block 16 train states 238 labels 914 new-state tests 0 / 50
+bc_seed17 block 17 train states 238 labels 914 new-state tests 0 / 50
