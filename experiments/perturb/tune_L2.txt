@@ -1,0 +1,2 @@
+L2 B2: r=0.87 kp=2 kg=1 -> 2495.15 km (41/144 settings feasible)
+L2 B1: CL=0.025 protection r=0.85 -> 2493.56 km

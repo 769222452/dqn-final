@@ -1,0 +1,1851 @@
+{
+ "L2": {
+  "B2": {
+   "action": 7,
+   "r": 0.87,
+   "kp": 2.0,
+   "kg": 1.0,
+   "failures": 0,
+   "mean_range_km": 2495.1525782475196
+  },
+  "B1": {
+   "action": 6,
+   "r": 0.85,
+   "cl_const": 0.025,
+   "failures": 0,
+   "mean_range_km": 2493.5567322642746,
+   "kp": 2.0,
+   "kg": 1.0
+  },
+  "grid_B2": [
+   {
+    "action": 3,
+    "r": 0.75,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 12,
+    "mean_range_km": 753.1434272747808
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 177.35016435528792
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 172.14472717471375
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 169.0831642874976
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 166.91754816145786
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 165.80007267784427
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 164.90514494813266
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 164.1605313085048
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 163.19177909250934
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 162.14419721075998
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 161.3991799370063
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 160.65672436324877
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 159.90356148684205
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 159.07750174259812
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 158.24818336034127
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "kp": 1.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 157.64705701872478
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 0,
+    "mean_range_km": 2451.2285815056002
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 0,
+    "mean_range_km": 2462.705394578222
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 0,
+    "mean_range_km": 2468.688398637365
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 1,
+    "mean_range_km": 2392.3540262528504
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 1,
+    "mean_range_km": 2395.444867180129
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 1,
+    "mean_range_km": 2396.743210163693
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 2,
+    "mean_range_km": 2355.431401904937
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2244.4129334462186
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2191.226597496521
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2191.1664401336166
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 4,
+    "mean_range_km": 2093.478400897554
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 5,
+    "mean_range_km": 2060.4676338969375
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 8,
+    "mean_range_km": 1827.5144864248136
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 9,
+    "mean_range_km": 1804.5775453440133
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 10,
+    "mean_range_km": 1631.2887381138178
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "kp": 1.0,
+    "kg": 1.0,
+    "failures": 12,
+    "mean_range_km": 1410.936239599007
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2378.563235682501
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2387.8877825970194
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2392.842303661728
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2395.901532383038
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2398.780870621219
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2400.1585055204687
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2401.498046498831
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2402.8022962854034
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2404.073599912479
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2405.313571576139
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2406.5231929742245
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2407.704228175447
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2408.8582519098572
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2409.986130906359
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2411.089047702856
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "kp": 1.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2412.167889947198
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 122.38487632189829
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 119.68044569464575
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 118.70615471198374
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 118.03244918870976
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 117.58219221312548
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 117.12974904809033
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 116.90333929766561
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 116.59959877417239
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 116.5255219283165
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 116.15253790388643
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 116.07533985421858
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 115.620915038849
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 115.39178132202274
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 115.16602200626
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 115.01873192588246
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "kp": 2.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 115.01889892870506
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 0,
+    "mean_range_km": 2469.644823892806
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 0,
+    "mean_range_km": 2481.394224514039
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 0,
+    "mean_range_km": 2487.552099134454
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 0,
+    "mean_range_km": 2491.428730872238
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 0,
+    "mean_range_km": 2495.1525782475196
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 1,
+    "mean_range_km": 2415.7026032467693
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 1,
+    "mean_range_km": 2417.234222542791
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 2,
+    "mean_range_km": 2306.2040907153896
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2217.4782015133887
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 5,
+    "mean_range_km": 1995.3034254982338
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 7,
+    "mean_range_km": 1769.459185779451
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 9,
+    "mean_range_km": 1566.8045695030196
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 12,
+    "mean_range_km": 1356.5232559547046
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 14,
+    "mean_range_km": 1039.0165542561642
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 14,
+    "mean_range_km": 882.367879215617
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "kp": 2.0,
+    "kg": 1.0,
+    "failures": 14,
+    "mean_range_km": 819.8011467583697
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2427.696477278133
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2438.2381402687947
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2443.892238991966
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2447.4095746493317
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2450.7303370858754
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2452.3221916708026
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2453.871614608679
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2455.381792156909
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2456.855937832258
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2458.296026544686
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 1,
+    "mean_range_km": 2380.79396392853
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 1,
+    "mean_range_km": 2381.971046748875
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 1,
+    "mean_range_km": 2383.119530902696
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 2,
+    "mean_range_km": 2343.574178059882
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 3,
+    "mean_range_km": 2271.4977011207275
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "kp": 2.0,
+    "kg": 3.0,
+    "failures": 4,
+    "mean_range_km": 2240.7162605296166
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 112.13913057800833
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 111.46171936937974
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 111.08710900756857
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 110.7077069818914
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 110.48168609844609
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 110.2549896597368
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 110.25477215035295
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 110.02928073444502
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 109.87679560729148
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 109.64911643037797
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 109.49614364688762
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 109.19372860788938
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 109.04418771288682
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 109.04382529804258
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 108.9692448343108
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "kp": 4.0,
+    "kg": 0.3,
+    "failures": 16,
+    "mean_range_km": 108.74240309975016
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2006.4597753119197
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2016.4241406363176
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2021.6996948547692
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2025.0146935054818
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2028.2473343127767
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2029.806726695128
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 3,
+    "mean_range_km": 2031.325927893555
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 4,
+    "mean_range_km": 1951.4783209987954
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 4,
+    "mean_range_km": 1952.6309056387536
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 6,
+    "mean_range_km": 1700.1990361410906
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 9,
+    "mean_range_km": 1395.0493672994148
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 13,
+    "mean_range_km": 924.1473945107136
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 15,
+    "mean_range_km": 555.3209860762319
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 15,
+    "mean_range_km": 390.8034994252257
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 16,
+    "mean_range_km": 238.73060874658884
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "kp": 4.0,
+    "kg": 1.0,
+    "failures": 16,
+    "mean_range_km": 233.55320447128395
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2453.0348676693147
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2464.396041439624
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2470.380692395456
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2474.0943074808583
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2477.6309333873724
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2479.3400363292826
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 0,
+    "mean_range_km": 2481.011700660547
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 1,
+    "mean_range_km": 2402.4953643937265
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 1,
+    "mean_range_km": 2403.8788771327736
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 1,
+    "mean_range_km": 2405.1606572637656
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 5,
+    "mean_range_km": 2055.004166320036
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 7,
+    "mean_range_km": 1907.2381398072996
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 10,
+    "mean_range_km": 1638.040392817772
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 13,
+    "mean_range_km": 1442.1207590419197
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 13,
+    "mean_range_km": 1407.532188999292
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "kp": 4.0,
+    "kg": 3.0,
+    "failures": 15,
+    "mean_range_km": 1267.7857794141814
+   }
+  ],
+  "grid_B1": [
+   {
+    "action": 3,
+    "r": 0.75,
+    "cl_const": 0.02,
+    "failures": 0,
+    "mean_range_km": 2471.364979298625
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "cl_const": 0.02,
+    "failures": 0,
+    "mean_range_km": 2483.1768293537643
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "cl_const": 0.02,
+    "failures": 0,
+    "mean_range_km": 2489.3681382580544
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "cl_const": 0.02,
+    "failures": 0,
+    "mean_range_km": 2493.263662860294
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "cl_const": 0.02,
+    "failures": 1,
+    "mean_range_km": 2415.908072803032
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "cl_const": 0.02,
+    "failures": 1,
+    "mean_range_km": 2417.424996066787
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "cl_const": 0.02,
+    "failures": 1,
+    "mean_range_km": 2418.9632623549796
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "cl_const": 0.02,
+    "failures": 2,
+    "mean_range_km": 2307.927453858547
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "cl_const": 0.02,
+    "failures": 3,
+    "mean_range_km": 2218.9953166785244
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "cl_const": 0.02,
+    "failures": 5,
+    "mean_range_km": 1996.5769671441378
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "cl_const": 0.02,
+    "failures": 7,
+    "mean_range_km": 1770.6331559488976
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "cl_const": 0.02,
+    "failures": 9,
+    "mean_range_km": 1567.7562481457458
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "cl_const": 0.02,
+    "failures": 12,
+    "mean_range_km": 1356.918246887083
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "cl_const": 0.02,
+    "failures": 14,
+    "mean_range_km": 1039.515727029544
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "cl_const": 0.02,
+    "failures": 14,
+    "mean_range_km": 904.4034852939668
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "cl_const": 0.02,
+    "failures": 14,
+    "mean_range_km": 820.4468297819508
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "cl_const": 0.0225,
+    "failures": 0,
+    "mean_range_km": 2471.5149312400395
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "cl_const": 0.0225,
+    "failures": 0,
+    "mean_range_km": 2483.32947547123
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "cl_const": 0.0225,
+    "failures": 0,
+    "mean_range_km": 2489.5218989130663
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "cl_const": 0.0225,
+    "failures": 0,
+    "mean_range_km": 2493.4179550931476
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "cl_const": 0.0225,
+    "failures": 1,
+    "mean_range_km": 2416.0566243492217
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "cl_const": 0.0225,
+    "failures": 1,
+    "mean_range_km": 2417.5736982594963
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "cl_const": 0.0225,
+    "failures": 1,
+    "mean_range_km": 2419.1118649822247
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "cl_const": 0.0225,
+    "failures": 2,
+    "mean_range_km": 2308.06923472161
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "cl_const": 0.0225,
+    "failures": 3,
+    "mean_range_km": 2219.130780348725
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "cl_const": 0.0225,
+    "failures": 5,
+    "mean_range_km": 1996.6976411547366
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "cl_const": 0.0225,
+    "failures": 7,
+    "mean_range_km": 1770.7397898399386
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "cl_const": 0.0225,
+    "failures": 9,
+    "mean_range_km": 1567.84952962698
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "cl_const": 0.0225,
+    "failures": 12,
+    "mean_range_km": 1356.9953121016595
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "cl_const": 0.0225,
+    "failures": 14,
+    "mean_range_km": 1040.3681999578696
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "cl_const": 0.0225,
+    "failures": 14,
+    "mean_range_km": 904.3877670157462
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "cl_const": 0.0225,
+    "failures": 14,
+    "mean_range_km": 820.7738261244635
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "cl_const": 0.025,
+    "failures": 0,
+    "mean_range_km": 2471.6506078557
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "cl_const": 0.025,
+    "failures": 0,
+    "mean_range_km": 2483.4674193872206
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "cl_const": 0.025,
+    "failures": 0,
+    "mean_range_km": 2489.660164630213
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "cl_const": 0.025,
+    "failures": 0,
+    "mean_range_km": 2493.5567322642746,
+    "kp": 2.0,
+    "kg": 1.0
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "cl_const": 0.025,
+    "failures": 1,
+    "mean_range_km": 2416.1877575452
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "cl_const": 0.025,
+    "failures": 1,
+    "mean_range_km": 2417.702035038339
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "cl_const": 0.025,
+    "failures": 1,
+    "mean_range_km": 2419.2332086973393
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "cl_const": 0.025,
+    "failures": 2,
+    "mean_range_km": 2308.099281810538
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "cl_const": 0.025,
+    "failures": 3,
+    "mean_range_km": 2219.1779145099513
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "cl_const": 0.025,
+    "failures": 5,
+    "mean_range_km": 1996.7558689019277
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "cl_const": 0.025,
+    "failures": 6,
+    "mean_range_km": 1888.7764456472873
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "cl_const": 0.025,
+    "failures": 7,
+    "mean_range_km": 1761.0502766002974
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "cl_const": 0.025,
+    "failures": 10,
+    "mean_range_km": 1550.5726964317196
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "cl_const": 0.025,
+    "failures": 13,
+    "mean_range_km": 1092.8988351288199
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "cl_const": 0.025,
+    "failures": 14,
+    "mean_range_km": 912.9344977503059
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "cl_const": 0.025,
+    "failures": 14,
+    "mean_range_km": 875.7561842161742
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "cl_const": 0.0275,
+    "failures": 0,
+    "mean_range_km": 2471.7968769448453
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "cl_const": 0.0275,
+    "failures": 0,
+    "mean_range_km": 2483.6119440660636
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "cl_const": 0.0275,
+    "failures": 0,
+    "mean_range_km": 2489.715728426231
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "cl_const": 0.0275,
+    "failures": 0,
+    "mean_range_km": 2493.353036273927
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "cl_const": 0.0275,
+    "failures": 1,
+    "mean_range_km": 2415.386791033278
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "cl_const": 0.0275,
+    "failures": 1,
+    "mean_range_km": 2416.4731475306157
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "cl_const": 0.0275,
+    "failures": 1,
+    "mean_range_km": 2417.5004085608407
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "cl_const": 0.0275,
+    "failures": 1,
+    "mean_range_km": 2418.172090436435
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "cl_const": 0.0275,
+    "failures": 1,
+    "mean_range_km": 2417.8983998427448
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "cl_const": 0.0275,
+    "failures": 3,
+    "mean_range_km": 2237.105291332302
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "cl_const": 0.0275,
+    "failures": 3,
+    "mean_range_km": 2237.293626892616
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "cl_const": 0.0275,
+    "failures": 4,
+    "mean_range_km": 2140.367833866615
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "cl_const": 0.0275,
+    "failures": 4,
+    "mean_range_km": 2076.075521042172
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "cl_const": 0.0275,
+    "failures": 6,
+    "mean_range_km": 1944.192680491652
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "cl_const": 0.0275,
+    "failures": 6,
+    "mean_range_km": 1850.7855485968023
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "cl_const": 0.0275,
+    "failures": 7,
+    "mean_range_km": 1796.9506978041384
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2471.8762004715763
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2482.379250510324
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2486.277358701892
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2487.97411124428
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2489.189381190549
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2489.6713098326964
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2490.098246147434
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2490.483056444882
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2490.83373357991
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2491.1576309433467
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2491.4611214470387
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2491.7478043006445
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2492.0173987328644
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2492.2724805569533
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2492.5147857360125
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "cl_const": 0.03,
+    "failures": 0,
+    "mean_range_km": 2492.7448089305967
+   },
+   {
+    "action": 3,
+    "r": 0.75,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2459.869954763408
+   },
+   {
+    "action": 4,
+    "r": 0.8,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2462.2115233847253
+   },
+   {
+    "action": 5,
+    "r": 0.83,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2463.2030603786616
+   },
+   {
+    "action": 6,
+    "r": 0.85,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2463.7638832191024
+   },
+   {
+    "action": 7,
+    "r": 0.87,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2464.2675202339724
+   },
+   {
+    "action": 8,
+    "r": 0.88,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2464.4997745014725
+   },
+   {
+    "action": 9,
+    "r": 0.89,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2464.7184317630017
+   },
+   {
+    "action": 10,
+    "r": 0.9,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2464.9263000328347
+   },
+   {
+    "action": 11,
+    "r": 0.91,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2465.1247426144528
+   },
+   {
+    "action": 12,
+    "r": 0.92,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2465.3136060157694
+   },
+   {
+    "action": 13,
+    "r": 0.93,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2465.49464007842
+   },
+   {
+    "action": 14,
+    "r": 0.94,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2465.669139120177
+   },
+   {
+    "action": 15,
+    "r": 0.95,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2465.837338355247
+   },
+   {
+    "action": 16,
+    "r": 0.96,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2465.999800886631
+   },
+   {
+    "action": 17,
+    "r": 0.97,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2466.156475475012
+   },
+   {
+    "action": 18,
+    "r": 0.98,
+    "cl_const": 0.035,
+    "failures": 0,
+    "mean_range_km": 2466.3077268810875
+   }
+  ]
+ }
+}
