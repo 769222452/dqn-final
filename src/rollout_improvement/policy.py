@@ -66,7 +66,9 @@ def chain_action(chain, f):
         elif kind == 'override':
             a = _override(stage, f, a)
         elif _in_window(stage, t):
-            lcb, _, _ = lower_confidence_bound(stage['members'], f, stage.get('inputs'))
+            lcb, mean, _ = lower_confidence_bound(stage['members'], f, stage.get('inputs'))
+            if stage.get('score') == 'mean':     # ablation: ensemble mean instead of the lower confidence bound
+                lcb = mean
             cand = max(neighbourhood(a), key=lambda j: (lcb[j], -abs(j-a)))
             if cand != a and lcb[cand] > stage['margin'] and lcb[cand] > lcb[a]:
                 a = cand
