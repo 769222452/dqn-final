@@ -84,8 +84,10 @@ def branch_job(args):
             prefix[t_b] = (env.G, a0, f)
             for a in alternatives(a0, t_b, sweep):
                 b = fly(env.fork(), chain, override=(t_b, a), schedule=sched)
+                # A limit violation is a real outcome with a known return (truncated range + failure penalty), so the
+                # branch is a valid label; `failed` only counts it.
                 rows.append(dict(scenario=seed, t=t_b, action=int(a), base_action=a0, features=f, G_end=b.G,
-                                 valid=bool(not b.failed), stop=b.reason))
+                                 valid=True, failed=bool(b.failed), stop=b.reason))
         return dict(rows=rows, prefix={str(t): list(v) for t, v in prefix.items()})
     except BaseException:
         return dict(error=traceback.format_exc(), rows=[])
@@ -184,7 +186,7 @@ def train(out, level, seed, inner, initial_action, inputs=FULL_INPUTS, workers=4
                     new.append(dict(features=f, action=a0, base_action=a0, t=float(t), advantage=0.))
             new += [dict(features=r['features'], action=r['action'], base_action=r['base_action'], t=r['t'],
                          advantage=r['G_end']-G_nom[r['scenario']]) for r in rows if r['valid']]
-            n_invalid = sum(not r['valid'] for r in rows)
+            n_invalid = sum(r['failed'] for r in rows)        # branches ending in a violation (kept as labels)
             n_pos = sum(1 for x in new if x['action'] != x['base_action'] and x['advantage'] > min_advantage)
             version = st['policy_version']
             for x in new:
