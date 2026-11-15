@@ -1,0 +1,4153 @@
+{
+ "level": "L2",
+ "seeds": [
+  2000,
+  2001,
+  2002,
+  2003,
+  2004,
+  2005,
+  2006,
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025,
+  2026,
+  2027,
+  2028,
+  2029,
+  2030,
+  2031,
+  2032,
+  2033,
+  2034,
+  2035,
+  2036,
+  2037,
+  2038,
+  2039
+ ],
+ "summary": {
+  "L2_full_s17": {
+   "vs_B2": {
+    "mean": 0.13170423438666604,
+    "ci95": [
+     0.07712772859232558,
+     0.19042463513566132
+    ],
+    "median": 0.0,
+    "wins": 16,
+    "worst": 0.0,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.24426182267833
+   },
+   "vs_B1": {
+    "mean": 0.6213122017715869,
+    "ci95": [
+     -0.38596296158526056,
+     1.4793374490888507
+    ],
+    "median": 1.6127908235262112,
+    "wins": 35,
+    "worst": -8.708170079911483,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.24426182267833
+   }
+  },
+  "L2_full_s23": {
+   "vs_B2": {
+    "mean": 1.8464769976524735,
+    "ci95": [
+     1.3913534954529723,
+     2.327963694575181
+    ],
+    "median": 1.6208945540845434,
+    "wins": 33,
+    "worst": 0.0,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.24426182267833
+   },
+   "vs_B1": {
+    "mean": 2.3360849650373945,
+    "ci95": [
+     1.0882054810950452,
+     3.4791998820055285
+    ],
+    "median": 3.2859649702413662,
+    "wins": 35,
+    "worst": -8.708170079911483,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.24426182267833
+   }
+  },
+  "L2_full_s41": {
+   "vs_B2": {
+    "mean": 0.7116541870254878,
+    "ci95": [
+     0.575025268434826,
+     0.8503737066273108
+    ],
+    "median": 0.7010074073280066,
+    "wins": 34,
+    "worst": 0.0,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.24426182267833
+   },
+   "vs_B1": {
+    "mean": 1.2012621544104085,
+    "ci95": [
+     0.11955917230594318,
+     2.1336527609378635
+    ],
+    "median": 2.28048290081324,
+    "wins": 35,
+    "worst": -8.708170079911483,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.24426182267833
+   }
+  },
+  "L2_full_s59": {
+   "vs_B2": {
+    "mean": 1.6273882835754065,
+    "ci95": [
+     1.2631890091007425,
+     1.9882886476442123
+    ],
+    "median": 1.7523616752455382,
+    "wins": 33,
+    "worst": 0.0,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.24441261502994
+   },
+   "vs_B1": {
+    "mean": 2.1169962509603275,
+    "ci95": [
+     0.8949122794731958,
+     3.1777795538095184
+    ],
+    "median": 3.239840587315257,
+    "wins": 35,
+    "worst": -8.707566910505008,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.24441261502994
+   }
+  },
+  "L2_full_s83": {
+   "vs_B2": {
+    "mean": 1.2823263382802224,
+    "ci95": [
+     1.0587260281251076,
+     1.4959558517472467
+    ],
+    "median": 1.494129484799032,
+    "wins": 37,
+    "worst": 0.0,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.244479299986
+   },
+   "vs_B1": {
+    "mean": 1.7719343056651433,
+    "ci95": [
+     0.6106644158018413,
+     2.760163871673064
+    ],
+    "median": 2.9428126786749544,
+    "wins": 35,
+    "worst": -8.707714462679192,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 93.244479299986
+   }
+  },
+  "B1": {
+   "vs_B2": {
+    "mean": -0.4896079673849208,
+    "ci95": [
+     -1.3376293604215421,
+     0.49936081817381095
+    ],
+    "median": -1.5663825616904887,
+    "wins": 5,
+    "worst": -2.2429753293031354,
+    "n": 40,
+    "failures": 5,
+    "ref_failures": 5,
+    "worst10_mean_km": 100.71722610258584
+   }
+  },
+  "B2": {
+   "mean_range_km": 2164.369950253763,
+   "failures": 5
+  }
+ },
+ "flights": {
+  "B2": [
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2000,
+     "dh": -413.0,
+     "dv": -40.6,
+     "k_lift": 0.9894282367928933,
+     "k_drag": 1.003303261112572
+    },
+    "range_km": 2422.513124362534,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09354392576149184
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2001,
+     "dh": 1479.0,
+     "dv": 25.0,
+     "k_lift": 0.9322525445965181,
+     "k_drag": 1.0067069307201695
+    },
+    "range_km": 2462.132196784894,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.02084145855226105
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2002,
+     "dh": 1113.0,
+     "dv": 18.3,
+     "k_lift": 1.0967087934948263,
+     "k_drag": 0.9881999431522333
+    },
+    "range_km": 2550.792219866722,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.12442282029589369
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2003,
+     "dh": 932.0,
+     "dv": -78.2,
+     "k_lift": 1.0027246854671523,
+     "k_drag": 1.0296968842786676
+    },
+    "range_km": 2374.7098253475856,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07551341657747868
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2004,
+     "dh": -1681.0,
+     "dv": 72.1,
+     "k_lift": 0.9987322627377074,
+     "k_drag": 0.9817854523233874
+    },
+    "range_km": 2565.707766179708,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05825872253941533
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2005,
+     "dh": -1901.0,
+     "dv": 35.6,
+     "k_lift": 0.9581445808587093,
+     "k_drag": 0.9751512093062566
+    },
+    "range_km": 2504.689580384821,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.040609529171078296
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2006,
+     "dh": -1091.0,
+     "dv": -42.4,
+     "k_lift": 0.9518500420049877,
+     "k_drag": 1.0300617330894521
+    },
+    "range_km": 2384.9104232910386,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06769351802165624
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2007,
+     "dh": -848.0,
+     "dv": 20.6,
+     "k_lift": 1.0159379279723206,
+     "k_drag": 1.0027855673687607
+    },
+    "range_km": 2505.656289841397,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07947728038169366
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2008,
+     "dh": -7.0,
+     "dv": 47.3,
+     "k_lift": 0.9186319246477481,
+     "k_drag": 0.9613979317843042
+    },
+    "range_km": 2500.588206991672,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016354676871609408
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2009,
+     "dh": 86.0,
+     "dv": 33.9,
+     "k_lift": 0.9378644819086974,
+     "k_drag": 1.0390452907497534
+    },
+    "range_km": 2458.505773057901,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.026014194091038
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2010,
+     "dh": -1815.0,
+     "dv": -26.2,
+     "k_lift": 0.9962380186049533,
+     "k_drag": 0.9778544204203972
+    },
+    "range_km": 2452.432684558808,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04030563326614789
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2011,
+     "dh": -1738.0,
+     "dv": 23.8,
+     "k_lift": 1.0497593568475787,
+     "k_drag": 0.9077858910556442
+    },
+    "range_km": 2566.2949630209023,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09411615216732339
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2012,
+     "dh": -1204.0,
+     "dv": 96.2,
+     "k_lift": 0.9048154098466384,
+     "k_drag": 1.039921249158825
+    },
+    "range_km": 87.39206774036943,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00023028799049917836
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2013,
+     "dh": -202.0,
+     "dv": -7.8,
+     "k_lift": 0.9348219479150153,
+     "k_drag": 1.0858646901153783
+    },
+    "range_km": 2385.149850594891,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04529095887474832
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2014,
+     "dh": -1245.0,
+     "dv": -79.3,
+     "k_lift": 1.0263726069416703,
+     "k_drag": 0.9622462673999936
+    },
+    "range_km": 2412.645609170554,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08831763064398801
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2015,
+     "dh": 1593.0,
+     "dv": 84.9,
+     "k_lift": 0.9267015143831674,
+     "k_drag": 0.9190853391680526
+    },
+    "range_km": 109.38866874780325,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0028196369523332265
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2016,
+     "dh": 1988.0,
+     "dv": -77.9,
+     "k_lift": 0.9764510950303212,
+     "k_drag": 1.049643988651432
+    },
+    "range_km": 2350.790251875282,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05441437477716804
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2017,
+     "dh": 1561.0,
+     "dv": -54.5,
+     "k_lift": 0.9798195370910944,
+     "k_drag": 0.9457319210817735
+    },
+    "range_km": 2428.931573991893,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06406151463020704
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2018,
+     "dh": -148.0,
+     "dv": 1.5,
+     "k_lift": 0.9629196845338824,
+     "k_drag": 0.9695948323352507
+    },
+    "range_km": 2470.5778415037,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016018508984960822
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2019,
+     "dh": -1279.0,
+     "dv": -56.2,
+     "k_lift": 0.9720729161761725,
+     "k_drag": 0.9761590637923793
+    },
+    "range_km": 2404.7071400496125,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0709981533643197
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2020,
+     "dh": -1886.0,
+     "dv": 80.4,
+     "k_lift": 0.9839787083940303,
+     "k_drag": 1.0426078495975313
+    },
+    "range_km": 2539.7401390443792,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.036961113343378926
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2021,
+     "dh": 1668.0,
+     "dv": 90.2,
+     "k_lift": 0.9,
+     "k_drag": 1.0061072064595298
+    },
+    "range_km": 107.1101596495921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0019545207811653142
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2022,
+     "dh": 1020.0,
+     "dv": 7.7,
+     "k_lift": 0.9659054883944477,
+     "k_drag": 0.96683456226428
+    },
+    "range_km": 2482.367696422701,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06835447769811509
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2023,
+     "dh": -1185.0,
+     "dv": 43.7,
+     "k_lift": 0.9301180690668717,
+     "k_drag": 0.9882001839221465
+    },
+    "range_km": 2489.651496756412,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.045037786387061685
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2024,
+     "dh": 1435.0,
+     "dv": -10.1,
+     "k_lift": 1.0956945360704502,
+     "k_drag": 0.9469290433256248
+    },
+    "range_km": 2535.552727616723,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09233615466207534
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2025,
+     "dh": 541.0,
+     "dv": -2.1,
+     "k_lift": 1.050425720597765,
+     "k_drag": 1.0735100089465508
+    },
+    "range_km": 2465.547149218111,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.041650274703566526
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2026,
+     "dh": 1468.0,
+     "dv": -98.8,
+     "k_lift": 0.9321800910916166,
+     "k_drag": 0.9766387380152004
+    },
+    "range_km": 2335.1411078299084,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.015607383885857362
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2027,
+     "dh": 1544.0,
+     "dv": -34.4,
+     "k_lift": 0.9711749882580918,
+     "k_drag": 1.0590147518634665
+    },
+    "range_km": 2391.1834291676178,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03904565832667872
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2028,
+     "dh": -1013.0,
+     "dv": -4.4,
+     "k_lift": 1.024220519942089,
+     "k_drag": 0.92438638743516
+    },
+    "range_km": 2515.7797279868196,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10549771551155596
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2029,
+     "dh": 1757.0,
+     "dv": 72.7,
+     "k_lift": 0.9518287500293204,
+     "k_drag": 1.0351871067543263
+    },
+    "range_km": 2514.7910346092867,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04651321566752742
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2030,
+     "dh": -1040.0,
+     "dv": -43.1,
+     "k_lift": 1.0006616454876176,
+     "k_drag": 1.0151070966134175
+    },
+    "range_km": 2420.202427397671,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08576353025374972
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2031,
+     "dh": 1346.0,
+     "dv": 3.8,
+     "k_lift": 1.0819925400815955,
+     "k_drag": 0.9921869779049406
+    },
+    "range_km": 2525.554068313053,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08200681756232953
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2032,
+     "dh": -1105.0,
+     "dv": 91.7,
+     "k_lift": 1.0146543974701228,
+     "k_drag": 1.0050785308873813
+    },
+    "range_km": 97.20758319430257,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.000721877734157772
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2033,
+     "dh": -1885.0,
+     "dv": 99.4,
+     "k_lift": 1.0315157328398314,
+     "k_drag": 0.9996876273935786
+    },
+    "range_km": 81.26723670644921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00024087384024618075
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2034,
+     "dh": -1085.0,
+     "dv": -58.4,
+     "k_lift": 0.995434508185618,
+     "k_drag": 0.9105657623467461
+    },
+    "range_km": 2447.1152724955155,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04505521135729795
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2035,
+     "dh": -11.0,
+     "dv": -68.1,
+     "k_lift": 0.9105583756092334,
+     "k_drag": 0.9703616435473532
+    },
+    "range_km": 2357.6174139164505,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.021323393701058402
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2036,
+     "dh": -1188.0,
+     "dv": 47.3,
+     "k_lift": 1.03397865264547,
+     "k_drag": 1.0495726141225614
+    },
+    "range_km": 2524.9047625345997,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09621290981163422
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2037,
+     "dh": -1881.0,
+     "dv": 11.8,
+     "k_lift": 0.9965983709686863,
+     "k_drag": 0.9814670653672412
+    },
+    "range_km": 2494.795419108948,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05445304850394428
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2038,
+     "dh": -1510.0,
+     "dv": 29.2,
+     "k_lift": 0.9822759995795509,
+     "k_drag": 1.0291493136383205
+    },
+    "range_km": 2485.345760411302,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.024208578789045143
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2039,
+     "dh": 737.0,
+     "dv": -79.5,
+     "k_lift": 0.9,
+     "k_drag": 0.9237329996345541
+    },
+    "range_km": 2365.4073404085743,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.044217621905281
+   }
+  ],
+  "B1": [
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2000,
+     "dh": -413.0,
+     "dv": -40.6,
+     "k_lift": 0.9894282367928933,
+     "k_drag": 1.003303261112572
+    },
+    "range_km": 2420.9818505622375,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.11417270988126971
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2001,
+     "dh": 1479.0,
+     "dv": 25.0,
+     "k_lift": 0.9322525445965181,
+     "k_drag": 1.0067069307201695
+    },
+    "range_km": 2460.680006095928,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04359671055778125
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2002,
+     "dh": 1113.0,
+     "dv": 18.3,
+     "k_lift": 1.0967087934948263,
+     "k_drag": 0.9881999431522333
+    },
+    "range_km": 2550.0898237046163,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.14388938756938807
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2003,
+     "dh": 932.0,
+     "dv": -78.2,
+     "k_lift": 1.0027246854671523,
+     "k_drag": 1.0296968842786676
+    },
+    "range_km": 2373.4607074645355,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09802371153554179
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2004,
+     "dh": -1681.0,
+     "dv": 72.1,
+     "k_lift": 0.9987322627377074,
+     "k_drag": 0.9817854523233874
+    },
+    "range_km": 2563.695859446808,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06317739920793031
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2005,
+     "dh": -1901.0,
+     "dv": 35.6,
+     "k_lift": 0.9581445808587093,
+     "k_drag": 0.9751512093062566
+    },
+    "range_km": 2502.504686355227,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06252740474173502
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2006,
+     "dh": -1091.0,
+     "dv": -42.4,
+     "k_lift": 0.9518500420049877,
+     "k_drag": 1.0300617330894521
+    },
+    "range_km": 2382.9817089069775,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0889863316535695
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2007,
+     "dh": -848.0,
+     "dv": 20.6,
+     "k_lift": 1.0159379279723206,
+     "k_drag": 1.0027855673687607
+    },
+    "range_km": 2504.0002504980444,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10114379660655182
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2008,
+     "dh": -7.0,
+     "dv": 47.3,
+     "k_lift": 0.9186319246477481,
+     "k_drag": 0.9613979317843042
+    },
+    "range_km": 2498.873375235303,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03910877820408931
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2009,
+     "dh": 86.0,
+     "dv": 33.9,
+     "k_lift": 0.9378644819086974,
+     "k_drag": 1.0390452907497534
+    },
+    "range_km": 2456.9452633448645,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.048281289690561224
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2010,
+     "dh": -1815.0,
+     "dv": -26.2,
+     "k_lift": 0.9962380186049533,
+     "k_drag": 0.9778544204203972
+    },
+    "range_km": 2450.5037951725544,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.062474392297716785
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2011,
+     "dh": -1738.0,
+     "dv": 23.8,
+     "k_lift": 1.0497593568475787,
+     "k_drag": 0.9077858910556442
+    },
+    "range_km": 2564.8177429659995,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.1144387671376762
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2012,
+     "dh": -1204.0,
+     "dv": 96.2,
+     "k_lift": 0.9048154098466384,
+     "k_drag": 1.039921249158825
+    },
+    "range_km": 94.86638912846291,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0015601846514616824
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2013,
+     "dh": -202.0,
+     "dv": -7.8,
+     "k_lift": 0.9348219479150153,
+     "k_drag": 1.0858646901153783
+    },
+    "range_km": 2383.399467718179,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06693096045050684
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2014,
+     "dh": -1245.0,
+     "dv": -79.3,
+     "k_lift": 1.0263726069416703,
+     "k_drag": 0.9622462673999936
+    },
+    "range_km": 2411.2059768557274,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10937682935894322
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2015,
+     "dh": 1593.0,
+     "dv": 84.9,
+     "k_lift": 0.9267015143831674,
+     "k_drag": 0.9190853391680526
+    },
+    "range_km": 115.60357554428589,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00351300505707286
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2016,
+     "dh": 1988.0,
+     "dv": -77.9,
+     "k_lift": 0.9764510950303212,
+     "k_drag": 1.049643988651432
+    },
+    "range_km": 2349.2179964649376,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07655639077669096
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2017,
+     "dh": 1561.0,
+     "dv": -54.5,
+     "k_lift": 0.9798195370910944,
+     "k_drag": 0.9457319210817735
+    },
+    "range_km": 2427.722280309939,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08593760451167676
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2018,
+     "dh": -148.0,
+     "dv": 1.5,
+     "k_lift": 0.9629196845338824,
+     "k_drag": 0.9695948323352507
+    },
+    "range_km": 2469.0667071403104,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03913413986592551
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2019,
+     "dh": -1279.0,
+     "dv": -56.2,
+     "k_lift": 0.9720729161761725,
+     "k_drag": 0.9761590637923793
+    },
+    "range_km": 2403.108888637835,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09245908216615661
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2020,
+     "dh": -1886.0,
+     "dv": 80.4,
+     "k_lift": 0.9839787083940303,
+     "k_drag": 1.0426078495975313
+    },
+    "range_km": 2537.497163715076,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04207476105756314
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2021,
+     "dh": 1668.0,
+     "dv": 90.2,
+     "k_lift": 0.9,
+     "k_drag": 1.0061072064595298
+    },
+    "range_km": 113.3324585734624,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00018867927646759597
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2022,
+     "dh": 1020.0,
+     "dv": 7.7,
+     "k_lift": 0.9659054883944477,
+     "k_drag": 0.96683456226428
+    },
+    "range_km": 2481.122720947853,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08877285163632154
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2023,
+     "dh": -1185.0,
+     "dv": 43.7,
+     "k_lift": 0.9301180690668717,
+     "k_drag": 0.9882001839221465
+    },
+    "range_km": 2487.6912337886797,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06698774948255937
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2024,
+     "dh": 1435.0,
+     "dv": -10.1,
+     "k_lift": 1.0956945360704502,
+     "k_drag": 0.9469290433256248
+    },
+    "range_km": 2534.5890176493513,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.11260983561979498
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2025,
+     "dh": 541.0,
+     "dv": -2.1,
+     "k_lift": 1.050425720597765,
+     "k_drag": 1.0735100089465508
+    },
+    "range_km": 2464.4772935434207,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06447931512099458
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2026,
+     "dh": 1468.0,
+     "dv": -98.8,
+     "k_lift": 0.9321800910916166,
+     "k_drag": 0.9766387380152004
+    },
+    "range_km": 2333.465986740218,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03802387886106584
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2027,
+     "dh": 1544.0,
+     "dv": -34.4,
+     "k_lift": 0.9711749882580918,
+     "k_drag": 1.0590147518634665
+    },
+    "range_km": 2389.742348088796,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.061018719218041806
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2028,
+     "dh": -1013.0,
+     "dv": -4.4,
+     "k_lift": 1.024220519942089,
+     "k_drag": 0.92438638743516
+    },
+    "range_km": 2514.177458492484,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.1259739879224111
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2029,
+     "dh": 1757.0,
+     "dv": 72.7,
+     "k_lift": 0.9518287500293204,
+     "k_drag": 1.0351871067543263
+    },
+    "range_km": 2513.2596455484236,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.050611612244182425
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2030,
+     "dh": -1040.0,
+     "dv": -43.1,
+     "k_lift": 1.0006616454876176,
+     "k_drag": 1.0151070966134175
+    },
+    "range_km": 2418.551378391669,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10639878356057342
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2031,
+     "dh": 1346.0,
+     "dv": 3.8,
+     "k_lift": 1.0819925400815955,
+     "k_drag": 0.9921869779049406
+    },
+    "range_km": 2524.488255097011,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10296164033352595
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2032,
+     "dh": -1105.0,
+     "dv": 91.7,
+     "k_lift": 1.0146543974701228,
+     "k_drag": 1.0050785308873813
+    },
+    "range_km": 105.91575327421405,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0019735833851459716
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2033,
+     "dh": -1885.0,
+     "dv": 99.4,
+     "k_lift": 1.0315157328398314,
+     "k_drag": 0.9996876273935786
+    },
+    "range_km": 88.75430343420398,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0005262181810774536
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2034,
+     "dh": -1085.0,
+     "dv": -58.4,
+     "k_lift": 0.995434508185618,
+     "k_drag": 0.9105657623467461
+    },
+    "range_km": 2445.3842774151494,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0672917777408818
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2035,
+     "dh": -11.0,
+     "dv": -68.1,
+     "k_lift": 0.9105583756092334,
+     "k_drag": 0.9703616435473532
+    },
+    "range_km": 2355.9933669101556,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.044247340597313056
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2036,
+     "dh": -1188.0,
+     "dv": 47.3,
+     "k_lift": 1.03397865264547,
+     "k_drag": 1.0495726141225614
+    },
+    "range_km": 2523.190967998806,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.11661613992830466
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2037,
+     "dh": -1881.0,
+     "dv": 11.8,
+     "k_lift": 0.9965983709686863,
+     "k_drag": 0.9814670653672412
+    },
+    "range_km": 2492.7047514988335,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.076131944588119
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2038,
+     "dh": -1510.0,
+     "dv": 29.2,
+     "k_lift": 0.9822759995795509,
+     "k_drag": 1.0291493136383205
+    },
+    "range_km": 2483.318049851384,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04591716692097214
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2039,
+     "dh": 737.0,
+     "dv": -79.5,
+     "k_lift": 0.9,
+     "k_drag": 0.9237329996345541
+    },
+    "range_km": 2363.8309089431445,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.065333352663559
+   }
+  ],
+  "L2_full_s17": [
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2000,
+     "dh": -413.0,
+     "dv": -40.6,
+     "k_lift": 0.9894282367928933,
+     "k_drag": 1.003303261112572
+    },
+    "range_km": 2422.907319402144,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09398969448490802
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2001,
+     "dh": 1479.0,
+     "dv": 25.0,
+     "k_lift": 0.9322525445965181,
+     "k_drag": 1.0067069307201695
+    },
+    "range_km": 2462.132196784894,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.02084145855226105
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2002,
+     "dh": 1113.0,
+     "dv": 18.3,
+     "k_lift": 1.0967087934948263,
+     "k_drag": 0.9881999431522333
+    },
+    "range_km": 2551.1361176353075,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.12489375758447008
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2003,
+     "dh": 932.0,
+     "dv": -78.2,
+     "k_lift": 1.0027246854671523,
+     "k_drag": 1.0296968842786676
+    },
+    "range_km": 2374.7098253475856,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07551341657747868
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2004,
+     "dh": -1681.0,
+     "dv": 72.1,
+     "k_lift": 0.9987322627377074,
+     "k_drag": 0.9817854523233874
+    },
+    "range_km": 2566.3473587928897,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05651654294079833
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2005,
+     "dh": -1901.0,
+     "dv": 35.6,
+     "k_lift": 0.9581445808587093,
+     "k_drag": 0.9751512093062566
+    },
+    "range_km": 2504.9940193693683,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04066383310327981
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2006,
+     "dh": -1091.0,
+     "dv": -42.4,
+     "k_lift": 0.9518500420049877,
+     "k_drag": 1.0300617330894521
+    },
+    "range_km": 2385.2815325085166,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06761721652755259
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2007,
+     "dh": -848.0,
+     "dv": 20.6,
+     "k_lift": 1.0159379279723206,
+     "k_drag": 1.0027855673687607
+    },
+    "range_km": 2505.988960484234,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07987401210330569
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2008,
+     "dh": -7.0,
+     "dv": 47.3,
+     "k_lift": 0.9186319246477481,
+     "k_drag": 0.9613979317843042
+    },
+    "range_km": 2500.588206991672,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016354676871609408
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2009,
+     "dh": 86.0,
+     "dv": 33.9,
+     "k_lift": 0.9378644819086974,
+     "k_drag": 1.0390452907497534
+    },
+    "range_km": 2458.505773057901,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.026014194091038
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2010,
+     "dh": -1815.0,
+     "dv": -26.2,
+     "k_lift": 0.9962380186049533,
+     "k_drag": 0.9778544204203972
+    },
+    "range_km": 2452.73235564287,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0394544449498162
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2011,
+     "dh": -1738.0,
+     "dv": 23.8,
+     "k_lift": 1.0497593568475787,
+     "k_drag": 0.9077858910556442
+    },
+    "range_km": 2566.2949630209023,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09411615216732339
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2012,
+     "dh": -1204.0,
+     "dv": 96.2,
+     "k_lift": 0.9048154098466384,
+     "k_drag": 1.039921249158825
+    },
+    "range_km": 87.39206774036943,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00023028799049917836
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2013,
+     "dh": -202.0,
+     "dv": -7.8,
+     "k_lift": 0.9348219479150153,
+     "k_drag": 1.0858646901153783
+    },
+    "range_km": 2385.149850594891,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04529095887474832
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2014,
+     "dh": -1245.0,
+     "dv": -79.3,
+     "k_lift": 1.0263726069416703,
+     "k_drag": 0.9622462673999936
+    },
+    "range_km": 2412.7230259823386,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08835083659237242
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2015,
+     "dh": 1593.0,
+     "dv": 84.9,
+     "k_lift": 0.9267015143831674,
+     "k_drag": 0.9190853391680526
+    },
+    "range_km": 109.38866874780325,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0028196369523332265
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2016,
+     "dh": 1988.0,
+     "dv": -77.9,
+     "k_lift": 0.9764510950303212,
+     "k_drag": 1.049643988651432
+    },
+    "range_km": 2350.790251875282,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05441437477716804
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2017,
+     "dh": 1561.0,
+     "dv": -54.5,
+     "k_lift": 0.9798195370910944,
+     "k_drag": 0.9457319210817735
+    },
+    "range_km": 2429.4082148940693,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0641144118966337
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2018,
+     "dh": -148.0,
+     "dv": 1.5,
+     "k_lift": 0.9629196845338824,
+     "k_drag": 0.9695948323352507
+    },
+    "range_km": 2470.5778415037,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016018508984960822
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2019,
+     "dh": -1279.0,
+     "dv": -56.2,
+     "k_lift": 0.9720729161761725,
+     "k_drag": 0.9761590637923793
+    },
+    "range_km": 2404.7071400496125,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0709981533643197
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2020,
+     "dh": -1886.0,
+     "dv": 80.4,
+     "k_lift": 0.9839787083940303,
+     "k_drag": 1.0426078495975313
+    },
+    "range_km": 2540.035634100492,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.036961113343378926
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2021,
+     "dh": 1668.0,
+     "dv": 90.2,
+     "k_lift": 0.9,
+     "k_drag": 1.0061072064595298
+    },
+    "range_km": 107.1101596495921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0019545207811653142
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2022,
+     "dh": 1020.0,
+     "dv": 7.7,
+     "k_lift": 0.9659054883944477,
+     "k_drag": 0.96683456226428
+    },
+    "range_km": 2482.74603310057,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06821836916662705
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2023,
+     "dh": -1185.0,
+     "dv": 43.7,
+     "k_lift": 0.9301180690668717,
+     "k_drag": 0.9882001839221465
+    },
+    "range_km": 2489.651496756412,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.045037786387061685
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2024,
+     "dh": 1435.0,
+     "dv": -10.1,
+     "k_lift": 1.0956945360704502,
+     "k_drag": 0.9469290433256248
+    },
+    "range_km": 2535.552727616723,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09233615466207534
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2025,
+     "dh": 541.0,
+     "dv": -2.1,
+     "k_lift": 1.050425720597765,
+     "k_drag": 1.0735100089465508
+    },
+    "range_km": 2465.851818974973,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04189171605402631
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2026,
+     "dh": 1468.0,
+     "dv": -98.8,
+     "k_lift": 0.9321800910916166,
+     "k_drag": 0.9766387380152004
+    },
+    "range_km": 2335.1411078299084,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.015607383885857362
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2027,
+     "dh": 1544.0,
+     "dv": -34.4,
+     "k_lift": 0.9711749882580918,
+     "k_drag": 1.0590147518634665
+    },
+    "range_km": 2391.1834291676178,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03904565832667872
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2028,
+     "dh": -1013.0,
+     "dv": -4.4,
+     "k_lift": 1.024220519942089,
+     "k_drag": 0.92438638743516
+    },
+    "range_km": 2515.7797279868196,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10549771551155596
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2029,
+     "dh": 1757.0,
+     "dv": 72.7,
+     "k_lift": 0.9518287500293204,
+     "k_drag": 1.0351871067543263
+    },
+    "range_km": 2515.242077907756,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04601896090313318
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2030,
+     "dh": -1040.0,
+     "dv": -43.1,
+     "k_lift": 1.0006616454876176,
+     "k_drag": 1.0151070966134175
+    },
+    "range_km": 2420.537678084373,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0856237143538836
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2031,
+     "dh": 1346.0,
+     "dv": 3.8,
+     "k_lift": 1.0819925400815955,
+     "k_drag": 0.9921869779049406
+    },
+    "range_km": 2525.554068313053,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08200681756232953
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2032,
+     "dh": -1105.0,
+     "dv": 91.7,
+     "k_lift": 1.0146543974701228,
+     "k_drag": 1.0050785308873813
+    },
+    "range_km": 97.20758319430257,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.000721877734157772
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2033,
+     "dh": -1885.0,
+     "dv": 99.4,
+     "k_lift": 1.0315157328398314,
+     "k_drag": 0.9996876273935786
+    },
+    "range_km": 81.26723670644921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00024087384024618075
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2034,
+     "dh": -1085.0,
+     "dv": -58.4,
+     "k_lift": 0.995434508185618,
+     "k_drag": 0.9105657623467461
+    },
+    "range_km": 2447.192816654119,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.044944238970344164
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2035,
+     "dh": -11.0,
+     "dv": -68.1,
+     "k_lift": 0.9105583756092334,
+     "k_drag": 0.9703616435473532
+    },
+    "range_km": 2357.6174139164505,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.021323393701058402
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2036,
+     "dh": -1188.0,
+     "dv": 47.3,
+     "k_lift": 1.03397865264547,
+     "k_drag": 1.0495726141225614
+    },
+    "range_km": 2524.9047625345997,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09621290981163422
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2037,
+     "dh": -1881.0,
+     "dv": 11.8,
+     "k_lift": 0.9965983709686863,
+     "k_drag": 0.9814670653672412
+    },
+    "range_km": 2494.9816157855334,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0545854875500974
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2038,
+     "dh": -1510.0,
+     "dv": 29.2,
+     "k_lift": 0.9822759995795509,
+     "k_drag": 1.0291493136383205
+    },
+    "range_km": 2485.345760411302,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.024208578789045143
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2039,
+     "dh": 737.0,
+     "dv": -79.5,
+     "k_lift": 0.9,
+     "k_drag": 0.9237329996345541
+    },
+    "range_km": 2365.4073404085743,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.044217621905281
+   }
+  ],
+  "L2_full_s23": [
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2000,
+     "dh": -413.0,
+     "dv": -40.6,
+     "k_lift": 0.9894282367928933,
+     "k_drag": 1.003303261112572
+    },
+    "range_km": 2423.8419375574376,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09330593554091282
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2001,
+     "dh": 1479.0,
+     "dv": 25.0,
+     "k_lift": 0.9322525445965181,
+     "k_drag": 1.0067069307201695
+    },
+    "range_km": 2462.363492207401,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0211695166965723
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2002,
+     "dh": 1113.0,
+     "dv": 18.3,
+     "k_lift": 1.0967087934948263,
+     "k_drag": 0.9881999431522333
+    },
+    "range_km": 2553.1812663674214,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.1248429585005213
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2003,
+     "dh": 932.0,
+     "dv": -78.2,
+     "k_lift": 1.0027246854671523,
+     "k_drag": 1.0296968842786676
+    },
+    "range_km": 2376.293188036592,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07597502529473255
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2004,
+     "dh": -1681.0,
+     "dv": 72.1,
+     "k_lift": 0.9987322627377074,
+     "k_drag": 0.9817854523233874
+    },
+    "range_km": 2567.3011300472735,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.056353457732047474
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2005,
+     "dh": -1901.0,
+     "dv": 35.6,
+     "k_lift": 0.9581445808587093,
+     "k_drag": 0.9751512093062566
+    },
+    "range_km": 2507.55703515833,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04022824122436819
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2006,
+     "dh": -1091.0,
+     "dv": -42.4,
+     "k_lift": 0.9518500420049877,
+     "k_drag": 1.0300617330894521
+    },
+    "range_km": 2390.5026216006763,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.018350390693636087
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2007,
+     "dh": -848.0,
+     "dv": 20.6,
+     "k_lift": 1.0159379279723206,
+     "k_drag": 1.0027855673687607
+    },
+    "range_km": 2506.981178865583,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.079353656470466
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2008,
+     "dh": -7.0,
+     "dv": 47.3,
+     "k_lift": 0.9186319246477481,
+     "k_drag": 0.9613979317843042
+    },
+    "range_km": 2500.588206991672,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016354676871609408
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2009,
+     "dh": 86.0,
+     "dv": 33.9,
+     "k_lift": 0.9378644819086974,
+     "k_drag": 1.0390452907497534
+    },
+    "range_km": 2463.052506336364,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.025846525036340107
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2010,
+     "dh": -1815.0,
+     "dv": -26.2,
+     "k_lift": 0.9962380186049533,
+     "k_drag": 0.9778544204203972
+    },
+    "range_km": 2453.72533754877,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.039769790141387595
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2011,
+     "dh": -1738.0,
+     "dv": 23.8,
+     "k_lift": 1.0497593568475787,
+     "k_drag": 0.9077858910556442
+    },
+    "range_km": 2568.084165752096,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09376872608429387
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2012,
+     "dh": -1204.0,
+     "dv": 96.2,
+     "k_lift": 0.9048154098466384,
+     "k_drag": 1.039921249158825
+    },
+    "range_km": 87.39206774036943,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00023028799049917836
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2013,
+     "dh": -202.0,
+     "dv": -7.8,
+     "k_lift": 0.9348219479150153,
+     "k_drag": 1.0858646901153783
+    },
+    "range_km": 2391.2155927699037,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.018530216816212253
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2014,
+     "dh": -1245.0,
+     "dv": -79.3,
+     "k_lift": 1.0263726069416703,
+     "k_drag": 0.9622462673999936
+    },
+    "range_km": 2414.5114840101137,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0883209753820966
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2015,
+     "dh": 1593.0,
+     "dv": 84.9,
+     "k_lift": 0.9267015143831674,
+     "k_drag": 0.9190853391680526
+    },
+    "range_km": 109.38866874780325,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0028196369523332265
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2016,
+     "dh": 1988.0,
+     "dv": -77.9,
+     "k_lift": 0.9764510950303212,
+     "k_drag": 1.049643988651432
+    },
+    "range_km": 2352.4386771158856,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05412513955774534
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2017,
+     "dh": 1561.0,
+     "dv": -54.5,
+     "k_lift": 0.9798195370910944,
+     "k_drag": 0.9457319210817735
+    },
+    "range_km": 2432.129605702831,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0640515565382137
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2018,
+     "dh": -148.0,
+     "dv": 1.5,
+     "k_lift": 0.9629196845338824,
+     "k_drag": 0.9695948323352507
+    },
+    "range_km": 2471.6339656409828,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.012860327078898615
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2019,
+     "dh": -1279.0,
+     "dv": -56.2,
+     "k_lift": 0.9720729161761725,
+     "k_drag": 0.9761590637923793
+    },
+    "range_km": 2408.0407925401014,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07060725321207051
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2020,
+     "dh": -1886.0,
+     "dv": 80.4,
+     "k_lift": 0.9839787083940303,
+     "k_drag": 1.0426078495975313
+    },
+    "range_km": 2541.187778536158,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03634342956771164
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2021,
+     "dh": 1668.0,
+     "dv": 90.2,
+     "k_lift": 0.9,
+     "k_drag": 1.0061072064595298
+    },
+    "range_km": 107.1101596495921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0019545207811653142
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2022,
+     "dh": 1020.0,
+     "dv": 7.7,
+     "k_lift": 0.9659054883944477,
+     "k_drag": 0.96683456226428
+    },
+    "range_km": 2485.348687980684,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.053188330831693165
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2023,
+     "dh": -1185.0,
+     "dv": 43.7,
+     "k_lift": 0.9301180690668717,
+     "k_drag": 0.9882001839221465
+    },
+    "range_km": 2489.893979409616,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04449216002506673
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2024,
+     "dh": 1435.0,
+     "dv": -10.1,
+     "k_lift": 1.0956945360704502,
+     "k_drag": 0.9469290433256248
+    },
+    "range_km": 2538.1328001763372,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09229155522906474
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2025,
+     "dh": 541.0,
+     "dv": -2.1,
+     "k_lift": 1.050425720597765,
+     "k_drag": 1.0735100089465508
+    },
+    "range_km": 2467.9217259579345,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.042605020739539534
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2026,
+     "dh": 1468.0,
+     "dv": -98.8,
+     "k_lift": 0.9321800910916166,
+     "k_drag": 0.9766387380152004
+    },
+    "range_km": 2335.1411078299084,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.015607383885857362
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2027,
+     "dh": 1544.0,
+     "dv": -34.4,
+     "k_lift": 0.9711749882580918,
+     "k_drag": 1.0590147518634665
+    },
+    "range_km": 2393.447745157685,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.037901937671767305
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2028,
+     "dh": -1013.0,
+     "dv": -4.4,
+     "k_lift": 1.024220519942089,
+     "k_drag": 0.92438638743516
+    },
+    "range_km": 2517.668098063455,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10605852550890216
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2029,
+     "dh": 1757.0,
+     "dv": 72.7,
+     "k_lift": 0.9518287500293204,
+     "k_drag": 1.0351871067543263
+    },
+    "range_km": 2520.0218901981625,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04536662129717506
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2030,
+     "dh": -1040.0,
+     "dv": -43.1,
+     "k_lift": 1.0006616454876176,
+     "k_drag": 1.0151070966134175
+    },
+    "range_km": 2420.943213939807,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08554870932741321
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2031,
+     "dh": 1346.0,
+     "dv": 3.8,
+     "k_lift": 1.0819925400815955,
+     "k_drag": 0.9921869779049406
+    },
+    "range_km": 2528.3057209614785,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07942957032354991
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2032,
+     "dh": -1105.0,
+     "dv": 91.7,
+     "k_lift": 1.0146543974701228,
+     "k_drag": 1.0050785308873813
+    },
+    "range_km": 97.20758319430257,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.000721877734157772
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2033,
+     "dh": -1885.0,
+     "dv": 99.4,
+     "k_lift": 1.0315157328398314,
+     "k_drag": 0.9996876273935786
+    },
+    "range_km": 81.26723670644921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00024087384024618075
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2034,
+     "dh": -1085.0,
+     "dv": -58.4,
+     "k_lift": 0.995434508185618,
+     "k_drag": 0.9105657623467461
+    },
+    "range_km": 2449.883961571744,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0449345296112017
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2035,
+     "dh": -11.0,
+     "dv": -68.1,
+     "k_lift": 0.9105583756092334,
+     "k_drag": 0.9703616435473532
+    },
+    "range_km": 2358.7003420718065,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.02123515384359176
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2036,
+     "dh": -1188.0,
+     "dv": 47.3,
+     "k_lift": 1.03397865264547,
+     "k_drag": 1.0495726141225614
+    },
+    "range_km": 2527.106679927912,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09592558387504846
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2037,
+     "dh": -1881.0,
+     "dv": 11.8,
+     "k_lift": 0.9965983709686863,
+     "k_drag": 0.9814670653672412
+    },
+    "range_km": 2496.586299053456,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05461083294752467
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2038,
+     "dh": -1510.0,
+     "dv": 29.2,
+     "k_lift": 0.9822759995795509,
+     "k_drag": 1.0291493136383205
+    },
+    "range_km": 2486.8299193580297,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.022178873009926603
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2039,
+     "dh": 737.0,
+     "dv": -79.5,
+     "k_lift": 0.9,
+     "k_drag": 0.9237329996345541
+    },
+    "range_km": 2365.729239574479,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04406213316401486
+   }
+  ],
+  "L2_full_s41": [
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2000,
+     "dh": -413.0,
+     "dv": -40.6,
+     "k_lift": 0.9894282367928933,
+     "k_drag": 1.003303261112572
+    },
+    "range_km": 2423.6113826016744,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09331382469225791
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2001,
+     "dh": 1479.0,
+     "dv": 25.0,
+     "k_lift": 0.9322525445965181,
+     "k_drag": 1.0067069307201695
+    },
+    "range_km": 2462.654274890097,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.02080587287896618
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2002,
+     "dh": 1113.0,
+     "dv": 18.3,
+     "k_lift": 1.0967087934948263,
+     "k_drag": 0.9881999431522333
+    },
+    "range_km": 2551.8790986595013,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.12476917138535115
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2003,
+     "dh": 932.0,
+     "dv": -78.2,
+     "k_lift": 1.0027246854671523,
+     "k_drag": 1.0296968842786676
+    },
+    "range_km": 2375.9988637115794,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0760375011713279
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2004,
+     "dh": -1681.0,
+     "dv": 72.1,
+     "k_lift": 0.9987322627377074,
+     "k_drag": 0.9817854523233874
+    },
+    "range_km": 2566.498987065223,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05825872253941533
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2005,
+     "dh": -1901.0,
+     "dv": 35.6,
+     "k_lift": 0.9581445808587093,
+     "k_drag": 0.9751512093062566
+    },
+    "range_km": 2505.126691075044,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04061613838652123
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2006,
+     "dh": -1091.0,
+     "dv": -42.4,
+     "k_lift": 0.9518500420049877,
+     "k_drag": 1.0300617330894521
+    },
+    "range_km": 2386.0951373855005,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06665140513848256
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2007,
+     "dh": -848.0,
+     "dv": 20.6,
+     "k_lift": 1.0159379279723206,
+     "k_drag": 1.0027855673687607
+    },
+    "range_km": 2506.5034158228054,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07944864369814697
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2008,
+     "dh": -7.0,
+     "dv": 47.3,
+     "k_lift": 0.9186319246477481,
+     "k_drag": 0.9613979317843042
+    },
+    "range_km": 2500.588206991672,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016354676871609408
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2009,
+     "dh": 86.0,
+     "dv": 33.9,
+     "k_lift": 0.9378644819086974,
+     "k_drag": 1.0390452907497534
+    },
+    "range_km": 2459.388887941082,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.025987351962975858
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2010,
+     "dh": -1815.0,
+     "dv": -26.2,
+     "k_lift": 0.9962380186049533,
+     "k_drag": 0.9778544204203972
+    },
+    "range_km": 2453.149229844369,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04037609492331118
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2011,
+     "dh": -1738.0,
+     "dv": 23.8,
+     "k_lift": 1.0497593568475787,
+     "k_drag": 0.9077858910556442
+    },
+    "range_km": 2566.9905798487353,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09351691146239915
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2012,
+     "dh": -1204.0,
+     "dv": 96.2,
+     "k_lift": 0.9048154098466384,
+     "k_drag": 1.039921249158825
+    },
+    "range_km": 87.39206774036943,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00023028799049917836
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2013,
+     "dh": -202.0,
+     "dv": -7.8,
+     "k_lift": 0.9348219479150153,
+     "k_drag": 1.0858646901153783
+    },
+    "range_km": 2386.5848624939536,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04467191348881827
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2014,
+     "dh": -1245.0,
+     "dv": -79.3,
+     "k_lift": 1.0263726069416703,
+     "k_drag": 0.9622462673999936
+    },
+    "range_km": 2413.5950801723707,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08817146303312329
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2015,
+     "dh": 1593.0,
+     "dv": 84.9,
+     "k_lift": 0.9267015143831674,
+     "k_drag": 0.9190853391680526
+    },
+    "range_km": 109.38866874780325,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0028196369523332265
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2016,
+     "dh": 1988.0,
+     "dv": -77.9,
+     "k_lift": 0.9764510950303212,
+     "k_drag": 1.049643988651432
+    },
+    "range_km": 2351.403052894662,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05436343732592164
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2017,
+     "dh": 1561.0,
+     "dv": -54.5,
+     "k_lift": 0.9798195370910944,
+     "k_drag": 0.9457319210817735
+    },
+    "range_km": 2429.5615010513816,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06396445549522889
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2018,
+     "dh": -148.0,
+     "dv": 1.5,
+     "k_lift": 0.9629196845338824,
+     "k_drag": 0.9695948323352507
+    },
+    "range_km": 2471.281548704087,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.01627859563660672
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2019,
+     "dh": -1279.0,
+     "dv": -56.2,
+     "k_lift": 0.9720729161761725,
+     "k_drag": 0.9761590637923793
+    },
+    "range_km": 2405.5654486167055,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07093271992669392
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2020,
+     "dh": -1886.0,
+     "dv": 80.4,
+     "k_lift": 0.9839787083940303,
+     "k_drag": 1.0426078495975313
+    },
+    "range_km": 2540.759177403312,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.036961113343378926
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2021,
+     "dh": 1668.0,
+     "dv": 90.2,
+     "k_lift": 0.9,
+     "k_drag": 1.0061072064595298
+    },
+    "range_km": 107.1101596495921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0019545207811653142
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2022,
+     "dh": 1020.0,
+     "dv": 7.7,
+     "k_lift": 0.9659054883944477,
+     "k_drag": 0.96683456226428
+    },
+    "range_km": 2482.6597561451345,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06818655347661151
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2023,
+     "dh": -1185.0,
+     "dv": 43.7,
+     "k_lift": 0.9301180690668717,
+     "k_drag": 0.9882001839221465
+    },
+    "range_km": 2490.031405759944,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.044241770483213205
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2024,
+     "dh": 1435.0,
+     "dv": -10.1,
+     "k_lift": 1.0956945360704502,
+     "k_drag": 0.9469290433256248
+    },
+    "range_km": 2536.183484892326,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09236220620621827
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2025,
+     "dh": 541.0,
+     "dv": -2.1,
+     "k_lift": 1.050425720597765,
+     "k_drag": 1.0735100089465508
+    },
+    "range_km": 2466.9259222400738,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04188327326065722
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2026,
+     "dh": 1468.0,
+     "dv": -98.8,
+     "k_lift": 0.9321800910916166,
+     "k_drag": 0.9766387380152004
+    },
+    "range_km": 2335.68678057058,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.008986891731227131
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2027,
+     "dh": 1544.0,
+     "dv": -34.4,
+     "k_lift": 0.9711749882580918,
+     "k_drag": 1.0590147518634665
+    },
+    "range_km": 2392.718508985069,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03821218971289597
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2028,
+     "dh": -1013.0,
+     "dv": -4.4,
+     "k_lift": 1.024220519942089,
+     "k_drag": 0.92438638743516
+    },
+    "range_km": 2516.0903374072896,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10591685170430754
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2029,
+     "dh": 1757.0,
+     "dv": 72.7,
+     "k_lift": 0.9518287500293204,
+     "k_drag": 1.0351871067543263
+    },
+    "range_km": 2516.3651524450383,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.045791460890139746
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2030,
+     "dh": -1040.0,
+     "dv": -43.1,
+     "k_lift": 1.0006616454876176,
+     "k_drag": 1.0151070966134175
+    },
+    "range_km": 2421.2170858075674,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08568916398142168
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2031,
+     "dh": 1346.0,
+     "dv": 3.8,
+     "k_lift": 1.0819925400815955,
+     "k_drag": 0.9921869779049406
+    },
+    "range_km": 2526.2523759273217,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0805827148327124
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2032,
+     "dh": -1105.0,
+     "dv": 91.7,
+     "k_lift": 1.0146543974701228,
+     "k_drag": 1.0050785308873813
+    },
+    "range_km": 97.20758319430257,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.000721877734157772
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2033,
+     "dh": -1885.0,
+     "dv": 99.4,
+     "k_lift": 1.0315157328398314,
+     "k_drag": 0.9996876273935786
+    },
+    "range_km": 81.26723670644921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00024087384024618075
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2034,
+     "dh": -1085.0,
+     "dv": -58.4,
+     "k_lift": 0.995434508185618,
+     "k_drag": 0.9105657623467461
+    },
+    "range_km": 2447.548248802625,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04494814631785371
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2035,
+     "dh": -11.0,
+     "dv": -68.1,
+     "k_lift": 0.9105583756092334,
+     "k_drag": 0.9703616435473532
+    },
+    "range_km": 2358.1093545204776,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.02131237710110112
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2036,
+     "dh": -1188.0,
+     "dv": 47.3,
+     "k_lift": 1.03397865264547,
+     "k_drag": 1.0495726141225614
+    },
+    "range_km": 2525.936112899549,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09544996838431763
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2037,
+     "dh": -1881.0,
+     "dv": 11.8,
+     "k_lift": 0.9965983709686863,
+     "k_drag": 0.9814670653672412
+    },
+    "range_km": 2495.830525111683,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.054493000558850646
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2038,
+     "dh": -1510.0,
+     "dv": 29.2,
+     "k_lift": 0.9822759995795509,
+     "k_drag": 1.0291493136383205
+    },
+    "range_km": 2486.4904150873235,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.02254312341185616
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2039,
+     "dh": 737.0,
+     "dv": -79.5,
+     "k_lift": 0.9,
+     "k_drag": 0.9237329996345541
+    },
+    "range_km": 2365.6175678172503,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04404361850324601
+   }
+  ],
+  "L2_full_s59": [
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2000,
+     "dh": -413.0,
+     "dv": -40.6,
+     "k_lift": 0.9894282367928933,
+     "k_drag": 1.003303261112572
+    },
+    "range_km": 2426.011307766807,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09362566088861002
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2001,
+     "dh": 1479.0,
+     "dv": 25.0,
+     "k_lift": 0.9322525445965181,
+     "k_drag": 1.0067069307201695
+    },
+    "range_km": 2462.674687458537,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.02078005661002258
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2002,
+     "dh": 1113.0,
+     "dv": 18.3,
+     "k_lift": 1.0967087934948263,
+     "k_drag": 0.9881999431522333
+    },
+    "range_km": 2552.3249740985325,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.12465626445227629
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2003,
+     "dh": 932.0,
+     "dv": -78.2,
+     "k_lift": 1.0027246854671523,
+     "k_drag": 1.0296968842786676
+    },
+    "range_km": 2377.5531189605654,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07494489780366997
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2004,
+     "dh": -1681.0,
+     "dv": 72.1,
+     "k_lift": 0.9987322627377074,
+     "k_drag": 0.9817854523233874
+    },
+    "range_km": 2568.323259930557,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05399862746023487
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2005,
+     "dh": -1901.0,
+     "dv": 35.6,
+     "k_lift": 0.9581445808587093,
+     "k_drag": 0.9751512093062566
+    },
+    "range_km": 2506.032342289162,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04028216342729485
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2006,
+     "dh": -1091.0,
+     "dv": -42.4,
+     "k_lift": 0.9518500420049877,
+     "k_drag": 1.0300617330894521
+    },
+    "range_km": 2387.6706963525744,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06536392564219007
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2007,
+     "dh": -848.0,
+     "dv": 20.6,
+     "k_lift": 1.0159379279723206,
+     "k_drag": 1.0027855673687607
+    },
+    "range_km": 2508.609964618394,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07968761191867746
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2008,
+     "dh": -7.0,
+     "dv": 47.3,
+     "k_lift": 0.9186319246477481,
+     "k_drag": 0.9613979317843042
+    },
+    "range_km": 2500.588206991672,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016354676871609408
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2009,
+     "dh": 86.0,
+     "dv": 33.9,
+     "k_lift": 0.9378644819086974,
+     "k_drag": 1.0390452907497534
+    },
+    "range_km": 2460.4142169491965,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.025908199259419562
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2010,
+     "dh": -1815.0,
+     "dv": -26.2,
+     "k_lift": 0.9962380186049533,
+     "k_drag": 0.9778544204203972
+    },
+    "range_km": 2454.8639197532257,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03971854878437808
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2011,
+     "dh": -1738.0,
+     "dv": 23.8,
+     "k_lift": 1.0497593568475787,
+     "k_drag": 0.9077858910556442
+    },
+    "range_km": 2566.964258424409,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09349949042297245
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2012,
+     "dh": -1204.0,
+     "dv": 96.2,
+     "k_lift": 0.9048154098466384,
+     "k_drag": 1.039921249158825
+    },
+    "range_km": 87.39206774036943,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00023028799049917836
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2013,
+     "dh": -202.0,
+     "dv": -7.8,
+     "k_lift": 0.9348219479150153,
+     "k_drag": 1.0858646901153783
+    },
+    "range_km": 2387.862586031332,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04566564453443056
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2014,
+     "dh": -1245.0,
+     "dv": -79.3,
+     "k_lift": 1.0263726069416703,
+     "k_drag": 0.9622462673999936
+    },
+    "range_km": 2414.2461958535587,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08844266904713272
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2015,
+     "dh": 1593.0,
+     "dv": 84.9,
+     "k_lift": 0.9267015143831674,
+     "k_drag": 0.9190853391680526
+    },
+    "range_km": 109.38866874780325,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0028196369523332265
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2016,
+     "dh": 1988.0,
+     "dv": -77.9,
+     "k_lift": 0.9764510950303212,
+     "k_drag": 1.049643988651432
+    },
+    "range_km": 2352.8638165525276,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05428432183539167
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2017,
+     "dh": 1561.0,
+     "dv": -54.5,
+     "k_lift": 0.9798195370910944,
+     "k_drag": 0.9457319210817735
+    },
+    "range_km": 2430.919068762892,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06385125004374781
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2018,
+     "dh": -148.0,
+     "dv": 1.5,
+     "k_lift": 0.9629196845338824,
+     "k_drag": 0.9695948323352507
+    },
+    "range_km": 2471.4661542155504,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016219041935306322
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2019,
+     "dh": -1279.0,
+     "dv": -56.2,
+     "k_lift": 0.9720729161761725,
+     "k_drag": 0.9761590637923793
+    },
+    "range_km": 2406.3917813595126,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07093280831424764
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2020,
+     "dh": -1886.0,
+     "dv": 80.4,
+     "k_lift": 0.9839787083940303,
+     "k_drag": 1.0426078495975313
+    },
+    "range_km": 2543.0036725047,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.027136519697444683
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2021,
+     "dh": 1668.0,
+     "dv": 90.2,
+     "k_lift": 0.9,
+     "k_drag": 1.0061072064595298
+    },
+    "range_km": 107.1101596495921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0019545207811653142
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2022,
+     "dh": 1020.0,
+     "dv": 7.7,
+     "k_lift": 0.9659054883944477,
+     "k_drag": 0.96683456226428
+    },
+    "range_km": 2484.0215896174864,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06755340717235325
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2023,
+     "dh": -1185.0,
+     "dv": 43.7,
+     "k_lift": 0.9301180690668717,
+     "k_drag": 0.9882001839221465
+    },
+    "range_km": 2489.8372667547383,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04464271321758295
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2024,
+     "dh": 1435.0,
+     "dv": -10.1,
+     "k_lift": 1.0956945360704502,
+     "k_drag": 0.9469290433256248
+    },
+    "range_km": 2537.372809657314,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09228795513340138
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2025,
+     "dh": 541.0,
+     "dv": -2.1,
+     "k_lift": 1.050425720597765,
+     "k_drag": 1.0735100089465508
+    },
+    "range_km": 2468.496560575498,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.041625108949807865
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2026,
+     "dh": 1468.0,
+     "dv": -98.8,
+     "k_lift": 0.9321800910916166,
+     "k_drag": 0.9766387380152004
+    },
+    "range_km": 2335.1411078299084,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.015607383885857362
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2027,
+     "dh": 1544.0,
+     "dv": -34.4,
+     "k_lift": 0.9711749882580918,
+     "k_drag": 1.0590147518634665
+    },
+    "range_km": 2393.326676093648,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.037479370434152615
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2028,
+     "dh": -1013.0,
+     "dv": -4.4,
+     "k_lift": 1.024220519942089,
+     "k_drag": 0.92438638743516
+    },
+    "range_km": 2516.512400123263,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10599726744996585
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2029,
+     "dh": 1757.0,
+     "dv": 72.7,
+     "k_lift": 0.9518287500293204,
+     "k_drag": 1.0351871067543263
+    },
+    "range_km": 2517.699910204822,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.037380483387615016
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2030,
+     "dh": -1040.0,
+     "dv": -43.1,
+     "k_lift": 1.0006616454876176,
+     "k_drag": 1.0151070966134175
+    },
+    "range_km": 2423.1615395486438,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08563874685189166
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2031,
+     "dh": 1346.0,
+     "dv": 3.8,
+     "k_lift": 1.0819925400815955,
+     "k_drag": 0.9921869779049406
+    },
+    "range_km": 2528.108760505518,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07928960582385824
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2032,
+     "dh": -1105.0,
+     "dv": 91.7,
+     "k_lift": 1.0146543974701228,
+     "k_drag": 1.0050785308873813
+    },
+    "range_km": 97.20818636370905,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0033644959088654502
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2033,
+     "dh": -1885.0,
+     "dv": 99.4,
+     "k_lift": 1.0315157328398314,
+     "k_drag": 0.9996876273935786
+    },
+    "range_km": 81.26723670644921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00024087384024618075
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2034,
+     "dh": -1085.0,
+     "dv": -58.4,
+     "k_lift": 0.995434508185618,
+     "k_drag": 0.9105657623467461
+    },
+    "range_km": 2448.40168976514,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04496782613345185
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2035,
+     "dh": -11.0,
+     "dv": -68.1,
+     "k_lift": 0.9105583756092334,
+     "k_drag": 0.9703616435473532
+    },
+    "range_km": 2357.8178307374556,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.021244270897378237
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2036,
+     "dh": -1188.0,
+     "dv": 47.3,
+     "k_lift": 1.03397865264547,
+     "k_drag": 1.0495726141225614
+    },
+    "range_km": 2527.8398888049996,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07997942572741046
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2037,
+     "dh": -1881.0,
+     "dv": 11.8,
+     "k_lift": 0.9965983709686863,
+     "k_drag": 0.9814670653672412
+    },
+    "range_km": 2497.028219325339,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.054463544011636444
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2038,
+     "dh": -1510.0,
+     "dv": 29.2,
+     "k_lift": 0.9822759995795509,
+     "k_drag": 1.0291493136383205
+    },
+    "range_km": 2488.5694034595454,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.01371868166632828
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2039,
+     "dh": 737.0,
+     "dv": -79.5,
+     "k_lift": 0.9,
+     "k_drag": 0.9237329996345541
+    },
+    "range_km": 2365.4073404085743,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.044217621905281
+   }
+  ],
+  "L2_full_s83": [
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2000,
+     "dh": -413.0,
+     "dv": -40.6,
+     "k_lift": 0.9894282367928933,
+     "k_drag": 1.003303261112572
+    },
+    "range_km": 2425.34139843927,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09347585022557992
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2001,
+     "dh": 1479.0,
+     "dv": 25.0,
+     "k_lift": 0.9322525445965181,
+     "k_drag": 1.0067069307201695
+    },
+    "range_km": 2463.744403268393,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.021033899282995483
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2002,
+     "dh": 1113.0,
+     "dv": 18.3,
+     "k_lift": 1.0967087934948263,
+     "k_drag": 0.9881999431522333
+    },
+    "range_km": 2551.963653458587,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.12462414818496503
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2003,
+     "dh": 932.0,
+     "dv": -78.2,
+     "k_lift": 1.0027246854671523,
+     "k_drag": 1.0296968842786676
+    },
+    "range_km": 2376.431615515586,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0753380316389135
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2004,
+     "dh": -1681.0,
+     "dv": 72.1,
+     "k_lift": 0.9987322627377074,
+     "k_drag": 0.9817854523233874
+    },
+    "range_km": 2567.864426173088,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.0550259563215274
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2005,
+     "dh": -1901.0,
+     "dv": 35.6,
+     "k_lift": 0.9581445808587093,
+     "k_drag": 0.9751512093062566
+    },
+    "range_km": 2506.316749904134,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04019331285861005
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2006,
+     "dh": -1091.0,
+     "dv": -42.4,
+     "k_lift": 0.9518500420049877,
+     "k_drag": 1.0300617330894521
+    },
+    "range_km": 2386.5662040577213,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06605720791870184
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2007,
+     "dh": -848.0,
+     "dv": 20.6,
+     "k_lift": 1.0159379279723206,
+     "k_drag": 1.0027855673687607
+    },
+    "range_km": 2507.7649731203555,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07968903858347598
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2008,
+     "dh": -7.0,
+     "dv": 47.3,
+     "k_lift": 0.9186319246477481,
+     "k_drag": 0.9613979317843042
+    },
+    "range_km": 2501.349326356582,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.015952395263563623
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2009,
+     "dh": 86.0,
+     "dv": 33.9,
+     "k_lift": 0.9378644819086974,
+     "k_drag": 1.0390452907497534
+    },
+    "range_km": 2459.81326850356,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.02584305428314182
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2010,
+     "dh": -1815.0,
+     "dv": -26.2,
+     "k_lift": 0.9962380186049533,
+     "k_drag": 0.9778544204203972
+    },
+    "range_km": 2454.3015983714095,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03920677412334139
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2011,
+     "dh": -1738.0,
+     "dv": 23.8,
+     "k_lift": 1.0497593568475787,
+     "k_drag": 0.9077858910556442
+    },
+    "range_km": 2567.7648653494484,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09401015917568178
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2012,
+     "dh": -1204.0,
+     "dv": 96.2,
+     "k_lift": 0.9048154098466384,
+     "k_drag": 1.039921249158825
+    },
+    "range_km": 87.39206774036943,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00023028799049917836
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2013,
+     "dh": -202.0,
+     "dv": -7.8,
+     "k_lift": 0.9348219479150153,
+     "k_drag": 1.0858646901153783
+    },
+    "range_km": 2386.548999958347,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04477365888796325
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2014,
+     "dh": -1245.0,
+     "dv": -79.3,
+     "k_lift": 1.0263726069416703,
+     "k_drag": 0.9622462673999936
+    },
+    "range_km": 2414.181230475423,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08842309070349308
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2015,
+     "dh": 1593.0,
+     "dv": 84.9,
+     "k_lift": 0.9267015143831674,
+     "k_drag": 0.9190853391680526
+    },
+    "range_km": 109.3892568832512,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.002532615751682954
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2016,
+     "dh": 1988.0,
+     "dv": -77.9,
+     "k_lift": 0.9764510950303212,
+     "k_drag": 1.049643988651432
+    },
+    "range_km": 2352.4822556479376,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.05413503719474777
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2017,
+     "dh": 1561.0,
+     "dv": -54.5,
+     "k_lift": 0.9798195370910944,
+     "k_drag": 0.9457319210817735
+    },
+    "range_km": 2430.66078328384,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06380282334405696
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2018,
+     "dh": -148.0,
+     "dv": 1.5,
+     "k_lift": 0.9629196845338824,
+     "k_drag": 0.9695948323352507
+    },
+    "range_km": 2471.8189819404056,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016092658882597588
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2019,
+     "dh": -1279.0,
+     "dv": -56.2,
+     "k_lift": 0.9720729161761725,
+     "k_drag": 0.9761590637923793
+    },
+    "range_km": 2405.339062637967,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.07094339068916145
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2020,
+     "dh": -1886.0,
+     "dv": 80.4,
+     "k_lift": 0.9839787083940303,
+     "k_drag": 1.0426078495975313
+    },
+    "range_km": 2541.744291179031,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.03391552092314676
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2021,
+     "dh": 1668.0,
+     "dv": 90.2,
+     "k_lift": 0.9,
+     "k_drag": 1.0061072064595298
+    },
+    "range_km": 107.11057394159052,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0017800525519824362
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2022,
+     "dh": 1020.0,
+     "dv": 7.7,
+     "k_lift": 0.9659054883944477,
+     "k_drag": 0.96683456226428
+    },
+    "range_km": 2483.6258754344803,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.06747175440122977
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2023,
+     "dh": -1185.0,
+     "dv": 43.7,
+     "k_lift": 0.9301180690668717,
+     "k_drag": 0.9882001839221465
+    },
+    "range_km": 2490.3152552909714,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.044811345901693
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2024,
+     "dh": 1435.0,
+     "dv": -10.1,
+     "k_lift": 1.0956945360704502,
+     "k_drag": 0.9469290433256248
+    },
+    "range_km": 2537.1780963745377,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09237267059889565
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2025,
+     "dh": 541.0,
+     "dv": -2.1,
+     "k_lift": 1.050425720597765,
+     "k_drag": 1.0735100089465508
+    },
+    "range_km": 2466.932444739594,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04187949237061961
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2026,
+     "dh": 1468.0,
+     "dv": -98.8,
+     "k_lift": 0.9321800910916166,
+     "k_drag": 0.9766387380152004
+    },
+    "range_km": 2335.6991420095806,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.01226755870508145
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2027,
+     "dh": 1544.0,
+     "dv": -34.4,
+     "k_lift": 0.9711749882580918,
+     "k_drag": 1.0590147518634665
+    },
+    "range_km": 2392.7017858086697,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.038407260733363535
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2028,
+     "dh": -1013.0,
+     "dv": -4.4,
+     "k_lift": 1.024220519942089,
+     "k_drag": 0.92438638743516
+    },
+    "range_km": 2516.7822267197666,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.10572229271311606
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2029,
+     "dh": 1757.0,
+     "dv": 72.7,
+     "k_lift": 0.9518287500293204,
+     "k_drag": 1.0351871067543263
+    },
+    "range_km": 2516.3315877090877,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04557448581227774
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2030,
+     "dh": -1040.0,
+     "dv": -43.1,
+     "k_lift": 1.0006616454876176,
+     "k_drag": 1.0151070966134175
+    },
+    "range_km": 2422.2027903277453,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08548106663926736
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2031,
+     "dh": 1346.0,
+     "dv": 3.8,
+     "k_lift": 1.0819925400815955,
+     "k_drag": 0.9921869779049406
+    },
+    "range_km": 2526.8413160541136,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.08088833517932581
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2032,
+     "dh": -1105.0,
+     "dv": 91.7,
+     "k_lift": 1.0146543974701228,
+     "k_drag": 1.0050785308873813
+    },
+    "range_km": 97.20803881153486,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.0027092790425626845
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2033,
+     "dh": -1885.0,
+     "dv": 99.4,
+     "k_lift": 1.0315157328398314,
+     "k_drag": 0.9996876273935786
+    },
+    "range_km": 81.26723670644921,
+    "success": false,
+    "reason": "VIOLATION:mach_hi",
+    "min_margin": -0.00024087384024618075
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2034,
+     "dh": -1085.0,
+     "dv": -58.4,
+     "k_lift": 0.995434508185618,
+     "k_drag": 0.9105657623467461
+    },
+    "range_km": 2448.9645735489776,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.04490180206738292
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2035,
+     "dh": -11.0,
+     "dv": -68.1,
+     "k_lift": 0.9105583756092334,
+     "k_drag": 0.9703616435473532
+    },
+    "range_km": 2358.3394709102554,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.021378448346142664
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2036,
+     "dh": -1188.0,
+     "dv": 47.3,
+     "k_lift": 1.03397865264547,
+     "k_drag": 1.0495726141225614
+    },
+    "range_km": 2526.8497333012206,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.09167643048133345
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2037,
+     "dh": -1881.0,
+     "dv": 11.8,
+     "k_lift": 0.9965983709686863,
+     "k_drag": 0.9814670653672412
+    },
+    "range_km": 2496.3357001432964,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.054651500439344636
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2038,
+     "dh": -1510.0,
+     "dv": 29.2,
+     "k_lift": 0.9822759995795509,
+     "k_drag": 1.0291493136383205
+    },
+    "range_km": 2487.2184631765626,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.016009814940733613
+   },
+   {
+    "scenario": {
+     "level": "L2",
+     "seed": 2039,
+     "dh": 737.0,
+     "dv": -79.5,
+     "k_lift": 0.9,
+     "k_drag": 0.9237329996345541
+    },
+    "range_km": 2365.4073404085743,
+    "success": true,
+    "reason": "DONE",
+    "min_margin": 0.044217621905281
+   }
+  ]
+ }
+}
