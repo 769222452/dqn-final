@@ -163,11 +163,13 @@ def _limits_constraints(model, x, q, lim, db, add):
     add(db.M[-1]-q['mach'], 0, ca.inf)
 
 
-def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None, friction=None, constant_cl=False):
+def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None, friction=None, constant_cl=False,
+                  heat_budget=None):
     """Upper bound on s(1200)-s(0). warm: optional dict(t, x[n+1,4], t_ctrl, CL) to initialise.
 
     friction: optional FrictionTable (CD includes skin friction, interpolated in Mach and altitude).
-    constant_cl: one CL for the whole flight (the best constant-CL policy under the same relaxation)."""
+    constant_cl: one CL for the whole flight (the best constant-CL policy under the same relaxation).
+    heat_budget: optional limit on the integrated stagnation heat load [J/m^2] (RK4-weighted stage heat flux)."""
     started = time.perf_counter()
     knots, lines, cl_range = envelope(db, indices=indices, friction=friction)
     if friction is None:
@@ -200,6 +202,7 @@ def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None
     xx, uu, ee = ca.MX.sym('x', 4), ca.MX.sym('u'), ca.MX.sym('e')
     rhs, qty = model.rhs_with_quantities(xx, [uu], [ee])
     F = ca.Function('F', [xx, uu, ee], [rhs, ca.vertcat(qty['q_dyn'], qty['heat_flux'], qty['n_load'], qty['mach'])])
+    heat_load = 0
     for k, dt in enumerate(dts):
         state = xs(k)
         ns = 1 if dt <= 1+1e-9 else 2
@@ -212,6 +215,7 @@ def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None
             k3, q3 = F(x3, CL[k], CD[k])
             x4 = state+h*k3
             k4, q4 = F(x4, CL[k], CD[k])
+            heat_load = heat_load+h*(q1[1]+2*q2[1]+2*q3[1]+q4[1])/6
             stages = [(state, q1), (x2, q2), (x3, q3), (x4, q4)]
             state = state+h*(k1+2*k2+2*k3+k4)/6
             for xsg, qq in stages:
@@ -222,6 +226,8 @@ def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None
         add(X[:, k+1]-state/sx, 0, 0)
         if constant_cl and k > 0:
             add(CL[k]-CL[0], 0, 0)
+    if heat_budget is not None:
+        add(heat_load/float(heat_budget), 0, 1)
     _, qe = F(xs(n), CL[n-1], CD[n-1])
     _limits_constraints(model, xs(n), dict(q_dyn=qe[0], heat_flux=qe[1], n_load=qe[2], mach=qe[3]), lim, db, add)
     obj = -(X[3, n]-X[3, 0])
@@ -255,7 +261,8 @@ def relaxed_bound(mission, db, x0, warm=None, dts=None, ipopt=None, indices=None
                CL=sol[4*(n+1):4*(n+1)+n].tolist(), CD=sol[4*(n+1)+n:].tolist(), wall_s=time.perf_counter()-started,
                envelope=dict(safety=ENVELOPE_SAFETY, cl_points=CL_POINTS.tolist(), cl_range=[cl_lo, cl_hi],
                              geometries='all' if indices is None else [db.ids[i] for i in indices],
-                             friction=None if friction is None else friction.path, constant_cl=bool(constant_cl)))
+                             friction=None if friction is None else friction.path, constant_cl=bool(constant_cl),
+                             heat_budget=heat_budget))
     out['verification'] = verify_relaxed(mission, db, x0, out, knots, lines,
                                          h_grid=None if friction is None else friction.h)
     return out

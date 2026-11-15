@@ -9,3 +9,4 @@ runs/
 data/surrogate_*/
 data/lookahead_*/
 data/lookahead_*.qualify.log
+experiments/perturb/screening/__pycache__/
