@@ -23,7 +23,7 @@ import reach as RC  # noqa: E402
 import screen as S  # noqa: E402
 import target as TG  # noqa: E402
 
-MAXFEV = 150
+MAXFEV = 60
 
 
 def fly_plan(p, sc, krho, mode='pc2'):
