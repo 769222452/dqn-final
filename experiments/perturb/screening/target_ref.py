@@ -78,10 +78,15 @@ def main(argv=None):
     p.add_argument('--workers', type=int, default=4)
     a = p.parse_args(argv)
     lo, hi = map(int, a.seeds.split('-'))
-    jobs = [(tn, a.level, s) for tn in a.targets.split(',') for s in range(lo, hi+1)]
+    out = Path(a.out)
+    rows = json.loads(out.read_text())['rows'] if out.exists() else []          # resumable: finished jobs are kept
+    done = {(r['target'], r['seed']) for r in rows}
+    jobs = [(tn, a.level, s) for tn in a.targets.split(',') for s in range(lo, hi+1) if (tn, s) not in done]
     with mp.get_context('spawn').Pool(a.workers) as pool:
-        rows = pool.map(job, jobs, chunksize=1)
-    Path(a.out).write_text(json.dumps(dict(level=a.level, maxfev=MAXFEV, rows=rows), indent=1))
+        for r in pool.imap_unordered(job, jobs, chunksize=1):
+            rows.append(r)
+            out.write_text(json.dumps(dict(level=a.level, maxfev=MAXFEV, rows=rows), indent=1))
+            print(r['target'], r['seed'], 'hit' if r['hit'] else 'miss', flush=True)
     for tn in a.targets.split(','):
         rr = [r for r in rows if r['target'] == tn]
         print(tn, 'reference hit %d/%d' % (sum(r['hit'] for r in rr), len(rr)), flush=True)
