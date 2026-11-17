@@ -42,9 +42,12 @@ def test_configuration_matches_original_mission():
 def test_scenarios_match_original_generator():
     for r in FIX['scenarios']:
         sc = SC.scenario(r['level'], r['seed'])
-        assert (sc.dh, sc.dv, sc.k_lift, sc.k_drag) == (r['dh'], r['dv'], r['kL'], r['kD'])
+        # The fixture was recorded on Linux; libm exp() may differ in the last bit on other platforms (Windows),
+        # so floating-point values are compared to 1e-12 relative, the rounded offsets exactly.
+        assert (sc.dh, sc.dv) == (r['dh'], r['dv'])
+        assert (sc.k_lift, sc.k_drag) == pytest.approx((r['kL'], r['kD']), rel=1e-12, abs=0)
         s, k = SC.density_field(sc)
-        assert [k[i] for i in (0, 1, 7, 100, 640)] == r['field_k']
+        assert [k[i] for i in (0, 1, 7, 100, 640)] == pytest.approx(r['field_k'], rel=1e-12, abs=0)
         f = SC.Field(sc)
         assert f(s[7]) == pytest.approx(k[7]) and f(2.5e3) == pytest.approx(.5*(k[0]+k[1]))
 
