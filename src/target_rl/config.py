@@ -14,6 +14,9 @@ def load(path=None):
     cfg = yaml.safe_load(p.read_text(encoding='utf-8'))
     if cfg.get('schema') != 'target_task/1':
         raise ValueError('unexpected configuration schema')
+    extra = os.environ.get('TARGET_RL_EXTRA_LIBRARIES')     # design studies: YAML {name: {path, sha256, fixed_geometry}}
+    if extra:
+        cfg['aero']['libraries'].update(yaml.safe_load(Path(extra).read_text(encoding='utf-8')))
     return cfg
 
 
