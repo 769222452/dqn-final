@@ -1,0 +1,116 @@
+# Fixed-time target arrival task (PREREGISTRATION.md). Every number used by the code is read from here.
+schema: target_task/1
+
+vehicle:                       # values of the original mission (configs/mission.yaml, configs/vehicle.yaml)
+  mass_kg: 1500.0
+  reference_area_m2: 6.931920786884801
+  heat_C: 1.7415e-4            # stagnation heat-flux proxy qdot = C sqrt(rho/R_n) V^3
+  heat_R_n: 0.05
+
+atmosphere:                    # ISA-like piecewise model of the original project
+  rho0: 1.225
+  p0: 101325.0
+  T0: 288.15
+  R_gas: 287.05287
+  gamma_gas: 1.4
+  g0: 9.80665
+  R_earth: 6371000.0
+  h_min_valid: 0.0
+  h_max_valid: 100000.0
+  rho_floor: 1.0e-9
+
+mission:
+  duration_s: 1200.0
+  decision_s: 12.0
+  inner_dt_s: 0.5
+  initial_state: [40150.27263771527, 2415.6424609292885, -0.014729622960607522, 0.0]   # h, V, gamma, s
+  limits:
+    altitude_m: [20000.0, 80000.0]
+    velocity_mps: [800.0, 6000.0]
+    gamma_rad: [-0.35, 0.35]
+    dynamic_pressure_pa_max: 80000.0
+    heat_proxy_wm2_max: 2000000.0
+    load_factor_g_max: 3.0
+  mach_support: [3.5, 8.25]    # Mach range of the aerodynamic table
+
+aero:
+  library: data/F8D2000/p2_grid.npz
+  sha256: 2ef9bd687be9483465f9c77976cbda8938b0ac5fbb1b74801af8a49df183de10
+  fixed_geometry: F8D_01351    # best fixed geometry of the library (data/F8D2000/README.md); used without morphing
+  cl_table: [-0.01, 0.13, 0.0025]   # CL grid of the equal-lift drag tables (start, stop, step)
+  alpha_step_deg: 0.02
+
+actions:
+  cl_levels: [-0.01, 0.0, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.05, 0.055, 0.06, 0.07, 0.08,
+              0.09, 0.10, 0.11, 0.12]     # the 19 absolute CL actions of the original project
+  morph_levels: [0.0, 0.3333333333333333, 0.6666666666666666, 1.0]   # w: CD = CDmin + w (CDmax - CDmin)
+  cl_clip: [-0.01, 0.12]
+
+protection:                    # inner loop shared by every method, every inner_dt_s
+  q_ratio: 0.95                # CL = max(CL command, law(q_ref = q_ratio q_max))
+  kp: 2.0
+  kg: 1.0
+
+disturbance:
+  levels:                      # density sigma, correlation length km, lift/drag bias sigma
+    L0: [0.0, 200.0, 0.0]
+    L1: [0.03, 200.0, 0.05]
+    L2: [0.06, 200.0, 0.05]
+    L3: [0.12, 200.0, 0.05]
+    L3b: [0.06, 50.0, 0.05]
+  initial_dh_m: 2000.0
+  initial_dv_mps: 100.0
+  main_level: L2
+
+hit:
+  range_km: 5.0
+  speed_mps: 25.0
+
+reward:                        # miss: -min(e, miss_cap), e = sqrt((dD/range_scale)^2 + (dV/speed_scale)^2)
+  hit_bonus: 0.10
+  range_scale_km: 100.0
+  speed_scale_mps: 100.0
+  miss_cap: 3.0
+  violation: -4.0              # worse than any miss
+
+targets:
+  region_shrink: 0.10          # region = convex hull of reachable (range, speed) with morphing, shrunk towards its centroid
+  exclusion: [40.0, 80.0]      # training targets avoid |dD| <= 40 km and |dV| <= 80 m/s around T1-T6
+  fixed_fractions: [0.25, 0.50, 0.75]   # T1-T3 / T4-T6 ranges: fractions of the common range interval
+  random_test: 10
+
+seeds:
+  train: [1100, 1147]          # inclusive
+  test: [2200, 2219]           # 2100-2119 were touched by development smoke runs (PREREGISTRATION.md amendment 1)
+  random_targets: [3000, 3009]
+  training_runs: [17, 23, 41, 59, 83]
+
+reach_grid:                    # region stage: three phases, (r, w) per phase
+  phases_s: [400.0, 800.0]
+  r: [0.3, 0.45, 0.6, 0.8, 0.95]
+  w: [0.0, 0.3333333333333333, 0.6666666666666666, 1.0]
+
+training:
+  iterations: 30
+  states: 25
+  stride_s: 48.0
+  window_s: 48.0
+  scenarios_per_iteration: 2
+  hidden: [16, 16]
+  label_scale: 100.0           # advantages in units of 0.01 return
+  label_clip: 2.0
+  margins: [1.0, 0.5, 0.25, 0.75, 1.25, 1.5]
+  min_advantage: 0.001
+  neighbourhood: [2, 1]        # model stages may move CL by +-2 levels and w by +-1 level per decision
+
+predictor_corrector:
+  cycle_s: 24.0
+  newton: 2
+  newton_first: 8
+  predict_dt_s: 2.0
+  margin: 0.005
+  r_bounds: [0.3, 0.95]
+  strong_phases_s: [400.0, 800.0]
+
+reference:
+  maxfev: 150                  # Nelder-Mead evaluations in total, split over three starting plans

@@ -1,0 +1,51 @@
+{
+  "dataset": "F8D2000",
+  "source_library": "fixed_leading_edge_G42_shape_2000_20261114_v1",
+  "publication_date": "2026-11-17",
+  "geometry_count": 2000,
+  "geometry_grid_shape": [
+    50,
+    50
+  ],
+  "geometry_storage": "geometries/<geometry_id>/native_geometry.mat",
+  "surface_domain": "one symmetric half of the vehicle; reflect y to obtain the other half",
+  "coordinate_units": "m",
+  "native_z_direction": "down",
+  "native_to_aero_body_xyz": [
+    1,
+    -1,
+    -1
+  ],
+  "fixed_3D_leading_edge": "G42",
+  "volume_constraint": null,
+  "reference_area_m2": 6.931920786884801,
+  "reference_length_m": 5.0,
+  "moment_reference_body_xyz_m": [
+    2.5,
+    0.0,
+    -0.9481139754931033
+  ],
+  "model": "original P2 surface pressure; frozen equations, accelerated root solver",
+  "included_force_terms": [
+    "surface pressure"
+  ],
+  "tensor_axes": [
+    "geometry_index",
+    "Mach",
+    "alpha_deg"
+  ],
+  "tensor_shape": [
+    2000,
+    18,
+    20
+  ],
+  "index_origin_python_csv": 0,
+  "index_origin_matlab": 1,
+  "grid_point_count": 720000,
+  "source_aggregate_geometry_sha256": "a8f8385b88e0bc16501d13e6fd23907a2b31a53c930aaac67af27ae467ead1ec",
+  "geometry_copy_validation": "All six float64 coordinate arrays of all 2000 MAT files exactly match the source aggregate.",
+  "p2_mat_validation": "All coefficient arrays, masks, axes and geometry IDs exactly match p2_grid.npz.",
+  "evaluation_scope": "120 equal-weight static equal-lift pressure-drag conditions, not flight-range gains",
+  "direct_verification_scope": "892 points / 22 shapes in the historical joint comparison; includes external old-library comparators",
+  "default_flight_database_changed": false
+}
