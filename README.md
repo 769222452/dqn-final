@@ -5,20 +5,21 @@
 
 **任务：** 1200 s 时刻同时到达指定航程和指定末速。大气和气动有扰动，每次飞行的目标不同。
 **方法：** 反事实优势策略迭代。一个策略打所有目标，每 12 s 选"升力系数 19 档 × 变构程度 4 档"。
-**对比：** 预测-校正制导（公平版、强版、不变构版）、常值起点策略、全知参照（只作上界）。
-**构型库：** 主实验用项目原有的 298 构型快照（L298，固定构型 G42）；F8D2000（固定构型 F8D_01351）作敏感性分析。
+**对比：** 预测-校正制导（公平版、强版、不变构版）、常值起点策略、全知参照（只作参考，不保证是上界）。
+**构型库：** 主实验用 **F8D2000B**（F8D2000 的 2000 个构型 + 91 个减速板构型，共 2091 个，前缘全部固定为 G42 前缘，不变构对照 F8D_01351）；F8D2000（不加减速板）和项目原有的 298 构型快照 L298（前缘不固定，对照 G42）作敏感性分析。
 
 ## 目录
 
 | 路径 | 内容 |
 |---|---|
 | `configs/task.yaml` | 全部参数：飞行器、约束、构型库、动作、扰动、种子、回报、训练、基线 |
-| `data/L298/` | 298 构型快照的 P2 气动表（主实验） |
-| `data/F8D2000/` | F8D2000 构型库的 P2 气动表（敏感性分析）和原说明 |
+| `data/F8D2000/` | F8D2000 构型库的 P2 气动表和原说明 |
+| `data/BrakeLadder/` | 91 个减速板构型的 P2 气动表和说明；与 F8D2000 合起来就是主实验的 F8D2000B |
+| `data/L298/` | 298 构型快照的 P2 气动表（敏感性分析） |
 | `src/target_rl/` | 代码（见下表） |
 | `tests/` | 测试；`fixtures/reference_model.json` 是从原工程模型记录的对照值 |
 | `scripts/run_all.sh` | 全流程，分阶段、可续跑 |
-| `runs/L298/region.json`、`runs/F8D2000/region.json` | 各库的目标区域和 T1–T6（已算好并随分支提交，预注册以它们为准） |
+| `runs/F8D2000B/region.json` 等 | 各库的目标区域和 T1–T6（已算好并随分支提交，预注册以它们为准） |
 
 | 模块 | 作用 |
 |---|---|
@@ -43,16 +44,20 @@ git clone -b target-rl https://github.com/769222452/dqn-final.git target-rl
 cd target-rl && python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
 ```
 
-主实验（298 库）：
+主实验（F8D2000B）：
 
 ```bash
-WORKERS=$(nproc) nohup bash scripts/run_all.sh > run_L298.log 2>&1 &
+WORKERS=$(nproc) nohup bash scripts/run_all.sh > run_F8D2000B.log 2>&1 &
 ```
 
-主实验跑完后，再跑敏感性分析（F8D2000）：
+主实验跑完后，再依次跑两个敏感性分析（F8D2000、L298）：
 
 ```bash
 LIBRARY=F8D2000 WORKERS=$(nproc) nohup bash scripts/run_all.sh > run_F8D2000.log 2>&1 &
+```
+
+```bash
+LIBRARY=L298 WORKERS=$(nproc) nohup bash scripts/run_all.sh > run_L298.log 2>&1 &
 ```
 
 各阶段（`STAGES` 环境变量可选其中几个），结果都在 `runs/<库名>/` 下：
@@ -66,7 +71,7 @@ LIBRARY=F8D2000 WORKERS=$(nproc) nohup bash scripts/run_all.sh > run_F8D2000.log
 | `eval` | `python -m target_rl.evaluate --methods all` | `eval/L2/*.json` | 约 30 分钟 |
 | `report` | `python -m target_rl.report` | `report.json`、`REPORT.md` | 秒级 |
 
-直接用 `python -m` 运行时，先设置 `PYTHONPATH=src`，库用环境变量 `TARGET_RL_LIBRARY`（默认 `L298`）。
+直接用 `python -m` 运行时，先设置 `PYTHONPATH=src`，库用环境变量 `TARGET_RL_LIBRARY`（默认 `F8D2000B`）。
 耗时是按本地 4 核试跑推算的（每轮训练约 18 s，单次飞行约 0.15 s，预测-校正单次 8～25 s），以实际为准。
 
 - **续跑：** 中断后再执行同一条命令即可，已完成的训练迭代和评估用例会跳过。
@@ -86,12 +91,12 @@ git checkout -b target-rl-results-$(date +%Y%m%d) && git add runs && git commit 
 
 - **主判据 H1：** 在只有变构才能到的目标 T4～T6 上，完整方法每个训练种子相对公平版预测-校正的命中率差，95% 置信区间下界 > 0，且超限率不更高。置信区间按测试场景做聚类自助法。
 - **门槛 G1：** 5 个种子平均命中率高 20 个百分点以上，且 H1 在至少 4 个种子成立。
-- **只按主实验（L298）判定；** F8D2000 同样报告，作敏感性分析。
+- **只按主实验（F8D2000B）判定；** F8D2000、L298 同样报告，作敏感性分析。
 - **命中：** 无超限，且航程误差 ≤ 5 km、末速误差 ≤ 25 m/s。
 
 ## 已知局限
 
 - 变构用"同升力下最小到最大阻力之间插值"作代理，不是逐个真实构型，也没有计入 8 s 变构过渡。
 - 只计压力阻力；传感器理想、无噪声；只有纵向平面；没有攻角速率限制。
-- L298 中阻力最大的构型可能形状较极端；可达区域的低速边界受气动表马赫下限 3.5 限制。
+- F8D2000B 的减速板构型弯度较大（最大约 0.16 m），机构可实现性未验证；L298 中阻力最大的构型可能形状较极端；可达区域的低速边界受气动表马赫下限 3.5 限制。
 - F8D2000 上"只有变构才能到"的区域只有 29～54 m/s 宽，见 `runs/F8D2000/region.json` 的 `notes`。

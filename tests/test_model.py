@@ -55,16 +55,17 @@ def test_train_and_test_seeds_are_disjoint():
     assert not (a & b) and not (a & c) and not (b & c)
 
 
-def test_default_library_is_the_298_snapshot():
-    assert config.load()['aero']['active'] == 'L298'
+def test_default_library_is_f8d2000b():
+    assert config.load()['aero']['active'] == 'F8D2000B'
 
 
-@pytest.mark.parametrize('name, count', [('L298', 298), ('F8D2000', 2000)])
+@pytest.mark.parametrize('name, count', [('F8D2000B', 2091), ('L298', 298), ('F8D2000', 2000)])
 def test_drag_tables(name, count, monkeypatch):
     monkeypatch.setenv('TARGET_RL_LIBRARY', name)
     assert config.runs_dir().name == name
     t = aero.tables()
-    assert t['sha256'] == config.library()['sha256'] and t['n_geometries'] == count
+    sha = config.library()['sha256']
+    assert t['sha256'] == ('+'.join(sha) if isinstance(sha, list) else sha) and t['n_geometries'] == count
     assert t['fixed'] == config.library()['fixed_geometry']
     ok = np.isfinite(t['cd_fix'])
     assert np.all(t['cd_min'][ok] <= t['cd_fix'][ok]+1e-15) and np.all(t['cd_fix'][ok] <= t['cd_max'][ok]+1e-15)

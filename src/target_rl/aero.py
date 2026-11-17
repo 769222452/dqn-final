@@ -34,12 +34,24 @@ def _cd_at_cl(alpha, cl_curve, cd_curve, cls):
 def build_tables(cfg=None):
     cfg = cfg or config.load()
     a = dict(cfg['aero'], **config.library(cfg))
-    path = config.ROOT/a['path']
-    digest = hashlib.sha256(path.read_bytes()).hexdigest()
-    if digest != a['sha256']:
-        raise ValueError(f'aerodynamic library checksum mismatch: {path}')
-    z = np.load(path, allow_pickle=False)
+    paths = a['path'] if isinstance(a['path'], list) else [a['path']]          # a list = concatenated libraries
+    sums = a['sha256'] if isinstance(a['sha256'], list) else [a['sha256']]
+    parts = []
+    for rel, want in zip(paths, sums):
+        path = config.ROOT/rel
+        if hashlib.sha256(path.read_bytes()).hexdigest() != want:
+            raise ValueError(f'aerodynamic library checksum mismatch: {path}')
+        parts.append(np.load(path, allow_pickle=False))
+    for q in parts[1:]:
+        if not (np.array_equal(q['mach_grid'], parts[0]['mach_grid']) and
+                np.array_equal(q['alpha_deg_grid'], parts[0]['alpha_deg_grid'])):
+            raise ValueError('libraries on different grids')
+    z = {k: np.concatenate([q[k] for q in parts]) for k in ('geometry_ids', 'CL', 'CD_pressure', 'usable_p2')}
+    z.update(mach_grid=parts[0]['mach_grid'], alpha_deg_grid=parts[0]['alpha_deg_grid'])
+    digest = '+'.join(sums)
     ids = [str(x) for x in z['geometry_ids']]
+    if len(set(ids)) != len(ids):
+        raise ValueError('duplicate geometry ids')
     if a['fixed_geometry'] not in ids:
         raise ValueError(f"fixed geometry {a['fixed_geometry']} not in the library")
     if not z['usable_p2'].all():
@@ -71,7 +83,8 @@ def build_tables(cfg=None):
 def tables(cfg=None):
     cfg = cfg or config.load()
     lib = config.library(cfg)
-    cache = config.ROOT/'runs'/'cache'/f"aero_{lib['sha256'][:12]}_{lib['fixed_geometry']}.npz"
+    key = '_'.join(s[:12] for s in (lib['sha256'] if isinstance(lib['sha256'], list) else [lib['sha256']]))
+    cache = config.ROOT/'runs'/'cache'/f"aero_{key}_{lib['fixed_geometry']}.npz"
     if cache.exists():
         z = np.load(cache, allow_pickle=False)
         return {k: (z[k] if z[k].ndim else z[k].item()) for k in z.files}

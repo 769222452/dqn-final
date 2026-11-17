@@ -34,9 +34,14 @@ mission:
   mach_support: [3.5, 8.25]    # Mach range of the aerodynamic table
 
 aero:
-  active: L298                 # primary study (PREREGISTRATION.md amendment 2); F8D2000 = sensitivity analysis.
+  active: F8D2000B             # primary study (PREREGISTRATION.md amendment 3); F8D2000, L298 = sensitivity analyses.
                                # Override with the environment variable TARGET_RL_LIBRARY; results go to runs/<library>/.
   libraries:
+    F8D2000B:                  # F8D2000 + 91 brake shapes (data/BrakeLadder/README.md): fixed G42 leading edge, 2091
+      path: [data/F8D2000/p2_grid.npz, data/BrakeLadder/p2_grid.npz]
+      sha256: [2ef9bd687be9483465f9c77976cbda8938b0ac5fbb1b74801af8a49df183de10,
+               3bbc36328f45128c1b18beec9411edce1bd6c4709fc47c51f6abaa744488f767]
+      fixed_geometry: F8D_01351  # best fixed geometry of F8D2000 (lowest mean drag of F8D2000B as well)
     L298:                      # the project's 298-geometry snapshot (data/geometry_subset of the main project)
       path: data/L298/p2_grid.npz
       sha256: 3d7b27d9e2178a6fb214c6360777f8f119612668b3401914e5969540bb554586

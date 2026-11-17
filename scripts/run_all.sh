@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Whole study (PREREGISTRATION.md). Every stage is resumable: finished work is skipped, interrupted work continues.
 #
-#   WORKERS=14 bash scripts/run_all.sh                          # primary study, 298-geometry library
-#   LIBRARY=F8D2000 WORKERS=14 bash scripts/run_all.sh          # sensitivity analysis, F8D2000 library
+#   WORKERS=14 bash scripts/run_all.sh                          # primary study, F8D2000B (fixed leading edge)
+#   LIBRARY=F8D2000 WORKERS=14 bash scripts/run_all.sh          # sensitivity: F8D2000 (no brake shapes); also L298
 #   STAGES="train" VARIANTS="full" SEEDS="17 23" bash scripts/run_all.sh
 #
 # Stages: test region pi0 train eval report. Results: runs/<library>/.
@@ -10,7 +10,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 PY=${PY:-python3}
 WORKERS=${WORKERS:-$(nproc)}
-LIBRARY=${LIBRARY:-L298}
+LIBRARY=${LIBRARY:-F8D2000B}
 STAGES=${STAGES:-"test region pi0 train eval report"}
 VARIANTS=${VARIANTS:-"full dist fixed mean"}
 SEEDS=${SEEDS:-"17 23 41 59 83"}
