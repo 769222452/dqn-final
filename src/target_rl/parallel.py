@@ -23,7 +23,7 @@ def _run(job):
             return fly_constant(sc, tg, kw['action'], kw.get('morph', True)).summary()
         if kind == 'method':
             from .evaluate import fly_method
-            return fly_method(kw['method'], kw['case'], kw.get('spec'))
+            return fly_method(kw['method'], kw['case'], kw.get('spec'), kw.get('trace', False))
         if kind == 'branch':
             from .train import branch_job
             return branch_job(kw)

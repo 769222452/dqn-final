@@ -96,3 +96,22 @@ def test_tiny_training_run_is_resumable(tmp_path):
     chain = st['chain']
     env = T.fly(F.TargetFlight(*cases[0]), chain)
     assert env.done and env.G is not None
+
+
+def test_oracle_counts_predictions_and_tracing_is_isolated():
+    from target_rl import evaluate as E
+    plan = dict(r=[.8, .8, .8], w=[0., 0., 0.])
+    end = RG.fly_plan(NOMINAL, plan, True)
+    tg = Target('o', end.range_km()-5., end.x[1]-10.)
+    r = E.fly_method('pc_oracle', (NOMINAL, tg), None, trace=True)
+    assert r['n_predictions'] > 0 and r['wall_s'] > 0 and r['decisions'] == 100
+    assert len(r['trace']) == 2400 and len(r['trace'][0]) == 9       # one row per 0.5 s step, predictions not traced
+    c = E.fly_method('constant', (NOMINAL, tg), dict(action=F.encode(7, 0)), trace=False)
+    assert 'trace' not in c and 'n_predictions' not in c
+
+
+def test_method_sets():
+    from target_rl import evaluate as E
+    assert E.method_set('baselines') == ['constant', 'pc_fair', 'pc_strong', 'pc_fixed', 'pc_oracle']
+    assert E.method_set('pc_fair,rl:full:17') == ['pc_fair', 'rl:full:17']
+    assert all(k[1] in ('T2', 'T4', 'T5') for k in E.trace_keys())

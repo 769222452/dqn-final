@@ -87,7 +87,7 @@ class LoadEstimator:
 
 
 class TargetFlight:
-    def __init__(self, sc, target, morph=True):
+    def __init__(self, sc, target, morph=True, trace=False):
         self.w = world(morph)
         self.morph = bool(morph)
         self.sc, self.target = sc, target
@@ -105,6 +105,9 @@ class TargetFlight:
         self.protect_steps = 0
         self.steps = 0
         self.min_margin = 1e9
+        self.wl = 0.
+        self.info = {}
+        self.trace = [] if trace else None      # per inner step: t, h, V, gamma, range_km, CL, w, q/q_max, protected
 
     # ------------------------------------------------------------------ measurements
     def k_rho(self):
@@ -164,7 +167,7 @@ class TargetFlight:
             cl, protected = self.command_cl(cl_cmd)
             self.protect_steps += protected
             self.steps += 1
-            self.cl = cl
+            self.cl, self.wl = cl, wl
             x = self.x
             k_meas = self.k_rho()
             k1, q1 = self._deriv(x, cl, wl)
@@ -186,6 +189,9 @@ class TargetFlight:
             self.est.decay()
             self.x = xn
             self.t += dt
+            if self.trace is not None:
+                self.trace.append([self.t, xn[0], xn[1], xn[2], (xn[3]-self.s0)/1e3, cl, wl, self.q()/w['qmax'],
+                                   int(protected)])
             if not all(math.isfinite(v) for v in xn) or worst < -1e-6:
                 self.failed = self.done = True
                 self.reason = 'VIOLATION:'+(lim.which(*which) if which else 'nonfinite')
@@ -230,6 +236,8 @@ class TargetFlight:
         c.x = list(self.x)
         c.est = copy.copy(self.est)
         c.est.num, c.est.den = list(self.est.num), list(self.est.den)
+        c.trace = None                   # forks (branches, predictions) are never traced
+        c.info = dict(self.info)
         return c
 
     def summary(self):
@@ -238,4 +246,4 @@ class TargetFlight:
                     target_speed_mps=self.target.speed_mps, G=self.G, hit=bool(self.hit()), feasible=not self.failed,
                     reason=self.reason, t_end=self.t, range_km=self.range_km(), V_end=self.x[1], h_end=self.x[0],
                     dD_km=dD, dV_mps=dV, protect_fraction=self.protect_steps/max(self.steps, 1),
-                    min_margin=self.min_margin)
+                    min_margin=self.min_margin, **self.info)

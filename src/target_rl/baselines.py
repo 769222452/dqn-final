@@ -10,9 +10,11 @@ pc_fair    predictor-corrector, every cycle_s: choose (r, w), held to the end, s
 pc_strong  as pc_fair with one (r, w) per phase (0-400, 400-800, 800-1200 s); every cycle re-solves the
            current and later phases.
 pc_fixed   as pc_fair without morphing (fixed geometry, r only, range target only).
+pc_oracle  as pc_strong, but the prediction uses the TRUE density field ahead and the TRUE lift/drag biases
+           (full information): a strong reference for what perfect knowledge of the disturbance buys.
 constant   the best constant action on the training cases (the initial policy pi0, "learning removed").
-reference  clairvoyant three-phase plan (true disturbances known), Nelder-Mead from the nearest nominal
-           region-grid plans; an upper reference only, not used by any criterion.
+reference  clairvoyant three-phase OPEN-LOOP plan, Nelder-Mead from the nearest nominal region-grid plans
+           (150 evaluations). Kept for completeness; not run by default (amendment 4: weaker than pc_strong).
 """
 import dataclasses
 import os
@@ -46,13 +48,18 @@ def _command(params, phases, morph):
     return command
 
 
-def predict(env, params, phases, pc):
-    """Nominal-model prediction from the current state: ((range, speed), keeps the margin)."""
+def predict(env, params, phases, pc, oracle=False):
+    """Prediction from the current state: ((range, speed), keeps the margin). Measured density ratio frozen and
+    estimated biases; with oracle=True the true density field and true biases."""
     p = env.fork()
-    kl, kd = env.est.values
-    kl, kd = float(np.clip(kl, .7, 1.3)), float(np.clip(kd, .7, 1.3))
-    p.field = _Const(env.k_rho())
-    p.sc = dataclasses.replace(env.sc, k_lift=kl, k_drag=kd)
+    p.trace = None
+    if oracle:
+        p.field, p.sc = env.field, env.sc
+    else:
+        kl, kd = env.est.values
+        kl, kd = float(np.clip(kl, .7, 1.3)), float(np.clip(kd, .7, 1.3))
+        p.field = _Const(env.k_rho())
+        p.sc = dataclasses.replace(env.sc, k_lift=kl, k_drag=kd)
     p.w = dict(env.w, dt=pc['predict_dt_s'])
     p.advance(env.w['T']-env.t, _command(params, phases, env.morph))
     return np.array([p.range_km(), p.x[1]]), (not p.failed) and p.min_margin >= pc['margin']
@@ -62,8 +69,12 @@ class PredictorCorrector:
     def __init__(self, kind, cfg=None):
         cfg = cfg or config.load()
         self.kind, self.pc = kind, cfg['predictor_corrector']
-        self.strong = kind == 'pc_strong'
+        if kind not in ('pc_fair', 'pc_strong', 'pc_fixed', 'pc_oracle'):
+            raise ValueError(kind)
+        self.strong = kind in ('pc_strong', 'pc_oracle')
+        self.oracle = kind == 'pc_oracle'
         self.morph = kind != 'pc_fixed'
+        self.n_predictions = 0
         self.phases = self.pc['strong_phases_s'] if self.strong else [1e9, 1e9]
         self.u = np.array([.8, .8, .8, 0., 0., 0.])
 
@@ -82,6 +93,10 @@ class PredictorCorrector:
             u[4] = u[5] = u[3]
         return u
 
+    def _predict(self, env, u):
+        self.n_predictions += 1
+        return predict(env, u, self.phases, self.pc, self.oracle)
+
     def correct(self, env, iterations):
         pc = self.pc
         rb = pc['r_bounds']
@@ -95,7 +110,7 @@ class PredictorCorrector:
         scale = np.array([1., 10.])[rows]
         u = self._tie(np.clip(self.u.copy(), lo, hi))
         for _ in range(iterations):
-            f0, ok0 = predict(env, u, self.phases, pc)
+            f0, ok0 = self._predict(env, u)
             e = (f0[rows]-tgt[rows])/scale
             J = np.zeros((len(rows), len(free)))
             for c, j in enumerate(free):
@@ -103,7 +118,7 @@ class PredictorCorrector:
                 uu = u.copy()
                 uu[j] = min(u[j]+d, hi[j]) if u[j]+d <= hi[j] else u[j]-d
                 uu = self._tie(uu)
-                fj, _ = predict(env, uu, self.phases, pc)
+                fj, _ = self._predict(env, uu)
                 J[:, c] = ((fj[rows]-tgt[rows])/scale-e)/(uu[j]-u[j])
             if not (np.all(np.isfinite(J)) and np.all(np.isfinite(e))):
                 break
@@ -113,15 +128,15 @@ class PredictorCorrector:
                 un = u.copy()
                 un[free] = np.clip(u[free]+frac*step, lo[free], hi[free])
                 un = self._tie(un)
-                fn, okn = predict(env, un, self.phases, pc)
+                fn, okn = self._predict(env, un)
                 if okn and (not ok0 or np.sum(((fn[rows]-tgt[rows])/scale)**2) <= np.sum(e**2)):
                     u = un
                     break
         self.u = u
         return u
 
-    def fly(self, sc, target):
-        env = F.TargetFlight(sc, target, self.morph)
+    def fly(self, sc, target, trace=False):
+        env = F.TargetFlight(sc, target, self.morph, trace=trace)
         pc = self.pc
         nxt = 0.
         while not env.done:
@@ -129,11 +144,12 @@ class PredictorCorrector:
                 self.correct(env, pc['newton_first'] if env.t == 0 else pc['newton'])
                 nxt += pc['cycle_s']
             env.advance(nxt-env.t, _command(self.u, self.phases, self.morph))
+        env.info['n_predictions'] = self.n_predictions
         return env
 
 
-def fly_constant(sc, target, action, morph=True):
-    env = F.TargetFlight(sc, target, morph)
+def fly_constant(sc, target, action, morph=True, trace=False):
+    env = F.TargetFlight(sc, target, morph, trace=trace)
     while not env.done:
         env.step(action)
     return env

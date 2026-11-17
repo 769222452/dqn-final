@@ -32,6 +32,17 @@
 | `ensemble.py`, `policy.py`, `train.py` | 优势网络集合、策略链、反事实优势策略迭代 |
 | `evaluate.py`, `report.py` | 测试集评估，H1/G1 判定和报告 |
 
+## 论文实验（推荐：一条命令跑完）
+
+实验设计见 [`EXPERIMENTS.md`](EXPERIMENTS.md)：研究问题、各方法、表 1–6 和图 1–7 与运行结果的对应关系、计算量估计。
+
+```bash
+WORKERS=$(nproc) nohup bash scripts/run_paper.sh > run_paper.log 2>&1 &
+```
+
+它依次跑主实验库 F8D2000B（完整方案）、敏感性库 F8D2000 和 L298（精简方案），最后把表格和图写到 `runs/paper/`。
+14 核约 5～6 小时，可续跑。
+
 ## 在云服务器上运行（给 Codex）
 
 需要 Python ≥ 3.10。只依赖 numpy、scipy、PyYAML、pytest，不需要 CasADi 或 MATLAB。

@@ -125,5 +125,11 @@ predictor_corrector:
   r_bounds: [0.3, 0.95]
   strong_phases_s: [400.0, 800.0]
 
+experiment:                    # paper experiment plan (EXPERIMENTS.md, PREREGISTRATION.md amendment 4)
+  main_library: F8D2000B
+  sensitivity_libraries: [F8D2000, L298]
+  generalization_levels: [L0, L1, L3]   # policies trained on L2, evaluated without retraining
+  trace_cases: [[2200, T2], [2200, T5], [2201, T4]]   # test cases flown with a per-step trajectory log
+
 reference:
   maxfev: 150                  # Nelder-Mead evaluations in total, split over three starting plans
