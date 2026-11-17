@@ -1,8 +1,8 @@
 """Evaluation on the test cases (20 test scenarios x 16 targets: T1-T6 and R1-R10).
 
 Methods: constant (pi0), pc_fair, pc_strong, pc_fixed, reference, and every finished training run
-(rl:<variant>:<seed>, read from runs/train/<variant>_s<seed>/state.json). One file per method:
-runs/eval/<level>/<method>.json, resumable (finished cases are kept).
+(rl:<variant>:<seed>, read from runs/<library>/train/<variant>_s<seed>/state.json). One file per method:
+runs/<library>/eval/<level>/<method>.json, resumable (finished cases are kept).
 
     python -m target_rl.evaluate --methods all --workers 14
     python -m target_rl.evaluate --methods pc_fair,rl:full:17 --level L2
@@ -15,7 +15,6 @@ from .parallel import pool_imap
 from .util import load_json, save_json
 
 BASELINES = ('constant', 'pc_fair', 'pc_strong', 'pc_fixed', 'reference')
-RUNS = config.ROOT/'runs'
 
 
 def fly_method(method, case, spec):
@@ -36,7 +35,7 @@ def fly_method(method, case, spec):
 
 def trained_runs():
     out = []
-    for p in sorted((RUNS/'train').glob('*_s*/state.json')):
+    for p in sorted((config.runs_dir()/'train').glob('*_s*/state.json')):
         st = load_json(p)
         if st.get('converged'):
             out.append(f"rl:{st['variant']}:{st['seed']}")
@@ -45,10 +44,10 @@ def trained_runs():
 
 def spec_for(method):
     if method == 'constant':
-        return dict(action=load_json(RUNS/'pi0_morph.json')['action'])
+        return dict(action=load_json(config.runs_dir()/'pi0_morph.json')['action'])
     if method.startswith('rl:'):
         _, variant, seed = method.split(':')
-        st = load_json(RUNS/'train'/f'{variant}_s{seed}'/'state.json')
+        st = load_json(config.runs_dir()/'train'/f'{variant}_s{seed}'/'state.json')
         return dict(chain=st['chain'], morph=st['settings']['morph'])
     return None
 
@@ -56,7 +55,7 @@ def spec_for(method):
 def evaluate(method, level, workers, cases=None, log=print):
     from .region import test_cases
     cases = cases or test_cases(level=level)
-    path = RUNS/'eval'/level/f"{method.replace(':', '_')}.json"
+    path = config.runs_dir()/'eval'/level/f"{method.replace(':', '_')}.json"
     done = load_json(path)['rows'] if path.exists() else []
     have = {(r['seed'], r['target']) for r in done}
     todo = [c for c in cases if (c[0].seed, c[1].name) not in have]

@@ -4,7 +4,7 @@ Groups: T1-T3 (reachable without morphing), T4-T6 (morphing only), R1-R10 (rando
 Paired differences against pc_fair are taken per (test scenario, target) and their mean's 95% interval comes
 from a cluster bootstrap over the 20 test scenarios (10000 resamples, seed 0).
 
-    python -m target_rl.report            # writes runs/report.json and runs/REPORT.md
+    python -m target_rl.report            # writes runs/<library>/report.json and REPORT.md
 """
 import argparse
 
@@ -13,7 +13,6 @@ import numpy as np
 from . import config
 from .util import cluster_bootstrap_ci, load_json, save_json
 
-RUNS = config.ROOT/'runs'
 GROUPS = dict(fixed=('T1', 'T2', 'T3'), morph=('T4', 'T5', 'T6'))
 
 
@@ -26,7 +25,7 @@ def group_of(name):
 
 def load_methods(level):
     out = {}
-    for p in sorted((RUNS/'eval'/level).glob('*.json')):
+    for p in sorted((config.runs_dir()/'eval'/level).glob('*.json')):
         d = load_json(p)
         out[d['method']] = d['rows']
     return out
@@ -66,7 +65,7 @@ def build(level=None):
     M = load_methods(level)
     table = {m: {g: stats([r for r in rows if group_of(r['target']) == g]) for g in ('fixed', 'morph', 'random')}
              for m, rows in M.items()}
-    out = dict(level=level, methods=table, H1={}, comparisons={}, ablations={})
+    out = dict(library=config.library_name(), level=level, methods=table, H1={}, comparisons={}, ablations={})
     ref = M.get('pc_fair')
     seeds = cfg['seeds']['training_runs']
     for variant in ('full', 'dist', 'fixed', 'mean'):
@@ -102,7 +101,7 @@ def build(level=None):
 def markdown(r):
     pct = lambda v: '—' if v is None else f'{100*v:.0f}%'
     num = lambda v, f='%.1f': '—' if v is None else f % v
-    lines = [f"# 评估报告（{r['level']}）", '',
+    lines = [f"# 评估报告（构型库 {r['library']}，扰动 {r['level']}）", '',
              '命中：无超限，且 |航程误差| ≤ 5 km、|末速误差| ≤ 25 m/s。T1–T3 不变构也能到，T4–T6 只有变构能到，R 为随机留出目标。', '',
              '| 方法 | T1–T3 命中 | T4–T6 命中 | 随机目标命中 | T4–T6 超限率 | T4–T6 末速误差中位数 (m/s) | 保护介入比例 |',
              '|---|---|---|---|---|---|---|']
@@ -134,8 +133,8 @@ def main(argv=None):
     p.add_argument('--level', default=None)
     a = p.parse_args(argv)
     r = build(a.level)
-    save_json(RUNS/'report.json', r)
-    (RUNS/'REPORT.md').write_text(markdown(r), encoding='utf-8')
+    save_json(config.runs_dir()/'report.json', r)
+    (config.runs_dir()/'REPORT.md').write_text(markdown(r), encoding='utf-8')
     print(markdown(r))
 
 

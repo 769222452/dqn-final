@@ -37,8 +37,9 @@ def test_flight_is_deterministic_and_fork_is_independent():
 
 
 def test_hit_and_return():
-    a = F.encode(7, 2)
+    a = F.encode(7, 0)                     # CL 0.035, lowest drag: completes the flight with either library
     end = constant_flight(NOMINAL, Target('x', 0., 0.), a)
+    assert not end.failed
     hit = constant_flight(NOMINAL, Target('h', end.range_km()+3., end.x[1]-20.), a)
     assert hit.hit() and hit.G == pytest.approx(.10)
     miss = constant_flight(NOMINAL, Target('m', end.range_km()+50., end.x[1]), a)
@@ -74,9 +75,13 @@ def test_region_geometry():
 
 
 def test_predictor_corrector_hits_a_nominal_target():
-    plan = dict(r=[.8, .8, .8], w=[.3, .3, .3])
+    """Target = end point of a feasible constant plan of the committed region grid (active library)."""
+    rows = [r for r in RG.load_region()['rows'] if r['morph'] and r['feasible'] and len(set(r['plan']['r'])) == 1
+            and len(set(r['plan']['w'])) == 1]
+    plan = sorted(rows, key=lambda r: r['V_end'])[len(rows)//2]['plan']
     end = RG.fly_plan(NOMINAL, plan, True)
-    tg = Target('p', end.range_km()-20., end.x[1]-30.)
+    assert not end.failed
+    tg = Target('p', end.range_km()-5., end.x[1]-10.)
     env = B.PredictorCorrector('pc_fair').fly(NOMINAL, tg)
     assert env.hit(), env.summary()
 

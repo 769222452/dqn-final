@@ -23,7 +23,7 @@ _W = {}
 
 
 def world(morph=True):
-    key = bool(morph)
+    key = (config.library_name(), bool(morph))
     if key not in _W:
         cfg = config.load()
         m = cfg['mission']

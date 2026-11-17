@@ -1,9 +1,9 @@
-"""Equal-lift drag tables of the geometry library (F8D2000, original P2 surface-pressure model).
+"""Equal-lift drag tables of the active geometry library (L298 or F8D2000, original P2 surface-pressure model).
 
 For every Mach node of the library and every CL of the table grid:
 
   CDmin, CDmax   lowest / highest pressure drag over the geometries that reach that CL inside the alpha support
-  CDfix          drag of the fixed geometry (configs/task.yaml aero.fixed_geometry)
+  CDfix          drag of the library's fixed geometry (configs/task.yaml aero.libraries.<name>.fixed_geometry)
 
 The CL of a geometry is followed on its monotone branch from the lowest alpha (PCHIP in alpha, step
 aero.alpha_step_deg). Between nodes the tables are interpolated linearly in Mach and CL. The morphing
@@ -33,8 +33,8 @@ def _cd_at_cl(alpha, cl_curve, cd_curve, cls):
 
 def build_tables(cfg=None):
     cfg = cfg or config.load()
-    a = cfg['aero']
-    path = config.ROOT/a['library']
+    a = dict(cfg['aero'], **config.library(cfg))
+    path = config.ROOT/a['path']
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
     if digest != a['sha256']:
         raise ValueError(f'aerodynamic library checksum mismatch: {path}')
@@ -70,7 +70,8 @@ def build_tables(cfg=None):
 
 def tables(cfg=None):
     cfg = cfg or config.load()
-    cache = config.ROOT/'runs'/'cache'/f"aero_{cfg['aero']['sha256'][:12]}_{cfg['aero']['fixed_geometry']}.npz"
+    lib = config.library(cfg)
+    cache = config.ROOT/'runs'/'cache'/f"aero_{lib['sha256'][:12]}_{lib['fixed_geometry']}.npz"
     if cache.exists():
         z = np.load(cache, allow_pickle=False)
         return {k: (z[k] if z[k].ndim else z[k].item()) for k in z.files}

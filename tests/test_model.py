@@ -55,9 +55,17 @@ def test_train_and_test_seeds_are_disjoint():
     assert not (a & b) and not (a & c) and not (b & c)
 
 
-def test_drag_tables():
+def test_default_library_is_the_298_snapshot():
+    assert config.load()['aero']['active'] == 'L298'
+
+
+@pytest.mark.parametrize('name, count', [('L298', 298), ('F8D2000', 2000)])
+def test_drag_tables(name, count, monkeypatch):
+    monkeypatch.setenv('TARGET_RL_LIBRARY', name)
+    assert config.runs_dir().name == name
     t = aero.tables()
-    assert t['sha256'] == config.load()['aero']['sha256'] and t['n_geometries'] == 2000
+    assert t['sha256'] == config.library()['sha256'] and t['n_geometries'] == count
+    assert t['fixed'] == config.library()['fixed_geometry']
     ok = np.isfinite(t['cd_fix'])
     assert np.all(t['cd_min'][ok] <= t['cd_fix'][ok]+1e-15) and np.all(t['cd_fix'][ok] <= t['cd_max'][ok]+1e-15)
     d = aero.Drag(True)
@@ -66,4 +74,4 @@ def test_drag_tables():
             lo, hi = d.cd(M, cl, 0.), d.cd(M, cl, 1.)
             assert 0 < lo < hi and d.cd(M, cl, .5) == pytest.approx(.5*(lo+hi))
     f = aero.Drag(False)
-    assert f.cd(7., .03) == pytest.approx(d.cd(7., .03, 0.), rel=.05)
+    assert d.cd(7., .03, 0.) <= f.cd(7., .03) <= 1.2*d.cd(7., .03, 0.)

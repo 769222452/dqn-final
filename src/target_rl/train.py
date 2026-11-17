@@ -31,7 +31,6 @@ VARIANTS = dict(full=dict(inputs=BASE, morph=True, score='lcb'),
                 dist=dict(inputs=BASE+EXTRA, morph=True, score='lcb'),
                 fixed=dict(inputs=BASE, morph=False, score='lcb'),
                 mean=dict(inputs=BASE, morph=True, score='mean'))
-RUNS = config.ROOT/'runs'
 
 
 # ------------------------------------------------------------------------------------------- cases
@@ -124,9 +123,9 @@ def stop_reason(history, patience, sweeps=2, stall=3):
 
 # ------------------------------------------------------------------------------------------- pi0
 def initial_action(morph, workers, cases):
-    """Best constant action on the training cases (cached in runs/pi0_<morph|fixed>.json)."""
+    """Best constant action on the training cases (cached in runs/<library>/pi0_<morph|fixed>.json)."""
     from .baselines import tune_constant
-    path = RUNS/f"pi0_{'morph' if morph else 'fixed'}.json"
+    path = config.runs_dir()/f"pi0_{'morph' if morph else 'fixed'}.json"
     if path.exists():
         return load_json(path)['action']
     a, table = tune_constant(cases, workers, morph)
@@ -146,7 +145,7 @@ def train(variant, seed, workers=4, out=None, iterations=None, cases=None, pi0=N
     tr = dict(cfg['training'], **(overrides or {}))
     v = VARIANTS[variant]
     morph, inputs = v['morph'], input_index(v['inputs'])
-    out = Path(out or RUNS/'train'/f'{variant}_s{seed}')
+    out = Path(out or config.runs_dir()/'train'/f'{variant}_s{seed}')
     out.mkdir(parents=True, exist_ok=True)
     path = out/'state.json'
     iterations = tr['iterations'] if iterations is None else iterations

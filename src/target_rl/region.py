@@ -13,7 +13,7 @@
 4. Training targets (seeds.train) and random test targets (seeds.random_targets): uniform in R, outside the
    exclusion box around T1-T6, rng = default_rng([seed, 11]).
 
-    python -m target_rl.region --workers 14            # writes runs/region.json
+    python -m target_rl.region --workers 14            # writes runs/<library>/region.json
 """
 import argparse
 import itertools
@@ -29,7 +29,6 @@ from . import config, flight as F
 from .scenario import Scenario, Target, scenario
 from .util import save_json
 
-REGION = config.ROOT/'runs'/'region.json'
 NOMINAL = Scenario('L0', 0, 0., 0., 1., 1.)        # no offset, no disturbance
 
 
@@ -138,7 +137,7 @@ _LOADED = {}
 
 
 def load_region(path=None):
-    p = Path(path or REGION)
+    p = Path(path or config.runs_dir()/'region.json')
     if str(p) not in _LOADED:
         if not p.exists():
             raise FileNotFoundError(f'{p} missing: run python -m target_rl.region first')
@@ -190,14 +189,15 @@ def test_cases(region=None, cfg=None, level=None):
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument('--workers', type=int, default=os.cpu_count() or 1)
-    p.add_argument('--out', default=str(REGION))
+    p.add_argument('--out', default=None, help='default runs/<library>/region.json')
     a = p.parse_args(argv)
     jobs = [(g, False) for g in grid(False)]+[(g, True) for g in grid(True)]
     with mp.get_context('spawn').Pool(a.workers) as pool:
         rows = pool.map(_job, jobs, chunksize=32)
     out = build(rows)
     out['rows'] = rows
-    save_json(a.out, out)
+    out['library'] = config.library()
+    save_json(a.out or config.runs_dir()/'region.json', out)
     print(json.dumps({k: out[k] for k in ('targets', 'notes', 'area_ratio', 'feasible', 'fixed_range')}, indent=1))
 
 
