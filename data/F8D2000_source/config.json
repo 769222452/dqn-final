@@ -1,0 +1,64 @@
+{
+  "reference": "G42",
+  "parents": [
+    "G42",
+    "F2K_01233",
+    "F2K_00021"
+  ],
+  "excluded_from_comparison": "F2K_00020",
+  "candidate_count": 2132,
+  "parameter_names": [
+    "upper_front",
+    "upper_rear",
+    "upper_tail",
+    "upper_span",
+    "lower_front",
+    "lower_rear",
+    "lower_tail",
+    "lower_span"
+  ],
+  "parameter_abs_limits_m": [
+    0.03,
+    0.03,
+    0.04,
+    0.025,
+    0.025,
+    0.025,
+    0.035,
+    0.02
+  ],
+  "seed": 20261115,
+  "reference_inputs10": [
+    15.0,
+    5.633749605922896,
+    7.796675937828777,
+    3.698465133623518,
+    3.0116105313696075,
+    1.0331,
+    1.0331,
+    0.11606537709080691,
+    -4.0,
+    0.9944782795122264
+  ],
+  "leading_edge_max_distance_tolerance_m": 1e-10,
+  "volume_constraint": null,
+  "geometry_method": "Boundary-preserving polynomial z deformation of existing meshes",
+  "basis": "t=streamwise index/(n-1); e=y_LE/max(y_LE); c=(5-x_LE)/5; B=c*[t^2*(1-t)^3/0.03456,t^3*(1-t)^2/0.03456,t^2*(3-2*t),16*t^2*(1-t)^2*(2*e^2-1)]",
+  "coordinate_semantics": "Native program z points down; positive coefficient moves surface downward.",
+  "remaining_pilot_restrictions": "x/y coordinates, planform, length=5 and mirror symmetry preserved for this pilot; these are not new user constraints.",
+  "sampling": "Retain all 178 valid pilot shapes; fill each parent quota from deterministic 8D Latin hypercubes, equal parameter bounds, ordered rejection sampling; no performance-based acceptance.",
+  "validity_scope": "Fixed-XY graph and every projected triangle overlap vertex checked for both triangulations; all pilot cases cross-checked and new cases sampled with original 3D audit. No volume filter; no mechanism or design-shock validation.",
+  "target_valid_unique": 2000,
+  "parent_target_counts": [
+    667,
+    667,
+    666
+  ],
+  "geometry_audit": "Fixed-XY piecewise-linear graph and full projected triangle overlay gap certificate, both diagonal splits; compare all 192 pilot cases and an independent new-case sample to the original 3D audit.",
+  "numeric_acceleration": "Same gas/pressure equations and branch definitions, safeguarded Newton roots with bisection fallback; validate against stored original P2 and direct reference calculations.",
+  "retained_pilot_count": 178,
+  "sampling_batch_size": 1024,
+  "source_library_identifier": "fixed_leading_edge_G42_2000_20261114_v1",
+  "pilot_library_identifier": "fixed_leading_edge_G42_shape_pilot_20261114_v1",
+  "parent_geometry_directory": "references"
+}
