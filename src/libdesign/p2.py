@@ -34,12 +34,24 @@ def oblique(M, th):
         maxth = theta_of_beta(M, hi)
         ok = (M > 1) & (th >= 0) & (th <= maxth)
         a, b = lo.copy(), hi.copy()
-        for _ in range(64):
+        for _ in range(22):                      # bracket the weak root
             mid = .5*(a+b)
             f = theta_of_beta(M, mid)-th
             a = np.where(f <= 0, mid, a)
             b = np.where(f > 0, mid, b)
-        beta = np.where(ok, .5*(a+b), np.nan)
+        x = .5*(a+b)
+        for _ in range(6):                       # safeguarded Newton (derivative of v7_flow_fast.m)
+            A = M**2
+            sn, ct = np.sin(x), 1/np.tan(x)
+            N = 2*ct*(A*sn**2-1)
+            D = A*(G+np.cos(2*x))+2
+            f = np.arctan(N/D)-th
+            dn = 2*(-(A*sn**2-1)/sn**2+ct*A*np.sin(2*x))
+            dd = -2*A*np.sin(2*x)
+            df = (dn*D-N*dd)/(D**2+N**2)
+            nx = x-f/df
+            x = np.where(np.isfinite(nx) & (nx > a) & (nx < b), nx, x)
+        beta = np.where(ok, x, np.nan)
         mn1 = M*np.sin(beta)
         mn2 = np.sqrt((1+(G-1)/2*mn1**2)/(G*mn1**2-(G-1)/2))
         pr = 1+2*G/(G+1)*(mn1**2-1)

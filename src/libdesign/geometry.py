@@ -81,6 +81,49 @@ def volume(lo, up):
     return 2*float((a*T.mean(1)).sum())
 
 
+class Fixed:
+    """Precomputed (x, y) structure of a parent: deformations change z only, so the interpolation weights of the
+    upper surface at the lower-surface points and the planform triangles are computed once."""
+
+    def __init__(self, par):
+        from scipy.spatial import Delaunay
+        lo, up = par
+        pts = up[..., :2].reshape(-1, 2)
+        self.keep_up = np.unique(np.round(pts, 12), axis=0, return_index=True)[1]
+        tri = Delaunay(pts[self.keep_up])
+        q = lo[..., :2].reshape(-1, 2)
+        s = tri.find_simplex(q)
+        self.inside = s >= 0
+        T = tri.transform[s[self.inside]]
+        b = np.einsum('nij,nj->ni', T[:, :2], q[self.inside]-T[:, 2])
+        self.bary = np.c_[b, 1-b.sum(1)]
+        self.vert = self.keep_up[tri.simplices[s[self.inside]]]
+        ptl = lo[..., :2].reshape(-1, 2)
+        self.keep_lo = np.unique(np.round(ptl, 12), axis=0, return_index=True)[1]
+        tl = Delaunay(ptl[self.keep_lo])
+        P = ptl[self.keep_lo][tl.simplices]
+        self.tri_area = .5*np.abs((P[:, 1, 0]-P[:, 0, 0])*(P[:, 2, 1]-P[:, 0, 1])-(P[:, 2, 0]-P[:, 0, 0])*(P[:, 1, 1]-P[:, 0, 1]))
+        self.tri_idx = self.keep_lo[tl.simplices]
+        self.shape = lo.shape[:2]
+        mask = np.zeros(self.shape, bool)
+        mask[1:-1, 1:] = True
+        self.inner = mask.reshape(-1)[self.inside]
+
+    def thickness(self, lo, up):
+        zu = up[..., 2].reshape(-1)
+        th = np.full(self.shape[0]*self.shape[1], np.nan)
+        th[self.inside] = lo[..., 2].reshape(-1)[self.inside]-(self.bary*zu[self.vert]).sum(1)
+        return th
+
+    def check(self, lo, up, min_gap=0.):
+        th = self.thickness(lo, up)[self.inside]
+        return bool(np.all(np.isfinite(th)) and np.min(th[self.inner]) >= min_gap)
+
+    def volume(self, lo, up):
+        th = np.nan_to_num(np.clip(self.thickness(lo, up), 0, None))
+        return 2*float((self.tri_area*th[self.tri_idx].mean(1)).sum())
+
+
 def check(lo, up, min_gap=0.):
     """Simple validity screen: finite, no streamwise fold-back, upper above lower away from the leading edge."""
     if not (np.all(np.isfinite(lo)) and np.all(np.isfinite(up))):
