@@ -45,6 +45,11 @@ aero:
       path: data/F8D2000/p2_grid.npz
       sha256: 2ef9bd687be9483465f9c77976cbda8938b0ac5fbb1b74801af8a49df183de10
       fixed_geometry: F8D_01351  # best fixed geometry of the library (G42 itself is not in it)
+    F8D2000B:                  # F8D2000 + brake ladder (docs/LIBRARY_DESIGN.md): fixed G42 leading edge, 2091 shapes
+      path: [data/F8D2000/p2_grid.npz, data/BrakeLadder/p2_grid.npz]
+      sha256: [2ef9bd687be9483465f9c77976cbda8938b0ac5fbb1b74801af8a49df183de10,
+               3bbc36328f45128c1b18beec9411edce1bd6c4709fc47c51f6abaa744488f767]
+      fixed_geometry: F8D_01351
   cl_table: [-0.01, 0.13, 0.0025]   # CL grid of the equal-lift drag tables (start, stop, step)
   alpha_step_deg: 0.02
 

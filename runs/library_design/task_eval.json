@@ -1,0 +1,164 @@
+{
+ "design_f8d2000_ladder": {
+  "targets": [
+   {
+    "name": "T1",
+    "range_km": 2226.41924623868,
+    "speed_mps": 1402.3459100644286,
+    "kind": "fixed_reachable"
+   },
+   {
+    "name": "T2",
+    "range_km": 2335.0202228018534,
+    "speed_mps": 1528.6269691529258,
+    "kind": "fixed_reachable"
+   },
+   {
+    "name": "T3",
+    "range_km": 2443.6211993650263,
+    "speed_mps": 1645.4096980656827,
+    "kind": "fixed_reachable"
+   },
+   {
+    "name": "T4",
+    "range_km": 2226.41924623868,
+    "speed_mps": 1168.447157334368,
+    "kind": "morph_only",
+    "band_mps": 255.56492756614284
+   },
+   {
+    "name": "T5",
+    "range_km": 2335.0202228018534,
+    "speed_mps": 1229.4810569350643,
+    "kind": "morph_only",
+    "band_mps": 345.5157794405932
+   },
+   {
+    "name": "T6",
+    "range_km": 2443.6211993650263,
+    "speed_mps": 1417.79515868388,
+    "kind": "morph_only",
+    "band_mps": 230.15187935428708
+   }
+  ],
+  "notes": [],
+  "area_ratio": 3.1937426431080382,
+  "feasible": {
+   "morph": 1833,
+   "fixed": 105
+  },
+  "fixed_range": [
+   2117.818269675507,
+   2552.2221759281992
+  ],
+  "fixed_geometry": "0:F8D_01351"
+ },
+ "design_f8d_x3": {
+  "targets": [
+   {
+    "name": "T1",
+    "range_km": 2228.401656665151,
+    "speed_mps": 1403.5877275720582,
+    "kind": "fixed_reachable"
+   },
+   {
+    "name": "T2",
+    "range_km": 2335.2698901212493,
+    "speed_mps": 1527.4270852841837,
+    "kind": "fixed_reachable"
+   },
+   {
+    "name": "T3",
+    "range_km": 2442.1381235773474,
+    "speed_mps": 1642.4027590269393,
+    "kind": "fixed_reachable"
+   },
+   {
+    "name": "T4",
+    "range_km": 2228.401656665151,
+    "speed_mps": 1174.08657543606,
+    "kind": "morph_only",
+    "band_mps": 251.65100318777831
+   },
+   {
+    "name": "T5",
+    "range_km": 2335.2698901212493,
+    "speed_mps": 1262.2668746847676,
+    "kind": "morph_only",
+    "band_mps": 283.5416219752117
+   },
+   {
+    "name": "T6",
+    "range_km": 2442.1381235773474,
+    "speed_mps": 1417.646511432107,
+    "kind": "morph_only",
+    "band_mps": 230.0583200334736
+   }
+  ],
+  "notes": [],
+  "area_ratio": 2.9231096950007798,
+  "feasible": {
+   "morph": 3108,
+   "fixed": 105
+  },
+  "fixed_range": [
+   2121.533423209053,
+   2549.0063570334455
+  ],
+  "fixed_geometry": "f8d_x3_00466"
+ },
+ "design_ladder": {
+  "targets": [
+   {
+    "name": "T1",
+    "range_km": 2224.8803985649056,
+    "speed_mps": 1398.838979944599,
+    "kind": "fixed_reachable"
+   },
+   {
+    "name": "T2",
+    "range_km": 2331.8884989098215,
+    "speed_mps": 1522.3793981337772,
+    "kind": "fixed_reachable"
+   },
+   {
+    "name": "T3",
+    "range_km": 2438.896599254738,
+    "speed_mps": 1637.4003812483825,
+    "kind": "fixed_reachable"
+   },
+   {
+    "name": "T4",
+    "range_km": 2224.8803985649056,
+    "speed_mps": 1165.9096240282402,
+    "kind": "morph_only",
+    "band_mps": 258.4698985519947
+   },
+   {
+    "name": "T5",
+    "range_km": 2331.8884989098215,
+    "speed_mps": 1225.7011146024313,
+    "kind": "morph_only",
+    "band_mps": 346.93147090002367
+   },
+   {
+    "name": "T6",
+    "range_km": 2438.896599254738,
+    "speed_mps": 1412.5947005119767,
+    "kind": "morph_only",
+    "band_mps": 230.26512165934992
+   }
+  ],
+  "notes": [],
+  "area_ratio": 3.266026557596126,
+  "feasible": {
+   "morph": 1816,
+   "fixed": 105
+  },
+  "fixed_range": [
+   2117.8722982199897,
+   2545.9046995996537
+  ],
+  "fixed_geometry": "ladder_00090"
+ }
+}

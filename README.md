@@ -1,5 +1,9 @@
 # 定时定点到达任务：变构乘波体的反事实优势强化学习
 
+> **library-design 分支：** 在 `target-rl` 的基础上增加了构型库设计研究（`src/libdesign/`，报告见
+> [`docs/LIBRARY_DESIGN.md`](docs/LIBRARY_DESIGN.md)）和推荐的前缘固定构型库 **F8D2000B**（F8D2000 + 减速板阶梯，
+> `LIBRARY=F8D2000B bash scripts/run_all.sh`）。`target-rl` 分支的预注册和默认设置没有改动。
+
 本分支是一个独立的最小工程，只含这项研究需要的代码和数据。研究设计、判据和修订记录见
 [`PREREGISTRATION.md`](PREREGISTRATION.md)。
 

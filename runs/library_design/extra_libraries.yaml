@@ -1,0 +1,12 @@
+design_f8d2000_ladder:
+  fixed_geometry: 0:F8D_01351
+  path: runs/library_design/libraries/f8d2000_ladder.npz
+  sha256: 17a2bb4f64771e6c7b2376503da8ce7b494ff6b7cabcc825ee2635aace8c6882
+design_f8d_x3:
+  fixed_geometry: f8d_x3_00466
+  path: runs/library_design/libraries/f8d_x3.npz
+  sha256: 09a859f324faae49fa65f39564e4ad4d42e4a0fe75f1c8d3d99a49dd59a63565
+design_ladder:
+  fixed_geometry: ladder_00090
+  path: runs/library_design/libraries/ladder.npz
+  sha256: 3bbc36328f45128c1b18beec9411edce1bd6c4709fc47c51f6abaa744488f767
