@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "equal_lift_points": 892,
+  "geometry_count": 22,
+  "max_abs_CL_residual": 9.77473935126483e-11,
+  "max_interpolated_CD_relative_error_percent": 1.709906187853627,
+  "median_interpolated_CD_relative_error_percent": 0.006757269583773651,
+  "original_selection_direct_reduction_vs_its_fixed_percent": 0.3087636179924913,
+  "new_selection_direct_reduction_vs_its_fixed_percent": 0.41067611072745924,
+  "new_selection_direct_reduction_vs_G42_percent": 8.995616675393991,
+  "new_selection_direct_reduction_vs_old_selection_percent": 4.161212969943751,
+  "cells_where_checked_contender_beats_interpolated_winner": 2,
+  "max_checked_winner_CD_improvement_percent": 0.013523260203918142,
+  "scope": "Direct equal-lift solve for every selected geometry at its selected conditions, top-three interpolated contenders per cell, top-three fixed candidates over all 120 conditions, G42, old best fixed and old selected conditions. Not an exhaustive direct search over all geometries."
+}

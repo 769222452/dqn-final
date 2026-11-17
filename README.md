@@ -2,6 +2,8 @@
 
 [中文说明](README_zh.md)
 
+Additional dataset: [F8D2000 — 2000 upper/lower surface morphing geometries and complete P2 aerodynamic tables](datasets/F8D2000/README.md). This independent dataset preserves the G42 three-dimensional leading edge; it does not replace the default flight database.
+
 This repository contains the code and input data for learning the lift-coefficient schedule of a morphing
 hypersonic waverider over a fixed 1200 s glide, where every executed control step is verified by a safety
 certification chain. The policy is improved by rollout-based approximate policy iteration: exact action

@@ -1,0 +1,22 @@
+{
+  "classification": "VALID",
+  "native_min_nonleading_gap_m": 0.00015581693647095314,
+  "opposite_min_nonleading_gap_m": 0.00015581693647117516,
+  "leading_boundary_gap_max_m": 2.16846926842517e-14,
+  "minimum_adjacent_normal_dot": 0.9944354599100209,
+  "whole_projected_domain_checked": true,
+  "xy_unchanged": true,
+  "leading_edge_unchanged": true,
+  "volume_used_as_filter": false,
+  "geometry_hash": "f238c720a7f9141b64ec72d2961677c405260023193358991c08bd6b5660daf4",
+  "geometry_id": "F8D_00751",
+  "parent_geometry_id": "G42",
+  "audit_method": "whole_XY_triangle_overlay_certificate_both_diagonals",
+  "leading_edge_error_m": 5.661048867003676e-16,
+  "volume_ratio_G42": 0.887682651992768,
+  "upper_max_change_m": 0.039538689765196366,
+  "lower_max_change_m": 0.025564486167989675,
+  "volume_m3": 0.9043831883488394,
+  "volume_translation_error_m3": 3.397282455352979e-14,
+  "grid_max_thickness_m": 0.25818668472737283
+}

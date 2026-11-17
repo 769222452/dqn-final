@@ -1,0 +1,29 @@
+{
+  "valid_unique": 2000,
+  "retained_pilot": 178,
+  "newly_accepted": 1822,
+  "attempted_in_this_build": 2132,
+  "rejected_in_this_build": 132,
+  "parent_counts": {
+    "G42": 667,
+    "F2K_01233": 667,
+    "F2K_00021": 666
+  },
+  "leading_edge_max_error_m": 5.661048867003676e-16,
+  "volume_range_m3": [
+    0.46868343230635645,
+    1.4164708076260446
+  ],
+  "volume_ratio_range": [
+    0.4600286222639328,
+    1.3903139500850925
+  ],
+  "volume_used_as_filter": false,
+  "geometry_coordinate_hashes_unique": true,
+  "minimum_parameter_vector_distance_m": {
+    "G42": 0.011643838978802851,
+    "F2K_01233": 0.008801073747492349,
+    "F2K_00021": 0.010672107189559741
+  },
+  "original_3D_audit_new_sample": "PASS (47 cases)"
+}

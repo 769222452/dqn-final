@@ -1,0 +1,21 @@
+{
+  "geometry_count": 2000,
+  "all_conditions_feasible_count": 2000,
+  "best_fixed_geometry": "F8D_01351",
+  "winner_counts": {
+    "F8D_01038": 1,
+    "F8D_01094": 34,
+    "F8D_01351": 77,
+    "F8D_02009": 1,
+    "F8D_02091": 6,
+    "F8D_02097": 1
+  },
+  "winner_count": 6,
+  "mean_CD_selected": 0.003511290961308272,
+  "mean_CD_best_fixed": 0.003525778781675314,
+  "mean_CD_G42": 0.003857019454524331,
+  "reduction_vs_best_fixed_percent": 0.4109112132145154,
+  "reduction_vs_G42_percent": 8.963618081068148,
+  "max_cell_reduction_vs_fixed_percent": 1.4407897064570796,
+  "reference_G42_is_not_counted_in_2000": true
+}
