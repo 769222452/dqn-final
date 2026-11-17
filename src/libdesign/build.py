@@ -116,11 +116,29 @@ def build(design, n=600, seed=20261117, workers=4, out=None):
 def main(argv=None):
     p = argparse.ArgumentParser()
     p.add_argument('--design', required=True)
+    p.add_argument('--merge', default=None, help='comma list of npz paths to concatenate into --design')
     p.add_argument('--n', type=int, default=600)
     p.add_argument('--workers', type=int, default=os.cpu_count())
     a = p.parse_args(argv)
+    if a.merge:
+        print(merge(a.design, a.merge.split(',')))
+        return
     path, info = build(a.design, a.n, workers=a.workers)
     print(path, info)
+
+
+
+def merge(name, parts):
+    """Concatenate library npz files (same grids) into runs/library_design/libraries/<name>.npz."""
+    tabs = [np.load(p, allow_pickle=False) for p in parts]
+    for t in tabs[1:]:
+        assert np.array_equal(t['mach_grid'], tabs[0]['mach_grid']) and np.array_equal(t['alpha_deg_grid'], tabs[0]['alpha_deg_grid'])
+    ids = np.concatenate([np.array([f'{i}:{g}' for g in t['geometry_ids']]) for i, t in enumerate(tabs)])
+    out = OUT/'libraries'/f'{name}.npz'
+    keys = ('CL', 'CD_pressure', 'Cm_pressure', 'model_valid', 'usable_p2')
+    np.savez(out, geometry_ids=ids, mach_grid=tabs[0]['mach_grid'], alpha_deg_grid=tabs[0]['alpha_deg_grid'],
+             **{k: np.concatenate([t[k] for t in tabs]) for k in keys})
+    return out
 
 
 if __name__ == '__main__':

@@ -78,11 +78,14 @@ def run(args):
     def f(x):
         cd, _ = evaluate(par, x, names, machs, cls, F)
         if cd is None or not np.all(np.isfinite(cd)):
-            return 1.
+            return 1e3                      # invalid shape or condition not reached: far above any CD x 1e3
         return float(np.mean(cd))*1e3
     x0 = np.zeros(len(L))
-    res = minimize(f, x0, method='Powell', bounds=list(zip(-L, L)), options=dict(maxfev=MAXFEV, xtol=1e-4, ftol=1e-7))
+    res = minimize(f, x0, method='Powell', bounds=list(zip(-L, L)),
+                   options=dict(maxfev=MAXFEV, xtol=1e-4, ftol=1e-7, direc=np.diag(.1*L)))   # small first steps
     x = res.x
+    if res.fun >= 1e3:                     # nothing valid found: keep the parent
+        x = np.zeros(len(L))
     cd_all, vol = evaluate(par, x, names, MACHS, CLS, F)
     return dict(parent=parent, set=setname, k=k, target=target, x=x.tolist(), limits=L.tolist(),
                 objective=float(res.fun)/1e3, nfev=int(res.nfev),
@@ -100,8 +103,11 @@ def summarise(rows):
         if not comp or len(spec) < len(CONDS):
             continue
         cc = np.array(comp[0]['cd_all'], float).ravel()
-        cs = np.array([spec[i]['objective'] for i in range(len(CONDS))])
-        cs = np.minimum(cs, cc)                         # a specialist is never worse than the compromise
+        cs = np.array([np.array(spec[i]['cd_all'], float).ravel()[i] if spec[i]['cd_all'] is not None else np.nan
+                       for i in range(len(CONDS))])
+        cs = np.fmin(cs, cc)                            # a specialist is never worse than the compromise
+        if not np.all(np.isfinite(cc)):
+            continue
         out['%s|%s|%g' % key] = dict(gain_bound=float(1-cs.mean()/cc.mean()),
                                      per_condition=(1-cs/cc).round(4).tolist(), compromise_x=comp[0]['x'],
                                      compromise_volume=comp[0]['volume'])
