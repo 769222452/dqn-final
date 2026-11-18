@@ -1,0 +1,13 @@
+[full s17] pi0: mean G -0.7719, hits 4/96, violations 0
+[full s17] iter 0: 225 labels, 67 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (31 s)
+[full s17] iter 1: 200 labels, 107 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (25 s)
+[full s17] iter 2: 200 labels, 52 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (24 s)
+[full s17] iter 3: 225 labels, 75 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (26 s)
+[full s17] iter 4: 200 labels, 44 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (28 s)
+[full s17] iter 5: 212 labels, 56 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (27 s)
+[full s17] iter 6: 200 labels, 51 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (25 s)
+[full s17] iter 7: 175 labels, 50 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (26 s)
+[full s17] iter 8: 250 labels, 70 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (31 s)
+[full s17] iter 9: 200 labels, 80 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (31 s)
+[full s17] iter 10: 225 labels, 68 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (29 s)
+[full s17] iter 11: 200 labels, 50 positive, 0 violating branches; kept; mean G -0.7719, hits 4/96, violations 0 (27 s)
