@@ -1,0 +1,13 @@
+[dist s83] pi0: mean G -1.8164, hits 0/48, violations 1
+[dist s83] iter 0: 200 labels, 73 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 1: 200 labels, 50 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 2: 200 labels, 79 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 3: 200 labels, 54 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 4: 200 labels, 73 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 5: 200 labels, 81 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[dist s83] iter 6: 200 labels, 21 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[dist s83] iter 7: 200 labels, 101 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 8: 200 labels, 44 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[dist s83] iter 9: 200 labels, 75 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 10: 200 labels, 50 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 11: 192 labels, 0 positive, 69 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (25 s)

@@ -1,0 +1,199 @@
+{
+ "action": 13,
+ "decoded": [
+  13,
+  0
+ ],
+ "table": [
+  {
+   "action": 0,
+   "decoded": [
+    0,
+    0
+   ],
+   "mean_G": -3.7528532434427806,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 1,
+   "decoded": [
+    1,
+    0
+   ],
+   "mean_G": -3.753383330007056,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 2,
+   "decoded": [
+    2,
+    0
+   ],
+   "mean_G": -3.753907035028314,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 3,
+   "decoded": [
+    3,
+    0
+   ],
+   "mean_G": -3.754123795151852,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 4,
+   "decoded": [
+    4,
+    0
+   ],
+   "mean_G": -3.754317755718018,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 5,
+   "decoded": [
+    5,
+    0
+   ],
+   "mean_G": -3.752979709716852,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 6,
+   "decoded": [
+    6,
+    0
+   ],
+   "mean_G": -2.795983368065477,
+   "hits": 0,
+   "violations": 9
+  },
+  {
+   "action": 7,
+   "decoded": [
+    7,
+    0
+   ],
+   "mean_G": -2.56104267755886,
+   "hits": 1,
+   "violations": 4
+  },
+  {
+   "action": 8,
+   "decoded": [
+    8,
+    0
+   ],
+   "mean_G": -2.4832706759995093,
+   "hits": 0,
+   "violations": 4
+  },
+  {
+   "action": 9,
+   "decoded": [
+    9,
+    0
+   ],
+   "mean_G": -2.3739603590509013,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 10,
+   "decoded": [
+    10,
+    0
+   ],
+   "mean_G": -2.236354554324814,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 11,
+   "decoded": [
+    11,
+    0
+   ],
+   "mean_G": -2.0673650770677354,
+   "hits": 0,
+   "violations": 2
+  },
+  {
+   "action": 12,
+   "decoded": [
+    12,
+    0
+   ],
+   "mean_G": -1.8424269203353345,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 13,
+   "decoded": [
+    13,
+    0
+   ],
+   "mean_G": -1.6699851635241114,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 14,
+   "decoded": [
+    14,
+    0
+   ],
+   "mean_G": -1.922929110370271,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 15,
+   "decoded": [
+    15,
+    0
+   ],
+   "mean_G": -2.344205376105993,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 16,
+   "decoded": [
+    16,
+    0
+   ],
+   "mean_G": -2.8950310823917964,
+   "hits": 0,
+   "violations": 12
+  },
+  {
+   "action": 17,
+   "decoded": [
+    17,
+    0
+   ],
+   "mean_G": -3.397263058324118,
+   "hits": 0,
+   "violations": 26
+  },
+  {
+   "action": 18,
+   "decoded": [
+    18,
+    0
+   ],
+   "mean_G": -3.852524785331911,
+   "hits": 0,
+   "violations": 42
+  }
+ ]
+}

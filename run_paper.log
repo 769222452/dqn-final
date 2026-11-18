@@ -1,0 +1,1708 @@
+=== 2026-11-17T11:53:10Z library F8D2000B, plan main, workers 5
+=== 2026-11-17T11:53:10Z stage test
+....................                                                     [100%]
+20 passed in 48.70s
+=== 2026-11-17T11:53:59Z stage region
+runs/F8D2000B/region.json exists (preregistered targets)
+=== 2026-11-17T11:53:59Z stage pi0
+pi0 (morphing): action 60 = (CL level, w level) (15, 0)
+pi0 (fixed): action 15 = (CL level, w level) (15, 0)
+=== 2026-11-17T11:56:59Z stage train
+--- 2026-11-17T11:56:59Z train full seed 17
+[full s17] pi0: mean G -1.8164, hits 0/48, violations 1
+[full s17] iter 0: 200 labels, 46 positive, 0 violating branches; accepted margin 1.25; mean G -1.7828, hits 0/48, violations 0 (22 s)
+[full s17] iter 1: 200 labels, 71 positive, 0 violating branches; kept; mean G -1.7828, hits 0/48, violations 0 (23 s)
+[full s17] iter 2: 200 labels, 68 positive, 0 violating branches; kept; mean G -1.7828, hits 0/48, violations 0 (23 s)
+[full s17] iter 3: 200 labels, 74 positive, 0 violating branches; kept; mean G -1.7828, hits 0/48, violations 0 (23 s)
+[full s17] iter 4: 200 labels, 0 positive, 0 violating branches; accepted margin 0.25; mean G -1.1585, hits 0/48, violations 0 (24 s)
+[full s17] iter 5: 211 labels, 49 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (26 s)
+[full s17] iter 6: 207 labels, 65 positive, 1 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (26 s)
+[full s17] iter 7: 215 labels, 89 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (26 s)
+[full s17] iter 8: 202 labels, 67 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (26 s)
+[full s17] iter 9: 205 labels, 45 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (26 s)
+[full s17] iter 10: 205 labels, 69 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (27 s)
+[full s17] iter 11: 206 labels, 62 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (27 s)
+[full s17] iter 12: 213 labels, 68 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (27 s)
+[full s17] iter 13: 207 labels, 63 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (27 s)
+[full s17] iter 14: 206 labels, 51 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (27 s)
+[full s17] iter 15: 207 labels, 50 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (28 s)
+[full s17] iter 16: 204 labels, 50 positive, 0 violating branches; kept; mean G -1.1585, hits 0/48, violations 0 (28 s)
+--- 2026-11-17T12:04:21Z train full seed 23
+[full s23] pi0: mean G -1.8164, hits 0/48, violations 1
+[full s23] iter 0: 200 labels, 50 positive, 0 violating branches; accepted margin 1.5; mean G -1.7418, hits 0/48, violations 1 (22 s)
+[full s23] iter 1: 200 labels, 19 positive, 0 violating branches; accepted margin 1.5; mean G -1.7385, hits 0/48, violations 1 (23 s)
+[full s23] iter 2: 200 labels, 22 positive, 0 violating branches; accepted margin 1; mean G -1.6900, hits 0/48, violations 1 (24 s)
+[full s23] iter 3: 198 labels, 23 positive, 0 violating branches; accepted margin 0.25; mean G -1.5733, hits 0/48, violations 1 (25 s)
+[full s23] iter 4: 200 labels, 21 positive, 0 violating branches; accepted margin 1; mean G -1.3385, hits 1/48, violations 0 (27 s)
+[full s23] iter 5: 203 labels, 59 positive, 0 violating branches; kept; mean G -1.3385, hits 1/48, violations 0 (28 s)
+[full s23] iter 6: 205 labels, 51 positive, 0 violating branches; accepted margin 1.5; mean G -1.3303, hits 1/48, violations 0 (28 s)
+[full s23] iter 7: 200 labels, 41 positive, 0 violating branches; accepted margin 0.75; mean G -1.3057, hits 2/48, violations 0 (29 s)
+[full s23] iter 8: 207 labels, 25 positive, 0 violating branches; kept; mean G -1.3057, hits 2/48, violations 0 (30 s)
+[full s23] iter 9: 203 labels, 86 positive, 0 violating branches; kept; mean G -1.3057, hits 2/48, violations 0 (30 s)
+[full s23] iter 10: 197 labels, 40 positive, 0 violating branches; kept; mean G -1.3057, hits 2/48, violations 0 (30 s)
+[full s23] iter 11: 202 labels, 70 positive, 0 violating branches; accepted margin 1.25; mean G -1.2922, hits 1/48, violations 0 (31 s)
+[full s23] iter 12: 204 labels, 65 positive, 0 violating branches; accepted margin 1.25; mean G -1.2841, hits 1/48, violations 0 (32 s)
+[full s23] iter 13: 200 labels, 39 positive, 0 violating branches; accepted margin 1.25; mean G -1.2633, hits 2/48, violations 0 (33 s)
+[full s23] iter 14: 200 labels, 47 positive, 0 violating branches; accepted margin 1.5; mean G -1.2575, hits 2/48, violations 0 (35 s)
+[full s23] iter 15: 207 labels, 39 positive, 0 violating branches; accepted margin 1.5; mean G -1.2556, hits 2/48, violations 0 (35 s)
+[full s23] iter 16: 199 labels, 41 positive, 1 violating branches; kept; mean G -1.2556, hits 2/48, violations 0 (35 s)
+[full s23] iter 17: 200 labels, 41 positive, 0 violating branches; kept; mean G -1.2556, hits 2/48, violations 0 (36 s)
+[full s23] iter 18: 209 labels, 31 positive, 0 violating branches; kept; mean G -1.2556, hits 2/48, violations 0 (36 s)
+[full s23] iter 19: 196 labels, 44 positive, 0 violating branches; accepted margin 0.75; mean G -1.2390, hits 3/48, violations 0 (36 s)
+[full s23] iter 20: 197 labels, 44 positive, 0 violating branches; kept; mean G -1.2390, hits 3/48, violations 0 (37 s)
+[full s23] iter 21: 199 labels, 60 positive, 0 violating branches; accepted margin 0.75; mean G -1.2178, hits 2/48, violations 0 (37 s)
+[full s23] iter 22: 203 labels, 78 positive, 0 violating branches; accepted margin 1.5; mean G -1.2149, hits 2/48, violations 0 (38 s)
+[full s23] iter 23: 207 labels, 93 positive, 0 violating branches; accepted margin 1.5; mean G -1.2148, hits 2/48, violations 0 (39 s)
+[full s23] iter 24: 217 labels, 70 positive, 0 violating branches; accepted margin 1.25; mean G -1.2038, hits 2/48, violations 0 (40 s)
+[full s23] iter 25: 208 labels, 30 positive, 0 violating branches; accepted margin 1.25; mean G -1.2029, hits 2/48, violations 0 (41 s)
+[full s23] iter 26: 200 labels, 26 positive, 0 violating branches; kept; mean G -1.2029, hits 2/48, violations 0 (42 s)
+[full s23] iter 27: 200 labels, 24 positive, 0 violating branches; kept; mean G -1.2029, hits 2/48, violations 0 (42 s)
+[full s23] iter 28: 200 labels, 34 positive, 0 violating branches; accepted margin 0.25; mean G -1.2015, hits 2/48, violations 0 (42 s)
+[full s23] iter 29: 203 labels, 86 positive, 0 violating branches; kept; mean G -1.2015, hits 2/48, violations 0 (43 s)
+--- 2026-11-17T12:21:23Z train full seed 41
+[full s41] pi0: mean G -1.8164, hits 0/48, violations 1
+[full s41] iter 0: 200 labels, 45 positive, 0 violating branches; accepted margin 1; mean G -1.7074, hits 0/48, violations 0 (22 s)
+[full s41] iter 1: 200 labels, 39 positive, 0 violating branches; kept; mean G -1.7074, hits 0/48, violations 0 (23 s)
+[full s41] iter 2: 200 labels, 68 positive, 0 violating branches; accepted margin 1.25; mean G -1.5170, hits 2/48, violations 0 (23 s)
+[full s41] iter 3: 200 labels, 88 positive, 0 violating branches; accepted margin 1.5; mean G -1.1597, hits 3/48, violations 0 (25 s)
+[full s41] iter 4: 207 labels, 34 positive, 0 violating branches; accepted margin 0.25; mean G -1.1497, hits 1/48, violations 0 (26 s)
+[full s41] iter 5: 225 labels, 84 positive, 0 violating branches; kept; mean G -1.1497, hits 1/48, violations 0 (28 s)
+[full s41] iter 6: 220 labels, 67 positive, 0 violating branches; kept; mean G -1.1497, hits 1/48, violations 0 (29 s)
+[full s41] iter 7: 201 labels, 23 positive, 0 violating branches; kept; mean G -1.1497, hits 1/48, violations 0 (27 s)
+[full s41] iter 8: 214 labels, 95 positive, 0 violating branches; kept; mean G -1.1497, hits 1/48, violations 0 (29 s)
+[full s41] iter 9: 200 labels, 36 positive, 0 violating branches; accepted margin 0.25; mean G -1.1359, hits 3/48, violations 0 (28 s)
+[full s41] iter 10: 209 labels, 56 positive, 0 violating branches; kept; mean G -1.1359, hits 3/48, violations 0 (30 s)
+[full s41] iter 11: 201 labels, 18 positive, 0 violating branches; kept; mean G -1.1359, hits 3/48, violations 0 (29 s)
+[full s41] iter 12: 209 labels, 19 positive, 0 violating branches; accepted margin 0.5; mean G -1.0735, hits 3/48, violations 0 (30 s)
+[full s41] iter 13: 221 labels, 60 positive, 0 violating branches; accepted margin 0.25; mean G -1.0610, hits 1/48, violations 0 (32 s)
+[full s41] iter 14: 213 labels, 85 positive, 0 violating branches; accepted margin 1; mean G -1.0535, hits 1/48, violations 0 (33 s)
+[full s41] iter 15: 210 labels, 73 positive, 0 violating branches; kept; mean G -1.0535, hits 1/48, violations 0 (33 s)
+[full s41] iter 16: 212 labels, 30 positive, 0 violating branches; accepted margin 1.25; mean G -1.0437, hits 1/48, violations 0 (34 s)
+[full s41] iter 17: 220 labels, 63 positive, 0 violating branches; kept; mean G -1.0437, hits 1/48, violations 0 (35 s)
+[full s41] iter 18: 222 labels, 52 positive, 0 violating branches; kept; mean G -1.0437, hits 1/48, violations 0 (36 s)
+[full s41] iter 19: 206 labels, 50 positive, 0 violating branches; accepted margin 0.5; mean G -1.0416, hits 2/48, violations 0 (34 s)
+[full s41] iter 20: 212 labels, 63 positive, 0 violating branches; kept; mean G -1.0416, hits 2/48, violations 0 (36 s)
+[full s41] iter 21: 211 labels, 54 positive, 0 violating branches; accepted margin 0.75; mean G -1.0249, hits 2/48, violations 0 (36 s)
+[full s41] iter 22: 217 labels, 63 positive, 0 violating branches; kept; mean G -1.0249, hits 2/48, violations 0 (36 s)
+[full s41] iter 23: 222 labels, 78 positive, 0 violating branches; accepted margin 0.25; mean G -1.0053, hits 4/48, violations 0 (36 s)
+[full s41] iter 24: 213 labels, 30 positive, 0 violating branches; kept; mean G -1.0053, hits 4/48, violations 0 (38 s)
+[full s41] iter 25: 206 labels, 46 positive, 0 violating branches; kept; mean G -1.0053, hits 4/48, violations 0 (38 s)
+[full s41] iter 26: 211 labels, 50 positive, 0 violating branches; kept; mean G -1.0053, hits 4/48, violations 0 (39 s)
+[full s41] iter 27: 208 labels, 48 positive, 0 violating branches; kept; mean G -1.0053, hits 4/48, violations 0 (38 s)
+[full s41] iter 28: 214 labels, 66 positive, 0 violating branches; kept; mean G -1.0053, hits 4/48, violations 0 (39 s)
+[full s41] iter 29: 212 labels, 28 positive, 0 violating branches; kept; mean G -1.0053, hits 4/48, violations 0 (39 s)
+--- 2026-11-17T12:37:35Z train full seed 59
+[full s59] pi0: mean G -1.8164, hits 0/48, violations 1
+[full s59] iter 0: 200 labels, 76 positive, 0 violating branches; accepted margin 1.25; mean G -1.6140, hits 0/48, violations 1 (23 s)
+[full s59] iter 1: 200 labels, 47 positive, 0 violating branches; accepted margin 0.25; mean G -1.3270, hits 1/48, violations 0 (25 s)
+[full s59] iter 2: 204 labels, 73 positive, 0 violating branches; kept; mean G -1.3270, hits 1/48, violations 0 (26 s)
+[full s59] iter 3: 201 labels, 44 positive, 0 violating branches; accepted margin 0.25; mean G -1.1399, hits 3/48, violations 0 (26 s)
+[full s59] iter 4: 201 labels, 41 positive, 0 violating branches; accepted margin 1.5; mean G -1.1357, hits 3/48, violations 0 (27 s)
+[full s59] iter 5: 222 labels, 74 positive, 0 violating branches; accepted margin 0.5; mean G -1.0804, hits 5/48, violations 0 (29 s)
+[full s59] iter 6: 202 labels, 62 positive, 0 violating branches; accepted margin 1.25; mean G -1.0714, hits 5/48, violations 0 (29 s)
+[full s59] iter 7: 212 labels, 67 positive, 0 violating branches; accepted margin 1; mean G -1.0428, hits 3/48, violations 0 (31 s)
+[full s59] iter 8: 213 labels, 51 positive, 0 violating branches; accepted margin 0.25; mean G -1.0346, hits 2/48, violations 0 (32 s)
+[full s59] iter 9: 214 labels, 61 positive, 0 violating branches; accepted margin 0.25; mean G -1.0206, hits 4/48, violations 0 (32 s)
+[full s59] iter 10: 202 labels, 71 positive, 0 violating branches; accepted margin 1.5; mean G -1.0186, hits 4/48, violations 0 (32 s)
+[full s59] iter 11: 204 labels, 46 positive, 0 violating branches; accepted margin 1.25; mean G -1.0181, hits 4/48, violations 0 (34 s)
+[full s59] iter 12: 202 labels, 45 positive, 0 violating branches; accepted margin 0.25; mean G -1.0108, hits 1/48, violations 0 (35 s)
+[full s59] iter 13: 205 labels, 45 positive, 0 violating branches; accepted margin 0.75; mean G -0.9633, hits 2/48, violations 0 (36 s)
+[full s59] iter 14: 202 labels, 58 positive, 0 violating branches; kept; mean G -0.9633, hits 2/48, violations 0 (36 s)
+[full s59] iter 15: 208 labels, 53 positive, 0 violating branches; kept; mean G -0.9633, hits 2/48, violations 0 (37 s)
+[full s59] iter 16: 200 labels, 46 positive, 0 violating branches; kept; mean G -0.9633, hits 2/48, violations 0 (36 s)
+[full s59] iter 17: 206 labels, 47 positive, 0 violating branches; kept; mean G -0.9633, hits 2/48, violations 0 (37 s)
+[full s59] iter 18: 202 labels, 24 positive, 0 violating branches; accepted margin 1.5; mean G -0.9619, hits 2/48, violations 0 (36 s)
+[full s59] iter 19: 203 labels, 75 positive, 0 violating branches; kept; mean G -0.9619, hits 2/48, violations 0 (38 s)
+[full s59] iter 20: 209 labels, 48 positive, 1 violating branches; kept; mean G -0.9619, hits 2/48, violations 0 (39 s)
+[full s59] iter 21: 223 labels, 74 positive, 0 violating branches; kept; mean G -0.9619, hits 2/48, violations 0 (39 s)
+[full s59] iter 22: 214 labels, 68 positive, 0 violating branches; kept; mean G -0.9619, hits 2/48, violations 0 (39 s)
+[full s59] iter 23: 216 labels, 79 positive, 0 violating branches; kept; mean G -0.9619, hits 2/48, violations 0 (40 s)
+[full s59] iter 24: 207 labels, 63 positive, 0 violating branches; kept; mean G -0.9619, hits 2/48, violations 0 (40 s)
+[full s59] iter 25: 204 labels, 49 positive, 0 violating branches; kept; mean G -0.9619, hits 2/48, violations 0 (40 s)
+[full s59] iter 26: 216 labels, 63 positive, 0 violating branches; kept; mean G -0.9619, hits 2/48, violations 0 (41 s)
+[full s59] iter 27: 205 labels, 43 positive, 0 violating branches; kept; mean G -0.9619, hits 2/48, violations 0 (41 s)
+[full s59] iter 28: 208 labels, 41 positive, 0 violating branches; accepted margin 1; mean G -0.9540, hits 2/48, violations 0 (42 s)
+[full s59] iter 29: 217 labels, 54 positive, 0 violating branches; kept; mean G -0.9540, hits 2/48, violations 0 (43 s)
+--- 2026-11-17T12:55:11Z train full seed 83
+[full s83] pi0: mean G -1.8164, hits 0/48, violations 1
+[full s83] iter 0: 200 labels, 73 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[full s83] iter 1: 200 labels, 50 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[full s83] iter 2: 200 labels, 79 positive, 0 violating branches; accepted margin 1.5; mean G -1.7860, hits 0/48, violations 1 (24 s)
+[full s83] iter 3: 214 labels, 46 positive, 0 violating branches; kept; mean G -1.7860, hits 0/48, violations 1 (25 s)
+[full s83] iter 4: 221 labels, 71 positive, 0 violating branches; kept; mean G -1.7860, hits 0/48, violations 1 (26 s)
+[full s83] iter 5: 220 labels, 62 positive, 0 violating branches; kept; mean G -1.7860, hits 0/48, violations 1 (26 s)
+[full s83] iter 6: 202 labels, 22 positive, 0 violating branches; kept; mean G -1.7860, hits 0/48, violations 1 (26 s)
+[full s83] iter 7: 219 labels, 69 positive, 0 violating branches; accepted margin 0.25; mean G -1.5690, hits 0/48, violations 1 (26 s)
+[full s83] iter 8: 204 labels, 49 positive, 0 violating branches; kept; mean G -1.5690, hits 0/48, violations 1 (27 s)
+[full s83] iter 9: 205 labels, 49 positive, 0 violating branches; accepted margin 0.5; mean G -1.4074, hits 1/48, violations 0 (27 s)
+[full s83] iter 10: 199 labels, 34 positive, 0 violating branches; accepted margin 0.25; mean G -1.3670, hits 1/48, violations 0 (28 s)
+[full s83] iter 11: 206 labels, 22 positive, 0 violating branches; accepted margin 0.75; mean G -1.3377, hits 1/48, violations 0 (30 s)
+[full s83] iter 12: 207 labels, 24 positive, 0 violating branches; accepted margin 1; mean G -1.3305, hits 1/48, violations 0 (32 s)
+[full s83] iter 13: 202 labels, 41 positive, 0 violating branches; accepted margin 0.25; mean G -1.2708, hits 0/48, violations 0 (32 s)
+[full s83] iter 14: 204 labels, 60 positive, 0 violating branches; accepted margin 0.5; mean G -1.2054, hits 0/48, violations 0 (32 s)
+[full s83] iter 15: 210 labels, 50 positive, 0 violating branches; accepted margin 0.25; mean G -1.1949, hits 0/48, violations 0 (32 s)
+[full s83] iter 16: 210 labels, 51 positive, 0 violating branches; accepted margin 0.5; mean G -1.1898, hits 0/48, violations 0 (34 s)
+[full s83] iter 17: 202 labels, 45 positive, 0 violating branches; accepted margin 0.25; mean G -1.1439, hits 0/48, violations 0 (35 s)
+[full s83] iter 18: 203 labels, 50 positive, 0 violating branches; accepted margin 1.5; mean G -1.1403, hits 0/48, violations 0 (35 s)
+[full s83] iter 19: 204 labels, 44 positive, 0 violating branches; accepted margin 0.75; mean G -1.1084, hits 0/48, violations 0 (36 s)
+[full s83] iter 20: 205 labels, 47 positive, 0 violating branches; accepted margin 0.75; mean G -1.0976, hits 0/48, violations 0 (38 s)
+[full s83] iter 21: 203 labels, 62 positive, 0 violating branches; accepted margin 0.25; mean G -1.0945, hits 0/48, violations 0 (39 s)
+[full s83] iter 22: 206 labels, 53 positive, 0 violating branches; accepted margin 0.25; mean G -1.0856, hits 0/48, violations 0 (40 s)
+[full s83] iter 23: 203 labels, 47 positive, 0 violating branches; accepted margin 0.5; mean G -1.0845, hits 0/48, violations 0 (40 s)
+[full s83] iter 24: 211 labels, 54 positive, 0 violating branches; accepted margin 0.5; mean G -1.0518, hits 0/48, violations 0 (44 s)
+[full s83] iter 25: 217 labels, 58 positive, 0 violating branches; accepted margin 1; mean G -1.0411, hits 1/48, violations 0 (42 s)
+[full s83] iter 26: 214 labels, 65 positive, 0 violating branches; accepted margin 1; mean G -1.0132, hits 1/48, violations 0 (44 s)
+[full s83] iter 27: 205 labels, 51 positive, 0 violating branches; accepted margin 0.75; mean G -0.9776, hits 1/48, violations 0 (44 s)
+[full s83] iter 28: 208 labels, 57 positive, 0 violating branches; kept; mean G -0.9776, hits 1/48, violations 0 (46 s)
+[full s83] iter 29: 217 labels, 59 positive, 0 violating branches; accepted margin 0.25; mean G -0.9470, hits 3/48, violations 0 (46 s)
+--- 2026-11-17T13:12:11Z train dist seed 17
+[dist s17] pi0: mean G -1.8164, hits 0/48, violations 1
+[dist s17] iter 0: 200 labels, 46 positive, 0 violating branches; accepted margin 1.5; mean G -1.7769, hits 0/48, violations 1 (23 s)
+[dist s17] iter 1: 200 labels, 71 positive, 0 violating branches; kept; mean G -1.7769, hits 0/48, violations 1 (25 s)
+[dist s17] iter 2: 200 labels, 74 positive, 0 violating branches; kept; mean G -1.7769, hits 0/48, violations 1 (24 s)
+[dist s17] iter 3: 200 labels, 72 positive, 0 violating branches; accepted margin 0.5; mean G -1.6012, hits 1/48, violations 0 (25 s)
+[dist s17] iter 4: 200 labels, 21 positive, 0 violating branches; accepted margin 0.25; mean G -1.5620, hits 1/48, violations 0 (26 s)
+[dist s17] iter 5: 215 labels, 36 positive, 0 violating branches; accepted margin 1; mean G -1.4950, hits 1/48, violations 0 (27 s)
+[dist s17] iter 6: 201 labels, 68 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (28 s)
+[dist s17] iter 7: 210 labels, 60 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (28 s)
+[dist s17] iter 8: 220 labels, 50 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (26 s)
+[dist s17] iter 9: 206 labels, 84 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (26 s)
+[dist s17] iter 10: 227 labels, 65 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (27 s)
+[dist s17] iter 11: 203 labels, 49 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (29 s)
+[dist s17] iter 12: 212 labels, 69 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (31 s)
+[dist s17] iter 13: 200 labels, 85 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (30 s)
+[dist s17] iter 14: 206 labels, 87 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (29 s)
+[dist s17] iter 15: 201 labels, 70 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (31 s)
+[dist s17] iter 16: 207 labels, 64 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (33 s)
+[dist s17] iter 17: 206 labels, 51 positive, 0 violating branches; kept; mean G -1.4950, hits 1/48, violations 0 (32 s)
+--- 2026-11-17T13:20:39Z train dist seed 23
+[dist s23] pi0: mean G -1.8164, hits 0/48, violations 1
+[dist s23] iter 0: 200 labels, 50 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (25 s)
+[dist s23] iter 1: 200 labels, 19 positive, 0 violating branches; accepted margin 1.25; mean G -1.7818, hits 0/48, violations 1 (25 s)
+[dist s23] iter 2: 200 labels, 21 positive, 0 violating branches; kept; mean G -1.7818, hits 0/48, violations 1 (25 s)
+[dist s23] iter 3: 200 labels, 33 positive, 0 violating branches; kept; mean G -1.7818, hits 0/48, violations 1 (25 s)
+[dist s23] iter 4: 199 labels, 19 positive, 0 violating branches; accepted margin 1; mean G -1.7329, hits 0/48, violations 1 (25 s)
+[dist s23] iter 5: 197 labels, 71 positive, 0 violating branches; accepted margin 1.5; mean G -1.7317, hits 0/48, violations 1 (26 s)
+[dist s23] iter 6: 198 labels, 58 positive, 0 violating branches; accepted margin 1.5; mean G -1.7298, hits 0/48, violations 1 (25 s)
+[dist s23] iter 7: 201 labels, 48 positive, 0 violating branches; accepted margin 1.5; mean G -1.7186, hits 0/48, violations 1 (25 s)
+[dist s23] iter 8: 201 labels, 75 positive, 0 violating branches; accepted margin 1.5; mean G -1.7176, hits 0/48, violations 1 (29 s)
+[dist s23] iter 9: 203 labels, 59 positive, 0 violating branches; accepted margin 0.75; mean G -1.6237, hits 1/48, violations 1 (30 s)
+[dist s23] iter 10: 200 labels, 70 positive, 0 violating branches; accepted margin 1.25; mean G -1.6113, hits 1/48, violations 1 (31 s)
+[dist s23] iter 11: 204 labels, 83 positive, 0 violating branches; accepted margin 0.5; mean G -1.5912, hits 0/48, violations 0 (31 s)
+[dist s23] iter 12: 207 labels, 65 positive, 0 violating branches; accepted margin 0.75; mean G -1.5711, hits 0/48, violations 0 (33 s)
+[dist s23] iter 13: 209 labels, 0 positive, 0 violating branches; kept; mean G -1.5711, hits 0/48, violations 0 (34 s)
+[dist s23] iter 14: 206 labels, 47 positive, 0 violating branches; kept; mean G -1.5711, hits 0/48, violations 0 (34 s)
+[dist s23] iter 15: 201 labels, 40 positive, 0 violating branches; accepted margin 1.5; mean G -1.5637, hits 0/48, violations 0 (34 s)
+[dist s23] iter 16: 201 labels, 60 positive, 0 violating branches; accepted margin 0.75; mean G -1.5556, hits 0/48, violations 0 (35 s)
+[dist s23] iter 17: 202 labels, 51 positive, 0 violating branches; accepted margin 1.25; mean G -1.5400, hits 0/48, violations 0 (37 s)
+[dist s23] iter 18: 209 labels, 45 positive, 0 violating branches; kept; mean G -1.5400, hits 0/48, violations 0 (37 s)
+[dist s23] iter 19: 211 labels, 54 positive, 0 violating branches; accepted margin 1.5; mean G -1.5334, hits 0/48, violations 0 (42 s)
+[dist s23] iter 20: 204 labels, 52 positive, 0 violating branches; kept; mean G -1.5334, hits 0/48, violations 0 (43 s)
+[dist s23] iter 21: 201 labels, 75 positive, 0 violating branches; kept; mean G -1.5334, hits 0/48, violations 0 (40 s)
+[dist s23] iter 22: 211 labels, 73 positive, 0 violating branches; accepted margin 1; mean G -1.5211, hits 0/48, violations 0 (40 s)
+[dist s23] iter 23: 208 labels, 58 positive, 0 violating branches; accepted margin 0.25; mean G -1.3163, hits 1/48, violations 0 (41 s)
+[dist s23] iter 24: 204 labels, 68 positive, 0 violating branches; accepted margin 1.5; mean G -1.3127, hits 1/48, violations 0 (41 s)
+[dist s23] iter 25: 200 labels, 26 positive, 0 violating branches; accepted margin 1.25; mean G -1.3123, hits 1/48, violations 0 (41 s)
+[dist s23] iter 26: 198 labels, 46 positive, 0 violating branches; kept; mean G -1.3123, hits 1/48, violations 0 (42 s)
+[dist s23] iter 27: 201 labels, 51 positive, 0 violating branches; kept; mean G -1.3123, hits 1/48, violations 0 (42 s)
+[dist s23] iter 28: 203 labels, 45 positive, 0 violating branches; kept; mean G -1.3123, hits 1/48, violations 0 (42 s)
+[dist s23] iter 29: 202 labels, 78 positive, 0 violating branches; accepted margin 1.5; mean G -1.3107, hits 1/48, violations 0 (43 s)
+--- 2026-11-17T13:37:53Z train dist seed 41
+[dist s41] pi0: mean G -1.8164, hits 0/48, violations 1
+[dist s41] iter 0: 200 labels, 45 positive, 0 violating branches; accepted margin 1.5; mean G -1.7968, hits 1/48, violations 1 (23 s)
+[dist s41] iter 1: 192 labels, 17 positive, 69 violating branches; kept; mean G -1.7968, hits 1/48, violations 1 (24 s)
+[dist s41] iter 2: 200 labels, 68 positive, 0 violating branches; accepted margin 0.5; mean G -1.5493, hits 0/48, violations 1 (24 s)
+[dist s41] iter 3: 202 labels, 38 positive, 0 violating branches; accepted margin 0.25; mean G -1.4755, hits 1/48, violations 1 (26 s)
+[dist s41] iter 4: 207 labels, 68 positive, 0 violating branches; accepted margin 0.25; mean G -1.4105, hits 1/48, violations 1 (27 s)
+[dist s41] iter 5: 211 labels, 87 positive, 0 violating branches; accepted margin 1.25; mean G -1.3455, hits 1/48, violations 1 (27 s)
+[dist s41] iter 6: 203 labels, 80 positive, 0 violating branches; accepted margin 1.5; mean G -1.3257, hits 0/48, violations 1 (30 s)
+[dist s41] iter 7: 200 labels, 17 positive, 0 violating branches; kept; mean G -1.3257, hits 0/48, violations 1 (30 s)
+[dist s41] iter 8: 207 labels, 81 positive, 0 violating branches; kept; mean G -1.3257, hits 0/48, violations 1 (31 s)
+[dist s41] iter 9: 200 labels, 41 positive, 0 violating branches; kept; mean G -1.3257, hits 0/48, violations 1 (31 s)
+[dist s41] iter 10: 204 labels, 48 positive, 0 violating branches; accepted margin 1.25; mean G -1.3238, hits 0/48, violations 1 (31 s)
+[dist s41] iter 11: 200 labels, 19 positive, 0 violating branches; kept; mean G -1.3238, hits 0/48, violations 1 (31 s)
+[dist s41] iter 12: 202 labels, 65 positive, 0 violating branches; kept; mean G -1.3238, hits 0/48, violations 1 (31 s)
+[dist s41] iter 13: 205 labels, 65 positive, 0 violating branches; accepted margin 0.75; mean G -1.2767, hits 1/48, violations 1 (32 s)
+[dist s41] iter 14: 205 labels, 66 positive, 0 violating branches; kept; mean G -1.2767, hits 1/48, violations 1 (33 s)
+[dist s41] iter 15: 204 labels, 53 positive, 0 violating branches; kept; mean G -1.2767, hits 1/48, violations 1 (33 s)
+[dist s41] iter 16: 202 labels, 34 positive, 0 violating branches; accepted margin 1.5; mean G -1.2749, hits 1/48, violations 1 (33 s)
+[dist s41] iter 17: 203 labels, 58 positive, 0 violating branches; kept; mean G -1.2749, hits 1/48, violations 1 (35 s)
+[dist s41] iter 18: 202 labels, 79 positive, 0 violating branches; accepted margin 1; mean G -1.2738, hits 1/48, violations 1 (37 s)
+[dist s41] iter 19: 199 labels, 48 positive, 0 violating branches; kept; mean G -1.2738, hits 1/48, violations 1 (35 s)
+[dist s41] iter 20: 207 labels, 100 positive, 0 violating branches; kept; mean G -1.2738, hits 1/48, violations 1 (36 s)
+[dist s41] iter 21: 205 labels, 48 positive, 0 violating branches; kept; mean G -1.2738, hits 1/48, violations 1 (37 s)
+[dist s41] iter 22: 215 labels, 61 positive, 0 violating branches; kept; mean G -1.2738, hits 1/48, violations 1 (37 s)
+[dist s41] iter 23: 223 labels, 73 positive, 0 violating branches; accepted margin 1.5; mean G -1.2736, hits 1/48, violations 1 (38 s)
+[dist s41] iter 24: 207 labels, 48 positive, 0 violating branches; accepted margin 1; mean G -1.2415, hits 1/48, violations 1 (35 s)
+[dist s41] iter 25: 198 labels, 26 positive, 74 violating branches; accepted margin 1.5; mean G -1.2413, hits 1/48, violations 1 (38 s)
+[dist s41] iter 26: 212 labels, 59 positive, 0 violating branches; accepted margin 1; mean G -1.2344, hits 1/48, violations 1 (40 s)
+[dist s41] iter 27: 206 labels, 51 positive, 0 violating branches; kept; mean G -1.2344, hits 1/48, violations 1 (39 s)
+[dist s41] iter 28: 204 labels, 82 positive, 0 violating branches; kept; mean G -1.2344, hits 1/48, violations 1 (39 s)
+[dist s41] iter 29: 209 labels, 42 positive, 0 violating branches; accepted margin 1.5; mean G -1.2328, hits 1/48, violations 1 (40 s)
+--- 2026-11-17T13:54:25Z train dist seed 59
+[dist s59] pi0: mean G -1.8164, hits 0/48, violations 1
+[dist s59] iter 0: 200 labels, 76 positive, 0 violating branches; accepted margin 1.25; mean G -1.6925, hits 0/48, violations 0 (23 s)
+[dist s59] iter 1: 200 labels, 46 positive, 0 violating branches; accepted margin 1; mean G -1.6607, hits 1/48, violations 0 (24 s)
+[dist s59] iter 2: 200 labels, 88 positive, 0 violating branches; kept; mean G -1.6607, hits 1/48, violations 0 (25 s)
+[dist s59] iter 3: 200 labels, 90 positive, 0 violating branches; kept; mean G -1.6607, hits 1/48, violations 0 (26 s)
+[dist s59] iter 4: 200 labels, 73 positive, 0 violating branches; accepted margin 1.5; mean G -1.5965, hits 1/48, violations 0 (26 s)
+[dist s59] iter 5: 197 labels, 85 positive, 0 violating branches; kept; mean G -1.5965, hits 1/48, violations 0 (26 s)
+[dist s59] iter 6: 205 labels, 73 positive, 0 violating branches; accepted margin 1.5; mean G -1.5946, hits 2/48, violations 0 (25 s)
+[dist s59] iter 7: 200 labels, 71 positive, 0 violating branches; accepted margin 1; mean G -1.5329, hits 0/48, violations 0 (28 s)
+[dist s59] iter 8: 212 labels, 41 positive, 0 violating branches; kept; mean G -1.5329, hits 0/48, violations 0 (29 s)
+[dist s59] iter 9: 204 labels, 78 positive, 0 violating branches; kept; mean G -1.5329, hits 0/48, violations 0 (29 s)
+[dist s59] iter 10: 212 labels, 21 positive, 0 violating branches; accepted margin 1.5; mean G -1.5327, hits 0/48, violations 0 (29 s)
+[dist s59] iter 11: 201 labels, 29 positive, 0 violating branches; kept; mean G -1.5327, hits 0/48, violations 0 (30 s)
+[dist s59] iter 12: 200 labels, 62 positive, 0 violating branches; accepted margin 1.5; mean G -1.5111, hits 0/48, violations 0 (31 s)
+[dist s59] iter 13: 210 labels, 52 positive, 0 violating branches; kept; mean G -1.5111, hits 0/48, violations 0 (30 s)
+[dist s59] iter 14: 203 labels, 67 positive, 0 violating branches; accepted margin 0.75; mean G -1.4230, hits 0/48, violations 0 (31 s)
+[dist s59] iter 15: 217 labels, 82 positive, 0 violating branches; accepted margin 1; mean G -1.3546, hits 1/48, violations 0 (34 s)
+[dist s59] iter 16: 203 labels, 50 positive, 0 violating branches; accepted margin 1.25; mean G -1.3447, hits 1/48, violations 0 (34 s)
+[dist s59] iter 17: 203 labels, 56 positive, 0 violating branches; kept; mean G -1.3447, hits 1/48, violations 0 (34 s)
+[dist s59] iter 18: 200 labels, 23 positive, 0 violating branches; accepted margin 0.25; mean G -1.2961, hits 0/48, violations 0 (34 s)
+[dist s59] iter 19: 202 labels, 67 positive, 0 violating branches; kept; mean G -1.2961, hits 0/48, violations 0 (36 s)
+[dist s59] iter 20: 196 labels, 74 positive, 0 violating branches; kept; mean G -1.2961, hits 0/48, violations 0 (36 s)
+[dist s59] iter 21: 207 labels, 63 positive, 0 violating branches; accepted margin 1; mean G -1.2861, hits 0/48, violations 0 (37 s)
+[dist s59] iter 22: 199 labels, 64 positive, 0 violating branches; accepted margin 1.25; mean G -1.2681, hits 0/48, violations 0 (36 s)
+[dist s59] iter 23: 207 labels, 71 positive, 0 violating branches; kept; mean G -1.2681, hits 0/48, violations 0 (38 s)
+[dist s59] iter 24: 208 labels, 62 positive, 0 violating branches; accepted margin 1; mean G -1.2642, hits 0/48, violations 0 (38 s)
+[dist s59] iter 25: 216 labels, 85 positive, 0 violating branches; kept; mean G -1.2642, hits 0/48, violations 0 (40 s)
+[dist s59] iter 26: 216 labels, 76 positive, 0 violating branches; kept; mean G -1.2642, hits 0/48, violations 0 (39 s)
+[dist s59] iter 27: 206 labels, 81 positive, 0 violating branches; kept; mean G -1.2642, hits 0/48, violations 0 (39 s)
+[dist s59] iter 28: 205 labels, 62 positive, 0 violating branches; kept; mean G -1.2642, hits 0/48, violations 0 (40 s)
+[dist s59] iter 29: 207 labels, 69 positive, 0 violating branches; kept; mean G -1.2642, hits 0/48, violations 0 (40 s)
+--- 2026-11-17T14:10:43Z train dist seed 83
+[dist s83] pi0: mean G -1.8164, hits 0/48, violations 1
+[dist s83] iter 0: 200 labels, 73 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 1: 200 labels, 50 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 2: 200 labels, 79 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 3: 200 labels, 54 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 4: 200 labels, 73 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 5: 200 labels, 81 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[dist s83] iter 6: 200 labels, 21 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[dist s83] iter 7: 200 labels, 101 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 8: 200 labels, 44 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[dist s83] iter 9: 200 labels, 75 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 10: 200 labels, 50 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[dist s83] iter 11: 192 labels, 0 positive, 69 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (25 s)
+--- 2026-11-17T14:15:29Z train fixed seed 17
+[fixed s17] pi0: mean G -1.8128, hits 2/48, violations 1
+[fixed s17] iter 0: 150 labels, 46 positive, 0 violating branches; accepted margin 1; mean G -1.7046, hits 0/48, violations 0 (22 s)
+[fixed s17] iter 1: 150 labels, 44 positive, 0 violating branches; accepted margin 1.5; mean G -1.3471, hits 0/48, violations 0 (22 s)
+[fixed s17] iter 2: 143 labels, 41 positive, 0 violating branches; kept; mean G -1.3471, hits 0/48, violations 0 (23 s)
+[fixed s17] iter 3: 147 labels, 45 positive, 0 violating branches; kept; mean G -1.3471, hits 0/48, violations 0 (23 s)
+[fixed s17] iter 4: 150 labels, 20 positive, 0 violating branches; accepted margin 0.25; mean G -1.2518, hits 0/48, violations 0 (24 s)
+[fixed s17] iter 5: 150 labels, 25 positive, 0 violating branches; kept; mean G -1.2518, hits 0/48, violations 0 (24 s)
+[fixed s17] iter 6: 148 labels, 49 positive, 0 violating branches; accepted margin 1; mean G -1.2134, hits 0/48, violations 0 (25 s)
+[fixed s17] iter 7: 139 labels, 34 positive, 0 violating branches; kept; mean G -1.2134, hits 0/48, violations 0 (25 s)
+[fixed s17] iter 8: 147 labels, 42 positive, 0 violating branches; accepted margin 0.25; mean G -1.1692, hits 0/48, violations 0 (24 s)
+[fixed s17] iter 9: 141 labels, 41 positive, 0 violating branches; accepted margin 0.5; mean G -1.1453, hits 0/48, violations 0 (25 s)
+[fixed s17] iter 10: 140 labels, 36 positive, 0 violating branches; kept; mean G -1.1453, hits 0/48, violations 0 (25 s)
+[fixed s17] iter 11: 149 labels, 42 positive, 0 violating branches; kept; mean G -1.1453, hits 0/48, violations 0 (26 s)
+[fixed s17] iter 12: 140 labels, 34 positive, 0 violating branches; kept; mean G -1.1453, hits 0/48, violations 0 (28 s)
+[fixed s17] iter 13: 144 labels, 41 positive, 0 violating branches; kept; mean G -1.1453, hits 0/48, violations 0 (27 s)
+[fixed s17] iter 14: 145 labels, 42 positive, 0 violating branches; kept; mean G -1.1453, hits 0/48, violations 0 (28 s)
+[fixed s17] iter 15: 148 labels, 41 positive, 0 violating branches; accepted margin 0.75; mean G -1.1239, hits 2/48, violations 0 (28 s)
+[fixed s17] iter 16: 145 labels, 41 positive, 0 violating branches; kept; mean G -1.1239, hits 2/48, violations 0 (28 s)
+[fixed s17] iter 17: 150 labels, 39 positive, 0 violating branches; accepted margin 0.75; mean G -1.1221, hits 2/48, violations 0 (29 s)
+[fixed s17] iter 18: 146 labels, 44 positive, 0 violating branches; accepted margin 0.25; mean G -1.1023, hits 3/48, violations 0 (30 s)
+[fixed s17] iter 19: 141 labels, 38 positive, 0 violating branches; kept; mean G -1.1023, hits 3/48, violations 0 (30 s)
+[fixed s17] iter 20: 143 labels, 35 positive, 0 violating branches; accepted margin 0.5; mean G -1.0970, hits 3/48, violations 0 (30 s)
+[fixed s17] iter 21: 147 labels, 40 positive, 0 violating branches; kept; mean G -1.0970, hits 3/48, violations 0 (32 s)
+[fixed s17] iter 22: 147 labels, 20 positive, 4 violating branches; kept; mean G -1.0970, hits 3/48, violations 0 (31 s)
+[fixed s17] iter 23: 150 labels, 41 positive, 0 violating branches; accepted margin 0.25; mean G -1.0919, hits 2/48, violations 0 (32 s)
+[fixed s17] iter 24: 150 labels, 42 positive, 0 violating branches; kept; mean G -1.0919, hits 2/48, violations 0 (32 s)
+[fixed s17] iter 25: 145 labels, 38 positive, 0 violating branches; accepted margin 0.25; mean G -1.0830, hits 2/48, violations 0 (32 s)
+[fixed s17] iter 26: 140 labels, 42 positive, 0 violating branches; kept; mean G -1.0830, hits 2/48, violations 0 (33 s)
+[fixed s17] iter 27: 142 labels, 34 positive, 0 violating branches; kept; mean G -1.0830, hits 2/48, violations 0 (34 s)
+[fixed s17] iter 28: 150 labels, 21 positive, 0 violating branches; kept; mean G -1.0830, hits 2/48, violations 0 (33 s)
+[fixed s17] iter 29: 148 labels, 26 positive, 0 violating branches; kept; mean G -1.0830, hits 2/48, violations 0 (33 s)
+--- 2026-11-17T14:29:36Z train fixed seed 23
+[fixed s23] pi0: mean G -1.8128, hits 2/48, violations 1
+[fixed s23] iter 0: 150 labels, 25 positive, 0 violating branches; accepted margin 1.25; mean G -1.7270, hits 0/48, violations 1 (21 s)
+[fixed s23] iter 1: 150 labels, 20 positive, 0 violating branches; kept; mean G -1.7270, hits 0/48, violations 1 (22 s)
+[fixed s23] iter 2: 150 labels, 21 positive, 0 violating branches; accepted margin 0.25; mean G -1.5666, hits 1/48, violations 1 (22 s)
+[fixed s23] iter 3: 149 labels, 24 positive, 0 violating branches; accepted margin 0.25; mean G -1.5057, hits 1/48, violations 1 (23 s)
+[fixed s23] iter 4: 150 labels, 24 positive, 0 violating branches; accepted margin 0.25; mean G -1.2551, hits 0/48, violations 0 (24 s)
+[fixed s23] iter 5: 150 labels, 44 positive, 0 violating branches; kept; mean G -1.2551, hits 0/48, violations 0 (25 s)
+[fixed s23] iter 6: 145 labels, 38 positive, 0 violating branches; accepted margin 0.25; mean G -1.2246, hits 2/48, violations 0 (25 s)
+[fixed s23] iter 7: 150 labels, 47 positive, 0 violating branches; kept; mean G -1.2246, hits 2/48, violations 0 (26 s)
+[fixed s23] iter 8: 145 labels, 22 positive, 0 violating branches; accepted margin 0.75; mean G -1.2239, hits 2/48, violations 0 (26 s)
+[fixed s23] iter 9: 149 labels, 45 positive, 0 violating branches; accepted margin 0.5; mean G -1.2197, hits 0/48, violations 0 (28 s)
+[fixed s23] iter 10: 144 labels, 43 positive, 0 violating branches; kept; mean G -1.2197, hits 0/48, violations 0 (27 s)
+[fixed s23] iter 11: 145 labels, 43 positive, 0 violating branches; kept; mean G -1.2197, hits 0/48, violations 0 (29 s)
+[fixed s23] iter 12: 141 labels, 30 positive, 0 violating branches; kept; mean G -1.2197, hits 0/48, violations 0 (29 s)
+[fixed s23] iter 13: 149 labels, 38 positive, 0 violating branches; accepted margin 0.25; mean G -1.2130, hits 0/48, violations 0 (29 s)
+[fixed s23] iter 14: 149 labels, 45 positive, 0 violating branches; accepted margin 0.5; mean G -1.2093, hits 0/48, violations 0 (30 s)
+[fixed s23] iter 15: 139 labels, 16 positive, 0 violating branches; accepted margin 0.25; mean G -1.1930, hits 1/48, violations 0 (30 s)
+[fixed s23] iter 16: 143 labels, 44 positive, 2 violating branches; kept; mean G -1.1930, hits 1/48, violations 0 (31 s)
+[fixed s23] iter 17: 141 labels, 43 positive, 0 violating branches; kept; mean G -1.1930, hits 1/48, violations 0 (31 s)
+[fixed s23] iter 18: 143 labels, 21 positive, 0 violating branches; kept; mean G -1.1930, hits 1/48, violations 0 (32 s)
+[fixed s23] iter 19: 145 labels, 37 positive, 0 violating branches; kept; mean G -1.1930, hits 1/48, violations 0 (32 s)
+[fixed s23] iter 20: 146 labels, 40 positive, 0 violating branches; accepted margin 0.25; mean G -1.1802, hits 3/48, violations 0 (32 s)
+[fixed s23] iter 21: 134 labels, 39 positive, 0 violating branches; accepted margin 0.25; mean G -1.1618, hits 3/48, violations 0 (33 s)
+[fixed s23] iter 22: 137 labels, 33 positive, 0 violating branches; accepted margin 0.5; mean G -1.1612, hits 2/48, violations 0 (33 s)
+[fixed s23] iter 23: 140 labels, 39 positive, 0 violating branches; kept; mean G -1.1612, hits 2/48, violations 0 (31 s)
+[fixed s23] iter 24: 137 labels, 32 positive, 0 violating branches; accepted margin 0.75; mean G -1.1516, hits 2/48, violations 0 (34 s)
+[fixed s23] iter 25: 147 labels, 19 positive, 0 violating branches; accepted margin 0.75; mean G -1.1506, hits 2/48, violations 0 (34 s)
+[fixed s23] iter 26: 149 labels, 21 positive, 0 violating branches; accepted margin 0.25; mean G -1.1464, hits 2/48, violations 0 (36 s)
+[fixed s23] iter 27: 142 labels, 18 positive, 0 violating branches; kept; mean G -1.1464, hits 2/48, violations 0 (36 s)
+[fixed s23] iter 28: 146 labels, 23 positive, 0 violating branches; kept; mean G -1.1464, hits 2/48, violations 0 (36 s)
+[fixed s23] iter 29: 141 labels, 22 positive, 0 violating branches; accepted margin 0.5; mean G -1.1448, hits 2/48, violations 0 (37 s)
+--- 2026-11-17T14:44:31Z train fixed seed 41
+[fixed s41] pi0: mean G -1.8128, hits 2/48, violations 1
+[fixed s41] iter 0: 150 labels, 45 positive, 0 violating branches; accepted margin 1.25; mean G -1.7036, hits 0/48, violations 0 (21 s)
+[fixed s41] iter 1: 150 labels, 37 positive, 0 violating branches; kept; mean G -1.7036, hits 0/48, violations 0 (22 s)
+[fixed s41] iter 2: 150 labels, 45 positive, 0 violating branches; accepted margin 0.75; mean G -1.5796, hits 0/48, violations 0 (22 s)
+[fixed s41] iter 3: 150 labels, 41 positive, 0 violating branches; accepted margin 0.25; mean G -1.3803, hits 0/48, violations 0 (23 s)
+[fixed s41] iter 4: 145 labels, 46 positive, 0 violating branches; accepted margin 0.25; mean G -1.1977, hits 1/48, violations 0 (24 s)
+[fixed s41] iter 5: 140 labels, 36 positive, 0 violating branches; accepted margin 0.25; mean G -1.1918, hits 1/48, violations 0 (25 s)
+[fixed s41] iter 6: 143 labels, 40 positive, 0 violating branches; accepted margin 1.5; mean G -1.1804, hits 0/48, violations 0 (26 s)
+[fixed s41] iter 7: 150 labels, 27 positive, 0 violating branches; accepted margin 0.25; mean G -1.1714, hits 0/48, violations 0 (27 s)
+[fixed s41] iter 8: 145 labels, 38 positive, 0 violating branches; kept; mean G -1.1714, hits 0/48, violations 0 (28 s)
+[fixed s41] iter 9: 150 labels, 42 positive, 0 violating branches; accepted margin 0.75; mean G -1.1523, hits 1/48, violations 0 (28 s)
+[fixed s41] iter 10: 150 labels, 40 positive, 0 violating branches; kept; mean G -1.1523, hits 1/48, violations 0 (29 s)
+[fixed s41] iter 11: 150 labels, 20 positive, 0 violating branches; accepted margin 0.25; mean G -1.1248, hits 1/48, violations 0 (29 s)
+[fixed s41] iter 12: 148 labels, 38 positive, 0 violating branches; kept; mean G -1.1248, hits 1/48, violations 0 (29 s)
+[fixed s41] iter 13: 147 labels, 39 positive, 0 violating branches; kept; mean G -1.1248, hits 1/48, violations 0 (30 s)
+[fixed s41] iter 14: 145 labels, 34 positive, 0 violating branches; accepted margin 0.25; mean G -1.0881, hits 0/48, violations 0 (30 s)
+[fixed s41] iter 15: 150 labels, 39 positive, 1 violating branches; accepted margin 0.75; mean G -1.0867, hits 0/48, violations 0 (31 s)
+[fixed s41] iter 16: 147 labels, 40 positive, 0 violating branches; accepted margin 0.75; mean G -1.0055, hits 3/48, violations 0 (31 s)
+[fixed s41] iter 17: 147 labels, 37 positive, 0 violating branches; accepted margin 1; mean G -1.0003, hits 3/48, violations 0 (32 s)
+[fixed s41] iter 18: 145 labels, 38 positive, 0 violating branches; accepted margin 0.5; mean G -0.9889, hits 3/48, violations 0 (33 s)
+[fixed s41] iter 19: 150 labels, 34 positive, 0 violating branches; accepted margin 0.5; mean G -0.9622, hits 3/48, violations 0 (34 s)
+[fixed s41] iter 20: 145 labels, 42 positive, 0 violating branches; kept; mean G -0.9622, hits 3/48, violations 0 (35 s)
+[fixed s41] iter 21: 146 labels, 40 positive, 0 violating branches; kept; mean G -0.9622, hits 3/48, violations 0 (35 s)
+[fixed s41] iter 22: 137 labels, 39 positive, 0 violating branches; kept; mean G -0.9622, hits 3/48, violations 0 (36 s)
+[fixed s41] iter 23: 142 labels, 34 positive, 0 violating branches; accepted margin 1.25; mean G -0.9597, hits 3/48, violations 0 (35 s)
+[fixed s41] iter 24: 148 labels, 45 positive, 1 violating branches; kept; mean G -0.9597, hits 3/48, violations 0 (36 s)
+[fixed s41] iter 25: 149 labels, 41 positive, 3 violating branches; kept; mean G -0.9597, hits 3/48, violations 0 (36 s)
+[fixed s41] iter 26: 144 labels, 37 positive, 0 violating branches; accepted margin 1.25; mean G -0.9576, hits 3/48, violations 0 (36 s)
+[fixed s41] iter 27: 148 labels, 39 positive, 0 violating branches; kept; mean G -0.9576, hits 3/48, violations 0 (37 s)
+[fixed s41] iter 28: 140 labels, 16 positive, 0 violating branches; kept; mean G -0.9576, hits 3/48, violations 0 (37 s)
+[fixed s41] iter 29: 147 labels, 45 positive, 0 violating branches; accepted margin 0.5; mean G -0.9522, hits 3/48, violations 0 (38 s)
+--- 2026-11-17T14:59:58Z train fixed seed 59
+[fixed s59] pi0: mean G -1.8128, hits 2/48, violations 1
+[fixed s59] iter 0: 150 labels, 51 positive, 0 violating branches; accepted margin 0.25; mean G -1.4802, hits 0/48, violations 1 (21 s)
+[fixed s59] iter 1: 150 labels, 46 positive, 0 violating branches; accepted margin 0.5; mean G -1.1451, hits 1/48, violations 0 (22 s)
+[fixed s59] iter 2: 138 labels, 38 positive, 0 violating branches; kept; mean G -1.1451, hits 1/48, violations 0 (23 s)
+[fixed s59] iter 3: 146 labels, 42 positive, 0 violating branches; accepted margin 0.5; mean G -1.1103, hits 1/48, violations 0 (23 s)
+[fixed s59] iter 4: 142 labels, 21 positive, 0 violating branches; accepted margin 1; mean G -1.1083, hits 1/48, violations 0 (24 s)
+[fixed s59] iter 5: 145 labels, 40 positive, 0 violating branches; kept; mean G -1.1083, hits 1/48, violations 0 (24 s)
+[fixed s59] iter 6: 144 labels, 41 positive, 0 violating branches; kept; mean G -1.1083, hits 1/48, violations 0 (25 s)
+[fixed s59] iter 7: 144 labels, 40 positive, 0 violating branches; accepted margin 0.25; mean G -1.1050, hits 1/48, violations 0 (25 s)
+[fixed s59] iter 8: 141 labels, 43 positive, 0 violating branches; accepted margin 0.5; mean G -1.0679, hits 1/48, violations 0 (26 s)
+[fixed s59] iter 9: 139 labels, 43 positive, 0 violating branches; accepted margin 0.5; mean G -1.0188, hits 2/48, violations 0 (27 s)
+[fixed s59] iter 10: 149 labels, 43 positive, 0 violating branches; kept; mean G -1.0188, hits 2/48, violations 0 (28 s)
+[fixed s59] iter 11: 146 labels, 45 positive, 0 violating branches; accepted margin 1; mean G -0.9898, hits 2/48, violations 0 (28 s)
+[fixed s59] iter 12: 148 labels, 47 positive, 0 violating branches; kept; mean G -0.9898, hits 2/48, violations 0 (29 s)
+[fixed s59] iter 13: 147 labels, 45 positive, 0 violating branches; kept; mean G -0.9898, hits 2/48, violations 0 (29 s)
+[fixed s59] iter 14: 147 labels, 45 positive, 0 violating branches; kept; mean G -0.9898, hits 2/48, violations 0 (28 s)
+[fixed s59] iter 15: 143 labels, 45 positive, 0 violating branches; accepted margin 0.5; mean G -0.9873, hits 2/48, violations 0 (29 s)
+[fixed s59] iter 16: 150 labels, 44 positive, 0 violating branches; kept; mean G -0.9873, hits 2/48, violations 0 (30 s)
+[fixed s59] iter 17: 144 labels, 43 positive, 0 violating branches; accepted margin 0.25; mean G -0.9872, hits 2/48, violations 0 (30 s)
+[fixed s59] iter 18: 148 labels, 22 positive, 0 violating branches; accepted margin 0.5; mean G -0.9867, hits 2/48, violations 0 (30 s)
+[fixed s59] iter 19: 146 labels, 22 positive, 0 violating branches; kept; mean G -0.9867, hits 2/48, violations 0 (31 s)
+[fixed s59] iter 20: 145 labels, 17 positive, 0 violating branches; kept; mean G -0.9867, hits 2/48, violations 0 (32 s)
+[fixed s59] iter 21: 144 labels, 43 positive, 0 violating branches; kept; mean G -0.9867, hits 2/48, violations 0 (31 s)
+[fixed s59] iter 22: 142 labels, 41 positive, 0 violating branches; accepted margin 0.5; mean G -0.9843, hits 2/48, violations 0 (31 s)
+[fixed s59] iter 23: 141 labels, 38 positive, 0 violating branches; accepted margin 0.75; mean G -0.9822, hits 2/48, violations 0 (33 s)
+[fixed s59] iter 24: 145 labels, 42 positive, 0 violating branches; kept; mean G -0.9822, hits 2/48, violations 0 (34 s)
+[fixed s59] iter 25: 149 labels, 46 positive, 0 violating branches; kept; mean G -0.9822, hits 2/48, violations 0 (34 s)
+[fixed s59] iter 26: 137 labels, 38 positive, 0 violating branches; accepted margin 0.5; mean G -0.9793, hits 1/48, violations 0 (34 s)
+[fixed s59] iter 27: 144 labels, 44 positive, 0 violating branches; accepted margin 0.25; mean G -0.9783, hits 1/48, violations 0 (35 s)
+[fixed s59] iter 28: 144 labels, 46 positive, 0 violating branches; kept; mean G -0.9783, hits 1/48, violations 0 (35 s)
+[fixed s59] iter 29: 144 labels, 44 positive, 0 violating branches; kept; mean G -0.9783, hits 1/48, violations 0 (35 s)
+--- 2026-11-17T15:14:31Z train fixed seed 83
+[fixed s83] pi0: mean G -1.8128, hits 2/48, violations 1
+[fixed s83] iter 0: 150 labels, 22 positive, 0 violating branches; accepted margin 0.25; mean G -1.4857, hits 2/48, violations 1 (21 s)
+[fixed s83] iter 1: 150 labels, 47 positive, 0 violating branches; accepted margin 0.25; mean G -1.2602, hits 1/48, violations 1 (22 s)
+[fixed s83] iter 2: 145 labels, 44 positive, 0 violating branches; accepted margin 0.25; mean G -1.1825, hits 1/48, violations 0 (22 s)
+[fixed s83] iter 3: 149 labels, 46 positive, 0 violating branches; accepted margin 0.75; mean G -1.1594, hits 1/48, violations 0 (24 s)
+[fixed s83] iter 4: 143 labels, 37 positive, 0 violating branches; accepted margin 1.5; mean G -1.1543, hits 1/48, violations 0 (24 s)
+[fixed s83] iter 5: 141 labels, 41 positive, 0 violating branches; accepted margin 1; mean G -1.1477, hits 2/48, violations 0 (26 s)
+[fixed s83] iter 6: 148 labels, 20 positive, 0 violating branches; accepted margin 0.25; mean G -1.0933, hits 1/48, violations 0 (27 s)
+[fixed s83] iter 7: 143 labels, 44 positive, 0 violating branches; accepted margin 0.75; mean G -1.0822, hits 2/48, violations 0 (28 s)
+[fixed s83] iter 8: 144 labels, 43 positive, 0 violating branches; kept; mean G -1.0822, hits 2/48, violations 0 (29 s)
+[fixed s83] iter 9: 148 labels, 50 positive, 0 violating branches; accepted margin 1.5; mean G -1.0769, hits 1/48, violations 0 (29 s)
+[fixed s83] iter 10: 143 labels, 39 positive, 0 violating branches; accepted margin 0.5; mean G -1.0485, hits 1/48, violations 0 (29 s)
+[fixed s83] iter 11: 148 labels, 41 positive, 0 violating branches; accepted margin 0.5; mean G -1.0464, hits 1/48, violations 0 (31 s)
+[fixed s83] iter 12: 145 labels, 40 positive, 0 violating branches; kept; mean G -1.0464, hits 1/48, violations 0 (32 s)
+[fixed s83] iter 13: 135 labels, 35 positive, 0 violating branches; accepted margin 0.25; mean G -1.0286, hits 1/48, violations 0 (31 s)
+[fixed s83] iter 14: 137 labels, 36 positive, 0 violating branches; kept; mean G -1.0286, hits 1/48, violations 0 (32 s)
+[fixed s83] iter 15: 135 labels, 37 positive, 0 violating branches; kept; mean G -1.0286, hits 1/48, violations 0 (32 s)
+[fixed s83] iter 16: 138 labels, 37 positive, 0 violating branches; kept; mean G -1.0286, hits 1/48, violations 0 (33 s)
+[fixed s83] iter 17: 146 labels, 41 positive, 0 violating branches; kept; mean G -1.0286, hits 1/48, violations 0 (32 s)
+[fixed s83] iter 18: 144 labels, 40 positive, 1 violating branches; kept; mean G -1.0286, hits 1/48, violations 0 (32 s)
+[fixed s83] iter 19: 142 labels, 32 positive, 0 violating branches; kept; mean G -1.0286, hits 1/48, violations 0 (32 s)
+[fixed s83] iter 20: 138 labels, 38 positive, 0 violating branches; accepted margin 0.5; mean G -1.0214, hits 2/48, violations 0 (31 s)
+[fixed s83] iter 21: 138 labels, 37 positive, 0 violating branches; kept; mean G -1.0214, hits 2/48, violations 0 (32 s)
+[fixed s83] iter 22: 145 labels, 39 positive, 0 violating branches; accepted margin 0.25; mean G -1.0208, hits 3/48, violations 0 (34 s)
+[fixed s83] iter 23: 148 labels, 39 positive, 0 violating branches; kept; mean G -1.0208, hits 3/48, violations 0 (34 s)
+[fixed s83] iter 24: 147 labels, 41 positive, 0 violating branches; kept; mean G -1.0208, hits 3/48, violations 0 (35 s)
+[fixed s83] iter 25: 140 labels, 30 positive, 0 violating branches; kept; mean G -1.0208, hits 3/48, violations 0 (35 s)
+[fixed s83] iter 26: 144 labels, 22 positive, 0 violating branches; accepted margin 0.5; mean G -1.0176, hits 3/48, violations 0 (35 s)
+[fixed s83] iter 27: 143 labels, 34 positive, 0 violating branches; kept; mean G -1.0176, hits 3/48, violations 0 (36 s)
+[fixed s83] iter 28: 141 labels, 36 positive, 0 violating branches; kept; mean G -1.0176, hits 3/48, violations 0 (36 s)
+[fixed s83] iter 29: 139 labels, 41 positive, 0 violating branches; accepted margin 0.75; mean G -1.0151, hits 3/48, violations 0 (36 s)
+--- 2026-11-17T15:29:52Z train mean seed 17
+[mean s17] pi0: mean G -1.8164, hits 0/48, violations 1
+[mean s17] iter 0: 200 labels, 46 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[mean s17] iter 1: 200 labels, 75 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[mean s17] iter 2: 200 labels, 78 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (22 s)
+[mean s17] iter 3: 200 labels, 52 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (22 s)
+[mean s17] iter 4: 200 labels, 0 positive, 0 violating branches; accepted margin 1.25; mean G -1.5915, hits 0/48, violations 1 (22 s)
+[mean s17] iter 5: 200 labels, 23 positive, 0 violating branches; kept; mean G -1.5915, hits 0/48, violations 1 (25 s)
+[mean s17] iter 6: 203 labels, 54 positive, 1 violating branches; kept; mean G -1.5915, hits 0/48, violations 1 (25 s)
+[mean s17] iter 7: 213 labels, 66 positive, 0 violating branches; kept; mean G -1.5915, hits 0/48, violations 1 (26 s)
+[mean s17] iter 8: 199 labels, 50 positive, 0 violating branches; accepted margin 0.75; mean G -1.4058, hits 1/48, violations 1 (25 s)
+[mean s17] iter 9: 214 labels, 63 positive, 0 violating branches; kept; mean G -1.4058, hits 1/48, violations 1 (27 s)
+[mean s17] iter 10: 219 labels, 36 positive, 0 violating branches; accepted margin 1.25; mean G -1.3888, hits 1/48, violations 1 (27 s)
+[mean s17] iter 11: 204 labels, 40 positive, 76 violating branches; accepted margin 0.5; mean G -1.3402, hits 1/48, violations 1 (28 s)
+[mean s17] iter 12: 220 labels, 71 positive, 0 violating branches; accepted margin 0.5; mean G -1.2679, hits 1/48, violations 1 (30 s)
+[mean s17] iter 13: 210 labels, 55 positive, 0 violating branches; accepted margin 0.5; mean G -1.1608, hits 0/48, violations 0 (31 s)
+[mean s17] iter 14: 210 labels, 72 positive, 0 violating branches; accepted margin 0.75; mean G -1.1258, hits 1/48, violations 0 (32 s)
+[mean s17] iter 15: 209 labels, 54 positive, 0 violating branches; accepted margin 1.5; mean G -1.0166, hits 1/48, violations 0 (31 s)
+[mean s17] iter 16: 207 labels, 85 positive, 0 violating branches; kept; mean G -1.0166, hits 1/48, violations 0 (32 s)
+[mean s17] iter 17: 206 labels, 59 positive, 0 violating branches; kept; mean G -1.0166, hits 1/48, violations 0 (32 s)
+[mean s17] iter 18: 212 labels, 78 positive, 0 violating branches; kept; mean G -1.0166, hits 1/48, violations 0 (32 s)
+[mean s17] iter 19: 206 labels, 85 positive, 0 violating branches; kept; mean G -1.0166, hits 1/48, violations 0 (33 s)
+[mean s17] iter 20: 207 labels, 62 positive, 0 violating branches; kept; mean G -1.0166, hits 1/48, violations 0 (33 s)
+[mean s17] iter 21: 207 labels, 79 positive, 0 violating branches; accepted margin 1.5; mean G -0.9578, hits 1/48, violations 0 (34 s)
+[mean s17] iter 22: 204 labels, 28 positive, 0 violating branches; kept; mean G -0.9578, hits 1/48, violations 0 (34 s)
+[mean s17] iter 23: 203 labels, 37 positive, 0 violating branches; kept; mean G -0.9578, hits 1/48, violations 0 (34 s)
+[mean s17] iter 24: 207 labels, 53 positive, 0 violating branches; kept; mean G -0.9578, hits 1/48, violations 0 (35 s)
+[mean s17] iter 25: 210 labels, 78 positive, 0 violating branches; kept; mean G -0.9578, hits 1/48, violations 0 (35 s)
+[mean s17] iter 26: 216 labels, 94 positive, 0 violating branches; accepted margin 1.5; mean G -0.9395, hits 1/48, violations 0 (36 s)
+[mean s17] iter 27: 209 labels, 72 positive, 0 violating branches; kept; mean G -0.9395, hits 1/48, violations 0 (36 s)
+[mean s17] iter 28: 205 labels, 41 positive, 0 violating branches; kept; mean G -0.9395, hits 1/48, violations 0 (35 s)
+[mean s17] iter 29: 202 labels, 51 positive, 0 violating branches; kept; mean G -0.9395, hits 1/48, violations 0 (35 s)
+--- 2026-11-17T15:44:56Z train mean seed 23
+[mean s23] pi0: mean G -1.8164, hits 0/48, violations 1
+[mean s23] iter 0: 200 labels, 50 positive, 0 violating branches; accepted margin 1.25; mean G -1.7489, hits 0/48, violations 1 (23 s)
+[mean s23] iter 1: 200 labels, 19 positive, 0 violating branches; kept; mean G -1.7489, hits 0/48, violations 1 (24 s)
+[mean s23] iter 2: 200 labels, 24 positive, 0 violating branches; kept; mean G -1.7489, hits 0/48, violations 1 (24 s)
+[mean s23] iter 3: 199 labels, 23 positive, 0 violating branches; accepted margin 0.75; mean G -1.6376, hits 0/48, violations 1 (24 s)
+[mean s23] iter 4: 200 labels, 18 positive, 0 violating branches; accepted margin 0.25; mean G -1.3292, hits 0/48, violations 0 (25 s)
+[mean s23] iter 5: 203 labels, 101 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (26 s)
+[mean s23] iter 6: 208 labels, 64 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (26 s)
+[mean s23] iter 7: 201 labels, 65 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (27 s)
+[mean s23] iter 8: 203 labels, 102 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (27 s)
+[mean s23] iter 9: 202 labels, 95 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (28 s)
+[mean s23] iter 10: 200 labels, 63 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (28 s)
+[mean s23] iter 11: 201 labels, 81 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (28 s)
+[mean s23] iter 12: 206 labels, 61 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (28 s)
+[mean s23] iter 13: 200 labels, 46 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (28 s)
+[mean s23] iter 14: 199 labels, 70 positive, 2 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (29 s)
+[mean s23] iter 15: 208 labels, 43 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (29 s)
+[mean s23] iter 16: 202 labels, 55 positive, 0 violating branches; kept; mean G -1.3292, hits 0/48, violations 0 (30 s)
+--- 2026-11-17T15:52:36Z train mean seed 41
+[mean s41] pi0: mean G -1.8164, hits 0/48, violations 1
+[mean s41] iter 0: 200 labels, 45 positive, 0 violating branches; accepted margin 1.25; mean G -1.6840, hits 0/48, violations 0 (23 s)
+[mean s41] iter 1: 200 labels, 38 positive, 0 violating branches; kept; mean G -1.6840, hits 0/48, violations 0 (24 s)
+[mean s41] iter 2: 200 labels, 70 positive, 0 violating branches; accepted margin 1.5; mean G -1.5219, hits 0/48, violations 0 (24 s)
+[mean s41] iter 3: 200 labels, 100 positive, 0 violating branches; accepted margin 1; mean G -1.2834, hits 1/48, violations 0 (24 s)
+[mean s41] iter 4: 223 labels, 91 positive, 0 violating branches; kept; mean G -1.2834, hits 1/48, violations 0 (26 s)
+[mean s41] iter 5: 221 labels, 90 positive, 0 violating branches; kept; mean G -1.2834, hits 1/48, violations 0 (26 s)
+[mean s41] iter 6: 208 labels, 67 positive, 1 violating branches; kept; mean G -1.2834, hits 1/48, violations 0 (27 s)
+[mean s41] iter 7: 206 labels, 25 positive, 0 violating branches; kept; mean G -1.2834, hits 1/48, violations 0 (27 s)
+[mean s41] iter 8: 225 labels, 90 positive, 0 violating branches; accepted margin 1.5; mean G -1.2507, hits 0/48, violations 0 (29 s)
+[mean s41] iter 9: 200 labels, 39 positive, 0 violating branches; kept; mean G -1.2507, hits 0/48, violations 0 (28 s)
+[mean s41] iter 10: 206 labels, 57 positive, 0 violating branches; accepted margin 1.5; mean G -1.2399, hits 0/48, violations 0 (29 s)
+[mean s41] iter 11: 200 labels, 20 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (28 s)
+[mean s41] iter 12: 213 labels, 46 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (30 s)
+[mean s41] iter 13: 215 labels, 49 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (31 s)
+[mean s41] iter 14: 216 labels, 58 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (31 s)
+[mean s41] iter 15: 217 labels, 58 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (30 s)
+[mean s41] iter 16: 211 labels, 30 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (32 s)
+[mean s41] iter 17: 219 labels, 61 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (33 s)
+[mean s41] iter 18: 216 labels, 58 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (33 s)
+[mean s41] iter 19: 202 labels, 45 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (33 s)
+[mean s41] iter 20: 213 labels, 53 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (34 s)
+[mean s41] iter 21: 211 labels, 54 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (34 s)
+[mean s41] iter 22: 227 labels, 64 positive, 0 violating branches; kept; mean G -1.2399, hits 0/48, violations 0 (35 s)
+--- 2026-11-17T16:03:55Z train mean seed 59
+[mean s59] pi0: mean G -1.8164, hits 0/48, violations 1
+[mean s59] iter 0: 200 labels, 76 positive, 0 violating branches; accepted margin 0.75; mean G -1.5084, hits 0/48, violations 1 (23 s)
+[mean s59] iter 1: 200 labels, 42 positive, 0 violating branches; accepted margin 0.25; mean G -1.2109, hits 2/48, violations 1 (24 s)
+[mean s59] iter 2: 202 labels, 83 positive, 0 violating branches; accepted margin 0.75; mean G -1.1902, hits 1/48, violations 0 (25 s)
+[mean s59] iter 3: 204 labels, 54 positive, 0 violating branches; kept; mean G -1.1902, hits 1/48, violations 0 (27 s)
+[mean s59] iter 4: 204 labels, 55 positive, 0 violating branches; accepted margin 1.25; mean G -1.0919, hits 2/48, violations 0 (27 s)
+[mean s59] iter 5: 213 labels, 67 positive, 0 violating branches; kept; mean G -1.0919, hits 2/48, violations 0 (29 s)
+[mean s59] iter 6: 202 labels, 63 positive, 0 violating branches; accepted margin 0.75; mean G -1.0651, hits 2/48, violations 0 (28 s)
+[mean s59] iter 7: 215 labels, 66 positive, 0 violating branches; accepted margin 0.25; mean G -0.9420, hits 4/48, violations 0 (28 s)
+[mean s59] iter 8: 207 labels, 63 positive, 0 violating branches; accepted margin 1.5; mean G -0.9050, hits 1/48, violations 0 (28 s)
+[mean s59] iter 9: 212 labels, 62 positive, 0 violating branches; accepted margin 1.5; mean G -0.9047, hits 1/48, violations 0 (32 s)
+[mean s59] iter 10: 202 labels, 45 positive, 0 violating branches; kept; mean G -0.9047, hits 1/48, violations 0 (32 s)
+[mean s59] iter 11: 209 labels, 46 positive, 0 violating branches; kept; mean G -0.9047, hits 1/48, violations 0 (33 s)
+[mean s59] iter 12: 205 labels, 43 positive, 0 violating branches; kept; mean G -0.9047, hits 1/48, violations 0 (33 s)
+[mean s59] iter 13: 209 labels, 56 positive, 0 violating branches; kept; mean G -0.9047, hits 1/48, violations 0 (33 s)
+[mean s59] iter 14: 211 labels, 63 positive, 0 violating branches; kept; mean G -0.9047, hits 1/48, violations 0 (34 s)
+[mean s59] iter 15: 212 labels, 55 positive, 0 violating branches; accepted margin 0.25; mean G -0.8997, hits 0/48, violations 0 (33 s)
+[mean s59] iter 16: 209 labels, 44 positive, 0 violating branches; kept; mean G -0.8997, hits 0/48, violations 0 (34 s)
+[mean s59] iter 17: 226 labels, 71 positive, 0 violating branches; kept; mean G -0.8997, hits 0/48, violations 0 (32 s)
+[mean s59] iter 18: 209 labels, 49 positive, 0 violating branches; kept; mean G -0.8997, hits 0/48, violations 0 (34 s)
+[mean s59] iter 19: 219 labels, 61 positive, 0 violating branches; kept; mean G -0.8997, hits 0/48, violations 0 (33 s)
+[mean s59] iter 20: 225 labels, 71 positive, 0 violating branches; kept; mean G -0.8997, hits 0/48, violations 0 (37 s)
+[mean s59] iter 21: 226 labels, 62 positive, 0 violating branches; kept; mean G -0.8997, hits 0/48, violations 0 (36 s)
+[mean s59] iter 22: 228 labels, 72 positive, 0 violating branches; kept; mean G -0.8997, hits 0/48, violations 0 (37 s)
+[mean s59] iter 23: 225 labels, 70 positive, 0 violating branches; accepted margin 0.25; mean G -0.8416, hits 1/48, violations 0 (38 s)
+[mean s59] iter 24: 200 labels, 57 positive, 0 violating branches; accepted margin 1; mean G -0.8415, hits 1/48, violations 0 (38 s)
+[mean s59] iter 25: 200 labels, 60 positive, 0 violating branches; accepted margin 0.75; mean G -0.8351, hits 1/48, violations 0 (38 s)
+[mean s59] iter 26: 207 labels, 59 positive, 0 violating branches; accepted margin 1.5; mean G -0.8345, hits 1/48, violations 0 (39 s)
+[mean s59] iter 27: 204 labels, 51 positive, 0 violating branches; kept; mean G -0.8345, hits 1/48, violations 0 (39 s)
+[mean s59] iter 28: 201 labels, 62 positive, 0 violating branches; kept; mean G -0.8345, hits 1/48, violations 0 (41 s)
+[mean s59] iter 29: 206 labels, 67 positive, 0 violating branches; accepted margin 1.25; mean G -0.8244, hits 1/48, violations 0 (42 s)
+--- 2026-11-17T16:20:34Z train mean seed 83
+[mean s83] pi0: mean G -1.8164, hits 0/48, violations 1
+[mean s83] iter 0: 200 labels, 73 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[mean s83] iter 1: 200 labels, 50 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[mean s83] iter 2: 200 labels, 79 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[mean s83] iter 3: 200 labels, 54 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[mean s83] iter 4: 200 labels, 73 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (23 s)
+[mean s83] iter 5: 200 labels, 81 positive, 0 violating branches; kept; mean G -1.8164, hits 0/48, violations 1 (24 s)
+[mean s83] iter 6: 200 labels, 21 positive, 0 violating branches; accepted margin 0.25; mean G -1.5864, hits 0/48, violations 0 (24 s)
+[mean s83] iter 7: 201 labels, 57 positive, 0 violating branches; accepted margin 1.5; mean G -1.5750, hits 0/48, violations 0 (25 s)
+[mean s83] iter 8: 193 labels, 42 positive, 0 violating branches; accepted margin 0.25; mean G -1.2585, hits 0/48, violations 0 (26 s)
+[mean s83] iter 9: 205 labels, 56 positive, 0 violating branches; accepted margin 1.25; mean G -1.2192, hits 0/48, violations 0 (27 s)
+[mean s83] iter 10: 206 labels, 50 positive, 0 violating branches; accepted margin 1.25; mean G -1.1943, hits 0/48, violations 0 (29 s)
+[mean s83] iter 11: 199 labels, 42 positive, 0 violating branches; accepted margin 1.25; mean G -1.1301, hits 1/48, violations 0 (30 s)
+[mean s83] iter 12: 207 labels, 46 positive, 0 violating branches; accepted margin 1.5; mean G -1.1289, hits 1/48, violations 0 (32 s)
+[mean s83] iter 13: 203 labels, 53 positive, 0 violating branches; kept; mean G -1.1289, hits 1/48, violations 0 (29 s)
+[mean s83] iter 14: 203 labels, 53 positive, 0 violating branches; kept; mean G -1.1289, hits 1/48, violations 0 (30 s)
+[mean s83] iter 15: 209 labels, 54 positive, 0 violating branches; accepted margin 1.5; mean G -1.1049, hits 1/48, violations 0 (31 s)
+[mean s83] iter 16: 212 labels, 55 positive, 0 violating branches; accepted margin 1.5; mean G -1.0829, hits 1/48, violations 0 (31 s)
+[mean s83] iter 17: 199 labels, 41 positive, 0 violating branches; kept; mean G -1.0829, hits 1/48, violations 0 (33 s)
+[mean s83] iter 18: 204 labels, 49 positive, 1 violating branches; accepted margin 1.25; mean G -1.0791, hits 1/48, violations 0 (33 s)
+[mean s83] iter 19: 200 labels, 44 positive, 0 violating branches; kept; mean G -1.0791, hits 1/48, violations 0 (34 s)
+[mean s83] iter 20: 205 labels, 57 positive, 0 violating branches; kept; mean G -1.0791, hits 1/48, violations 0 (35 s)
+[mean s83] iter 21: 215 labels, 75 positive, 0 violating branches; accepted margin 0.75; mean G -1.0441, hits 1/48, violations 0 (36 s)
+[mean s83] iter 22: 206 labels, 56 positive, 0 violating branches; accepted margin 1.5; mean G -1.0215, hits 1/48, violations 0 (36 s)
+[mean s83] iter 23: 210 labels, 55 positive, 0 violating branches; accepted margin 1.25; mean G -1.0150, hits 1/48, violations 0 (36 s)
+[mean s83] iter 24: 205 labels, 51 positive, 0 violating branches; accepted margin 1.5; mean G -1.0004, hits 1/48, violations 0 (37 s)
+[mean s83] iter 25: 207 labels, 67 positive, 0 violating branches; accepted margin 1.25; mean G -0.9679, hits 3/48, violations 0 (38 s)
+[mean s83] iter 26: 207 labels, 93 positive, 0 violating branches; kept; mean G -0.9679, hits 3/48, violations 0 (37 s)
+[mean s83] iter 27: 210 labels, 70 positive, 0 violating branches; kept; mean G -0.9679, hits 3/48, violations 0 (39 s)
+[mean s83] iter 28: 210 labels, 69 positive, 0 violating branches; kept; mean G -0.9679, hits 3/48, violations 0 (38 s)
+[mean s83] iter 29: 217 labels, 80 positive, 0 violating branches; kept; mean G -0.9679, hits 3/48, violations 0 (39 s)
+=== 2026-11-17T16:36:10Z stage eval
+constant (L2): 20/320
+constant (L2): 40/320
+constant (L2): 60/320
+constant (L2): 80/320
+constant (L2): 100/320
+constant (L2): 120/320
+constant (L2): 140/320
+constant (L2): 160/320
+constant (L2): 180/320
+constant (L2): 200/320
+constant (L2): 220/320
+constant (L2): 240/320
+constant (L2): 260/320
+constant (L2): 280/320
+constant (L2): 300/320
+constant (L2): 320/320
+pc_fair (L2): 20/320
+pc_fair (L2): 40/320
+pc_fair (L2): 60/320
+pc_fair (L2): 80/320
+pc_fair (L2): 100/320
+pc_fair (L2): 120/320
+pc_fair (L2): 140/320
+pc_fair (L2): 160/320
+pc_fair (L2): 180/320
+pc_fair (L2): 200/320
+pc_fair (L2): 220/320
+pc_fair (L2): 240/320
+pc_fair (L2): 260/320
+pc_fair (L2): 280/320
+pc_fair (L2): 300/320
+pc_fair (L2): 320/320
+pc_strong (L2): 20/320
+pc_strong (L2): 40/320
+pc_strong (L2): 60/320
+pc_strong (L2): 80/320
+pc_strong (L2): 100/320
+pc_strong (L2): 120/320
+pc_strong (L2): 140/320
+pc_strong (L2): 160/320
+pc_strong (L2): 180/320
+pc_strong (L2): 200/320
+pc_strong (L2): 220/320
+pc_strong (L2): 240/320
+pc_strong (L2): 260/320
+pc_strong (L2): 280/320
+pc_strong (L2): 300/320
+pc_strong (L2): 320/320
+pc_fixed (L2): 20/320
+pc_fixed (L2): 40/320
+pc_fixed (L2): 60/320
+pc_fixed (L2): 80/320
+pc_fixed (L2): 100/320
+pc_fixed (L2): 120/320
+pc_fixed (L2): 140/320
+pc_fixed (L2): 160/320
+pc_fixed (L2): 180/320
+pc_fixed (L2): 200/320
+pc_fixed (L2): 220/320
+pc_fixed (L2): 240/320
+pc_fixed (L2): 260/320
+pc_fixed (L2): 280/320
+pc_fixed (L2): 300/320
+pc_fixed (L2): 320/320
+pc_oracle (L2): 20/320
+pc_oracle (L2): 40/320
+pc_oracle (L2): 60/320
+pc_oracle (L2): 80/320
+pc_oracle (L2): 100/320
+pc_oracle (L2): 120/320
+pc_oracle (L2): 140/320
+pc_oracle (L2): 160/320
+pc_oracle (L2): 180/320
+pc_oracle (L2): 200/320
+pc_oracle (L2): 220/320
+pc_oracle (L2): 240/320
+pc_oracle (L2): 260/320
+pc_oracle (L2): 280/320
+pc_oracle (L2): 300/320
+pc_oracle (L2): 320/320
+rl:dist:17 (L2): 20/320
+rl:dist:17 (L2): 40/320
+rl:dist:17 (L2): 60/320
+rl:dist:17 (L2): 80/320
+rl:dist:17 (L2): 100/320
+rl:dist:17 (L2): 120/320
+rl:dist:17 (L2): 140/320
+rl:dist:17 (L2): 160/320
+rl:dist:17 (L2): 180/320
+rl:dist:17 (L2): 200/320
+rl:dist:17 (L2): 220/320
+rl:dist:17 (L2): 240/320
+rl:dist:17 (L2): 260/320
+rl:dist:17 (L2): 280/320
+rl:dist:17 (L2): 300/320
+rl:dist:17 (L2): 320/320
+rl:dist:23 (L2): 20/320
+rl:dist:23 (L2): 40/320
+rl:dist:23 (L2): 60/320
+rl:dist:23 (L2): 80/320
+rl:dist:23 (L2): 100/320
+rl:dist:23 (L2): 120/320
+rl:dist:23 (L2): 140/320
+rl:dist:23 (L2): 160/320
+rl:dist:23 (L2): 180/320
+rl:dist:23 (L2): 200/320
+rl:dist:23 (L2): 220/320
+rl:dist:23 (L2): 240/320
+rl:dist:23 (L2): 260/320
+rl:dist:23 (L2): 280/320
+rl:dist:23 (L2): 300/320
+rl:dist:23 (L2): 320/320
+rl:dist:41 (L2): 20/320
+rl:dist:41 (L2): 40/320
+rl:dist:41 (L2): 60/320
+rl:dist:41 (L2): 80/320
+rl:dist:41 (L2): 100/320
+rl:dist:41 (L2): 120/320
+rl:dist:41 (L2): 140/320
+rl:dist:41 (L2): 160/320
+rl:dist:41 (L2): 180/320
+rl:dist:41 (L2): 200/320
+rl:dist:41 (L2): 220/320
+rl:dist:41 (L2): 240/320
+rl:dist:41 (L2): 260/320
+rl:dist:41 (L2): 280/320
+rl:dist:41 (L2): 300/320
+rl:dist:41 (L2): 320/320
+rl:dist:59 (L2): 20/320
+rl:dist:59 (L2): 40/320
+rl:dist:59 (L2): 60/320
+rl:dist:59 (L2): 80/320
+rl:dist:59 (L2): 100/320
+rl:dist:59 (L2): 120/320
+rl:dist:59 (L2): 140/320
+rl:dist:59 (L2): 160/320
+rl:dist:59 (L2): 180/320
+rl:dist:59 (L2): 200/320
+rl:dist:59 (L2): 220/320
+rl:dist:59 (L2): 240/320
+rl:dist:59 (L2): 260/320
+rl:dist:59 (L2): 280/320
+rl:dist:59 (L2): 300/320
+rl:dist:59 (L2): 320/320
+rl:dist:83 (L2): 20/320
+rl:dist:83 (L2): 40/320
+rl:dist:83 (L2): 60/320
+rl:dist:83 (L2): 80/320
+rl:dist:83 (L2): 100/320
+rl:dist:83 (L2): 120/320
+rl:dist:83 (L2): 140/320
+rl:dist:83 (L2): 160/320
+rl:dist:83 (L2): 180/320
+rl:dist:83 (L2): 200/320
+rl:dist:83 (L2): 220/320
+rl:dist:83 (L2): 240/320
+rl:dist:83 (L2): 260/320
+rl:dist:83 (L2): 280/320
+rl:dist:83 (L2): 300/320
+rl:dist:83 (L2): 320/320
+rl:fixed:17 (L2): 20/320
+rl:fixed:17 (L2): 40/320
+rl:fixed:17 (L2): 60/320
+rl:fixed:17 (L2): 80/320
+rl:fixed:17 (L2): 100/320
+rl:fixed:17 (L2): 120/320
+rl:fixed:17 (L2): 140/320
+rl:fixed:17 (L2): 160/320
+rl:fixed:17 (L2): 180/320
+rl:fixed:17 (L2): 200/320
+rl:fixed:17 (L2): 220/320
+rl:fixed:17 (L2): 240/320
+rl:fixed:17 (L2): 260/320
+rl:fixed:17 (L2): 280/320
+rl:fixed:17 (L2): 300/320
+rl:fixed:17 (L2): 320/320
+rl:fixed:23 (L2): 20/320
+rl:fixed:23 (L2): 40/320
+rl:fixed:23 (L2): 60/320
+rl:fixed:23 (L2): 80/320
+rl:fixed:23 (L2): 100/320
+rl:fixed:23 (L2): 120/320
+rl:fixed:23 (L2): 140/320
+rl:fixed:23 (L2): 160/320
+rl:fixed:23 (L2): 180/320
+rl:fixed:23 (L2): 200/320
+rl:fixed:23 (L2): 220/320
+rl:fixed:23 (L2): 240/320
+rl:fixed:23 (L2): 260/320
+rl:fixed:23 (L2): 280/320
+rl:fixed:23 (L2): 300/320
+rl:fixed:23 (L2): 320/320
+rl:fixed:41 (L2): 20/320
+rl:fixed:41 (L2): 40/320
+rl:fixed:41 (L2): 60/320
+rl:fixed:41 (L2): 80/320
+rl:fixed:41 (L2): 100/320
+rl:fixed:41 (L2): 120/320
+rl:fixed:41 (L2): 140/320
+rl:fixed:41 (L2): 160/320
+rl:fixed:41 (L2): 180/320
+rl:fixed:41 (L2): 200/320
+rl:fixed:41 (L2): 220/320
+rl:fixed:41 (L2): 240/320
+rl:fixed:41 (L2): 260/320
+rl:fixed:41 (L2): 280/320
+rl:fixed:41 (L2): 300/320
+rl:fixed:41 (L2): 320/320
+rl:fixed:59 (L2): 20/320
+rl:fixed:59 (L2): 40/320
+rl:fixed:59 (L2): 60/320
+rl:fixed:59 (L2): 80/320
+rl:fixed:59 (L2): 100/320
+rl:fixed:59 (L2): 120/320
+rl:fixed:59 (L2): 140/320
+rl:fixed:59 (L2): 160/320
+rl:fixed:59 (L2): 180/320
+rl:fixed:59 (L2): 200/320
+rl:fixed:59 (L2): 220/320
+rl:fixed:59 (L2): 240/320
+rl:fixed:59 (L2): 260/320
+rl:fixed:59 (L2): 280/320
+rl:fixed:59 (L2): 300/320
+rl:fixed:59 (L2): 320/320
+rl:fixed:83 (L2): 20/320
+rl:fixed:83 (L2): 40/320
+rl:fixed:83 (L2): 60/320
+rl:fixed:83 (L2): 80/320
+rl:fixed:83 (L2): 100/320
+rl:fixed:83 (L2): 120/320
+rl:fixed:83 (L2): 140/320
+rl:fixed:83 (L2): 160/320
+rl:fixed:83 (L2): 180/320
+rl:fixed:83 (L2): 200/320
+rl:fixed:83 (L2): 220/320
+rl:fixed:83 (L2): 240/320
+rl:fixed:83 (L2): 260/320
+rl:fixed:83 (L2): 280/320
+rl:fixed:83 (L2): 300/320
+rl:fixed:83 (L2): 320/320
+rl:full:17 (L2): 20/320
+rl:full:17 (L2): 40/320
+rl:full:17 (L2): 60/320
+rl:full:17 (L2): 80/320
+rl:full:17 (L2): 100/320
+rl:full:17 (L2): 120/320
+rl:full:17 (L2): 140/320
+rl:full:17 (L2): 160/320
+rl:full:17 (L2): 180/320
+rl:full:17 (L2): 200/320
+rl:full:17 (L2): 220/320
+rl:full:17 (L2): 240/320
+rl:full:17 (L2): 260/320
+rl:full:17 (L2): 280/320
+rl:full:17 (L2): 300/320
+rl:full:17 (L2): 320/320
+rl:full:23 (L2): 20/320
+rl:full:23 (L2): 40/320
+rl:full:23 (L2): 60/320
+rl:full:23 (L2): 80/320
+rl:full:23 (L2): 100/320
+rl:full:23 (L2): 120/320
+rl:full:23 (L2): 140/320
+rl:full:23 (L2): 160/320
+rl:full:23 (L2): 180/320
+rl:full:23 (L2): 200/320
+rl:full:23 (L2): 220/320
+rl:full:23 (L2): 240/320
+rl:full:23 (L2): 260/320
+rl:full:23 (L2): 280/320
+rl:full:23 (L2): 300/320
+rl:full:23 (L2): 320/320
+rl:full:41 (L2): 20/320
+rl:full:41 (L2): 40/320
+rl:full:41 (L2): 60/320
+rl:full:41 (L2): 80/320
+rl:full:41 (L2): 100/320
+rl:full:41 (L2): 120/320
+rl:full:41 (L2): 140/320
+rl:full:41 (L2): 160/320
+rl:full:41 (L2): 180/320
+rl:full:41 (L2): 200/320
+rl:full:41 (L2): 220/320
+rl:full:41 (L2): 240/320
+rl:full:41 (L2): 260/320
+rl:full:41 (L2): 280/320
+rl:full:41 (L2): 300/320
+rl:full:41 (L2): 320/320
+rl:full:59 (L2): 20/320
+rl:full:59 (L2): 40/320
+rl:full:59 (L2): 60/320
+rl:full:59 (L2): 80/320
+rl:full:59 (L2): 100/320
+rl:full:59 (L2): 120/320
+rl:full:59 (L2): 140/320
+rl:full:59 (L2): 160/320
+rl:full:59 (L2): 180/320
+rl:full:59 (L2): 200/320
+rl:full:59 (L2): 220/320
+rl:full:59 (L2): 240/320
+rl:full:59 (L2): 260/320
+rl:full:59 (L2): 280/320
+rl:full:59 (L2): 300/320
+rl:full:59 (L2): 320/320
+rl:full:83 (L2): 20/320
+rl:full:83 (L2): 40/320
+rl:full:83 (L2): 60/320
+rl:full:83 (L2): 80/320
+rl:full:83 (L2): 100/320
+rl:full:83 (L2): 120/320
+rl:full:83 (L2): 140/320
+rl:full:83 (L2): 160/320
+rl:full:83 (L2): 180/320
+rl:full:83 (L2): 200/320
+rl:full:83 (L2): 220/320
+rl:full:83 (L2): 240/320
+rl:full:83 (L2): 260/320
+rl:full:83 (L2): 280/320
+rl:full:83 (L2): 300/320
+rl:full:83 (L2): 320/320
+rl:mean:17 (L2): 20/320
+rl:mean:17 (L2): 40/320
+rl:mean:17 (L2): 60/320
+rl:mean:17 (L2): 80/320
+rl:mean:17 (L2): 100/320
+rl:mean:17 (L2): 120/320
+rl:mean:17 (L2): 140/320
+rl:mean:17 (L2): 160/320
+rl:mean:17 (L2): 180/320
+rl:mean:17 (L2): 200/320
+rl:mean:17 (L2): 220/320
+rl:mean:17 (L2): 240/320
+rl:mean:17 (L2): 260/320
+rl:mean:17 (L2): 280/320
+rl:mean:17 (L2): 300/320
+rl:mean:17 (L2): 320/320
+rl:mean:23 (L2): 20/320
+rl:mean:23 (L2): 40/320
+rl:mean:23 (L2): 60/320
+rl:mean:23 (L2): 80/320
+rl:mean:23 (L2): 100/320
+rl:mean:23 (L2): 120/320
+rl:mean:23 (L2): 140/320
+rl:mean:23 (L2): 160/320
+rl:mean:23 (L2): 180/320
+rl:mean:23 (L2): 200/320
+rl:mean:23 (L2): 220/320
+rl:mean:23 (L2): 240/320
+rl:mean:23 (L2): 260/320
+rl:mean:23 (L2): 280/320
+rl:mean:23 (L2): 300/320
+rl:mean:23 (L2): 320/320
+rl:mean:41 (L2): 20/320
+rl:mean:41 (L2): 40/320
+rl:mean:41 (L2): 60/320
+rl:mean:41 (L2): 80/320
+rl:mean:41 (L2): 100/320
+rl:mean:41 (L2): 120/320
+rl:mean:41 (L2): 140/320
+rl:mean:41 (L2): 160/320
+rl:mean:41 (L2): 180/320
+rl:mean:41 (L2): 200/320
+rl:mean:41 (L2): 220/320
+rl:mean:41 (L2): 240/320
+rl:mean:41 (L2): 260/320
+rl:mean:41 (L2): 280/320
+rl:mean:41 (L2): 300/320
+rl:mean:41 (L2): 320/320
+rl:mean:59 (L2): 20/320
+rl:mean:59 (L2): 40/320
+rl:mean:59 (L2): 60/320
+rl:mean:59 (L2): 80/320
+rl:mean:59 (L2): 100/320
+rl:mean:59 (L2): 120/320
+rl:mean:59 (L2): 140/320
+rl:mean:59 (L2): 160/320
+rl:mean:59 (L2): 180/320
+rl:mean:59 (L2): 200/320
+rl:mean:59 (L2): 220/320
+rl:mean:59 (L2): 240/320
+rl:mean:59 (L2): 260/320
+rl:mean:59 (L2): 280/320
+rl:mean:59 (L2): 300/320
+rl:mean:59 (L2): 320/320
+rl:mean:83 (L2): 20/320
+rl:mean:83 (L2): 40/320
+rl:mean:83 (L2): 60/320
+rl:mean:83 (L2): 80/320
+rl:mean:83 (L2): 100/320
+rl:mean:83 (L2): 120/320
+rl:mean:83 (L2): 140/320
+rl:mean:83 (L2): 160/320
+rl:mean:83 (L2): 180/320
+rl:mean:83 (L2): 200/320
+rl:mean:83 (L2): 220/320
+rl:mean:83 (L2): 240/320
+rl:mean:83 (L2): 260/320
+rl:mean:83 (L2): 280/320
+rl:mean:83 (L2): 300/320
+rl:mean:83 (L2): 320/320
+=== 2026-11-17T18:35:19Z stage generalize
+constant (L0): 20/320
+constant (L0): 40/320
+constant (L0): 60/320
+constant (L0): 80/320
+constant (L0): 100/320
+constant (L0): 120/320
+constant (L0): 140/320
+constant (L0): 160/320
+constant (L0): 180/320
+constant (L0): 200/320
+constant (L0): 220/320
+constant (L0): 240/320
+constant (L0): 260/320
+constant (L0): 280/320
+constant (L0): 300/320
+constant (L0): 320/320
+pc_fair (L0): 20/320
+pc_fair (L0): 40/320
+pc_fair (L0): 60/320
+pc_fair (L0): 80/320
+pc_fair (L0): 100/320
+pc_fair (L0): 120/320
+pc_fair (L0): 140/320
+pc_fair (L0): 160/320
+pc_fair (L0): 180/320
+pc_fair (L0): 200/320
+pc_fair (L0): 220/320
+pc_fair (L0): 240/320
+pc_fair (L0): 260/320
+pc_fair (L0): 280/320
+pc_fair (L0): 300/320
+pc_fair (L0): 320/320
+pc_strong (L0): 20/320
+pc_strong (L0): 40/320
+pc_strong (L0): 60/320
+pc_strong (L0): 80/320
+pc_strong (L0): 100/320
+pc_strong (L0): 120/320
+pc_strong (L0): 140/320
+pc_strong (L0): 160/320
+pc_strong (L0): 180/320
+pc_strong (L0): 200/320
+pc_strong (L0): 220/320
+pc_strong (L0): 240/320
+pc_strong (L0): 260/320
+pc_strong (L0): 280/320
+pc_strong (L0): 300/320
+pc_strong (L0): 320/320
+pc_oracle (L0): 20/320
+pc_oracle (L0): 40/320
+pc_oracle (L0): 60/320
+pc_oracle (L0): 80/320
+pc_oracle (L0): 100/320
+pc_oracle (L0): 120/320
+pc_oracle (L0): 140/320
+pc_oracle (L0): 160/320
+pc_oracle (L0): 180/320
+pc_oracle (L0): 200/320
+pc_oracle (L0): 220/320
+pc_oracle (L0): 240/320
+pc_oracle (L0): 260/320
+pc_oracle (L0): 280/320
+pc_oracle (L0): 300/320
+pc_oracle (L0): 320/320
+rl:full:17 (L0): 20/320
+rl:full:17 (L0): 40/320
+rl:full:17 (L0): 60/320
+rl:full:17 (L0): 80/320
+rl:full:17 (L0): 100/320
+rl:full:17 (L0): 120/320
+rl:full:17 (L0): 140/320
+rl:full:17 (L0): 160/320
+rl:full:17 (L0): 180/320
+rl:full:17 (L0): 200/320
+rl:full:17 (L0): 220/320
+rl:full:17 (L0): 240/320
+rl:full:17 (L0): 260/320
+rl:full:17 (L0): 280/320
+rl:full:17 (L0): 300/320
+rl:full:17 (L0): 320/320
+rl:full:23 (L0): 20/320
+rl:full:23 (L0): 40/320
+rl:full:23 (L0): 60/320
+rl:full:23 (L0): 80/320
+rl:full:23 (L0): 100/320
+rl:full:23 (L0): 120/320
+rl:full:23 (L0): 140/320
+rl:full:23 (L0): 160/320
+rl:full:23 (L0): 180/320
+rl:full:23 (L0): 200/320
+rl:full:23 (L0): 220/320
+rl:full:23 (L0): 240/320
+rl:full:23 (L0): 260/320
+rl:full:23 (L0): 280/320
+rl:full:23 (L0): 300/320
+rl:full:23 (L0): 320/320
+rl:full:41 (L0): 20/320
+rl:full:41 (L0): 40/320
+rl:full:41 (L0): 60/320
+rl:full:41 (L0): 80/320
+rl:full:41 (L0): 100/320
+rl:full:41 (L0): 120/320
+rl:full:41 (L0): 140/320
+rl:full:41 (L0): 160/320
+rl:full:41 (L0): 180/320
+rl:full:41 (L0): 200/320
+rl:full:41 (L0): 220/320
+rl:full:41 (L0): 240/320
+rl:full:41 (L0): 260/320
+rl:full:41 (L0): 280/320
+rl:full:41 (L0): 300/320
+rl:full:41 (L0): 320/320
+rl:full:59 (L0): 20/320
+rl:full:59 (L0): 40/320
+rl:full:59 (L0): 60/320
+rl:full:59 (L0): 80/320
+rl:full:59 (L0): 100/320
+rl:full:59 (L0): 120/320
+rl:full:59 (L0): 140/320
+rl:full:59 (L0): 160/320
+rl:full:59 (L0): 180/320
+rl:full:59 (L0): 200/320
+rl:full:59 (L0): 220/320
+rl:full:59 (L0): 240/320
+rl:full:59 (L0): 260/320
+rl:full:59 (L0): 280/320
+rl:full:59 (L0): 300/320
+rl:full:59 (L0): 320/320
+rl:full:83 (L0): 20/320
+rl:full:83 (L0): 40/320
+rl:full:83 (L0): 60/320
+rl:full:83 (L0): 80/320
+rl:full:83 (L0): 100/320
+rl:full:83 (L0): 120/320
+rl:full:83 (L0): 140/320
+rl:full:83 (L0): 160/320
+rl:full:83 (L0): 180/320
+rl:full:83 (L0): 200/320
+rl:full:83 (L0): 220/320
+rl:full:83 (L0): 240/320
+rl:full:83 (L0): 260/320
+rl:full:83 (L0): 280/320
+rl:full:83 (L0): 300/320
+rl:full:83 (L0): 320/320
+constant (L1): 20/320
+constant (L1): 40/320
+constant (L1): 60/320
+constant (L1): 80/320
+constant (L1): 100/320
+constant (L1): 120/320
+constant (L1): 140/320
+constant (L1): 160/320
+constant (L1): 180/320
+constant (L1): 200/320
+constant (L1): 220/320
+constant (L1): 240/320
+constant (L1): 260/320
+constant (L1): 280/320
+constant (L1): 300/320
+constant (L1): 320/320
+pc_fair (L1): 20/320
+pc_fair (L1): 40/320
+pc_fair (L1): 60/320
+pc_fair (L1): 80/320
+pc_fair (L1): 100/320
+pc_fair (L1): 120/320
+pc_fair (L1): 140/320
+pc_fair (L1): 160/320
+pc_fair (L1): 180/320
+pc_fair (L1): 200/320
+pc_fair (L1): 220/320
+pc_fair (L1): 240/320
+pc_fair (L1): 260/320
+pc_fair (L1): 280/320
+pc_fair (L1): 300/320
+pc_fair (L1): 320/320
+pc_strong (L1): 20/320
+pc_strong (L1): 40/320
+pc_strong (L1): 60/320
+pc_strong (L1): 80/320
+pc_strong (L1): 100/320
+pc_strong (L1): 120/320
+pc_strong (L1): 140/320
+pc_strong (L1): 160/320
+pc_strong (L1): 180/320
+pc_strong (L1): 200/320
+pc_strong (L1): 220/320
+pc_strong (L1): 240/320
+pc_strong (L1): 260/320
+pc_strong (L1): 280/320
+pc_strong (L1): 300/320
+pc_strong (L1): 320/320
+pc_oracle (L1): 20/320
+pc_oracle (L1): 40/320
+pc_oracle (L1): 60/320
+pc_oracle (L1): 80/320
+pc_oracle (L1): 100/320
+pc_oracle (L1): 120/320
+pc_oracle (L1): 140/320
+pc_oracle (L1): 160/320
+pc_oracle (L1): 180/320
+pc_oracle (L1): 200/320
+pc_oracle (L1): 220/320
+pc_oracle (L1): 240/320
+pc_oracle (L1): 260/320
+pc_oracle (L1): 280/320
+pc_oracle (L1): 300/320
+pc_oracle (L1): 320/320
+rl:full:17 (L1): 20/320
+rl:full:17 (L1): 40/320
+rl:full:17 (L1): 60/320
+rl:full:17 (L1): 80/320
+rl:full:17 (L1): 100/320
+rl:full:17 (L1): 120/320
+rl:full:17 (L1): 140/320
+rl:full:17 (L1): 160/320
+rl:full:17 (L1): 180/320
+rl:full:17 (L1): 200/320
+rl:full:17 (L1): 220/320
+rl:full:17 (L1): 240/320
+rl:full:17 (L1): 260/320
+rl:full:17 (L1): 280/320
+rl:full:17 (L1): 300/320
+rl:full:17 (L1): 320/320
+rl:full:23 (L1): 20/320
+rl:full:23 (L1): 40/320
+rl:full:23 (L1): 60/320
+rl:full:23 (L1): 80/320
+rl:full:23 (L1): 100/320
+rl:full:23 (L1): 120/320
+rl:full:23 (L1): 140/320
+rl:full:23 (L1): 160/320
+rl:full:23 (L1): 180/320
+rl:full:23 (L1): 200/320
+rl:full:23 (L1): 220/320
+rl:full:23 (L1): 240/320
+rl:full:23 (L1): 260/320
+rl:full:23 (L1): 280/320
+rl:full:23 (L1): 300/320
+rl:full:23 (L1): 320/320
+rl:full:41 (L1): 20/320
+rl:full:41 (L1): 40/320
+rl:full:41 (L1): 60/320
+rl:full:41 (L1): 80/320
+rl:full:41 (L1): 100/320
+rl:full:41 (L1): 120/320
+rl:full:41 (L1): 140/320
+rl:full:41 (L1): 160/320
+rl:full:41 (L1): 180/320
+rl:full:41 (L1): 200/320
+rl:full:41 (L1): 220/320
+rl:full:41 (L1): 240/320
+rl:full:41 (L1): 260/320
+rl:full:41 (L1): 280/320
+rl:full:41 (L1): 300/320
+rl:full:41 (L1): 320/320
+rl:full:59 (L1): 20/320
+rl:full:59 (L1): 40/320
+rl:full:59 (L1): 60/320
+rl:full:59 (L1): 80/320
+rl:full:59 (L1): 100/320
+rl:full:59 (L1): 120/320
+rl:full:59 (L1): 140/320
+rl:full:59 (L1): 160/320
+rl:full:59 (L1): 180/320
+rl:full:59 (L1): 200/320
+rl:full:59 (L1): 220/320
+rl:full:59 (L1): 240/320
+rl:full:59 (L1): 260/320
+rl:full:59 (L1): 280/320
+rl:full:59 (L1): 300/320
+rl:full:59 (L1): 320/320
+rl:full:83 (L1): 20/320
+rl:full:83 (L1): 40/320
+rl:full:83 (L1): 60/320
+rl:full:83 (L1): 80/320
+rl:full:83 (L1): 100/320
+rl:full:83 (L1): 120/320
+rl:full:83 (L1): 140/320
+rl:full:83 (L1): 160/320
+rl:full:83 (L1): 180/320
+rl:full:83 (L1): 200/320
+rl:full:83 (L1): 220/320
+rl:full:83 (L1): 240/320
+rl:full:83 (L1): 260/320
+rl:full:83 (L1): 280/320
+rl:full:83 (L1): 300/320
+rl:full:83 (L1): 320/320
+constant (L3): 20/320
+constant (L3): 40/320
+constant (L3): 60/320
+constant (L3): 80/320
+constant (L3): 100/320
+constant (L3): 120/320
+constant (L3): 140/320
+constant (L3): 160/320
+constant (L3): 180/320
+constant (L3): 200/320
+constant (L3): 220/320
+constant (L3): 240/320
+constant (L3): 260/320
+constant (L3): 280/320
+constant (L3): 300/320
+constant (L3): 320/320
+pc_fair (L3): 20/320
+pc_fair (L3): 40/320
+pc_fair (L3): 60/320
+pc_fair (L3): 80/320
+pc_fair (L3): 100/320
+pc_fair (L3): 120/320
+pc_fair (L3): 140/320
+pc_fair (L3): 160/320
+pc_fair (L3): 180/320
+pc_fair (L3): 200/320
+pc_fair (L3): 220/320
+pc_fair (L3): 240/320
+pc_fair (L3): 260/320
+pc_fair (L3): 280/320
+pc_fair (L3): 300/320
+pc_fair (L3): 320/320
+pc_strong (L3): 20/320
+pc_strong (L3): 40/320
+pc_strong (L3): 60/320
+pc_strong (L3): 80/320
+pc_strong (L3): 100/320
+pc_strong (L3): 120/320
+pc_strong (L3): 140/320
+pc_strong (L3): 160/320
+pc_strong (L3): 180/320
+pc_strong (L3): 200/320
+pc_strong (L3): 220/320
+pc_strong (L3): 240/320
+pc_strong (L3): 260/320
+pc_strong (L3): 280/320
+pc_strong (L3): 300/320
+pc_strong (L3): 320/320
+pc_oracle (L3): 20/320
+pc_oracle (L3): 40/320
+pc_oracle (L3): 60/320
+pc_oracle (L3): 80/320
+pc_oracle (L3): 100/320
+pc_oracle (L3): 120/320
+pc_oracle (L3): 140/320
+pc_oracle (L3): 160/320
+pc_oracle (L3): 180/320
+pc_oracle (L3): 200/320
+pc_oracle (L3): 220/320
+pc_oracle (L3): 240/320
+pc_oracle (L3): 260/320
+pc_oracle (L3): 280/320
+pc_oracle (L3): 300/320
+pc_oracle (L3): 320/320
+rl:full:17 (L3): 20/320
+rl:full:17 (L3): 40/320
+rl:full:17 (L3): 60/320
+rl:full:17 (L3): 80/320
+rl:full:17 (L3): 100/320
+rl:full:17 (L3): 120/320
+rl:full:17 (L3): 140/320
+rl:full:17 (L3): 160/320
+rl:full:17 (L3): 180/320
+rl:full:17 (L3): 200/320
+rl:full:17 (L3): 220/320
+rl:full:17 (L3): 240/320
+rl:full:17 (L3): 260/320
+rl:full:17 (L3): 280/320
+rl:full:17 (L3): 300/320
+rl:full:17 (L3): 320/320
+rl:full:23 (L3): 20/320
+rl:full:23 (L3): 40/320
+rl:full:23 (L3): 60/320
+rl:full:23 (L3): 80/320
+rl:full:23 (L3): 100/320
+rl:full:23 (L3): 120/320
+rl:full:23 (L3): 140/320
+rl:full:23 (L3): 160/320
+rl:full:23 (L3): 180/320
+rl:full:23 (L3): 200/320
+rl:full:23 (L3): 220/320
+rl:full:23 (L3): 240/320
+rl:full:23 (L3): 260/320
+rl:full:23 (L3): 280/320
+rl:full:23 (L3): 300/320
+rl:full:23 (L3): 320/320
+rl:full:41 (L3): 20/320
+rl:full:41 (L3): 40/320
+rl:full:41 (L3): 60/320
+rl:full:41 (L3): 80/320
+rl:full:41 (L3): 100/320
+rl:full:41 (L3): 120/320
+rl:full:41 (L3): 140/320
+rl:full:41 (L3): 160/320
+rl:full:41 (L3): 180/320
+rl:full:41 (L3): 200/320
+rl:full:41 (L3): 220/320
+rl:full:41 (L3): 240/320
+rl:full:41 (L3): 260/320
+rl:full:41 (L3): 280/320
+rl:full:41 (L3): 300/320
+rl:full:41 (L3): 320/320
+rl:full:59 (L3): 20/320
+rl:full:59 (L3): 40/320
+rl:full:59 (L3): 60/320
+rl:full:59 (L3): 80/320
+rl:full:59 (L3): 100/320
+rl:full:59 (L3): 120/320
+rl:full:59 (L3): 140/320
+rl:full:59 (L3): 160/320
+rl:full:59 (L3): 180/320
+rl:full:59 (L3): 200/320
+rl:full:59 (L3): 220/320
+rl:full:59 (L3): 240/320
+rl:full:59 (L3): 260/320
+rl:full:59 (L3): 280/320
+rl:full:59 (L3): 300/320
+rl:full:59 (L3): 320/320
+rl:full:83 (L3): 20/320
+rl:full:83 (L3): 40/320
+rl:full:83 (L3): 60/320
+rl:full:83 (L3): 80/320
+rl:full:83 (L3): 100/320
+rl:full:83 (L3): 120/320
+rl:full:83 (L3): 140/320
+rl:full:83 (L3): 160/320
+rl:full:83 (L3): 180/320
+rl:full:83 (L3): 200/320
+rl:full:83 (L3): 220/320
+rl:full:83 (L3): 240/320
+rl:full:83 (L3): 260/320
+rl:full:83 (L3): 280/320
+rl:full:83 (L3): 300/320
+rl:full:83 (L3): 320/320
+=== 2026-11-17T23:28:19Z stage report
+# 评估报告（构型库 F8D2000B，扰动 L2）
+
+命中：无超限，且 |航程误差| ≤ 5 km、|末速误差| ≤ 25 m/s。T1–T3 不变构也能到，T4–T6 只有变构能到，R 为随机留出目标。
+
+| 方法 | T1–T3 命中 | T4–T6 命中 | 随机目标命中 | T4–T6 超限率 | T4–T6 末速误差中位数 (m/s) | 保护介入比例 |
+|---|---|---|---|---|---|---|
+| constant | 0% | 0% | 0% | 5% | 95 | 0% |
+| pc_fair | 72% | 12% | 38% | 27% | 54 | 0% |
+| pc_fixed | 32% | 0% | 12% | 3% | 245 | 0% |
+| pc_oracle | 92% | 88% | 82% | 5% | 0 | 0% |
+| pc_strong | 97% | 90% | 84% | 5% | 1 | 0% |
+| rl:dist:17 | 0% | 0% | 0% | 0% | 56 | 6% |
+| rl:dist:23 | 0% | 0% | 0% | 0% | 60 | 3% |
+| rl:dist:41 | 0% | 0% | 2% | 0% | 50 | 4% |
+| rl:dist:59 | 0% | 0% | 0% | 7% | 62 | 1% |
+| rl:dist:83 | 0% | 0% | 0% | 5% | 95 | 0% |
+| rl:fixed:17 | 0% | 0% | 2% | 2% | 51 | 4% |
+| rl:fixed:23 | 0% | 0% | 2% | 8% | 53 | 4% |
+| rl:fixed:41 | 2% | 0% | 0% | 0% | 56 | 9% |
+| rl:fixed:59 | 2% | 0% | 0% | 0% | 70 | 1% |
+| rl:fixed:83 | 0% | 0% | 2% | 0% | 43 | 6% |
+| rl:full:17 | 0% | 0% | 4% | 2% | 51 | 5% |
+| rl:full:23 | 2% | 0% | 2% | 2% | 53 | 3% |
+| rl:full:41 | 2% | 0% | 0% | 2% | 20 | 9% |
+| rl:full:59 | 0% | 0% | 2% | 0% | 32 | 3% |
+| rl:full:83 | 2% | 0% | 0% | 2% | 27 | 5% |
+| rl:mean:17 | 3% | 0% | 3% | 0% | 48 | 6% |
+| rl:mean:23 | 0% | 0% | 1% | 2% | 67 | 0% |
+| rl:mean:41 | 0% | 0% | 0% | 0% | 38 | 7% |
+| rl:mean:59 | 0% | 0% | 2% | 2% | 35 | 5% |
+| rl:mean:83 | 0% | 0% | 0% | 0% | 32 | 5% |
+
+## H1：完整方法相对公平版预测-校正（T4–T6 命中率差）
+
+| 种子 | 命中率差 | 95% 置信区间 | H1 |
+|---|---|---|---|
+| 17 | -11.7 个百分点 | [-20.0, -3.3] | 不成立 |
+| 23 | -11.7 个百分点 | [-20.0, -3.3] | 不成立 |
+| 41 | -11.7 个百分点 | [-20.0, -3.3] | 不成立 |
+| 59 | -11.7 个百分点 | [-20.0, -3.3] | 不成立 |
+| 83 | -11.7 个百分点 | [-20.0, -3.3] | 不成立 |
+
+## G1
+
+平均命中率差 -11.7 个百分点（门槛 +20），H1 成立 0/5 → **未通过**
+
+## 消融（T4–T6 平均命中率）
+
+| 变体 | 种子数 | 平均命中率 |
+|---|---|---|
+| full | 5 | 0% |
+| dist | 5 | 0% |
+| fixed | 5 | 0% |
+| mean | 5 | 0% |
+
+=== 2026-11-17T23:28:20Z done (F8D2000B)
+=== 2026-11-17T23:28:20Z library F8D2000, plan sensitivity, workers 5
+=== 2026-11-17T23:28:20Z stage test
+....................                                                     [100%]
+20 passed in 48.32s
+=== 2026-11-17T23:29:09Z stage region
+runs/F8D2000/region.json exists (preregistered targets)
+=== 2026-11-17T23:29:09Z stage pi0
+pi0 (morphing): action 52 = (CL level, w level) (13, 0)
+pi0 (fixed): action 13 = (CL level, w level) (13, 0)
+=== 2026-11-17T23:32:38Z stage train
+--- 2026-11-17T23:32:38Z train full seed 17
+[full s17] pi0: mean G -1.6611, hits 1/48, violations 0
+[full s17] iter 0: 200 labels, 51 positive, 0 violating branches; kept; mean G -1.6611, hits 1/48, violations 0 (23 s)
+[full s17] iter 1: 200 labels, 59 positive, 0 violating branches; accepted margin 0.25; mean G -1.3508, hits 1/48, violations 0 (23 s)
+[full s17] iter 2: 204 labels, 64 positive, 0 violating branches; accepted margin 1.5; mean G -1.3364, hits 1/48, violations 0 (24 s)
+[full s17] iter 3: 200 labels, 17 positive, 0 violating branches; kept; mean G -1.3364, hits 1/48, violations 0 (24 s)
+[full s17] iter 4: 200 labels, 18 positive, 0 violating branches; accepted margin 1; mean G -1.3074, hits 1/48, violations 0 (26 s)
+[full s17] iter 5: 200 labels, 21 positive, 0 violating branches; accepted margin 0.5; mean G -1.1835, hits 0/48, violations 0 (26 s)
+[full s17] iter 6: 203 labels, 21 positive, 0 violating branches; accepted margin 0.25; mean G -1.1249, hits 0/48, violations 0 (28 s)
+[full s17] iter 7: 203 labels, 73 positive, 0 violating branches; kept; mean G -1.1249, hits 0/48, violations 0 (27 s)
+[full s17] iter 8: 206 labels, 52 positive, 0 violating branches; kept; mean G -1.1249, hits 0/48, violations 0 (29 s)
+[full s17] iter 9: 200 labels, 43 positive, 0 violating branches; kept; mean G -1.1249, hits 0/48, violations 0 (29 s)
+[full s17] iter 10: 195 labels, 63 positive, 0 violating branches; kept; mean G -1.1249, hits 0/48, violations 0 (29 s)
+[full s17] iter 11: 206 labels, 49 positive, 0 violating branches; kept; mean G -1.1249, hits 0/48, violations 0 (30 s)
+[full s17] iter 12: 209 labels, 74 positive, 0 violating branches; accepted margin 1; mean G -1.0906, hits 0/48, violations 0 (30 s)
+[full s17] iter 13: 205 labels, 51 positive, 0 violating branches; kept; mean G -1.0906, hits 0/48, violations 0 (31 s)
+[full s17] iter 14: 210 labels, 48 positive, 0 violating branches; accepted margin 0.5; mean G -1.0693, hits 1/48, violations 0 (32 s)
+[full s17] iter 15: 206 labels, 51 positive, 0 violating branches; accepted margin 0.25; mean G -1.0414, hits 0/48, violations 0 (32 s)
+[full s17] iter 16: 202 labels, 40 positive, 1 violating branches; accepted margin 0.75; mean G -0.9565, hits 2/48, violations 0 (33 s)
+[full s17] iter 17: 207 labels, 46 positive, 0 violating branches; accepted margin 0.75; mean G -0.9492, hits 2/48, violations 0 (33 s)
+[full s17] iter 18: 208 labels, 33 positive, 0 violating branches; accepted margin 0.75; mean G -0.9284, hits 3/48, violations 0 (35 s)
+[full s17] iter 19: 200 labels, 40 positive, 0 violating branches; kept; mean G -0.9284, hits 3/48, violations 0 (35 s)
+[full s17] iter 20: 200 labels, 46 positive, 0 violating branches; kept; mean G -0.9284, hits 3/48, violations 0 (36 s)
+[full s17] iter 21: 206 labels, 27 positive, 0 violating branches; kept; mean G -0.9284, hits 3/48, violations 0 (36 s)
+[full s17] iter 22: 202 labels, 17 positive, 0 violating branches; kept; mean G -0.9284, hits 3/48, violations 0 (36 s)
+[full s17] iter 23: 201 labels, 23 positive, 0 violating branches; accepted margin 0.25; mean G -0.8551, hits 2/48, violations 0 (37 s)
+[full s17] iter 24: 204 labels, 43 positive, 0 violating branches; kept; mean G -0.8551, hits 2/48, violations 0 (37 s)
+[full s17] iter 25: 204 labels, 70 positive, 0 violating branches; kept; mean G -0.8551, hits 2/48, violations 0 (37 s)
+[full s17] iter 26: 194 labels, 43 positive, 0 violating branches; accepted margin 1; mean G -0.8293, hits 2/48, violations 0 (37 s)
+[full s17] iter 27: 206 labels, 48 positive, 0 violating branches; kept; mean G -0.8293, hits 2/48, violations 0 (38 s)
+[full s17] iter 28: 202 labels, 43 positive, 0 violating branches; kept; mean G -0.8293, hits 2/48, violations 0 (38 s)
+[full s17] iter 29: 200 labels, 16 positive, 0 violating branches; kept; mean G -0.8293, hits 2/48, violations 0 (38 s)
+--- 2026-11-17T23:48:36Z train full seed 23
+[full s23] pi0: mean G -1.6611, hits 1/48, violations 0
+[full s23] iter 0: 200 labels, 1 positive, 0 violating branches; kept; mean G -1.6611, hits 1/48, violations 0 (23 s)
+[full s23] iter 1: 200 labels, 26 positive, 0 violating branches; kept; mean G -1.6611, hits 1/48, violations 0 (23 s)
+[full s23] iter 2: 200 labels, 43 positive, 0 violating branches; accepted margin 0.25; mean G -1.5479, hits 0/48, violations 0 (23 s)
+[full s23] iter 3: 200 labels, 36 positive, 0 violating branches; accepted margin 0.25; mean G -1.3123, hits 0/48, violations 0 (24 s)
+[full s23] iter 4: 200 labels, 35 positive, 0 violating branches; accepted margin 1.25; mean G -1.3123, hits 0/48, violations 0 (25 s)
+[full s23] iter 5: 200 labels, 19 positive, 0 violating branches; accepted margin 0.5; mean G -1.2755, hits 1/48, violations 0 (25 s)
+[full s23] iter 6: 200 labels, 12 positive, 0 violating branches; accepted margin 1; mean G -1.2747, hits 1/48, violations 0 (27 s)
+[full s23] iter 7: 200 labels, 104 positive, 0 violating branches; accepted margin 0.25; mean G -1.1023, hits 1/48, violations 0 (29 s)
+[full s23] iter 8: 204 labels, 51 positive, 1 violating branches; kept; mean G -1.1023, hits 1/48, violations 0 (29 s)
+[full s23] iter 9: 203 labels, 50 positive, 1 violating branches; accepted margin 1; mean G -1.1018, hits 1/48, violations 0 (28 s)
+[full s23] iter 10: 201 labels, 41 positive, 0 violating branches; kept; mean G -1.1018, hits 1/48, violations 0 (28 s)
+[full s23] iter 11: 205 labels, 81 positive, 0 violating branches; kept; mean G -1.1018, hits 1/48, violations 0 (28 s)
+[full s23] iter 12: 202 labels, 97 positive, 0 violating branches; kept; mean G -1.1018, hits 1/48, violations 0 (27 s)
+[full s23] iter 13: 200 labels, 0 positive, 0 violating branches; kept; mean G -1.1018, hits 1/48, violations 0 (27 s)
+[full s23] iter 14: 201 labels, 40 positive, 0 violating branches; kept; mean G -1.1018, hits 1/48, violations 0 (28 s)
+[full s23] iter 15: 202 labels, 49 positive, 0 violating branches; accepted margin 1; mean G -1.0880, hits 0/48, violations 0 (32 s)
+[full s23] iter 16: 202 labels, 45 positive, 0 violating branches; kept; mean G -1.0880, hits 0/48, violations 0 (32 s)
+[full s23] iter 17: 200 labels, 39 positive, 0 violating branches; kept; mean G -1.0880, hits 0/48, violations 0 (32 s)
+[full s23] iter 18: 202 labels, 47 positive, 0 violating branches; accepted margin 1.5; mean G -1.0820, hits 0/48, violations 0 (31 s)
+[full s23] iter 19: 200 labels, 43 positive, 0 violating branches; accepted margin 0.75; mean G -1.0556, hits 1/48, violations 0 (33 s)
+[full s23] iter 20: 200 labels, 43 positive, 0 violating branches; accepted margin 0.25; mean G -1.0116, hits 0/48, violations 0 (36 s)
+[full s23] iter 21: 203 labels, 37 positive, 0 violating branches; kept; mean G -1.0116, hits 0/48, violations 0 (36 s)
+[full s23] iter 22: 201 labels, 36 positive, 0 violating branches; accepted margin 0.5; mean G -1.0042, hits 0/48, violations 0 (37 s)
+[full s23] iter 23: 202 labels, 56 positive, 1 violating branches; kept; mean G -1.0042, hits 0/48, violations 0 (34 s)
+[full s23] iter 24: 199 labels, 52 positive, 0 violating branches; kept; mean G -1.0042, hits 0/48, violations 0 (32 s)
+[full s23] iter 25: 201 labels, 17 positive, 0 violating branches; accepted margin 1; mean G -0.9590, hits 1/48, violations 0 (39 s)
+[full s23] iter 26: 204 labels, 45 positive, 0 violating branches; kept; mean G -0.9590, hits 1/48, violations 0 (36 s)
+[full s23] iter 27: 203 labels, 42 positive, 0 violating branches; accepted margin 1.5; mean G -0.9556, hits 1/48, violations 0 (39 s)
+[full s23] iter 28: 200 labels, 58 positive, 0 violating branches; kept; mean G -0.9556, hits 1/48, violations 0 (37 s)
+[full s23] iter 29: 201 labels, 19 positive, 0 violating branches; kept; mean G -0.9556, hits 1/48, violations 0 (38 s)
+--- 2026-11-18T00:04:06Z train full seed 41
+[full s41] pi0: mean G -1.6611, hits 1/48, violations 0
+[full s41] iter 0: 200 labels, 52 positive, 0 violating branches; accepted margin 1.5; mean G -1.5873, hits 0/48, violations 0 (22 s)
+[full s41] iter 1: 200 labels, 64 positive, 0 violating branches; accepted margin 1.5; mean G -1.5588, hits 0/48, violations 0 (24 s)
+[full s41] iter 2: 198 labels, 41 positive, 0 violating branches; accepted margin 0.25; mean G -1.2893, hits 0/48, violations 0 (25 s)
+[full s41] iter 3: 200 labels, 42 positive, 0 violating branches; accepted margin 0.25; mean G -1.0593, hits 2/48, violations 0 (26 s)
+[full s41] iter 4: 195 labels, 45 positive, 0 violating branches; accepted margin 0.75; mean G -0.9976, hits 3/48, violations 0 (28 s)
+[full s41] iter 5: 196 labels, 62 positive, 0 violating branches; kept; mean G -0.9976, hits 3/48, violations 0 (28 s)
+[full s41] iter 6: 198 labels, 57 positive, 0 violating branches; accepted margin 0.25; mean G -0.9908, hits 2/48, violations 0 (28 s)
+[full s41] iter 7: 199 labels, 32 positive, 0 violating branches; accepted margin 0.75; mean G -0.9901, hits 2/48, violations 0 (30 s)
+[full s41] iter 8: 200 labels, 41 positive, 0 violating branches; accepted margin 0.25; mean G -0.8862, hits 1/48, violations 0 (31 s)
+[full s41] iter 9: 200 labels, 43 positive, 0 violating branches; accepted margin 0.5; mean G -0.7710, hits 2/48, violations 0 (31 s)
+[full s41] iter 10: 200 labels, 49 positive, 0 violating branches; accepted margin 0.25; mean G -0.7109, hits 2/48, violations 0 (32 s)
+[full s41] iter 11: 200 labels, 50 positive, 0 violating branches; accepted margin 0.25; mean G -0.7018, hits 2/48, violations 0 (33 s)
+[full s41] iter 12: 200 labels, 24 positive, 0 violating branches; accepted margin 0.5; mean G -0.6943, hits 2/48, violations 0 (35 s)
+[full s41] iter 13: 199 labels, 40 positive, 0 violating branches; kept; mean G -0.6943, hits 2/48, violations 0 (35 s)
+[full s41] iter 14: 198 labels, 56 positive, 0 violating branches; kept; mean G -0.6943, hits 2/48, violations 0 (35 s)
+[full s41] iter 15: 199 labels, 45 positive, 0 violating branches; kept; mean G -0.6943, hits 2/48, violations 0 (35 s)
+[full s41] iter 16: 200 labels, 37 positive, 0 violating branches; accepted margin 0.25; mean G -0.6705, hits 1/48, violations 0 (36 s)
+[full s41] iter 17: 200 labels, 21 positive, 0 violating branches; accepted margin 1; mean G -0.6552, hits 1/48, violations 0 (36 s)
+[full s41] iter 18: 198 labels, 71 positive, 0 violating branches; accepted margin 0.5; mean G -0.6070, hits 4/48, violations 0 (37 s)
+[full s41] iter 19: 200 labels, 57 positive, 0 violating branches; kept; mean G -0.6070, hits 4/48, violations 0 (35 s)
+[full s41] iter 20: 193 labels, 61 positive, 0 violating branches; accepted margin 0.5; mean G -0.5912, hits 5/48, violations 0 (36 s)
+[full s41] iter 21: 195 labels, 47 positive, 0 violating branches; accepted margin 0.5; mean G -0.5817, hits 6/48, violations 0 (40 s)
+[full s41] iter 22: 200 labels, 40 positive, 0 violating branches; accepted margin 0.25; mean G -0.5545, hits 3/48, violations 0 (41 s)
+[full s41] iter 23: 193 labels, 45 positive, 0 violating branches; accepted margin 0.75; mean G -0.5522, hits 3/48, violations 0 (42 s)
+[full s41] iter 24: 197 labels, 47 positive, 0 violating branches; kept; mean G -0.5522, hits 3/48, violations 0 (43 s)
+[full s41] iter 25: 197 labels, 44 positive, 0 violating branches; kept; mean G -0.5522, hits 3/48, violations 0 (43 s)
+[full s41] iter 26: 197 labels, 60 positive, 0 violating branches; kept; mean G -0.5522, hits 3/48, violations 0 (43 s)
+[full s41] iter 27: 203 labels, 28 positive, 0 violating branches; accepted margin 1.25; mean G -0.5496, hits 3/48, violations 0 (43 s)
+[full s41] iter 28: 197 labels, 64 positive, 0 violating branches; kept; mean G -0.5496, hits 3/48, violations 0 (44 s)
+[full s41] iter 29: 195 labels, 50 positive, 0 violating branches; accepted margin 0.25; mean G -0.5489, hits 3/48, violations 0 (44 s)
+--- 2026-11-18T00:21:39Z train full seed 59
+[full s59] pi0: mean G -1.6611, hits 1/48, violations 0
+[full s59] iter 0: 200 labels, 98 positive, 0 violating branches; kept; mean G -1.6611, hits 1/48, violations 0 (23 s)
+[full s59] iter 1: 200 labels, 21 positive, 0 violating branches; accepted margin 0.25; mean G -1.5788, hits 0/48, violations 0 (23 s)
+[full s59] iter 2: 201 labels, 97 positive, 0 violating branches; kept; mean G -1.5788, hits 0/48, violations 0 (23 s)
+[full s59] iter 3: 200 labels, 22 positive, 0 violating branches; kept; mean G -1.5788, hits 0/48, violations 0 (23 s)
+[full s59] iter 4: 200 labels, 40 positive, 0 violating branches; kept; mean G -1.5788, hits 0/48, violations 0 (24 s)
+[full s59] iter 5: 200 labels, 35 positive, 0 violating branches; kept; mean G -1.5788, hits 0/48, violations 0 (24 s)
+[full s59] iter 6: 200 labels, 68 positive, 0 violating branches; kept; mean G -1.5788, hits 0/48, violations 0 (23 s)
+[full s59] iter 7: 200 labels, 19 positive, 0 violating branches; accepted margin 0.75; mean G -1.3487, hits 0/48, violations 0 (25 s)
+[full s59] iter 8: 200 labels, 36 positive, 0 violating branches; accepted margin 0.25; mean G -1.2149, hits 0/48, violations 0 (27 s)
+[full s59] iter 9: 199 labels, 43 positive, 0 violating branches; accepted margin 0.5; mean G -1.1744, hits 1/48, violations 0 (28 s)
+[full s59] iter 10: 200 labels, 20 positive, 0 violating branches; accepted margin 0.25; mean G -1.1597, hits 1/48, violations 0 (28 s)
+[full s59] iter 11: 200 labels, 35 positive, 0 violating branches; accepted margin 1; mean G -1.1191, hits 1/48, violations 0 (29 s)
+[full s59] iter 12: 200 labels, 35 positive, 0 violating branches; kept; mean G -1.1191, hits 1/48, violations 0 (31 s)
+[full s59] iter 13: 199 labels, 40 positive, 0 violating branches; accepted margin 0.75; mean G -1.1052, hits 1/48, violations 0 (31 s)
+[full s59] iter 14: 199 labels, 45 positive, 0 violating branches; accepted margin 0.25; mean G -1.0132, hits 2/48, violations 0 (32 s)
+[full s59] iter 15: 197 labels, 20 positive, 0 violating branches; accepted margin 0.75; mean G -0.9954, hits 1/48, violations 0 (31 s)
+[full s59] iter 16: 200 labels, 48 positive, 0 violating branches; accepted margin 0.25; mean G -0.9700, hits 1/48, violations 0 (33 s)
+[full s59] iter 17: 200 labels, 39 positive, 0 violating branches; accepted margin 0.5; mean G -0.9503, hits 1/48, violations 0 (34 s)
+[full s59] iter 18: 200 labels, 20 positive, 0 violating branches; accepted margin 0.25; mean G -0.9316, hits 2/48, violations 0 (34 s)
+[full s59] iter 19: 199 labels, 44 positive, 0 violating branches; accepted margin 0.25; mean G -0.8743, hits 2/48, violations 0 (35 s)
+[full s59] iter 20: 204 labels, 68 positive, 0 violating branches; kept; mean G -0.8743, hits 2/48, violations 0 (36 s)
+[full s59] iter 21: 197 labels, 34 positive, 0 violating branches; kept; mean G -0.8743, hits 2/48, violations 0 (37 s)
+[full s59] iter 22: 199 labels, 81 positive, 1 violating branches; accepted margin 0.25; mean G -0.8299, hits 2/48, violations 0 (37 s)
+[full s59] iter 23: 197 labels, 68 positive, 0 violating branches; accepted margin 0.25; mean G -0.8062, hits 1/48, violations 0 (38 s)
+[full s59] iter 24: 199 labels, 40 positive, 0 violating branches; kept; mean G -0.8062, hits 1/48, violations 0 (38 s)
+[full s59] iter 25: 202 labels, 52 positive, 0 violating branches; kept; mean G -0.8062, hits 1/48, violations 0 (39 s)
+[full s59] iter 26: 198 labels, 46 positive, 0 violating branches; kept; mean G -0.8062, hits 1/48, violations 0 (39 s)
+[full s59] iter 27: 202 labels, 38 positive, 0 violating branches; accepted margin 1.25; mean G -0.8000, hits 2/48, violations 0 (39 s)
+[full s59] iter 28: 197 labels, 41 positive, 0 violating branches; kept; mean G -0.8000, hits 2/48, violations 0 (40 s)
+[full s59] iter 29: 198 labels, 40 positive, 0 violating branches; accepted margin 0.75; mean G -0.7892, hits 2/48, violations 0 (41 s)
+--- 2026-11-18T00:37:35Z train full seed 83
+[full s83] pi0: mean G -1.6611, hits 1/48, violations 0
+[full s83] iter 0: 200 labels, 41 positive, 0 violating branches; accepted margin 1; mean G -1.4391, hits 2/48, violations 0 (23 s)
+[full s83] iter 1: 200 labels, 53 positive, 0 violating branches; accepted margin 0.25; mean G -1.3096, hits 0/48, violations 0 (24 s)
+[full s83] iter 2: 200 labels, 17 positive, 0 violating branches; accepted margin 0.25; mean G -1.2156, hits 0/48, violations 0 (25 s)
+[full s83] iter 3: 200 labels, 71 positive, 0 violating branches; accepted margin 0.5; mean G -1.1859, hits 0/48, violations 0 (26 s)
+[full s83] iter 4: 197 labels, 67 positive, 0 violating branches; accepted margin 0.5; mean G -1.0397, hits 1/48, violations 0 (27 s)
+[full s83] iter 5: 198 labels, 44 positive, 0 violating branches; kept; mean G -1.0397, hits 1/48, violations 0 (28 s)
+[full s83] iter 6: 197 labels, 67 positive, 0 violating branches; accepted margin 0.5; mean G -1.0056, hits 1/48, violations 0 (28 s)
+[full s83] iter 7: 198 labels, 50 positive, 0 violating branches; accepted margin 0.5; mean G -0.8779, hits 2/48, violations 0 (29 s)
+[full s83] iter 8: 198 labels, 53 positive, 0 violating branches; accepted margin 0.5; mean G -0.8503, hits 1/48, violations 0 (30 s)
+[full s83] iter 9: 198 labels, 59 positive, 0 violating branches; accepted margin 0.5; mean G -0.7826, hits 1/48, violations 0 (31 s)
+[full s83] iter 10: 193 labels, 49 positive, 0 violating branches; kept; mean G -0.7826, hits 1/48, violations 0 (31 s)
+[full s83] iter 11: 198 labels, 42 positive, 0 violating branches; kept; mean G -0.7826, hits 1/48, violations 0 (31 s)
+[full s83] iter 12: 192 labels, 52 positive, 0 violating branches; kept; mean G -0.7826, hits 1/48, violations 0 (31 s)
+[full s83] iter 13: 198 labels, 45 positive, 0 violating branches; accepted margin 1.5; mean G -0.7680, hits 2/48, violations 0 (32 s)
+[full s83] iter 14: 194 labels, 51 positive, 0 violating branches; accepted margin 0.75; mean G -0.7577, hits 2/48, violations 0 (34 s)
+[full s83] iter 15: 199 labels, 41 positive, 0 violating branches; accepted margin 0.5; mean G -0.6671, hits 3/48, violations 0 (35 s)
+[full s83] iter 16: 189 labels, 39 positive, 0 violating branches; accepted margin 0.5; mean G -0.6523, hits 3/48, violations 0 (36 s)
+[full s83] iter 17: 200 labels, 30 positive, 0 violating branches; accepted margin 0.25; mean G -0.6490, hits 1/48, violations 0 (37 s)
+[full s83] iter 18: 197 labels, 78 positive, 0 violating branches; accepted margin 0.5; mean G -0.6460, hits 1/48, violations 0 (38 s)
+[full s83] iter 19: 197 labels, 48 positive, 0 violating branches; accepted margin 0.5; mean G -0.6313, hits 3/48, violations 0 (39 s)
+[full s83] iter 20: 196 labels, 19 positive, 0 violating branches; kept; mean G -0.6313, hits 3/48, violations 0 (38 s)
+[full s83] iter 21: 194 labels, 68 positive, 0 violating branches; accepted margin 1.5; mean G -0.6209, hits 3/48, violations 0 (36 s)
+[full s83] iter 22: 195 labels, 69 positive, 0 violating branches; kept; mean G -0.6209, hits 3/48, violations 0 (36 s)
+[full s83] iter 23: 199 labels, 70 positive, 0 violating branches; kept; mean G -0.6209, hits 3/48, violations 0 (40 s)
+[full s83] iter 24: 197 labels, 50 positive, 0 violating branches; accepted margin 1.5; mean G -0.6175, hits 2/48, violations 0 (41 s)
+[full s83] iter 25: 194 labels, 50 positive, 0 violating branches; accepted margin 0.75; mean G -0.6092, hits 2/48, violations 0 (41 s)
+[full s83] iter 26: 200 labels, 35 positive, 0 violating branches; accepted margin 0.25; mean G -0.5935, hits 2/48, violations 0 (43 s)
+[full s83] iter 27: 191 labels, 50 positive, 0 violating branches; kept; mean G -0.5935, hits 2/48, violations 0 (43 s)
+[full s83] iter 28: 190 labels, 53 positive, 0 violating branches; kept; mean G -0.5935, hits 2/48, violations 0 (44 s)
+[full s83] iter 29: 198 labels, 75 positive, 0 violating branches; accepted margin 1; mean G -0.5887, hits 2/48, violations 0 (44 s)
+=== 2026-11-18T00:54:49Z stage eval
+constant (L2): 20/320
+constant (L2): 40/320
+constant (L2): 60/320
+constant (L2): 80/320
+constant (L2): 100/320
+constant (L2): 120/320
+constant (L2): 140/320
+constant (L2): 160/320
+constant (L2): 180/320
+constant (L2): 200/320
+constant (L2): 220/320
+constant (L2): 240/320
+constant (L2): 260/320
+constant (L2): 280/320
+constant (L2): 300/320
+constant (L2): 320/320
+pc_fair (L2): 20/320
+pc_fair (L2): 40/320
+pc_fair (L2): 60/320
+pc_fair (L2): 80/320
+pc_fair (L2): 100/320
+pc_fair (L2): 120/320
+pc_fair (L2): 140/320
+pc_fair (L2): 160/320
+pc_fair (L2): 180/320
+pc_fair (L2): 200/320
+pc_fair (L2): 220/320
+pc_fair (L2): 240/320
+pc_fair (L2): 260/320
+pc_fair (L2): 280/320
+pc_fair (L2): 300/320
+pc_fair (L2): 320/320
+pc_strong (L2): 20/320
+pc_strong (L2): 40/320
+pc_strong (L2): 60/320
+pc_strong (L2): 80/320
+pc_strong (L2): 100/320
+pc_strong (L2): 120/320
+pc_strong (L2): 140/320
+pc_strong (L2): 160/320
+pc_strong (L2): 180/320
+pc_strong (L2): 200/320
+pc_strong (L2): 220/320
+pc_strong (L2): 240/320
+pc_strong (L2): 260/320
+pc_strong (L2): 280/320
+pc_strong (L2): 300/320
+pc_strong (L2): 320/320
+pc_oracle (L2): 20/320
+pc_oracle (L2): 40/320
+pc_oracle (L2): 60/320
+pc_oracle (L2): 80/320
+pc_oracle (L2): 100/320
+pc_oracle (L2): 120/320
+pc_oracle (L2): 140/320
+pc_oracle (L2): 160/320
+pc_oracle (L2): 180/320
+pc_oracle (L2): 200/320
+pc_oracle (L2): 220/320

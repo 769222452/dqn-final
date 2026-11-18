@@ -1,0 +1,769 @@
+{
+ "action": 52,
+ "decoded": [
+  13,
+  0
+ ],
+ "table": [
+  {
+   "action": 0,
+   "decoded": [
+    0,
+    0
+   ],
+   "mean_G": -3.7533209960451983,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 1,
+   "decoded": [
+    0,
+    1
+   ],
+   "mean_G": -3.5717567223804623,
+   "hits": 0,
+   "violations": 35
+  },
+  {
+   "action": 2,
+   "decoded": [
+    0,
+    2
+   ],
+   "mean_G": -3.2779699996936174,
+   "hits": 0,
+   "violations": 29
+  },
+  {
+   "action": 3,
+   "decoded": [
+    0,
+    3
+   ],
+   "mean_G": -2.6967197692921565,
+   "hits": 0,
+   "violations": 21
+  },
+  {
+   "action": 4,
+   "decoded": [
+    1,
+    0
+   ],
+   "mean_G": -3.753841809136352,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 5,
+   "decoded": [
+    1,
+    1
+   ],
+   "mean_G": -3.571455384879029,
+   "hits": 0,
+   "violations": 35
+  },
+  {
+   "action": 6,
+   "decoded": [
+    1,
+    2
+   ],
+   "mean_G": -3.207207292417485,
+   "hits": 0,
+   "violations": 28
+  },
+  {
+   "action": 7,
+   "decoded": [
+    1,
+    3
+   ],
+   "mean_G": -2.6984332645064133,
+   "hits": 0,
+   "violations": 21
+  },
+  {
+   "action": 8,
+   "decoded": [
+    2,
+    0
+   ],
+   "mean_G": -3.7543528280835456,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 9,
+   "decoded": [
+    2,
+    1
+   ],
+   "mean_G": -3.571158546694806,
+   "hits": 0,
+   "violations": 35
+  },
+  {
+   "action": 10,
+   "decoded": [
+    2,
+    2
+   ],
+   "mean_G": -3.2083163149934357,
+   "hits": 0,
+   "violations": 28
+  },
+  {
+   "action": 11,
+   "decoded": [
+    2,
+    3
+   ],
+   "mean_G": -2.7000762929385065,
+   "hits": 0,
+   "violations": 21
+  },
+  {
+   "action": 12,
+   "decoded": [
+    3,
+    0
+   ],
+   "mean_G": -3.754561043677309,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 13,
+   "decoded": [
+    3,
+    1
+   ],
+   "mean_G": -3.571019607510666,
+   "hits": 0,
+   "violations": 35
+  },
+  {
+   "action": 14,
+   "decoded": [
+    3,
+    2
+   ],
+   "mean_G": -3.2804815019864897,
+   "hits": 0,
+   "violations": 29
+  },
+  {
+   "action": 15,
+   "decoded": [
+    3,
+    3
+   ],
+   "mean_G": -2.7008923620558924,
+   "hits": 0,
+   "violations": 21
+  },
+  {
+   "action": 16,
+   "decoded": [
+    4,
+    0
+   ],
+   "mean_G": -3.754745705923544,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 17,
+   "decoded": [
+    4,
+    1
+   ],
+   "mean_G": -3.504577211537548,
+   "hits": 0,
+   "violations": 34
+  },
+  {
+   "action": 18,
+   "decoded": [
+    4,
+    2
+   ],
+   "mean_G": -3.2092902497508597,
+   "hits": 0,
+   "violations": 28
+  },
+  {
+   "action": 19,
+   "decoded": [
+    4,
+    3
+   ],
+   "mean_G": -2.6535237356615835,
+   "hits": 0,
+   "violations": 20
+  },
+  {
+   "action": 20,
+   "decoded": [
+    5,
+    0
+   ],
+   "mean_G": -3.75339125291074,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 21,
+   "decoded": [
+    5,
+    1
+   ],
+   "mean_G": -3.4839470684024385,
+   "hits": 0,
+   "violations": 33
+  },
+  {
+   "action": 22,
+   "decoded": [
+    5,
+    2
+   ],
+   "mean_G": -3.083976979804214,
+   "hits": 0,
+   "violations": 26
+  },
+  {
+   "action": 23,
+   "decoded": [
+    5,
+    3
+   ],
+   "mean_G": -2.5726938580966747,
+   "hits": 0,
+   "violations": 18
+  },
+  {
+   "action": 24,
+   "decoded": [
+    6,
+    0
+   ],
+   "mean_G": -2.7986184368953686,
+   "hits": 0,
+   "violations": 9
+  },
+  {
+   "action": 25,
+   "decoded": [
+    6,
+    1
+   ],
+   "mean_G": -2.5968934396943246,
+   "hits": 0,
+   "violations": 9
+  },
+  {
+   "action": 26,
+   "decoded": [
+    6,
+    2
+   ],
+   "mean_G": -2.420400865441565,
+   "hits": 0,
+   "violations": 8
+  },
+  {
+   "action": 27,
+   "decoded": [
+    6,
+    3
+   ],
+   "mean_G": -2.1966673335783344,
+   "hits": 0,
+   "violations": 7
+  },
+  {
+   "action": 28,
+   "decoded": [
+    7,
+    0
+   ],
+   "mean_G": -2.5626492449892324,
+   "hits": 1,
+   "violations": 4
+  },
+  {
+   "action": 29,
+   "decoded": [
+    7,
+    1
+   ],
+   "mean_G": -2.42442522669061,
+   "hits": 1,
+   "violations": 4
+  },
+  {
+   "action": 30,
+   "decoded": [
+    7,
+    2
+   ],
+   "mean_G": -2.2029861765362075,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 31,
+   "decoded": [
+    7,
+    3
+   ],
+   "mean_G": -2.0605289613864173,
+   "hits": 0,
+   "violations": 4
+  },
+  {
+   "action": 32,
+   "decoded": [
+    8,
+    0
+   ],
+   "mean_G": -2.484497902461553,
+   "hits": 0,
+   "violations": 4
+  },
+  {
+   "action": 33,
+   "decoded": [
+    8,
+    1
+   ],
+   "mean_G": -2.3378812578814645,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 34,
+   "decoded": [
+    8,
+    2
+   ],
+   "mean_G": -2.1342388189408568,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 35,
+   "decoded": [
+    8,
+    3
+   ],
+   "mean_G": -1.9008874986858257,
+   "hits": 1,
+   "violations": 2
+  },
+  {
+   "action": 36,
+   "decoded": [
+    9,
+    0
+   ],
+   "mean_G": -2.3759191125625736,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 37,
+   "decoded": [
+    9,
+    1
+   ],
+   "mean_G": -2.2099152399131214,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 38,
+   "decoded": [
+    9,
+    2
+   ],
+   "mean_G": -2.041731397401484,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 39,
+   "decoded": [
+    9,
+    3
+   ],
+   "mean_G": -1.8029805933533494,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 40,
+   "decoded": [
+    10,
+    0
+   ],
+   "mean_G": -2.241601811299726,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 41,
+   "decoded": [
+    10,
+    1
+   ],
+   "mean_G": -2.1006521749925455,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 42,
+   "decoded": [
+    10,
+    2
+   ],
+   "mean_G": -1.9041312225515323,
+   "hits": 0,
+   "violations": 2
+  },
+  {
+   "action": 43,
+   "decoded": [
+    10,
+    3
+   ],
+   "mean_G": -1.7717871167730006,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 44,
+   "decoded": [
+    11,
+    0
+   ],
+   "mean_G": -2.1159208200890536,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 45,
+   "decoded": [
+    11,
+    1
+   ],
+   "mean_G": -1.9305569683318744,
+   "hits": 1,
+   "violations": 2
+  },
+  {
+   "action": 46,
+   "decoded": [
+    11,
+    2
+   ],
+   "mean_G": -1.7223954157108707,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 47,
+   "decoded": [
+    11,
+    3
+   ],
+   "mean_G": -1.7541023061971763,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 48,
+   "decoded": [
+    12,
+    0
+   ],
+   "mean_G": -1.9032673752524334,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 49,
+   "decoded": [
+    12,
+    1
+   ],
+   "mean_G": -1.7291646986271914,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 50,
+   "decoded": [
+    12,
+    2
+   ],
+   "mean_G": -1.686552210213657,
+   "hits": 1,
+   "violations": 0
+  },
+  {
+   "action": 51,
+   "decoded": [
+    12,
+    3
+   ],
+   "mean_G": -1.8170909574567498,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 52,
+   "decoded": [
+    13,
+    0
+   ],
+   "mean_G": -1.6610634604868253,
+   "hits": 1,
+   "violations": 0
+  },
+  {
+   "action": 53,
+   "decoded": [
+    13,
+    1
+   ],
+   "mean_G": -1.7496281507804008,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 54,
+   "decoded": [
+    13,
+    2
+   ],
+   "mean_G": -1.869318026737312,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 55,
+   "decoded": [
+    13,
+    3
+   ],
+   "mean_G": -2.053475752224506,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 56,
+   "decoded": [
+    14,
+    0
+   ],
+   "mean_G": -1.8984502083180184,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 57,
+   "decoded": [
+    14,
+    1
+   ],
+   "mean_G": -2.0415544421975675,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 58,
+   "decoded": [
+    14,
+    2
+   ],
+   "mean_G": -2.2030638852201427,
+   "hits": 1,
+   "violations": 1
+  },
+  {
+   "action": 59,
+   "decoded": [
+    14,
+    3
+   ],
+   "mean_G": -2.3881765699944064,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 60,
+   "decoded": [
+    15,
+    0
+   ],
+   "mean_G": -2.293037556061398,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 61,
+   "decoded": [
+    15,
+    1
+   ],
+   "mean_G": -2.456127956486958,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 62,
+   "decoded": [
+    15,
+    2
+   ],
+   "mean_G": -2.720708006155288,
+   "hits": 0,
+   "violations": 8
+  },
+  {
+   "action": 63,
+   "decoded": [
+    15,
+    3
+   ],
+   "mean_G": -2.927471041975546,
+   "hits": 0,
+   "violations": 14
+  },
+  {
+   "action": 64,
+   "decoded": [
+    16,
+    0
+   ],
+   "mean_G": -2.79158870425713,
+   "hits": 1,
+   "violations": 9
+  },
+  {
+   "action": 65,
+   "decoded": [
+    16,
+    1
+   ],
+   "mean_G": -2.9819110425780284,
+   "hits": 0,
+   "violations": 14
+  },
+  {
+   "action": 66,
+   "decoded": [
+    16,
+    2
+   ],
+   "mean_G": -3.1745154274163276,
+   "hits": 0,
+   "violations": 19
+  },
+  {
+   "action": 67,
+   "decoded": [
+    16,
+    3
+   ],
+   "mean_G": -3.381666588400408,
+   "hits": 0,
+   "violations": 26
+  },
+  {
+   "action": 68,
+   "decoded": [
+    17,
+    0
+   ],
+   "mean_G": -3.2849743371449818,
+   "hits": 0,
+   "violations": 22
+  },
+  {
+   "action": 69,
+   "decoded": [
+    17,
+    1
+   ],
+   "mean_G": -3.510230252555831,
+   "hits": 0,
+   "violations": 30
+  },
+  {
+   "action": 70,
+   "decoded": [
+    17,
+    2
+   ],
+   "mean_G": -3.754091674126515,
+   "hits": 0,
+   "violations": 38
+  },
+  {
+   "action": 71,
+   "decoded": [
+    17,
+    3
+   ],
+   "mean_G": -3.8519983928326647,
+   "hits": 0,
+   "violations": 42
+  },
+  {
+   "action": 72,
+   "decoded": [
+    18,
+    0
+   ],
+   "mean_G": -3.828280883775778,
+   "hits": 0,
+   "violations": 41
+  },
+  {
+   "action": 73,
+   "decoded": [
+    18,
+    1
+   ],
+   "mean_G": -3.9145324069767926,
+   "hits": 0,
+   "violations": 44
+  },
+  {
+   "action": 74,
+   "decoded": [
+    18,
+    2
+   ],
+   "mean_G": -3.9583333333333335,
+   "hits": 0,
+   "violations": 46
+  },
+  {
+   "action": 75,
+   "decoded": [
+    18,
+    3
+   ],
+   "mean_G": -3.9791666666666665,
+   "hits": 0,
+   "violations": 47
+  }
+ ]
+}

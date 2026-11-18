@@ -1,0 +1,769 @@
+{
+ "action": 60,
+ "decoded": [
+  15,
+  0
+ ],
+ "table": [
+  {
+   "action": 0,
+   "decoded": [
+    0,
+    0
+   ],
+   "mean_G": -3.7931841483066755,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 1,
+   "decoded": [
+    0,
+    1
+   ],
+   "mean_G": -3.408816122894377,
+   "hits": 0,
+   "violations": 36
+  },
+  {
+   "action": 2,
+   "decoded": [
+    0,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 3,
+   "decoded": [
+    0,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 4,
+   "decoded": [
+    1,
+    0
+   ],
+   "mean_G": -3.793391890067794,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 5,
+   "decoded": [
+    1,
+    1
+   ],
+   "mean_G": -3.410072167268328,
+   "hits": 0,
+   "violations": 36
+  },
+  {
+   "action": 6,
+   "decoded": [
+    1,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 7,
+   "decoded": [
+    1,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 8,
+   "decoded": [
+    2,
+    0
+   ],
+   "mean_G": -3.7936055084105096,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 9,
+   "decoded": [
+    2,
+    1
+   ],
+   "mean_G": -3.411375598405178,
+   "hits": 0,
+   "violations": 36
+  },
+  {
+   "action": 10,
+   "decoded": [
+    2,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 11,
+   "decoded": [
+    2,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 12,
+   "decoded": [
+    3,
+    0
+   ],
+   "mean_G": -3.7936926808678995,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 13,
+   "decoded": [
+    3,
+    1
+   ],
+   "mean_G": -3.41200224961973,
+   "hits": 0,
+   "violations": 36
+  },
+  {
+   "action": 14,
+   "decoded": [
+    3,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 15,
+   "decoded": [
+    3,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 16,
+   "decoded": [
+    4,
+    0
+   ],
+   "mean_G": -3.79377086075351,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 17,
+   "decoded": [
+    4,
+    1
+   ],
+   "mean_G": -3.412594053514448,
+   "hits": 0,
+   "violations": 36
+  },
+  {
+   "action": 18,
+   "decoded": [
+    4,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 19,
+   "decoded": [
+    4,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 20,
+   "decoded": [
+    5,
+    0
+   ],
+   "mean_G": -3.792839085935851,
+   "hits": 0,
+   "violations": 40
+  },
+  {
+   "action": 21,
+   "decoded": [
+    5,
+    1
+   ],
+   "mean_G": -3.413043280132287,
+   "hits": 0,
+   "violations": 36
+  },
+  {
+   "action": 22,
+   "decoded": [
+    5,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 23,
+   "decoded": [
+    5,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 24,
+   "decoded": [
+    6,
+    0
+   ],
+   "mean_G": -3.1289896990034216,
+   "hits": 0,
+   "violations": 9
+  },
+  {
+   "action": 25,
+   "decoded": [
+    6,
+    1
+   ],
+   "mean_G": -3.2170479084000263,
+   "hits": 0,
+   "violations": 31
+  },
+  {
+   "action": 26,
+   "decoded": [
+    6,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 27,
+   "decoded": [
+    6,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 28,
+   "decoded": [
+    7,
+    0
+   ],
+   "mean_G": -2.970805664871562,
+   "hits": 0,
+   "violations": 4
+  },
+  {
+   "action": 29,
+   "decoded": [
+    7,
+    1
+   ],
+   "mean_G": -2.4240776926091985,
+   "hits": 1,
+   "violations": 15
+  },
+  {
+   "action": 30,
+   "decoded": [
+    7,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 31,
+   "decoded": [
+    7,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 32,
+   "decoded": [
+    8,
+    0
+   ],
+   "mean_G": -2.9336613326173784,
+   "hits": 0,
+   "violations": 4
+  },
+  {
+   "action": 33,
+   "decoded": [
+    8,
+    1
+   ],
+   "mean_G": -2.166584166129034,
+   "hits": 0,
+   "violations": 9
+  },
+  {
+   "action": 34,
+   "decoded": [
+    8,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 35,
+   "decoded": [
+    8,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 36,
+   "decoded": [
+    9,
+    0
+   ],
+   "mean_G": -2.8353802263990535,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 37,
+   "decoded": [
+    9,
+    1
+   ],
+   "mean_G": -1.8978932811572886,
+   "hits": 0,
+   "violations": 2
+  },
+  {
+   "action": 38,
+   "decoded": [
+    9,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 39,
+   "decoded": [
+    9,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 40,
+   "decoded": [
+    10,
+    0
+   ],
+   "mean_G": -2.7815175733919837,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 41,
+   "decoded": [
+    10,
+    1
+   ],
+   "mean_G": -1.8503945779198103,
+   "hits": 1,
+   "violations": 1
+  },
+  {
+   "action": 42,
+   "decoded": [
+    10,
+    2
+   ],
+   "mean_G": -3.9791666666666665,
+   "hits": 0,
+   "violations": 47
+  },
+  {
+   "action": 43,
+   "decoded": [
+    10,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 44,
+   "decoded": [
+    11,
+    0
+   ],
+   "mean_G": -2.6907879664407175,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 45,
+   "decoded": [
+    11,
+    1
+   ],
+   "mean_G": -1.9248000833346215,
+   "hits": 0,
+   "violations": 3
+  },
+  {
+   "action": 46,
+   "decoded": [
+    11,
+    2
+   ],
+   "mean_G": -3.9791666666666665,
+   "hits": 0,
+   "violations": 47
+  },
+  {
+   "action": 47,
+   "decoded": [
+    11,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 48,
+   "decoded": [
+    12,
+    0
+   ],
+   "mean_G": -2.4875182930154263,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 49,
+   "decoded": [
+    12,
+    1
+   ],
+   "mean_G": -1.9810666139027262,
+   "hits": 0,
+   "violations": 4
+  },
+  {
+   "action": 50,
+   "decoded": [
+    12,
+    2
+   ],
+   "mean_G": -3.9791666666666665,
+   "hits": 0,
+   "violations": 47
+  },
+  {
+   "action": 51,
+   "decoded": [
+    12,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 52,
+   "decoded": [
+    13,
+    0
+   ],
+   "mean_G": -2.1450743827111967,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 53,
+   "decoded": [
+    13,
+    1
+   ],
+   "mean_G": -2.384735325705522,
+   "hits": 0,
+   "violations": 13
+  },
+  {
+   "action": 54,
+   "decoded": [
+    13,
+    2
+   ],
+   "mean_G": -3.9791666666666665,
+   "hits": 0,
+   "violations": 47
+  },
+  {
+   "action": 55,
+   "decoded": [
+    13,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 56,
+   "decoded": [
+    14,
+    0
+   ],
+   "mean_G": -1.8273121327427273,
+   "hits": 0,
+   "violations": 0
+  },
+  {
+   "action": 57,
+   "decoded": [
+    14,
+    1
+   ],
+   "mean_G": -2.8691358227675985,
+   "hits": 0,
+   "violations": 21
+  },
+  {
+   "action": 58,
+   "decoded": [
+    14,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 59,
+   "decoded": [
+    14,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 60,
+   "decoded": [
+    15,
+    0
+   ],
+   "mean_G": -1.8164401251424926,
+   "hits": 0,
+   "violations": 1
+  },
+  {
+   "action": 61,
+   "decoded": [
+    15,
+    1
+   ],
+   "mean_G": -3.5903687889015763,
+   "hits": 0,
+   "violations": 38
+  },
+  {
+   "action": 62,
+   "decoded": [
+    15,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 63,
+   "decoded": [
+    15,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 64,
+   "decoded": [
+    16,
+    0
+   ],
+   "mean_G": -2.267022304394535,
+   "hits": 0,
+   "violations": 9
+  },
+  {
+   "action": 65,
+   "decoded": [
+    16,
+    1
+   ],
+   "mean_G": -3.9113440941675535,
+   "hits": 0,
+   "violations": 45
+  },
+  {
+   "action": 66,
+   "decoded": [
+    16,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 67,
+   "decoded": [
+    16,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 68,
+   "decoded": [
+    17,
+    0
+   ],
+   "mean_G": -2.9549933190242705,
+   "hits": 0,
+   "violations": 22
+  },
+  {
+   "action": 69,
+   "decoded": [
+    17,
+    1
+   ],
+   "mean_G": -3.9791666666666665,
+   "hits": 0,
+   "violations": 47
+  },
+  {
+   "action": 70,
+   "decoded": [
+    17,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 71,
+   "decoded": [
+    17,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 72,
+   "decoded": [
+    18,
+    0
+   ],
+   "mean_G": -3.728000311706058,
+   "hits": 0,
+   "violations": 41
+  },
+  {
+   "action": 73,
+   "decoded": [
+    18,
+    1
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 74,
+   "decoded": [
+    18,
+    2
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  },
+  {
+   "action": 75,
+   "decoded": [
+    18,
+    3
+   ],
+   "mean_G": -4.0,
+   "hits": 0,
+   "violations": 48
+  }
+ ]
+}
