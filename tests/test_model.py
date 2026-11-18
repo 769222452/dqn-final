@@ -54,8 +54,12 @@ def test_scenarios_match_original_generator():
 
 def test_train_and_test_seeds_are_disjoint():
     s = config.load()['seeds']
-    a, b, c = (set(config.seed_range(s[k])) for k in ('train', 'test', 'random_targets'))
-    assert not (a & b) and not (a & c) and not (b & c)
+    sets = [set(config.seed_range(s[k])) for k in ('train', 'test', 'random_targets', 'dev')]
+    for i in range(len(sets)):
+        for j in range(i+1, len(sets)):
+            assert not (sets[i] & sets[j])
+    round1_test = set(range(2200, 2220))          # round-1 test scenarios must not be reused
+    assert not (set(config.seed_range(s['test'])) & round1_test) and not (set(config.seed_range(s['dev'])) & round1_test)
 
 
 def test_default_library_is_f8d2000b():

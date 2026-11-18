@@ -64,6 +64,10 @@ protection:                    # inner loop shared by every method, every inner_
   kp: 2.0
   kg: 1.0
 
+execution:                     # round 2 (PREREGISTRATION.md amendment 5): CL target fed back on the flight-path angle
+  kg: 1.0                      # executed CL = CL target - kg * gamma, then the protection loop (round 1: kg = 0)
+  update_s: 3.0                # the corrected target is refreshed every 3 s (the decision step of the certified chain)
+
 disturbance:
   levels:                      # density sigma, correlation length km, lift/drag bias sigma
     L0: [0.0, 200.0, 0.0]
@@ -92,9 +96,10 @@ targets:
   fixed_fractions: [0.25, 0.50, 0.75]   # T1-T3 / T4-T6 ranges: fractions of the common range interval
   random_test: 10
 
-seeds:
-  train: [1100, 1147]          # inclusive
-  test: [2200, 2219]           # 2100-2119 were touched by development smoke runs (PREREGISTRATION.md amendment 1)
+seeds:                         # round 2 (amendment 5); round 1 used train 1100-1147 and test 2200-2219
+  train: [1100, 1195]          # inclusive
+  test: [2300, 2319]           # new, never used before; 2200-2219 were the round-1 test scenarios
+  dev: [2350, 2354]            # pilot runs only (scripts/pilot_r2.sh); never part of the test set
   random_targets: [3000, 3009]
   training_runs: [17, 23, 41, 59, 83]
 
@@ -104,7 +109,7 @@ reach_grid:                    # region stage: three phases, (r, w) per phase
   w: [0.0, 0.3333333333333333, 0.6666666666666666, 1.0]
 
 training:
-  iterations: 30
+  iterations: 60               # round 1: 30
   states: 25
   stride_s: 48.0
   window_s: 48.0
@@ -112,7 +117,7 @@ training:
   hidden: [16, 16]
   label_scale: 100.0           # advantages in units of 0.01 return
   label_clip: 2.0
-  margins: [1.0, 0.5, 0.25, 0.75, 1.25, 1.5]
+  margins: [0.5, 1.0, 1.5]     # round 1: 1, 0.5, 0.25, 0.75, 1.25, 1.5
   min_advantage: 0.001
   neighbourhood: [2, 1]        # model stages may move CL by +-2 levels and w by +-1 level per decision
 
@@ -125,11 +130,13 @@ predictor_corrector:
   r_bounds: [0.3, 0.95]
   strong_phases_s: [400.0, 800.0]
 
-experiment:                    # paper experiment plan (EXPERIMENTS.md, PREREGISTRATION.md amendment 4)
+experiment:                    # round 2 plan (EXPERIMENTS.md, PREREGISTRATION.md amendment 5)
+  tag: r2                      # round-2 results go to runs/r2/<library>/; round 1 stays in runs/<library>/
   main_library: F8D2000B
-  sensitivity_libraries: [F8D2000, L298]
+  sensitivity_libraries: [F8D2000]
+  variants: [full, nodamp, single, fixed]
   generalization_levels: [L0, L1, L3]   # policies trained on L2, evaluated without retraining
-  trace_cases: [[2200, T2], [2200, T5], [2201, T4]]   # test cases flown with a per-step trajectory log
+  trace_cases: [[2300, T2], [2300, T5], [2301, T4]]   # test cases flown with a per-step trajectory log
 
 reference:
   maxfev: 150                  # Nelder-Mead evaluations in total, split over three starting plans

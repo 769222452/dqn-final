@@ -148,11 +148,22 @@ class PredictorCorrector:
         return env
 
 
-def fly_constant(sc, target, action, morph=True, trace=False):
-    env = F.TargetFlight(sc, target, morph, trace=trace)
+def fly_constant(sc, target, action, morph=True, trace=False, kg=None):
+    env = F.TargetFlight(sc, target, morph, trace=trace, kg=kg)
     while not env.done:
         env.step(action)
     return env
+
+
+def constant_table(cases, workers, morph=True, kg=None):
+    """Return G[action, case] and violation[action, case] of every constant action on every case."""
+    from .parallel import pool_map
+    n = F.n_actions(morph)
+    jobs = [('constant', dict(case=c, action=a, morph=morph, kg=kg)) for a in range(n) for c in cases]
+    res = pool_map(jobs, workers, chunksize=4)
+    G = np.array([r['G'] for r in res]).reshape(n, len(cases))
+    V = np.array([not r['feasible'] for r in res]).reshape(n, len(cases))
+    return G, V
 
 
 def tune_constant(cases, workers, morph=True):

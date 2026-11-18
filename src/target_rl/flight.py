@@ -32,6 +32,8 @@ def world(morph=True):
                        qmax=m['limits']['dynamic_pressure_pa_max'], cl_levels=list(cfg['actions']['cl_levels']),
                        w_levels=list(cfg['actions']['morph_levels']) if morph else [0.],
                        cl_clip=cfg['actions']['cl_clip'], prot=cfg['protection'], hit=cfg['hit'],
+                       kg=float(cfg.get('execution', {}).get('kg', 0.)),
+                       update_s=float(cfg.get('execution', {}).get('update_s', 3.)),
                        reward=cfg['reward'])
     return _W[key]
 
@@ -87,8 +89,9 @@ class LoadEstimator:
 
 
 class TargetFlight:
-    def __init__(self, sc, target, morph=True, trace=False):
+    def __init__(self, sc, target, morph=True, trace=False, kg=None):
         self.w = world(morph)
+        self.kg = self.w['kg'] if kg is None else float(kg)     # flight-path-angle feedback on the CL target
         self.morph = bool(morph)
         self.sc, self.target = sc, target
         self.field = Field(sc, self.w['cfg'])
@@ -128,7 +131,7 @@ class TargetFlight:
             return base
         kl, kd = self.est.values
         return base+[(self.k_rho()-1)/.1, (self.q()/self.w['qmax']-.9)/.1, (kl-1)/.05, (kd-1)/.05,
-                     (self.rho_prev-1)/.1]
+                     (self.rho_prev-1)/.1, tg.range_km/1000., tg.speed_mps/1000.]
 
     # ------------------------------------------------------------------ dynamics
     def _cd(self, mach, cl, wl):
@@ -203,14 +206,26 @@ class TargetFlight:
         return self
 
     def step(self, action):
-        """One decision with a fixed (CL level, w level) action."""
+        """One decision: CL target level and w level held for the decision (12 s).
+
+        Execution (round 2): every update_s the executed CL target is refreshed to CL target - kg * gamma (the
+        certified chain refreshes its CL target every 3 s); the protection loop then applies every inner step.
+        With kg = 0 this is the round-1 execution (the CL target held)."""
         if self.done:
             raise RuntimeError('flight finished')
         i_cl, i_w = decode(action, self.morph)
         cl_cmd, wl = self.w['cl_levels'][i_cl], self.w['w_levels'][i_w]
         self.rho_prev = self.k_rho()
         self.last_action = int(action)
-        return self.advance(self.w['decision'], lambda env: (cl_cmd, wl))
+        held = dict(next=self.t, cl=cl_cmd)
+        upd = self.w['update_s']
+
+        def command(env):
+            if env.t >= held['next']-1e-9:
+                held['cl'] = cl_cmd-env.kg*env.x[2]
+                held['next'] = env.t+upd
+            return held['cl'], wl
+        return self.advance(self.w['decision'], command)
 
     # ------------------------------------------------------------------ outcome
     def errors(self):

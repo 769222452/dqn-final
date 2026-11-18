@@ -137,7 +137,7 @@ _LOADED = {}
 
 
 def load_region(path=None):
-    p = Path(path or config.runs_dir()/'region.json')
+    p = Path(path or config.region_path())
     if str(p) not in _LOADED:
         if not p.exists():
             raise FileNotFoundError(f'{p} missing: run python -m target_rl.region first')
@@ -179,9 +179,12 @@ def test_targets(region=None, cfg=None):
     return named_targets(region)+rnd
 
 
-def test_cases(region=None, cfg=None, level=None):
+def test_cases(region=None, cfg=None, level=None, which='test'):
+    """which = 'test': test scenarios x (T1-T6 + random targets); 'dev': pilot scenarios x T1-T6 (never tested)."""
     cfg = cfg or config.load()
     lvl = level or cfg['disturbance']['main_level']
+    if which == 'dev':
+        return [(scenario(lvl, s), t) for s in config.seed_range(cfg['seeds']['dev']) for t in named_targets(region)]
     tg = test_targets(region, cfg)
     return [(scenario(lvl, s), t) for s in config.seed_range(cfg['seeds']['test']) for t in tg]
 
@@ -197,7 +200,7 @@ def main(argv=None):
     out = build(rows)
     out['rows'] = rows
     out['library'] = config.library()
-    save_json(a.out or config.runs_dir()/'region.json', out)
+    save_json(a.out or config.region_path(), out)
     print(json.dumps({k: out[k] for k in ('targets', 'notes', 'area_ratio', 'feasible', 'fixed_range')}, indent=1))
 
 

@@ -68,19 +68,22 @@ def build(level=None):
     out = dict(library=config.library_name(), level=level, methods=table, H1={}, comparisons={}, ablations={})
     ref = M.get('pc_fair')
     seeds = cfg['seeds']['training_runs']
-    for variant in ('full', 'dist', 'fixed', 'mean'):
+    runs = [('rl', v) for v in cfg['experiment'].get('variants', ['full'])]+[('r1', 'full')]
+    for prefix, variant in runs:
+        key = variant if prefix == 'rl' else f'{prefix}_{variant}'
         per_seed = {}
         for s in seeds:
-            m = f'rl:{variant}:{s}'
+            m = f'{prefix}:{variant}:{s}'
             if m in M and ref is not None:
                 per_seed[s] = {g: paired(M[m], ref, g) for g in ('fixed', 'morph', 'random')}
                 if 'pc_strong' in M:
                     per_seed[s]['morph_vs_pc_strong'] = paired(M[m], M['pc_strong'], 'morph')
                 if 'constant' in M:
                     per_seed[s]['morph_vs_constant'] = paired(M[m], M['constant'], 'morph')
-        out['comparisons'][variant] = per_seed
-        rates = [table[f'rl:{variant}:{s}']['morph']['hit_rate'] for s in seeds if f'rl:{variant}:{s}' in table]
-        out['ablations'][variant] = dict(seeds=len(rates), morph_hit_rate_mean=float(np.mean(rates)) if rates else None)
+        out['comparisons'][key] = per_seed
+        rates = [table[f'{prefix}:{variant}:{s}']['morph']['hit_rate'] for s in seeds
+                 if f'{prefix}:{variant}:{s}' in table]
+        out['ablations'][key] = dict(seeds=len(rates), morph_hit_rate_mean=float(np.mean(rates)) if rates else None)
     full = out['comparisons'].get('full', {})
     h1 = {}
     for s, c in full.items():

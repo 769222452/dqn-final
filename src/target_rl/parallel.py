@@ -20,7 +20,7 @@ def _run(job):
         if kind == 'constant':
             from .baselines import fly_constant
             sc, tg = kw['case']
-            return fly_constant(sc, tg, kw['action'], kw.get('morph', True)).summary()
+            return fly_constant(sc, tg, kw['action'], kw.get('morph', True), kg=kw.get('kg')).summary()
         if kind == 'method':
             from .evaluate import fly_method
             return fly_method(kw['method'], kw['case'], kw.get('spec'), kw.get('trace', False))

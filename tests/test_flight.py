@@ -106,12 +106,50 @@ def test_oracle_counts_predictions_and_tracing_is_isolated():
     r = E.fly_method('pc_oracle', (NOMINAL, tg), None, trace=True)
     assert r['n_predictions'] > 0 and r['wall_s'] > 0 and r['decisions'] == 100
     assert len(r['trace']) == 2400 and len(r['trace'][0]) == 9       # one row per 0.5 s step, predictions not traced
-    c = E.fly_method('constant', (NOMINAL, tg), dict(action=F.encode(7, 0)), trace=False)
+    c = E.fly_method('constant', (NOMINAL, tg), dict(chain=[dict(kind='constant', action=F.encode(7, 0))], morph=True,
+                                                    kg=1.), trace=False)
     assert 'trace' not in c and 'n_predictions' not in c
 
 
 def test_method_sets():
     from target_rl import evaluate as E
-    assert E.method_set('baselines') == ['constant', 'pc_fair', 'pc_strong', 'pc_fixed', 'pc_oracle']
+    assert E.method_set('baselines') == ['constant', 'lookup', 'pc_fair', 'pc_strong', 'pc_fixed', 'pc_oracle']
     assert E.method_set('pc_fair,rl:full:17') == ['pc_fair', 'rl:full:17']
     assert all(k[1] in ('T2', 'T4', 'T5') for k in E.trace_keys())
+
+
+def test_execution_feedback_damps_the_phugoid():
+    """CL target held 12 s: kg = 1 (round 2) removes most of the altitude oscillation of kg = 0 (round 1)."""
+    tg = Target('x', 2300., 1300.)
+    amp = {}
+    for kg in (0., 1.):
+        env = F.TargetFlight(NOMINAL, tg, True, trace=True, kg=kg)
+        while not env.done:
+            env.step(F.encode(15, 0))                    # CL 0.09, lowest drag
+        A = np.array(env.trace)
+        late = A[A[:, 0] >= 200]
+        amp[kg] = np.degrees(late[:, 3]).std()
+    assert amp[1.] < .25*amp[0.]
+
+
+def test_lookup_stage_uses_the_nearest_training_target():
+    stage = dict(kind='lookup', targets=[[2200., 1300.], [2400., 1600.]], actions=[3, 41])
+    env = F.TargetFlight(NOMINAL, Target('n', 2390., 1580.))
+    assert P.initial_action(stage, env.features(extra=True)) == 41
+    env = F.TargetFlight(NOMINAL, Target('n', 2150., 1250.))
+    assert P.chain_action([stage], env.features(extra=True)) == 3
+
+
+def test_round1_policies_fly_with_their_own_execution():
+    from target_rl import config, evaluate as E
+    if not (config.round1_dir('F8D2000B')/'train'/'full_s17'/'state.json').exists():
+        pytest.skip('round-1 results not present')
+    spec = E.spec_for('r1:full:17')
+    assert spec['kg'] == 0. and spec['morph'] and spec['chain'][0]['kind'] == 'constant'
+
+
+def test_variants_execution_and_start():
+    from target_rl import train as T
+    assert T.variant_kg(T.VARIANTS['full']) == 1. and T.variant_kg(T.VARIANTS['nodamp']) == 0.
+    assert T.VARIANTS['single']['start'] == 'single' and T.VARIANTS['full']['start'] == 'lookup'
+    assert not T.VARIANTS['fixed']['morph']

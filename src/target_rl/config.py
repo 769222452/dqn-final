@@ -31,9 +31,24 @@ def library(cfg=None):
     return dict(cfg['aero']['libraries'][library_name(cfg)], name=library_name(cfg))
 
 
-def runs_dir(cfg=None):
-    """Results of the active library: runs/<library>/ (the aerodynamic cache runs/cache/ is shared)."""
-    return ROOT/'runs'/library_name(cfg)
+def runs_dir(cfg=None, library=None):
+    """Results of the current round: runs/<tag>/<library>/ (round 1, without a tag: runs/<library>/).
+
+    The preregistered target regions (region_path) and the aerodynamic cache (runs/cache/) are shared by all
+    rounds."""
+    cfg = cfg or load()
+    lib = library or library_name(cfg)
+    tag = cfg.get('experiment', {}).get('tag')
+    return ROOT/'runs'/tag/lib if tag else ROOT/'runs'/lib
+
+
+def round1_dir(library=None, cfg=None):
+    """Round-1 results (runs/<library>/), used to re-evaluate the round-1 policies on the new test set."""
+    return ROOT/'runs'/(library or library_name(cfg))
+
+
+def region_path(library=None, cfg=None):
+    return ROOT/'runs'/(library or library_name(cfg))/'region.json'
 
 
 def seed_range(pair):

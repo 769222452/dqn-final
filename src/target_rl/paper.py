@@ -25,19 +25,29 @@ from .report import group_of, paired
 from .util import load_json
 
 RUNS = config.ROOT/'runs'
-OUT = RUNS/'paper'
+OUT = config.runs_dir(library='paper')          # runs/<tag>/paper
+
+
+def LIBDIR(lib):
+    return config.runs_dir(library=lib)
 GROUPS = (('fixed', 'T1–T3'), ('morph', 'T4–T6'), ('random', 'R1–R10'))
-METHOD_LABEL = dict(constant=('常值策略 π₀', 'Constant π₀'), pc_fixed=('预测-校正（不变构）', 'PC (no morphing)'),
+METHOD_LABEL = dict(constant=('单一常值动作', 'Single constant'), lookup=('按目标查表起点', 'Target lookup start'),
+                    nodamp=('无阻尼', 'No damping'), single=('单一常值起点', 'Single constant start'),
+                    r1=('第一轮方法', 'Round-1 method'), pc_fixed=('预测-校正（不变构）', 'PC (no morphing)'),
                     pc_fair=('预测-校正（公平版）', 'PC (fair)'), pc_strong=('预测-校正（强版）', 'PC (strong)'),
                     pc_oracle=('预测-校正（全信息）', 'PC (oracle)'), full=('本文方法', 'Proposed'),
                     dist=('加扰动输入', '+disturbance inputs'), fixed=('不变构', 'No morphing'),
                     mean=('均值打分', 'Mean score'))
-BASE_ORDER = ('constant', 'pc_fixed', 'pc_fair', 'pc_strong', 'pc_oracle')
+BASE_ORDER = ('constant', 'lookup', 'pc_fixed', 'pc_fair', 'pc_strong', 'pc_oracle')
+
+
+def variants():
+    return list(config.load()['experiment'].get('variants', ['full']))
 
 
 # ------------------------------------------------------------------------------------------- data
 def rows_of(lib, level):
-    d = RUNS/lib/'eval'/level
+    d = LIBDIR(lib)/'eval'/level
     out = {}
     if d.exists():
         for p in sorted(d.glob('*.json')):
@@ -46,8 +56,8 @@ def rows_of(lib, level):
     return out
 
 
-def rl_runs(M, variant):
-    return sorted((m for m in M if m.startswith(f'rl:{variant}:')), key=lambda m: int(m.split(':')[2]))
+def rl_runs(M, variant, prefix='rl'):
+    return sorted((m for m in M if m.startswith(f'{prefix}:{variant}:')), key=lambda m: int(m.split(':')[2]))
 
 
 def hit_rate(rows, group=None):
@@ -71,9 +81,9 @@ def stat_row(rows):
                 pred=float(np.median([r['n_predictions'] for r in rows if 'n_predictions' in r])) if any('n_predictions' in r for r in rows) else np.nan)
 
 
-def seed_stats(M, variant):
+def seed_stats(M, variant, prefix='rl'):
     """Mean and standard deviation over training seeds of every stat_row entry."""
-    runs = rl_runs(M, variant)
+    runs = rl_runs(M, variant, prefix)
     if not runs:
         return None, 0
     S = [stat_row(M[m]) for m in runs]
@@ -151,10 +161,10 @@ def table_paired(T, M, lib, report):
 def table_ablation(T, M, lib):
     header = ['变体', '种子数', 'T1–T3 命中率 %', 'T4–T6 命中率 %', '随机目标命中率 %', '总命中率 %', '超限率 %']
     rows = []
-    for v in ('full', 'dist', 'fixed', 'mean'):
-        s, n = seed_stats(M, v)
+    for prefix, v in [('rl', x) for x in variants()]+[('r1', 'full')]:
+        s, n = seed_stats(M, v, prefix)
         if s:
-            rows.append([METHOD_LABEL[v][0], n, pct(*s['fixed']), pct(*s['morph']), pct(*s['random']), pct(*s['all']),
+            rows.append([METHOD_LABEL[v if prefix == 'rl' else 'r1'][0], n, pct(*s['fixed']), pct(*s['morph']), pct(*s['random']), pct(*s['all']),
                          pct(*s['viol'])])
     T.add('T3_ablation', f'表 3  消融（{lib}，L2，均值 ± 标准差）', header, rows)
 
@@ -165,7 +175,7 @@ def table_libraries(T, libs):
     rows = []
     edge = dict(F8D2000B='固定', F8D2000='固定', L298='不固定')
     for lib in libs:
-        reg = RUNS/lib/'region.json'
+        reg = config.region_path(lib)
         if not reg.exists():
             continue
         r = load_json(reg)
@@ -238,18 +248,18 @@ def _save(fig, name):
     fig.savefig(d/f'{name}.pdf', bbox_inches='tight')
 
 
-COLORS = dict(constant='#999999', pc_fixed='#c7b299', pc_fair='#e9a03b', pc_strong='#d1495b', pc_oracle='#6c5b7b',
+COLORS = dict(lookup='#7a7a7a', nodamp='#9d4edd', single='#f4a261', r1='#bbbbbb', constant='#999999', pc_fixed='#c7b299', pc_fair='#e9a03b', pc_strong='#d1495b', pc_oracle='#6c5b7b',
               full='#1f6fb4', dist='#2a9d8f', fixed='#8ab17d', mean='#264653')
 
 
 def fig_regions(libs):
     plt, L = _plt()
-    libs = [x for x in libs if (RUNS/x/'region.json').exists()]
+    libs = [x for x in libs if config.region_path(x).exists()]
     if not libs:
         return
     fig, axes = plt.subplots(1, len(libs), figsize=(4.6*len(libs), 3.8), sharex=True, sharey=True, squeeze=False)
     for ax, lib in zip(axes[0], libs):
-        d = load_json(RUNS/lib/'region.json')
+        d = load_json(config.region_path(lib))
         for key, color, lab in (('morph_hull', '#1f6fb4', ('变构可达', 'With morphing')),
                                 ('fixed_hull', '#d1495b', ('不变构可达', 'Fixed geometry'))):
             H = np.array(d[key])
@@ -269,12 +279,12 @@ def fig_regions(libs):
 
 def fig_learning(lib):
     plt, L = _plt()
-    d = RUNS/lib/'train'
+    d = LIBDIR(lib)/'train'
     if not d.exists():
         return
     fig, ax = plt.subplots(figsize=(5.5, 3.4))
     drawn = False
-    for v in ('full', 'dist', 'fixed', 'mean'):
+    for v in variants():
         curves = []
         for p in sorted(d.glob(f'{v}_s*/state.json')):
             st = load_json(p)
@@ -351,7 +361,7 @@ def fig_levels(lib, levels):
 
 def fig_traces(lib):
     plt, L = _plt()
-    d = RUNS/lib/'traces'/'L2'
+    d = LIBDIR(lib)/'traces'/'L2'
     if not d.exists():
         return
     data = {}
