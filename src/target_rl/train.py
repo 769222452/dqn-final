@@ -15,6 +15,9 @@ CL target - kg gamma (kg from configs/task.yaml execution) and starts from the t
   fixed    no morphing
   dist     + measured density ratio, dynamic pressure, online bias estimates, previous density ratio (not run)
   mean     ensemble mean instead of the LCB (not run)
+Study A (PREREGISTRATION.md amendment 6, configs/study_a.yaml):
+  pcguided the cheap strong predictor-corrector flies (guided.py); the policy chooses an offset to its planned
+           morph level; inputs BASE + the corrector's predicted errors and plan; initial policy = offset 0
 
     python -m target_rl.train --variant full --seed 17 --workers 14
 """
@@ -28,7 +31,7 @@ import numpy as np
 from . import config, flight as F
 from .ensemble import LABEL_DECAY, LABEL_KEEP, fit_ensemble, retained_labels
 from .parallel import pool_map
-from .policy import BASE, EXTRA, alternatives, chain_action, input_index
+from .policy import BASE, EXTRA, GUIDE, alternatives, chain_action, input_index
 from .scenario import Scenario, Target
 from .util import load_json, save_json
 
@@ -37,7 +40,8 @@ VARIANTS = dict(full=dict(inputs=BASE, morph=True, score='lcb', kg=None, start='
                 single=dict(inputs=BASE, morph=True, score='lcb', kg=None, start='single'),
                 fixed=dict(inputs=BASE, morph=False, score='lcb', kg=None, start='lookup'),
                 dist=dict(inputs=BASE+EXTRA, morph=True, score='lcb', kg=None, start='lookup'),
-                mean=dict(inputs=BASE, morph=True, score='mean', kg=None, start='lookup'))
+                mean=dict(inputs=BASE, morph=True, score='mean', kg=None, start='lookup'),
+                pcguided=dict(inputs=BASE+GUIDE, morph=True, score='lcb', kg=None, start='plan'))
 
 
 def variant_kg(v):
@@ -71,10 +75,15 @@ def fly(env, chain, override=None, schedule=None, until=None, log=None):
     return env
 
 
+def make_env(sc, tg, morph=True, kg=None):
+    from .guided import make
+    return make(sc, tg, morph, kg=kg)
+
+
 def candidate_job(kw):
     sc, tg = kw['case']
     dec = []
-    env = fly(F.TargetFlight(sc, tg, kw['morph'], kg=kw.get('kg')), kw['chain'], log=dec)
+    env = fly(make_env(sc, tg, kw['morph'], kg=kw.get('kg')), kw['chain'], log=dec)
     return dict(env.summary(), schedule=dec)
 
 
@@ -82,7 +91,7 @@ def branch_job(kw):
     sc, tg = kw['case']
     morph = kw['morph']
     sched = {int(round(t)): int(a) for t, a in kw['schedule']}
-    env = F.TargetFlight(sc, tg, morph, kg=kw.get('kg'))
+    env = make_env(sc, tg, morph, kg=kw.get('kg'))
     rows, prefix = [], []
     for t_b in kw['times']:
         fly(env, kw['chain'], schedule=sched, until=t_b)
@@ -181,7 +190,12 @@ def train(variant, seed, workers=4, out=None, iterations=None, cases=None, pi0=N
         cases = [case_from_json(c) for c in st['cases']]
     else:
         cases = cases or training_cases()
-        if pi0 is None:
+        if v['start'] == 'plan':
+            from .guided import enabled, plan_action
+            if not enabled():
+                raise ValueError('variant pcguided needs the study A configuration (TARGET_RL_CONFIG=configs/study_a.yaml)')
+            first = dict(kind='plan', action=plan_action())
+        elif pi0 is None:
             first = initial_stage(morph, kg, v['start'], workers, cases)
         else:
             first = pi0 if isinstance(pi0, dict) else dict(kind='constant', action=int(pi0))

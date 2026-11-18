@@ -1,7 +1,7 @@
 """Bootstrap ensemble of tanh MLPs predicting action advantages (ported from rollout_improvement.ensemble).
 
 Targets: advantages A(s, a) times label_scale (configs/task.yaml: units of 0.01 return), clipped from below at
--label_clip. Each member: bootstrap sample of states, Adam, early stopping on its out-of-bag states. Action
+-label_clip (and from above at label_clip_upper when that key is set: study A, symmetric clipping). Each member: bootstrap sample of states, Adam, early stopping on its out-of-bag states. Action
 selection uses the lower confidence bound mean - std over the members.
 """
 import numpy as np
@@ -103,7 +103,10 @@ def label_matrix(labels, n_actions, weights=None, cfg=None):
     Wt = np.zeros((len(keys), n_actions))
     for r, w in zip(labels, weights if weights is not None else [1.]*len(labels)):
         i = index[tuple(r['features'])]
-        S[i, r['action']] += w*max(r['advantage']*tr['label_scale'], -tr['label_clip'])
+        y = max(r['advantage']*tr['label_scale'], -tr['label_clip'])
+        if tr.get('label_clip_upper') is not None:
+            y = min(y, tr['label_clip_upper'])
+        S[i, r['action']] += w*y
         Wt[i, r['action']] += w
     M = Wt > 0
     A = np.where(M, S/np.where(M, Wt, 1.), 0.)

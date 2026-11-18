@@ -30,6 +30,9 @@ def _run(job):
         if kind == 'candidate':
             from .train import candidate_job
             return candidate_job(kw)
+        if kind == 'guided':
+            from .study_a import fly_job
+            return fly_job(kw)
         if kind == 'fit_member':
             from .ensemble import fit_member_job
             return fit_member_job(kw)

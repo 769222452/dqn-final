@@ -16,7 +16,8 @@ from .ensemble import as_arrays, lower_confidence_bound
 BASE = ('h', 'V', 'gamma', 't', 'range_to_go', 'speed_error')
 EXTRA = ('rho', 'q', 'kL', 'kD', 'rho_prev')
 TARGET = ('target_range', 'target_speed')      # read by the lookup stage only; never a network input
-NAMES = BASE+EXTRA+TARGET
+GUIDE = ('pred_range_error', 'pred_speed_error', 'w_plan', 'r_plan')   # study A guided flight only (guided.py)
+NAMES = BASE+EXTRA+TARGET+GUIDE
 RADIUS_BLOCK_S = 96.
 _CACHE = {}
 
@@ -57,7 +58,7 @@ def _members(stage):
 
 def initial_action(stage, f):
     """Action of the first stage for the feature vector f."""
-    if stage.get('kind', 'constant') == 'constant':
+    if stage.get('kind', 'constant') in ('constant', 'plan'):    # 'plan': study A, offset 0 = follow the plan
         return int(stage['action'])
     D, V = float(f[NAMES.index('target_range')])*1000., float(f[NAMES.index('target_speed')])*1000.
     T = np.asarray(stage['targets'], float)

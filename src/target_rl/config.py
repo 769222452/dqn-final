@@ -1,4 +1,4 @@
-"""Task configuration (configs/task.yaml) and repository paths."""
+"""Task configuration (configs/task.yaml, or the file named by TARGET_RL_CONFIG) and repository paths."""
 import os
 from functools import lru_cache
 from pathlib import Path
@@ -10,7 +10,12 @@ ROOT = Path(__file__).resolve().parents[2]
 
 @lru_cache(maxsize=None)
 def load(path=None):
+    """Configuration file: `path`, else the environment variable TARGET_RL_CONFIG (relative to the repository root
+    or absolute; used by study A: configs/study_a.yaml), else configs/task.yaml."""
+    path = path or os.environ.get('TARGET_RL_CONFIG')
     p = Path(path) if path else ROOT/'configs'/'task.yaml'
+    if not p.is_absolute() and not p.exists():
+        p = ROOT/p
     cfg = yaml.safe_load(p.read_text(encoding='utf-8'))
     if cfg.get('schema') != 'target_task/1':
         raise ValueError('unexpected configuration schema')
