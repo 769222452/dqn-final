@@ -1,0 +1,117 @@
+{
+  "source_commit": "650b37145a4d468ca5335530bdfb3119cb3f32e4",
+  "branch": "target-rl-a",
+  "platform": "Windows Git Bash",
+  "python": "3.11.5",
+  "workers": 5,
+  "commands": [
+    "PY=.venv/Scripts/python WORKERS=5 bash -o igncr scripts/run_a.sh",
+    "PY=.venv/Scripts/python WORKERS=5 STAGES=report bash -o igncr scripts/run_a.sh"
+  ],
+  "task_started": "2026-11-18T21:20:38.9693597+08:00",
+  "script_started": "2026-11-18T21:23:30+08:00",
+  "training_started": "2026-11-18T21:24:20+08:00",
+  "training_stopped": "2026-11-19T04:51:21.0860036+08:00",
+  "report_started": "2026-11-19T04:51:29+08:00",
+  "report_completed": "2026-11-19T04:55:56.2559752+08:00",
+  "script_to_report_wall_s": 27146.2559752,
+  "task_to_report_wall_s": 27317.2866155,
+  "tests_passed": 24,
+  "tests_wall_s": 49.42,
+  "completed_iterations": 22,
+  "max_iterations": 30,
+  "accepted_iterations": 9,
+  "termination": "Stopped at the user-authorized morning/time limit, reserving time within 8 hours for evaluation and upload. Ctrl+C and a Windows CTRL_C_EVENT did not stop the native Python process. The verified training-only process tree was terminated; the completed iteration-22 checkpoint SHA256 was unchanged. The next partial iteration was not used.",
+  "training_command_exit_code": 1,
+  "report_command_exit_code": 0,
+  "log_error_scan_matches": 0,
+  "report_log_encoding": "Windows CP936 console output; A_REPORT.md is UTF-8",
+  "source_config_preregistration_unchanged": true,
+  "checkpoint_sha256": "201c886d10c3ff2bc0e4bd600adc7a59662adaf6a37d06bb8c28034deb2449a2",
+  "evaluation_summary": [
+    {
+      "set": "validation",
+      "method": "base",
+      "n": 96,
+      "hits": 69,
+      "violations": 13,
+      "mean_G": -0.5591353329540452,
+      "chain_len": 1
+    },
+    {
+      "set": "validation",
+      "method": "rl_17",
+      "n": 96,
+      "hits": 68,
+      "violations": 11,
+      "mean_G": -0.47506501724811767,
+      "chain_len": 10
+    },
+    {
+      "set": "dev",
+      "method": "base",
+      "n": 30,
+      "hits": 26,
+      "violations": 0,
+      "mean_G": 0.024457393771962866,
+      "chain_len": 1
+    },
+    {
+      "set": "dev",
+      "method": "rl_17",
+      "n": 30,
+      "hits": 26,
+      "violations": 0,
+      "mean_G": 0.024457393771962866,
+      "chain_len": 10
+    }
+  ],
+  "files": [
+    {
+      "path": "A_REPORT.md",
+      "bytes": 1548,
+      "sha256": "347ad18ca2dec4be7ead6e7bd6597f8a7d54c148ad925e29392f9fe4ba280b7b"
+    },
+    {
+      "path": "logs/report.log",
+      "bytes": 1242,
+      "sha256": "c57eb60038209011f845630e0d834226118908579a3e29aba9b78e096fd0b768"
+    },
+    {
+      "path": "logs/test.log",
+      "bytes": 102,
+      "sha256": "bc1a3c994fdd969c32e4eb1551e2a37ee6b82d764277e757cc7f395830a8c703"
+    },
+    {
+      "path": "logs/train_pcguided_s17.log",
+      "bytes": 3057,
+      "sha256": "963f4aad23b492b33601e83b402fa028e69051b691418f03b5e0dcdb4b2aa838"
+    },
+    {
+      "path": "study_a/dev/base.json",
+      "bytes": 17867,
+      "sha256": "5161eb36cd99b64ef0c4c91483d5c27b5c0898e8574b09b4b40999c9e119d7a7"
+    },
+    {
+      "path": "study_a/dev/rl_17.json",
+      "bytes": 17867,
+      "sha256": "6a47b2eb82258cedffc0dbd587be3403b33e4ab1e30a45a4ada0313981fccd86"
+    },
+    {
+      "path": "study_a/validation/base.json",
+      "bytes": 55831,
+      "sha256": "423a4f0cbb3a1807c63caf933c3a356683b40160a9f2603d012a47d5c1768585"
+    },
+    {
+      "path": "study_a/validation/rl_17.json",
+      "bytes": 55876,
+      "sha256": "2a33eab541d0386c8a37e324128a6c552061e8a1bdaf8d07820c0bc097ca8d57"
+    },
+    {
+      "path": "train/pcguided_s17/state.json",
+      "bytes": 6502747,
+      "sha256": "201c886d10c3ff2bc0e4bd600adc7a59662adaf6a37d06bb8c28034deb2449a2"
+    }
+  ],
+  "files_sha256_scope": "Exact local Windows output bytes before Git text line-ending normalization. Git may normalize CRLF to LF for tracked text; numeric results and original local files are unchanged."
+}
