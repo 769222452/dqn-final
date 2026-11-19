@@ -18,6 +18,10 @@ CL target - kg gamma (kg from configs/task.yaml execution) and starts from the t
 Study A (PREREGISTRATION.md amendment 6, configs/study_a.yaml):
   pcguided the cheap strong predictor-corrector flies (guided.py); the policy chooses an offset to its planned
            morph level; inputs BASE + the corrector's predicted errors and plan; initial policy = offset 0
+Study R (PREREGISTRATION.md amendment 7, configs/study_r.yaml):
+  rel      the policy flies (CL target increments + w), one coarse prediction as input (guided.RelPredFlight);
+           initial policy = the feedback rule of configs/study_r.yaml start_rule
+  relfixed the same without morphing
 
     python -m target_rl.train --variant full --seed 17 --workers 14
 """
@@ -41,7 +45,9 @@ VARIANTS = dict(full=dict(inputs=BASE, morph=True, score='lcb', kg=None, start='
                 fixed=dict(inputs=BASE, morph=False, score='lcb', kg=None, start='lookup'),
                 dist=dict(inputs=BASE+EXTRA, morph=True, score='lcb', kg=None, start='lookup'),
                 mean=dict(inputs=BASE, morph=True, score='mean', kg=None, start='lookup'),
-                pcguided=dict(inputs=BASE+GUIDE, morph=True, score='lcb', kg=None, start='plan'))
+                pcguided=dict(inputs=BASE+GUIDE, morph=True, score='lcb', kg=None, start='plan'),
+                rel=dict(inputs=BASE+GUIDE, morph=True, score='lcb', kg=None, start='rule'),
+                relfixed=dict(inputs=BASE+GUIDE, morph=False, score='lcb', kg=None, start='rule'))
 
 
 def variant_kg(v):
@@ -190,11 +196,16 @@ def train(variant, seed, workers=4, out=None, iterations=None, cases=None, pi0=N
         cases = [case_from_json(c) for c in st['cases']]
     else:
         cases = cases or training_cases()
-        if v['start'] == 'plan':
+        if v['start'] == 'rule':
+            cfg_ = config.load()
+            if cfg_.get('guidance', {}).get('kind') != 'rel_pred':
+                raise ValueError('variants rel/relfixed need the study R configuration (TARGET_RL_CONFIG=configs/study_r.yaml)')
+            first = dict(kind='pfb', morph=morph, **cfg_['start_rule'])
+        elif v['start'] == 'plan':
             from .guided import enabled, plan_action
             if not enabled():
                 raise ValueError('variant pcguided needs the study A configuration (TARGET_RL_CONFIG=configs/study_a.yaml)')
-            first = dict(kind='plan', action=plan_action())
+            first = dict(kind='plan', action=plan_action(morph))
         elif pi0 is None:
             first = initial_stage(morph, kg, v['start'], workers, cases)
         else:

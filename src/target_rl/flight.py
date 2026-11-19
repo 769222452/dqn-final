@@ -242,6 +242,12 @@ class TargetFlight:
             self.G = r['violation']
         elif self.hit():
             self.G = r['hit_bonus']
+        elif r.get('shape') == 'log_tol':
+            # study R: z = error in units of the hit tolerance; 0 at the tolerance, -0.5 per doubling, capped
+            dD, dV = self.errors()
+            h = self.w['hit']
+            z = math.hypot(dD/h['range_km'], dV/h['speed_mps'])
+            self.G = -min(.5*math.log2(max(z, 1.)), r['miss_cap'])
         else:
             dD, dV = self.errors()
             self.G = -min(math.hypot(dD/r['range_scale_km'], dV/r['speed_scale_mps']), r['miss_cap'])

@@ -20,7 +20,7 @@ from . import baselines as B, config, flight as F
 
 
 def enabled(cfg=None):
-    return (cfg or config.load()).get('guidance', {}).get('kind') == 'pc_offset'
+    return (cfg or config.load()).get('guidance', {}).get('kind') in ('pc_offset', 'rel_pred')
 
 
 class PCOffsetFlight(F.TargetFlight):
@@ -123,14 +123,111 @@ class PCOffsetFlight(F.TargetFlight):
         return c
 
 
+ABS_CL = [-0.01, 0.0, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.05, 0.055, 0.06, 0.07, 0.08, 0.09,
+          0.10, 0.11, 0.12]
+_NOMMAP = {}
+
+
+def _hold(cl, wl):
+    """Execution of round 2: CL target - kg gamma, refreshed every update_s; w held."""
+    held = dict(next=-1., cl=cl)
+
+    def command(env):
+        if env.t >= held['next']-1e-9:
+            held['cl'] = cl-env.kg*env.x[2]
+            held['next'] = env.t+env.w['update_s']
+        return held['cl'], wl
+    return command
+
+
+def nominal_map():
+    """Nominal (no disturbance) end range of a constant CL target, w = 0, for the absolute CL levels."""
+    if 'm' not in _NOMMAP:
+        from .scenario import Scenario, Target
+        nom = Scenario('L0', 0, 0., 0., 1., 1.)
+        rows = []
+        for cl in ABS_CL:
+            e = F.TargetFlight(nom, Target('x', 0., 0.), True)
+            e.advance(e.w['T'], _hold(cl, 0.))
+            if not e.failed:
+                rows.append((cl, e.range_km()))
+        _NOMMAP['m'] = rows
+    return _NOMMAP['m']
+
+
+class RelPredFlight(F.TargetFlight):
+    """Study R (PREREGISTRATION.md amendment 7). The policy decides every decision (12 s): an increment of the CL
+    target (actions.cl_levels) and an absolute morph level w (actions.morph_levels; fixed geometry: w = 0). Input
+    features: the last coarse prediction (every guidance.predict_every_s; CL target held, no more braking, density
+    frozen at the measured value, estimated biases, step guidance.predict_dt_s) of the range and speed errors at
+    1200 s, the current w and CL target. Initial CL target: the nominal constant CL (w = 0) whose range equals the
+    target range. Execution as round 2 (CL target - kg gamma every 3 s, shared protection loop)."""
+
+    def __init__(self, sc, target, morph=True, trace=False, kg=None):
+        super().__init__(sc, target, morph, trace, kg)
+        rows = sorted(nominal_map(), key=lambda r: r[1])
+        cl = [r[0] for r in rows]
+        rg = [r[1] for r in rows]
+        self.cl_t = float(np.interp(target.range_km, rg, cl))
+        self.w_cur = 0.
+        self.npred = 0
+        self.pdt = config.load()['guidance'].get('predict_dt_s', 4.)
+        self._predict()
+
+    def _predict(self):
+        self.npred += 1
+        self.last_pred_t = self.t
+        p = F.TargetFlight.fork(self)
+        kl, kd = self.est.values
+        p.field = B._Const(self.k_rho())
+        p.sc = dataclasses.replace(self.sc, k_lift=float(np.clip(kl, .7, 1.3)), k_drag=float(np.clip(kd, .7, 1.3)))
+        p.w = dict(self.w, dt=self.pdt)
+        F.TargetFlight.advance(p, self.w['T']-p.t, _hold(self.cl_t, 0.))
+        self.pred = np.array([p.range_km(), p.x[1]])
+
+    def features(self, extra=False):
+        base = super().features(extra)
+        if not extra:
+            return base
+        e = self.pred-np.array([self.target.range_km, self.target.speed_mps])
+        return base+[float(e[0])/100., float(e[1])/100., self.w_cur, self.cl_t*10.]
+
+    def step(self, action):
+        if self.done:
+            raise RuntimeError('flight finished')
+        i_cl, i_w = F.decode(action, self.morph)
+        lo, hi = self.w['cl_clip']
+        self.cl_t = float(np.clip(self.cl_t+self.w['cl_levels'][i_cl], lo, hi))
+        self.w_cur = self.w['w_levels'][i_w]
+        self.rho_prev = self.k_rho()
+        self.last_action = int(action)
+        self.advance(self.w['decision'], _hold(self.cl_t, self.w_cur))
+        every = config.load()['guidance'].get('predict_every_s', self.w['decision'])
+        if not self.done and self.t >= self.last_pred_t+every-1e-6:
+            self._predict()
+        if self.done:
+            self.info.update(n_predictions=self.npred)
+        return self
+
+    def fork(self):
+        c = super().fork()
+        c.pred = self.pred.copy()
+        return c
+
+
 def make(sc, target, morph=True, trace=False, kg=None):
     """Flight of the configured kind: the guided flight under study A, else the round-2 TargetFlight."""
-    if enabled():
+    kind = config.load().get('guidance', {}).get('kind')
+    if kind == 'pc_offset':
         return PCOffsetFlight(sc, target, morph, trace, kg)
+    if kind == 'rel_pred':
+        return RelPredFlight(sc, target, morph, trace, kg)
     return F.TargetFlight(sc, target, morph, trace=trace, kg=kg)
 
 
-def plan_action():
-    """Action index of offset 0 (= follow the predictor-corrector plan)."""
-    lv = F.world(True)['w_levels']
-    return F.encode(0, int(np.argmin(np.abs(np.asarray(lv)))), True)
+def plan_action(morph=True):
+    """Action index of offset 0 (= follow the predictor-corrector plan); rel_pred: CL increment 0, w = 0."""
+    w = F.world(morph)
+    i_cl = int(np.argmin(np.abs(np.asarray(w['cl_levels']))))
+    i_w = int(np.argmin(np.abs(np.asarray(w['w_levels']))))
+    return F.encode(i_cl, i_w, morph)

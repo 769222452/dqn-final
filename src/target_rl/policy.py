@@ -16,7 +16,8 @@ from .ensemble import as_arrays, lower_confidence_bound
 BASE = ('h', 'V', 'gamma', 't', 'range_to_go', 'speed_error')
 EXTRA = ('rho', 'q', 'kL', 'kD', 'rho_prev')
 TARGET = ('target_range', 'target_speed')      # read by the lookup stage only; never a network input
-GUIDE = ('pred_range_error', 'pred_speed_error', 'w_plan', 'r_plan')   # study A guided flight only (guided.py)
+GUIDE = ('pred_range_error', 'pred_speed_error', 'w_plan', 'r_plan')   # guided flights only (guided.py); study R:
+#        predicted range / speed errors, current w, current CL target x 10
 NAMES = BASE+EXTRA+TARGET+GUIDE
 RADIUS_BLOCK_S = 96.
 _CACHE = {}
@@ -60,6 +61,15 @@ def initial_action(stage, f):
     """Action of the first stage for the feature vector f."""
     if stage.get('kind', 'constant') in ('constant', 'plan'):    # 'plan': study A, offset 0 = follow the plan
         return int(stage['action'])
+    if stage['kind'] == 'pfb':     # study R start rule: step the CL target on the predicted range error; brake late
+        eD = float(f[NAMES.index('pred_range_error')])*100.
+        eV = float(f[NAMES.index('pred_speed_error')])*100.
+        t = float(f[3])*1200.
+        i_cl = 4 if eD > stage['d2'] else 3 if eD > stage['d1'] else 0 if eD < -stage['d2'] else 1 if eD < -stage['d1'] else 2
+        i_w = 0
+        if stage['morph'] and eV > stage['v_brake'] and t >= stage['t_brake']:
+            i_w = int(stage.get('i_w_brake', 3))
+        return F.encode(i_cl, i_w, stage['morph'])
     D, V = float(f[NAMES.index('target_range')])*1000., float(f[NAMES.index('target_speed')])*1000.
     T = np.asarray(stage['targets'], float)
     k = int(np.argmin(((T[:, 0]-D)/100.)**2+((T[:, 1]-V)/100.)**2))

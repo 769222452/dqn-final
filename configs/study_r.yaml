@@ -1,0 +1,162 @@
+# Study R (PREREGISTRATION.md amendment 7): the policy flies by itself (CL target increments + morph level), with
+# one coarse prediction every 48 s as input (guided.RelPredFlight). Selected with TARGET_RL_CONFIG=configs/study_r.yaml
+# (scripts/run_r.sh). Everything not changed here equals configs/task.yaml (round 2).
+# Fixed-time target arrival task (PREREGISTRATION.md). Every number used by the code is read from here.
+schema: target_task/1
+
+vehicle:                       # values of the original mission (configs/mission.yaml, configs/vehicle.yaml)
+  mass_kg: 1500.0
+  reference_area_m2: 6.931920786884801
+  heat_C: 1.7415e-4            # stagnation heat-flux proxy qdot = C sqrt(rho/R_n) V^3
+  heat_R_n: 0.05
+
+atmosphere:                    # ISA-like piecewise model of the original project
+  rho0: 1.225
+  p0: 101325.0
+  T0: 288.15
+  R_gas: 287.05287
+  gamma_gas: 1.4
+  g0: 9.80665
+  R_earth: 6371000.0
+  h_min_valid: 0.0
+  h_max_valid: 100000.0
+  rho_floor: 1.0e-9
+
+mission:
+  duration_s: 1200.0
+  decision_s: 12.0
+  inner_dt_s: 0.5
+  initial_state: [40150.27263771527, 2415.6424609292885, -0.014729622960607522, 0.0]   # h, V, gamma, s
+  limits:
+    altitude_m: [20000.0, 80000.0]
+    velocity_mps: [800.0, 6000.0]
+    gamma_rad: [-0.35, 0.35]
+    dynamic_pressure_pa_max: 80000.0
+    heat_proxy_wm2_max: 2000000.0
+    load_factor_g_max: 3.0
+  mach_support: [3.5, 8.25]    # Mach range of the aerodynamic table
+
+aero:
+  active: F8D2000B             # primary study (PREREGISTRATION.md amendment 3); F8D2000, L298 = sensitivity analyses.
+                               # Override with the environment variable TARGET_RL_LIBRARY; results go to runs/<library>/.
+  libraries:
+    F8D2000B:                  # F8D2000 + 91 brake shapes (data/BrakeLadder/README.md): fixed G42 leading edge, 2091
+      path: [data/F8D2000/p2_grid.npz, data/BrakeLadder/p2_grid.npz]
+      sha256: [2ef9bd687be9483465f9c77976cbda8938b0ac5fbb1b74801af8a49df183de10,
+               3bbc36328f45128c1b18beec9411edce1bd6c4709fc47c51f6abaa744488f767]
+      fixed_geometry: F8D_01351  # best fixed geometry of F8D2000 (lowest mean drag of F8D2000B as well)
+    L298:                      # the project's 298-geometry snapshot (data/geometry_subset of the main project)
+      path: data/L298/p2_grid.npz
+      sha256: 3d7b27d9e2178a6fb214c6360777f8f119612668b3401914e5969540bb554586
+      fixed_geometry: G42      # the project's initial geometry; used without morphing
+    F8D2000:                   # fixed-G42-leading-edge library of 2000 geometries (data/F8D2000/README.md)
+      path: data/F8D2000/p2_grid.npz
+      sha256: 2ef9bd687be9483465f9c77976cbda8938b0ac5fbb1b74801af8a49df183de10
+      fixed_geometry: F8D_01351  # best fixed geometry of the library (G42 itself is not in it)
+  cl_table: [-0.01, 0.13, 0.0025]   # CL grid of the equal-lift drag tables (start, stop, step)
+  alpha_step_deg: 0.02
+
+actions:
+  cl_levels: [-0.005, -0.0025, 0.0, 0.0025, 0.005]   # study R: CL target increments per decision
+  morph_levels: [0.0, 0.3333333333333333, 0.6666666666666666, 1.0]   # absolute w (fixed geometry: 0 only)
+  cl_clip: [-0.01, 0.12]
+
+protection:                    # inner loop shared by every method, every inner_dt_s
+  q_ratio: 0.95                # CL = max(CL command, law(q_ref = q_ratio q_max))
+  kp: 2.0
+  kg: 1.0
+
+execution:                     # round 2 (PREREGISTRATION.md amendment 5): CL target fed back on the flight-path angle
+  kg: 1.0                      # executed CL = CL target - kg * gamma, then the protection loop (round 1: kg = 0)
+  update_s: 3.0                # the corrected target is refreshed every 3 s (the decision step of the certified chain)
+
+disturbance:
+  levels:                      # density sigma, correlation length km, lift/drag bias sigma
+    L0: [0.0, 200.0, 0.0]
+    L1: [0.03, 200.0, 0.05]
+    L2: [0.06, 200.0, 0.05]
+    L3: [0.12, 200.0, 0.05]
+    L3b: [0.06, 50.0, 0.05]
+  initial_dh_m: 2000.0
+  initial_dv_mps: 100.0
+  main_level: L2
+
+hit:
+  range_km: 5.0
+  speed_mps: 25.0
+
+reward:                        # miss: -min(e, miss_cap), e = sqrt((dD/range_scale)^2 + (dV/speed_scale)^2)
+  shape: log_tol               # study R: miss = -min(0.5 log2(z), miss_cap), z = error / hit tolerance
+  hit_bonus: 1.0               # study R (round 2: 0.10)
+  range_scale_km: 100.0
+  speed_scale_mps: 100.0
+  miss_cap: 3.0
+  violation: -4.0              # worse than any miss
+
+targets:
+  region_shrink: 0.10          # region = convex hull of reachable (range, speed) with morphing, shrunk towards its centroid
+  exclusion: [40.0, 80.0]      # training targets avoid |dD| <= 40 km and |dV| <= 80 m/s around T1-T6
+  fixed_fractions: [0.25, 0.50, 0.75]   # T1-T3 / T4-T6 ranges: fractions of the common range interval
+  random_test: 10
+
+seeds:                         # round 2 (amendment 5); round 1 used train 1100-1147 and test 2200-2219
+  train: [1100, 1399]          # study R: 300 training cases
+  validation: [1400, 1495]     # decision set (also used in study A)
+  test: [2300, 2319]           # new, never used before; 2200-2219 were the round-1 test scenarios
+  dev: [2350, 2354]            # pilot runs only (scripts/pilot_r2.sh); never part of the test set
+  random_targets: [3000, 3009]
+  training_runs: [17, 23, 41, 59, 83]
+
+reach_grid:                    # region stage: three phases, (r, w) per phase
+  phases_s: [400.0, 800.0]
+  r: [0.3, 0.45, 0.6, 0.8, 0.95]
+  w: [0.0, 0.3333333333333333, 0.6666666666666666, 1.0]
+
+training:
+  iterations: 30               # study R
+  states: 25
+  stride_s: 48.0
+  window_s: 48.0
+  scenarios_per_iteration: 8   # study A (round 2: 2)
+  hidden: [16, 16]
+  label_scale: 100.0           # advantages in units of 0.01 return
+  label_clip: 100.0            # study R: symmetric clipping at +-1 return
+  label_clip_upper: 100.0
+  margins: [1.0, 3.0, 10.0]    # study A
+  min_advantage: 0.001
+  neighbourhood: [2, 1]        # model stages may move CL by +-2 levels and w by +-1 level per decision
+
+predictor_corrector:
+  cycle_s: 24.0
+  newton: 2
+  newton_first: 8
+  predict_dt_s: 2.0
+  margin: 0.005
+  r_bounds: [0.3, 0.95]
+  strong_phases_s: [400.0, 800.0]
+
+guidance:                      # study R: the policy flies (guided.RelPredFlight)
+  kind: rel_pred
+  predict_every_s: 48.0        # one coarse prediction every 48 s (25 per flight), used as input
+  predict_dt_s: 4.0
+  cycle_s: 48.0                # cheap predictor-corrector settings for the comparison methods (study_r.py)
+  newton: 1
+  newton_first: 4
+
+start_rule:                    # study R initial policy (no learning): CL target step on the predicted range error
+  d1: 4.0                      # |error| > 4 km: step 0.0025; > 15 km: step 0.005
+  d2: 15.0
+  v_brake: 25.0                # full brake (w = 1) when the predicted end speed is > 25 m/s too high and t >= 1000 s
+  t_brake: 1000.0
+  i_w_brake: 3
+
+experiment:                    # round 2 plan (EXPERIMENTS.md, PREREGISTRATION.md amendment 5); study A: tag a
+  tag: r                      # round-2 results go to runs/r2/<library>/; round 1 stays in runs/<library>/
+  main_library: F8D2000B
+  sensitivity_libraries: [F8D2000]
+  variants: [full, nodamp, single, fixed]
+  generalization_levels: [L0, L1, L3]   # policies trained on L2, evaluated without retraining
+  trace_cases: [[2300, T2], [2300, T5], [2301, T4]]   # test cases flown with a per-step trajectory log
+
+reference:
+  maxfev: 150                  # Nelder-Mead evaluations in total, split over three starting plans
