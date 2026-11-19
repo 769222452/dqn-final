@@ -114,7 +114,7 @@ reach_grid:                    # region stage: three phases, (r, w) per phase
   w: [0.0, 0.3333333333333333, 0.6666666666666666, 1.0]
 
 training:
-  iterations: 30               # study A
+  iterations: 45               # study A (30 in the first run; raised to 45 after the interim evaluation, amendment 6 note)
   states: 25
   stride_s: 48.0
   window_s: 48.0
