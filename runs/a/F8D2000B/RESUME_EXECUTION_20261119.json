@@ -1,0 +1,87 @@
+{
+  "source_commit": "da7099497a395fcd704d87dd21b53190e71d6904",
+  "branch": "target-rl-a-results-20261119",
+  "platform": "Windows Git Bash",
+  "workers": 5,
+  "command": "PY=.venv/Scripts/python WORKERS=5 STAGES=\"train report\" bash -o igncr scripts/run_a.sh",
+  "task_started": "2026-11-19T09:38:17.1883718+08:00",
+  "script_started": "2026-11-19T09:38:56+08:00",
+  "report_stage_started": "2026-11-19T13:01:39+08:00",
+  "report_completed": "2026-11-19T13:01:41.0606065+08:00",
+  "script_exit_code": 0,
+  "resume_wall_s": 12165.0606065,
+  "task_to_report_wall_s": 12203.8722347,
+  "initial_iteration": 22,
+  "final_iteration": 32,
+  "new_iterations": 10,
+  "configured_iteration_cap": 45,
+  "accepted_total": 9,
+  "accepted_during_resume": 0,
+  "stop_reason": "no candidate accepted in 12 iterations",
+  "manual_interruption": false,
+  "unexpected_interruptions": 0,
+  "restarts": 0,
+  "test_stage_skipped": true,
+  "first_22_history_unchanged": true,
+  "policy_chain_identical_to_iteration_22": true,
+  "evaluation_cache_reused": true,
+  "evaluation_note": "The selected policy chain is unchanged. The unmodified study_a report stage reused all four existing evaluation cache files and regenerated A_REPORT.md.",
+  "source_code_config_preregistration_unchanged": true,
+  "log_error_scan_matches": 0,
+  "report_log_encoding": "Windows CP936 console output; A_REPORT.md is UTF-8",
+  "checkpoint_settings_initial_cap": 30,
+  "checkpoint_settings_note": "The checkpoint retains the settings snapshot from initialization. The training loop reads the effective 45-iteration cap from configs/study_a.yaml.",
+  "files_sha256_scope": "Exact local Windows bytes before Git text line-ending normalization. RUN_EXECUTION.json remains the historical record of the initial 22-iteration run.",
+  "files": [
+    {
+      "path": "A_REPORT.md",
+      "bytes": 1601,
+      "sha256": "a139ce95c34515e8abacbfd9503f9147284aee3700ceda07a81a658d8d87f55a"
+    },
+    {
+      "path": "logs/report.log",
+      "bytes": 1290,
+      "sha256": "481d4dc1bfe1d215cbe9d2369346d66d0db8d5427d86665eae9acbf92c519ed3"
+    },
+    {
+      "path": "logs/test.log",
+      "bytes": 102,
+      "sha256": "bc1a3c994fdd969c32e4eb1551e2a37ee6b82d764277e757cc7f395830a8c703"
+    },
+    {
+      "path": "logs/train_pcguided_s17.log",
+      "bytes": 4368,
+      "sha256": "dc72bdf6d6f8cf5b79247b3af3bd6e94cc09b81f3b2312733f331d9e2ba0fadd"
+    },
+    {
+      "path": "RUN_EXECUTION.json",
+      "bytes": 4051,
+      "sha256": "0bb71441cf450957f69542716160577f0230590bf2f37959379d0d351adb11c1"
+    },
+    {
+      "path": "study_a/dev/base.json",
+      "bytes": 17867,
+      "sha256": "5161eb36cd99b64ef0c4c91483d5c27b5c0898e8574b09b4b40999c9e119d7a7"
+    },
+    {
+      "path": "study_a/dev/rl_17.json",
+      "bytes": 17867,
+      "sha256": "6a47b2eb82258cedffc0dbd587be3403b33e4ab1e30a45a4ada0313981fccd86"
+    },
+    {
+      "path": "study_a/validation/base.json",
+      "bytes": 55831,
+      "sha256": "423a4f0cbb3a1807c63caf933c3a356683b40160a9f2603d012a47d5c1768585"
+    },
+    {
+      "path": "study_a/validation/rl_17.json",
+      "bytes": 55876,
+      "sha256": "2a33eab541d0386c8a37e324128a6c552061e8a1bdaf8d07820c0bc097ca8d57"
+    },
+    {
+      "path": "train/pcguided_s17/state.json",
+      "bytes": 9505513,
+      "sha256": "ea8773b04551a8e1bb6c288f1319f99d53b7641ade9c320f79ba2f6e83135325"
+    }
+  ]
+}
