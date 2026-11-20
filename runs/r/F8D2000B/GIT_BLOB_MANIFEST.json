@@ -1,0 +1,107 @@
+{
+  "scope": "All snapshot files except this manifest; hashes are Git-normalized committed blob bytes",
+  "files": [
+    {
+      "path": "runs/r/F8D2000B/CURRENT_PROGRESS.md",
+      "git_blob_sha1": "5823e08076dd8b426e494fc149565c43ea462951",
+      "git_blob_sha256": "6654b823089d7ceb2d1c343dfd6b165a6050002051f30c309c7d3e4a1d62cdd6",
+      "bytes": 2681
+    },
+    {
+      "path": "runs/r/F8D2000B/SNAPSHOT_20261120.json",
+      "git_blob_sha1": "9cfc26f94889598e83b59502551afcb73effef03",
+      "git_blob_sha256": "40d1aeaa168860cdf41e95856b516795b564330b9baea675a51e52e27eb076b5",
+      "bytes": 4472
+    },
+    {
+      "path": "runs/r/F8D2000B/budget_extension_20261119/budget_change.json",
+      "git_blob_sha1": "f0813b8af4ae58dbbdf8f96fb6baaf65be955d55",
+      "git_blob_sha256": "fc63f34baf7a85bc78e48d88c12dc1fa56ee406fb9f683a198a8ebdca46cff1f",
+      "bytes": 1807
+    },
+    {
+      "path": "runs/r/F8D2000B/budget_extension_20261119/execution_source/configs/study_r.yaml",
+      "git_blob_sha1": "9883e19bf4800e8cbd314e1083798d3df35ca640",
+      "git_blob_sha256": "44a4a99f6df0e4bd51bb3e84bb945ffbe04b4d90e4b65cda8540d828063189c7",
+      "bytes": 7602
+    },
+    {
+      "path": "runs/r/F8D2000B/budget_extension_20261119/execution_source/src/target_rl/train.py",
+      "git_blob_sha1": "ec665b3793a12dd87371374478a4e0727572c680",
+      "git_blob_sha256": "60b8566674de65aa8b3e9aba4c99f17be5c21b01d6e4bec394d20fc7b38fd070",
+      "bytes": 17732
+    },
+    {
+      "path": "runs/r/F8D2000B/budget_extension_20261119/execution_source/tests/test_training_stop.py",
+      "git_blob_sha1": "8dc88ad3d815f910d5d24868b39b71328e0970d9",
+      "git_blob_sha256": "362377bbd176638314499d1f26eb35f368c7c1c8aaca13270a9eb6795e8d61c8",
+      "bytes": 1331
+    },
+    {
+      "path": "runs/r/F8D2000B/budget_extension_20261119/rel_s17_state_before.json",
+      "git_blob_sha1": "dcb77a9edd9d870ececaff60f746f550d8698f22",
+      "git_blob_sha256": "a1e77cc4170cd97c9472cc6858f45dd55b02ae75a7c4bc8c358729faf75680a2",
+      "bytes": 9419700
+    },
+    {
+      "path": "runs/r/F8D2000B/budget_extension_20261119/relfixed_s17_state_before.json",
+      "git_blob_sha1": "b005d6108ffa8df7a5dd8e7b4b778f026b4339db",
+      "git_blob_sha256": "b2c7db142b4cc833052b7bfa078439e7044f3ecfb5d98fb2d8c3111d8e2da1db",
+      "bytes": 3818430
+    },
+    {
+      "path": "runs/r/F8D2000B/budget_extension_20261119/test_before_extension_25_passed.log",
+      "git_blob_sha1": "fb5176b791e5b5413864f0576526eb2a5a6a927d",
+      "git_blob_sha256": "86c95129ddfacad873dec323f511cd706a4d64b916a37db1067bbebf57fdbee9",
+      "bytes": 100
+    },
+    {
+      "path": "runs/r/F8D2000B/budget_extension_20261119/tracked_changes.patch",
+      "git_blob_sha1": "553f85311ad2a9a58f16c328f8567a4a8725b02e",
+      "git_blob_sha256": "1eccd31dbad75d481564701fca3a20bd3de065f0a6cf3351965e47c3680f2998",
+      "bytes": 2409
+    },
+    {
+      "path": "runs/r/F8D2000B/logs/test.log",
+      "git_blob_sha1": "aa54e57eb155b692660dcef306d20f53a0680509",
+      "git_blob_sha256": "16f31eed766ba4e4bd80a443241921b5cbd8f5b2ed3ff2395f9312d90629d1cb",
+      "bytes": 111
+    },
+    {
+      "path": "runs/r/F8D2000B/logs/train_rel_s17.log",
+      "git_blob_sha1": "605d38d62a5c26217aea186ac2c4b9f5a9d104d5",
+      "git_blob_sha256": "5f02ab8217fef3335d69759b1901f66024893278140dcbcd310faae77ffc2516",
+      "bytes": 8161
+    },
+    {
+      "path": "runs/r/F8D2000B/logs/train_relfixed_s17.log",
+      "git_blob_sha1": "683d7bd5f2824944328d389b17ced3fbae0011f8",
+      "git_blob_sha256": "037252c67072b25e3be8f1c06d0ce2ffa36cfafc77e22c3bef03b135c622d954",
+      "bytes": 15716
+    },
+    {
+      "path": "runs/r/F8D2000B/train/rel_s17/iteration_metrics_snapshot.csv",
+      "git_blob_sha1": "e9ebfed724af2a7d7f205ac395dc107cbf523746",
+      "git_blob_sha256": "bbafe43e2b66607566ada6015a4f753f3cada79f98a7bb241e15d7ae6662e307",
+      "bytes": 8564
+    },
+    {
+      "path": "runs/r/F8D2000B/train/rel_s17/state.json",
+      "git_blob_sha1": "c0ade8702576bc17d61bee021517e2a51db95b58",
+      "git_blob_sha256": "0012fce07822188c1d6b73c10e72118af4400a0f3183f850397e5bc89acd7797",
+      "bytes": 16067020
+    },
+    {
+      "path": "runs/r/F8D2000B/train/relfixed_s17/iteration_metrics_snapshot.csv",
+      "git_blob_sha1": "a31191c9df2b1e21de666d7cc242c52c7e8c56e2",
+      "git_blob_sha256": "0c336d47605218c705f0dcbe5f4885d75c6b0f50f0daada7f8e9d2abceb90de3",
+      "bytes": 15551
+    },
+    {
+      "path": "runs/r/F8D2000B/train/relfixed_s17/state.json",
+      "git_blob_sha1": "709f1927522a7b4610d893c5ab15467322c455f3",
+      "git_blob_sha256": "a7668fe98c29f38a6dffe4a29114c3abc030771078ce17506565b68b882d0cb1",
+      "bytes": 9362668
+    }
+  ]
+}

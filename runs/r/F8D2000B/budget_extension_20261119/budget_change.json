@@ -1,0 +1,56 @@
+{
+  "time": "2026-11-19T22:43:43.107476+08:00",
+  "source_commit": "3a3c2000e4d8c9c586361192090038c5eb1c1461",
+  "authorized_changes": {
+    "training.iterations": [
+      30,
+      120
+    ],
+    "no_acceptance_iterations": [
+      12,
+      20
+    ]
+  },
+  "unchanged": [
+    "clean-sweep stopping rule",
+    "reward",
+    "data",
+    "actions",
+    "network",
+    "acceptance criteria",
+    "preregistration"
+  ],
+  "interruption": {
+    "reason": "apply user-authorized budget and stopping-rule changes",
+    "checkpoint_rel": 30,
+    "checkpoint_relfixed": 17,
+    "relfixed_checkpoint_sha256_before_and_after_stop": "b2c7db142b4cc833052b7bfa078439e7044f3ecfb5d98fb2d8c3111d8e2da1db"
+  },
+  "checkpoints": [
+    {
+      "run": "rel_s17",
+      "iteration": 30,
+      "old_sha256": "a1e77cc4170cd97c9472cc6858f45dd55b02ae75a7c4bc8c358729faf75680a2",
+      "new_sha256": "7bee8e77b7b29ec173f0cb8bd76b1a6fd91e096c7d7496b1b269fa3ef51a59d7",
+      "cleared_marker": {
+        "iteration": 29,
+        "reason": "iteration limit",
+        "G": -0.6810353333643765
+      },
+      "preserved_policy_labels_history_and_schedules": true
+    },
+    {
+      "run": "relfixed_s17",
+      "iteration": 17,
+      "old_sha256": "b2c7db142b4cc833052b7bfa078439e7044f3ecfb5d98fb2d8c3111d8e2da1db",
+      "new_sha256": "3b6d2a56283b436272c9297562c230eedd1f7d450803bf7830ccf5ebf9fe8ee2",
+      "cleared_marker": null,
+      "preserved_policy_labels_history_and_schedules": true
+    }
+  ],
+  "execution_source_sha256": {
+    "configs/study_r.yaml": "f542a3eded2e27fce86f0fa23355cc8347737a944e90f5890e3b15800c5b79a0",
+    "src/target_rl/train.py": "e08dc5cb6f6726ed538cbfa591ce92fe6312d86d3d278339dc4cdc5794a0788b",
+    "tests/test_training_stop.py": "362377bbd176638314499d1f26eb35f368c7c1c8aaca13270a9eb6795e8d61c8"
+  }
+}
