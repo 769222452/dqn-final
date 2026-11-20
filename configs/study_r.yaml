@@ -113,7 +113,8 @@ reach_grid:                    # region stage: three phases, (r, w) per phase
   w: [0.0, 0.3333333333333333, 0.6666666666666666, 1.0]
 
 training:
-  iterations: 30               # study R
+  iterations: 120              # study R: user-authorized extension, 2026-11-19
+  no_acceptance_iterations: 20  # other studies retain their original stopping rule
   states: 25
   stride_s: 48.0
   window_s: 48.0

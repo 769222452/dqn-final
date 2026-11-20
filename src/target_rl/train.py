@@ -135,7 +135,7 @@ def improvable_fraction(new, min_advantage):
     return sum(1 for s in states if max(x['advantage'] for x in new if (x['case'], x['t']) == s) > min_advantage)/len(states)
 
 
-def stop_reason(history, patience, sweeps=2, stall=3):
+def stop_reason(history, patience, sweeps=2, stall=3, no_acceptance_iterations=None):
     n = 0
     for r in reversed(history):
         if r['accepted'] or r['positive_pairs'] or r['invalid']:
@@ -143,8 +143,9 @@ def stop_reason(history, patience, sweeps=2, stall=3):
         n += 1
     if n >= patience*sweeps:
         return f'{sweeps} clean sweeps ({n} iterations): no positive pair, no violating branch, no acceptance'
-    if len(history) >= patience*stall and not any(r['accepted'] for r in history[-patience*stall:]):
-        return f'no candidate accepted in {patience*stall} iterations'
+    limit = patience*stall if no_acceptance_iterations is None else int(no_acceptance_iterations)
+    if len(history) >= limit and not any(r['accepted'] for r in history[-limit:]):
+        return f'no candidate accepted in {limit} iterations'
     return None
 
 
@@ -285,7 +286,7 @@ def train(variant, seed, workers=4, out=None, iterations=None, cases=None, pi0=N
         rec['wall_s'] = time.perf_counter()-t0
         st['history'].append(rec)
         st['iteration'] = i+1
-        reason = stop_reason(st['history'], patience)
+        reason = stop_reason(st['history'], patience, no_acceptance_iterations=tr.get('no_acceptance_iterations'))
         if reason or st['iteration'] >= tr['iterations']:
             st['converged'] = dict(iteration=i, reason=reason or 'iteration limit', G=st['G'])
         save_json(path, st)
