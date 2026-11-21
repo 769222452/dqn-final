@@ -45,7 +45,7 @@ ITER_ARG=""
 for s in $STAGES; do
   echo "=== $(stamp) v2: $s (tag $TAG, library $TARGET_RL_LIBRARY, seeds $SEEDS, workers $WORKERS)"
   case $s in
-    test)    $PY -m pytest -q 2>&1 | tee "$LOGS/test.log" ;;
+    test)    TARGET_RL_CONFIG="" $PY -m pytest -q 2>&1 | tee "$LOGS/test.log" ;;      # the tests assume the default configuration
     train)   for seed in $SEEDS; do for v in rel relfixed; do
                echo "=== $(stamp) train $v seed $seed"
                $PY -m target_rl.train --variant "$v" --seed "$seed" --workers "$WORKERS" $ITER_ARG 2>&1 | tee -a "$LOGS/train_${v}_s$seed.log"
