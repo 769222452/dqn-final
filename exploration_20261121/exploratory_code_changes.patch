@@ -1,0 +1,167 @@
+diff -ru -x __pycache__ src/target_rl/flight.py /tmp/claude-0/-home-user-dqn-final/87c281b1-63f7-56ca-b436-68c23ccd16ca/scratchpad/imp/src/target_rl/flight.py
+--- src/target_rl/flight.py	2026-11-19 11:41:48.551515036 +0000
++++ /tmp/claude-0/-home-user-dqn-final/87c281b1-63f7-56ca-b436-68c23ccd16ca/scratchpad/imp/src/target_rl/flight.py	2026-11-20 02:45:29.232072847 +0000
+@@ -153,6 +153,13 @@
+         guard = law_cl(model, self.x, q, p['q_ratio'], w['qmax'], p['kp'], p['kg'])
+         cl = max(cl_cmd, guard)
+         protected = guard > cl_cmd
++        buf = p.get('floor_buffer_m', 0.)
++        if buf > 0:           # altitude-floor guard: raise CL when within buf of the altitude floor
++            h0 = w['limits'].h[0]+buf
++            if self.x[0] < h0:
++                need = model.level_cl(self.x, q)*(1+p.get('floor_gain', 2.)*(h0-self.x[0])/buf)-p['kg']*self.x[2]
++                if need > cl:
++                    cl, protected = need, True
+         lo, hi = w['cl_clip']
+         mach = self.x[1]/model.atm.speed_of_sound(self.x[0])
+         clo, chi = w['drag'].cl_limits(mach)
+diff -ru -x __pycache__ src/target_rl/guided.py /tmp/claude-0/-home-user-dqn-final/87c281b1-63f7-56ca-b436-68c23ccd16ca/scratchpad/imp/src/target_rl/guided.py
+--- src/target_rl/guided.py	2026-11-19 11:41:48.550795357 +0000
++++ /tmp/claude-0/-home-user-dqn-final/87c281b1-63f7-56ca-b436-68c23ccd16ca/scratchpad/imp/src/target_rl/guided.py	2026-11-20 02:47:16.784247125 +0000
+@@ -215,9 +215,55 @@
+         return c
+ 
+ 
++DCL = 0.0025
++
++
++class TwoPredFlight(RelPredFlight):
++    """As RelPredFlight, but every prediction is made twice: CL target held with no more braking (pred) and with
++    full braking from now (fb). Features add fb range / speed errors, a full-brake-infeasible flag and the brake
++    fraction beta = (V_pred - V*) / (V_pred - V_fb) the full brake would have to be applied for (linear)."""
++
++    def _predict(self):
++        self.npred += 2
++        self.last_pred_t = self.t
++        kl, kd = self.est.values
++        sc = dataclasses.replace(self.sc, k_lift=float(np.clip(kl, .7, 1.3)), k_drag=float(np.clip(kd, .7, 1.3)))
++        res = []
++        for wl, dcl in ((0., 0.), (1., 0.), (0., DCL)):
++            p = F.TargetFlight.fork(self)
++            p.field = B._Const(self.k_rho())
++            p.sc = sc
++            p.w = dict(self.w, dt=self.pdt)
++            F.TargetFlight.advance(p, self.w['T']-p.t, _hold(self.cl_t+dcl, wl))
++            res.append((np.array([p.range_km(), p.x[1]]), bool(p.failed)))
++        self.npred += 1
++        self.pred, _ = res[0]
++        self.fb, self.fb_fail = res[1]
++        self.gc = (res[2][0]-res[0][0])/DCL            # d(range, speed)/d(CL target), no brake
++
++    def features(self, extra=False):
++        base = F.TargetFlight.features(self, extra)
++        if not extra:
++            return base
++        tg = np.array([self.target.range_km, self.target.speed_mps])
++        e, f = self.pred-tg, self.fb-tg
++        beta = float(np.clip((self.pred[1]-tg[1])/max(self.pred[1]-self.fb[1], 1.), -1., 2.))
++        return base+[float(e[0])/100., float(e[1])/100., self.w_cur, self.cl_t*10.,
++                     float(f[0])/100., float(f[1])/100., float(self.fb_fail), beta,
++                     float(self.gc[0])*0.001, float(self.gc[1])*0.001]
++
++    def fork(self):
++        c = super().fork()
++        c.fb, c.fb_fail = self.fb.copy(), self.fb_fail
++        c.gc = self.gc.copy()
++        return c
++
++
+ def make(sc, target, morph=True, trace=False, kg=None):
+     """Flight of the configured kind: the guided flight under study A, else the round-2 TargetFlight."""
+     kind = config.load().get('guidance', {}).get('kind')
++    if kind == 'rel_pred2':
++        return TwoPredFlight(sc, target, morph, trace, kg)
+     if kind == 'pc_offset':
+         return PCOffsetFlight(sc, target, morph, trace, kg)
+     if kind == 'rel_pred':
+diff -ru -x __pycache__ src/target_rl/policy.py /tmp/claude-0/-home-user-dqn-final/87c281b1-63f7-56ca-b436-68c23ccd16ca/scratchpad/imp/src/target_rl/policy.py
+--- src/target_rl/policy.py	2026-11-19 11:41:48.551188056 +0000
++++ /tmp/claude-0/-home-user-dqn-final/87c281b1-63f7-56ca-b436-68c23ccd16ca/scratchpad/imp/src/target_rl/policy.py	2026-11-20 02:47:16.784644423 +0000
+@@ -18,7 +18,8 @@
+ TARGET = ('target_range', 'target_speed')      # read by the lookup stage only; never a network input
+ GUIDE = ('pred_range_error', 'pred_speed_error', 'w_plan', 'r_plan')   # guided flights only (guided.py); study R:
+ #        predicted range / speed errors, current w, current CL target x 10
+-NAMES = BASE+EXTRA+TARGET+GUIDE
++GUIDE2 = ('fb_range_error', 'fb_speed_error', 'fb_fail', 'beta', 'gc_range', 'gc_speed')
++NAMES = BASE+EXTRA+TARGET+GUIDE+GUIDE2
+ RADIUS_BLOCK_S = 96.
+ _CACHE = {}
+ 
+@@ -70,6 +71,39 @@
+         if stage['morph'] and eV > stage['v_brake'] and t >= stage['t_brake']:
+             i_w = int(stage.get('i_w_brake', 3))
+         return F.encode(i_cl, i_w, stage['morph'])
++    if stage['kind'] == 'newton':
++        from scipy.optimize import lsq_linear
++        e0 = np.array([f[NAMES.index('pred_range_error')]*100., f[NAMES.index('pred_speed_error')]*100.])
++        e1 = np.array([f[NAMES.index('fb_range_error')]*100., f[NAMES.index('fb_speed_error')]*100.])
++        gc = np.array([f[NAMES.index('gc_range')], f[NAMES.index('gc_speed')]])*1000.     # per unit CL
++        t = float(f[3])*1200.
++        sc_ = np.array([stage['d1'], stage['vtol']])
++        A = np.stack([(e1-e0)/sc_, gc*.001/sc_], axis=1)        # columns: beta, delta CL in 0.001 units
++        lo_b = 0. if (stage['morph'] and t >= stage['t_start']) else 0.
++        hi_b = 1. if (stage['morph'] and t >= stage['t_start']) else 0.
++        hi_b = min(hi_b, .67 if float(f[NAMES.index('fb_fail')]) > .5 else 1.)
++        sol = lsq_linear(A, -e0/sc_, bounds=([lo_b, -20.], [hi_b+1e-9, 20.]))
++        beta, dcl = sol.x[0], sol.x[1]*.001
++        i_w = int(round(beta*3)) if stage['morph'] else 0
++        lv = np.array([-.005, -.0025, 0., .0025, .005])
++        i_cl = int(np.argmin(np.abs(lv-np.clip(dcl, -.005, .005))))
++        return F.encode(i_cl, i_w, stage['morph'])
++    if stage['kind'] == 'p2rule':
++        # two predictions (no brake / full brake): brake fraction beta, CL step on the range error of the blend
++        beta = float(np.clip(f[NAMES.index('beta')], 0., 1.))
++        eD0 = float(f[NAMES.index('pred_range_error')])*100.
++        eD1 = float(f[NAMES.index('fb_range_error')])*100.
++        t = float(f[3])*1200.
++        i_w = 0
++        if stage['morph'] and t >= stage['t_start']:
++            lv = stage.get('levels', 3)
++            i_w = int(round(beta*lv)) if stage.get('mode', 'prop') == 'prop' else (lv if beta > stage.get('thr', .5) else 0)
++            if float(f[NAMES.index('fb_fail')]) > .5:
++                i_w = min(i_w, 2)
++        e = eD0+(beta*(eD1-eD0) if i_w > 0 else 0.)
++        d1, d2 = stage['d1'], stage['d2']
++        i_cl = 4 if e > d2 else 3 if e > d1 else 0 if e < -d2 else 1 if e < -d1 else 2
++        return F.encode(i_cl, i_w, stage['morph'])
+     D, V = float(f[NAMES.index('target_range')])*1000., float(f[NAMES.index('target_speed')])*1000.
+     T = np.asarray(stage['targets'], float)
+     k = int(np.argmin(((T[:, 0]-D)/100.)**2+((T[:, 1]-V)/100.)**2))
+--- configs/study_r.yaml	2026-11-20 02:14:46.430460123 +0000
++++ /tmp/claude-0/-home-user-dqn-final/87c281b1-63f7-56ca-b436-68c23ccd16ca/scratchpad/imp/configs/imp.yaml	2026-11-20 02:45:29.232366736 +0000
+@@ -65,6 +65,8 @@
+   q_ratio: 0.95                # CL = max(CL command, law(q_ref = q_ratio q_max))
+   kp: 2.0
+   kg: 1.0
++  floor_buffer_m: 1500.0        # altitude-floor guard (all methods)
++  floor_gain: 2.0
+ 
+ execution:                     # round 2 (PREREGISTRATION.md amendment 5): CL target fed back on the flight-path angle
+   kg: 1.0                      # executed CL = CL target - kg * gamma, then the protection loop (round 1: kg = 0)
+@@ -101,7 +103,7 @@
+ 
+ seeds:                         # round 2 (amendment 5); round 1 used train 1100-1147 and test 2200-2219
+   train: [1100, 1399]          # study R: 300 training cases
+-  validation: [1400, 1495]     # decision set (also used in study A)
++  validation: [1500, 1595]     # fresh validation seeds for the improvement study
+   test: [2300, 2319]           # new, never used before; 2200-2219 were the round-1 test scenarios
+   dev: [2350, 2354]            # pilot runs only (scripts/pilot_r2.sh); never part of the test set
+   random_targets: [3000, 3009]
+@@ -137,7 +139,7 @@
+   strong_phases_s: [400.0, 800.0]
+ 
+ guidance:                      # study R: the policy flies (guided.RelPredFlight)
+-  kind: rel_pred
++  kind: rel_pred2
+   predict_every_s: 48.0        # one coarse prediction every 48 s (25 per flight), used as input
+   predict_dt_s: 4.0
+   cycle_s: 48.0                # cheap predictor-corrector settings for the comparison methods (study_r.py)
+@@ -152,7 +154,7 @@
+   i_w_brake: 3
+ 
+ experiment:                    # round 2 plan (EXPERIMENTS.md, PREREGISTRATION.md amendment 5); study A: tag a
+-  tag: r                      # round-2 results go to runs/r2/<library>/; round 1 stays in runs/<library>/
++  tag: imp                      # round-2 results go to runs/r2/<library>/; round 1 stays in runs/<library>/
+   main_library: F8D2000B
+   sensitivity_libraries: [F8D2000]
+   variants: [full, nodamp, single, fixed]
