@@ -16,6 +16,7 @@ Writes runs/v2/<library>/V2_REPORT.md (+ figure).
 import argparse
 import os
 import platform
+import sys
 import time
 
 import numpy as np
@@ -179,6 +180,15 @@ def draw_map(out, methods, grid, path):
 
 
 # ------------------------------------------------------------------------------------------- report
+def safe_print(text):
+    """Print to consoles whose encoding cannot represent every symbol (Windows GBK: the minus sign, >=, x); the file is UTF-8."""
+    try:
+        print(text)
+    except UnicodeEncodeError:
+        enc = sys.stdout.encoding or 'utf-8'
+        print(text.encode(enc, 'replace').decode(enc))
+
+
 def report(seeds, which, with_domain=True):
     cfg = config.load()
     nb = int(cfg['experiment']['bootstrap'])
@@ -265,7 +275,7 @@ def report(seeds, which, with_domain=True):
     out_path = config.runs_dir()/f'V2_REPORT_{which}.md'
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(text, encoding='utf-8')
-    print(text)
+    safe_print(text)
     return out_path
 
 

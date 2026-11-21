@@ -20,6 +20,7 @@ QUICK=${QUICK:-0}
 RUN_TEST=${RUN_TEST:-0}
 export PYTHONPATH=src OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 TARGET_RL_LIBRARY=${LIBRARY:-F8D2000B}
 export TARGET_RL_CONFIG=${TARGET_RL_CONFIG:-configs/v2.yaml}
+export PYTHONIOENCODING=utf-8      # reports contain symbols a GBK console cannot print; the files are UTF-8
 if [ "$QUICK" = 1 ]; then
   mkdir -p runs
   $PY - <<'PYEOF'
