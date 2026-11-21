@@ -14,6 +14,8 @@ transitions to the new shape linearly in 8 s (flight.TargetFlight._morph_exec). 
 """
 import hashlib
 import math
+import os
+import time
 from pathlib import Path
 
 import numpy as np
@@ -88,20 +90,46 @@ def build_tables(cfg=None):
                 fixed=a['fixed_geometry'], n_geometries=len(ids), levels=levels, nlev=np.isfinite(levels).sum(-1).astype(np.int32))
 
 
+def _load_cache(cache):
+    """Cached tables, or None (missing, written before the shape levels existed, or being written / locked by another process)."""
+    if not cache.exists():
+        return None
+    try:
+        with np.load(cache, allow_pickle=False) as z:        # closed at once: Windows cannot replace an open file
+            if 'levels' not in z.files:
+                return None
+            return {k: (z[k] if z[k].ndim else z[k].item()) for k in z.files}
+    except (OSError, ValueError, KeyError):
+        return None
+
+
+def _store_cache(cache, t):
+    """Atomic, race-tolerant write (several worker processes may build the tables at the same time)."""
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    tmp = cache.with_name(f'{cache.name}.{os.getpid()}.tmp.npz')
+    np.savez(tmp, **t)
+    for k in range(8):
+        try:
+            tmp.replace(cache)
+            return
+        except PermissionError:                              # Windows: another process has the file open; it wrote the same tables
+            time.sleep(.2*(k+1))
+    try:
+        tmp.unlink()
+    except OSError:
+        pass
+
+
 def tables(cfg=None):
     cfg = cfg or config.load()
     lib = config.library(cfg)
     key = '_'.join(s[:12] for s in (lib['sha256'] if isinstance(lib['sha256'], list) else [lib['sha256']]))
-    cache = config.ROOT/'runs'/'cache'/f"aero_{key}_{lib['fixed_geometry']}.npz"
-    if cache.exists():
-        z = np.load(cache, allow_pickle=False)
-        if 'levels' in z.files:                      # caches of rounds 1-2 have no shape levels: rebuild them
-            return {k: (z[k] if z[k].ndim else z[k].item()) for k in z.files}
+    cache = config.ROOT/'runs'/'cache'/f"aero_{key}_{lib['fixed_geometry']}_lv.npz"      # _lv: tables with the shape levels (v2)
+    t = _load_cache(cache)
+    if t is not None:
+        return t
     t = build_tables(cfg)
-    cache.parent.mkdir(parents=True, exist_ok=True)
-    tmp = cache.with_name(cache.name+'.tmp.npz')
-    np.savez(tmp, **t)
-    tmp.replace(cache)
+    _store_cache(cache, t)
     return t
 
 

@@ -23,7 +23,7 @@ R = lambda k: set(config.seed_range(c['seeds'][k]))
 assert not (R('train') & R('validation')) and not (R('train') & R('test')) and not (R('validation') & R('test'))
 assert not (R('test') & R('dev')) and R('domain') <= R('validation')
 assert not (R('validation') & set(range(1400, 1600))), 'seeds looked at during exploration are not decision seeds'
-assert str(config.runs_dir()).endswith('runs/v2/F8D2000B')
+assert config.runs_dir().parts[-3:] == ('runs', 'v2', 'F8D2000B')
 print('ok')
 ''')
 
