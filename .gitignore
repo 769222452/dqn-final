@@ -3,3 +3,6 @@ __pycache__/
 runs/cache/
 .pytest_cache/
 runs/paper.log
+
+runs/v2quick/
+runs/v2quick_config.yaml

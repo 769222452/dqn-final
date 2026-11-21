@@ -37,18 +37,18 @@ def _phase(t, phases):
     return 0 if t < phases[0] else (1 if t < phases[1] else 2)
 
 
-def _command(params, phases, morph):
-    """params: r[3] + w[3] per phase."""
+def _command(params, phases, morph, w0=False):
+    """params: r[3] + w[3] per phase. w0: the morph level is forced to 0 (the minimum-drag shape)."""
     def command(env):
         k = _phase(env.t, phases)
         w = env.w
         p = w['prot']
         cl = F.law_cl(w['model'], env.x, env.q(), params[k], w['qmax'], p['kp'], p['kg'])
-        return cl, (params[3+k] if morph else 0.)
+        return cl, (params[3+k] if morph and not w0 else 0.)
     return command
 
 
-def predict(env, params, phases, pc, oracle=False):
+def predict(env, params, phases, pc, oracle=False, w0=False):
     """Prediction from the current state: ((range, speed), keeps the margin). Measured density ratio frozen and
     estimated biases; with oracle=True the true density field and true biases."""
     p = env.fork()
@@ -61,7 +61,8 @@ def predict(env, params, phases, pc, oracle=False):
         p.field = _Const(env.k_rho())
         p.sc = dataclasses.replace(env.sc, k_lift=kl, k_drag=kd)
     p.w = dict(env.w, dt=pc['predict_dt_s'])
-    p.advance(env.w['T']-env.t, _command(params, phases, env.morph))
+    p.realistic = False              # predictions use the continuous, instantaneous morph model
+    p.advance(env.w['T']-env.t, _command(params, phases, env.morph, w0))
     return np.array([p.range_km(), p.x[1]]), (not p.failed) and p.min_margin >= pc['margin']
 
 
@@ -69,9 +70,10 @@ class PredictorCorrector:
     def __init__(self, kind, cfg=None):
         cfg = cfg or config.load()
         self.kind, self.pc = kind, cfg['predictor_corrector']
-        if kind not in ('pc_fair', 'pc_strong', 'pc_fixed', 'pc_oracle'):
+        if kind not in ('pc_fair', 'pc_strong', 'pc_fixed', 'pc_oracle', 'pc_strong_w0'):
             raise ValueError(kind)
-        self.strong = kind in ('pc_strong', 'pc_oracle')
+        self.w0 = kind == 'pc_strong_w0'     # v2 fixed-geometry-like baseline: strong PC (D and V) with the morph level 0
+        self.strong = kind in ('pc_strong', 'pc_oracle', 'pc_strong_w0')
         self.oracle = kind == 'pc_oracle'
         self.morph = kind != 'pc_fixed'
         self.n_predictions = 0
@@ -84,7 +86,7 @@ class PredictorCorrector:
             idx = [0, 1, 2, 3, 4, 5] if self.morph else [0, 1, 2]
             return idx
         k = _phase(t, self.phases)
-        return [j for j in range(k, 3)]+([3+j for j in range(k, 3)] if self.morph else [])
+        return [j for j in range(k, 3)]+([3+j for j in range(k, 3)] if self.morph and not self.w0 else [])
 
     def _tie(self, u):
         """pc_fair / pc_fixed hold one (r, w) for the whole rest of the flight."""
@@ -95,7 +97,7 @@ class PredictorCorrector:
 
     def _predict(self, env, u):
         self.n_predictions += 1
-        return predict(env, u, self.phases, self.pc, self.oracle)
+        return predict(env, u, self.phases, self.pc, self.oracle, self.w0)
 
     def correct(self, env, iterations):
         pc = self.pc
@@ -143,7 +145,7 @@ class PredictorCorrector:
             if env.t >= nxt-1e-9:
                 self.correct(env, pc['newton_first'] if env.t == 0 else pc['newton'])
                 nxt += pc['cycle_s']
-            env.advance(nxt-env.t, _command(self.u, self.phases, self.morph))
+            env.advance(nxt-env.t, _command(self.u, self.phases, self.morph, self.w0))
         env.info['n_predictions'] = self.n_predictions
         return env
 

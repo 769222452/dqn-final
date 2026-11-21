@@ -165,9 +165,80 @@ def random_target(seed, name, region=None, cfg=None):
     raise RuntimeError('no target found in the region')
 
 
+# ------------------------------------------------------------------------------------------- v2 target distribution
+def _seg_dist(p, a, b):
+    ab = b-a
+    t = np.clip(np.dot(p-a, ab)/max(np.dot(ab, ab), 1e-12), 0., 1.)
+    return float(np.linalg.norm(p-(a+t*ab)))
+
+
+def edge_depth(p, region=None, cfg=None):
+    """Distance of the target p = (range km, speed m/s) to the edge of the target region, in normalised units
+    (range / targets.v2.scale[0] km, speed / targets.v2.scale[1] m/s)."""
+    cfg = cfg or config.load()
+    region = region or load_region()
+    sc = np.asarray(cfg['targets']['v2']['scale'], float)
+    q = np.asarray(p, float)/sc
+    P = np.asarray(region['region'], float)/sc
+    return min(_seg_dist(q, P[i], P[(i+1) % len(P)]) for i in range(len(P)))
+
+
+def v2_target(seed, stratum, name, k=0, region=None, cfg=None):
+    """v2 random target: inside the target region, at least targets.v2.margin from its edge, and in stratum 'F' (also reachable
+    with fixed geometry in the nominal fixed-geometry region) or 'M' (only the morphing region contains it)."""
+    cfg = cfg or config.load()
+    region = region or load_region()
+    R, FX = np.asarray(region['region']), np.asarray(region['fixed_hull'])
+    margin = float(cfg['targets']['v2']['margin'])
+    rng = np.random.default_rng([int(seed), 23, int(stratum == 'F'), int(k)])
+    (x0, y0), (x1, y1) = R.min(0), R.max(0)
+    for _ in range(200000):
+        p = (float(rng.uniform(x0, x1)), float(rng.uniform(y0, y1)))
+        if inside(R, p) and inside(FX, p) == (stratum == 'F') and edge_depth(p, region, cfg) >= margin:
+            return Target(name, round(p[0], 3), round(p[1], 3))
+    raise RuntimeError('no v2 target found')
+
+
+def domain_grid(region=None, cfg=None):
+    """Grid points (range, speed) of the task-domain map inside the nominal morphing-reachable hull."""
+    cfg = cfg or config.load()
+    region = region or load_region()
+    g = cfg['targets']['v2']['grid']
+    MH = np.asarray(region['morph_hull'])
+    return [(float(d), float(v)) for d in np.arange(g['D'][0], g['D'][1]+1e-9, g['D'][2])
+            for v in np.arange(g['V'][0], g['V'][1]+1e-9, g['V'][2]) if inside(MH, (float(d), float(v)))]
+
+
+def v2_cases(which, region=None, cfg=None):
+    """v2 case sets (scenario, target).
+    train       one random target per training scenario, strata F / M alternating (300 cases)
+    validation  two random targets (one per stratum) per validation scenario (decision set)
+    test        test scenarios x (targets.v2.test_per_stratum random targets per stratum + T1-T6); run once
+    domain      domain-map scenarios x grid points"""
+    cfg = cfg or config.load()
+    region = region or load_region()
+    lvl = cfg['disturbance']['main_level']
+    if which == 'train':
+        return [(scenario(lvl, s), v2_target(s, 'F' if s % 2 == 0 else 'M', f'train{s}', 0, region, cfg))
+                for s in config.seed_range(cfg['seeds']['train'])]
+    if which == 'validation':
+        return [(scenario(lvl, s), v2_target(s, st, f'{st}{s}', 0, region, cfg))
+                for s in config.seed_range(cfg['seeds']['validation']) for st in ('F', 'M')]
+    if which == 'test':
+        n = int(cfg['targets']['v2']['test_per_stratum'])
+        return [(scenario(lvl, s), t) for s in config.seed_range(cfg['seeds']['test'])
+                for t in [v2_target(s, st, f'{st}{s}_{k}', k, region, cfg) for st in ('F', 'M') for k in range(n)]+named_targets(region)]
+    if which == 'domain':
+        grid = domain_grid(region, cfg)
+        return [(scenario(lvl, s), Target(f'g{int(d)}_{int(v)}', d, v)) for s in config.seed_range(cfg['seeds']['domain']) for d, v in grid]
+    raise ValueError(which)
+
+
 def training_cases(region=None, cfg=None):
     cfg = cfg or config.load()
     region = region or load_region()
+    if cfg.get('targets', {}).get('v2'):
+        return v2_cases('train', region, cfg)
     lvl = cfg['disturbance']['main_level']
     return [(scenario(lvl, s), random_target(s, f'train{s}', region, cfg)) for s in config.seed_range(cfg['seeds']['train'])]
 

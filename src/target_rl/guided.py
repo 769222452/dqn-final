@@ -74,6 +74,7 @@ class PCOffsetFlight(F.TargetFlight):
         """Prediction: w for one decision, then the plan; True if every path limit keeps the margin."""
         self.pc.n_predictions += 1
         p = super().fork()
+        p.realistic = False
         p.trace = None
         kl, kd = self.est.values
         p.field = B._Const(self.k_rho())
@@ -178,6 +179,7 @@ class RelPredFlight(F.TargetFlight):
         self.npred += 1
         self.last_pred_t = self.t
         p = F.TargetFlight.fork(self)
+        p.realistic = False
         kl, kd = self.est.values
         p.field = B._Const(self.k_rho())
         p.sc = dataclasses.replace(self.sc, k_lift=float(np.clip(kl, .7, 1.3)), k_drag=float(np.clip(kd, .7, 1.3)))

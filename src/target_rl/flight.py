@@ -34,6 +34,7 @@ def world(morph=True):
                        cl_clip=cfg['actions']['cl_clip'], prot=cfg['protection'], hit=cfg['hit'],
                        kg=float(cfg.get('execution', {}).get('kg', 0.)),
                        update_s=float(cfg.get('execution', {}).get('update_s', 3.)),
+                       morph_exec=dict(cfg.get('execution', {}).get('morph', {})),
                        reward=cfg['reward'])
     return _W[key]
 
@@ -109,6 +110,10 @@ class TargetFlight:
         self.steps = 0
         self.min_margin = 1e9
         self.wl = 0.
+        # v2 execution (configs/v2.yaml execution.morph.realistic): the plant flies library shapes only and needs
+        # transition_s to move to a new one. Predictions (forks made by predictors) set realistic = False.
+        self.realistic = bool(morph and self.w['morph_exec'].get('realistic', False))
+        self.mstate = dict(act=0., frm=0., goal=0., t0=-1e9, n=0)
         self.info = {}
         self.trace = [] if trace else None      # per inner step: t, h, V, gamma, range_km, CL, w, q/q_max, protected
 
@@ -153,10 +158,31 @@ class TargetFlight:
         guard = law_cl(model, self.x, q, p['q_ratio'], w['qmax'], p['kp'], p['kg'])
         cl = max(cl_cmd, guard)
         protected = guard > cl_cmd
+        buf = p.get('floor_buffer_m', 0.)
+        if buf > 0:                      # v2: altitude-floor guard, raise CL within buf of the altitude floor
+            h0 = w['limits'].h[0]+buf
+            if self.x[0] < h0:
+                need = model.level_cl(self.x, q)*(1+p.get('floor_gain', 2.)*(h0-self.x[0])/buf)-p['kg']*self.x[2]
+                if need > cl:
+                    cl, protected = need, True
         lo, hi = w['cl_clip']
         mach = self.x[1]/model.atm.speed_of_sound(self.x[0])
         clo, chi = w['drag'].cl_limits(mach)
         return min(max(cl, lo, clo), hi, chi), protected
+
+    def _morph_exec(self, wl, cl):
+        """Executed morph level: the requested level snapped to a library shape (at the current Mach and CL), reached by
+        a linear transition of transition_s; a new shape is accepted only after the current transition is complete."""
+        ex, ms = self.w['morph_exec'], self.mstate
+        tr = float(ex.get('transition_s', 8.))
+        goal = wl
+        if ex.get('snap', True):
+            goal = self.w['drag'].snap(self.x[1]/self.w['model'].atm.speed_of_sound(self.x[0]), cl, wl)
+        if self.t-ms['t0'] >= tr-1e-9 and abs(goal-ms['goal']) > 1e-9:
+            ms.update(frm=ms['act'], goal=goal, t0=self.t)
+            ms['n'] += 1
+        ms['act'] = ms['goal'] if tr <= 0 else ms['frm']+(ms['goal']-ms['frm'])*min(1., (self.t-ms['t0'])/tr)
+        return ms['act']
 
     def advance(self, duration, command):
         """Fly `duration` seconds; command(env) -> (CL command, w) is evaluated every inner step."""
@@ -168,6 +194,8 @@ class TargetFlight:
         while not self.done and self.t < end-1e-9:
             cl_cmd, wl = command(self)
             cl, protected = self.command_cl(cl_cmd)
+            if self.realistic:
+                wl = self._morph_exec(wl, cl)
             self.protect_steps += protected
             self.steps += 1
             self.cl, self.wl = cl, wl
@@ -258,6 +286,7 @@ class TargetFlight:
         c.est = copy.copy(self.est)
         c.est.num, c.est.den = list(self.est.num), list(self.est.den)
         c.trace = None                   # forks (branches, predictions) are never traced
+        c.mstate = dict(self.mstate)
         c.info = dict(self.info)
         return c
 
@@ -267,4 +296,4 @@ class TargetFlight:
                     target_speed_mps=self.target.speed_mps, G=self.G, hit=bool(self.hit()), feasible=not self.failed,
                     reason=self.reason, t_end=self.t, range_km=self.range_km(), V_end=self.x[1], h_end=self.x[0],
                     dD_km=dD, dV_mps=dV, protect_fraction=self.protect_steps/max(self.steps, 1),
-                    min_margin=self.min_margin, **self.info)
+                    min_margin=self.min_margin, n_switches=self.mstate['n'], **self.info)

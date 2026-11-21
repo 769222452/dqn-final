@@ -1,5 +1,8 @@
 # 定时定点到达任务：变构乘波体的反事实优势强化学习
 
+> **v2（本分支 `target-rl-v2-run`）：**变构扩大可靠任务域的完整实验，运行说明见 [`README_V2.md`](README_V2.md)，设计见 [`PREREGISTRATION_V2.md`](PREREGISTRATION_V2.md)。以下是第二轮的说明。
+
+
 本分支是一个独立的最小工程，只含这项研究需要的代码和数据。研究设计、判据和修订记录见
 [`PREREGISTRATION.md`](PREREGISTRATION.md)。
 

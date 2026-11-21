@@ -8,7 +8,9 @@ For every Mach node of the library and every CL of the table grid:
 The CL of a geometry is followed on its monotone branch from the lowest alpha (PCHIP in alpha, step
 aero.alpha_step_deg). Between nodes the tables are interpolated linearly in Mach and CL. The morphing
 action w in [0, 1] gives CD = CDmin + w (CDmax - CDmin): a proxy for "choose a geometry with this much drag at
-this lift" (the 8 s morph transition is not modelled). Tables are cached in runs/cache/.
+this lift". Round 2 / study R: the 8 s transition is not modelled. v2 (configs/v2.yaml execution.morph): the plant snaps
+the requested w to the library shapes available at the current Mach and CL (Drag.snap, tables `levels`) and
+transitions to the new shape linearly in 8 s (flight.TargetFlight._morph_exec). Tables are cached in runs/cache/.
 """
 import hashlib
 import math
@@ -67,6 +69,7 @@ def build_tables(cfg=None):
     tmax = np.full_like(tmin, np.nan)
     tfix = np.full_like(tmin, np.nan)
     count = np.zeros_like(tmin, dtype=int)
+    levels = np.full((len(M), len(cls), len(ids)), np.nan, np.float32)   # sorted normalised drag levels of the shapes
     for i in range(len(M)):
         y = PchipInterpolator(A, np.stack([z['CL'][:, i], z['CD_pressure'][:, i]], -1), axis=1)(alpha)
         cd = np.array([_cd_at_cl(alpha, y[g, :, 0], y[g, :, 1], cls) for g in range(len(ids))])
@@ -76,8 +79,13 @@ def build_tables(cfg=None):
             tmin[i] = np.where(count[i] > 0, np.nanmin(np.where(ok, cd, np.inf), 0), np.nan)
             tmax[i] = np.where(count[i] > 0, np.nanmax(np.where(ok, cd, -np.inf), 0), np.nan)
         tfix[i] = cd[fix]
+        for j in range(len(cls)):
+            v = cd[:, j]
+            v = v[np.isfinite(v)]
+            if len(v) >= 2 and v.max() > v.min():
+                levels[i, j, :len(v)] = np.sort((v-v.min())/(v.max()-v.min()))
     return dict(mach=M, cl=cls, cd_min=tmin, cd_max=tmax, cd_fix=tfix, count=count, sha256=digest,
-                fixed=a['fixed_geometry'], n_geometries=len(ids))
+                fixed=a['fixed_geometry'], n_geometries=len(ids), levels=levels, nlev=np.isfinite(levels).sum(-1).astype(np.int32))
 
 
 def tables(cfg=None):
@@ -87,7 +95,8 @@ def tables(cfg=None):
     cache = config.ROOT/'runs'/'cache'/f"aero_{key}_{lib['fixed_geometry']}.npz"
     if cache.exists():
         z = np.load(cache, allow_pickle=False)
-        return {k: (z[k] if z[k].ndim else z[k].item()) for k in z.files}
+        if 'levels' in z.files:                      # caches of rounds 1-2 have no shape levels: rebuild them
+            return {k: (z[k] if z[k].ndim else z[k].item()) for k in z.files}
     t = build_tables(cfg)
     cache.parent.mkdir(parents=True, exist_ok=True)
     tmp = cache.with_name(cache.name+'.tmp.npz')
@@ -125,6 +134,8 @@ class Drag:
         # covers RK sub-stages whose Mach differs slightly from the clipping Mach)
         self.lo, self.hi = _edge_fill(self.lo, ok), _edge_fill(self.hi, ok)
         self.Ml, self.Mh = list(self.M), len(self.M)
+        self.levels = np.asarray(t['levels']) if 'levels' in t else None
+        self.nlev = np.asarray(t['nlev']) if 'nlev' in t else None
 
     def _node(self, mach):
         M = self.M
@@ -132,6 +143,24 @@ class Drag:
         i = int(np.searchsorted(M, mach, side='right'))-1
         i = min(max(i, 0), len(M)-2)
         return i, (mach-M[i])/(M[i+1]-M[i])
+
+    def snap(self, mach, cl, w):
+        """The normalised drag level w of the library shape closest to the request w, among the shapes that reach this
+        lift at the nearest Mach node (v2: the plant can only fly shapes of the library)."""
+        if not self.morph or self.levels is None:
+            return w
+        i = int(np.argmin(np.abs(self.M-mach)))
+        j = min(max(int(round((cl-self.cl0)/self.dcl)), 0), len(self.cl)-1)
+        n = int(self.nlev[i, j])
+        if n < 2:
+            return w
+        ws = self.levels[i, j, :n]
+        k = int(np.searchsorted(ws, w))
+        if k <= 0:
+            return float(ws[0])
+        if k >= n:
+            return float(ws[-1])
+        return float(ws[k-1] if w-ws[k-1] <= ws[k]-w else ws[k])
 
     def cl_limits(self, mach):
         """CL interval available at this Mach (inner of the two neighbouring nodes)."""
