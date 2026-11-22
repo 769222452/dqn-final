@@ -143,6 +143,8 @@ def _hold(cl, wl):
 
 def nominal_map():
     """Nominal (no disturbance) end range of a constant CL target, w = 0, for the absolute CL levels."""
+    if config.load()['mission'].get('end') == 'speed':
+        raise ValueError('mission.end = speed: use nominal_speed_map')
     if 'm' not in _NOMMAP:
         from .scenario import Scenario, Target
         nom = Scenario('L0', 0, 0., 0., 1., 1.)
@@ -156,6 +158,46 @@ def nominal_map():
     return _NOMMAP['m']
 
 
+SPEED_GRID = np.arange(900., 2420., 10.)
+
+
+def nominal_speed_map():
+    """v3 (mission.end = speed): range at which the speed comes down to v (SPEED_GRID) for each constant CL target of ABS_CL,
+    w = 0, nominal model (no disturbance, no plant mismatch: what the designer knows). Returns (CL levels, ranges [cl, v],
+    NaN where not reached)."""
+    if 's' not in _NOMMAP:
+        from .scenario import Scenario, Target
+        nom = Scenario('L0', 0, 0., 0., 1., 1.)
+        cls, R = [], []
+        for cl in ABS_CL:
+            e = F.TargetFlight(nom, Target('x', 0., float(SPEED_GRID[0])), True, trace=True)
+            e.plant = False
+            e.advance(e.w['T'], _hold(cl, 0.))
+            tr = np.asarray(e.trace)
+            v, r = np.r_[e.w['x0'][1], tr[:, 2]], np.r_[0., tr[:, 4]]
+            ok = np.r_[True, np.diff(v) < 0]
+            row = np.interp(-SPEED_GRID, -v[ok], r[ok], left=np.nan, right=np.nan)
+            row[SPEED_GRID < v[ok].min()] = np.nan
+            cls.append(cl)
+            R.append(row)
+        _NOMMAP['s'] = (np.asarray(cls), np.asarray(R))
+    return _NOMMAP['s']
+
+
+def initial_cl_speed(target):
+    """Constant CL target whose nominal range at the target speed equals the target range, on the branch above the CL of
+    the longest range (more CL = shorter range there); the longest-range CL if the target is beyond the nominal reach."""
+    cls, R = nominal_speed_map()
+    col = np.array([np.interp(target.speed_mps, SPEED_GRID, r) for r in R])
+    ok = np.isfinite(col)
+    cls, col = cls[ok], col[ok]
+    k = int(np.argmax(col))
+    c, r = cls[k:], col[k:]
+    if len(c) < 2 or target.range_km >= r[0]:
+        return float(c[0])
+    return float(np.interp(-target.range_km, -r, c))
+
+
 class RelPredFlight(F.TargetFlight):
     """Study R (PREREGISTRATION.md amendment 7). The policy decides every decision (12 s): an increment of the CL
     target (actions.cl_levels) and an absolute morph level w (actions.morph_levels; fixed geometry: w = 0). Input
@@ -166,10 +208,14 @@ class RelPredFlight(F.TargetFlight):
 
     def __init__(self, sc, target, morph=True, trace=False, kg=None):
         super().__init__(sc, target, morph, trace, kg)
-        rows = sorted(nominal_map(), key=lambda r: r[1])
-        cl = [r[0] for r in rows]
-        rg = [r[1] for r in rows]
-        self.cl_t = float(np.interp(target.range_km, rg, cl))
+        self.speed_end = self.w['end'] == 'speed'
+        if self.speed_end:
+            self.cl_t = initial_cl_speed(target)
+        else:
+            rows = sorted(nominal_map(), key=lambda r: r[1])
+            cl = [r[0] for r in rows]
+            rg = [r[1] for r in rows]
+            self.cl_t = float(np.interp(target.range_km, rg, cl))
         self.w_cur = 0.
         self.npred = 0
         self.pdt = config.load()['guidance'].get('predict_dt_s', 4.)
@@ -180,17 +226,21 @@ class RelPredFlight(F.TargetFlight):
         self.last_pred_t = self.t
         p = F.TargetFlight.fork(self)
         p.realistic = False
+        p.plant = False                  # v3: predictions fly the nominal model (the plant mismatch is unknown)
         kl, kd = self.est.values
         p.field = B._Const(self.k_rho())
         p.sc = dataclasses.replace(self.sc, k_lift=float(np.clip(kl, .7, 1.3)), k_drag=float(np.clip(kd, .7, 1.3)))
         p.w = dict(self.w, dt=self.pdt)
         F.TargetFlight.advance(p, self.w['T']-p.t, _hold(self.cl_t, 0.))
-        self.pred = np.array([p.range_km(), p.x[1]])
+        # v3 (end at the target speed): the second entry is the predicted time to go (s) instead of the end speed
+        self.pred = np.array([p.range_km(), (p.t-self.t) if self.speed_end else p.x[1]])
 
     def features(self, extra=False):
         base = super().features(extra)
         if not extra:
             return base
+        if self.speed_end:      # predicted range error at the target speed /100 km, predicted time to go /1000 s
+            return base+[float(self.pred[0]-self.target.range_km)/100., float(self.pred[1])/1000., self.w_cur, self.cl_t*10.]
         e = self.pred-np.array([self.target.range_km, self.target.speed_mps])
         return base+[float(e[0])/100., float(e[1])/100., self.w_cur, self.cl_t*10.]
 

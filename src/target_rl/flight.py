@@ -1,4 +1,5 @@
-"""One disturbed flight towards a target (range D*, speed V* at t = 1200 s).
+"""One disturbed flight towards a target (range D*, speed V* at t = 1200 s; v3, mission.end = speed: range D* when the speed
+has come down to V*, at most mission.duration_s).
 
 Truth: point-mass RK4 (inner_dt_s = 0.5 s) with the scenario's density field and lift/drag biases; every RK
 stage is checked against every path limit; a violation ends the flight (failure). Lift CL_true = k_L CL, drag
@@ -35,6 +36,7 @@ def world(morph=True):
                        kg=float(cfg.get('execution', {}).get('kg', 0.)),
                        update_s=float(cfg.get('execution', {}).get('update_s', 3.)),
                        morph_exec=dict(cfg.get('execution', {}).get('morph', {})),
+                       end=m.get('end', 'time'), plant=dict(cfg.get('plant', {}) or {}),
                        reward=cfg['reward'])
     return _W[key]
 
@@ -114,6 +116,9 @@ class TargetFlight:
         # transition_s to move to a new one. Predictions (forks made by predictors) set realistic = False.
         self.realistic = bool(morph and self.w['morph_exec'].get('realistic', False))
         self.mstate = dict(act=0., frm=0., goal=0., t0=-1e9, n=0)
+        # v3 (configs/v3.yaml plant): the plant differs from the model of the vehicle that predictions, the initial CL map
+        # and the bias estimator use. Predictions (forks) set plant = False and fly the nominal model.
+        self.plant = bool(self.w['plant'])
         self.info = {}
         self.trace = [] if trace else None      # per inner step: t, h, V, gamma, range_km, CL, w, q/q_max, protected
 
@@ -146,7 +151,13 @@ class TargetFlight:
         model = self.w['model']
         kr = self.field(y[3])
         a = model.atm.speed_of_sound(y[0])
-        cd = self._cd(y[1]/a, cl, wl)
+        mach = y[1]/a
+        if self.plant:       # model mismatch: morph drag authority, extra drag, drag slope with Mach, lift error
+            pm = self.w['plant']
+            cd = self._cd(mach, cl, wl*pm.get('morph_effect', 1.))*(1+pm.get('extra_drag', 0.)
+                                                                    +pm.get('drag_mach_slope', 0.)*(mach-6.))
+            return model.rhs(y, self.sc.k_lift*(1+pm.get('lift_error', 0.))*cl, self.sc.k_drag*cd, kr)
+        cd = self._cd(mach, cl, wl)
         return model.rhs(y, self.sc.k_lift*cl, self.sc.k_drag*cd, kr)
 
     def command_cl(self, cl_cmd):
@@ -226,9 +237,16 @@ class TargetFlight:
             if not all(math.isfinite(v) for v in xn) or worst < -1e-6:
                 self.failed = self.done = True
                 self.reason = 'VIOLATION:'+(lim.which(*which) if which else 'nonfinite')
+            elif w['end'] == 'speed' and xn[1] <= self.target.speed_mps:
+                # v3: the flight ends when the speed reaches the target speed (state interpolated to the crossing)
+                u = (x[1]-self.target.speed_mps)/max(x[1]-xn[1], 1e-12)
+                self.x = [a+u*(b-a) for a, b in zip(x, xn)]
+                self.t += (u-1)*dt
+                self.done = True
+                self.reason = 'SPEED'
             elif self.t >= T-1e-9:
                 self.done = True
-                self.reason = 'END'
+                self.reason = 'END' if w['end'] != 'speed' else 'TIMEOUT'
         if self.done:
             self._finish()
         return self
@@ -262,7 +280,8 @@ class TargetFlight:
     def hit(self):
         dD, dV = self.errors()
         h = self.w['hit']
-        return (self.done and not self.failed and abs(dD) <= h['range_km'] and abs(dV) <= h['speed_mps'])
+        return (self.done and not self.failed and abs(dD) <= h['range_km'] and abs(dV) <= h['speed_mps']
+                and (self.w['end'] != 'speed' or self.reason == 'SPEED'))
 
     def _finish(self):
         r = self.w['reward']
@@ -287,6 +306,7 @@ class TargetFlight:
         c.est.num, c.est.den = list(self.est.num), list(self.est.den)
         c.trace = None                   # forks (branches, predictions) are never traced
         c.mstate = dict(self.mstate)
+        c.plant = self.plant
         c.info = dict(self.info)
         return c
 

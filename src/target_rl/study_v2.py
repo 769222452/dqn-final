@@ -10,6 +10,8 @@ Methods (all flown on the same cases, execution of configs/v2.yaml: altitude gua
   rl_fixed:<s> / rl_morph:<s>   the trained policies (variants relfixed / rel, seed s)
 Sets (region.v2_cases): validation (decision set), test (run once), domain (task-domain map).
 Writes runs/v2/<library>/V2_REPORT.md (+ figure).
+v3 (configs/v3.yaml): the same module; the methods come from the configuration (experiment.baselines, experiment.variants,
+experiment.domain_methods): the learned policy and its start rule only. Writes runs/v3/<library>/V3_REPORT_<set>.md.
 
     TARGET_RL_CONFIG=configs/v2.yaml PYTHONPATH=src python -m target_rl.study_v2 --workers 5 --seeds "17 23"
 """
@@ -39,8 +41,33 @@ def train_state(variant, seed):
     return load_json(p) if p.exists() else None
 
 
+DEFAULT_BASE = ['pc_weak', 'pc_fixedlike', 'pc_morph', 'pc_oracle', 'rule_fixed', 'rule_morph']
+DEFAULT_DOMAIN = ['pc_weak', 'pc_fixedlike', 'pc_morph']
+RL_KIND = {'rel': 'rl_morph', 'relfixed': 'rl_fixed'}
+
+
+def variants():
+    return list(config.load()['experiment'].get('variants', ['rel', 'relfixed']))
+
+
+def base_methods():
+    return list(config.load()['experiment'].get('baselines', DEFAULT_BASE))
+
+
+def domain_methods():
+    return list(config.load()['experiment'].get('domain_methods', DEFAULT_DOMAIN))
+
+
+def rl_methods(seeds):
+    return [f'{RL_KIND[v]}:{s}' for s in seeds for v in ('relfixed', 'rel') if v in variants()]
+
+
 def seeds_available(seeds):
-    return [s for s in seeds if train_state('rel', s) and train_state('relfixed', s)]
+    return [s for s in seeds if all(train_state(v, s) for v in variants())]
+
+
+def tag():
+    return str(config.load()['experiment'].get('tag', 'v2'))
 
 
 def name(m):
@@ -142,14 +169,15 @@ def domain_stats(res, methods, p0s):
     return out, lines, grid
 
 
-def far_end(out, methods, grid, p0=.8):
+def far_end(out, methods, grid, p0=.8, near=False):
+    """Farthest (near=True: nearest and farthest) reliable range per required speed."""
     Vs = sorted({g[1] for g in grid})
     lines = [f'| 末速要求 m/s | ' + ' | '.join(name(m) for m in methods) + ' |', '|---|' + '---|'*len(methods)]
     for V in Vs:
         cells = []
         for m in methods:
             ok = [g[0] for g in grid if g[1] == V and out[m].get(g, 0.) >= p0-1e-9]
-            cells.append(f'{max(ok):.0f} km' if ok else '—')
+            cells.append(('—' if not ok else f'{min(ok):.0f}–{max(ok):.0f} km' if near else f'{max(ok):.0f} km'))
         lines.append(f'| {V:.0f} | ' + ' | '.join(cells) + ' |')
     return lines
 
@@ -192,18 +220,23 @@ def safe_print(text):
 def report(seeds, which, with_domain=True):
     cfg = config.load()
     nb = int(cfg['experiment']['bootstrap'])
-    base = ['pc_weak', 'pc_fixedlike', 'pc_morph', 'pc_oracle', 'rule_fixed', 'rule_morph']
-    rl = [f'{k}:{s}' for s in seeds for k in ('rl_fixed', 'rl_morph')]
-    methods = base+rl
+    rl = rl_methods(seeds)
+    methods = base_methods()+rl
     path = lambda m: config.runs_dir()/'study_v2'/which/f"{m.replace(':', '_')}.json"
     res = {m: load_json(path(m))['rows'] for m in methods if path(m).exists()}
     methods = [m for m in methods if m in res]
     cases = RG.v2_cases(which)
     scen = np.array([sc.seed for sc, _ in cases])
     n_sc = len(np.unique(scen))
-    L = [f'# v2 结果报告（{which} 场景）', '',
+    L = [f'# {tag()} 结果报告（{which} 场景）', '',
          f'场景 {n_sc} 个，用例 {len(cases)} 个；扰动 {cfg["disturbance"]["main_level"]}；执行层：高度保护、真实构型就近选、8 s 变构过渡。'
          f'判定容差 {cfg["hit"]["range_km"]:g} km / {cfg["hit"]["speed_mps"]:g} m/s（1×）。区间为整场景重抽样的 95% 自助区间（{nb} 次）。', '']
+    if cfg['mission'].get('end') == 'speed':
+        L += [f'飞行在速度降到要求的末速时结束（最长 {cfg["mission"]["duration_s"]:.0f} s，超时算未命中），命中 = 航程误差 ≤ {cfg["hit"]["range_km"]:g} km 且无超限。', '']
+    if cfg.get('plant'):
+        pm = cfg['plant']
+        L += [f'模型失配（真实对象 ≠ 策略的预测、初始升力表和在线估计所用的名义模型）：刹车构型阻力效果 ×{pm.get("morph_effect", 1):g}，'
+              f'阻力 +{100*pm.get("extra_drag", 0):.0f}%，阻力随马赫数斜率 {100*pm.get("drag_mach_slope", 0):+.0f}%/Ma（以 Ma 6 为零点），升力 {100*pm.get("lift_error", 0):+.0f}%。', '']
     # 1 main table
     L += ['## 1. 主结果', '', '| 方法 | 成功率 1× | 2× | 4× | 可到目标* | 只有变构能到* | 超限 | 平均回报 | 构型切换次数/次飞行 | 预测次数 | 单次飞行 s |',
           '|---|---|---|---|---|---|---|---|---|---|---|']
@@ -250,7 +283,8 @@ def report(seeds, which, with_domain=True):
         L.append(f'| {lab} | {100*d:+.1f} | [{100*lo:+.1f}, {100*hi:+.1f}] | {dv:+d} |')
         if h:
             verdict[h].append((lo > 0 and dv <= 0, lo >= -.05, lab))
-    L += ['', '## 4. 判定（预注册 v2 第 7 节的默认设定；待导师确认项见 PREREGISTRATION_V2.md）', '']
+    if any(verdict.values()):
+        L += ['', '## 4. 判定（预注册 v2 第 7 节的默认设定；待导师确认项见 PREREGISTRATION_V2.md）', '']
     for h, title in (('H1', 'H1 变构消融'), ('H2', 'H2 方法消融')):
         if verdict[h]:
             ok = [v[0] for v in verdict[h]]
@@ -260,19 +294,21 @@ def report(seeds, which, with_domain=True):
     # 5 domain
     dom_note = ''
     if with_domain:
-        dm = [m for m in ['pc_weak', 'pc_fixedlike', 'pc_morph']+rl if (config.runs_dir()/'study_v2'/'domain'/f"{m.replace(':', '_')}.json").exists()]
+        dm = [m for m in domain_methods()+rl if (config.runs_dir()/'study_v2'/'domain'/f"{m.replace(':', '_')}.json").exists()]
         if dm:
             dres = {m: load_json(config.runs_dir()/'study_v2'/'domain'/f"{m.replace(':', '_')}.json")['rows'] for m in dm}
             out, lines, grid = domain_stats(dres, dm, cfg['experiment']['domain_levels'])
-            figm = [m for m in dm if m in ('pc_fixedlike', 'pc_morph') or m.endswith(f':{seeds[0]}' if seeds else ':none')]
-            fig = config.runs_dir()/'V2_domain_map.png'
+            figm = [m for m in dm if m in domain_methods() or m.endswith(f':{seeds[0]}' if seeds else ':none')]
+            fig = config.runs_dir()/f'{tag().upper()}_domain_map.png'
             draw_map(out, figm, grid, fig)
             L += ['', '## 5. 距离—末速任务域（扰动下的成功率地图）', '', *lines, '',
                   f'地图：`{fig.name}`（红色实线 / 虚线：变构 / 固定外形的名义可达区域）。', '',
-                  '各末速要求下最远可靠距离（成功率 ≥ 80%%，格距 %.0f km）：' % cfg['targets']['v2']['grid']['D'][2], '', *far_end(out, dm, grid)]
+                  ('各末速要求下可靠距离的范围（近端–远端，成功率 ≥ 80%%，格距 %.0f km；变构主要扩展近端）：' if cfg['mission'].get('end') == 'speed'
+                   else '各末速要求下最远可靠距离（成功率 ≥ 80%%，格距 %.0f km）：') % cfg['targets']['v2']['grid']['D'][2], '',
+                  *far_end(out, dm, grid, near=cfg['mission'].get('end') == 'speed')]
     L += ['', f'平台：{platform.system()} / Python {platform.python_version()}，numpy {np.__version__}。', '']
     text = '\n'.join(L)
-    out_path = config.runs_dir()/f'V2_REPORT_{which}.md'
+    out_path = config.runs_dir()/f'{tag().upper()}_REPORT_{which}.md'
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(text, encoding='utf-8')
     safe_print(text)
@@ -288,14 +324,13 @@ def main(argv=None):
     p.add_argument('--report-only', action='store_true')
     a = p.parse_args(argv)
     seeds = seeds_available([int(s) for s in a.seeds.replace(',', ' ').split()])
-    base = ['pc_weak', 'pc_fixedlike', 'pc_morph', 'pc_oracle', 'rule_fixed', 'rule_morph']
-    rl = [f'{k}:{s}' for s in seeds for k in ('rl_fixed', 'rl_morph')]
+    rl = rl_methods(seeds)
     try:
         if not a.report_only:
-            for m in base+rl:
+            for m in base_methods()+rl:
                 evaluate(m, a.which, a.workers)
             if not a.no_domain:
-                for m in ['pc_weak', 'pc_fixedlike', 'pc_morph']+rl:
+                for m in domain_methods()+rl:
                     evaluate(m, 'domain', a.workers)
         report(seeds, a.which, with_domain=not a.no_domain)
     finally:

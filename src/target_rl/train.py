@@ -234,7 +234,7 @@ def train(variant, seed, workers=4, out=None, iterations=None, cases=None, pi0=N
         t0 = time.perf_counter()
         k = tr['scenarios_per_iteration']
         pick = [int(order[(i*k+j) % len(order)]) for j in range(k)]
-        times = state_times(i, tr['states'], tr['stride_s'])
+        times = state_times(i, tr['states'], tr['stride_s'], cfg['mission']['decision_s'], cfg['mission']['duration_s'])
         sweep = i//patience
         jobs = [('branch', dict(case=cases[c], case_id=c, chain=st['chain'], times=[t], sweep=sweep,
                                 schedule=st['schedules'][c], morph=morph, kg=kg)) for c in pick for t in times]

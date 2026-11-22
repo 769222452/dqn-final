@@ -37,7 +37,10 @@ def plan_command(plan, phases, morph):
         k = 0 if env.t < phases[0] else (1 if env.t < phases[1] else 2)
         w = env.w
         p = w['prot']
-        cl = F.law_cl(w['model'], env.x, env.q(), plan['r'][k], w['qmax'], p['kp'], p['kg'])
+        if 'cl' in plan:            # v3: absolute CL target per phase (fed back on gamma), reaches the high-CL flights
+            cl = plan['cl'][k]-env.kg*env.x[2]
+        else:
+            cl = F.law_cl(w['model'], env.x, env.q(), plan['r'][k], w['qmax'], p['kp'], p['kg'])
         return cl, (plan['w'][k] if morph else 0.)
     return command
 
@@ -49,9 +52,32 @@ def fly_plan(sc, plan, morph=True, target=None):
     return env
 
 
+SPEED_STEP = 25.
+
+
 def _job(args):
     plan, morph = args
     os.environ.setdefault('OMP_NUM_THREADS', '1')
+    cfg = config.load()
+    if cfg['mission'].get('end') == 'speed':
+        # v3: fly (plant, nominal scenario) down to the lowest speed of interest; every crossing of a speed level v before a
+        # limit violation is a reachable end point (range at v, v) of the task "end when the speed reaches v"
+        v_lo = float(cfg['targets']['v2']['grid']['V'][0])-SPEED_STEP
+        env = F.TargetFlight(NOMINAL, Target('none', 0., v_lo), morph, trace=True)
+        env.advance(env.w['T'], plan_command(plan, cfg['reach_grid']['phases_s'], morph))
+        tr = np.asarray(env.trace)
+        v, r = np.r_[env.w['x0'][1], tr[:, 2]], np.r_[0., tr[:, 4]]
+        if env.failed:                                   # drop the step that violated
+            v, r = v[:-1], r[:-1]
+        levels = np.arange(v_lo, v.max(), SPEED_STEP)
+        pts = []
+        for lv in levels:
+            k = np.nonzero((v[:-1] > lv) & (v[1:] <= lv))[0]
+            if len(k):
+                i = k[0]
+                u = (v[i]-lv)/(v[i]-v[i+1])
+                pts.append([float(r[i]+u*(r[i+1]-r[i])), float(lv)])
+        return dict(plan=plan, morph=morph, feasible=bool(pts), points=pts, reason=env.reason)
     env = fly_plan(NOMINAL, plan, morph)
     return dict(plan=plan, morph=morph, feasible=not env.failed, range_km=env.range_km(), V_end=env.x[1],
                 reason=env.reason)
@@ -59,10 +85,11 @@ def _job(args):
 
 def grid(morph):
     g = config.load()['reach_grid']
-    rs = list(itertools.product(g['r'], repeat=3))
+    plans = [dict(r=list(r)) for r in itertools.product(g['r'], repeat=3)]
+    plans += [dict(cl=list(c)) for c in itertools.product(g.get('cl', []), repeat=3)]     # v3
     if not morph:
-        return [dict(r=list(r), w=[0., 0., 0.]) for r in rs]
-    return [dict(r=list(r), w=list(w)) for r in rs for w in itertools.product(g['w'], repeat=3)]
+        return [dict(p, w=[0., 0., 0.]) for p in plans]
+    return [dict(p, w=list(w)) for p in plans for w in itertools.product(g['w'], repeat=3)]
 
 
 def _poly_centroid(P):
@@ -109,8 +136,14 @@ def chord(V, D):
 def build(rows, cfg=None):
     cfg = cfg or config.load()
     tg = cfg['targets']
-    pm = [(r['range_km'], r['V_end']) for r in rows if r['morph'] and r['feasible']]
-    pf = [(r['range_km'], r['V_end']) for r in rows if not r['morph'] and r['feasible']]
+    if rows and 'points' in rows[0]:          # v3: reachable (range at v, v) points of every plan, v in the target speed band
+        vg = tg['v2']['grid']['V']
+        band = lambda p: vg[0]-SPEED_STEP-1e-9 <= p[1] <= vg[1]+SPEED_STEP+1e-9
+        pm = [tuple(p) for r in rows if r['morph'] for p in r['points'] if band(p)]
+        pf = [tuple(p) for r in rows if not r['morph'] for p in r['points'] if band(p)]
+    else:
+        pm = [(r['range_km'], r['V_end']) for r in rows if r['morph'] and r['feasible']]
+        pf = [(r['range_km'], r['V_end']) for r in rows if not r['morph'] and r['feasible']]
     Hm, Hf = hull(pm), hull(pf)
     R = shrink(Hm, tg['region_shrink'])
     lo, hi = Hf[:, 0].min(), Hf[:, 0].max()
@@ -269,7 +302,7 @@ def main(argv=None):
     with mp.get_context('spawn').Pool(a.workers) as pool:
         rows = pool.map(_job, jobs, chunksize=32)
     out = build(rows)
-    out['rows'] = rows
+    out['rows'] = [{k: v for k, v in r.items() if k != 'points'} for r in rows]   # v3: the points are not stored (size)
     out['library'] = config.library()
     save_json(a.out or config.region_path(), out)
     print(json.dumps({k: out[k] for k in ('targets', 'notes', 'area_ratio', 'feasible', 'fixed_range')}, indent=1))

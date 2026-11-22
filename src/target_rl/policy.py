@@ -57,6 +57,11 @@ def _members(stage):
     return _CACHE[key]
 
 
+def horizon():
+    """Seconds per unit of the time feature (mission.duration_s; 1200 s in rounds 1-2 and v2)."""
+    return float(config.load()['mission']['duration_s'])
+
+
 def initial_action(stage, f):
     """Action of the first stage for the feature vector f."""
     if stage.get('kind', 'constant') in ('constant', 'plan'):    # 'plan': study A, offset 0 = follow the plan
@@ -64,10 +69,15 @@ def initial_action(stage, f):
     if stage['kind'] == 'pfb':     # study R start rule: step the CL target on the predicted range error; brake late
         eD = float(f[NAMES.index('pred_range_error')])*100.
         eV = float(f[NAMES.index('pred_speed_error')])*100.
-        t = float(f[3])*1200.
+        t = float(f[3])*horizon()
         i_cl = 4 if eD > stage['d2'] else 3 if eD > stage['d1'] else 0 if eD < -stage['d2'] else 1 if eD < -stage['d1'] else 2
         i_w = 0
-        if stage['morph'] and eV > stage['v_brake'] and t >= stage['t_brake']:
+        if stage.get('brake_on') == 'range':     # v3 (end at the target speed): brake while the predicted overshoot is large
+            cl_t = float(f[NAMES.index('r_plan')])/10.     # current CL target (feature x 10)
+            if stage['morph'] and eD > stage['d_brake'] and cl_t >= stage.get('cl_brake', -1.):   # brake once CL is high
+                step = stage.get('brake_step_km')       # graded: one w level per brake_step_km of predicted overshoot
+                i_w = int(stage['i_w_brake']) if not step else min(int(stage['i_w_brake']), int(eD//step))
+        elif stage['morph'] and eV > stage['v_brake'] and t >= stage['t_brake']:
             i_w = int(stage.get('i_w_brake', 3))
         return F.encode(i_cl, i_w, stage['morph'])
     D, V = float(f[NAMES.index('target_range')])*1000., float(f[NAMES.index('target_speed')])*1000.
@@ -79,7 +89,7 @@ def initial_action(stage, f):
 def chain_action(chain, f, morph=True):
     """Action of the policy `chain` for the full feature vector f (NAMES order)."""
     a = initial_action(chain[0], f)
-    t = float(f[3])*1200.
+    t = float(f[3])*horizon()
     for stage in chain[1:]:
         if not np.any(np.abs(np.asarray(stage['times'])-t) <= stage['window']+1e-9):
             continue
