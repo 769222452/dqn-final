@@ -215,6 +215,12 @@ class ChainFlight:
         except (DomainExit, ValueError, FloatingPointError) as exc:      # state outside the tables / model domain
             return self._fail('OUT_OF_DOMAIN:'+type(exc).__name__)
         if not pool['mask'].any():
+            reasons = {}
+            for r_ in (cert.pool_records[-1]['reasons'] if cert.pool_records else []):
+                reasons[str(r_)] = reasons.get(str(r_), 0)+1
+            self.info['not_certified'] = dict(t=self.t, h=self.x[0], V=self.x[1], gamma=self.x[2], cl_des=cl_des,
+                                              level=level, source=env.db.ids[env.transition.source],
+                                              target=env.db.ids[env.transition.target], reasons=reasons)
             return self._fail('NOT_CERTIFIED')
         a = int(np.argmax(np.where(pool['mask'], pref, -np.inf)))
         from certified_flight.surrogate import OracleRequired
