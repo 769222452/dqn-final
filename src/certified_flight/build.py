@@ -25,8 +25,8 @@ RUNTIME_KEYS = {'description', 'surrogate', 'model_sha256', 'ood_physics_fallbac
 
 
 def runtime_config(root=ROOT):
-    """Load and validate configs/runtime.json."""
-    config = json.loads((Path(root)/RUNTIME).read_text(encoding='utf-8'))
+    """Load and validate configs/runtime.json (v4c: or the file named by the environment variable CF_RUNTIME)."""
+    config = json.loads((Path(root)/(os.environ.get('CF_RUNTIME') or RUNTIME)).read_text(encoding='utf-8'))
     if set(config) != RUNTIME_KEYS:
         raise ValueError('runtime.json keys must be exactly '+', '.join(sorted(RUNTIME_KEYS)))
     if not isinstance(config['ood_physics_fallback'], bool) or not isinstance(config['exact_integration_memo'], bool):

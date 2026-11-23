@@ -1,0 +1,274 @@
+# v4c (README_V4C.md): fixed-time target arrival (range D*, speed V* at 1200 s) flown on the CERTIFIED CHAIN (certified_flight:
+# surrogate of the two-stage OCP, corrector, 30 s look-ahead, 0.1 s audit) with the F8D2000B library, the morph level chosen
+# by the policy, and a truth plant with disturbances and the v3 model mismatch. Pure reinforcement learning (policy iteration
+# with counterfactual labels, held-out acceptance), no comparison methods. Sizes are reduced for a 4-core run (a chain flight
+# takes about a minute; a fast-model flight a quarter of a second). Selected with TARGET_RL_CONFIG=configs/v4c.yaml.
+schema: target_task/1
+vehicle:
+  mass_kg: 1500.0
+  reference_area_m2: 6.931920786884801
+  heat_C: 0.00017415
+  heat_R_n: 0.05
+atmosphere:
+  rho0: 1.225
+  p0: 101325.0
+  T0: 288.15
+  R_gas: 287.05287
+  gamma_gas: 1.4
+  g0: 9.80665
+  R_earth: 6371000.0
+  h_min_valid: 0.0
+  h_max_valid: 100000.0
+  rho_floor: 1.0e-09
+mission:
+  duration_s: 1200.0
+  decision_s: 12.0
+  inner_dt_s: 0.5
+  initial_state:
+  - 40150.27263771527
+  - 2415.6424609292885
+  - -0.014729622960607522
+  - 0.0
+  limits:
+    altitude_m:
+    - 20000.0
+    - 80000.0
+    velocity_mps:
+    - 800.0
+    - 6000.0
+    gamma_rad:
+    - -0.35
+    - 0.35
+    dynamic_pressure_pa_max: 80000.0
+    heat_proxy_wm2_max: 2000000.0
+    load_factor_g_max: 3.0
+  mach_support:
+  - 3.5
+  - 8.25
+aero:
+  active: F8D2000B
+  libraries:
+    F8D2000B:
+      path:
+      - data/F8D2000/p2_grid.npz
+      - data/BrakeLadder/p2_grid.npz
+      sha256:
+      - 2ef9bd687be9483465f9c77976cbda8938b0ac5fbb1b74801af8a49df183de10
+      - 3bbc36328f45128c1b18beec9411edce1bd6c4709fc47c51f6abaa744488f767
+      fixed_geometry: F8D_01351
+    L298:
+      path: data/L298/p2_grid.npz
+      sha256: 3d7b27d9e2178a6fb214c6360777f8f119612668b3401914e5969540bb554586
+      fixed_geometry: G42
+    F8D2000:
+      path: data/F8D2000/p2_grid.npz
+      sha256: 2ef9bd687be9483465f9c77976cbda8938b0ac5fbb1b74801af8a49df183de10
+      fixed_geometry: F8D_01351
+  cl_table:
+  - -0.01
+  - 0.13
+  - 0.0025
+  alpha_step_deg: 0.02
+actions:
+  cl_levels:
+  - -0.005
+  - -0.0025
+  - 0.0
+  - 0.0025
+  - 0.005
+  morph_levels:
+  - 0.0
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+  - 1.0
+  cl_clip:
+  - -0.01
+  - 0.12
+protection:
+  q_ratio: 0.9
+  kp: 2.0
+  kg: 1.0
+  floor_buffer_m: 1500.0
+  floor_gain: 2.0
+  use_lift_estimate: true
+execution:
+  kg: 1.0
+  update_s: 3.0
+  morph:
+    realistic: true
+    snap: true
+    transition_s: 8.0
+disturbance:
+  levels:
+    L0:
+    - 0.0
+    - 200.0
+    - 0.0
+    L1:
+    - 0.03
+    - 200.0
+    - 0.05
+    L2:
+    - 0.06
+    - 200.0
+    - 0.05
+    L3:
+    - 0.12
+    - 200.0
+    - 0.05
+    L3b:
+    - 0.06
+    - 50.0
+    - 0.05
+  initial_dh_m: 2000.0
+  initial_dv_mps: 100.0
+  main_level: L2
+hit:
+  range_km: 5.0
+  speed_mps: 25.0
+reward:
+  shape: log_tol
+  hit_bonus: 1.0
+  range_scale_km: 100.0
+  speed_scale_mps: 100.0
+  miss_cap: 3.0
+  violation: -4.0
+targets:
+  v2:
+    margin: 0.5
+    scale:
+    - 100.0
+    - 100.0
+    test_per_stratum: 2
+    grid:
+      D:
+      - 1500.0
+      - 2700.0
+      - 200.0
+      V:
+      - 1050.0
+      - 1850.0
+      - 200.0
+  region_shrink: 0.1
+  exclusion:
+  - 40.0
+  - 80.0
+  fixed_fractions:
+  - 0.25
+  - 0.5
+  - 0.75
+  random_test: 10
+seeds:
+  train:
+  - 1100
+  - 1131
+  validation:
+  - 1600
+  - 1647
+  domain:
+  - 1600
+  - 1603
+  test:
+  - 2400
+  - 2419
+  dev:
+  - 2350
+  - 2354
+  random_targets:
+  - 3000
+  - 3009
+  training_runs:
+  - 17
+  acceptance:
+  - 1400
+  - 1431
+reach_grid:
+  kind: chain_constant
+  cl:
+  - 0.02
+  - 0.04
+  - 0.06
+  - 0.08
+  - 0.1
+  - 0.12
+  w:
+  - 0.0
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+  - 1.0
+  switch_s: 600.0
+training:
+  iterations: 20
+  no_acceptance_iterations: 8
+  states: 12
+  stride_s: 96.0
+  window_s: 96.0
+  scenarios_per_iteration: 4
+  hidden:
+  - 16
+  - 16
+  label_scale: 100.0
+  label_clip: 100.0
+  label_clip_upper: 100.0
+  margins:
+  - 3.0
+  - 10.0
+  min_advantage: 0.001
+  neighbourhood:
+  - 2
+  - 1
+  held_out_acceptance: true
+predictor_corrector:
+  cycle_s: 48.0
+  newton: 1
+  newton_first: 4
+  predict_dt_s: 4.0
+  margin: 0.005
+  r_bounds:
+  - 0.3
+  - 0.95
+  strong_phases_s:
+  - 400.0
+  - 800.0
+guidance:
+  kind: chain
+  predict_every_s: 48.0
+  predict_dt_s: 4.0
+  cycle_s: 48.0
+  newton: 1
+  newton_first: 4
+start_rule:
+  d1: 4.0
+  d2: 15.0
+  v_brake: 25.0
+  t_brake: 1000.0
+  i_w_brake: 5
+experiment:
+  tag: v4c
+  main_library: F8D2000B
+  variants:
+  - rel
+  domain_levels:
+  - 0.5
+  - 0.8
+  - 0.9
+  bootstrap: 10000
+  own_region: true
+  baselines:
+  - rule_morph
+  domain_methods:
+  - rule_morph
+reference:
+  maxfev: 150
+plant:
+  morph_effect: 0.6
+  extra_drag: 0.2
+  drag_mach_slope: 0.1
+  lift_error: -0.05
+chain:
+  runtime: configs/runtime_v4c.json
+  true_ocp_fallback: false

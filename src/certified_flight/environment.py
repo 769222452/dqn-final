@@ -35,7 +35,8 @@ class FlightEnvironment:
         self.ocp = SimpleNamespace(plant=plant, db=plant.db, m=plant.mission)
         self.db, self.m, self.cfg = plant.db, plant.mission, config
         self.cl_actions = [float(cl) for cl in config['cl_actions']]
-        self.start = self.db.index['G42']
+        self.start = self.db.index[config.get('start_geometry', 'G42')]    # v4c: F8D2000B has no G42 itself
+        self.truth = None          # v4c: optional truth plant (certified_flight.truth); None = the nominal plant flies
         self.control = config.get('control', {})
         if self.control.get('pre_transition_model', 'frozen') not in ('actual', 'frozen'):
             raise ValueError('Unknown preliminary transition model')
@@ -90,7 +91,8 @@ class FlightEnvironment:
             rate = 0.
         return {'x': self.x.tolist(), 'alpha_prev': self.alpha, 't': self.t, 'source': z.source, 'target': z.target,
                 'fraction': z.fraction(self.t), 'rate': rate, 'CL_des': cl, 'CD_des': None,
-                'CL_raw': cl if raw is None else raw, 'control_contract': self.control_contract}
+                'CL_raw': cl if raw is None else raw, 'control_contract': self.control_contract,
+                **({} if self.db.level is None else {'morph_level': float(self.db.level)})}
 
     def step(self, action):
         """Execute one 3 s decision; returns (state_finite, reward, done, info)."""
@@ -166,8 +168,7 @@ class FlightEnvironment:
         if not audit['valid']:
             raise OracleRequired('FAST_EXECUTION_AUDIT_FAILURE', post_c, 'post',
                                  self.rejection_evidence(audit, alpha, pre_c, reachable, choice))
-        actual = self.ocp.plant.integrate(self.x, alpha, times, z.source, z.target, post_c['fraction'],
-                                          post_c['rate'], self.m.data['plant_dt_s'])
+        actual = self.propagate(self.x, alpha, times, z.source, z.target, post_c['fraction'], post_c['rate'])
         if not actual['valid']:
             raise OracleRequired('FAST_PLANT_RK_STAGE_FAILURE', post_c, 'post',
                                  self.rejection_evidence(actual, alpha, pre_c, reachable, choice))
@@ -259,6 +260,14 @@ class FlightEnvironment:
         self.decision_index += 1
         state_finite = bool(np.isfinite(self.state_summary()).all())
         return state_finite, rew['reward'], self.done, info
+
+    def propagate(self, x, alpha, times, source, target, fraction, rate):
+        """The executed motion: the nominal plant, or (v4c) the truth plant with disturbances and model mismatch.
+        The truth result is always 'valid' when finite (its own margins are reported, never used to refuse an action:
+        the certifier does not know the truth); certification audits stay on the nominal plant."""
+        if self.truth is None:
+            return self.ocp.plant.integrate(x, alpha, times, source, target, fraction, rate, self.m.data['plant_dt_s'])
+        return self.truth.integrate(x, alpha, times, source, target, fraction, rate, self.m.data['plant_dt_s'])
 
     def rejection_evidence(self, audit, alpha, pre_c, reachable, choice):
         samples = audit['samples']
@@ -359,6 +368,9 @@ class CertifiedFlightEnvironment(FlightEnvironment):
             if physics is not None:
                 event['physics_fallback_attempt'] = deepcopy(physics)
             self.oracle_events.append(event)
+            if not getattr(self, 'oracle_enabled', True):     # v4c: no true-OCP takeover (cost); the action is uncertified
+                event.update(reason='TRUE_OCP_DISABLED', wall_s=time.perf_counter()-started)
+                raise OracleRequired('TRUE_OCP_DISABLED', exc.context, exc.head, deepcopy(event))
             oracle_controller = OracleController(self.oracle, event, self.artifact_sink)
             candidate = self._candidate(oracle_controller)
             try:

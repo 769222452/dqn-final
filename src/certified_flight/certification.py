@@ -309,6 +309,10 @@ class Certifier:
             raise OracleRequired('CERTIFICATE_EXECUTION_AUDIT_REJECTED', info['post_context'], 'post',
                                  compact_audit(au))
         actual = au['actual']
+        if env.truth is not None:        # v4c: the executed motion is the truth plant's (deterministic, as in the certificate)
+            pc = info['post_context']
+            actual = env.propagate(pc['x'], info['plant']['alpha'], np.arange(7)*.5, pc['source'], pc['target'],
+                                   pc['fraction'], pc['rate'])
         new_x = actual['x'][-1].copy()
         if not np.array_equal(new_x, np.asarray(c.after['x'])):
             raise RuntimeError('Certified endpoint no longer matches exact dynamics')

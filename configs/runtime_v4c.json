@@ -1,0 +1,103 @@
+{
+  "description": "v4c runtime (target arrival on the F8D2000B library): Certified-flight runtime. Fallback chain: surrogate out-of-distribution refusal -> exact-physics equal-lift baseline -> true pre/post OCP; the post corrector, lookahead guard and independent audits always decide, and only VERIFIED_PASS actions are executed. Objective aligned, look-ahead order minimal_first; geometry chosen by the requested drag level.",
+  "surrogate": "data/surrogate_v4c/controller.npz",
+  "model_sha256": "PENDING_FIT",
+  "ood_physics_fallback": true,
+  "exact_integration_memo": true,
+  "dead_end_retry": {
+    "enabled": true,
+    "wall_s": 60.0,
+    "max_evaluations": 24
+  },
+  "safety_options": {
+    "constraint_aware_post_enabled": true,
+    "post_correction_method": "six_alpha_slsqp",
+    "post_correction_max_wall_s": 2.0,
+    "max_iterations": 60,
+    "ftol": 1e-10,
+    "alpha_scale_rad": 0.05,
+    "CL_scale": 0.1,
+    "weights": {
+      "network": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "smooth": 0.01,
+      "CL": 0.05
+    },
+    "internal_margin": 0.0,
+    "dense_refinement": true,
+    "lookahead_enabled": true,
+    "lookahead_horizon_s": 30.0,
+    "lookahead_candidate_policy": [
+      "equal_lift",
+      "load_recovery",
+      "rolling_corrector"
+    ],
+    "lookahead_max_wall_s": 30.0,
+    "lookahead_search_order": "risk_first",
+    "lookahead_qualification_report": "data/lookahead_v4c/AB_metrics.json",
+    "recovery_search_max_evaluations": 12,
+    "lookahead_policy_search_enabled": true,
+    "lookahead_save_witness": true,
+    "boundary_smoothing": true,
+    "lookahead_offset_order": "minimal_first"
+  },
+  "physical": {
+    "snapshot": "data/geometry_f8d2000b",
+    "mission": "configs/mission.yaml",
+    "trajectory": "configs/trajectory.yaml",
+    "cl_actions": [
+      -0.01,
+      0.0,
+      0.01,
+      0.015,
+      0.02,
+      0.025,
+      0.03,
+      0.035,
+      0.04,
+      0.045,
+      0.05,
+      0.055,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.11,
+      0.12
+    ],
+    "transition": {
+      "duration_s": 8.0,
+      "reachability": "all_pairs_assumed",
+      "aerodynamic_blend": "linear_endpoint_coefficients_at_same_Mach_alpha",
+      "new_command_during_transition": "complete_current_pair_then_accept_at_next_decision"
+    },
+    "ocp": {
+      "horizon_s": 60.0,
+      "fine_until_s": 9.0,
+      "fine_dt_s": 0.5,
+      "coarse_dt_s": 3.0,
+      "coarse_rk4_substeps": 2,
+      "acceptance_violation": 1e-06,
+      "audit_dt_s": 0.1,
+      "tracking_mode": "pointwise_horizon",
+      "tracking_weight_multiplier": 1.0,
+      "boundary_smoothing": true,
+      "heat_weight": 0.0,
+      "horizon_tracking_weight": 20.0,
+      "second_difference_weight": 0.0
+    },
+    "control": {
+      "pre_transition_model": "actual",
+      "reachability": true,
+      "switch_cost": 0.0
+    },
+    "start_geometry": "F8D_01351"
+  }
+}

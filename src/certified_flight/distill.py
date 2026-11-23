@@ -50,6 +50,7 @@ class Teacher:
         t = float(pre['t'])
         z = Transition(int(pre['source']), int(pre['target']), t-self.duration*float(pre['fraction']), self.duration)
         z.settle(t)
+        self.db.level = pre.get('morph_level')      # v4c: the generator's drag level of this decision (None: minimum drag)
         choice = self.db.generate(float(mach), pre['CL_des'], current=z.target)
         if choice['geometry_index'] is not None:
             z.command(choice['geometry_index'], t)

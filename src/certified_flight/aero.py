@@ -168,23 +168,36 @@ class AeroDatabase:
         cd = ((c[0]*d+c[1])*d+c[2])*d+c[3]
         return alpha, np.where(feasible, cd, np.inf), feasible
 
+    # v4c: requested morph (drag) level w in [0, 1]; None (default) = the original minimum-drag generator.
+    level = None
+    LEVEL_KEEP = .02          # keep the current shape while its drag level is within 0.02 of the best match
+
     def generate(self, mach, CL_des, current=None):
         """Geometry generator: the minimum-CD candidate that reaches CL_des at this Mach.
 
         Ties within 1e-12 keep the current target geometry.
+        v4c (self.level = w > 0): the candidate whose equal-lift drag level (CD - CDmin)/(CDmax - CDmin) over the
+        feasible candidates is nearest to w; the current target is kept while its level is within LEVEL_KEEP of the best.
         """
         alpha, cd, ok = self.equal_lift(mach, CL_des)
         if not ok.any():
             return {'status': 'CL_UNREACHABLE', 'geometry_index': None, 'feasible_count': 0}
-        score = cd
+        level = self.level
+        if level is None or level <= 0:
+            score, tol, selection = cd, 1e-12, 'MIN_CD_AT_CL'
+        else:
+            lo, hi = float(cd[ok].min()), float(cd[ok].max())
+            score = np.where(ok, np.abs((cd-lo)/max(hi-lo, 1e-15)-float(level)), np.inf)
+            tol, selection = self.LEVEL_KEEP, 'DRAG_LEVEL_AT_CL'
         k = int(np.argmin(score))
-        if current is not None and ok[current] and abs(score[current]-score[k]) <= 1e-12:
+        if current is not None and ok[current] and abs(score[current]-score[k]) <= tol:
             k = int(current)
         cl_check, cd_check = self.coefficients_k(k, mach, alpha[k])
         return {'status': 'MATCHED', 'geometry_index': k, 'geometry_id': self.ids[k],
                 'CL_des': float(CL_des), 'alpha_rad': float(alpha[k]),
                 'CL': cl_check, 'CD': cd_check, 'CL_abs_error': abs(cl_check-CL_des),
-                'feasible_count': int(ok.sum()), 'selection': 'MIN_CD_AT_CL'}
+                'feasible_count': int(ok.sum()), 'selection': selection,
+                **({} if selection == 'MIN_CD_AT_CL' else {'morph_level': float(level)})}
 
     def _symbolic(self):
         """CasADi PCHIP evaluation with the coefficients of one geometry as a parameter vector."""
