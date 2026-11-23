@@ -1,0 +1,184 @@
+=== 2026-11-23T08:34:38Z v3: train (tag v3b, library F8D2000B, seeds 17, workers 4)
+=== 2026-11-23T08:34:38Z train rel seed 17
+[rel s17] pi0 on 200 acceptance cases: mean G 0.5510, hits 152, violations 0
+[rel s17] pi0: mean G 0.5352, hits 223/300, violations 1
+[rel s17] iter 0: 476 labels, 15 positive, 0 violating branches; kept; mean G 0.5352, hits 223/300, violations 1; acceptance set G 0.5510, hits 152/200, violations 0 (139 s)
+[rel s17] iter 1: 494 labels, 10 positive, 0 violating branches; accepted margin 1; mean G 0.6364, hits 243/300, violations 1; acceptance set G 0.5551, hits 154/200, violations 0 (157 s)
+[rel s17] iter 2: 467 labels, 13 positive, 0 violating branches; kept; mean G 0.6364, hits 243/300, violations 1; acceptance set G 0.5551, hits 154/200, violations 0 (148 s)
+[rel s17] iter 3: 367 labels, 16 positive, 0 violating branches; kept; mean G 0.6364, hits 243/300, violations 1; acceptance set G 0.5551, hits 154/200, violations 0 (141 s)
+[rel s17] iter 4: 613 labels, 0 positive, 0 violating branches; kept; mean G 0.6364, hits 243/300, violations 1; acceptance set G 0.5551, hits 154/200, violations 0 (172 s)
+[rel s17] iter 5: 506 labels, 0 positive, 0 violating branches; kept; mean G 0.6364, hits 243/300, violations 1; acceptance set G 0.5551, hits 154/200, violations 0 (151 s)
+[rel s17] iter 6: 387 labels, 0 positive, 0 violating branches; accepted margin 10; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (139 s)
+[rel s17] iter 7: 375 labels, 12 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (141 s)
+[rel s17] iter 8: 576 labels, 12 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (170 s)
+[rel s17] iter 9: 480 labels, 11 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (160 s)
+[rel s17] iter 10: 438 labels, 33 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (161 s)
+[rel s17] iter 11: 446 labels, 28 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (153 s)
+[rel s17] iter 12: 532 labels, 13 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (168 s)
+[rel s17] iter 13: 525 labels, 14 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (173 s)
+[rel s17] iter 14: 550 labels, 0 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (187 s)
+[rel s17] iter 15: 388 labels, 11 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (161 s)
+[rel s17] iter 16: 491 labels, 0 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (175 s)
+[rel s17] iter 17: 433 labels, 15 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (183 s)
+[rel s17] iter 18: 344 labels, 23 positive, 19 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (163 s)
+[rel s17] iter 19: 379 labels, 20 positive, 0 violating branches; kept; mean G 0.6365, hits 243/300, violations 1; acceptance set G 0.5554, hits 154/200, violations 0 (153 s)
+[rel s17] iter 20: 453 labels, 13 positive, 0 violating branches; accepted margin 10; mean G 0.6437, hits 244/300, violations 1; acceptance set G 0.5753, hits 156/200, violations 0 (168 s)
+[rel s17] iter 21: 529 labels, 35 positive, 0 violating branches; kept; mean G 0.6437, hits 244/300, violations 1; acceptance set G 0.5753, hits 156/200, violations 0 (210 s)
+[rel s17] iter 22: 411 labels, 9 positive, 0 violating branches; kept; mean G 0.6437, hits 244/300, violations 1; acceptance set G 0.5753, hits 156/200, violations 0 (164 s)
+[rel s17] iter 23: 437 labels, 10 positive, 0 violating branches; kept; mean G 0.6437, hits 244/300, violations 1; acceptance set G 0.5753, hits 156/200, violations 0 (168 s)
+[rel s17] iter 24: 461 labels, 25 positive, 0 violating branches; kept; mean G 0.6437, hits 244/300, violations 1; acceptance set G 0.5753, hits 156/200, violations 0 (176 s)
+[rel s17] iter 25: 559 labels, 28 positive, 0 violating branches; kept; mean G 0.6437, hits 244/300, violations 1; acceptance set G 0.5753, hits 156/200, violations 0 (193 s)
+[rel s17] iter 26: 393 labels, 14 positive, 0 violating branches; accepted margin 10; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (161 s)
+[rel s17] iter 27: 479 labels, 15 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (178 s)
+[rel s17] iter 28: 478 labels, 24 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (183 s)
+[rel s17] iter 29: 527 labels, 0 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (184 s)
+[rel s17] iter 30: 460 labels, 26 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (173 s)
+[rel s17] iter 31: 439 labels, 12 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (168 s)
+[rel s17] iter 32: 512 labels, 0 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (182 s)
+[rel s17] iter 33: 475 labels, 14 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (178 s)
+[rel s17] iter 34: 376 labels, 13 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (166 s)
+[rel s17] iter 35: 520 labels, 0 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (180 s)
+[rel s17] iter 36: 490 labels, 13 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (180 s)
+[rel s17] iter 37: 449 labels, 0 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (176 s)
+[rel s17] iter 38: 447 labels, 4 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (169 s)
+[rel s17] iter 39: 537 labels, 13 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (188 s)
+[rel s17] iter 40: 394 labels, 27 positive, 0 violating branches; kept; mean G 0.6441, hits 244/300, violations 1; acceptance set G 0.5754, hits 156/200, violations 0 (171 s)
+[rel s17] iter 41: 407 labels, 0 positive, 0 violating branches; accepted margin 10; mean G 0.6448, hits 244/300, violations 1; acceptance set G 0.5805, hits 157/200, violations 0 (179 s)
+[rel s17] iter 42: 622 labels, 0 positive, 0 violating branches; kept; mean G 0.6448, hits 244/300, violations 1; acceptance set G 0.5805, hits 157/200, violations 0 (203 s)
+[rel s17] iter 43: 470 labels, 0 positive, 0 violating branches; kept; mean G 0.6448, hits 244/300, violations 1; acceptance set G 0.5805, hits 157/200, violations 0 (184 s)
+[rel s17] iter 44: 400 labels, 14 positive, 0 violating branches; kept; mean G 0.6448, hits 244/300, violations 1; acceptance set G 0.5805, hits 157/200, violations 0 (179 s)
+[rel s17] iter 45: 501 labels, 24 positive, 0 violating branches; kept; mean G 0.6448, hits 244/300, violations 1; acceptance set G 0.5805, hits 157/200, violations 0 (197 s)
+[rel s17] iter 46: 490 labels, 0 positive, 0 violating branches; kept; mean G 0.6448, hits 244/300, violations 1; acceptance set G 0.5805, hits 157/200, violations 0 (195 s)
+[rel s17] iter 47: 428 labels, 46 positive, 0 violating branches; accepted margin 10; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (184 s)
+[rel s17] iter 48: 536 labels, 15 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (185 s)
+[rel s17] iter 49: 401 labels, 23 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (185 s)
+[rel s17] iter 50: 536 labels, 3 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (202 s)
+[rel s17] iter 51: 561 labels, 13 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (205 s)
+[rel s17] iter 52: 466 labels, 0 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (198 s)
+[rel s17] iter 53: 442 labels, 13 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (193 s)
+[rel s17] iter 54: 472 labels, 9 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (192 s)
+[rel s17] iter 55: 378 labels, 30 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (181 s)
+[rel s17] iter 56: 370 labels, 0 positive, 21 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (179 s)
+[rel s17] iter 57: 456 labels, 32 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (198 s)
+[rel s17] iter 58: 488 labels, 35 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (200 s)
+[rel s17] iter 59: 447 labels, 0 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (192 s)
+[rel s17] iter 60: 423 labels, 5 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (182 s)
+[rel s17] iter 61: 430 labels, 27 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (191 s)
+[rel s17] iter 62: 538 labels, 8 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (208 s)
+[rel s17] iter 63: 461 labels, 40 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (203 s)
+[rel s17] iter 64: 462 labels, 13 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (199 s)
+[rel s17] iter 65: 429 labels, 11 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (196 s)
+[rel s17] iter 66: 505 labels, 12 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (205 s)
+[rel s17] iter 67: 496 labels, 0 positive, 0 violating branches; kept; mean G 0.6487, hits 245/300, violations 1; acceptance set G 0.5876, hits 158/200, violations 0 (203 s)
+=== 2026-11-23T11:58:13Z v3: eval (tag v3b, library F8D2000B, seeds 17, workers 4)
+# v3b 结果报告（validation 场景）
+
+场景 96 个，用例 192 个；扰动 L2；执行层：高度保护、真实构型就近选、8 s 变构过渡。判定容差 5 km / 25 m/s（1×）。区间为整场景重抽样的 95% 自助区间（10000 次）。
+
+飞行在速度降到要求的末速时结束（最长 2400 s，超时算未命中），命中 = 航程误差 ≤ 5 km 且无超限。
+
+训练：候选策略只有在训练场景和单独的采纳场景（1400–1599，不产生标签）上都提高、且两边超限都不增加时才采纳。
+
+保护回路：平衡升力系数按在线升力估计修正，动压目标 0.9 倍上限。
+
+模型失配（真实对象 ≠ 策略的预测、初始升力表和在线估计所用的名义模型）：刹车构型阻力效果 ×0.6，阻力 +20%，阻力随马赫数斜率 +10%/Ma（以 Ma 6 为零点），升力 -5%。
+
+## 1. 主结果
+
+| 方法 | 成功率 1× | 2× | 4× | 可到目标* | 只有变构能到* | 超限 | 平均回报 | 构型切换次数/次飞行 | 预测次数 | 单次飞行 s |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 起点规则（变构） | 74.0% | 88.5% | 94.8% | 83.3% | 64.6% | 0 | +0.573 | 2 | 16 | 0.22 |
+| 强化学习（变构，种子 17） | 72.4% | 85.4% | 94.3% | 82.3% | 62.5% | 0 | +0.533 | 8 | 16 | 0.26 |
+
+*"可到目标"：名义上固定外形也能到的目标；"只有变构能到"：只有变构的名义可达区域包含的目标（随机目标按此分层，T1–T3 / T4–T6 另列）。
+
+## 3. 配对比较（成功率差，百分点；区间为整场景重抽样的 95% 自助区间）
+
+| 比较 | 差（百分点） | 95% 区间 | 超限数差 |
+|---|---|---|---|
+| 学习的作用（变构，种子 17）：强化学习 − 起点规则 | -1.6 | [-7.3, +4.2] | +0 |
+
+## 5. 距离—末速任务域（扰动下的成功率地图）
+
+| 方法 | 网格平均成功率 | 成功率 ≥ 50% 的格数 | 成功率 ≥ 80% 的格数 | 成功率 ≥ 90% 的格数 |
+|---|---|---|---|---|
+| 起点规则（变构） | 73.2% | 131 | 87 | 68 |
+| 强化学习（变构，种子 17） | 72.8% | 133 | 87 | 67 |
+
+地图：`V3B_domain_map.png`（红色实线 / 虚线：变构 / 固定外形的名义可达区域）。
+
+各末速要求下可靠距离的范围（近端–远端，成功率 ≥ 80%，格距 150 km；变构主要扩展近端）：
+
+| 末速要求 m/s | 起点规则（变构） | 强化学习（变构，种子 17） |
+|---|---|---|
+| 1050 | 1650–3300 km | 1650–3300 km |
+| 1125 | 1350–3150 km | 1500–3150 km |
+| 1200 | 1350–3000 km | 1350–3000 km |
+| 1275 | 1500–2850 km | 1350–2850 km |
+| 1350 | 1200–2400 km | 1200–2400 km |
+| 1425 | 1200–2400 km | 1200–2400 km |
+| 1500 | 1050–2100 km | 1200–2100 km |
+| 1575 | 1050–1800 km | 900–1800 km |
+| 1650 | 900–1650 km | 1050–1650 km |
+| 1725 | 900–1200 km | 900–1200 km |
+| 1800 | 750–1050 km | 750–1050 km |
+
+平台：Linux / Python 3.13.18，numpy 2.5.3。
+
+=== 2026-11-23T12:06:08Z v3: report (tag v3b, library F8D2000B, seeds 17, workers 4)
+# v3b 结果报告（validation 场景）
+
+场景 96 个，用例 192 个；扰动 L2；执行层：高度保护、真实构型就近选、8 s 变构过渡。判定容差 5 km / 25 m/s（1×）。区间为整场景重抽样的 95% 自助区间（10000 次）。
+
+飞行在速度降到要求的末速时结束（最长 2400 s，超时算未命中），命中 = 航程误差 ≤ 5 km 且无超限。
+
+训练：候选策略只有在训练场景和单独的采纳场景（1400–1599，不产生标签）上都提高、且两边超限都不增加时才采纳。
+
+保护回路：平衡升力系数按在线升力估计修正，动压目标 0.9 倍上限。
+
+模型失配（真实对象 ≠ 策略的预测、初始升力表和在线估计所用的名义模型）：刹车构型阻力效果 ×0.6，阻力 +20%，阻力随马赫数斜率 +10%/Ma（以 Ma 6 为零点），升力 -5%。
+
+## 1. 主结果
+
+| 方法 | 成功率 1× | 2× | 4× | 可到目标* | 只有变构能到* | 超限 | 平均回报 | 构型切换次数/次飞行 | 预测次数 | 单次飞行 s |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 起点规则（变构） | 74.0% | 88.5% | 94.8% | 83.3% | 64.6% | 0 | +0.573 | 2 | 16 | 0.22 |
+| 强化学习（变构，种子 17） | 72.4% | 85.4% | 94.3% | 82.3% | 62.5% | 0 | +0.533 | 8 | 16 | 0.26 |
+
+*"可到目标"：名义上固定外形也能到的目标；"只有变构能到"：只有变构的名义可达区域包含的目标（随机目标按此分层，T1–T3 / T4–T6 另列）。
+
+## 3. 配对比较（成功率差，百分点；区间为整场景重抽样的 95% 自助区间）
+
+| 比较 | 差（百分点） | 95% 区间 | 超限数差 |
+|---|---|---|---|
+| 学习的作用（变构，种子 17）：强化学习 − 起点规则 | -1.6 | [-7.3, +4.2] | +0 |
+
+## 5. 距离—末速任务域（扰动下的成功率地图）
+
+| 方法 | 网格平均成功率 | 成功率 ≥ 50% 的格数 | 成功率 ≥ 80% 的格数 | 成功率 ≥ 90% 的格数 |
+|---|---|---|---|---|
+| 起点规则（变构） | 73.2% | 131 | 87 | 68 |
+| 强化学习（变构，种子 17） | 72.8% | 133 | 87 | 67 |
+
+地图：`V3B_domain_map.png`（红色实线 / 虚线：变构 / 固定外形的名义可达区域）。
+
+各末速要求下可靠距离的范围（近端–远端，成功率 ≥ 80%，格距 150 km；变构主要扩展近端）：
+
+| 末速要求 m/s | 起点规则（变构） | 强化学习（变构，种子 17） |
+|---|---|---|
+| 1050 | 1650–3300 km | 1650–3300 km |
+| 1125 | 1350–3150 km | 1500–3150 km |
+| 1200 | 1350–3000 km | 1350–3000 km |
+| 1275 | 1500–2850 km | 1350–2850 km |
+| 1350 | 1200–2400 km | 1200–2400 km |
+| 1425 | 1200–2400 km | 1200–2400 km |
+| 1500 | 1050–2100 km | 1200–2100 km |
+| 1575 | 1050–1800 km | 900–1800 km |
+| 1650 | 900–1650 km | 1050–1650 km |
+| 1725 | 900–1200 km | 900–1200 km |
+| 1800 | 750–1050 km | 750–1050 km |
+
+平台：Linux / Python 3.13.18，numpy 2.5.3。
+
+=== 2026-11-23T12:06:11Z v3 done: runs/v3b/F8D2000B/V3B_REPORT_validation.md
+RUN EXIT 0
