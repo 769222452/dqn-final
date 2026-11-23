@@ -1,0 +1,81 @@
+labels done: 1500
+=== 2026-11-23T14:13:49Z v4c: fit (jobs 4)
+{"model": "data/surrogate_v4c/controller.npz", "model_sha256": "32c12209aae5e9a870227048fee30945c4e0ceccaffe4372921d61b9ccdb569b", "contract": "rl298-consistent/2:ac8fa9f64586d329", "counts": {"total": 1500, "usable": 1492, "train": 1090, "validation": 110, "test": 292}, "length_scales": {"pre": 0.15, "post": 0.15}, "validation_mse": {"pre": 6.407899582880625e-07, "post": 5.094556983425237e-06}}
+=== 2026-11-23T14:13:52Z v4c: qualify (jobs 4)
+{"P1": "PASSED", "checks": {"validation_samples": true, "test_samples": true, "validation_corrected_dense_failures_zero": true, "test_corrected_dense_failures_zero": true}, "splits": {"validation": {"teacher": {"dense_failures": 0, "refused": 0, "alpha_rmse_deg": null, "ptp_mean_deg": 0.1811496356973044, "jump_mean_deg": 0.23717200808491964}, "raw_network": {"dense_failures": 0, "refused": 1, "alpha_rmse_deg": 0.1351042086484786, "ptp_mean_deg": 0.19784587131563008, "jump_mean_deg": 0.2490810049404083}, "corrected_network": {"dense_failures": 0, "refused": 1, "alpha_rmse_deg": 0.1351042086484786, "ptp_mean_deg": 0.19784587131563008, "jump_mean_deg": 0.2490810049404083}}, "test": {"teacher": {"dense_failures": 0, "refused": 0, "alpha_rmse_deg": null, "ptp_mean_deg": 0.1359662341745286, "jump_mean_deg": 0.2193696301916649}, "raw_network": {"dense_failures": 0, "refused": 1, "alpha_rmse_deg": 0.1157159740999513, "ptp_mean_deg": 0.13640594667006614, "jump_mean_deg": 0.22762465598052417}, "corrected_network": {"dense_failures": 0, "refused": 1, "alpha_rmse_deg": 0.1157159740999513, "ptp_mean_deg": 0.13640594667006614, "jump_mean_deg": 0.22762465598052417}}}, "accuracy": {"test_raw_planned_mach_mae": {"value": 0.00018280705722406815, "threshold": 0.01, "kind": "max", "passed": true}, "test_raw_alpha_rmse_deg": {"value": 0.1157159740999513, "threshold": 0.5, "kind": "max", "passed": true}, "test_raw_alpha_abs_p95_deg": {"value": 0.2200906304937154, "threshold": 1.5, "kind": "max", "passed": true}, "speedup": {"value": 866.6209472931888, "threshold": 5.0, "kind": "min", "passed": true}}, "out": "data/lookahead_v4c"}
+=== 2026-11-23T14:14:03Z v4c: install (jobs 4)
+installed surrogate 32c12209aae5 | P1 gate passed: True | status: COMPLETE
+=== 2026-11-23T14:14:03Z v4c: region (jobs 4)
+/usr/local/lib/python3.13/multiprocessing/resource_tracker.py:479: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown: {'/mp-fra4ihzw', '/mp-9bwno4ol', '/mp-po4jj0g8', '/mp-mtss3dx_', '/mp-t_q6i945', '/mp-tf6x8mic'}
+  warnings.warn(
+--- restart Mon Nov 23 15:45:16 UTC 2026
+labels done: 1500
+=== 2026-11-23T15:45:16Z v4c: region (jobs 4)
+{
+ "targets": [
+  {
+   "name": "T1",
+   "range_km": 1998.934229760045,
+   "speed_mps": 1148.9502814912958,
+   "kind": "fixed_reachable"
+  },
+  {
+   "name": "T2",
+   "range_km": 2122.97544750292,
+   "speed_mps": 1248.5037051017875,
+   "kind": "fixed_reachable"
+  },
+  {
+   "name": "T3",
+   "range_km": 2247.016665245795,
+   "speed_mps": 1376.3104133475333,
+   "kind": "fixed_reachable"
+  },
+  {
+   "name": "T4",
+   "range_km": 1998.934229760045,
+   "speed_mps": 1045.0253158216653,
+   "kind": "morph_only",
+   "band_mps": 17.848348349716616
+  },
+  {
+   "name": "T5",
+   "range_km": 2122.97544750292,
+   "speed_mps": 1079.0085010687758,
+   "kind": "morph_only",
+   "band_mps": 82.70387678640623
+  },
+  {
+   "name": "T6",
+   "range_km": 2247.016665245795,
+   "speed_mps": 1239.4949414691127,
+   "kind": "morph_only",
+   "band_mps": 23.70802556574563
+  }
+ ],
+ "notes": [
+  "T4: morph-only band at 1999 km is only 18 m/s wide",
+  "T5: morph-only band at 2123 km is only 83 m/s wide",
+  "T6: morph-only band at 2247 km is only 24 m/s wide",
+  "T4 lies outside the shrunk target region",
+  "T6 lies outside the shrunk target region"
+ ],
+ "area_ratio": 1.2497370409251365,
+ "feasible": {
+  "morph": 58,
+  "fixed": 32
+ },
+ "fixed_range": [
+  1874.8930120171697,
+  2371.0578829886704
+ ]
+}
+=== 2026-11-23T18:31:40Z v4c: train (jobs 4)
+/usr/local/lib/python3.13/multiprocessing/resource_tracker.py:479: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown: {'/mp-xvqz_tnf', '/mp-w8ye27xv', '/mp-y31y_u_2', '/mp-02ce5cpa', '/mp-m32s6mcn', '/mp-xbx4m_37'}
+  warnings.warn(
+--- restart training Mon Nov 23 18:40:18 UTC 2026
+labels done: 1500
+=== 2026-11-23T18:40:18Z v4c: train (jobs 4)
+[rel s17] pi0 on 32 acceptance cases: mean G -0.2904, hits 8, violations 0
+[rel s17] pi0: mean G -0.3947, hits 6/32, violations 0
+[rel s17] iter 0: 165 labels, 26 positive, 0 violating branches; accepted margin 10; mean G -0.0604, hits 11/32, violations 0; acceptance set G -0.2752, hits 6/32, violations 0 (2640 s)

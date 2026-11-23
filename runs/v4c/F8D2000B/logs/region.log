@@ -1,0 +1,59 @@
+{
+ "targets": [
+  {
+   "name": "T1",
+   "range_km": 1998.934229760045,
+   "speed_mps": 1148.9502814912958,
+   "kind": "fixed_reachable"
+  },
+  {
+   "name": "T2",
+   "range_km": 2122.97544750292,
+   "speed_mps": 1248.5037051017875,
+   "kind": "fixed_reachable"
+  },
+  {
+   "name": "T3",
+   "range_km": 2247.016665245795,
+   "speed_mps": 1376.3104133475333,
+   "kind": "fixed_reachable"
+  },
+  {
+   "name": "T4",
+   "range_km": 1998.934229760045,
+   "speed_mps": 1045.0253158216653,
+   "kind": "morph_only",
+   "band_mps": 17.848348349716616
+  },
+  {
+   "name": "T5",
+   "range_km": 2122.97544750292,
+   "speed_mps": 1079.0085010687758,
+   "kind": "morph_only",
+   "band_mps": 82.70387678640623
+  },
+  {
+   "name": "T6",
+   "range_km": 2247.016665245795,
+   "speed_mps": 1239.4949414691127,
+   "kind": "morph_only",
+   "band_mps": 23.70802556574563
+  }
+ ],
+ "notes": [
+  "T4: morph-only band at 1999 km is only 18 m/s wide",
+  "T5: morph-only band at 2123 km is only 83 m/s wide",
+  "T6: morph-only band at 2247 km is only 24 m/s wide",
+  "T4 lies outside the shrunk target region",
+  "T6 lies outside the shrunk target region"
+ ],
+ "area_ratio": 1.2497370409251365,
+ "feasible": {
+  "morph": 58,
+  "fixed": 32
+ },
+ "fixed_range": [
+  1874.8930120171697,
+  2371.0578829886704
+ ]
+}
