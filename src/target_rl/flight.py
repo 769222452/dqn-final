@@ -166,7 +166,13 @@ class TargetFlight:
         model = w['model']
         q = self.q()
         p = w['prot']
-        guard = law_cl(model, self.x, q, p['q_ratio'], w['qmax'], p['kp'], p['kg'])
+        if p.get('use_lift_estimate'):
+            # v3: the equilibrium CL of the guard is corrected by the online lift estimate (with less lift than modelled the
+            # proportional law would otherwise settle above the dynamic-pressure limit)
+            kl = min(max(self.est.values[0], .7), 1.3)
+            guard = model.level_cl(self.x, q)/kl*(1+p['kp']*(q/(p['q_ratio']*w['qmax'])-1))-p['kg']*self.x[2]
+        else:
+            guard = law_cl(model, self.x, q, p['q_ratio'], w['qmax'], p['kp'], p['kg'])
         cl = max(cl_cmd, guard)
         protected = guard > cl_cmd
         buf = p.get('floor_buffer_m', 0.)

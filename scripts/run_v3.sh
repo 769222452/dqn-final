@@ -2,6 +2,7 @@
 # v3 full process (README_V3.md): pure reinforcement learning under model mismatch, flight ends at the target speed.
 #
 #   WORKERS=5 bash scripts/run_v3.sh                       # test, region (skipped: committed), train, eval, report
+#   TARGET_RL_CONFIG=configs/v3b.yaml WORKERS=5 bash scripts/run_v3.sh    # v3b: held-out acceptance, guard with lift estimate
 #   QUICK=1 WORKERS=4 bash scripts/run_v3.sh               # pipeline check in about 15 minutes (tiny sizes, separate folder)
 #   STAGES="eval report" bash scripts/run_v3.sh            # only evaluate and report with the policies trained so far
 #   RUN_TEST=1 STAGES="testset" bash scripts/run_v3.sh     # the test set: ONCE, only after the validation results are recorded
@@ -26,17 +27,20 @@ if [ "$QUICK" = 1 ]; then
   mkdir -p runs
   $PY - <<'PYEOF'
 import os, shutil, yaml
-c = yaml.safe_load(open('configs/v3.yaml', encoding='utf-8'))
-c['experiment']['tag'] = 'v3quick'
+c = yaml.safe_load(open(os.environ['TARGET_RL_CONFIG'], encoding='utf-8'))
+c['experiment']['tag'] += 'quick'
 c['seeds'].update(train=[1100, 1105], validation=[1600, 1601], domain=[1600, 1600], test=[2300, 2300], training_runs=[17])
+if 'acceptance' in c['seeds']:
+    c['seeds']['acceptance'] = [1400, 1403]
 c['training'].update(iterations=1, states=3, scenarios_per_iteration=2, no_acceptance_iterations=20)
 g = c['targets']['v2']['grid']
 c['targets']['v2'].update(test_per_stratum=1, grid={'D': [g['D'][0], g['D'][1], 3*g['D'][2]], 'V': [g['V'][0], g['V'][1], 3*g['V'][2]]})
 c['experiment']['bootstrap'] = 500
 yaml.safe_dump(c, open('runs/v3quick_config.yaml', 'w', encoding='utf-8'), sort_keys=False)
 lib = os.environ['TARGET_RL_LIBRARY']
-os.makedirs(f'runs/v3quick/{lib}', exist_ok=True)
-shutil.copy(f'runs/v3/{lib}/region.json', f'runs/v3quick/{lib}/region.json')   # the committed region of the full run
+tag = c['experiment']['tag']
+os.makedirs(f'runs/{tag}/{lib}', exist_ok=True)
+shutil.copy(f'runs/v3/{lib}/region.json', f'runs/{tag}/{lib}/region.json')   # the committed region of the full run
 PYEOF
   export TARGET_RL_CONFIG=runs/v3quick_config.yaml
   SEEDS=17
@@ -52,7 +56,8 @@ for s in $STAGES; do
   echo "=== $(stamp) v3: $s (tag $TAG, library $TARGET_RL_LIBRARY, seeds $SEEDS, workers $WORKERS)"
   case $s in
     test)    TARGET_RL_CONFIG="" $PY -m pytest -q 2>&1 | tee "$LOGS/test.log" ;;      # the tests assume the default configuration
-    region)  if [ -f "$OUT/region.json" ]; then echo "region exists: $OUT/region.json (delete it to recompute, about 1 hour)"
+    region)  REG=$($PY -c "from target_rl import config; print(config.region_path())")
+             if [ -f "$REG" ]; then echo "region exists: $REG (delete it to recompute, about 25 minutes)"
              else $PY -m target_rl.region --workers "$WORKERS" 2>&1 | tee "$LOGS/region.log"; fi ;;
     train)   for seed in $SEEDS; do for v in $VARIANTS; do
                echo "=== $(stamp) train $v seed $seed"

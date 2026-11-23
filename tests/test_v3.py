@@ -93,3 +93,26 @@ f[P.NAMES.index('pred_range_error')] = -.30                 # 30 km short: CL do
 assert F.decode(P.initial_action(rule, f), True) == (0, 0)
 print('ok')
 ''')
+
+
+def test_v3b_held_out_acceptance_and_guard():
+    env = dict(os.environ, TARGET_RL_CONFIG='configs/v3b.yaml', TARGET_RL_LIBRARY='F8D2000B', PYTHONPATH=str(ROOT/'src'))
+    code = '''
+from target_rl import config, flight as F, guided as G, region as RG
+from target_rl.scenario import Scenario, Target
+c = config.load()
+assert c['experiment']['tag'] == 'v3b' and c['training']['held_out_acceptance'] and c['protection']['use_lift_estimate']
+assert config.region_path().parts[-4:] == ('runs', 'v3', 'F8D2000B', 'region.json')
+R = lambda k: set(config.seed_range(c['seeds'][k]))
+for k in ('train', 'validation', 'test', 'domain'):
+    assert not (R('acceptance') & R(k)), k
+acc = RG.v2_cases('accept')
+assert len(acc) == 200 and acc[0][1].name.startswith('acc')
+sc = Scenario('L0', 0, 0., 0., .9, 1.)              # 10 % less lift than modelled (plus the plant's 5 %)
+e = F.TargetFlight(sc, Target('x', 2500., 1300.), True)
+e.advance(600., G._hold(.0, 0.))                     # the policy asks for no lift: the guard alone holds the limit
+assert not e.failed and e.min_margin > 0
+print('ok')
+'''
+    r = subprocess.run([sys.executable, '-c', code], cwd=ROOT, env=env, capture_output=True, text=True, timeout=900)
+    assert r.returncode == 0 and 'ok' in r.stdout, r.stderr[-3000:]

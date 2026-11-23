@@ -233,6 +233,11 @@ def report(seeds, which, with_domain=True):
          f'判定容差 {cfg["hit"]["range_km"]:g} km / {cfg["hit"]["speed_mps"]:g} m/s（1×）。区间为整场景重抽样的 95% 自助区间（{nb} 次）。', '']
     if cfg['mission'].get('end') == 'speed':
         L += [f'飞行在速度降到要求的末速时结束（最长 {cfg["mission"]["duration_s"]:.0f} s，超时算未命中），命中 = 航程误差 ≤ {cfg["hit"]["range_km"]:g} km 且无超限。', '']
+    if cfg['training'].get('held_out_acceptance'):
+        L += [f'训练：候选策略只有在训练场景和单独的采纳场景（{cfg["seeds"]["acceptance"][0]}–{cfg["seeds"]["acceptance"][1]}，不产生标签）上都提高、'
+              f'且两边超限都不增加时才采纳。', '']
+    if cfg['protection'].get('use_lift_estimate'):
+        L += [f'保护回路：平衡升力系数按在线升力估计修正，动压目标 {cfg["protection"]["q_ratio"]:g} 倍上限。', '']
     if cfg.get('plant'):
         pm = cfg['plant']
         L += [f'模型失配（真实对象 ≠ 策略的预测、初始升力表和在线估计所用的名义模型）：刹车构型阻力效果 ×{pm.get("morph_effect", 1):g}，'

@@ -54,7 +54,10 @@ def round1_dir(library=None, cfg=None):
 
 def region_path(library=None, cfg=None):
     cfg = cfg or load()
-    if cfg.get('experiment', {}).get('own_region'):          # v3: a region of its own (other task, plant with mismatch)
+    ex = cfg.get('experiment', {})
+    if ex.get('region_tag'):                                  # v3b: the region of another tag (same task)
+        return ROOT/'runs'/ex['region_tag']/(library or library_name(cfg))/'region.json'
+    if ex.get('own_region'):                                  # v3: a region of its own (other task, plant with mismatch)
         return runs_dir(cfg, library)/'region.json'
     return ROOT/'runs'/(library or library_name(cfg))/'region.json'
 

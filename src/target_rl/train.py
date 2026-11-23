@@ -218,6 +218,16 @@ def train(variant, seed, workers=4, out=None, iterations=None, cases=None, pi0=N
     if st.get('converged'):
         log(f"[{variant} s{seed}] already finished: {st['converged']['reason']}")
         return st
+    held = bool(tr.get('held_out_acceptance'))      # v3b: a candidate must also improve on held-out acceptance cases
+    if held and 'acc_cases' not in st:
+        from .region import v2_cases
+        st['acc_cases'] = [case_to_json(c) for c in v2_cases('accept')]
+    acc_cases = [case_from_json(c) for c in st['acc_cases']] if held else []
+    if held and 'acc_G' not in st:
+        st['acc_G'], st['acc_violations'], st['acc_hits'] = set_stats(fly_set(st['chain'], acc_cases, morph, workers, kg))
+        save_json(path, st)
+        log(f"[{variant} s{seed}] pi0 on {len(acc_cases)} acceptance cases: mean G {st['acc_G']:.4f}, hits {st['acc_hits']}, "
+            f"violations {st['acc_violations']}")
     if 'G' not in st:
         res = fly_set(st['chain'], cases, morph, workers, kg)
         st['G'], st['violations'], st['hits'] = set_stats(res)
@@ -260,22 +270,32 @@ def train(variant, seed, workers=4, out=None, iterations=None, cases=None, pi0=N
         specs = [st['chain']+[dict(kind='model', run=f'{variant}_s{seed}', members=members, margin=m, iteration=i,
                                    times=label_times, window=tr['window_s'], score=v['score'], inputs=inputs)]
                  for m in sorted(tr['margins'])]
-        cres = pool_map([('candidate', dict(case=c, chain=ch, morph=morph, kg=kg)) for ch in specs for c in cases],
+        allc = cases+acc_cases
+        cres = pool_map([('candidate', dict(case=c, chain=ch, morph=morph, kg=kg)) for ch in specs for c in allc],
                         workers)
-        n = len(cases)
+        n, na = len(cases), len(allc)
         cands = []
         for j, ch in enumerate(specs):
-            part = cres[j*n:(j+1)*n]
+            part = cres[j*na:j*na+n]
             G, viol, hits = set_stats(part)
-            cands.append(dict(chain=ch, G=G, violations=viol, hits=hits, part=part, margin=ch[-1]['margin']))
+            c = dict(chain=ch, G=G, violations=viol, hits=hits, part=part, margin=ch[-1]['margin'])
+            if held:
+                c['acc_G'], c['acc_violations'], c['acc_hits'] = set_stats(cres[j*na+n:(j+1)*na])
+            cands.append(c)
         ok = [c for c in cands if c['violations'] <= st['violations']]
-        best = max(ok, key=lambda c: c['G']) if ok else None
+        if held:     # better on the training cases AND on the held-out acceptance cases, no more violations on either; best on the held-out
+            ok = [c for c in ok if c['G'] > st['G']+1e-9 and c['acc_G'] > st['acc_G']+1e-9
+                  and c['acc_violations'] <= st['acc_violations']]
+            best = max(ok, key=lambda c: c['acc_G']) if ok else None
+        else:
+            best = max(ok, key=lambda c: c['G']) if ok else None
         accepted = bool(best and best['G'] > st['G']+1e-9)
         rec = dict(iteration=i, cases=pick, labels=len(new), invalid=n_fail, positive_pairs=n_pos,
                    improvable_fraction=improvable_fraction([x for x in new if x['case'] is not None],
                                                            tr['min_advantage']),
                    G_before=st['G'], accepted=accepted, fit=fit, wall_s=None,
-                   candidates=[dict(margin=c['margin'], G=c['G'], violations=c['violations'], hits=c['hits'])
+                   candidates=[dict(margin=c['margin'], G=c['G'], violations=c['violations'], hits=c['hits'],
+                                    **({k: c[k] for k in ('acc_G', 'acc_violations', 'acc_hits')} if held else {}))
                                for c in cands])
         if accepted:
             st['chain'], st['G'], st['violations'], st['hits'] = best['chain'], best['G'], best['violations'], best['hits']
@@ -283,6 +303,8 @@ def train(variant, seed, workers=4, out=None, iterations=None, cases=None, pi0=N
             st['case_G'] = [r['G'] for r in best['part']]
             st['policy_version'] = version+1
             rec['accepted_margin'] = best['margin']
+            if held:
+                st['acc_G'], st['acc_violations'], st['acc_hits'] = best['acc_G'], best['acc_violations'], best['acc_hits']
         rec['wall_s'] = time.perf_counter()-t0
         st['history'].append(rec)
         st['iteration'] = i+1
@@ -292,7 +314,9 @@ def train(variant, seed, workers=4, out=None, iterations=None, cases=None, pi0=N
         save_json(path, st)
         log(f"[{variant} s{seed}] iter {i}: {len(new)} labels, {n_pos} positive, {n_fail} violating branches; "
             + (f"accepted margin {best['margin']:g}" if accepted else 'kept')
-            + f"; mean G {st['G']:.4f}, hits {st['hits']}/{n}, violations {st['violations']} ({rec['wall_s']:.0f} s)")
+            + f"; mean G {st['G']:.4f}, hits {st['hits']}/{n}, violations {st['violations']}"
+            + (f"; acceptance set G {st['acc_G']:.4f}, hits {st['acc_hits']}/{len(acc_cases)}, violations {st['acc_violations']}"
+               if held else '') + f" ({rec['wall_s']:.0f} s)")
         if st.get('converged'):
             break
     return st

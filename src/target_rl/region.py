@@ -251,9 +251,10 @@ def v2_cases(which, region=None, cfg=None):
     cfg = cfg or config.load()
     region = region or load_region()
     lvl = cfg['disturbance']['main_level']
-    if which == 'train':
-        return [(scenario(lvl, s), v2_target(s, 'F' if s % 2 == 0 else 'M', f'train{s}', 0, region, cfg))
-                for s in config.seed_range(cfg['seeds']['train'])]
+    if which in ('train', 'accept'):          # accept (v3b): held-out acceptance cases of the training, seeds.acceptance
+        key, pre = ('train', 'train') if which == 'train' else ('acceptance', 'acc')
+        return [(scenario(lvl, s), v2_target(s, 'F' if s % 2 == 0 else 'M', f'{pre}{s}', 0, region, cfg))
+                for s in config.seed_range(cfg['seeds'][key])]
     if which == 'validation':
         return [(scenario(lvl, s), v2_target(s, st, f'{st}{s}', 0, region, cfg))
                 for s in config.seed_range(cfg['seeds']['validation']) for st in ('F', 'M')]
