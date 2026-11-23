@@ -80,3 +80,5 @@ labels done: 1500
 [rel s17] pi0: mean G -0.3947, hits 6/32, violations 0
 [rel s17] iter 0: 165 labels, 26 positive, 0 violating branches; accepted margin 10; mean G -0.0604, hits 11/32, violations 0; acceptance set G -0.2752, hits 6/32, violations 0 (2640 s)
 [rel s17] iter 1: 164 labels, 25 positive, 0 violating branches; kept; mean G -0.0604, hits 11/32, violations 0; acceptance set G -0.2752, hits 6/32, violations 0 (2570 s)
+[rel s17] iter 2: 167 labels, 36 positive, 0 violating branches; kept; mean G -0.0604, hits 11/32, violations 0; acceptance set G -0.2752, hits 6/32, violations 0 (2628 s)
+[rel s17] iter 3: 161 labels, 8 positive, 0 violating branches; kept; mean G -0.0604, hits 11/32, violations 0; acceptance set G -0.2752, hits 6/32, violations 0 (2478 s)
