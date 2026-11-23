@@ -1,0 +1,2 @@
+{"flights": 64, "decisions": 25278, "sampled": 1500, "splits": {"train": 1093, "validation": 111, "test": 296}}
+reasons {'END': 50, 'NOT_CERTIFIED': 11, 'OUT_OF_DOMAIN:DomainExit': 3}

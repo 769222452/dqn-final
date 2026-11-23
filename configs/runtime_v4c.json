@@ -1,7 +1,7 @@
 {
   "description": "v4c runtime (target arrival on the F8D2000B library): Certified-flight runtime. Fallback chain: surrogate out-of-distribution refusal -> exact-physics equal-lift baseline -> true pre/post OCP; the post corrector, lookahead guard and independent audits always decide, and only VERIFIED_PASS actions are executed. Objective aligned, look-ahead order minimal_first; geometry chosen by the requested drag level.",
   "surrogate": "data/surrogate_v4c/controller.npz",
-  "model_sha256": "PENDING_FIT",
+  "model_sha256": "32c12209aae5e9a870227048fee30945c4e0ceccaffe4372921d61b9ccdb569b",
   "ood_physics_fallback": true,
   "exact_integration_memo": true,
   "dead_end_retry": {

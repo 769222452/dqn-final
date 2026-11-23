@@ -1,0 +1,57 @@
+{
+ "schema": "aoa-fix-P1-evaluation/1",
+ "status": "COMPLETE",
+ "source_sha256": {
+  "data/surrogate_v4c/controller.npz": "32c12209aae5e9a870227048fee30945c4e0ceccaffe4372921d61b9ccdb569b",
+  "data/surrogate_v4c/controller.json": "64558069a2a3b87f6fa8b2f133ed5837da26586f3619a9db374d12953b881fe3",
+  "runs/v4c/F8D2000B/surrogate/labels.jsonl": "5e82c82045179f8630ded9b93fafa0d1dd34a414e792919b5125135f4da08d3d",
+  "scripts/aoa_qualify_surrogate.py": "c1e4b2bf5fbbd8e7e209a634c36830ef6abcc6685ff81cda0aac1fc79982d9ca",
+  "src/certified_flight/distill.py": "1750b57c75a3d06e2d237e4da0c21056df1c94a24d8b4d8e3bdbb4f0a666cea4",
+  "src/certified_flight/corrector.py": "efcc58310497b9eb45d9ff6816a50738a3adb7e9018b12ad0d33f4d79d3a1bfe",
+  "src/certified_flight/ocp.py": "f7ac054d77c1d7828249deccd246d13f26ea0dc33ae1887909a37ff23c1a114e"
+ },
+ "config": {
+  "objective": "aligned",
+  "fast_safety": {
+   "constraint_aware_post_enabled": true,
+   "post_correction_method": "six_alpha_slsqp",
+   "post_correction_max_wall_s": 2.0,
+   "max_iterations": 60,
+   "ftol": 1e-10,
+   "alpha_scale_rad": 0.05,
+   "CL_scale": 0.1,
+   "weights": {
+    "network": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "smooth": 0.01,
+    "CL": 0.05
+   },
+   "internal_margin": 0.0,
+   "dense_refinement": true,
+   "boundary_smoothing": true
+  }
+ },
+ "control_contract": "rl298-consistent/2:ac8fa9f64586d329",
+ "gates": {
+  "maximum_dense_violations": 0,
+  "min_train_samples": 48,
+  "min_validation_samples": 12,
+  "min_test_samples": 24,
+  "planned_mach_mae_max": 0.01,
+  "alpha_rmse_deg_max": 0.5,
+  "alpha_abs_p95_deg_max": 1.5,
+  "test_dense_violation_rate_max": 0.0,
+  "validation_dense_violation_rate_max": 0.0,
+  "min_speedup": 5.0,
+  "full_fast_mission_required_for_scale_up": true
+ },
+ "expected_validation": 110,
+ "expected_test": 292,
+ "gate_status": "PASSED"
+}
