@@ -87,7 +87,9 @@ class CLReachability:
         low = np.maximum(alow, alpha-lim['alpha_rate_radps']*dt*np.arange(1, n+1))
         high = np.minimum(ahigh, alpha+lim['alpha_rate_radps']*dt*np.arange(1, n+1))
         active = z.active(t)
-        ids = [z.source, z.target] if active else list(range(len(self.db.ids)))
+        cand = getattr(self.db, 'candidates', None)       # v4c: only generator candidates can become the next target
+        everyone = list(range(len(self.db.ids))) if cand is None else sorted(set(cand.tolist())|{int(z.source)})
+        ids = [z.source, z.target] if active else everyone
         bounds = []
         for i in range(n):
             ml, mh = self._mach_box(np.asarray(x), dt*(i+1))
@@ -105,8 +107,9 @@ class CLReachability:
                 bounds.append(((1-fbar)*lo[0]+fbar*lo[1], (1-fbar)*hi[0]+fbar*hi[1]))
             else:
                 # Any target may be chosen next, including staying at source.
-                bounds.append(((1-fbar)*lo[z.source]+fbar*lo.min(),
-                               (1-fbar)*hi[z.source]+fbar*hi.max()))
+                js = ids.index(z.source)
+                bounds.append(((1-fbar)*lo[js]+fbar*lo.min(),
+                               (1-fbar)*hi[js]+fbar*hi.max()))
         outer = np.mean(bounds, axis=0)+np.array([-1e-12, 1e-12])
         result.update(CL_outer_min=float(outer[0]), CL_outer_max=float(outer[1]))
         outside = raw < outer[0] or raw > outer[1]

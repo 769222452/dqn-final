@@ -82,6 +82,13 @@ class AeroDatabase:
         if not self.valid.all() or not np.isfinite(self.values).all() or np.any(self.values[..., 1] <= 0):
             raise ValueError('Incomplete/invalid table: segmented interpolation is required')
         self.index = {name: i for i, name in enumerate(self.ids)}
+        # v4c: optional generator candidate set (generator_candidates.json next to the snapshot; not part of the manifest).
+        # The generator chooses among these shapes only; None = every shape (the original behaviour).
+        self.candidates = None
+        cand = self.directory/'generator_candidates.json'
+        if cand.exists():
+            names = json.loads(cand.read_text(encoding='utf-8'))['geometry_ids']
+            self.candidates = np.array(sorted(self.index[n] for n in names), dtype=int)
         # [geometry, polynomial_power, Mach_interval, alpha_node, coefficient]
         self.c = np.moveaxis(PchipInterpolator(self.M, self.values, axis=1, extrapolate=False).c, 2, 0)
         self.ncoef = int(np.prod(self.c.shape[1:]))
@@ -144,15 +151,16 @@ class AeroDatabase:
         """Alpha giving cl_des for every geometry, the CD there (inf if unreachable) and feasibility."""
         if not np.isfinite(cl_des):
             raise ValueError('Nonfinite lift target')
-        y = self.curves(mach)
+        sub = self.candidates
+        y = self.curves(mach, sub)
         if not np.all(np.diff(y[..., 0], axis=1) > 0):
             raise ValueError('Nonmonotone interpolated lift curve: branch-wise inversion required')
         feasible = (y[:, 0, 0] <= cl_des) & (cl_des <= y[:, -1, 0])
         # Vectorised PCHIP bisection for all candidates; no extrapolation.
         pc = PchipInterpolator(self.A, y, axis=1, extrapolate=False)
-        lo = np.full(len(self.ids), self.A[0])
-        hi = np.full(len(self.ids), self.A[-1])
-        rows = np.arange(len(self.ids))
+        lo = np.full(len(y), self.A[0])
+        hi = np.full(len(y), self.A[-1])
+        rows = np.arange(len(y))
         for _ in range(38):
             mid = (lo+hi)/2
             j = np.clip(np.searchsorted(self.A, mid, side='right')-1, 0, len(self.A)-2)
@@ -166,7 +174,12 @@ class AeroDatabase:
         c = pc.c[:, j, rows, 1]
         d = alpha-self.A[j]
         cd = ((c[0]*d+c[1])*d+c[2])*d+c[3]
-        return alpha, np.where(feasible, cd, np.inf), feasible
+        if sub is None:
+            return alpha, np.where(feasible, cd, np.inf), feasible
+        # v4c: full-length arrays; shapes outside the candidate set are infeasible for the generator
+        A, CD, OK = np.full(len(self.ids), np.nan), np.full(len(self.ids), np.inf), np.zeros(len(self.ids), bool)
+        A[sub], CD[sub], OK[sub] = alpha, np.where(feasible, cd, np.inf), feasible
+        return A, CD, OK
 
     # v4c: requested morph (drag) level w in [0, 1]; None (default) = the original minimum-drag generator.
     level = None
