@@ -202,7 +202,7 @@ reach_grid:
   - 1.0
   switch_s: 600.0
 training:
-  iterations: 20
+  iterations: 60                # v4c: safety cap; training stops after no_acceptance_iterations without an acceptance
   no_acceptance_iterations: 8
   states: 12
   stride_s: 96.0
