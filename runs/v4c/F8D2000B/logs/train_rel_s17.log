@@ -34,3 +34,5 @@
 [rel s17] iter 27: 161 labels, 0 positive, 0 violating branches; kept; mean G 0.1706, hits 16/32, violations 0; acceptance set G -0.1450, hits 10/32, violations 0 (2916 s)
 [rel s17] iter 28: 163 labels, 27 positive, 0 violating branches; kept; mean G 0.1706, hits 16/32, violations 0; acceptance set G -0.1450, hits 10/32, violations 0 (3032 s)
 [rel s17] iter 29: 162 labels, 7 positive, 0 violating branches; accepted margin 3; mean G 0.2873, hits 19/32, violations 0; acceptance set G -0.0812, hits 11/32, violations 0 (3047 s)
+[rel s17] iter 30: 157 labels, 22 positive, 0 violating branches; kept; mean G 0.2873, hits 19/32, violations 0; acceptance set G -0.0812, hits 11/32, violations 0 (3106 s)
+[rel s17] iter 31: 163 labels, 4 positive, 0 violating branches; kept; mean G 0.2873, hits 19/32, violations 0; acceptance set G -0.0812, hits 11/32, violations 0 (3178 s)
